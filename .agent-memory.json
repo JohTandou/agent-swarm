@@ -1,0 +1,51 @@
+{
+  "metrics": [
+    {
+      "run_id": "swarm-20260605-t1t5",
+      "route": "FULL",
+      "task_type": "T1-Bootstrap-Angular",
+      "iterations": 1,
+      "agents_used": ["planner", "front", "tester", "reviewer", "writer"],
+      "retry_reasons": ["reviewer-REJECT-aria-expanded"],
+      "status": "done"
+    },
+    {
+      "run_id": "swarm-20260605-t1t5",
+      "route": "FULL",
+      "task_type": "T2-Content-System",
+      "iterations": 1,
+      "agents_used": ["planner", "front", "tester", "reviewer", "writer"],
+      "retry_reasons": [],
+      "status": "done"
+    },
+    {
+      "run_id": "swarm-20260605-t1t5",
+      "route": "FULL",
+      "task_type": "T3-Homepage-D3",
+      "iterations": 2,
+      "agents_used": ["front", "tester", "reviewer"],
+      "retry_reasons": ["reviewer-REJECT-stats-invisible-budget-palette"],
+      "status": "done"
+    },
+    {
+      "run_id": "swarm-20260605-t1t5",
+      "route": "MEDIUM",
+      "task_type": "T4-Problem-Innovation",
+      "iterations": 2,
+      "agents_used": ["front", "tester", "reviewer"],
+      "retry_reasons": ["reviewer-REJECT-tests-missing-palette-codemort"],
+      "status": "done"
+    },
+    {
+      "run_id": "swarm-20260605-t1t5",
+      "route": "FULL",
+      "task_type": "T5-Agents-Template",
+      "iterations": 1,
+      "agents_used": ["front", "tester", "reviewer"],
+      "retry_reasons": [],
+      "status": "done"
+    }
+  ],
+  "task_in_queue": true,
+  "queue_size": 5
+}

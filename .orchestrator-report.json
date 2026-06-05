@@ -7,13 +7,13 @@
     },
     {
       "name": "build",
-      "status": "fail",
-      "detail": "Unknown command: \"build\"\n\n\nDid you mean this?\n  npm run build # run the \"build\" package script\nTo see a list of supported npm commands, run:\n  npm help\n"
+      "status": "pass",
+      "detail": ""
     },
     {
       "name": "unit-tests",
-      "status": "fail",
-      "detail": "Node.js version v25.4.0 detected.\nOdd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.\nError: Unknown arguments: changed, changedBranch\n"
+      "status": "pass",
+      "detail": "passed"
     },
     {
       "name": "backend-start",
@@ -28,8 +28,8 @@
     {
       "name": "e2e",
       "status": "skip",
-      "detail": "No Playwright config found"
+      "detail": "No frontend files changed (e2e_auto_grep_from_diff=true)"
     }
   ],
-  "overall": "fail"
+  "overall": "pass"
 }

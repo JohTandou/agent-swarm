@@ -1,7 +1,93 @@
-Unknown command: "build"
+
+> swarm-wiki@0.0.0 build
+> ng build
+
+Node.js version v25.4.0 detected.
+Odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.
+❯ Building...
+✔ Building...
+Initial chunk files   | Names                        |  Raw size | Estimated transfer size
+chunk-JVG2SHEP.js     | -                            | 141.54 kB |                42.32 kB
+chunk-WRVB5RQ5.js     | -                            |  70.81 kB |                17.62 kB
+chunk-GTZB57V7.js     | -                            |  51.81 kB |                14.64 kB
+chunk-6B6LEZD2.js     | -                            |  38.90 kB |                10.97 kB
+polyfills-5CFQRCPP.js | polyfills                    |  34.59 kB |                11.33 kB
+styles-LY7SRWNP.css   | styles                       |  28.97 kB |                 6.42 kB
+main-325SQC4T.js      | main                         |  25.95 kB |                 6.45 kB
+chunk-DGJOY6OK.js     | -                            |   1.64 kB |               753 bytes
+
+                      | Initial total                | 394.21 kB |               110.50 kB
+
+Lazy chunk files      | Names                        |  Raw size | Estimated transfer size
+chunk-ZFU6DGMU.js     | -                            | 600.64 kB |               116.01 kB
+chunk-SBGK7DE2.js     | -                            | 442.93 kB |               119.56 kB
+chunk-O5BWQK5D.js     | -                            | 277.43 kB |                78.95 kB
+chunk-7L4JETQM.js     | katex                        | 267.72 kB |                63.76 kB
+chunk-S5QZFVPD.js     | -                            | 229.70 kB |                27.35 kB
+chunk-WNO7UZY5.js     | architectureDiagram-3BPJPVTR | 150.70 kB |                36.32 kB
+chunk-2CWPO6RG.js     | sequenceDiagram-3UESZ5HK     | 117.25 kB |                25.80 kB
+chunk-VBXX2VDA.js     | -                            | 101.71 kB |                21.08 kB
+chunk-ZLHVTQHK.js     | cose-bilkent-S5V4N54A        |  82.64 kB |                19.74 kB
+chunk-TANAIQIR.js     | blockDiagram-GPEHLZMM        |  72.51 kB |                18.06 kB
+chunk-YI7CDJMK.js     | c4Diagram-AAUBKEIU           |  70.31 kB |                15.84 kB
+chunk-GMBAFH72.js     | flowDiagram-I6XJVG4X         |  61.11 kB |                16.03 kB
+chunk-XQ2RZINO.js     | -                            |  57.18 kB |                16.78 kB
+chunk-UIIPNG5E.js     | -                            |  53.36 kB |                16.00 kB
+chunk-2A7SF6C4.js     | ganttDiagram-6RSMTGT7        |  50.27 kB |                15.08 kB
+...and 74 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [5.736 seconds]
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 10.23 kB with a total of 18.23 kB.[0m
 
 
-Did you mean this?
-  npm run build # run the "build" package script
-To see a list of supported npm commands, run:
-  npm help
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'cytoscape-fcose' used by 'node_modules/mermaid/dist/chunks/mermaid.core/architectureDiagram-3BPJPVTR.mjs' is not ESM[0m
+
+  CommonJS or AMD dependencies can cause optimization bailouts.
+  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule '@braintree/sanitize-url' used by 'node_modules/mermaid/dist/chunks/mermaid.core/sequenceDiagram-3UESZ5HK.mjs' is not ESM[0m
+
+  CommonJS or AMD dependencies can cause optimization bailouts.
+  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'dayjs' used by 'node_modules/mermaid/dist/chunks/mermaid.core/ganttDiagram-6RSMTGT7.mjs' is not ESM[0m
+
+  CommonJS or AMD dependencies can cause optimization bailouts.
+  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'dayjs/plugin/isoWeek.js' used by 'node_modules/mermaid/dist/chunks/mermaid.core/ganttDiagram-6RSMTGT7.mjs' is not ESM[0m
+
+  CommonJS or AMD dependencies can cause optimization bailouts.
+  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'dayjs/plugin/customParseFormat.js' used by 'node_modules/mermaid/dist/chunks/mermaid.core/ganttDiagram-6RSMTGT7.mjs' is not ESM[0m
+
+  CommonJS or AMD dependencies can cause optimization bailouts.
+  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'dayjs/plugin/advancedFormat.js' used by 'node_modules/mermaid/dist/chunks/mermaid.core/ganttDiagram-6RSMTGT7.mjs' is not ESM[0m
+
+  CommonJS or AMD dependencies can cause optimization bailouts.
+  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'dayjs/plugin/duration.js' used by 'node_modules/mermaid/dist/chunks/mermaid.core/ganttDiagram-6RSMTGT7.mjs' is not ESM[0m
+
+  CommonJS or AMD dependencies can cause optimization bailouts.
+  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'cytoscape-cose-bilkent' used by 'node_modules/mermaid/dist/chunks/mermaid.core/cose-bilkent-S5V4N54A.mjs' is not ESM[0m
+
+  CommonJS or AMD dependencies can cause optimization bailouts.
+  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
+
+
+Output location: /Users/johtnd/swarm-wiki/dist/swarm-wiki
+
