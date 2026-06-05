@@ -4,7 +4,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component';
-import { TocPlaceholderComponent } from './layout/toc-placeholder/toc-placeholder.component';
+import { TableOfContentsComponent } from './shared/components/table-of-contents/table-of-contents.component';
 import type { Breadcrumb } from '@shared/models';
 
 /**
@@ -20,7 +20,7 @@ import type { Breadcrumb } from '@shared/models';
     HeaderComponent,
     SidebarComponent,
     BreadcrumbsComponent,
-    TocPlaceholderComponent,
+    TableOfContentsComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

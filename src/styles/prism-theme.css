@@ -1,0 +1,183 @@
+/* ==========================================================================
+   Swarm Wiki — Thème Prism.js dark (palette 6 couleurs exclusive)
+   ========================================================================== */
+
+/* Fond des blocs de code */
+pre[class*="language-"],
+code[class*="language-"] {
+  color: var(--color-text-primary);
+  background: var(--color-bg-subtle);
+  font-family: var(--font-body);
+  text-shadow: none;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.6;
+  tab-size: 4;
+  hyphens: none;
+}
+
+pre[class*="language-"] {
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(142, 136, 130, 0.12);
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+/* Code inline */
+:not(pre) > code[class*="language-"] {
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  white-space: normal;
+  background: var(--color-bg-subtle);
+  color: var(--color-accent);
+}
+
+/* Tokens — palette exclusive, PAS de bleu/vert/rouge */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: var(--color-text-secondary);
+}
+
+.token.namespace {
+  opacity: 0.8;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--color-accent);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--color-text-primary);
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+  color: var(--color-text-secondary);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.token.function,
+.token.class-name {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: var(--color-accent);
+}
+
+.token.important,
+.token.bold {
+  font-weight: 700;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/* Line numbers */
+pre[class*="language-"].line-numbers {
+  position: relative;
+  padding-left: 3.8em;
+  counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+  position: relative;
+  white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 1.25em;
+  font-size: 100%;
+  left: -3.8em;
+  width: 3em;
+  letter-spacing: -1px;
+  border-right: 1px solid rgba(142, 136, 130, 0.2);
+  user-select: none;
+}
+
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: var(--color-text-secondary);
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
+}
+
+/* Toolbar */
+div.code-toolbar {
+  position: relative;
+}
+
+div.code-toolbar > .toolbar {
+  position: absolute;
+  top: 0.4em;
+  right: 0.5em;
+  opacity: 0;
+  transition: opacity 200ms var(--ease-spring);
+}
+
+div.code-toolbar:hover > .toolbar {
+  opacity: 1;
+}
+
+div.code-toolbar > .toolbar button {
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(142, 136, 130, 0.2);
+  border-radius: 4px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+}
+
+div.code-toolbar > .toolbar button:hover {
+  color: var(--color-accent);
+  border-color: rgba(240, 165, 34, 0.3);
+  box-shadow: 0 0 12px rgba(240, 165, 34, 0.08);
+}

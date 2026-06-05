@@ -16,6 +16,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/about/about.routes').then((m) => m.aboutRoutes),
   },
+  {
+    path: 'demo-markdown',
+    loadChildren: () =>
+      import('./features/wiki-demo/wiki-demo.routes').then((m) => m.wikiDemoRoutes),
+  },
   /* Route wildcard — redirige vers l'accueil */
   { path: '**', redirectTo: '' },
 ];
