@@ -1,0 +1,341 @@
+import { Component, OnInit, OnDestroy, inject, signal, computed } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+/* ==========================================================================
+ * Types — Outil MCP
+ * ========================================================================== */
+
+interface McpTool {
+  readonly name: string;
+  readonly description: string;
+  readonly params: readonly string[];
+}
+
+interface McpCategory {
+  readonly id: string;
+  readonly label: string;
+  readonly icon: string;
+  readonly description: string;
+  readonly tools: readonly McpTool[];
+  readonly exampleCode: string;
+  readonly playgroundLabel: string;
+}
+
+/* ==========================================================================
+ * Constantes de configuration
+ * ========================================================================== */
+
+const LOADING_SIMULATION_MS = 600;
+const CATEGORIES: readonly string[] = ['supabase', 'vercel', 'render', 'playwright'];
+
+/* ==========================================================================
+ * Données statiques — Outils MCP par catégorie
+ * ========================================================================== */
+
+const SUPABASE_TOOLS: readonly McpTool[] = [
+  { name: 'apply_migration', description: 'Applique une migration DDL à la base de données', params: ['name', 'query'] },
+  { name: 'execute_sql', description: 'Exécute du SQL brut dans la base Postgres', params: ['query'] },
+  { name: 'list_tables', description: 'Liste toutes les tables d\'un ou plusieurs schémas', params: ['schemas'] },
+  { name: 'list_migrations', description: 'Liste toutes les migrations de la base', params: [] },
+  { name: 'get_logs', description: 'Récupère les logs par type de service', params: ['service'] },
+  { name: 'deploy_edge_function', description: 'Déploie une Edge Function sur Supabase', params: ['name', 'files', 'entrypoint_path'] },
+  { name: 'create_branch', description: 'Crée une branche de développement', params: ['name'] },
+  { name: 'merge_branch', description: 'Fusionne une branche de développement en production', params: ['branch_id'] },
+  { name: 'search_docs', description: 'Recherche dans la documentation Supabase via GraphQL', params: ['graphql_query'] },
+  { name: 'generate_typescript_types', description: 'Génère les types TypeScript depuis la base', params: [] },
+];
+
+const VERCEL_TOOLS: readonly McpTool[] = [
+  { name: 'deploy_to_vercel', description: 'Déploie le projet courant sur Vercel', params: [] },
+  { name: 'list_deployments', description: 'Liste tous les déploiements d\'un projet', params: ['projectId', 'teamId'] },
+  { name: 'get_deployment', description: 'Récupère un déploiement par ID ou URL', params: ['idOrUrl', 'teamId'] },
+  { name: 'list_projects', description: 'Liste tous les projets Vercel', params: ['teamId'] },
+  { name: 'get_project', description: 'Récupère un projet spécifique', params: ['projectId', 'teamId'] },
+  { name: 'check_domain_availability', description: 'Vérifie la disponibilité de noms de domaine', params: ['names'] },
+  { name: 'get_runtime_logs', description: 'Récupère les logs d\'exécution', params: ['projectId', 'teamId', 'deploymentId', 'level', 'since'] },
+  { name: 'search_documentation', description: 'Recherche dans la documentation Vercel', params: ['topic', 'tokens'] },
+];
+
+const RENDER_TOOLS: readonly McpTool[] = [
+  { name: 'create_web_service', description: 'Crée un nouveau service web', params: ['name', 'runtime', 'repo', 'buildCommand', 'startCommand', 'plan'] },
+  { name: 'create_postgres', description: 'Crée une nouvelle instance Postgres', params: ['name', 'plan', 'version', 'diskSizeGb'] },
+  { name: 'create_static_site', description: 'Crée un nouveau site statique', params: ['name', 'buildCommand', 'publishPath', 'repo'] },
+  { name: 'list_services', description: 'Liste tous les services du compte', params: ['includePreviews'] },
+  { name: 'get_service', description: 'Récupère les détails d\'un service', params: ['serviceId'] },
+  { name: 'get_metrics', description: 'Récupère les métriques de performance', params: ['resourceId', 'metricTypes', 'startTime', 'endTime'] },
+  { name: 'list_deploys', description: 'Liste les déploiements d\'un service', params: ['serviceId', 'limit', 'cursor'] },
+  { name: 'get_deploy', description: 'Récupère un déploiement spécifique', params: ['serviceId', 'deployId'] },
+  { name: 'list_logs', description: 'Liste les logs selon des filtres', params: ['resource', 'level', 'startTime', 'endTime', 'limit'] },
+  { name: 'create_cron_job', description: 'Crée une tâche planifiée (cron)', params: ['name', 'schedule', 'runtime', 'buildCommand', 'startCommand'] },
+];
+
+const PLAYWRIGHT_TOOLS: readonly McpTool[] = [
+  { name: 'browser_navigate', description: 'Navigue vers une URL', params: ['url'] },
+  { name: 'browser_click', description: 'Effectue un clic sur un élément', params: ['element', 'target'] },
+  { name: 'browser_type', description: 'Saisit du texte dans un champ', params: ['target', 'text'] },
+  { name: 'browser_snapshot', description: 'Capture le snapshot d\'accessibilité de la page', params: [] },
+  { name: 'browser_take_screenshot', description: 'Prend une capture d\'écran de la page', params: ['filename', 'type', 'fullPage'] },
+  { name: 'browser_fill_form', description: 'Remplit plusieurs champs de formulaire', params: ['fields'] },
+  { name: 'browser_hover', description: 'Survole un élément', params: ['target'] },
+  { name: 'browser_press_key', description: 'Appuie sur une touche du clavier', params: ['key'] },
+  { name: 'browser_select_option', description: 'Sélectionne une option dans un menu déroulant', params: ['target', 'values'] },
+  { name: 'browser_wait_for', description: 'Attend l\'apparition ou la disparition d\'un texte', params: ['time', 'text', 'textGone'] },
+];
+
+/* ==========================================================================
+ * Données structurées — Catégories MCP
+ * ========================================================================== */
+
+const MCP_CATEGORIES: Record<string, McpCategory> = {
+  supabase: {
+    id: 'supabase',
+    label: 'Supabase',
+    icon: '🗄️',
+    description: 'Outils MCP pour la gestion de bases de données Supabase : migrations, branches de développement, Edge Functions, logs et documentation.',
+    tools: SUPABASE_TOOLS,
+    exampleCode: `// Déploiement d'une Edge Function
+supabase_deploy_edge_function({
+  name: "hello-world",
+  files: [
+    { name: "index.ts", content: "Deno.serve(() => new Response('Hello'))" }
+  ],
+  entrypoint_path: "index.ts"
+});
+
+// Création d'une migration
+supabase_apply_migration({
+  name: "add_users_table",
+  query: "CREATE TABLE users (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), email TEXT UNIQUE NOT NULL);"
+});`,
+    playgroundLabel: 'Simulez une migration Supabase',
+  },
+  vercel: {
+    id: 'vercel',
+    label: 'Vercel',
+    icon: '▲',
+    description: 'Outils MCP pour la plateforme Vercel : déploiements, projets, domaines, logs d\'exécution et documentation.',
+    tools: VERCEL_TOOLS,
+    exampleCode: `// Déploiement automatique
+vercel_deploy_to_vercel();
+
+// Lister les déploiements récents
+vercel_list_deployments({
+  projectId: "prj_abc123",
+  teamId: "team_xyz789"
+});
+
+// Récupérer les logs d'erreur
+vercel_get_runtime_logs({
+  projectId: "prj_abc123",
+  teamId: "team_xyz789",
+  level: ["error", "fatal"],
+  since: "1h"
+});`,
+    playgroundLabel: 'Simulez une recherche de logs Vercel',
+  },
+  render: {
+    id: 'render',
+    label: 'Render',
+    icon: '⚡',
+    description: 'Outils MCP pour la plateforme cloud Render : services web, bases de données, sites statiques, métriques et tâches planifiées.',
+    tools: RENDER_TOOLS,
+    exampleCode: `// Créer un service web Node.js
+render_create_web_service({
+  name: "mon-api",
+  runtime: "node",
+  repo: "https://github.com/user/repo",
+  buildCommand: "npm install && npm run build",
+  startCommand: "npm start",
+  plan: "starter"
+});
+
+// Surveiller les métriques
+render_get_metrics({
+  resourceId: "srv-cf8x9h2",
+  metricTypes: ["cpu_usage", "memory_usage"],
+  startTime: "2024-01-01T00:00:00Z",
+  endTime: "2024-01-01T12:00:00Z"
+});`,
+    playgroundLabel: 'Simulez la création d\'un service Render',
+  },
+  playwright: {
+    id: 'playwright',
+    label: 'Playwright',
+    icon: '🎭',
+    description: 'Outils MCP pour l\'automatisation de navigateur via Playwright : navigation, interactions, captures d\'écran et tests E2E.',
+    tools: PLAYWRIGHT_TOOLS,
+    exampleCode: `// Naviguer et interagir
+playwright_browser_navigate({ url: "https://example.com" });
+
+// Remplir un formulaire
+playwright_browser_fill_form({
+  fields: [
+    { target: "#email", name: "Email", type: "textbox", value: "user@example.com" },
+    { target: "#password", name: "Mot de passe", type: "textbox", value: "••••••••" }
+  ]
+});
+
+// Cliquer sur le bouton de connexion
+playwright_browser_click({
+  element: "Bouton de connexion",
+  target: "button[type='submit']"
+});
+
+// Capturer le résultat
+playwright_browser_take_screenshot({
+  filename: "apres-connexion.png",
+  type: "png",
+  fullPage: true
+});`,
+    playgroundLabel: 'Simulez un remplissage de formulaire Playwright',
+  },
+};
+
+/* ==========================================================================
+ * Préfixes de namespace pour chaque catégorie.
+ * ========================================================================== */
+const CATEGORY_PREFIXES: Record<string, string> = {
+  supabase: 'supabase',
+  vercel: 'vercel',
+  render: 'render',
+  playwright: 'playwright',
+};
+
+/* ==========================================================================
+ * Composant — McpToolsComponent
+ * ========================================================================== */
+
+/**
+ * Page Outils MCP — Composant pur Apple-grade.
+ *
+ * Présente les 4 catégories d'outils MCP (Supabase, Vercel, Render, Playwright)
+ * avec un tableau des outils, un exemple de code et un mini-playground interactif.
+ */
+@Component({
+  selector: 'app-mcp-tools',
+  standalone: true,
+  imports: [RouterLink],
+  templateUrl: './mcp-tools.component.html',
+  styleUrls: ['./mcp-tools.component.scss'],
+})
+export class McpToolsComponent implements OnInit, OnDestroy {
+  /* ==========================================================================
+   * Injection
+   * ========================================================================== */
+
+  private readonly route = inject(ActivatedRoute);
+
+  /* ==========================================================================
+   * État du composant
+   * ========================================================================== */
+
+  protected readonly loading = signal(true);
+  protected readonly error = signal<string | null>(null);
+  protected readonly categoryId = signal<string>('supabase');
+
+  /** Catégories disponibles pour la navigation */
+  protected readonly categories = CATEGORIES;
+
+  /** Données de la catégorie active */
+  protected readonly categoryData = computed<McpCategory | null>(() => {
+    return MCP_CATEGORIES[this.categoryId()] ?? null;
+  });
+
+  /* ==========================================================================
+   * État du playground
+   * ========================================================================== */
+
+  /** Valeurs simulées des paramètres dans le playground */
+  protected readonly playgroundValues = signal<Record<string, string>>({});
+
+  /** Affiche le résultat simulé du playground */
+  protected readonly playgroundVisible = signal(false);
+
+  /* ==========================================================================
+   * Lifecycle
+   * ========================================================================== */
+
+  private routeSub: Subscription | null = null;
+
+  ngOnInit(): void {
+    this.routeSub = this.route.paramMap.subscribe((params) => {
+      const cat = params.get('category') ?? 'supabase';
+      this.categoryId.set(cat);
+      this.loadCategoryData();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.routeSub?.unsubscribe();
+  }
+
+  /* ==========================================================================
+   * Méthodes
+   * ========================================================================== */
+
+  /** Charge les données de la catégorie avec un délai simulé. */
+  private loadCategoryData(): void {
+    const id = this.categoryId();
+
+    if (!MCP_CATEGORIES[id]) {
+      this.loading.set(false);
+      this.error.set(`Catégorie « ${id} » introuvable.`);
+      return;
+    }
+
+    this.loading.set(true);
+    this.error.set(null);
+    this.playgroundValues.set({});
+    this.playgroundVisible.set(false);
+
+    setTimeout(() => {
+      this.loading.set(false);
+    }, LOADING_SIMULATION_MS);
+  }
+
+  /** Réinitialise l'état en cas d'erreur. */
+  protected retry(): void {
+    this.loading.set(true);
+    this.error.set(null);
+    this.loadCategoryData();
+  }
+
+  /* ==========================================================================
+   * Méthodes du playground
+   * ========================================================================== */
+
+  /** Met à jour la valeur d'un paramètre dans le playground. */
+  protected updatePlaygroundParam(paramName: string, event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const current = { ...this.playgroundValues() };
+    current[paramName] = input.value;
+    this.playgroundValues.set(current);
+  }
+
+  /** Affiche / masque le résultat simulé du playground. */
+  protected togglePlaygroundResult(): void {
+    this.playgroundVisible.set(!this.playgroundVisible());
+  }
+
+  /** Construit une représentation JSON des valeurs du playground. */
+  protected playgroundPayload(): string {
+    const values = this.playgroundValues();
+    const entries = Object.entries(values).filter(([, v]) => v.trim() !== '');
+    if (entries.length === 0) return '{}';
+    const obj: Record<string, string> = {};
+    entries.forEach(([k, v]) => { obj[k] = v; });
+    return JSON.stringify(obj, null, 2);
+  }
+
+  /** Retourne la valeur d'un paramètre ou une chaîne vide. */
+  protected playgroundValue(param: string): string {
+    return this.playgroundValues()[param] ?? '';
+  }
+
+  /** Formate l'affichage du nom d'un outil avec le préfixe de la catégorie. */
+  protected displayToolName(tool: McpTool): string {
+    const prefix = CATEGORY_PREFIXES[this.categoryId()] ?? '';
+    return prefix ? `${prefix}_${tool.name}` : tool.name;
+  }
+}
