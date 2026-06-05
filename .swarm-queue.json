@@ -17,7 +17,9 @@
       "title": "T2: Système de contenu statique",
       "body": "Service MarkdownLoader pour charger les fichiers .md depuis src/content/. Composant MarkdownRenderer avec template riche (callouts, code blocks avec coloration Prism.js, diagrammes Mermaid, tableaux). Thème Prism.js dark custom. Composant TableOfContents dynamique généré depuis les headings. Système de métadonnées frontmatter YAML.",
       "route": "FULL",
-      "status": "pending"
+      "status": "in_progress",
+      "issue_number": 3,
+      "branch": "feature/swarm-issue-3-t2-syst-me-de-contenu-statique"
     },
     {
       "id": "3",
@@ -41,5 +43,5 @@
       "status": "pending"
     }
   ],
-  "current_index": 0
+  "current_index": 1
 }

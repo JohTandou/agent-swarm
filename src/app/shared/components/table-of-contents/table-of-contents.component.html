@@ -1,0 +1,60 @@
+<aside class="toc" aria-label="Table des matières">
+  <h4 class="toc__title">Sur cette page</h4>
+
+  <!-- État vide -->
+  @if (entries().length === 0) {
+    <div class="toc__empty">
+      <p class="toc__empty-text">Aucune section détectée</p>
+      <p class="toc__empty-hint">
+        La table des matières se remplit automatiquement<br />
+        lorsque vous naviguez dans un document.
+      </p>
+    </div>
+  }
+
+  <!-- Navigation hiérarchique -->
+  @if (entries().length > 0) {
+    <nav class="toc__nav" [class.toc__nav--visible]="isVisible()">
+      <ul class="toc__list">
+        @for (entry of entries(); track entry.id) {
+          <li
+            class="toc__item"
+            [style.padding-left.px]="getIndent(entry.level)"
+          >
+            <a
+              class="toc__link"
+              [class.toc__link--active]="activeId() === entry.id"
+              [class]="getLevelClass(entry.level)"
+              [href]="'#' + entry.id"
+              (click)="scrollTo(entry.id); $event.preventDefault()"
+            >
+              {{ entry.label }}
+            </a>
+
+            <!-- Sous-entrées récursives -->
+            @if (entry.children && entry.children.length > 0) {
+              <ul class="toc__sublist">
+                @for (child of entry.children; track child.id) {
+                  <li
+                    class="toc__item"
+                    [style.padding-left.px]="getIndent(child.level)"
+                  >
+                    <a
+                      class="toc__link"
+                      [class.toc__link--active]="activeId() === child.id"
+                      [class]="getLevelClass(child.level)"
+                      [href]="'#' + child.id"
+                      (click)="scrollTo(child.id); $event.preventDefault()"
+                    >
+                      {{ child.label }}
+                    </a>
+                  </li>
+                }
+              </ul>
+            }
+          </li>
+        }
+      </ul>
+    </nav>
+  }
+</aside>

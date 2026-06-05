@@ -51,11 +51,16 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*.md",
+                "input": "src/content"
               }
             ],
             "styles": [
               "src/styles.css",
-              "src/styles/animations.scss"
+              "src/styles/animations.scss",
+              "src/styles/prism-theme.css"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
@@ -116,11 +121,16 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*.md",
+                "input": "src/content"
               }
             ],
             "styles": [
               "src/styles.css",
-              "src/styles/animations.scss"
+              "src/styles/animations.scss",
+              "src/styles/prism-theme.css"
             ],
             "scripts": []
           }

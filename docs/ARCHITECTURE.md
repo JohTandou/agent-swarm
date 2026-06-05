@@ -154,9 +154,108 @@ Le wiki étant statique, le flux de données est exclusivement **navigateur → 
 | `/skills/:id` | SkillDetailComponent | Lazy | ⬜ T8 (à venir) |
 | `/workflow` | WorkflowComponent | Lazy | ⬜ T7 (à venir) |
 | `/outils-mcp/:category` | McpToolsComponent | Lazy | ⬜ T10 (à venir) |
+| `/demo-markdown` | WikiDemoComponent | Lazy | ✅ T2 |
 | `**` | Redirect → `/` | — | ✅ |
 
 La route `**` (wildcard) redirige vers l'accueil pour éviter les 404 SPA sur Vercel.
+
+## Système de contenu (T2)
+
+Le système de contenu statique transforme des fichiers Markdown bruts en pages HTML Apple-grade. Le pipeline complet :
+
+```
+src/content/*.md  →  ContentService  →  MarkdownDocument  →  MarkdownRenderer  →  DOM
+       │                    │                                      │
+       │              [parse YAML]                           [pre-processing]
+       │              [extract headings]                     [ngx-markdown]
+       │              [flatten → TocEntry[]]                 [post-processing]
+       │                    │                                      │
+       │              TocService ◄─────────────────────────────────┘
+       │              (Signals réactifs)
+       │                    │
+       │              TableOfContentsComponent
+       │              (scroll-spy IntersectionObserver)
+```
+
+### ContentService — Chargement et parsing
+
+Le `ContentService` (singleton, `providedIn: 'root'`) expose une méthode unique :
+
+```typescript
+loadDocument(sourcePath: string): Observable<MarkdownDocument>
+```
+
+**Fonctionnement interne** :
+1. **Chargement** : `HttpClient.get(/content/${sourcePath})` en mode `text` — les fichiers `.md` sont dans `src/content/`, servis comme assets statiques par le dev server et inclus dans le build.
+2. **Parsing YAML** : le bloc frontmatter délimité par `---` est extrait via regex et parsé avec `js-yaml`. Champs obligatoires : `title`, `description`, `order`. Les champs supplémentaires sont conservés (extensibilité). Une erreur YAML ne bloque pas le rendu — le frontmatter est ignoré avec un `console.warn`.
+3. **Extraction des headings** : regex `^(#{1,4})\s+(.+)$` capture les h1–h4, construit une hiérarchie arborescente (`HeadingNode[]`) par niveau via une pile, puis aplatit en `TocEntry[]` (niveaux 1–3 uniquement).
+4. **Slugification** : génération de slugs HTML (`"Mon Titre !"` → `"mon-titre"`) via normalisation Unicode NFD, suppression des accents et caractères spéciaux.
+
+### TocService — État réactif partagé
+
+Le `TocService` découple le producteur (`MarkdownRendererComponent`) du consommateur (`TableOfContentsComponent`) via deux Signals :
+
+```typescript
+readonly entries = signal<TocEntry[]>([]);   // Hiérarchie TOC complète
+readonly activeId = signal<string>('');       // Slug du heading visible (scroll-spy)
+```
+
+Ce découplage permet au `MarkdownRendererComponent` d'être réutilisé sans dépendance au TOC, et au `TableOfContentsComponent` de fonctionner avec n'importe quelle source de `TocEntry[]`.
+
+### MarkdownRendererComponent — Rendu riche
+
+Composant standalone (`<app-markdown-renderer>`) acceptant soit un `sourcePath` (charge via ContentService), soit un `content` brut.
+
+**Pre-processing** (avant ngx-markdown) :
+- **Callouts** : `:::info`, `:::warning`, `:::tip`, `:::danger` sont transformés en `<div class="callout callout--{type}">` avec icônes (ℹ️/⚠️/💡/🚨) et bordures colorées
+- **Ancres** : injection de `<a id="slug" class="heading-anchor">` avant chaque heading pour le scroll-spy TOC
+
+**Post-processing** (après rendu ngx-markdown) :
+- **Mermaid.js** : import dynamique `import('mermaid')` déclenché uniquement si des blocs `language-mermaid` sont détectés (~500KB lazy-load). Thème dark synchronisé avec la palette (fond `#3A3530`, texte `#F5F0EB`, bordures `rgba(142,136,130,0.3)`)
+- **Prism.js** : coloration via `markdownService.highlight()` — applique le thème custom `prism-theme.css`
+
+**États gérés** :
+| État | Rendu |
+|---|---|
+| Loading | 3 barres shimmer animées (largeurs 100%/70%/40%) |
+| Error | Bloc avec bordure ambrée, titre "Erreur de chargement", message explicite |
+| Empty | Message "Aucun contenu à afficher" + hint "Fournissez un chemin source ou du contenu brut" |
+| Success | Rendu Markdown complet avec callouts, code colorisé, tableaux |
+
+### TableOfContentsComponent — Navigation intra-page
+
+Composant standalone (`<app-table-of-contents>`) dans la colonne latérale droite (220px).
+
+- **Scroll-spy** : `IntersectionObserver` avec `rootMargin: '-64px 0 -20% 0'` (compense le header fixe de 64px). Détecte le premier heading visible et met à jour `TocService.activeId()`
+- **Hiérarchie visuelle** : indentation par niveau (h1: 0px, h2: 16px, h3: 32px), variations de taille de police et opacité
+- **Navigation** : clic → `scrollIntoView({ behavior: 'smooth' })` avec désactivation temporaire de l'observer (800ms) pour éviter les conflits
+- **Animation** : entrée stagger — le bloc TOC fade-in + translateY(8px→0) après un délai de 50ms post-chargement
+- **État vide** : message "Aucune section" + hint "Naviguez vers un document pour voir la table des matières"
+
+### Thème Prism.js dark custom
+
+`src/styles/prism-theme.css` (183 lignes) — coloration syntaxique utilisant exclusivement la palette 6 couleurs :
+
+| Token | Couleur | Style |
+|---|---|---|
+| Commentaires | `--color-text-secondary` | Italique |
+| Mots-clés, attributs | `--color-accent` | Gras 500 |
+| Fonctions, classes | `--color-text-primary` | Gras 500 |
+| Chaînes, sélecteurs | `--color-text-primary` | Normal |
+| Ponctuation, opérateurs | `--color-text-secondary` | Normal |
+| Code inline | `--color-accent` sur fond `--color-bg-subtle` | — |
+
+Support additionnel : line numbers (bordures `rgba(142,136,130,0.2)`), toolbar copier (bouton avec hover glow ambré).
+
+### Structure du contenu
+
+```
+src/content/
+├── .gitkeep              # Placeholder pour Git
+└── demo.md               # Démo du système (105 lignes, frontmatter YAML)
+```
+
+**Convention** : chaque fichier `.md` DOIT avoir un bloc frontmatter YAML avec `title`, `description` et `order`. Le corps du document est en Markdown standard avec extensions callout `:::type`.
 
 ## Système d'Élévation Dark
 
@@ -184,7 +283,7 @@ Les deux sont chargées depuis Fontshare CDN dans `index.html` avec `display=swa
 
 **Framework** : Jasmine + Karma (Angular CLI default).
 
-À date (T1) : **79 tests, coverage 100%** — chaque composant, service, route et modèle est testé.
+À date (T2) : **194 tests, coverage 89.5%** — tous les composants, services, modèles et routes sont testés. Le coverage légèrement inférieur à T1 s'explique par les branches de gestion d'erreur asynchrone dans le ContentService (timeout HTTP, YAML corrompu) difficiles à couvrir en Jasmine/Karma.
 
 **À venir (T16)** : migration vers Jest pour les snapshots et le watch mode. Playwright pour les E2E (T17).
 

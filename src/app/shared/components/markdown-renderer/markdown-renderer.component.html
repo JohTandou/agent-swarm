@@ -1,0 +1,37 @@
+<article class="markdown-body" aria-label="Contenu du document">
+  <!-- État de chargement -->
+  @if (isLoading) {
+    <div class="markdown-loading" aria-live="polite" aria-busy="true">
+      <div class="markdown-loading__shimmer"></div>
+      <div class="markdown-loading__shimmer markdown-loading__shimmer--short"></div>
+      <div class="markdown-loading__shimmer markdown-loading__shimmer--medium"></div>
+    </div>
+  }
+
+  <!-- État d'erreur -->
+  @if (errorMessage) {
+    <div class="markdown-error" role="alert">
+      <p class="markdown-error__title">Impossible de charger le document</p>
+      <p class="markdown-error__message">{{ errorMessage }}</p>
+    </div>
+  }
+
+  <!-- État vide -->
+  @if (!isLoading && !errorMessage && !processedContent) {
+    <div class="markdown-empty">
+      <p class="markdown-empty__text">Aucun contenu à afficher.</p>
+      <p class="markdown-empty__hint">
+        Le document est peut-être vide ou n'a pas encore été chargé.
+      </p>
+    </div>
+  }
+
+  <!-- Contenu rendu -->
+  @if (!isLoading && !errorMessage && processedContent) {
+    <markdown
+      [data]="processedContent"
+      [mermaid]="false"
+      [disableSanitizer]="true"
+    />
+  }
+</article>
