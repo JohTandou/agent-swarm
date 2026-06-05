@@ -1,48 +1,49 @@
 ---
 title: Search
-description: Analyse le codebase, identifie les fichiers impactés, détecte les patterns et conventions
+description: Agent d'analyse de codebase en lecture seule — détection de patterns, documentation context7, cartographie des dépendances
 order: 2
 ---
 
 ## Rôle
 
-L'agent search est le premier maillon de la chaîne d'analyse. Il explore le codebase pour identifier les fichiers impactés par une tâche, détecter les patterns et conventions existants, récupérer la documentation à jour des frameworks via context7, et cartographier les dépendances. C'est un agent de LECTURE SEULE — il ne modifie jamais de code.
+L'agent search est le premier agent activé par l'orchestrateur sur toute route classifiée ADAPT ou supérieure. Il analyse la codebase en lecture seule, détecte les patterns existants, consulte la documentation context7, et fournit un rapport structuré au planner. Il ne modifie jamais le moindre fichier.
 
 ## Responsabilités
 
-- **Analyse du codebase** : identifier tous les fichiers pertinents pour une tâche donnée
-- **Détection de patterns** : repérer les conventions de code, styles, architectures existantes
-- **Documentation context7** : récupérer la documentation la plus récente des frameworks utilisés
-- **Cartographie des dépendances** : tracer les imports et relations entre modules
-- **Rapport de recherche** : produire un résumé structuré pour le planner
+- **Analyse de codebase** : explorer le projet pour comprendre la structure, les conventions et les dépendances
+- **Détection de patterns** : identifier les patterns récurrents (composants, services, styles) pour guider l'implémentation
+- **Documentation context7** : consulter la documentation à jour des bibliothèques et frameworks utilisés
+- **Cartographie des dépendances** : tracer le graphe d'imports et les relations entre modules
+- **Rapport structuré** : produire un rapport d'analyse exploitable par le planner
 
 ## Contraintes
 
-- **Lecture seule absolue** — ne modifie aucun fichier
-- **Ne peut pas vérifier ses hypothèses** en exécutant du code
-- **Si le codebase est mal structuré**, l'analyse sera incomplète
-- **Dépend de la qualité des patterns** détectés pour guider le planner
+- **Lecture seule absolue** : ne modifie jamais le moindre fichier, aucun write/edit/delete
+- **Ne vérifie pas ses hypothèses** : identifie des patterns possibles, ne les valide pas — c'est le rôle du planner
+- **Pas de décision architecturale** : ne propose pas de solution, ne fait que cartographier l'existant
+- **Ne communique pas avec l'utilisateur** : interactions uniquement via le pipeline interne
 
 ## Outils
 
-- Grep, Glob (recherche de fichiers)
-- Lecture de fichiers (Read)
-- context7 (documentation frameworks)
-- Analyse de code statique
+- **Grep** : recherche par motif dans la codebase
+- **Glob** : recherche par pattern de nom de fichier
+- **Read** : lecture de fichiers et dossiers
+- **context7** : consultation de documentation technique (resolve + query)
+- **webfetch** : récupération de contenu web externe
 
 ## Routes
 
 | Route | Contexte |
 |-------|---------|
-| ADAPT | 2-4 fichiers, 1 domaine |
-| MEDIUM | 4+ fichiers, 1 domaine |
-| FULL | Contrat + multi-domaine |
+| ADAPT | Analyse légère, fichier unique ou module isolé |
+| MEDIUM | Analyse multi-fichiers, détection de patterns transverses |
+| FULL | Analyse exhaustive, cartographie complète des dépendances |
 
 ## Exemple
 
-Tâche : « Ajoute un système de notifications ». L'agent search :
-1. Grep 'notification', 'notify', 'alert' → 8 fichiers trouvés
-2. Lit les composants existants pour détecter le pattern UI
-3. Vérifie context7 pour la doc Angular des services
-4. Cartographie les dépendances : NotificationService → HeaderComponent → AppModule
-5. Rapport : « 8 fichiers impactés (4 front, 2 services, 1 modèle, 1 test). Pattern : service providedIn 'root' + composant standalone. Route suggérée : MEDIUM. »
+Tâche : « Ajouter un système de notifications temps réel ». L'agent search :
+1. Lance `grep` pour détecter les usages existants de WebSocket/SSE
+2. Utilise `glob` pour trouver les services de communication existants
+3. Consulte la documentation context7 pour l'API temps réel Supabase
+4. Cartographie les imports et dépendances entre modules concernés
+5. Produit un rapport : patterns détectés, dépendances identifiées, documentation applicable

@@ -1,49 +1,50 @@
 ---
 title: Tester
-description: Génère les tests manquants, exécute la suite, mesure la couverture (seuil 80%) et catégorise les erreurs
+description: Première gate qualité — génère les tests manquants, exécute la suite, mesure la couverture avec un seuil minimum de 80%
 order: 7
 ---
 
 ## Rôle
 
-L'agent tester est la première gate qualité du pipeline Swarm. Il génère les tests manquants pour le code modifié, exécute TOUS les tests, mesure la couverture, et catégorise chaque échec pour permettre un retry granulaire. Son seuil de couverture est de 80% — en dessous, la tâche n'est pas validée.
+L'agent tester est la première des deux gates qualité du pipeline Swarm. Il est déclenché avant chaque commit sur les routes SIMPLE (si code modifié), ADAPT, MEDIUM et FULL. Il génère les tests manquants pour le nouveau code, exécute la suite complète, mesure la couverture, catégorise les erreurs et produit un rapport structuré.
 
 ## Responsabilités
 
-- **Génération de tests** : créer les tests unitaires, d'intégration et E2E manquants
-- **Exécution** : lancer la suite de tests complète (Jest/Karma + Playwright)
-- **Mesure de couverture** : vérifier que le seuil de 80% est atteint
-- **Catégorisation des erreurs** : classifier chaque échec (TEST_BUG, CODE_BUG, ENV, FLACKY, etc.)
-- **Rapport de test** : produire un rapport JSON structuré avec coverage, failures, retry_target
+- **Génération de tests** : créer les tests unitaires, d'intégration et E2E pour le nouveau code
+- **Exécution** : lancer la suite de tests complète (`ng test`, `npx playwright test`)
+- **Mesure de couverture** : vérifier que la couverture atteint le seuil de 80%
+- **Catégorisation des erreurs** : classifier les échecs (code vs test, flaky, environnement)
+- **Rapport de qualité** : produire un rapport détaillé avec métriques et recommandations
 
 ## Contraintes
 
-- **Additif uniquement** — ne modifie jamais un test existant
-- **Si un test legacy est cassé**, il est signalé mais pas corrigé
-- **Ne génère pas de tests triviaux** (pas de `expect(true).toBe(true)`)
-- **Ignore les failures pré-existantes** — ne bloque pas sur du legacy cassé
+- **Additif uniquement** : génère de nouveaux tests, ne modifie jamais les tests existants
+- **Seuil de couverture** : 80% minimum — bloque le commit si non atteint
+- **Ignore les failures pré-existantes** : ne bloque pas sur des tests déjà cassés avant la modification
+- **Pas de modification de code source** : ne corrige pas les bugs, se contente de les signaler
 
 ## Outils
 
-- Jest / Jasmine / Karma (tests unitaires)
-- Playwright (tests E2E)
-- Istanbul / coverage reporters
-- Parsing de sortie de test
+- **Jest / Jasmine / Karma** : tests unitaires Angular avec @angular-builders/jest
+- **Playwright** : tests E2E avec snapshots visuels (Chromium + iPhone 14)
+- **Istanbul** : mesure de couverture de code
+- **Analyse de codebase** : détection des patterns de test existants
 
 ## Routes
 
 | Route | Contexte |
 |-------|---------|
-| SIMPLE | Si code modifié |
-| ADAPT | Si code modifié |
-| MEDIUM | Obligatoire (gate qualité) |
-| FULL | Obligatoire (gate qualité) |
+| SIMPLE | Si code modifié : génération tests unitaires pour 1-2 fichiers |
+| ADAPT | Tests unitaires + intégration pour 2-4 fichiers |
+| MEDIUM | Suite complète : unitaires + intégration + E2E |
+| FULL | Suite exhaustive avec snapshots visuels et tests de contrat |
 
 ## Exemple
 
-Tâche MEDIUM : l'agent front a modifié 4 fichiers. Le tester :
-1. Génère 12 tests pour `UserService` (non testé)
-2. Génère 8 tests pour `UserProfileComponent` (non testé)
-3. Exécute la suite complète : 247 tests, 245 passent, 2 échouent
-4. Catégorise les 2 échecs : 1 TEST_BUG (test mal écrit, à corriger) + 1 CODE_BUG (race condition)
-5. Rapport : coverage 87%, retry_target = CODE_BUG
+Tâche : « Valider le nouveau composant NotificationList ». L'agent tester :
+1. Analyse le composant et identifie les cas à tester (affichage, vide, erreur, interaction)
+2. Génère 12 tests unitaires Jest couvrant tous les états
+3. Génère 3 tests E2E Playwright pour le flux complet
+4. Exécute `ng test` → 12/12 PASS, couverture 92%
+5. Exécute `npx playwright test` → 3/3 PASS
+6. Produit le rapport : « Gate 1 — PASS — Couverture 92% — Prêt pour review »
