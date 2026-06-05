@@ -1,0 +1,77 @@
+@if (agent(); as agentData) {
+  <section class="agent-detail">
+    <!-- Header agent -->
+    <header class="agent-detail__header">
+      <!-- Fil d'Ariane -->
+      <nav class="agent-detail__breadcrumb" aria-label="Fil d'Ariane">
+        <a routerLink="/agents" class="agent-detail__breadcrumb-link">Agents</a>
+        <span class="agent-detail__breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="agent-detail__breadcrumb-current">{{ agentData.name }}</span>
+      </nav>
+
+      <!-- Infos principales -->
+      <div class="agent-detail__hero">
+        <span class="agent-detail__emoji" aria-hidden="true">{{ agentData.emoji }}</span>
+        <div class="agent-detail__hero-text">
+          <h1 class="agent-detail__name">{{ agentData.name }}</h1>
+          <p class="agent-detail__role">{{ agentData.role }}</p>
+          <div class="agent-detail__meta">
+            <span class="agent-detail__route">
+              Route {{ agentData.route }}
+            </span>
+            <span class="agent-detail__category">
+              {{ getCategoryLabel(agentData.category) }}
+            </span>
+            @if (agentData.active) {
+              <span class="agent-detail__badge agent-detail__badge--active">
+                Actif
+              </span>
+            } @else {
+              <span class="agent-detail__badge agent-detail__badge--inactive">
+                Inactif
+              </span>
+            }
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenu Markdown -->
+    @if (hasContent()) {
+      <div class="agent-detail__content">
+        <app-markdown-renderer
+          [sourcePath]="sourcePath()"
+          [enableMermaid]="false"
+          [enablePrism]="true"
+          (tocEntries)="onTocEntries($event)"
+        />
+      </div>
+    } @else {
+      <div class="agent-detail__no-content">
+        <p>La documentation détaillée de cet agent sera disponible prochainement.</p>
+      </div>
+    }
+
+    <!-- Navigation pied de page -->
+    <footer class="agent-detail__footer">
+      <a routerLink="/agents" class="agent-detail__back">
+        ← Retour au listing
+      </a>
+    </footer>
+  </section>
+} @else {
+  <!-- État : agent introuvable -->
+  <section class="agent-detail agent-detail--error">
+    <div class="agent-detail__error">
+      <span class="agent-detail__error-emoji" aria-hidden="true">🔍</span>
+      <h1 class="agent-detail__error-title">Agent introuvable</h1>
+      <p class="agent-detail__error-text">
+        L'agent <strong>{{ agentId() }}</strong> n'existe pas dans le pipeline Swarm.
+        Vérifiez l'identifiant ou retournez au listing.
+      </p>
+      <a routerLink="/agents" class="agent-detail__error-link">
+        ← Retour au listing des agents
+      </a>
+    </div>
+  </section>
+}
