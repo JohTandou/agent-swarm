@@ -81,3 +81,16 @@
     display: none;
   }
 }
+
+/* ==========================================================================
+   Homepage — full-bleed, pas de contrainte de largeur ni de sidebar
+   ========================================================================== */
+.content-area--homepage {
+  margin-left: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+}
+
+.main-content--homepage {
+  max-width: 100% !important;
+}

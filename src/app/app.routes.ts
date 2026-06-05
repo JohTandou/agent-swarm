@@ -26,6 +26,13 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/wiki-demo/wiki-demo.routes').then((m) => m.wikiDemoRoutes),
   },
+  {
+    path: 'probleme-innovation',
+    loadChildren: () =>
+      import('./features/problem-innovation/problem-innovation.routes').then(
+        (m) => m.problemInnovationRoutes
+      ),
+  },
   /* Route wildcard — redirige vers l'accueil */
   { path: '**', redirectTo: '' },
 ];

@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { routes } from './app.routes';
 
 describe('AppRoutes', () => {
-  it('devrait avoir 5 routes définies', () => {
+  it('devrait avoir 6 routes définies', () => {
     expect(routes.length).toBe(6);
   });
 

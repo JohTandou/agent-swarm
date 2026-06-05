@@ -1,0 +1,123 @@
+<!-- ==========================================================================
+     Page d'accueil Swarm Wiki — Immersive Apple-grade
+     Sections plein écran, graphe D3 interactif, animations scroll-driven
+     ========================================================================== -->
+
+<main class="homepage" id="main-content">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Section 1 : Hero — Tagline + Résumé exécutif (100vh minimum)
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="homepage__hero" aria-label="Présentation du système Swarm">
+    <div class="homepage__hero-content">
+      <!-- Badge statut -->
+      <div class="homepage__badge" aria-hidden="true">
+        <span class="homepage__badge-dot"></span>
+        Pipeline d'agents IA &#183; Open Source
+      </div>
+
+      <!-- Tagline monumentale -->
+      <h1 class="homepage__tagline">
+        Le premier pipeline d'agents IA qui
+        <span class="homepage__tagline-accent">code, teste, review et déploie</span>
+        automatiquement
+      </h1>
+
+      <!-- Résumé exécutif — 3 phrases percutantes -->
+      <div class="homepage__summary">
+        <p class="homepage__summary-text">
+          Swarm orchestre <strong>9 agents IA spécialisés</strong> qui collaborent en temps réel&nbsp;:
+          de l'analyse du codebase au déploiement, chaque étape est automatisée par un agent dédié.
+        </p>
+        <p class="homepage__summary-text">
+          <strong>26 skills activables</strong> par les agents couvrent l'intégralité du cycle de développement —
+          génération de code, tests, revue, documentation et déploiement sur Supabase, Vercel, Render.
+        </p>
+        <p class="homepage__summary-text">
+          Une session de développement <strong>coûte en moyenne 1.25&nbsp;$</strong>,
+          soit 10× moins qu'un développeur humain pour un résultat de qualité production.
+        </p>
+      </div>
+    </div>
+
+    <!-- Indicateur de scroll -->
+    <div class="homepage__scroll-hint" aria-hidden="true">
+      <span class="homepage__scroll-text">Explorer</span>
+      <div class="homepage__scroll-arrow">
+        <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+          <rect x="6" y="2" width="4" height="8" rx="2" fill="currentColor" opacity="0.6"/>
+          <rect x="7" y="12" width="2" height="10" rx="1" fill="currentColor" opacity="0.3"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Section 2 : Graphe interactif D3.js — carte des 9 agents
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="homepage__graph" aria-label="Carte interactive des agents du Swarm">
+    <div class="homepage__graph-header">
+      <h2 class="homepage__section-title">Le réseau d'agents</h2>
+      <p class="homepage__section-subtitle">
+        Chaque nœud est un agent autonome. L'orchestrateur coordonne, les autres exécutent.
+        Survolez les nœuds pour découvrir leur rôle.
+      </p>
+    </div>
+    <app-swarm-graph class="homepage__graph-canvas" />
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Section 3 : Statistiques clés — 4 métriques animées
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="homepage__stats" aria-label="Statistiques clés du Swarm">
+    <div class="homepage__stats-grid">
+      @for (stat of stats; track stat.label; let idx = $index) {
+        <div
+          class="homepage__stat-card"
+          [style.animation-delay.ms]="idx * 100"
+        >
+          <div class="homepage__stat-value" [attr.aria-label]="stat.label">
+            @if (idx === 3) {
+              {{ formatStat(idx) }}
+            } @else {
+              {{ animatedValues()[idx] || 0 }}
+            }
+          </div>
+          <div class="homepage__stat-label">{{ stat.label }}</div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Section 4 : Navigation visuelle — 4 cartes vers les sections
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="homepage__navigation" aria-label="Navigation vers les sections du wiki">
+    <h2 class="homepage__section-title">Explorez le système</h2>
+    <div class="homepage__nav-grid">
+      @for (card of navCards; track card.route; let idx = $index) {
+        <a
+          [routerLink]="card.route"
+          class="homepage__nav-card"
+          [style.animation-delay.ms]="idx * 80"
+          [attr.aria-label]="card.title + ' — ' + card.description"
+        >
+          <span class="homepage__nav-icon" aria-hidden="true">{{ card.icon }}</span>
+          <h3 class="homepage__nav-title">{{ card.title }}</h3>
+          <p class="homepage__nav-description">{{ card.description }}</p>
+          <span class="homepage__nav-arrow" aria-hidden="true">→</span>
+        </a>
+      }
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Footer minimal
+       ═══════════════════════════════════════════════════════════════════ -->
+  <footer class="homepage__footer">
+    <span class="homepage__footer-text">
+      Swarm &middot; Pipeline d'agents IA pour le développement logiciel
+    </span>
+  </footer>
+
+</main>
