@@ -397,7 +397,7 @@ $section-padding-mobile: 64px 20px;
 }
 
 .comparison-card__col--before .comparison-card__col-label {
-  color: #C47F4A;
+  color: #D4A855;
 }
 
 .comparison-card__col--after .comparison-card__col-label {
@@ -1102,7 +1102,7 @@ $section-padding-mobile: 64px 20px;
   &:hover {
     border-color: rgba(240, 165, 34, 0.2);
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 0 20px rgba(240, 165, 34, 0.04);
+    box-shadow: 0 8px 32px rgba(58, 53, 48, 0.4), 0 0 20px rgba(240, 165, 34, 0.04);
   }
 }
 

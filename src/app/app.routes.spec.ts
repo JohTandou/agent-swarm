@@ -3,7 +3,7 @@ import { routes } from './app.routes';
 
 describe('AppRoutes', () => {
   it('devrait avoir 4 routes définies', () => {
-    expect(routes.length).toBe(4);
+    expect(routes.length).toBe(5);
   });
 
   it('devrait avoir une route racine avec lazy loading vers homepage', () => {

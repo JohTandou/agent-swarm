@@ -1,5 +1,11 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, signal } from '@angular/core';
 
+/* Constantes de configuration */
+const LOADING_SIMULATION_DELAY_MS = 500;
+const READY_CHECK_INTERVAL_MS = 100;
+const READY_CHECK_TIMEOUT_MS = 2000;
+const COUNTER_ANIMATION_DURATION_MS = 1800;
+
 /**
  * Données structurées pour la section Avant/Après.
  */
@@ -338,10 +344,9 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
    * Références aux éléments DOM pour les animations
    * ========================================================================== */
 
-  private readonly observer: IntersectionObserver | null = null;
-  private readonly observedElements: Set<Element> = new Set();
   private counterAnimating = false;
   private animationFrameId: number | null = null;
+  private _readyCheckInterval: ReturnType<typeof setInterval> | null = null;
 
   /* ==========================================================================
    * Lifecycle
@@ -363,7 +368,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     // (donne le temps au DOM d'être prêt et crée une transition fluide)
     setTimeout(() => {
       this.loading.set(false);
-    }, 500);
+    }, LOADING_SIMULATION_DELAY_MS);
   }
 
   ngAfterViewInit(): void {
@@ -372,6 +377,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngOnDestroy(): void {
+    this.stopReadyCheck();
     this.cleanupAnimations();
   }
 
@@ -381,15 +387,15 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
 
   private setupScrollAnimations(): void {
     // Attendre que le loading soit terminé
-    const checkReady = setInterval(() => {
+    this._readyCheckInterval = setInterval(() => {
       if (!this.loading()) {
-        clearInterval(checkReady);
+        this.stopReadyCheck();
         this.observeAnimatedElements();
       }
-    }, 100);
+    }, READY_CHECK_INTERVAL_MS);
 
     // Timeout de sécurité
-    setTimeout(() => clearInterval(checkReady), 2000);
+    setTimeout(() => this.stopReadyCheck(), READY_CHECK_TIMEOUT_MS);
   }
 
   private observeAnimatedElements(): void {
@@ -449,7 +455,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   private animateCounter(element: HTMLElement): void {
     this.counterAnimating = true;
     const target = 8;
-    const duration = 1800; // ms
+    const duration = COUNTER_ANIMATION_DURATION_MS;
     const startTime = performance.now();
 
     const update = (currentTime: number) => {
@@ -471,6 +477,13 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     };
 
     this.animationFrameId = requestAnimationFrame(update);
+  }
+
+  private stopReadyCheck(): void {
+    if (this._readyCheckInterval) {
+      clearInterval(this._readyCheckInterval);
+      this._readyCheckInterval = null;
+    }
   }
 
   /**
