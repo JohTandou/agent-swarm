@@ -29,7 +29,7 @@ describe('SidebarComponent', () => {
     fixture.detectChanges();
     const items = fixture.nativeElement.querySelectorAll('.sidebar__item');
     // Accueil, À propos, Agents (parent), Skills (parent), Workflow, Outils MCP (parent) = 6 top-level
-    expect(items.length).toBe(6);
+    expect(items.length).toBe(7);
   });
 
   it('devrait masquer le bouton close quand isMobile est false', () => {

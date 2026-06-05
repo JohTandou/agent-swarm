@@ -9,50 +9,27 @@ Component HMR has been enabled, see https://angular.dev/hmr for more info.
 ✔ Building...
 Initial chunk files | Names                     |  Raw size
 polyfills.js        | polyfills                 |  89.77 kB | 
-main.js             | main                      |  69.11 kB | 
+main.js             | main                      |  69.78 kB | 
 styles.css          | styles                    |  31.95 kB | 
 chunk-NMLQYLNV.js   | -                         |   1.34 kB | 
 chunk-VTZCDIGA.js   | -                         |   1.31 kB | 
 
-                    | Initial total             | 193.47 kB
+                    | Initial total             | 194.15 kB
 
 Lazy chunk files    | Names                     |  Raw size
 chunk-6EWSCNZQ.js   | problem-innovation-routes | 115.42 kB | 
-chunk-DOFI3QMV.js   | homepage-routes           |  70.86 kB | 
-chunk-2BOYTGIA.js   | agents-routes             |  65.91 kB | 
+chunk-ZDOLTTCZ.js   | workflow-routes           |  97.86 kB | 
+chunk-UQ2SL2YD.js   | ecosystem-routes          |  85.67 kB | 
+chunk-WRLEYGU7.js   | mcp-tools-routes          |  73.23 kB | 
+chunk-U2J6NZD5.js   | homepage-routes           |  70.82 kB | 
+chunk-FVPZHR6F.js   | agents-routes             |  65.91 kB | 
+chunk-RRPCSOK2.js   | skills-routes             |  52.69 kB | 
 chunk-MLPXPZPS.js   | -                         |  32.60 kB | 
-chunk-JIITXGOZ.js   | wiki-demo-routes          |   6.49 kB | 
+chunk-C3SUDRJL.js   | wiki-demo-routes          |   6.49 kB | 
 chunk-2PI2JPBZ.js   | about-routes              |   5.77 kB | 
 
-Application bundle generation complete. [2.324 seconds]
+Application bundle generation complete. [2.007 seconds]
 
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
-4:26:45 PM [vite] (ssr) Re-optimizing dependencies because lockfile has changed
-4:26:45 PM [vite] (client) Re-optimizing dependencies because lockfile has changed
   ➜  Local:   http://localhost:4200/
-fatal error: all goroutines are asleep - deadlock!
-
-goroutine 1 [chan receive]:
-github.com/evanw/esbuild/internal/helpers.(*ThreadSafeWaitGroup).Wait(...)
-	github.com/evanw/esbuild/internal/helpers/waitgroup.go:36
-main.runService.func2()
-	github.com/evanw/esbuild/cmd/esbuild/service.go:114 +0x8c
-main.runService(0x1)
-	github.com/evanw/esbuild/cmd/esbuild/service.go:160 +0x560
-main.main()
-	github.com/evanw/esbuild/cmd/esbuild/main.go:252 +0xb5c
-
-goroutine 7 [chan receive]:
-main.runService.func1()
-	github.com/evanw/esbuild/cmd/esbuild/service.go:98 +0x40
-created by main.runService in goroutine 1
-	github.com/evanw/esbuild/cmd/esbuild/service.go:97 +0x188
-
-goroutine 8 [chan receive]:
-main.(*serviceType).sendRequest(0x39594f87d020, {0x104b44f40, 0x395950ea1b30})
-	github.com/evanw/esbuild/cmd/esbuild/service.go:192 +0x134
-main.runService.func3()
-	github.com/evanw/esbuild/cmd/esbuild/service.go:125 +0x44
-created by main.runService in goroutine 1
-	github.com/evanw/esbuild/cmd/esbuild/service.go:122 +0x2a8

@@ -44,6 +44,11 @@ export const routes: Routes = [
       import('./features/workflow/workflow.routes').then((m) => m.workflowRoutes),
   },
   {
+    path: 'ecosysteme',
+    loadChildren: () =>
+      import('./features/ecosystem/ecosystem.routes').then((m) => m.ecosystemRoutes),
+  },
+  {
     path: 'outils-mcp',
     loadChildren: () =>
       import('./features/mcp-tools/mcp-tools.routes').then((m) => m.mcpToolsRoutes),
