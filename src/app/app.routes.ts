@@ -33,6 +33,11 @@ export const routes: Routes = [
         (m) => m.problemInnovationRoutes
       ),
   },
+  {
+    path: 'outils-mcp',
+    loadChildren: () =>
+      import('./features/mcp-tools/mcp-tools.routes').then((m) => m.mcpToolsRoutes),
+  },
   /* Route wildcard — redirige vers l'accueil */
   { path: '**', redirectTo: '' },
 ];

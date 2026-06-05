@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { routes } from './app.routes';
 
 describe('AppRoutes', () => {
-  it('devrait avoir 6 routes définies', () => {
-    expect(routes.length).toBe(6);
+  it('devrait avoir 7 routes définies', () => {
+    expect(routes.length).toBe(7);
   });
 
   it('devrait avoir une route racine avec lazy loading vers homepage', () => {
@@ -89,6 +89,35 @@ describe('AppRoutes', () => {
       expect(listRoute).toBeTruthy();
       const detailRoute = loadedRoutes.find((r) => r.path === ':id');
       expect(detailRoute).toBeTruthy();
+    }
+  });
+
+  it('devrait avoir une route /outils-mcp avec lazy loading vers mcp-tools', () => {
+    const mcpRoute = routes.find((r) => r.path === 'outils-mcp');
+    expect(mcpRoute).toBeTruthy();
+    expect(mcpRoute?.loadChildren).toBeDefined();
+    expect(typeof mcpRoute?.loadChildren).toBe('function');
+  });
+
+  it('la fonction lazy load de la route /outils-mcp devrait retourner une promesse', () => {
+    const mcpRoute = routes.find((r) => r.path === 'outils-mcp');
+    const loadFn = mcpRoute?.loadChildren as (() => Promise<Routes>) | undefined;
+    const result = loadFn?.();
+    expect(result).toBeInstanceOf(Promise);
+  });
+
+  it('la route /outils-mcp devrait charger les routes mcp-tools correctement', async () => {
+    const mcpRoute = routes.find((r) => r.path === 'outils-mcp');
+    const loadFn = mcpRoute?.loadChildren as (() => Promise<Routes>) | undefined;
+    if (loadFn) {
+      const loadedRoutes = await loadFn();
+      expect(loadedRoutes).toBeDefined();
+      expect(Array.isArray(loadedRoutes)).toBeTrue();
+      const redirectRoute = loadedRoutes.find((r) => r.path === '');
+      expect(redirectRoute).toBeTruthy();
+      expect(redirectRoute?.redirectTo).toBe('supabase');
+      const categoryRoute = loadedRoutes.find((r) => r.path === ':category');
+      expect(categoryRoute).toBeTruthy();
     }
   });
 });

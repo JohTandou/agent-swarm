@@ -55,6 +55,8 @@ export class SidebarComponent {
       children: [
         { label: 'Supabase', route: '/outils-mcp/supabase' },
         { label: 'Vercel', route: '/outils-mcp/vercel' },
+        { label: 'Render', route: '/outils-mcp/render' },
+        { label: 'Playwright', route: '/outils-mcp/playwright' },
       ],
     },
   ];
