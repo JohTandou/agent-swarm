@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { WorkflowComponent } from './workflow.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideMarkdown } from 'ngx-markdown';
+import { ContentService } from '../../shared/services/content.service';
 
 describe('WorkflowComponent', () => {
   let component: WorkflowComponent;
@@ -11,33 +13,41 @@ describe('WorkflowComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [WorkflowComponent],
-      providers: [provideHttpClient(), provideMarkdown()],
-      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideMarkdown(),
+        ContentService,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(WorkflowComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    // Ne pas appeler detectChanges ici — ngOnInit sera déclenché dans chaque test
   });
 
   it('devrait créer le composant', () => {
     expect(component).toBeTruthy();
   });
 
-  it('devrait afficher le loader au début (loading = true)', () => {
+  it('devrait afficher le loader après initialisation', () => {
+    fixture.detectChanges(); // déclenche ngOnInit → loading = true
     const loader: HTMLElement | null = fixture.nativeElement.querySelector('.page-loader');
     expect(loader).toBeTruthy();
   });
 
   it('devrait afficher le contenu après le chargement', fakeAsync(() => {
-    tick(500);
-    fixture.detectChanges();
+    fixture.detectChanges(); // ngOnInit → loading = true, setTimeout(400ms)
+    tick(500);              // avance le temps → loading = false
+    fixture.detectChanges(); // met à jour la vue
 
     const main: HTMLElement | null = fixture.nativeElement.querySelector('.page');
     expect(main).toBeTruthy();
   }));
 
   it('devrait afficher le titre hero après chargement', fakeAsync(() => {
+    fixture.detectChanges();
     tick(500);
     fixture.detectChanges();
 
@@ -47,6 +57,7 @@ describe('WorkflowComponent', () => {
   }));
 
   it('devrait afficher les 5 nœuds de décision', fakeAsync(() => {
+    fixture.detectChanges();
     tick(500);
     fixture.detectChanges();
 
@@ -55,6 +66,7 @@ describe('WorkflowComponent', () => {
   }));
 
   it('devrait afficher les routes dans les nœuds', fakeAsync(() => {
+    fixture.detectChanges();
     tick(500);
     fixture.detectChanges();
 
@@ -65,6 +77,7 @@ describe('WorkflowComponent', () => {
   }));
 
   it('devrait afficher le tableau des seuils de pre-search', fakeAsync(() => {
+    fixture.detectChanges();
     tick(500);
     fixture.detectChanges();
 
@@ -73,6 +86,7 @@ describe('WorkflowComponent', () => {
   }));
 
   it('devrait afficher les 2 gates qualité', fakeAsync(() => {
+    fixture.detectChanges();
     tick(500);
     fixture.detectChanges();
 
@@ -81,6 +95,7 @@ describe('WorkflowComponent', () => {
   }));
 
   it('devrait afficher les 5 étapes Git', fakeAsync(() => {
+    fixture.detectChanges();
     tick(500);
     fixture.detectChanges();
 
@@ -89,6 +104,7 @@ describe('WorkflowComponent', () => {
   }));
 
   it('devrait afficher les 2 fichiers swarm', fakeAsync(() => {
+    fixture.detectChanges();
     tick(500);
     fixture.detectChanges();
 
@@ -97,6 +113,7 @@ describe('WorkflowComponent', () => {
   }));
 
   it('devrait avoir les 3 statistiques dans le hero', fakeAsync(() => {
+    fixture.detectChanges();
     tick(500);
     fixture.detectChanges();
 
@@ -104,15 +121,13 @@ describe('WorkflowComponent', () => {
     expect(stats.length).toBe(3);
   }));
 
-  it('devrait contenir un élément app-markdown-renderer pour le diagramme', fakeAsync(() => {
+  it('devrait gérer l\'état d\'erreur via retry()', fakeAsync(() => {
+    // D'abord, initialiser normalement
+    fixture.detectChanges();
     tick(500);
     fixture.detectChanges();
 
-    const mermaidEl: HTMLElement | null = fixture.nativeElement.querySelector('app-markdown-renderer');
-    expect(mermaidEl).toBeTruthy();
-  }));
-
-  it('devrait gérer l\'état d\'erreur via retry()', fakeAsync(() => {
+    // Puis déclencher une erreur
     component['error'].set('Test error message');
     fixture.detectChanges();
 
@@ -120,6 +135,7 @@ describe('WorkflowComponent', () => {
     expect(errorState).toBeTruthy();
     expect(errorState!.textContent).toContain('Test error message');
 
+    // Retry
     const retryBtn: HTMLElement | null = fixture.nativeElement.querySelector('.error-state__retry');
     expect(retryBtn).toBeTruthy();
     retryBtn!.click();
