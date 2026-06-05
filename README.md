@@ -1,59 +1,95 @@
-# SwarmWiki
+# Swarm Wiki
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.27.
+Documentation technique du **Swarm** — pipeline d'agents IA spécialisés qui collaborent pour concevoir, implémenter, tester et documenter des projets logiciels de bout en bout.
 
-## Development server
+**Cible** : recruteurs, tech leads, managers — ton accessible, jamais simpliste.
 
-To start a local development server, run:
+## Stack Technique
+
+| Domaine | Technologie |
+|---|---|
+| Framework | Angular 19 — standalone components, pas de NgModules |
+| Langage | TypeScript 5 (strict) |
+| CSS | Tailwind v4 (CSS-first, `@theme` + custom properties) + SCSS |
+| Composants UI | Angular CDK (primitives headless pour a11y) |
+| État | Signals + Services natifs (wiki statique, pas de NgRx) |
+| Animations | SCSS keyframes (GSAP à venir T14) |
+| Tests unitaires | Jasmine + Karma |
+| Typographie | Cabinet Grotesk (display) + Satoshi (body) via Fontshare CDN |
+| Déploiement | Vercel (build : `ng build`, output : `dist/swarm-wiki/browser`) |
+
+### Palette — Dark mode exclusif
+
+```css
+--color-bg-primary:    #3A3530;  /* Fond de page */
+--color-bg-elevated:   #4A4540;  /* Cartes, surfaces */
+--color-bg-subtle:     #2A2520;  /* Code blocks, footer */
+--color-text-primary:  #F5F0EB;  /* Texte principal */
+--color-text-secondary:#8E8882;  /* Métadonnées, légendes */
+--color-accent:        #F0A522;  /* Liens, hover, glow */
+```
+
+## Setup Local
 
 ```bash
+# Installation
+npm install
+
+# Serveur de développement (port 4200)
 ng serve
+# ou
+npm start
+
+# Build production
+npm run build
+
+# Tests unitaires (Jasmine/Karma, 79 tests, coverage 100%)
+npm test
+
+# Lint
+ng lint
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Structure du Projet
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+swarm-wiki/
+├── src/
+│   ├── app/
+│   │   ├── layout/                # Shell : header, sidebar, breadcrumbs, TOC placeholder
+│   │   ├── features/              # Pages lazy-loadées (homepage, about, à venir)
+│   │   ├── shared/models/         # Interfaces TypeScript (NavItem, Breadcrumb, TocEntry)
+│   │   ├── app.component.ts       # Shell racine 3 colonnes responsive
+│   │   ├── app.config.ts          # Providers (zoneless + router)
+│   │   └── app.routes.ts          # Routes racine avec lazy loading
+│   ├── styles/
+│   │   ├── styles.css             # Thème Tailwind v4, palette, typographie, reset
+│   │   └── animations.scss        # Keyframes (fadeSlideIn, shimmer, pulseGlow), easings
+│   ├── index.html                 # Point d'entrée, chargement Fontshare CDN
+│   └── main.ts                    # Bootstrap standalone
+├── angular.json                   # Config Angular CLI (build application, test Karma)
+├── postcss.config.js              # Plugin Tailwind v4 CSS-first
+└── tsconfig.json                  # Strict, path alias @shared/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Commandes Utiles
 
-```bash
-ng generate --help
-```
+| Commande | Description |
+|---|---|
+| `ng serve` | Démarre le serveur de dev avec HMR |
+| `ng build` | Build production → `dist/swarm-wiki/browser` |
+| `ng test` | Lance Jasmine/Karma (watch + coverage) |
+| `ng lint` | Vérifie la qualité du code |
+| `ng generate component nom` | Scaffold un composant standalone |
 
-## Building
+## Conventions
 
-To build the project run:
+- **Langue** : UI en français, code en anglais, commentaires en français
+- **Composants** : 100% standalone, nouveau control flow Angular (`@if`, `@for`)
+- **Dark mode** : exclusif — pas de toggle, pas de `prefers-color-scheme: light`
+- **Mobile** : sidebar → slide-over, TOC caché, layout 1 colonne
+- **Accessibilité** : skip-to-content link, `:focus-visible`, scrollbar custom dark, touch targets ≥ 44×44px
 
-```bash
-ng build
-```
+## Déploiement
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Le projet est configuré pour Vercel avec déploiement automatique sur merge main. La commande de build est `ng build` et le répertoire de sortie est `dist/swarm-wiki/browser`.
