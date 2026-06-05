@@ -1,0 +1,414 @@
+/* ==========================================================================
+   Agents List — Grille bento asymétrique
+   Pipeline miniature animé sur chaque carte (wow moment)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Section container
+   -------------------------------------------------------------------------- */
+.agents {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px 0 80px;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.agents__header {
+  margin-bottom: 8px;
+}
+
+.agents__eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 8px;
+}
+
+.agents__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+
+.agents__subtitle {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+/* --------------------------------------------------------------------------
+   Filtres
+   -------------------------------------------------------------------------- */
+.agents__filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.agents__filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid rgba(142, 136, 130, 0.15);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all 200ms ease-out;
+
+  &:hover {
+    border-color: rgba(142, 136, 130, 0.3);
+    color: var(--color-text-primary);
+    background: rgba(74, 69, 64, 0.5);
+  }
+
+  &--active {
+    border-color: rgba(240, 165, 34, 0.4);
+    color: var(--color-accent);
+    background: rgba(240, 165, 34, 0.08);
+    box-shadow: 0 0 12px rgba(240, 165, 34, 0.06);
+  }
+}
+
+.agents__filter-count {
+  font-size: 0.6875rem;
+  opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   Grille Bento — asymétrique
+   -------------------------------------------------------------------------- */
+.agents__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  grid-auto-rows: auto;
+  grid-auto-flow: dense;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Carte agent — Élévation N2
+   -------------------------------------------------------------------------- */
+.agents__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  border-radius: 12px;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(142, 136, 130, 0.12);
+  box-shadow: var(--elevation-n2);
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 250ms ease-out;
+  min-height: 200px;
+
+  /* Glow border — invisible par défaut, révélé au hover */
+  &-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    border: 1px solid rgba(240, 165, 34, 0.3);
+    box-shadow: inset 0 0 30px rgba(240, 165, 34, 0.06);
+    transition: opacity 300ms ease-out;
+  }
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: var(--elevation-n3);
+    border-color: rgba(142, 136, 130, 0.2);
+
+    .agents__card-glow {
+      opacity: 1;
+    }
+
+    .agents__card-emoji {
+      transform: scale(1.1);
+    }
+  }
+
+  &:active {
+    transform: scale(0.97);
+    transition: transform 100ms ease-in-out;
+  }
+
+  /* Variantes de taille pour la grille bento */
+  &--featured {
+    grid-column: span 2;
+    grid-row: span 2;
+    min-height: 440px;
+
+    .agents__card-emoji {
+      font-size: 3rem;
+    }
+
+    .agents__card-name {
+      font-size: clamp(1.25rem, 2vw, 1.5rem);
+    }
+
+    .agents__card-desc {
+      -webkit-line-clamp: 4;
+    }
+
+    @media (max-width: 1024px) {
+      grid-column: span 2;
+      grid-row: span 1;
+      min-height: 300px;
+    }
+
+    @media (max-width: 640px) {
+      grid-column: span 1;
+      grid-row: span 1;
+      min-height: 240px;
+    }
+  }
+
+  &--wide {
+    grid-column: span 2;
+
+    @media (max-width: 640px) {
+      grid-column: span 1;
+    }
+  }
+
+  /* Carte inactive — opacité réduite */
+  &--inactive {
+    opacity: 0.45;
+
+    &:hover {
+      opacity: 0.65;
+      transform: scale(1.01);
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Éléments internes de la carte
+   -------------------------------------------------------------------------- */
+.agents__card-emoji {
+  font-size: 2rem;
+  line-height: 1;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+  display: block;
+}
+
+.agents__card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.agents__card-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.agents__card-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+
+  &--active {
+    background: rgba(240, 165, 34, 0.1);
+    color: var(--color-accent);
+    border: 1px solid rgba(240, 165, 34, 0.2);
+  }
+
+  &--inactive {
+    background: rgba(142, 136, 130, 0.1);
+    color: var(--color-text-secondary);
+    border: 1px solid rgba(142, 136, 130, 0.15);
+  }
+}
+
+.agents__card-role {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.agents__card-desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Pied de carte — route + pipeline animé
+   -------------------------------------------------------------------------- */
+.agents__card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  gap: 12px;
+}
+
+.agents__card-route {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(142, 136, 130, 0.2);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Pipeline miniature animé — Wow moment
+   Quatre billes lumineuses qui circulent de gauche à droite
+   -------------------------------------------------------------------------- */
+.agents__card-pipeline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 4px;
+  flex: 1;
+  position: relative;
+  max-width: 80px;
+
+  /* Ligne de fond du pipeline */
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1px;
+    background: rgba(142, 136, 130, 0.2);
+    border-radius: 1px;
+  }
+}
+
+.agents__card-pipeline-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 6px rgba(240, 165, 34, 0.5);
+  position: relative;
+  z-index: 1;
+  animation: pipeline-flow 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  opacity: 0;
+}
+
+@keyframes pipeline-flow {
+  0% {
+    opacity: 0;
+    transform: translateX(-12px) scale(0.5);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(20px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(32px) scale(0.5);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Empty state — aucun agent filtré
+   -------------------------------------------------------------------------- */
+.agents__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 64px 24px;
+  text-align: center;
+}
+
+.agents__empty-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.agents__empty-reset {
+  padding: 8px 20px;
+  border: 1px solid rgba(240, 165, 34, 0.3);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all 200ms ease-out;
+
+  &:hover {
+    background: rgba(240, 165, 34, 0.08);
+    box-shadow: 0 0 16px rgba(240, 165, 34, 0.08);
+  }
+}

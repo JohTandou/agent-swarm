@@ -10,6 +10,8 @@ export type { Breadcrumb } from './breadcrumb.model';
 export type { TocEntry } from './toc-entry.model';
 export type { ShellConfig } from './shell-config.model';
 
+export type { Agent, AgentCategory, AgentRoute } from './agent.model';
+
 // Système de contenu (T2)
 export type { CalloutType } from './callout-type.model';
 export type { MarkdownFrontmatter } from './markdown-frontmatter.model';
