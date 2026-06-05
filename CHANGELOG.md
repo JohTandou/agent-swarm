@@ -9,8 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **T2 — Système de contenu statique** (en cours) : service de chargement Markdown, renderer avec template riche (callouts, code blocks Prism.js, diagrammes Mermaid, TOC dynamique), frontmatter YAML.
-- Placeholder pour les sections Agents, Skills, Workflow, Outils MCP dans la sidebar.
+- *Rien pour l'instant — prochaine tâche : T3 (page d'accueil interactive avec grille hexagonale Canvas).*
 
 ## [1.0.0] — 2026-06-05
 
@@ -49,3 +48,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 79 tests Jasmine/Karma, coverage 100% (composants, models, routes, config).
 - Config `@angular-devkit/build-angular:application` pour build optimisé.
 - Budgets de build : initial ≤ 500KB warning, composant style ≤ 4KB warning.
+
+### Added — T2 : Système de contenu statique
+
+- **ContentService** (`src/app/shared/services/content.service.ts`) : chargement asynchrone des fichiers Markdown depuis `src/content/` via HttpClient, parsing du frontmatter YAML avec js-yaml, extraction de la hiérarchie des headings (h1–h4), aplatissement en `TocEntry[]` pour le composant TOC. Gestion des erreurs (fichier introuvable, YAML invalide) avec messages en français.
+- **TocService** (`src/app/shared/services/toc.service.ts`) : service réactif Signals (`entries()` et `activeId()`) partagé entre le `MarkdownRendererComponent` (producteur) et le `TableOfContentsComponent` (consommateur). Permet le découplage complet entre le rendu de contenu et la navigation intra-page.
+- **MarkdownRendererComponent** (`src/app/shared/components/markdown-renderer/`) : composant standalone utilisant ngx-markdown pour le rendu Markdown → HTML. Pre-processing des callouts `:::info` / `:::warning` / `:::tip` / `:::danger` en HTML structuré avec icônes et bordures colorées. Injection automatique d'ancres HTML sur les headings pour le scroll-spy. Post-processing : lazy-load de Mermaid.js pour les diagrammes (import dynamique, ~500KB chargés uniquement si des blocs `mermaid` sont présents) et coloration syntaxique Prism.js. Gère les 4 états : loading (shimmer animé), error (message + icône ambrée), empty (message guide), success.
+- **TableOfContentsComponent** (`src/app/shared/components/table-of-contents/`) : navigation intra-page avec scroll-spy via `IntersectionObserver` (rootMargin `-64px 0 -20%`). Surbrillance ambrée du heading actif, indentation hiérarchique par niveau (16px/32px), défilement fluide programmatique avec désactivation temporaire de l'observer. État vide avec message guide. Animation d'entrée stagger au chargement.
+- **Thème Prism.js dark custom** (`src/styles/prism-theme.css`, 183 lignes) : coloration syntaxique utilisant exclusivement la palette 6 couleurs du projet — pas de bleu, vert ou rouge. Tokens : commentaires en `--color-text-secondary` (italique), mots-clés en `--color-accent` (gras 500), noms de fonctions en `--color-text-primary`. Support des line numbers et toolbar (bouton copier avec hover glow ambré).
+- **Page démo `/demo-markdown`** (`src/app/features/wiki-demo/`) : page lazy-loadée illustrant l'intégration complète du pipeline. Affiche un titre avec dégradé texte (ambre → blanc), charge `demo.md` via `MarkdownRendererComponent` et peuple la TOC latérale. Contient des callouts, tableaux, blocs de code TypeScript avec coloration, et diagrammes Mermaid.
+- **Modèles** : `HeadingNode` (nœud hiérarchique h1–h4), `MarkdownDocument` (document parsé complet), `MarkdownFrontmatter` (métadonnées YAML), `MarkdownConfig` (options du renderer), `CalloutType` (union `'info'|'warning'|'tip'|'danger'`).
+- **Contenu** : `src/content/demo.md` — premier fichier Markdown du wiki, illustrant toutes les fonctionnalités du moteur de rendu.
+- **Dépendances ajoutées** : `ngx-markdown` (19.x), `marked` (15.x), `prismjs` (1.30), `mermaid` (11.x, lazy-load), `js-yaml` (4.x).
+- **Provider** : `provideMarkdown()` et `provideHttpClient(withFetch())` dans `app.config.ts`.
+- 194 tests Jasmine/Karma, coverage 89.5% (composants, services, modèles).

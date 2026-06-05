@@ -13,8 +13,11 @@ Documentation technique du **Swarm** — pipeline d'agents IA spécialisés qui 
 | CSS | Tailwind v4 (CSS-first, `@theme` + custom properties) + SCSS |
 | Composants UI | Angular CDK (primitives headless pour a11y) |
 | État | Signals + Services natifs (wiki statique, pas de NgRx) |
+| Markdown | ngx-markdown + marked.js (rendu riche, callouts, tableaux) |
+| Coloration syntaxique | Prism.js (thème dark custom, palette 6 couleurs) |
+| Diagrammes | Mermaid.js (lazy-load, thème dark synchronisé) |
 | Animations | SCSS keyframes (GSAP à venir T14) |
-| Tests unitaires | Jasmine + Karma |
+| Tests unitaires | Jasmine + Karma (194 tests, coverage 89.5%) |
 | Typographie | Cabinet Grotesk (display) + Satoshi (body) via Fontshare CDN |
 | Déploiement | Vercel (build : `ng build`, output : `dist/swarm-wiki/browser`) |
 
@@ -43,7 +46,7 @@ npm start
 # Build production
 npm run build
 
-# Tests unitaires (Jasmine/Karma, 79 tests, coverage 100%)
+# Tests unitaires (Jasmine/Karma, 194 tests, coverage 89.5%)
 npm test
 
 # Lint
@@ -56,15 +59,21 @@ ng lint
 swarm-wiki/
 ├── src/
 │   ├── app/
-│   │   ├── layout/                # Shell : header, sidebar, breadcrumbs, TOC placeholder
-│   │   ├── features/              # Pages lazy-loadées (homepage, about, à venir)
-│   │   ├── shared/models/         # Interfaces TypeScript (NavItem, Breadcrumb, TocEntry)
+│   │   ├── layout/                # Shell : header, sidebar, breadcrumbs
+│   │   ├── features/              # Pages lazy-loadées (homepage, about, wiki-demo)
+│   │   ├── shared/
+│   │   │   ├── components/        # Composants transverses (MarkdownRenderer, TOC)
+│   │   │   ├── models/            # Interfaces TypeScript (NavItem, Breadcrumb, TocEntry, MarkdownDocument)
+│   │   │   └── services/          # Services (ContentService — chargement Markdown, TocService — TOC réactive)
 │   │   ├── app.component.ts       # Shell racine 3 colonnes responsive
-│   │   ├── app.config.ts          # Providers (zoneless + router)
+│   │   ├── app.config.ts          # Providers (zoneless + router + HTTP + ngx-markdown)
 │   │   └── app.routes.ts          # Routes racine avec lazy loading
+│   ├── content/                   # Fichiers Markdown du wiki (frontmatter YAML obligatoire)
+│   │   └── demo.md                # Démo du système de rendu
 │   ├── styles/
 │   │   ├── styles.css             # Thème Tailwind v4, palette, typographie, reset
-│   │   └── animations.scss        # Keyframes (fadeSlideIn, shimmer, pulseGlow), easings
+│   │   ├── animations.scss        # Keyframes (fadeSlideIn, shimmer, pulseGlow), easings
+│   │   └── prism-theme.css        # Thème Prism.js dark custom (palette 6 couleurs)
 │   ├── index.html                 # Point d'entrée, chargement Fontshare CDN
 │   └── main.ts                    # Bootstrap standalone
 ├── angular.json                   # Config Angular CLI (build application, test Karma)
