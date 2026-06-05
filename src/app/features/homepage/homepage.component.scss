@@ -1,0 +1,458 @@
+/* ==========================================================================
+   Homepage — Styles Apple-grade
+   Palette 6 couleurs exclusive, Cabinet Grotesk + Satoshi,
+   Sections plein écran, stagger animations, glow borders
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Variables locales — héritent des CSS custom properties racine
+   -------------------------------------------------------------------------- */
+$ease-natural: var(--ease-natural, cubic-bezier(0.25, 0.46, 0.45, 0.94));
+$ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
+
+/* --------------------------------------------------------------------------
+   Conteneur racine — full bleed, pas de contrainte de largeur
+   -------------------------------------------------------------------------- */
+.homepage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--color-bg-primary, #3A3530);
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   SECTION 1 : Hero
+   ========================================================================== */
+.homepage__hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: clamp(40px, 8vh, 120px) clamp(24px, 8vw, 120px);
+  text-align: center;
+}
+
+.homepage__hero-content {
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(24px, 4vh, 48px);
+}
+
+/* Badge */
+.homepage__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid rgba(142, 136, 130, 0.2);
+  border-radius: 9999px;
+  font-family: var(--font-body, 'Satoshi', sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary, #8E8882);
+  background: rgba(74, 69, 64, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  animation: hero-stagger 0.7s $ease-spring forwards;
+}
+
+.homepage__badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent, #F0A522);
+  box-shadow: 0 0 6px rgba(240, 165, 34, 0.5);
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Tagline monumentale */
+.homepage__tagline {
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--color-text-primary, #F5F0EB);
+  margin: 0;
+  opacity: 0;
+  animation: hero-stagger 0.7s $ease-spring 0.1s forwards;
+}
+
+.homepage__tagline-accent {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent, #F0A522) 0%,
+    #F5C86A 50%,
+    var(--color-accent, #F0A522) 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: accent-shift 4s ease-in-out infinite;
+}
+
+@keyframes accent-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Résumé exécutif */
+.homepage__summary {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vh, 20px);
+  max-width: 680px;
+  opacity: 0;
+  animation: hero-stagger 0.7s $ease-spring 0.25s forwards;
+}
+
+.homepage__summary-text {
+  font-family: var(--font-body, 'Satoshi', sans-serif);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--color-text-secondary, #8E8882);
+  margin: 0;
+
+  strong {
+    color: var(--color-text-primary, #F5F0EB);
+    font-weight: 500;
+  }
+}
+
+/* Keyframe stagger pour la section hero */
+@keyframes hero-stagger {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Indicateur de scroll */
+.homepage__scroll-hint {
+  position: absolute;
+  bottom: clamp(24px, 4vh, 48px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: hero-stagger 0.7s $ease-spring 0.5s forwards;
+}
+
+.homepage__scroll-text {
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary, #8E8882);
+}
+
+.homepage__scroll-arrow {
+  color: var(--color-text-secondary, #8E8882);
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+/* ==========================================================================
+   SECTION 2 : Graphe interactif
+   ========================================================================== */
+.homepage__graph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: clamp(40px, 8vh, 100px) clamp(24px, 6vw, 80px);
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    rgba(240, 165, 34, 0.03) 0%,
+    transparent 70%
+  );
+}
+
+.homepage__graph-header {
+  text-align: center;
+  max-width: 600px;
+  margin-bottom: clamp(32px, 6vh, 64px);
+}
+
+.homepage__graph-canvas {
+  width: 100%;
+  max-width: 900px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   SECTION 3 : Statistiques — 4 métriques animées
+   ========================================================================== */
+.homepage__stats {
+  display: flex;
+  justify-content: center;
+  min-height: 60vh;
+  padding: clamp(40px, 8vh, 100px) clamp(24px, 8vw, 120px);
+  background: var(--color-bg-subtle, #2A2520);
+  border-top: 1px solid rgba(142, 136, 130, 0.06);
+  border-bottom: 1px solid rgba(142, 136, 130, 0.06);
+}
+
+.homepage__stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  max-width: 1000px;
+  width: 100%;
+  align-items: center;
+}
+
+.homepage__stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  opacity: 0;
+  animation: stat-appear 0.6s $ease-spring forwards;
+  animation-play-state: paused;
+
+  .homepage__stats--visible & {
+    animation-play-state: running;
+  }
+}
+
+@keyframes stat-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.homepage__stat-value {
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary, #F5F0EB);
+  line-height: 1;
+}
+
+.homepage__stat-label {
+  font-family: var(--font-body, 'Satoshi', sans-serif);
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  color: var(--color-text-secondary, #8E8882);
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   SECTION 4 : Navigation visuelle — 4 cartes
+   ========================================================================== */
+.homepage__navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: clamp(40px, 8vh, 100px) clamp(24px, 6vw, 80px);
+}
+
+.homepage__section-title {
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary, #F5F0EB);
+  text-align: center;
+  margin: 0 0 clamp(8px, 1.5vh, 16px) 0;
+}
+
+.homepage__section-subtitle {
+  font-family: var(--font-body, 'Satoshi', sans-serif);
+  font-size: clamp(0.9375rem, 1.3vw, 1.0625rem);
+  line-height: 1.6;
+  color: var(--color-text-secondary, #8E8882);
+  text-align: center;
+  margin: 0;
+}
+
+.homepage__nav-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+  max-width: 1100px;
+  width: 100%;
+  margin-top: clamp(40px, 8vh, 72px);
+}
+
+.homepage__nav-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(24px, 3vw, 36px) clamp(16px, 2vw, 28px);
+  background: var(--color-bg-elevated, #4A4540);
+  border: 1px solid rgba(142, 136, 130, 0.12);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 250ms var(--ease-natural, cubic-bezier(0.25, 0.46, 0.45, 0.94));
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: stat-appear 0.5s $ease-spring forwards;
+  cursor: pointer;
+
+  /* Glow subtil au hover */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(240, 165, 34, 0.06) 0%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: rgba(240, 165, 34, 0.25);
+    box-shadow: var(--elevation-n3, 0 0 20px rgba(240, 165, 34, 0.04));
+
+    &::before {
+      opacity: 1;
+    }
+
+    .homepage__nav-arrow {
+      transform: translateX(4px);
+      color: var(--color-accent, #F0A522);
+    }
+  }
+
+  &:active {
+    transform: scale(0.98);
+    transition: transform 100ms ease-in-out;
+  }
+}
+
+.homepage__nav-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.homepage__nav-title {
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-text-primary, #F5F0EB);
+  margin: 0;
+}
+
+.homepage__nav-description {
+  font-family: var(--font-body, 'Satoshi', sans-serif);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--color-text-secondary, #8E8882);
+  margin: 0;
+  flex: 1;
+}
+
+.homepage__nav-arrow {
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-size: 1rem;
+  color: var(--color-text-secondary, #8E8882);
+  align-self: flex-end;
+  transition: all 200ms ease-out;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.homepage__footer {
+  display: flex;
+  justify-content: center;
+  padding: clamp(24px, 4vh, 48px) clamp(24px, 6vw, 80px);
+  border-top: 1px solid rgba(142, 136, 130, 0.08);
+}
+
+.homepage__footer-text {
+  font-family: var(--font-body, 'Satoshi', sans-serif);
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #8E8882);
+}
+
+/* ==========================================================================
+   Responsive — Mobile (< 768px)
+   ========================================================================== */
+@media (max-width: 767px) {
+  .homepage__stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .homepage__nav-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+
+  .homepage__hero {
+    padding: 80px 20px;
+    min-height: 90vh;
+  }
+
+  .homepage__graph {
+    padding: 60px 16px;
+  }
+
+  .homepage__navigation {
+    padding: 60px 20px;
+    min-height: auto;
+  }
+
+  .homepage__stats {
+    padding: 60px 20px;
+    min-height: auto;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion — accessibilité
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .homepage__tagline,
+  .homepage__summary,
+  .homepage__badge,
+  .homepage__scroll-hint,
+  .homepage__stat-card,
+  .homepage__nav-card {
+    animation: none;
+    opacity: 1;
+  }
+}
