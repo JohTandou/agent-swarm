@@ -54,7 +54,8 @@
               },
               {
                 "glob": "**/*.md",
-                "input": "src/content"
+                "input": "src/content",
+                "output": "content"
               }
             ],
             "styles": [
@@ -124,7 +125,8 @@
               },
               {
                 "glob": "**/*.md",
-                "input": "src/content"
+                "input": "src/content",
+                "output": "content"
               }
             ],
             "styles": [
