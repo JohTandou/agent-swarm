@@ -9,7 +9,7 @@ export default defineConfig({
   reporter: 'html',
   
   use: {
-    baseURL: 'http://localhost:4200',
+    baseURL: 'http://localhost:3000',
     colorScheme: 'dark',
     trace: 'on-first-retry',
   },
@@ -26,8 +26,8 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npx ng serve --port 4200',
-    url: 'http://localhost:4200',
+    command: 'npx ng serve --port 3000',
+    url: 'http://localhost:3000',
     reuseExistingServer: !process.env['CI'],
     timeout: 120 * 1000,
   },

@@ -38,7 +38,7 @@ Documentation technique du **Swarm** — pipeline d'agents IA spécialisés qui 
 # Installation
 npm install
 
-# Serveur de développement (port 4200)
+# Serveur de développement (port 3000)
 ng serve
 # ou
 npm start
