@@ -27,6 +27,13 @@ describe('AppRoutes', () => {
     expect(typeof agentsRoute?.loadChildren).toBe('function');
   });
 
+  it('devrait avoir une route /outils-mcp avec lazy loading vers mcp-tools', () => {
+    const mcpRoute = routes.find((r) => r.path === 'outils-mcp');
+    expect(mcpRoute).toBeTruthy();
+    expect(mcpRoute?.loadChildren).toBeDefined();
+    expect(typeof mcpRoute?.loadChildren).toBe('function');
+  });
+
   it('devrait avoir une route wildcard ** qui redirige vers "" (accueil)', () => {
     const wildcardRoute = routes.find((r) => r.path === '**');
     expect(wildcardRoute).toBeTruthy();
