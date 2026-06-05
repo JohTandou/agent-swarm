@@ -17,21 +17,9 @@ export const routes: Routes = [
       import('./features/about/about.routes').then((m) => m.aboutRoutes),
   },
   {
-    path: 'agents',
-    loadChildren: () =>
-      import('./features/agents/agents.routes').then((m) => m.agentsRoutes),
-  },
-  {
     path: 'demo-markdown',
     loadChildren: () =>
       import('./features/wiki-demo/wiki-demo.routes').then((m) => m.wikiDemoRoutes),
-  },
-  {
-    path: 'probleme-innovation',
-    loadChildren: () =>
-      import('./features/problem-innovation/problem-innovation.routes').then(
-        (m) => m.problemInnovationRoutes
-      ),
   },
   /* Route wildcard — redirige vers l'accueil */
   { path: '**', redirectTo: '' },
