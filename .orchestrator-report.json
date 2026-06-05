@@ -27,8 +27,8 @@
     },
     {
       "name": "e2e",
-      "status": "skip",
-      "detail": "Dev server timeout after 60s (http://localhost:3000)"
+      "status": "warn",
+      "detail": "Suite: smoke — 0 tests matched the grep pattern"
     }
   ],
   "overall": "pass"

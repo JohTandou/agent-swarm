@@ -1,7 +1,3 @@
-
-> swarm-wiki@0.0.0 start
-> ng serve
-
 Node.js version v25.4.0 detected.
 Odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.
 Component HMR has been enabled, see https://angular.dev/hmr for more info.
@@ -28,8 +24,8 @@ chunk-MLPXPZPS.js   | -                         |  32.60 kB |
 chunk-C3SUDRJL.js   | wiki-demo-routes          |   6.49 kB | 
 chunk-2PI2JPBZ.js   | about-routes              |   5.77 kB | 
 
-Application bundle generation complete. [1.994 seconds]
+Application bundle generation complete. [2.022 seconds]
 
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
-  ➜  Local:   http://localhost:4200/
+  ➜  Local:   http://localhost:3000/

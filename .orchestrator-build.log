@@ -37,15 +37,15 @@ chunk-UIIPNG5E.js     | -                            |  53.36 kB |              
 chunk-2A7SF6C4.js     | ganttDiagram-6RSMTGT7        |  50.27 kB |                15.08 kB
 ...and 78 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [5.308 seconds]
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 10.23 kB with a total of 18.23 kB.[0m
-
+Application bundle generation complete. [5.153 seconds]
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 6.81 kB with a total of 14.81 kB.[0m
 
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/mcp-tools/mcp-tools.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 3.80 kB with a total of 11.80 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 10.23 kB with a total of 18.23 kB.[0m
 
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/ecosystem/ecosystem.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 4.54 kB with a total of 12.54 kB.[0m
