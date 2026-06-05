@@ -1,0 +1,83 @@
+/* ==========================================================================
+   Shell Layout — Grille 3 colonnes desktop, stack mobile
+   ========================================================================== */
+
+.shell-layout {
+  display: flex;
+  min-height: calc(100vh - var(--header-height));
+  margin-top: var(--header-height);
+  background: var(--color-bg-primary);
+}
+
+.shell-layout__sidebar {
+  flex-shrink: 0;
+  width: var(--sidebar-width);
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 40;
+  background: var(--color-bg-primary);
+  border-right: 1px solid rgba(142, 136, 130, 0.08);
+}
+
+/* Sidebar en overlay sur mobile */
+.shell-layout__sidebar--overlay {
+  z-index: 100;
+  transform: translateX(0);
+  transition: transform 300ms var(--ease-spring);
+}
+
+/* Overlay semi-transparent quand la sidebar mobile est ouverte */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  top: var(--header-height);
+  z-index: 90;
+  background: rgba(42, 37, 32, 0.7);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+/* Zone de contenu centrale */
+.content-area {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--sidebar-width);
+  padding: 32px 48px;
+  max-width: calc(var(--content-max-width) + var(--toc-width) + 96px);
+}
+
+/* Contenu principal — largeur de lecture optimale */
+.main-content {
+  max-width: var(--content-max-width);
+}
+
+/* Table des matières — colonne droite sticky */
+.shell-layout__toc {
+  flex-shrink: 0;
+  width: var(--toc-width);
+  position: sticky;
+  top: calc(var(--header-height) + 32px);
+  align-self: flex-start;
+  max-height: calc(100vh - var(--header-height) - 64px);
+  overflow-y: auto;
+}
+
+/* Responsive mobile */
+@media (max-width: 1024px) {
+  .shell-layout__sidebar {
+    display: none;
+  }
+
+  .content-area {
+    margin-left: 0;
+    padding: 24px 16px;
+    max-width: 100%;
+  }
+
+  .shell-layout__toc {
+    display: none;
+  }
+}

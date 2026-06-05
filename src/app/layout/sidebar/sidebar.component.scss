@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Sidebar — 280px, navigation hiérarchique pliable, hover premium
+   ========================================================================== */
+
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100%;
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bouton close mobile */
+.sidebar__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 16px 8px auto;
+  background: none;
+  border: 1px solid rgba(142, 136, 130, 0.15);
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+  cursor: pointer;
+  transition: all 200ms ease-out;
+}
+
+.sidebar__close:hover {
+  color: var(--color-accent);
+  border-color: rgba(240, 165, 34, 0.3);
+  box-shadow: 0 0 12px rgba(240, 165, 34, 0.08);
+}
+
+/* Liste de navigation */
+.sidebar__nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 12px;
+}
+
+.sidebar__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar__item {
+  /* Conteneur pour l'effet hover */
+}
+
+/* Liens et boutons de navigation — style unifié */
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 16px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  min-height: 44px;
+  transition: all 200ms ease-out;
+}
+
+/* Hover premium — scale léger + glow ambré */
+.sidebar__link:hover {
+  color: var(--color-text-primary);
+  background: rgba(240, 165, 34, 0.06);
+  transform: scale(1.02);
+}
+
+/* État actif */
+.sidebar__link--active {
+  color: var(--color-accent);
+  background: rgba(240, 165, 34, 0.08);
+  font-weight: 500;
+}
+
+/* Menu parent */
+.sidebar__link--parent {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+}
+
+/* Chevron pour menus pliables */
+.sidebar__chevron {
+  font-size: 0.625rem;
+  transition: transform 250ms var(--ease-spring);
+}
+
+.sidebar__link--expanded .sidebar__chevron {
+  transform: rotate(180deg);
+}
+
+/* Sous-liste */
+.sidebar__sublist {
+  list-style: none;
+  padding: 0 0 0 20px;
+  margin: 2px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.sidebar__link--child {
+  font-size: 0.875rem;
+  padding: 8px 16px;
+  min-height: 40px;
+}
+
+/* Scrollbar custom dans la nav */
+.sidebar__nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar__nav::-webkit-scrollbar-thumb {
+  background: rgba(142, 136, 130, 0.3);
+  border-radius: 2px;
+}
