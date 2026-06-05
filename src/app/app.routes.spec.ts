@@ -92,32 +92,29 @@ describe('AppRoutes', () => {
     }
   });
 
-  it('devrait avoir une route /outils-mcp avec lazy loading vers mcp-tools', () => {
-    const mcpRoute = routes.find((r) => r.path === 'outils-mcp');
-    expect(mcpRoute).toBeTruthy();
-    expect(mcpRoute?.loadChildren).toBeDefined();
-    expect(typeof mcpRoute?.loadChildren).toBe('function');
+  it('devrait avoir une route /workflow avec lazy loading vers workflow', () => {
+    const workflowRoute = routes.find((r) => r.path === 'workflow');
+    expect(workflowRoute).toBeTruthy();
+    expect(workflowRoute?.loadChildren).toBeDefined();
+    expect(typeof workflowRoute?.loadChildren).toBe('function');
   });
 
-  it('la fonction lazy load de la route /outils-mcp devrait retourner une promesse', () => {
-    const mcpRoute = routes.find((r) => r.path === 'outils-mcp');
-    const loadFn = mcpRoute?.loadChildren as (() => Promise<Routes>) | undefined;
+  it('la fonction lazy load de la route /workflow devrait retourner une promesse', () => {
+    const workflowRoute = routes.find((r) => r.path === 'workflow');
+    const loadFn = workflowRoute?.loadChildren as (() => Promise<Routes>) | undefined;
     const result = loadFn?.();
     expect(result).toBeInstanceOf(Promise);
   });
 
-  it('la route /outils-mcp devrait charger les routes mcp-tools correctement', async () => {
-    const mcpRoute = routes.find((r) => r.path === 'outils-mcp');
-    const loadFn = mcpRoute?.loadChildren as (() => Promise<Routes>) | undefined;
+  it('la route /workflow devrait charger les routes workflow correctement', async () => {
+    const workflowRoute = routes.find((r) => r.path === 'workflow');
+    const loadFn = workflowRoute?.loadChildren as (() => Promise<Routes>) | undefined;
     if (loadFn) {
       const loadedRoutes = await loadFn();
       expect(loadedRoutes).toBeDefined();
       expect(Array.isArray(loadedRoutes)).toBeTrue();
-      const redirectRoute = loadedRoutes.find((r) => r.path === '');
-      expect(redirectRoute).toBeTruthy();
-      expect(redirectRoute?.redirectTo).toBe('supabase');
-      const categoryRoute = loadedRoutes.find((r) => r.path === ':category');
-      expect(categoryRoute).toBeTruthy();
+      const indexRoute = loadedRoutes.find((r) => r.path === '');
+      expect(indexRoute).toBeTruthy();
     }
   });
 });
