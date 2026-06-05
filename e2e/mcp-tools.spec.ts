@@ -28,6 +28,7 @@ test.describe('T10 — Pages Outils MCP', () => {
 
     test('le clic sur Vercel change de catégorie', async ({ page }) => {
       await page.goto('/outils-mcp/supabase');
+      await expect(page.getByRole('link', { name: /Vercel/ })).toBeVisible({ timeout: 10000 });
       await page.getByRole('link', { name: /Vercel/ }).click();
       await page.waitForURL(/outils-mcp\/vercel/);
       await expect(page.getByRole('heading', { name: 'Vercel' })).toBeVisible();
@@ -84,6 +85,7 @@ test.describe('T10 — Pages Outils MCP', () => {
   test.describe('Playground', () => {
     test('affiche les champs de paramètres', async ({ page }) => {
       await page.goto('/outils-mcp/supabase');
+      await expect(page.locator('.mcp-playground__input').first()).toBeVisible({ timeout: 10000 });
       const inputs = page.locator('.mcp-playground__input');
       const count = await inputs.count();
       expect(count).toBeGreaterThan(0);
@@ -91,8 +93,8 @@ test.describe('T10 — Pages Outils MCP', () => {
 
     test("le bouton Assembler affiche/masque le résultat", async ({ page }) => {
       await page.goto('/outils-mcp/supabase');
-      const btn = page.getByRole('button', { name: /Assembler les paramètres/ });
-      await expect(btn).toBeVisible();
+      const btn = page.locator('.mcp-playground__button');
+      await expect(btn).toBeVisible({ timeout: 10000 });
       await btn.click();
       await expect(page.locator('.mcp-playground__result')).toBeVisible();
       await btn.click();

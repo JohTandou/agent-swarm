@@ -177,8 +177,7 @@ test.describe('T8 — Pages Skills', () => {
     test("les cartes sont des liens navigables (rôle listitem)", async ({ page }) => {
       await page.goto('/skills');
       const cards = page.locator('[role="listitem"]');
-      const count = await cards.count();
-      expect(count).toBe(3);
+      await expect(cards).toHaveCount(3);
     });
 
     test("la grille a un rôle list avec aria-label", async ({ page }) => {
