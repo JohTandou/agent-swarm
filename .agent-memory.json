@@ -44,8 +44,15 @@
       "agents_used": ["front", "tester", "reviewer"],
       "retry_reasons": [],
       "status": "done"
+    },
+    {
+      "run_id": "swarm-20260606-t11",
+      "route": "MEDIUM",
+      "task_type": "T11-Ecosysteme",
+      "iterations": 1,
+      "agents_used": ["search", "planner", "front", "general", "tester", "reviewer"],
+      "retry_reasons": ["tester-TEST_BUG-sidebar-count", "tester-TEST_BUG-routes-count"],
+      "status": "reviewed"
     }
-  ],
-  "task_in_queue": true,
-  "queue_size": 5
+  ]
 }
