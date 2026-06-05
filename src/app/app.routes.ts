@@ -33,6 +33,11 @@ export const routes: Routes = [
         (m) => m.problemInnovationRoutes
       ),
   },
+  {
+    path: 'skills',
+    loadChildren: () =>
+      import('./features/skills/skills.routes').then((m) => m.skillsRoutes),
+  },
   /* Route wildcard — redirige vers l'accueil */
   { path: '**', redirectTo: '' },
 ];

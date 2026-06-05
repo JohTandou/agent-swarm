@@ -1,0 +1,93 @@
+<section class="skills">
+  <!-- En-tête section -->
+  <header class="skills__header">
+    <p class="skills__eyebrow">Modules Réutilisables</p>
+    <h1 class="skills__title">Skills</h1>
+    <p class="skills__subtitle">
+      Des modules spécialisés que les agents activent à la demande. Chaque skill
+      étend les capacités du Swarm avec une expertise ciblée.
+    </p>
+  </header>
+
+  <!-- Barre de filtres -->
+  <nav class="skills__filters" aria-label="Filtrer par catégorie">
+    <button
+      class="skills__filter"
+      [class.skills__filter--active]="activeCategory() === null"
+      (click)="activeCategory.set(null)"
+      aria-label="Afficher tous les skills"
+    >
+      Tous
+      <span class="skills__filter-count">{{ skills.length }}</span>
+    </button>
+    @for (category of categories; track category) {
+      <button
+        class="skills__filter"
+        [class.skills__filter--active]="activeCategory() === category"
+        (click)="toggleCategory(category)"
+        [attr.aria-label]="'Filtrer par ' + getCategoryLabel(category)"
+      >
+        {{ getCategoryLabel(category) }}
+        <span class="skills__filter-count">{{ getCategoryCount(category) }}</span>
+      </button>
+    }
+  </nav>
+
+  <!-- Grille bento -->
+  <div class="skills__grid" role="list" aria-label="Liste des skills Swarm">
+    @for (skill of filteredSkills(); track skill.id) {
+      <a
+        [routerLink]="['/skills', skill.id]"
+        class="skills__card"
+        [class.skills__card--featured]="isFeatured(skill)"
+        [class.skills__card--wide]="isWide(skill)"
+        role="listitem"
+        [attr.aria-label]="'Fiche de ' + skill.name"
+        [attr.data-category]="skill.category"
+      >
+        <!-- Icône -->
+        <span class="skills__card-emoji" aria-hidden="true">{{ skill.emoji }}</span>
+
+        <!-- En-tête carte -->
+        <div class="skills__card-header">
+          <h2 class="skills__card-name">{{ skill.name }}</h2>
+        </div>
+
+        <!-- Description -->
+        <p class="skills__card-desc">{{ skill.description }}</p>
+
+        <!-- Tags -->
+        <div class="skills__card-tags">
+          @for (tag of skill.tags; track tag) {
+            <span class="skills__card-tag">{{ tag }}</span>
+          }
+        </div>
+
+        <!-- Pied de carte — catégorie -->
+        <div class="skills__card-footer">
+          <span class="skills__card-category">
+            {{ getCategoryLabel(skill.category) }}
+          </span>
+        </div>
+
+        <!-- Glow border hover -->
+        <div class="skills__card-glow" aria-hidden="true"></div>
+      </a>
+    }
+
+    <!-- Empty state -->
+    @if (filteredSkills().length === 0) {
+      <div class="skills__empty" role="status">
+        <p class="skills__empty-text">
+          Aucun skill dans cette catégorie pour le moment.
+        </p>
+        <button
+          class="skills__empty-reset"
+          (click)="activeCategory.set(null)"
+        >
+          Réinitialiser le filtre
+        </button>
+      </div>
+    }
+  </div>
+</section>

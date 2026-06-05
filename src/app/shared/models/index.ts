@@ -11,6 +11,7 @@ export type { TocEntry } from './toc-entry.model';
 export type { ShellConfig } from './shell-config.model';
 
 export type { Agent, AgentCategory, AgentRoute } from './agent.model';
+export type { Skill, SkillCategory } from './skill.model';
 
 // Système de contenu (T2)
 export type { CalloutType } from './callout-type.model';

@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { routes } from './app.routes';
 
 describe('AppRoutes', () => {
-  it('devrait avoir 6 routes définies', () => {
-    expect(routes.length).toBe(6);
+  it('devrait avoir 7 routes définies', () => {
+    expect(routes.length).toBe(7);
   });
 
   it('devrait avoir une route racine avec lazy loading vers homepage', () => {
@@ -25,6 +25,13 @@ describe('AppRoutes', () => {
     expect(agentsRoute).toBeTruthy();
     expect(agentsRoute?.loadChildren).toBeDefined();
     expect(typeof agentsRoute?.loadChildren).toBe('function');
+  });
+
+  it('devrait avoir une route /skills avec lazy loading vers skills', () => {
+    const skillsRoute = routes.find((r) => r.path === 'skills');
+    expect(skillsRoute).toBeTruthy();
+    expect(skillsRoute?.loadChildren).toBeDefined();
+    expect(typeof skillsRoute?.loadChildren).toBe('function');
   });
 
   it('devrait avoir une route wildcard ** qui redirige vers "" (accueil)', () => {

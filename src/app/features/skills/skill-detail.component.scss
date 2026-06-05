@@ -1,0 +1,256 @@
+/* ==========================================================================
+   Skill Detail — Page de détail d'un skill Swarm
+   Header premium + contenu Markdown rendu
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Section container
+   -------------------------------------------------------------------------- */
+.skill-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px 0 80px;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.skill-detail__header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(142, 136, 130, 0.12);
+}
+
+/* Fil d'Ariane */
+.skill-detail__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.skill-detail__breadcrumb-link {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 200ms ease-out;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.skill-detail__breadcrumb-sep {
+  color: rgba(142, 136, 130, 0.4);
+  user-select: none;
+}
+
+.skill-detail__breadcrumb-current {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+/* Hero section */
+.skill-detail__hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+}
+
+.skill-detail__emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  background: rgba(240, 165, 34, 0.06);
+  border: 1px solid rgba(240, 165, 34, 0.12);
+}
+
+.skill-detail__hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-detail__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.skill-detail__desc {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.0625rem;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 640px;
+}
+
+.skill-detail__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.skill-detail__category {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(240, 165, 34, 0.3);
+  background: rgba(240, 165, 34, 0.06);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+.skill-detail__tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(142, 136, 130, 0.2);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Contenu Markdown
+   -------------------------------------------------------------------------- */
+.skill-detail__content {
+  max-width: var(--content-max-width);
+}
+
+.skill-detail__no-content {
+  padding: 48px 0;
+  text-align: center;
+
+  p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Navigation pied de page
+   -------------------------------------------------------------------------- */
+.skill-detail__footer {
+  padding-top: 28px;
+  border-top: 1px solid rgba(142, 136, 130, 0.12);
+}
+
+.skill-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border: 1px solid rgba(142, 136, 130, 0.2);
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 200ms ease-out;
+
+  &:hover {
+    border-color: rgba(240, 165, 34, 0.3);
+    color: var(--color-accent);
+    background: rgba(240, 165, 34, 0.06);
+    box-shadow: 0 0 16px rgba(240, 165, 34, 0.08);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   État erreur — skill introuvable
+   -------------------------------------------------------------------------- */
+.skill-detail--error {
+  min-height: 60vh;
+}
+
+.skill-detail__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  padding: 80px 24px;
+  flex: 1;
+}
+
+.skill-detail__error-emoji {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.skill-detail__error-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.skill-detail__error-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  max-width: 420px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.skill-detail__error-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border: 1px solid rgba(240, 165, 34, 0.3);
+  border-radius: 8px;
+  color: var(--color-accent);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  transition: all 200ms ease-out;
+
+  &:hover {
+    background: rgba(240, 165, 34, 0.08);
+    box-shadow: 0 0 16px rgba(240, 165, 34, 0.1);
+  }
+}
