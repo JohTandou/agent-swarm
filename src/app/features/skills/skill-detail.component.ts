@@ -11,37 +11,33 @@ import type { TocEntry } from '@shared/models';
  */
 const SKILLS_MAP: Record<string, Skill> = {
   'ui-ux-pro-max': {
-    id: 'ui-ux-pro-max',
-    name: 'UI/UX Pro Max',
-    emoji: '🎨',
-    description: 'Intelligence de design UI/UX — 67 styles, 96 palettes, 57 paires typographiques. Supporte 13 stacks techniques.',
-    category: 'creation',
+    id: 'ui-ux-pro-max', name: 'UI/UX Pro Max', emoji: '🎨',
+    description: 'Intelligence de design : 67 styles, 96 palettes.',
+    tags: ['design', 'UI', 'UX', 'tailwind'],
+    category: 'création',
     sourcePath: 'skills/ui-ux-pro-max.md',
   },
   'tests-create': {
-    id: 'tests-create',
-    name: 'Tests Create',
-    emoji: '🧪',
-    description: 'Génère des tests unitaires, fonctionnels, d\'intégration et E2E optimaux.',
-    category: 'creation',
+    id: 'tests-create', name: 'Tests Create', emoji: '🧪',
+    description: 'Génération de tests unitaires, fonctionnels, E2E.',
+    tags: ['tests', 'jest', 'playwright'],
+    category: 'qualité',
     sourcePath: 'skills/tests-create.md',
   },
-  'graphify': {
-    id: 'graphify',
-    name: 'Graphify',
-    emoji: '🕸️',
-    description: 'Transforme n\'importe quelle entrée en graphe de connaissances interactif.',
-    category: 'workflow',
+  graphify: {
+    id: 'graphify', name: 'Graphify', emoji: '🕸️',
+    description: 'Transforme code et docs en graphes de connaissances.',
+    tags: ['graphe', 'analyse', 'visualisation'],
+    category: 'analyse',
     sourcePath: 'skills/graphify.md',
   },
 };
 
 /** Labels des catégories */
 const CATEGORY_LABELS: Record<SkillCategory, string> = {
-  audit: 'Audit',
-  creation: 'Création',
-  workflow: 'Workflow',
-  documentation: 'Documentation',
+  création: 'Création',
+  qualité: 'Qualité',
+  analyse: 'Analyse',
 };
 
 /**
@@ -87,11 +83,9 @@ export class SkillDetailComponent {
   readonly hasContent = computed(() => this.sourcePath() !== '');
 
   constructor() {
-    // Lit le paramètre de route :id
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       this.skillId.set(id ?? '');
-      // Réinitialise la TOC à chaque navigation
       this.tocService.clear();
     });
   }

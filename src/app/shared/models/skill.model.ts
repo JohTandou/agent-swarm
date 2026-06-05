@@ -2,14 +2,14 @@
  * Catégorie fonctionnelle d'un skill Swarm.
  * Utilisée pour le filtrage sur la page de listing.
  */
-export type SkillCategory = 'audit' | 'creation' | 'workflow' | 'documentation';
+export type SkillCategory = 'création' | 'qualité' | 'analyse';
 
 /**
- * Définition d'un skill du pipeline Swarm.
- * Chaque skill est une capacité spécialisée documentée en Markdown.
+ * Définition d'un skill du système Swarm.
+ * Chaque skill est un module réutilisable documenté en Markdown.
  */
 export interface Skill {
-  /** Identifiant unique pour le routage (ex: 'ui-ux-pro-max') */
+  /** Identifiant unique pour le routage (ex: 'ui-ux-pro-max', 'tests-create') */
   id: string;
 
   /** Nom affiché du skill (français) */
@@ -18,8 +18,11 @@ export interface Skill {
   /** Icône représentant le skill (emoji) */
   emoji: string;
 
-  /** Description résumée pour la carte listing */
+  /** Description courte pour la carte listing */
   description: string;
+
+  /** Tags associés au skill */
+  tags: string[];
 
   /** Catégorie fonctionnelle pour le filtrage */
   category: SkillCategory;

@@ -14,11 +14,14 @@
         <span class="skill-detail__emoji" aria-hidden="true">{{ skillData.emoji }}</span>
         <div class="skill-detail__hero-text">
           <h1 class="skill-detail__name">{{ skillData.name }}</h1>
-          <p class="skill-detail__description">{{ skillData.description }}</p>
+          <p class="skill-detail__desc">{{ skillData.description }}</p>
           <div class="skill-detail__meta">
             <span class="skill-detail__category">
               {{ getCategoryLabel(skillData.category) }}
             </span>
+            @for (tag of skillData.tags; track tag) {
+              <span class="skill-detail__tag">{{ tag }}</span>
+            }
           </div>
         </div>
       </div>
@@ -43,7 +46,7 @@
     <!-- Navigation pied de page -->
     <footer class="skill-detail__footer">
       <a routerLink="/skills" class="skill-detail__back">
-        ← Retour au catalogue
+        ← Retour au listing
       </a>
     </footer>
   </section>
@@ -54,11 +57,11 @@
       <span class="skill-detail__error-emoji" aria-hidden="true">🔍</span>
       <h1 class="skill-detail__error-title">Skill introuvable</h1>
       <p class="skill-detail__error-text">
-        Le skill <strong>{{ skillId() }}</strong> n'existe pas dans la bibliothèque Swarm.
-        Vérifiez l'identifiant ou retournez au catalogue.
+        Le skill <strong>{{ skillId() }}</strong> n'existe pas dans le système Swarm.
+        Vérifiez l'identifiant ou retournez au listing.
       </p>
       <a routerLink="/skills" class="skill-detail__error-link">
-        ← Retour au catalogue des skills
+        ← Retour au listing des skills
       </a>
     </div>
   </section>

@@ -4,8 +4,7 @@ import { SkillDetailComponent } from './skill-detail.component';
 
 /**
  * Routes de la section Skills.
- * Lazy loading par feature — chargé à la demande.
- * Route avec paramètre :id pour les pages de détail.
+ * Lazy loading par feature — chaque skill documenté en Markdown.
  */
 export const skillsRoutes: Routes = [
   { path: '', component: SkillsListComponent },

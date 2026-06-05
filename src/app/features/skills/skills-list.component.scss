@@ -1,6 +1,6 @@
 /* ==========================================================================
    Skills List — Grille bento asymétrique
-   Hover glow + scale premium sur chaque carte
+   Tags interactifs sur chaque carte
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -234,21 +234,6 @@
   margin: 0;
 }
 
-.skills__card-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 8px;
-  border-radius: 6px;
-  background: rgba(240, 165, 34, 0.1);
-  color: var(--color-accent);
-  border: 1px solid rgba(240, 165, 34, 0.2);
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.6875rem;
-  letter-spacing: 0.02em;
-  line-height: 1.5;
-}
-
 .skills__card-desc {
   font-family: var(--font-body);
   font-weight: 400;
@@ -264,7 +249,56 @@
 }
 
 /* --------------------------------------------------------------------------
-   Empty state — aucun skill filtré
+   Tags
+   -------------------------------------------------------------------------- */
+.skills__card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skills__card-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(240, 165, 34, 0.06);
+  border: 1px solid rgba(240, 165, 34, 0.12);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Pied de carte
+   -------------------------------------------------------------------------- */
+.skills__card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  gap: 12px;
+}
+
+.skills__card-category {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(142, 136, 130, 0.2);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Empty state
    -------------------------------------------------------------------------- */
 .skills__empty {
   grid-column: 1 / -1;

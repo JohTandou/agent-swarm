@@ -1,36 +1,63 @@
 ---
-title: Tests Create
-description: Génère des tests unitaires, fonctionnels, d'intégration et E2E optimaux pour l'application
-category: creation
+title: Tests Create (qualité)
+description: Génération optimale de tests unitaires, fonctionnels, intégration et E2E
 order: 2
 ---
 
 ## Rôle
 
-Tests Create analyse le codebase pour identifier toutes les unités testables, puis génère des fichiers de test complets en suivant les conventions existantes du projet. Il couvre les tests unitaires (Jest/Jasmine), les tests d'intégration, et les tests E2E (Playwright).
+Tests Create analyse le codebase pour identifier toutes les unités testables, puis génère des fichiers de test complets en suivant les conventions et l'infrastructure de test existantes du projet.
 
-## Cas d'usage
+## Types de tests générés
 
-- **Générer** les tests manquants pour un nouveau composant
-- **Compléter** la couverture d'une feature existante
-- **Migrer** des tests d'un framework à un autre
-- **Auditer** la qualité des tests existants
+### Tests unitaires
+- Fonctions pures, services, utilitaires
+- Composants isolés avec mocks
+- Pipes, directives, guards
+- Couverture des cas limites et erreurs
 
-## Déclencheurs
+### Tests fonctionnels
+- Flux métier complets
+- Scénarios utilisateur bout en bout
+- Validation des règles métier
 
-L'agent tester charge ce skill automatiquement quand :
-- Du nouveau code est détecté sans tests correspondants
-- La couverture est en dessous du seuil de 80%
-- L'utilisateur demande explicitement des tests
+### Tests d'intégration
+- Communication entre services
+- Interactions composants parents/enfants
+- Intégration avec les APIs et bases de données
 
-## Entrées
+### Tests E2E
+- Parcours utilisateur complets
+- Navigation multi-pages
+- Validation cross-browser
 
-- Fichiers source à tester
-- Configuration de test existante (jest.config, karma.conf, playwright.config)
-- Conventions de test du projet
+## Conventions respectées
 
-## Sorties
+- Framework de test existant (Jest, Playwright, Cypress, etc.)
+- Conventions de nommage du projet
+- Structure de fichiers et dossiers
+- Patterns de mock et fixtures
+- Seuil de couverture configuré (80% minimum)
 
-- Fichiers `.spec.ts` avec tests unitaires
-- Fichiers `.e2e.spec.ts` avec tests E2E
-- Rapport de couverture
+## Processus
+
+1. Analyse du codebase pour identifier les unités testables
+2. Détection du framework de test existant
+3. Génération des fichiers de test avec la bonne structure
+4. Inclusion des cas de test pertinents (happy path, edge cases, erreurs)
+5. Configuration des mocks et stubs nécessaires
+
+## Exemple
+
+```typescript
+// Généré automatiquement pour un service Angular
+describe('ContentService', () => {
+  it('devrait charger un document Markdown', () => {
+    // Test avec mock HttpClient
+  });
+
+  it('devrait gérer les erreurs de chargement', () => {
+    // Test du cas d'erreur
+  });
+});
+```

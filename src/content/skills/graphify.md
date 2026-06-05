@@ -1,36 +1,46 @@
 ---
-title: Graphify
-description: Transforme n'importe quelle entrée (code, docs, papiers, images) en graphe de connaissances interactif
-category: workflow
+title: Graphify (analyse)
+description: Transforme code, documentation, papiers et images en graphes de connaissances interactifs
 order: 3
 ---
 
 ## Rôle
 
-Graphify est un skill d'analyse qui transforme des entrées complexes (code source, documentation, articles scientifiques, images) en un graphe de connaissances. Il détecte les entités, les relations, les clusters thématiques, et produit une visualisation HTML interactive + un rapport d'audit.
+Graphify convertit n'importe quelle entrée (code source, documentation, articles scientifiques, images) en un graphe de connaissances structuré. Il applique ensuite un clustering par communautés pour révéler les relations cachées entre les concepts.
+
+## Pipeline de transformation
+
+1. **Input** : code, docs, articles, images
+2. **Extraction** : entités, relations, concepts clés
+3. **Graphe** : construction du knowledge graph
+4. **Clustering** : communautés thématiques
+5. **Output** : HTML + JSON + rapport d'audit
+
+## Formats de sortie
+
+### HTML interactif
+Visualisation du graphe avec navigation, zoom, filtrage par communauté. Interface exploratoire complète.
+
+### JSON structuré
+Données brutes du graphe pour intégration dans d'autres outils ou analyses programmatiques.
+
+### Rapport d'audit
+Analyse des communautés détectées, métriques du graphe (densité, centralité), recommandations.
 
 ## Cas d'usage
 
-- **Cartographier** un codebase complexe
-- **Analyser** les dépendances entre modules
-- **Visualiser** l'architecture d'un système
-- **Auditer** la cohérence d'une base de code
+- Cartographier les dépendances d'un codebase complexe
+- Visualiser la structure d'une documentation technique
+- Analyser les relations entre concepts dans un article
+- Détecter les patterns architecturaux émergents
+- Identifier les zones de fort couplage dans un projet
 
-## Déclencheurs
+## Exemple
 
-L'agent search ou planner peut charger ce skill pour :
-- Comprendre la structure d'un nouveau projet
-- Identifier les clusters de code interdépendants
-- Générer une carte visuelle pour le onboarding
-
-## Entrées
-
-- Code source (fichiers .ts, .py, .js...)
-- Documentation (fichiers .md)
-- Spécifications (fichiers .yaml, .json)
-
-## Sorties
-
-- Graphe HTML interactif (D3.js)
-- Fichier JSON des entités et relations
-- Rapport d'audit (clusters, densité, centralité)
+```
+Input : documentation Swarm Wiki (20+ fichiers Markdown)
+→ Graphify extrait agents, skills, concepts clés
+→ Construit un graphe avec 45 nœuds et 120 relations
+→ Détecte 4 communautés : agents build, agents qualité, skills création, workflow
+→ Génère HTML interactif + JSON + rapport
+```

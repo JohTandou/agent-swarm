@@ -34,9 +34,9 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'outils-mcp',
+    path: 'skills',
     loadChildren: () =>
-      import('./features/mcp-tools/mcp-tools.routes').then((m) => m.mcpToolsRoutes),
+      import('./features/skills/skills.routes').then((m) => m.skillsRoutes),
   },
   /* Route wildcard — redirige vers l'accueil */
   { path: '**', redirectTo: '' },

@@ -1,37 +1,53 @@
 ---
-title: UI/UX Pro Max
-description: Intelligence de design UI/UX — 67 styles, 96 palettes, 57 paires typographiques
-category: creation
+title: UI/UX Pro Max (création)
+description: Intelligence de design UI/UX avec 67 styles, 96 palettes, 57 pairings typographiques
 order: 1
 ---
 
 ## Rôle
 
-UI/UX Pro Max est le skill de design intelligence du Swarm. Il fournit 67 styles visuels, 96 palettes de couleurs, 57 paires typographiques, 25 types de graphiques, et supporte 13 stacks techniques (React, Next.js, Vue, Svelte, SwiftUI, Flutter, Tailwind, shadcn/ui...).
+UI/UX Pro Max est un skill de design intelligence qui fournit des recommandations visuelles exhaustives pour la création d'interfaces. Il couvre l'ensemble du spectre du design : styles, palettes de couleurs, pairings typographiques, graphiques, et stacks techniques.
+
+## Fonctionnalités
+
+- **67 styles visuels** : glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design
+- **96 palettes de couleurs** : une palette pour chaque humeur et chaque contexte métier
+- **57 pairings typographiques** : combinaisons validées de polices display + body
+- **25 types de graphiques** : pour dashboards et data visualisation
+- **13 stacks techniques** : React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui
 
 ## Cas d'usage
 
-- **Planifier** un design system complet
-- **Créer** des composants UI (boutons, modales, navbars, cartes, tableaux)
-- **Review** le code UI/UX existant
-- **Améliorer** l'accessibilité et le responsive
-- **Optimiser** les animations et micro-interactions
+- Planifier le design d'une nouvelle page ou composant
+- Améliorer l'UI existante avec des recommandations de style
+- Choisir une palette de couleurs adaptée au contexte
+- Sélectionner un pairing typographique premium
+- Implémenter des composants avec shadcn/ui
 
-## Déclencheurs
+## Intégrations
 
-L'agent front charge ce skill automatiquement quand :
-- La tâche implique la création de composants visibles
-- L'utilisateur demande un style spécifique (glassmorphism, minimalism, brutalism...)
-- Une review UI/UX est nécessaire
+### shadcn/ui MCP
+Recherche de composants et exemples directement depuis la bibliothèque shadcn/ui. Utilisable pour générer des composants accessibles et personnalisables.
 
-## Entrées
+### Types d'actions supportées
+- `plan`, `build`, `create`, `design` : conception from scratch
+- `implement`, `review`, `fix` : travail sur du code existant
+- `improve`, `optimize`, `enhance`, `refactor` : amélioration continue
+- `check` : validation de la qualité UI/UX
 
-- Description textuelle du composant à créer
-- Contexte du projet (stack, palette, typographie)
-- Contraintes de design (accessibilité, responsive)
+## Types de projets cibles
+- Site web, landing page
+- Dashboard, admin panel
+- E-commerce, SaaS
+- Portfolio, blog
+- Application mobile
 
-## Sorties
+## Exemple
 
-- Code HTML/SCSS/TS du composant
-- Documentation des choix de design
-- Tests de régression visuelle
+```
+"I need a dark mode dashboard with glassmorphism cards"
+→ UI/UX Pro Max analyse le contexte
+→ Propose une palette dark adaptée
+→ Suggère des composants glassmorphism
+→ Fournit le code Tailwind correspondant
+```
