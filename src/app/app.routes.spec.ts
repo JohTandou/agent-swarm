@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { routes } from './app.routes';
 
 describe('AppRoutes', () => {
-  it('devrait avoir 6 routes définies', () => {
-    expect(routes.length).toBe(6);
+  it('devrait avoir 7 routes définies', () => {
+    expect(routes.length).toBe(7);
   });
 
   it('devrait avoir une route racine avec lazy loading vers homepage', () => {
@@ -89,6 +89,32 @@ describe('AppRoutes', () => {
       expect(listRoute).toBeTruthy();
       const detailRoute = loadedRoutes.find((r) => r.path === ':id');
       expect(detailRoute).toBeTruthy();
+    }
+  });
+
+  it('devrait avoir une route /workflow avec lazy loading vers workflow', () => {
+    const workflowRoute = routes.find((r) => r.path === 'workflow');
+    expect(workflowRoute).toBeTruthy();
+    expect(workflowRoute?.loadChildren).toBeDefined();
+    expect(typeof workflowRoute?.loadChildren).toBe('function');
+  });
+
+  it('la fonction lazy load de la route /workflow devrait retourner une promesse', () => {
+    const workflowRoute = routes.find((r) => r.path === 'workflow');
+    const loadFn = workflowRoute?.loadChildren as (() => Promise<Routes>) | undefined;
+    const result = loadFn?.();
+    expect(result).toBeInstanceOf(Promise);
+  });
+
+  it('la route /workflow devrait charger les routes workflow correctement', async () => {
+    const workflowRoute = routes.find((r) => r.path === 'workflow');
+    const loadFn = workflowRoute?.loadChildren as (() => Promise<Routes>) | undefined;
+    if (loadFn) {
+      const loadedRoutes = await loadFn();
+      expect(loadedRoutes).toBeDefined();
+      expect(Array.isArray(loadedRoutes)).toBeTrue();
+      const indexRoute = loadedRoutes.find((r) => r.path === '');
+      expect(indexRoute).toBeTruthy();
     }
   });
 });

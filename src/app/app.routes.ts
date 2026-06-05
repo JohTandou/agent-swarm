@@ -33,6 +33,11 @@ export const routes: Routes = [
         (m) => m.problemInnovationRoutes
       ),
   },
+  {
+    path: 'workflow',
+    loadChildren: () =>
+      import('./features/workflow/workflow.routes').then((m) => m.workflowRoutes),
+  },
   /* Route wildcard — redirige vers l'accueil */
   { path: '**', redirectTo: '' },
 ];
