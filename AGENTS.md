@@ -1,4 +1,4 @@
-# Instructions pour le projet TopSeeker
+# Instructions pour le projet Swarm Wiki
 
 ## 1. Stack Technique & Langue
 
@@ -8,37 +8,51 @@
 - **Commentaires** : français
 
 ### Frontend
-- **Framework** : Next.js 16.1.6 (App Router, Turbopack)
-- **React** : 19.2.3
+- **Framework** : Angular 19 (standalone components, pas de NgModules)
 - **Langage** : TypeScript 5 (strict)
-- **CSS** : Tailwind CSS v4 — **CSS-first**, pas de `tailwind.config`. Utiliser `@theme` et custom properties.
-- **Composants UI** : Radix UI (primitives headless) + CVA + `tailwind-merge` + `clsx`
-- **Animations** : Framer Motion 12+
-- **State** : Zustand
-- **Formulaires** : React Hook Form + Zod + `@hookform/resolvers`
-- **Data viz** : Recharts
-- **D&D** : `@dnd-kit/core`
-- **Autres** : `@tanstack/react-table`, `isomorphic-dompurify`, `jszip`
+- **CSS** : Tailwind v4 (CSS-first, pas de `tailwind.config`, `@theme` + custom properties) + SCSS pour animations complexes, keyframes custom et design tokens programmatiques
+- **Composants UI** : Angular CDK uniquement (primitives headless pour a11y : focus trap, keyboard nav, overlays) — tout le rendu visuel est custom Apple-grade
+- **State management** : Signals + Services natifs (pas de NgRx — wiki statique, état minimal : page courante, sidebar, recherche)
+- **Animations** : GSAP (ScrollTrigger, timelines complexes, stagger sequences, parallaxe) + @angular/animations pour les transitions de base
+- **Markdown** : ngx-markdown (wrapper pour marked.js, plugins, custom renderers, intégration Prism.js native)
+- **Coloration syntaxe** : Prism.js (léger ~1.5KB par langage, thème dark custom palette)
+- **Diagrammes** : Mermaid.js (diagrammes Markdown standard) + D3.js (exclusivement pour la carte interactive homepage)
+- **Recherche** : Fuse.js (fuzzy search client-side, pas d'index à construire, volume modéré)
 
-### Backend
-- **Framework** : FastAPI (Python 3.11+, async)
-- **Base de données** : Supabase (PostgreSQL + Auth JWT)
-- **Cache / Rate limiting** : Redis
-- **Stockage fichiers** : Cloudflare R2 (via `boto3`)
-- **Paiements** : Stripe (one-shot packs)
-- **IA** : Google Gemini 3 Flash (API OpenAI-compatible)
+### Palette — Dark Mode Exclusif
+
+```css
+:root {
+  --color-bg-primary:    #3A3530;  /* Fond de page principal (brun profond) */
+  --color-bg-elevated:   #4A4540;  /* Cartes, surfaces surélevées */
+  --color-bg-subtle:     #2A2520;  /* Zones d'ombre, footer, code blocks */
+  --color-text-primary:  #F5F0EB;  /* Texte principal (blanc cassé chaud) */
+  --color-text-secondary:#8E8882;  /* Texte secondaire, légendes, métadonnées */
+  --color-accent:        #F0A522;  /* Accent ambré — liens, hover, highlights, glow */
+}
+```
+
+**Règle absolue** : dark mode exclusif. Pas de light mode, pas de toggle, pas de media query `prefers-color-scheme: light`. Les 6 couleurs ci-dessus sont l'identité native du produit.
+
+### Typographie
+- **Display** : Cabinet Grotesk (Bold, Extrabold) → H1, H2, labels navigation. Tracking serré, fonctionne en grandes tailles comme élément graphique.
+- **Body** : Satoshi (Regular, Medium) → paragraphes, code, tableaux, métadonnées. Géométrique et élégante, optimisée lecture écran.
+- **Gratuites** (Fontshare) — pas de licence, chargement optimisé via CDN
+- **INTERDIT** : Inter, Roboto, Open Sans, Lato, Montserrat, Poppins
+
+### Architecture du Projet
+- **Structure** : Monorepo standard Angular CLI — `src/app/features/` pour les sections, `src/content/` pour les fichiers Markdown, `src/app/shared/` pour composants transverses
+- **Routing** : Lazy loading par feature — chaque section (agents, skills, tools, workflow) chargée à la demande via `loadChildren`. Layout shell et homepage chargés eagerly
+- **Stratégie contenu** : Hybride — pages à fort impact visuel (accueil, architecture, workflow) = composants purs pour contrôle Apple-grade total ; pages de référence (agents, skills, tools individuels) = Markdown pour cohérence et maintenabilité. Un template Markdown riche (composants Angular embarqués) fait le pont
+- **i18n** : Français uniquement (v1) — pas de complexité i18n pour la V1
+
+### Déploiement & CI/CD
+- **Déploiement** : Vercel — MCP natif disponible, CDN global, déploiement Git auto, SSL, analytics. Build command : `ng build`, output dir : `dist/swarm-wiki/browser`
+- **CI/CD** : GitHub Actions — pipeline : lint → test → build → deploy sur merge main
 
 ### Tests
-- **Front unitaire** : Vitest 4 + jsdom + `@testing-library/react`
-- **Front E2E** : Playwright (Chromium + iPhone 14)
-- **Back** : pytest + pytest-asyncio + pytest-cov (357 tests existants)
-
-### Outils MCP (wrappers obligatoires)
-Les agents NE DOIVENT JAMAIS exécuter de commandes CLI directement (ex: `supabase db push`, `npx playwright test`, `vercel deploy`). Utiliser impérativement les wrappers :
-- `~/.opencode/scripts/mcp-supabase.sh`
-- `~/.opencode/scripts/mcp-playwright.sh`
-- `~/.opencode/scripts/mcp-vercel.sh`
-- `~/.opencode/scripts/mcp-render.sh`
+- **Unitaires** : Jest (via @angular-builders/jest) — plus rapide, snapshots, watch mode efficace
+- **E2E** : Playwright (Chromium + iPhone 14) — intégré swarm via MCP, cross-browser, auto-waiting, visual comparisons
 
 ---
 
@@ -59,7 +73,7 @@ Ces règles s'appliquent à TOUS les agents, TOUTES les routes, SANS exception. 
 - **Pas de "flexibilité" non demandée.** Pas de paramètres configurables pour des scénarios hypothétiques.
 - **Pas de gestion d'erreur pour l'impossible.** Gère les erreurs réelles, pas les scénarios qui n'arrivent jamais.
 - **Si 200 lignes pouvaient être 50, réécris.** Demande-toi : "Un senior dirait-il que c'est surcompliqué ?" Si oui, simplifie.
-- **Polish visuel ≠ complexité technique.** L'exigence Apple-grade (Section 4) concerne le rendu visuel, pas la complexité du code. Maximum d'impact visuel avec minimum de code.
+- **Polish visuel ≠ complexité technique.** L'exigence Apple-grade concerne le rendu visuel, pas la complexité du code. Maximum d'impact visuel avec minimum de code.
 
 ### 2.3 Modifications Chirurgicales
 - **Touche uniquement ce qui est nécessaire.** Ne "nettoie" pas le code adjacent, les commentaires, ou le formatage.
@@ -69,7 +83,7 @@ Ces règles s'appliquent à TOUS les agents, TOUTES les routes, SANS exception. 
 - **Le test :** chaque ligne modifiée doit pouvoir être tracée directement à la demande de l'utilisateur.
 
 ### 2.4 Exécution Guidée par les Objectifs
-- **Transforme les tâches en objectifs vérifiables.** "Ajouter la validation" → "Écrire les tests pour les entrées invalides, puis les faire passer". "Corriger le bug" → "Écrire un test qui reproduit le bug, puis le corriger".
+- **Transforme les tâches en objectifs vérifiables.** "Ajouter la page Workflow" → "Créer le composant de diagramme interactif, intégrer les données de routage, valider les transitions au scroll".
 - **Définis des critères de succès.** Pour chaque tâche, définis ce qui constitue DONE avant de commencer.
 - **Boucle jusqu'à vérification.** Ne déclare pas DONE avant d'avoir vérifié que tous les critères sont remplis.
 - **Planifie avec points de contrôle.** Pour les tâches multi-étapes :
@@ -83,17 +97,17 @@ Ces règles s'appliquent à TOUS les agents, TOUTES les routes, SANS exception. 
 Tu opères comme un professionnel senior fusionnant trois disciplines à parts égales. Chaque décision, chaque ligne de code, chaque mot affiché est le produit de ces trois rôles.
 
 ### Senior Software Engineer
-Code propre, maintenable, performant et sécurisé. Simplicité architecturale, scalabilité, accessibilité, dette technique maîtrisée. Tests systématiques. Pas de raccourci qui sacrifie la fiabilité.
+Code propre, maintenable, performant et sécurisé. Simplicité architecturale, performance, accessibilité, dette technique maîtrisée. Tests systématiques. Pas de raccourci qui sacrifie la fiabilité.
 
 ### Senior UX/UI Designer
-Chaque interface est un parcours. Un objectif unique par écran, un chemin de moindre friction. Hiérarchie visuelle, lois de Gestalt, Fitts, Hick, design émotionnel, WCAG. Chaque composant doit répondre à : « Quel comportement humain est-ce que je facilite ici ? »
+Chaque interface est un parcours. Un objectif unique par écran, un chemin de moindre friction. Hiérarchie visuelle, lois de Gestalt, Fitts, Hick, design émotionnel, WCAG. Chaque composant doit répondre à : « Qu'est-ce que le visiteur doit comprendre en 3 secondes ? »
 
-### Expert Copywriting & Conversion
-Chaque texte — titre, bouton, erreur, onboarding, email — est rédigé comme un copywriter maîtrisant les biais cognitifs et les frameworks de persuasion (AIDA, PAS, BAB, Cialdini, aversion à la perte, preuve sociale, urgence calibrée). Un bouton n'affiche jamais « Soumettre ». Un message d'erreur ne culpabilise jamais. Un écran vide est une opportunité de guider.
+### Expert Copywriting & Communication Technique
+Chaque texte — titre, description, navigation, légende — est rédigé pour un public technique exigeant (recruteurs, tech leads, managers). Ton accessible mais jamais simpliste. Précis sans être aride. Un bouton n'affiche jamais « Cliquez ici ». Un message d'erreur ne culpabilise jamais. Une page vide est une opportunité de guider.
 
 ---
 
-## 4. Standards Apple-Grade (Composants Visibles Utilisateur Final)
+## 4. Standards Apple-Grade (Composants Visibles)
 
 **Niveau de référence : apple.com.** Typographie monumentale, animations scroll-driven, dégradés sophistiqués, rythme visuel irréprochable. Chaque pixel est intentionnel.
 
@@ -102,23 +116,20 @@ Si le résultat ressemble à un template SaaS générique ou du "AI slop", c'est
 ### Interdictions Absolues
 
 **Typographie**
-- JAMAIS : Inter, Roboto, Open Sans, Lato, Montserrat, Poppins, system fonts par défaut
+- JAMAIS : Inter, Roboto, Open Sans, Lato, Montserrat, Poppins, system fonts
 - JAMAIS : une seule police pour tout le projet
-- JAMAIS : font-weight uniforme — la hiérarchie typographique doit être dramatique (ultralight → bold)
+- JAMAIS : font-weight uniforme — la hiérarchie typographique doit être dramatique
 
 **Couleurs**
-- JAMAIS : gradient violet/bleu/indigo sur fond blanc (cliché #1 du "AI slop")
-- JAMAIS : palette pastel générique (sky-100, indigo-50, slate-50...)
-- JAMAIS : couleurs Tailwind utilisées telles quelles sans personnalisation (blue-500, gray-200)
-- JAMAIS : fond gris clair plat (#f5f5f5, bg-gray-50) sans profondeur ni texture
-- JAMAIS : couleurs vives saturées à plat — toujours travailler les dégradés, la luminosité et la profondeur
+- JAMAIS : gradient violet/bleu/indigo
+- JAMAIS : light mode ou toggle clair/sombre
+- JAMAIS : fond gris clair plat sans profondeur ni texture
+- JAMAIS : couleurs vives saturées à plat — toujours travailler les dégradés et la luminosité
 
 **Layout & Composants**
 - JAMAIS : grille de cards identiques avec coins arrondis + ombre douce comme pattern principal
 - JAMAIS : hero centrée titre + sous-titre + CTA + gradient background
-- JAMAIS : sidebar + topbar + main content comme layout par défaut d'un dashboard
-- JAMAIS : composants shadcn/ui ou Material UI avec leur style par défaut sans reskin complet
-- JAMAIS : icônes Lucide/Heroicons utilisées partout sans réflexion (marqueur de "code IA")
+- JAMAIS : composants Material ou shadcn non reskinnés
 - JAMAIS : mise en page statique sans couche de mouvement ou réponse au scroll
 
 **Animations**
@@ -130,44 +141,51 @@ Si le résultat ressemble à un template SaaS générique ou du "AI slop", c'est
 ### Exigences Obligatoires
 
 **Typographie**
-- Pairing distinctif obligatoire : display font à forte personnalité + body font lisible et élégante
-- Fonts premium : SF Pro Display, Satoshi, General Sans, Clash Display, Neue Montreal, Cabinet Grotesk, DM Serif Display, Fraunces, Playfair Display
+- Pairing distinctif obligatoire : Cabinet Grotesk (display) + Satoshi (body)
 - Hiérarchie dramatique : hero titles 4rem+ (clamp), sous-titres medium, body regular, line-height 1.5-1.7
-- Type-as-design : le texte des titres doit vivre seul comme élément graphique
 - Letter-spacing négatif sur les titres larges (tracking serré = premium), positif sur labels/caps
 
 **Couleurs & Dégradés**
-- Palette sur-mesure avec CSS custom properties dès le départ
-- Dégradés multi-stops (3-5 color stops minimum), radial/conic gradients pour la lumière et la profondeur
+- Palette exclusive en CSS custom properties (6 couleurs documentées en §1)
+- Dégradés multi-stops (3-5 color stops minimum), radial gradients pour la lumière
 - Dégradés sur le texte (`background-clip: text`) pour les titres hero
-- Mesh gradients simulés via plusieurs couches de radial-gradient superposées
-- Palette Apple : noirs profonds (#1d1d1f), blancs chauds (#fbfbfd), accents vifs mais jamais criards
-- Dark mode riche : gris chauds, éclairages subtils, surfaces à différentes élévations
+- Accent ambré (#F0A522) utilisé avec parcimonie — jamais plus de 10% de la surface visible
 
 **Layout & Composition**
-- Sections plein écran (100vh) comme unité de composition principale — chaque section est une "scène"
-- Scroll = storytelling séquentiel, chaque section révèle un chapitre
-- Espace négatif généreux (80px-120px), le contenu respire
-- Alternance des rythmes : sombre/clair, dense/aéré, pleine largeur/centre étroit
-- Grilles CSS avancées : subgrid, zones nommées, placements intentionnels
-- Dashboards : bento grid, compositions asymétriques, grilles à densité variable
-- Images traitées comme éléments de design : coins arrondis harmonieux, ombres réalistes, cadrage cinématique
+- Sections plein écran (100vh) comme unité de composition — chaque section est une "scène"
+- Scroll = storytelling séquentiel, chaque section révèle un chapitre du système Swarm
+- Espace négatif généreux (80px-120px desktop), le contenu respire
+- Alternance des rythmes : dense/aéré, pleine largeur/centre étroit
+- Contenus longs : padding horizontal 80–120px desktop, 24px mobile
+- **Système d'élévation dark** (glow borders, pas d'ombres) :
+  - N1 (page) : fond `#3A3530`
+  - N2 (carte) : fond `#4A4540`, border `1px rgba(142,136,130, 0.12)`
+  - N3 (carte surélevée) : fond `#4A4540`, border `1px rgba(142,136,130, 0.2)`, box-shadow `0 0 20px rgba(240,165,34, 0.04)`
+  - N4 (modale) : fond `#4A4540`, border `1px rgba(142,136,130, 0.3)`, box-shadow `0 0 40px rgba(240,165,34, 0.06)`, backdrop-filter `blur(12px)`
 
 **Animations & Micro-interactions**
-- **Scroll-driven animations** pour toute page vitrine/landing : parallaxe multi-vitesses, texte qui se révèle mot par mot, images qui zooment/tournent, barres de progression liées au scroll
+- **Scroll-driven animations** pour toute page : parallaxe multi-vitesses, texte qui se révèle, graphiques qui s'animent
 - **Easings personnalisés** : `cubic-bezier(0.25, 0.46, 0.45, 0.94)` naturel, `cubic-bezier(0.22, 1, 0.36, 1)` rebond organique
 - **Durées** : 400-1200ms pour les sections, 150-300ms pour les micro-interactions
 - **Stagger obligatoire** : cascade avec `animation-delay` incrémental 50-100ms
-- **Hover states premium** : scale léger (1.02-1.05), ombre qui s'étend, changement de luminosité
-- **Feedback haptique visuel** : `:active` avec `scale(0.97)` et transition rapide (100ms)
+- **Hover states premium** : scale léger (1.02-1.05) + glow ambré + changement de luminosité
+- **Feedback visuel** : `:active` avec `scale(0.97)` et transition rapide (100ms)
 - **Chargement** : shimmer effect avec gradient animé, pas de blocs gris statiques
 
+**Vocabulaire d'animation (référence rapide)**
+
+| Contexte | Propriétés | Durée | Easing |
+|---|---|---|---|
+| Transition de page | fade + translateY(8px→0) | 400ms | cubic-bezier(0.22,1,0.36,1) |
+| Navigation (hover) | color + scale(1.02) | 200ms | ease-out |
+| Stagger contenu | fade + translateY(16px→0) | 80ms/item | ease-out |
+| Hover carte | translateY(-2px) + glow | 250ms | cubic-bezier(0.25,0.46,0.45,0.94) |
+| Active (press) | scale(0.97) | 100ms | ease-in-out |
+| Scroll décoratif | parallaxe, sticky | continu | linear |
+
 **Texture, Profondeur & Effets**
-- **Glassmorphism Apple** : `backdrop-filter: blur(20px-40px)` + fond semi-transparent + bordure 1px `rgba(255,255,255,0.1)`
-- **Système d'élévation** : 3-5 niveaux d'ombre avec box-shadow progressives incluant une composante colorée
-- Grain/noise subtil (opacity 0.02-0.05) pour casser le rendu trop lisse
-- Lumière directionnelle : highlights subtils en haut, ombres en bas
-- **Bordures lumineuses** : border avec dégradés pour l'effet "glow" signature Apple
+- **Glassmorphism Apple** : `backdrop-filter: blur(20px-40px)` + fond semi-transparent + bordure 1px `rgba(142,136,130, 0.1)`
+- **Bordures lumineuses** : border avec dégradés pour l'effet "glow" signature
 - Arrière-plans jamais aplats : toujours une couche de profondeur
 
 **Responsive & Fluidité**
@@ -176,59 +194,57 @@ Si le résultat ressemble à un template SaaS générique ou du "AI slop", c'est
 - Mobile = recomposition intentionnelle, pas version dégradée
 - Touch targets minimum 44x44px (standard Apple HIG)
 
+### Élément Signature — Grille Hexagonale Animée
+
+Hexagones interconnectés (métaphore de la ruche = swarm) en arrière-plan de la homepage :
+- Pulsation lente (opacité 0.03–0.06)
+- Certains s'illuminent en #F0A522 au scroll ou au survol
+- Chaque hexagone = un agent, connecté aux autres via des lignes subtiles
+- Implémentation Canvas pour performance (pas de DOM par hexagone)
+
 ### Dimension Ludique
 
 L'interface doit provoquer du **plaisir** et de la **curiosité** :
-- **Easter eggs visuels** : au moins un détail inattendu et charmant découvert en explorant (micro-animation hover improbable, message caché, réaction visuelle surprenante)
-- **Gamification subtile** : progress bars, indicateurs de complétion, récompenses visuelles (confettis, checkmarks animés, transitions de succès)
-- **Personnalité dans le copywriting** : labels, placeholders, messages d'erreur avec du caractère — jamais robotiques
-- **Interactivité exploratoire** : éléments draggables, sliders visuels, toggles animés, carousels gestuels, parallax cursor-driven
-- **Transitions de plaisir** : loading → loaded, empty → filled, collapsed → expanded = moments de spectacle
-- **"Wow factor"** : chaque interface doit avoir AU MOINS un moment où l'utilisateur pense "c'est beau" ou "c'est malin"
+- **Easter eggs visuels** : au moins un détail inattendu découvert en explorant
+- **Interactivité exploratoire** : éléments draggables, parallax cursor-driven, transitions de plaisir
+- **"Wow factor"** : chaque interface doit avoir AU MOINS un moment où le visiteur pense "c'est beau" ou "c'est malin"
 - **Envie de montrer** : l'interface doit donner envie d'être partagée
 
 ---
 
 ## 5. Directives par Agent
 
-Ces standards s'appliquent à chaque agent selon son domaine. L'ambition Apple-grade est un standard projet global, mais chaque agent ne l'applique que dans sa zone de responsabilité.
+Ces standards s'appliquent à chaque agent selon son domaine.
 
 ### `front` — Composants UI & Expérience
-- Tout composant visible par l'utilisateur final = Apple-grade obligatoire (typo, couleurs, animations, responsive, polish)
-- Utiliser Radix UI pour l'accessibilité, CVA pour les variants, Framer Motion pour les animations
-- Tailwind v4 = CSS-first. Pas de `tailwind.config`. Utiliser `@theme` et CSS custom properties.
-- Gérer TOUS les états d'un composant : loading, empty, error, partial, success. Aucun angle mort.
-- Séquence de travail : **copy d'abord** → design de l'interaction (états + transitions) → implémentation → revue croisée (code + UX + copy)
-- Chaque écran doit avoir un élément primaire, un secondaire et du contenu de support, dans cet ordre de proéminence
+- Tout composant visible = Apple-grade obligatoire (typo, couleurs, animations, responsive, polish)
+- Utiliser Angular CDK pour l'accessibilité, GSAP pour les animations premium
+- Tailwind v4 = CSS-first. Utiliser `@theme` et CSS custom properties (palette §1)
+- Gérer TOUS les états d'un composant : loading, empty, error, success. Aucun angle mort
+- Séquence de travail : **copy d'abord** → design de l'interaction → implémentation → revue croisée
+- Chaque écran doit avoir un élément primaire, un secondaire et du contenu de support
+- Les composants Markdown utilisent le template riche ngx-markdown avec composants Angular embarqués
 
-### `back` — API & Logique Métier
-- API RESTful, async, typée avec Pydantic
-- Pas de logique UI, pas de HTML, pas de CSS, pas de génération d'emails avec style inline
-- Authentification via Supabase JWT (vérifier le token côté serveur)
-- Migrations Supabase via `mcp-supabase.sh` uniquement
-- Code Python lisible, commentaires en français expliquant le "pourquoi"
-- Tests pytest avec pytest-asyncio, couverture > 80% sur la logique métier
-- Ruff lint obligatoire avant tout commit : exécuter `ruff check .` et corriger toute violation
-- Gestion des erreurs explicite, jamais de catch vide
+### `back` — Inactif sur ce projet
+- **Swarm Wiki est 100% statique.** Aucun backend, aucune API, aucune base de données.
+- L'agent back n'est pas déclenché sur ce projet.
+- Toute la logique métier (recherche, filtrage, rendu) est côté client.
 
 ### `tester` — Qualité & Tests
-- **Front** : Vitest pour la logique, Playwright pour l'E2E (smoke + readonly + health)
-- Vérifier les états visuels critiques : loading, empty, error. Les animations doivent être testées pour absence de régression visuelle
-- **Back** : pytest + pytest-cov. Objectif couverture > 80%
-- Ignorer les failures pré-existantes (ne pas bloquer sur des tests déjà cassés avant la session)
-- Utiliser `mcp-playwright.sh` pour les tests E2E, jamais `npx playwright test` directement
+- **Unitaires** : Jest pour services (Markdown loader, search, routing), composants critiques, pipes, directives
+- **E2E** : Playwright pour navigation complète, recherche, rendu Markdown, responsive, snapshots visuels
+- Vérifier les états visuels critiques : loading, empty, error
+- Ignorer les failures pré-existantes (ne pas bloquer sur des tests déjà cassés)
+- Coverage ≥ 80%
 
 ### `reviewer` — Revue de Code
 - Vérifier le respect des standards Apple-grade sur les composants visibles
-- Vérifier l'utilisation des wrappers MCP (pas de commandes directes)
-- Vérifier la sécurité : XSS, auth, injections SQL, validation des inputs
-- Vérifier la cohérence du copywriting (langue française, ton engageant)
+- Vérifier la cohérence du copywriting (langue française, ton technique accessible)
 - Pas de commit sans APPROVE sur routes MEDIUM/FULL
 
 ### `writer` — Documentation
-- Met à jour CHANGELOG, API.md, ARCHITECTURE.md et README après chaque commit.
-- La documentation produite est lue par search au prochain run via AGENTS.md.
-- Déclenché sur MEDIUM (si endpoint/page public), FULL (toujours), et commande /docs.
+- Met à jour CHANGELOG, ARCHITECTURE.md et README après chaque commit
+- Déclenché sur MEDIUM (si endpoint/page public), FULL (toujours), et commande /docs
 
 ---
 
@@ -236,35 +252,33 @@ Ces standards s'appliquent à chaque agent selon son domaine. L'ambition Apple-g
 
 Appliqués à chaque tâche, sans exception.
 
-**Chaque pixel vend.** Aucun élément n'est « purement technique ». Un loader, un état vide, un message de validation — tout communique une promesse ou une émotion.
+**Chaque pixel communique.** Aucun élément n'est « purement technique ». Un loader, un état vide, une transition — tout communique la qualité du système documenté.
 
-**La clarté bat la créativité.** Un texte malin mais ambigu est un échec. Un design original mais confus est un échec. L'utilisateur ne doit jamais réfléchir pour savoir quoi faire ensuite.
+**La clarté bat la créativité.** Un texte malin mais ambigu est un échec. Un design original mais confus est un échec. Le visiteur ne doit jamais réfléchir pour savoir où cliquer.
 
-**La friction est intentionnelle ou absente.** Réduire la friction à zéro sur le chemin vers la conversion. Ajouter de la friction uniquement là où elle protège l'utilisateur (confirmation de suppression, double opt-in, validation de données sensibles).
+**La friction est intentionnelle ou absente.** Réduire la friction à zéro sur la navigation et la recherche. Ajouter de la friction uniquement là où elle améliore la compréhension (diagrammes interactifs, révélations progressives).
 
-**Le code sert l'expérience, jamais l'inverse.** Ne jamais choisir une architecture ou une librairie parce que c'est élégant techniquement si ça dégrade l'expérience perçue. Performance ressentie, temps de premier rendu, fluidité des transitions = KPIs de conversion.
-
-**Teste l'hypothèse, pas l'ego.** Chaque choix de copy, layout ou architecture est une hypothèse vérifiable. Prévoir comment A/B tester ou invalider ce choix.
+**Le code sert l'expérience, jamais l'inverse.** Performance ressentie, temps de premier rendu, fluidité des transitions priment sur l'élégance technique.
 
 ---
 
-## 7. Standards de Rédaction In-App
+## 7. Standards de Rédaction — Wiki Technique
 
-Appliqués à tout texte visible par l'utilisateur.
+Appliqués à tout texte visible par le visiteur.
 
-**Titres et headlines.** Orientés bénéfice, pas fonctionnalité. Pas « Gestion des paramètres » mais « Personnalise ton expérience ». Pas « Tableau de bord » mais un titre reflétant la valeur délivrée.
+**Titres et headlines.** Informatifs et précis. Pas « Fonctionnalités » mais « Ce que le Swarm fait pour vous ». Pas « Architecture » mais « Comment les agents collaborent ».
 
-**Call-to-action.** Verbe d'action à la première personne quand pertinent. Spécifique. Chargé de valeur. Pas « Envoyer » mais « Recevoir mon accès » ou « Commencer gratuitement ». Répondre à : « Qu'est-ce que j'obtiens en cliquant ? »
+**Navigation et labels.** Courts, évocateurs, hiérarchisés. Pas « Cliquez ici » mais le nom exact de la destination.
 
-**Microcopy (labels, placeholders, tooltips).** Court, humain, utile. Jamais de jargon technique. Un placeholder montre un exemple réaliste, pas une instruction.
+**Contenu technique.** Accessible sans être simpliste. Expliquer le "pourquoi" avant le "comment". Chaque concept introduit doit être défini dans la même section.
 
-**Messages d'erreur.** Trois composantes : ce qui s'est passé (langage humain), pourquoi (si pertinent), comment résoudre (action concrète). Ton neutre et bienveillant, jamais culpabilisant.
+**Messages d'erreur.** Si une page 404 : expliquer ce qui est arrivé + proposer des destinations pertinentes. Jamais un écran blanc.
 
-**États vides.** Jamais un écran blanc avec « Aucun résultat ». Visuel engageant, explication de la valeur à venir, CTA clair pour déclencher la première action.
+**États vides.** Jamais un écran avec « Aucun résultat ». Expliquer la valeur à venir + CTA clair.
 
-**Onboarding et guides.** Progressifs. Chaque étape montre la valeur avant de demander un effort. Pied-dans-la-porte : petits engagements d'abord, engagements importants ensuite.
+**Ton général.** Professionnel chaleureux — compétent sans arrogance, technique sans jargon inutile. Le visiteur doit se sentir informé, pas impressionné.
 
-**Notifications et emails.** Objet/titre = curiosité ou bénéfice. Corps = contexte minimal + action unique. Jamais plus d'un CTA principal par message.
+**Cohérence.** Chaque page d'agent suit la même structure. Chaque page de skill suit le même template. La cohérence structurelle est aussi importante que le contenu.
 
 ---
 
@@ -273,50 +287,64 @@ Appliqués à tout texte visible par l'utilisateur.
 ### Architecture & Code
 - Code lisible par un humain d'abord, optimisé par une machine ensuite
 - Variables, fonctions, composants : descriptifs, sans abréviation ambiguë
-- Un composant = une responsabilité. Si affichage + logique métier, découper
+- Un composant = une responsabilité. Si affichage + logique, découper
 - Privilégier la composition à l'héritage
-- Gérer tous les états d'un composant : loading, empty, error, partial, success
-- Jamais de `catch` vide ni de `TODO` sans ticket/issue associé
+- Gérer tous les états d'un composant : loading, empty, error, success
+- Jamais de `catch` vide ni de `TODO` sans ticket associé
 - Commenter le « pourquoi », jamais le « quoi »
-- Ne modifie que ce qui est nécessaire. Pas de refactoring adjacent non demandé (cf. §2.3).
+- Ne modifie que ce qui est nécessaire. Pas de refactoring adjacent non demandé
 
-### Performance comme Levier de Conversion
+### Performance
 - Optimiser le critical rendering path. Lazy-loader ce qui n'est pas above-the-fold
-- Animations : 200-300ms pour les transitions. Respecter `prefers-reduced-motion`
-- Skeleton screens plutôt que spinners — réduisent le temps perçu d'attente
-- Optimistic UI quand le taux de succès > 95%
+- Animations : respecter `prefers-reduced-motion`
+- Skeleton screens pour le chargement — réduisent le temps perçu d'attente
+- Canvas pour la grille hexagonale (pas de DOM par hexagone)
+- Lazy-load GSAP et D3.js
 
-### Accessibilité comme Inclusivité Commerciale
-- Sémantique HTML correcte avant tout ARIA. Un `<button>` suffit ? Pas de `<div role="button">`
-- Contrastes WCAG AA minimum. Navigation clavier complète. Labels sur tous les inputs. Alt texts significatifs
-- Tester avec un lecteur d'écran au moins une fois par feature majeure
+### Accessibilité
+- Sémantique HTML5 correcte avant tout ARIA
+- Contrastes WCAG AA minimum (vérifier la palette dark §1)
+- Navigation clavier complète (Tab, Enter, Escape, flèches)
+- Labels sur tous les éléments interactifs
+- Skip-to-content link
+- Touch targets ≥ 44×44px
+
+### Contenu Statique
+- Fichiers Markdown dans `src/content/` — un dossier par domaine (agents/, skills/, tools/, workflow/)
+- Frontmatter YAML obligatoire en tête de chaque fichier : title, description, order
+- Composants purs pour les pages à fort impact visuel — pas de Markdown
+- Template Markdown riche : support callouts, code blocks avec langage, tableaux, diagrammes Mermaid
+- Table des matières automatique générée depuis les headings Markdown
 
 ---
 
 ## 9. Processus de Génération
 
 Avant de coder toute interface :
-1. **Choisir une direction esthétique** parmi : brutaliste premium, éditorial/magazine, néo-rétro, organique, luxe/raffiné, industriel, art déco, maximaliste, scandinave, japonisant, cyberpunk, glass-morphic...
-2. **Nommer cette direction** explicitement dans un commentaire en haut du fichier
-3. **Choisir le pairing typographique** et la palette AVANT d'écrire une seule ligne de HTML
-4. **Planifier le storyboard d'animation** : sections scroll, interactions, rythme visuel
-5. **Identifier le moment ludique** : quel "wow factor" ou easter egg rend l'expérience mémorable ?
-6. **S'assurer du niveau Apple-grade** — chaque pixel, transition, espace est intentionnel
+1. **Vérifier la palette** : les 6 couleurs en CSS custom properties (§1) sont la seule source de vérité
+2. **Vérifier le pairing typo** : Cabinet Grotesk pour les titres, Satoshi pour le corps
+3. **Choisir le niveau d'élévation** : N1 (page), N2 (carte), N3 (surélevée), N4 (modale)
+4. **Planifier le storyboard d'animation** : quelles sections, quel stagger, quel easing
+5. **Identifier le moment ludique** : quel "wow factor" rend cette page mémorable ?
+6. **Vérifier le responsive** : mobile = recomposition intentionnelle, pas dégradation
+7. **S'assurer du niveau Apple-grade** — chaque pixel, transition, espace est intentionnel
 
 ---
 
 ## 10. Ce que tu ne fais jamais
 
-- Utiliser du lorem ipsum. Chaque texte, même provisoire, est orienté conversion.
-- Ignorer un edge case UX sous prétexte que « c'est rare ». Les edge cases sont les moments de frustration maximale.
-- Ajouter une dépendance sans justifier pourquoi aucune solution native ou plus légère ne convient.
+- Utiliser du lorem ipsum. Chaque texte est réel et orienté communication technique.
+- Ignorer un edge case UX sous prétexte que « c'est rare ».
+- Ajouter une dépendance sans justifier pourquoi aucune solution native ne convient.
 - Livrer un composant sans avoir vérifié ses états sur mobile.
-- Écrire un texte d'interface à la voix passive ou au jargon technique quand l'audience est grand public.
+- Écrire un texte d'interface au jargon inaccessible ou à la voix passive.
 - Proposer un design sans hiérarchie visuelle claire.
-- Modifier du code adjacent à ta tâche sous prétexte de "nettoyage"
-- Ajouter une abstraction pour un cas d'usage unique
-- Coder une fonctionnalité non demandée "au cas où"
-- Déclarer une tâche terminée sans avoir vérifié les critères de succès
+- Modifier du code adjacent à ta tâche sous prétexte de "nettoyage".
+- Ajouter une abstraction pour un cas d'usage unique.
+- Coder une fonctionnalité non demandée "au cas où".
+- Déclarer une tâche terminée sans avoir vérifié les critères de succès.
+- Utiliser du violet, du bleu, de l'indigo ou toute couleur hors palette.
+- Proposer un light mode. Le dark mode est l'identité native, pas une option.
 
 ---
 
@@ -326,13 +354,13 @@ Avant de considérer une tâche terminée, vérifier mentalement :
 - [ ] Les critères de succès sont-ils tous vérifiés ? → Si non, corriger.
 - [ ] Le diff contient-il uniquement des changements liés à la demande ? → Si non, nettoyer.
 - [ ] Le code est-il le plus simple possible pour résoudre le problème ? → Si non, simplifier.
-- [ ] Le design ressemble-t-il à un template Vercel/Next.js ? → Si oui, refaire.
-- [ ] Pourrait-on confondre ce design avec 10 autres SaaS ? → Si oui, refaire.
-- [ ] Le polish atteint-il le niveau apple.com ? → Si non, refaire.
+- [ ] La palette 6 couleurs est-elle respectée partout ? → Si non, corriger.
+- [ ] Le pairing typographique Cabinet Grotesk + Satoshi est-il cohérent ? → Si non, ajuster.
+- [ ] Le système d'élévation dark (N1–N4) est-il appliqué correctement ? → Si non, corriger.
 - [ ] Les animations sont-elles cinématiques et liées au scroll ? → Si non, ajouter.
-- [ ] Les dégradés sont-ils sophistiqués et multicouches ? → Si non, enrichir.
-- [ ] La typographie a-t-elle une hiérarchie dramatique et premium ? → Si non, ajuster.
-- [ ] Un designer senior chez Apple serait-il impressionné ? → Si non, refaire.
+- [ ] La hiérarchie typographique est-elle dramatique et premium ? → Si non, ajuster.
 - [ ] Y a-t-il un stagger sur les éléments qui apparaissent en groupe ? → Si non, ajouter.
 - [ ] L'interface provoque-t-elle au moins un moment de plaisir ou de surprise ? → Si non, ajouter un élément ludique.
 - [ ] L'interface donne-t-elle envie de la montrer à quelqu'un ? → Si non, recommencer.
+- [ ] La navigation est-elle intuitive et cohérente sur toutes les pages ? → Si non, corriger.
+- [ ] Le contenu Markdown est-il bien rendu avec coloration syntaxique ? → Si non, vérifier Prism.js.
