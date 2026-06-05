@@ -1,0 +1,65 @@
+<aside
+  class="sidebar"
+  role="navigation"
+  aria-label="Navigation principale"
+>
+  <!-- Bouton close mobile -->
+  @if (isMobile) {
+    <button
+      class="sidebar__close"
+      (click)="closeSidebar.emit()"
+      aria-label="Fermer le menu"
+    >
+      <span class="sidebar__close-icon" aria-hidden="true">✕</span>
+    </button>
+  }
+
+  <!-- Liste de navigation -->
+  <nav class="sidebar__nav">
+    <ul class="sidebar__list">
+      @for (item of navItems; track item.route) {
+        <li class="sidebar__item">
+          @if (item.children && item.children.length > 0) {
+            <!-- Menu parent pliable -->
+            <button
+              class="sidebar__link sidebar__link--parent"
+              [class.sidebar__link--expanded]="item.expanded"
+              (click)="toggleExpanded(item)"
+              [attr.aria-expanded]="item.expanded"
+            >
+              <span>{{ item.label }}</span>
+              <span class="sidebar__chevron" aria-hidden="true">▼</span>
+            </button>
+            @if (item.expanded) {
+              <ul class="sidebar__sublist">
+                @for (child of item.children; track child.route) {
+                  <li class="sidebar__subitem">
+                    <a
+                      class="sidebar__link sidebar__link--child"
+                      [routerLink]="child.route"
+                      routerLinkActive="sidebar__link--active"
+                      (click)="isMobile && closeSidebar.emit()"
+                    >
+                      {{ child.label }}
+                    </a>
+                  </li>
+                }
+              </ul>
+            }
+          } @else {
+            <!-- Lien simple -->
+            <a
+              class="sidebar__link"
+              [routerLink]="item.route"
+              routerLinkActive="sidebar__link--active"
+              [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+              (click)="isMobile && closeSidebar.emit()"
+            >
+              {{ item.label }}
+            </a>
+          }
+        </li>
+      }
+    </ul>
+  </nav>
+</aside>

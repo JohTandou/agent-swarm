@@ -1,0 +1,50 @@
+<!-- Lien d'accès rapide — accessibilité clavier -->
+<a href="#main-content" class="skip-to-content">Aller au contenu principal</a>
+
+<!-- En-tête fixe glassmorphique -->
+<app-header
+  [isMobile]="isMobile()"
+  [sidebarOpen]="sidebarOpen()"
+  (toggleSidebar)="toggleSidebar()"
+/>
+
+<!-- Layout 3 colonnes desktop / 1 colonne mobile -->
+<div class="shell-layout" [class.shell-layout--sidebar-open]="isMobile() && sidebarOpen()">
+  <!-- Sidebar gauche -->
+  @if (!isMobile()) {
+    <app-sidebar class="shell-layout__sidebar" />
+  } @else if (sidebarOpen()) {
+    <app-sidebar
+      class="shell-layout__sidebar shell-layout__sidebar--overlay"
+      [isMobile]="true"
+      (closeSidebar)="closeSidebar()"
+    />
+  }
+
+  <!-- Overlay mobile pour fermer la sidebar au tap -->
+  @if (isMobile() && sidebarOpen()) {
+    <div
+      class="sidebar-overlay"
+      (click)="closeSidebar()"
+      (keydown.escape)="closeSidebar()"
+      role="presentation"
+      tabindex="-1"
+    ></div>
+  }
+
+  <!-- Contenu principal -->
+  <main id="main-content" class="content-area">
+    <!-- Fil d'Ariane -->
+    <app-breadcrumbs [breadcrumbs]="breadcrumbs" />
+
+    <!-- Zone de contenu dynamique -->
+    <div class="main-content">
+      <router-outlet />
+    </div>
+  </main>
+
+  <!-- Table des matières placeholder — desktop only -->
+  @if (!isMobile()) {
+    <app-toc-placeholder class="shell-layout__toc" />
+  }
+</div>

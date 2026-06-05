@@ -1,0 +1,53 @@
+/* ==========================================================================
+   Breadcrumbs — Fil d'Ariane, segments /, dernier non cliquable
+   ========================================================================== */
+
+.breadcrumbs {
+  padding: 8px 0 24px;
+  font-size: 0.8125rem;
+}
+
+.breadcrumbs__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 4px;
+}
+
+.breadcrumbs__item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumbs__link {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: color 200ms ease-out;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbs__link:hover {
+  color: var(--color-accent);
+}
+
+.breadcrumbs__current {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  padding: 4px 6px;
+}
+
+.breadcrumbs__separator {
+  color: rgba(142, 136, 130, 0.4);
+  user-select: none;
+}

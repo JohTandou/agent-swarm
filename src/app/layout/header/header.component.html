@@ -1,0 +1,35 @@
+<header class="header" role="banner">
+  <div class="header__inner">
+    <!-- Brand -->
+    <a routerLink="/" class="header__brand" aria-label="Swarm Wiki — Accueil">
+      <span class="header__brand-text">Swarm Wiki</span>
+    </a>
+
+    <!-- Navigation primaire desktop -->
+    @if (!isMobile) {
+      <nav class="header__nav" aria-label="Navigation principale">
+        <a routerLink="/" class="header__nav-link" routerLinkActive="header__nav-link--active" [routerLinkActiveOptions]="{ exact: true }">
+          Accueil
+        </a>
+        <a routerLink="/a-propos" class="header__nav-link" routerLinkActive="header__nav-link--active">
+          À propos
+        </a>
+      </nav>
+    }
+
+    <!-- Hamburger mobile -->
+    @if (isMobile) {
+      <button
+        class="header__hamburger"
+        [class.header__hamburger--open]="sidebarOpen"
+        (click)="toggleSidebar.emit()"
+        [attr.aria-label]="sidebarOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
+        [attr.aria-expanded]="sidebarOpen"
+      >
+        <span class="header__hamburger-bar"></span>
+        <span class="header__hamburger-bar"></span>
+        <span class="header__hamburger-bar"></span>
+      </button>
+    }
+  </div>
+</header>

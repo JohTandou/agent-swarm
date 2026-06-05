@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Header — Glassmorphisme fixe, 64px, navigation premium
+   ========================================================================== */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: var(--header-height);
+  background: rgba(42, 37, 32, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(142, 136, 130, 0.12);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 24px;
+  max-width: 100%;
+}
+
+/* Brand */
+.header__brand {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.header__brand-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  transition: color 200ms ease-out, text-shadow 200ms ease-out;
+}
+
+.header__brand:hover .header__brand-text {
+  color: var(--color-accent);
+  text-shadow: 0 0 16px rgba(240, 165, 34, 0.3);
+}
+
+/* Navigation desktop */
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header__nav-link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  transition: color 200ms ease-out, background 200ms ease-out;
+}
+
+.header__nav-link:hover {
+  color: var(--color-text-primary);
+  background: rgba(142, 136, 130, 0.1);
+}
+
+.header__nav-link--active {
+  color: var(--color-accent);
+}
+
+/* Hamburger mobile */
+.header__hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 150ms ease-out;
+}
+
+.header__hamburger:hover {
+  background: rgba(142, 136, 130, 0.1);
+}
+
+.header__hamburger-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text-primary);
+  border-radius: 1px;
+  transition: transform 250ms var(--ease-spring), opacity 150ms ease-out;
+}
+
+/* Animation hamburger → croix */
+.header__hamburger--open .header__hamburger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.header__hamburger--open .header__hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.header__hamburger--open .header__hamburger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}

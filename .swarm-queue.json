@@ -1,0 +1,45 @@
+{
+  "session_id": "swarm-20260605-t1t5",
+  "original_request": "Réaliser les tâches 1 à 5 du PLAN.md : Bootstrap Angular, Système contenu, Page accueil, Problème & Innovation, Agents template",
+  "created_at": "2026-06-05T10:00:00Z",
+  "tasks": [
+    {
+      "id": "1",
+      "title": "T1: Bootstrap Angular + thème dark",
+      "body": "ng new swarm-wiki, config Tailwind v4 + SCSS, palette CSS custom properties (6 couleurs), thème dark global exclusif, routing lazy-load par feature, layout shell (sidebar vide, breadcrumbs, TOC placeholder, header), polices Cabinet Grotesk + Satoshi chargées via Fontshare CDN. Composants : app-shell avec sidebar, breadcrumbs, header.",
+      "route": "FULL",
+      "status": "in_progress",
+      "issue_number": 1,
+      "branch": "feature/swarm-issue-1-t1-bootstrap-angular-theme-dark"
+    },
+    {
+      "id": "2",
+      "title": "T2: Système de contenu statique",
+      "body": "Service MarkdownLoader pour charger les fichiers .md depuis src/content/. Composant MarkdownRenderer avec template riche (callouts, code blocks avec coloration Prism.js, diagrammes Mermaid, tableaux). Thème Prism.js dark custom. Composant TableOfContents dynamique généré depuis les headings. Système de métadonnées frontmatter YAML.",
+      "route": "FULL",
+      "status": "pending"
+    },
+    {
+      "id": "3",
+      "title": "T3: Page d'accueil interactive",
+      "body": "Carte interactive du système Swarm avec D3.js : graphe de nœuds agents (9 agents, connexions animées). Résumé exécutif 3 phrases. Statistiques clés (9 agents, 26 skills, 4 catégories MCP). Wow moment: animation d'entrée du graphe avec stagger. Composant pur (Option B).",
+      "route": "FULL",
+      "status": "pending"
+    },
+    {
+      "id": "4",
+      "title": "T4: Page Problème & Innovation",
+      "body": "Section Avant/Après, comparaison vs systèmes agentiques (Claude Code, Cursor, Devin, CrewAI), 7 piliers d'innovation, analyse coûts (Swarm vs Claude Max vs API), modèles IA (DeepSeek V4 Pro + Gemini Flash Lite), limites du système, section Pour qui. Wow moment: compteur animé de réduction de temps, barres de comparaison au scroll.",
+      "route": "MEDIUM",
+      "status": "pending"
+    },
+    {
+      "id": "5",
+      "title": "T5: Pages Agents — template + modèles",
+      "body": "Page listing agents (grille asymétrique), template page détail (rôle, responsabilités, contraintes, outils, routes, exemple), 2 agents complets rédigés (orchestrateur + front). Wow moment: animation de pipeline sur la fiche agent. Composant listing + template Markdown pour le contenu détail.",
+      "route": "FULL",
+      "status": "pending"
+    }
+  ],
+  "current_index": 0
+}

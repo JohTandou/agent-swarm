@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Swarm Wiki — Keyframes d'animation et easings custom
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Easings custom (cubic-bezier)
+   -------------------------------------------------------------------------- */
+:root {
+  --ease-natural: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Keyframes
+   -------------------------------------------------------------------------- */
+
+/* Apparition fluide avec slide */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Effet shimmer pour les loaders / skeletons */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Pulsation glow ambrée pour l'accent */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 4px rgba(240, 165, 34, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(240, 165, 34, 0.25);
+  }
+}
+
+/* Rotation lente pour éléments décoratifs */
+@keyframes slowRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Utility classes d'animation
+   -------------------------------------------------------------------------- */
+
+.animate-fade-slide-in {
+  animation: fadeSlideIn 400ms var(--ease-spring) both;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-elevated) 0%,
+    rgba(142, 136, 130, 0.15) 50%,
+    var(--color-bg-elevated) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s var(--ease-natural) infinite;
+}
+
+/* Stagger children — délai incrémental pour les listes */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeSlideIn 400ms var(--ease-spring) forwards;
+}
+
+@for $i from 1 through 20 {
+  .stagger-children > *:nth-child(#{$i}) {
+    animation-delay: #{$i * 80}ms;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion — Respect du préférence système
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
