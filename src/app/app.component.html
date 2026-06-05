@@ -10,19 +10,21 @@
 
 <!-- Layout 3 colonnes desktop / 1 colonne mobile -->
 <div class="shell-layout" [class.shell-layout--sidebar-open]="isMobile() && sidebarOpen()">
-  <!-- Sidebar gauche -->
-  @if (!isMobile()) {
-    <app-sidebar class="shell-layout__sidebar" />
-  } @else if (sidebarOpen()) {
-    <app-sidebar
-      class="shell-layout__sidebar shell-layout__sidebar--overlay"
-      [isMobile]="true"
-      (closeSidebar)="closeSidebar()"
-    />
+  <!-- Sidebar gauche — masquée sur la page d'accueil -->
+  @if (!isHomepage()) {
+    @if (!isMobile()) {
+      <app-sidebar class="shell-layout__sidebar" />
+    } @else if (sidebarOpen()) {
+      <app-sidebar
+        class="shell-layout__sidebar shell-layout__sidebar--overlay"
+        [isMobile]="true"
+        (closeSidebar)="closeSidebar()"
+      />
+    }
   }
 
   <!-- Overlay mobile pour fermer la sidebar au tap -->
-  @if (isMobile() && sidebarOpen()) {
+  @if (isMobile() && sidebarOpen() && !isHomepage()) {
     <div
       class="sidebar-overlay"
       (click)="closeSidebar()"
@@ -33,18 +35,27 @@
   }
 
   <!-- Contenu principal -->
-  <main id="main-content" class="content-area">
-    <!-- Fil d'Ariane -->
-    <app-breadcrumbs [breadcrumbs]="breadcrumbs" />
+  <main
+    id="main-content"
+    class="content-area"
+    [class.content-area--homepage]="isHomepage()"
+  >
+    <!-- Fil d'Ariane — masqué sur la page d'accueil -->
+    @if (!isHomepage()) {
+      <app-breadcrumbs [breadcrumbs]="breadcrumbs" />
+    }
 
     <!-- Zone de contenu dynamique -->
-    <div class="main-content">
+    <div
+      class="main-content"
+      [class.main-content--homepage]="isHomepage()"
+    >
       <router-outlet />
     </div>
   </main>
 
-  <!-- Table des matières dynamique — desktop only -->
-  @if (!isMobile()) {
+  <!-- Table des matières dynamique — desktop only, masquée sur homepage -->
+  @if (!isMobile() && !isHomepage()) {
     <app-table-of-contents class="shell-layout__toc" />
   }
 </div>
