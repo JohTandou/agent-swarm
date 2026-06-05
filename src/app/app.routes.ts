@@ -17,11 +17,6 @@ export const routes: Routes = [
       import('./features/about/about.routes').then((m) => m.aboutRoutes),
   },
   {
-    path: 'agents',
-    loadChildren: () =>
-      import('./features/agents/agents.routes').then((m) => m.agentsRoutes),
-  },
-  {
     path: 'demo-markdown',
     loadChildren: () =>
       import('./features/wiki-demo/wiki-demo.routes').then((m) => m.wikiDemoRoutes),
