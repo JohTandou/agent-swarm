@@ -66,8 +66,8 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+  background: var(--color-accent, #F0A522);
+  box-shadow: 0 0 6px rgba(240, 165, 34, 0.5);
   animation: dot-pulse 2s ease-in-out infinite;
 }
 

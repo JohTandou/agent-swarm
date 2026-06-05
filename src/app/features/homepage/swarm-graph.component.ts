@@ -7,6 +7,11 @@ import {
   OnInit,
 } from '@angular/core';
 
+const D3_LINK_DISTANCE = 130;
+const D3_FORCE_STRENGTH = -350;
+const D3_COLLIDE_RADIUS = 38;
+const D3_TOTAL_TICKS = 300;
+
 /** Données d'un agent dans le graphe */
 interface AgentNode {
   id: string;
@@ -403,15 +408,15 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
               simLinks.map((l) => ({ source: l.source, target: l.target }))
             )
             .id((d) => d.id)
-            .distance(130)
+            .distance(D3_LINK_DISTANCE)
         )
-        .force('charge', d3.forceManyBody().strength(-350))
+        .force('charge', d3.forceManyBody().strength(D3_FORCE_STRENGTH))
         .force('center', d3.forceCenter(0, 0))
-        .force('collide', d3.forceCollide(38))
+        .force('collide', d3.forceCollide(D3_COLLIDE_RADIUS))
         .stop();
 
       /* Exécuter la simulation manuellement jusqu'à stabilisation */
-      const totalTicks = 300;
+      const totalTicks = D3_TOTAL_TICKS;
       for (let i = 0; i < totalTicks; i++) {
         simulation.tick();
       }

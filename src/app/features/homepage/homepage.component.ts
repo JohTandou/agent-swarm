@@ -9,6 +9,11 @@ import {
 import { RouterLink } from '@angular/router';
 import { SwarmGraphComponent } from './swarm-graph.component';
 
+/** Délai de stabilisation du DOM après le rendu initial */
+const DOM_STABILIZE_DELAY_MS = 200;
+/** Durée de l'animation des compteurs en ms (cubic-out easing) */
+const COUNTER_ANIMATION_DURATION_MS = 2000;
+
 /** Données d'une carte statistique */
 interface StatCard {
   value: number;
@@ -130,8 +135,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !this.countersDone()) {
-            this.animateCounters();
+          if (entry.isIntersecting) {
+            entry.target.classList.add('homepage__stats--visible');
+            if (!this.countersDone()) {
+              this.animateCounters();
+            }
           }
         });
       },
@@ -142,7 +150,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       const el = document.querySelector('.homepage__stats');
       if (el) this.observer?.observe(el);
-    }, 200);
+    }, DOM_STABILIZE_DELAY_MS);
   }
 
   /**
@@ -151,7 +159,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
    * Durée : 2000ms.
    */
   private animateCounters(): void {
-    const duration = 2000;
+    const duration = COUNTER_ANIMATION_DURATION_MS;
     const startTime = performance.now();
     const targets = this.stats.map((s) => s.value);
 
