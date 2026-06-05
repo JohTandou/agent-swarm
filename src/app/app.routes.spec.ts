@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { routes } from './app.routes';
 
 describe('AppRoutes', () => {
-  it('devrait avoir 7 routes définies', () => {
-    expect(routes.length).toBe(7);
+  it('devrait avoir 8 routes définies', () => {
+    expect(routes.length).toBe(8);
   });
 
   it('devrait avoir une route racine avec lazy loading vers homepage', () => {

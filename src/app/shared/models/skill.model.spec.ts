@@ -7,7 +7,8 @@ describe('Skill model', () => {
       name: 'UI/UX Pro Max',
       emoji: '🎨',
       description: 'Intelligence de design UI/UX',
-      category: 'creation',
+      tags: [],
+      category: 'création',
       sourcePath: 'skills/ui-ux-pro-max.md',
     };
 
@@ -15,42 +16,44 @@ describe('Skill model', () => {
     expect(skill.name).toBe('UI/UX Pro Max');
     expect(skill.emoji).toBe('🎨');
     expect(skill.description).toBe('Intelligence de design UI/UX');
-    expect(skill.category).toBe('creation');
+    expect(skill.tags).toEqual([]);
+    expect(skill.category).toBe('création');
     expect(skill.sourcePath).toBe('skills/ui-ux-pro-max.md');
   });
 
   it('devrait accepter toutes les catégories valides', () => {
-    const categories: SkillCategory[] = ['audit', 'creation', 'workflow', 'documentation'];
-    expect(categories.length).toBe(4);
-    expect(categories).toContain('audit');
-    expect(categories).toContain('creation');
-    expect(categories).toContain('workflow');
-    expect(categories).toContain('documentation');
+    const categories: SkillCategory[] = ['création', 'qualité', 'analyse'];
+    expect(categories.length).toBe(3);
+    expect(categories).toContain('création');
+    expect(categories).toContain('qualité');
+    expect(categories).toContain('analyse');
   });
 
-  it('devrait permettre un skill de catégorie audit', () => {
+  it('devrait permettre un skill de catégorie qualité', () => {
     const skill: Skill = {
       id: 'audit-global',
       name: 'Audit Global',
       emoji: '🔍',
       description: 'Audit complet du projet',
-      category: 'audit',
+      tags: [],
+      category: 'qualité',
       sourcePath: 'skills/audit-global.md',
     };
 
-    expect(skill.category).toBe('audit');
+    expect(skill.category).toBe('qualité');
   });
 
-  it('devrait permettre un skill de catégorie workflow', () => {
+  it('devrait permettre un skill de catégorie analyse', () => {
     const skill: Skill = {
       id: 'graphify',
       name: 'Graphify',
       emoji: '🕸️',
       description: 'Transforme en graphe de connaissances',
-      category: 'workflow',
+      tags: [],
+      category: 'analyse',
       sourcePath: 'skills/graphify.md',
     };
 
-    expect(skill.category).toBe('workflow');
+    expect(skill.category).toBe('analyse');
   });
 });
