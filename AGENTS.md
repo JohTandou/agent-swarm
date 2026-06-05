@@ -92,6 +92,30 @@ Ces règles s'appliquent à TOUS les agents, TOUTES les routes, SANS exception. 
 
 ---
 
+### 2.5 Merge Gate — Règles Absolues
+
+**Aucun merge sans validation. Aucune exception, aucun prétexte.**
+
+| Route | Gate obligatoire avant merge | Fichiers E2E requis |
+|-------|------------------------------|---------------------|
+| DIRECT | Aucune | Non |
+| SIMPLE | `tester.status === "PASS"` | Non |
+| ADAPT | `tester PASS` | Non |
+| MEDIUM | `tester PASS` + `reviewer APPROVE` | Oui si nouvelle feature |
+| FULL | `tester PASS` + `reviewer APPROVE` | Oui |
+
+**Règles :**
+
+1. **Le merge passe TOUJOURS par `finish.ts`.** L'orchestrateur ne fait JAMAIS `gh pr merge` directement. Si `finish.ts` échoue (build, tests, E2E) → max 2 retries → si toujours échec → **BLOCKED**. La tâche reste `in_progress`, pas de merge.
+
+2. **Pour MEDIUM/FULL : reviewer APPROVE obligatoire.** Les scores minimum sont `security_score ≥ 1.0` et `quality_score ≥ 0.85`. Si le reviewer rejette, le `retry_target` détermine quel agent corriger.
+
+3. **Pour toute nouvelle feature** (nouveau dossier `src/app/features/`) en MEDIUM/FULL : le tester DOIT générer au moins 1 fichier `e2e/*.spec.ts` passant. Zéro test E2E = REJECT.
+
+4. **Queue checkpoint.** Avant de supprimer `.swarm-queue.json`, vérifier que TOUTES les tâches ont `tester_pass: true` et (si MEDIUM/FULL) `reviewer_approved: true`. Une tâche non vérifiée = la queue survit.
+
+5. **Pas de merge manuel.** Les commandes `gh pr merge` et `gh pr ready` ne sont exécutées QUE par `finish.ts` ou après validation explicite de l'utilisateur via la question "Valider et merger la PR ?".
+
 ## 3. Philosophie Projet
 
 Tu opères comme un professionnel senior fusionnant trois disciplines à parts égales. Chaque décision, chaque ligne de code, chaque mot affiché est le produit de ces trois rôles.
