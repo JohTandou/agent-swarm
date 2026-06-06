@@ -22,4 +22,11 @@ export class HeaderComponent {
 
   /** Émet quand l'utilisateur clique sur le hamburger */
   @Output() toggleSidebar = new EventEmitter<void>();
+
+  /** Émet quand l'utilisateur clique sur le bouton de recherche */
+  @Output() openSearch = new EventEmitter<void>();
+
+  onSearchClick(): void {
+    this.openSearch.emit();
+  }
 }

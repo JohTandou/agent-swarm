@@ -19,3 +19,5 @@ export type { MarkdownFrontmatter } from './markdown-frontmatter.model';
 export type { HeadingNode } from './heading-node.model';
 export type { MarkdownDocument } from './markdown-document.model';
 export type { MarkdownConfig } from './markdown-config.model';
+export type { SearchResult } from './search-result.model';
+

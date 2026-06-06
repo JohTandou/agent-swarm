@@ -95,4 +95,13 @@ describe('HeaderComponent', () => {
     expect(navLinks[1].textContent?.trim()).toBe('À propos');
     expect(navLinks[2].textContent?.trim()).toBe('Standards');
   });
+
+  it('devrait émettre openSearch quand le bouton de recherche est cliqué', () => {
+    component.isMobile = false;
+    fixture.detectChanges();
+    const emitSpy = spyOn(component.openSearch, 'emit');
+    const searchBtn: HTMLElement = fixture.nativeElement.querySelector('.header__search-btn');
+    searchBtn.click();
+    expect(emitSpy).toHaveBeenCalled();
+  });
 });
