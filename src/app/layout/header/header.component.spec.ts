@@ -86,12 +86,13 @@ describe('HeaderComponent', () => {
     expect(hamburgerBtn.getAttribute('aria-expanded')).toBe('true');
   });
 
-  it('devrait avoir les liens de navigation Accueil et À propos', () => {
+  it('devrait avoir les liens de navigation Accueil, À propos et Standards', () => {
     component.isMobile = false;
     fixture.detectChanges();
     const navLinks = fixture.nativeElement.querySelectorAll('.header__nav-link');
-    expect(navLinks.length).toBe(2);
+    expect(navLinks.length).toBe(3);
     expect(navLinks[0].textContent?.trim()).toBe('Accueil');
     expect(navLinks[1].textContent?.trim()).toBe('À propos');
+    expect(navLinks[2].textContent?.trim()).toBe('Standards');
   });
 });

@@ -1,0 +1,36 @@
+{
+  "session_id": "swarm-20260606-t12t15",
+  "original_request": "Réaliser T12 à T15 du PLAN.md",
+  "created_at": "2026-06-06T00:00:00Z",
+  "tasks": [
+    {
+      "id": "1",
+      "title": "T12 — Page Standards",
+      "body": "Créer la page Standards (route /standards) : standards Apple-grade (typo, couleurs, animations), conventions de code, philosophie de test, processus de documentation. Contenu principalement Markdown chargé via ContentService. MEDIUM.",
+      "route": "MEDIUM",
+      "status": "pending"
+    },
+    {
+      "id": "2",
+      "title": "T13 — Recherche Cmd+K",
+      "body": "Implémenter la recherche : installer Fuse.js, créer un service de recherche indexant le contenu Markdown, créer un composant modal Cmd+K/Ctrl+K avec overlay, résultats en temps réel, navigation clavier, highlight des termes, stagger animation. MEDIUM.",
+      "route": "MEDIUM",
+      "status": "pending"
+    },
+    {
+      "id": "3",
+      "title": "T14 — Animations globales + signature",
+      "body": "Installer GSAP, ajouter animations scroll-triggered (parallaxe, reveal, stagger) sur toutes les pages, transitions de page, animations hover premium, parallaxe multi-vitesses. Créer la grille hexagonale Canvas en arrière-plan homepage (pulsation, illumination interactive). Easings custom, respect prefers-reduced-motion. FULL.",
+      "route": "FULL",
+      "status": "pending"
+    },
+    {
+      "id": "4",
+      "title": "T15 — Responsive mobile",
+      "body": "Audit et adaptation responsive de TOUTES les pages : sidebar→slide-over, TOC→accordéon mobile, grilles→stack vertical, polices clamp(), diagrammes→zoomables, touch targets ≥44px. Tests sur viewports mobiles. MEDIUM.",
+      "route": "MEDIUM",
+      "status": "pending"
+    }
+  ],
+  "current_index": 0
+}

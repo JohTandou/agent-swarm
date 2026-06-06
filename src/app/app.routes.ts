@@ -48,6 +48,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/mcp-tools/mcp-tools.routes').then((m) => m.mcpToolsRoutes),
   },
+  {
+    path: 'normes',
+    loadChildren: () =>
+      import('./features/standards/standards.routes').then((m) => m.standardsRoutes),
+  },
   /* Route wildcard — redirige vers l'accueil */
   { path: '**', redirectTo: '' },
 ];

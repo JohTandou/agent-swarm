@@ -7,16 +7,17 @@ Odd numbered Node.js versions will not enter LTS status and should not be used f
 ❯ Building...
 ✔ Building...
 Initial chunk files   | Names                        |  Raw size | Estimated transfer size
-chunk-JVG2SHEP.js     | -                            | 141.54 kB |                42.32 kB
-chunk-WRVB5RQ5.js     | -                            |  70.81 kB |                17.62 kB
-chunk-GTZB57V7.js     | -                            |  51.81 kB |                14.64 kB
-chunk-6B6LEZD2.js     | -                            |  38.90 kB |                10.97 kB
+chunk-VWFVD7WK.js     | -                            | 141.88 kB |                42.41 kB
+chunk-S2QPMPK3.js     | -                            |  70.81 kB |                17.61 kB
+chunk-TPNG27FV.js     | -                            |  51.51 kB |                14.53 kB
+chunk-QLYGZOLS.js     | -                            |  38.90 kB |                10.97 kB
 polyfills-5CFQRCPP.js | polyfills                    |  34.59 kB |                11.33 kB
 styles-LY7SRWNP.css   | styles                       |  28.97 kB |                 6.42 kB
-main-325SQC4T.js      | main                         |  25.95 kB |                 6.45 kB
+main-V3MRZDLE.js      | main                         |  26.63 kB |                 6.57 kB
 chunk-DGJOY6OK.js     | -                            |   1.64 kB |               753 bytes
+chunk-H7YPFF45.js     | -                            | 345 bytes |               345 bytes
 
-                      | Initial total                | 394.21 kB |               110.50 kB
+                      | Initial total                | 395.26 kB |               110.95 kB
 
 Lazy chunk files      | Names                        |  Raw size | Estimated transfer size
 chunk-ZFU6DGMU.js     | -                            | 600.64 kB |               116.01 kB
@@ -31,14 +32,23 @@ chunk-ZLHVTQHK.js     | cose-bilkent-S5V4N54A        |  82.64 kB |              
 chunk-TANAIQIR.js     | blockDiagram-GPEHLZMM        |  72.51 kB |                18.06 kB
 chunk-YI7CDJMK.js     | c4Diagram-AAUBKEIU           |  70.31 kB |                15.84 kB
 chunk-GMBAFH72.js     | flowDiagram-I6XJVG4X         |  61.11 kB |                16.03 kB
-chunk-XQ2RZINO.js     | -                            |  57.18 kB |                16.78 kB
+chunk-SLGUZOW6.js     | -                            |  57.18 kB |                16.79 kB
 chunk-UIIPNG5E.js     | -                            |  53.36 kB |                16.00 kB
 chunk-2A7SF6C4.js     | ganttDiagram-6RSMTGT7        |  50.27 kB |                15.08 kB
-...and 74 more lazy chunks files. Use "--verbose" to show all the files.
+...and 78 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [5.736 seconds]
+Application bundle generation complete. [9.139 seconds]
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 6.81 kB with a total of 14.81 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/mcp-tools/mcp-tools.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 3.80 kB with a total of 11.80 kB.[0m
+
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 10.23 kB with a total of 18.23 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/standards/standards.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 4.55 kB with a total of 12.55 kB.[0m
 
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'cytoscape-fcose' used by 'node_modules/mermaid/dist/chunks/mermaid.core/architectureDiagram-3BPJPVTR.mjs' is not ESM[0m

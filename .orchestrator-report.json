@@ -28,7 +28,7 @@
     {
       "name": "e2e",
       "status": "skip",
-      "detail": "No frontend files changed (e2e_auto_grep_from_diff=true)"
+      "detail": "No frontend files changed (server left running for interactive testing)"
     }
   ],
   "overall": "pass"
