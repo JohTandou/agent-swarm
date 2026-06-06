@@ -299,9 +299,9 @@ describe('McpToolsComponent', () => {
    * Accessibilité
    * ========================================================================== */
 
-  it('la section principale devrait avoir role="main"', () => {
-    const main = fixture.nativeElement.querySelector('section[role="main"]');
-    expect(main).toBeTruthy();
+  it('la section principale devrait avoir un aria-label approprié', () => {
+    const section = fixture.nativeElement.querySelector('section[aria-label="Outils MCP"]');
+    expect(section).toBeTruthy();
   });
 
   it('le tableau devrait avoir un aria-label', fakeAsync(() => {

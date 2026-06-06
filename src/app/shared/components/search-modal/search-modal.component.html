@@ -3,7 +3,7 @@
 
 <!-- Panel de recherche N4 -->
 <div
-  class="search-modal__panel"
+  class="search-modal__panel" #searchPanel
   (click)="onPanelClick($event)"
   role="dialog"
   aria-label="Recherche rapide"
@@ -37,7 +37,7 @@
       autocomplete="off"
       spellcheck="false"
       role="combobox"
-      aria-expanded="true"
+      [attr.aria-expanded]="results().length > 0 || loading()"
       aria-haspopup="listbox"
       aria-controls="search-results-list"
       [attr.aria-activedescendant]="selectedIndex() >= 0 ? getResultId(selectedIndex()) : ''"

@@ -8,13 +8,13 @@
     <!-- Navigation primaire desktop -->
     @if (!isMobile) {
       <nav class="header__nav" aria-label="Navigation principale">
-        <a routerLink="/" class="header__nav-link" routerLinkActive="header__nav-link--active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/" class="header__nav-link" routerLinkActive="header__nav-link--active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">
           Accueil
         </a>
-        <a routerLink="/a-propos" class="header__nav-link" routerLinkActive="header__nav-link--active">
+        <a routerLink="/a-propos" class="header__nav-link" routerLinkActive="header__nav-link--active" ariaCurrentWhenActive="page">
           À propos
         </a>
-        <a routerLink="/normes" class="header__nav-link" routerLinkActive="header__nav-link--active">
+        <a routerLink="/normes" class="header__nav-link" routerLinkActive="header__nav-link--active" ariaCurrentWhenActive="page">
           Standards
         </a>
       </nav>
