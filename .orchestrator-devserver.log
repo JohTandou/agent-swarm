@@ -24,7 +24,7 @@ chunk-MLPXPZPS.js   | -                         |  32.60 kB |
 chunk-C3SUDRJL.js   | wiki-demo-routes          |   6.49 kB | 
 chunk-2PI2JPBZ.js   | about-routes              |   5.77 kB | 
 
-Application bundle generation complete. [3.053 seconds]
+Application bundle generation complete. [1.998 seconds]
 
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
