@@ -49,6 +49,7 @@ export class SearchModalComponent implements AfterViewInit, OnDestroy {
 
   /** Input de recherche (focus auto à l'ouverture) */
   @ViewChild('searchInput') searchInputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('searchPanel') searchPanelRef!: ElementRef<HTMLElement>;
 
   /** Texte de recherche courant */
   readonly query = signal('');
@@ -113,6 +114,11 @@ export class SearchModalComponent implements AfterViewInit, OnDestroy {
       case 'ArrowUp':
         event.preventDefault();
         this.moveSelection(-1);
+        break;
+
+      case 'Tab':
+        event.preventDefault();
+        this.trapFocus(event.shiftKey);
         break;
 
       case 'Enter':
@@ -183,6 +189,27 @@ export class SearchModalComponent implements AfterViewInit, OnDestroy {
   }
 
   /** Retourne l'ID d'un résultat pour aria-activedescendant */
+  private trapFocus(shiftKey: boolean): void {
+    const panel = this.searchPanelRef?.nativeElement;
+    if (!panel) return;
+    const focusable = panel.querySelectorAll<HTMLElement>(
+      'input, button, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const current = document.activeElement as HTMLElement;
+    if (shiftKey) {
+      if (current === first || !panel.contains(current)) {
+        last.focus();
+      }
+    } else {
+      if (current === last || !panel.contains(current)) {
+        first.focus();
+      }
+    }
+  }
+
   getResultId(index: number): string {
     return `search-result-${index}`;
   }
