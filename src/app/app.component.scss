@@ -54,6 +54,12 @@
   max-width: var(--content-max-width);
 }
 
+/* Transition de page GSAP */
+.page-transition {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Table des matières — colonne droite sticky */
 .shell-layout__toc {
   flex-shrink: 0;

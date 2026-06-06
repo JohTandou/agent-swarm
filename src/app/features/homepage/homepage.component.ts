@@ -5,13 +5,16 @@ import {
   OnDestroy,
   ElementRef,
   ViewChild,
+  AfterViewInit,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SwarmGraphComponent } from './swarm-graph.component';
+import { HexGridComponent } from './hex-grid.component';
+import { AnimationService } from '../../shared/services/animation.service';
 
 /** Délai de stabilisation du DOM après le rendu initial */
 const DOM_STABILIZE_DELAY_MS = 200;
-/** Durée de l'animation des compteurs en ms (cubic-out easing) */
+/** Durée de l'animation des compteurs en ms */
 const COUNTER_ANIMATION_DURATION_MS = 2000;
 
 /** Données d'une carte statistique */
@@ -33,9 +36,9 @@ interface NavCard {
  * Page d'accueil immersive du Swarm Wiki.
  *
  * Composition :
- * 1. Hero — tagline + résumé exécutif (100vh)
+ * 1. Hero — tagline animée GSAP + grille hexagonale en arrière-plan
  * 2. Graphe D3.js — 9 agents interconnectés (100vh)
- * 3. Statistiques — 4 métriques animées au scroll (60vh)
+ * 3. Statistiques — 4 métriques animées au scroll via GSAP
  * 4. Navigation — 4 cartes vers les sections (100vh)
  *
  * États : le composant est toujours en succès (données statiques).
@@ -44,11 +47,14 @@ interface NavCard {
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [RouterLink, SwarmGraphComponent],
+  imports: [RouterLink, SwarmGraphComponent, HexGridComponent],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
 })
-export class HomepageComponent implements OnInit, OnDestroy {
+export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('heroSection', { static: false })
+  heroSectionRef?: ElementRef<HTMLElement>;
+
   @ViewChild('statsSection', { static: false })
   statsSectionRef?: ElementRef<HTMLElement>;
 
@@ -70,9 +76,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
       format: (v: number): string => `${v}`,
     },
     {
-      value: 125, // centimes → animé de 0 à 125, affiché "1.25 $"
+      value: 125,
       label: 'par session MEDIUM',
-      format: (v: number): string => `1.${String(v).padStart(2, '0')} $`,
+      format: (v: number): string => `1.${String(v).padStart(2, '0')}\u00A0$`,
     },
   ];
 
@@ -113,52 +119,214 @@ export class HomepageComponent implements OnInit, OnDestroy {
   /** L'animation des compteurs est-elle terminée ? */
   readonly countersDone = signal(false);
 
-  private observer: IntersectionObserver | null = null;
-  private rafId: number | null = null;
+  private statsTriggered = false;
+
+  constructor(private animService: AnimationService) {}
 
   ngOnInit(): void {
-    this.setupStatsObserver();
+    this.setupHeroAnimation();
+  }
+
+  ngAfterViewInit(): void {
+    this.setupAnimations();
   }
 
   ngOnDestroy(): void {
-    this.observer?.disconnect();
-    if (this.rafId !== null) {
-      cancelAnimationFrame(this.rafId);
+    this.animService.killAll();
+  }
+
+  /* ==========================================================================
+   * Hero — animation GSAP au montage
+   * ========================================================================== */
+
+  private async setupHeroAnimation(): Promise<void> {
+    if (this.animService.isReducedMotion()) return;
+
+    setTimeout(async () => {
+      try {
+        const gsap = await this.animService.getGsap();
+
+        // Stagger sur les éléments du hero
+        const heroEls = document.querySelectorAll('.homepage__hero-stagger');
+        if (heroEls.length > 0) {
+          gsap.fromTo(
+            heroEls,
+            { autoAlpha: 0, y: 16 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.7,
+              stagger: 0.12,
+              ease: 'power2.out',
+            },
+          );
+        }
+
+        // Parallaxe sur le décor d'arrière-plan
+        const bgDecor = document.querySelector('.homepage__hero-decor') as HTMLElement;
+        if (bgDecor) {
+          const { ScrollTrigger } = await this.animService.initGsap();
+          gsap.to(bgDecor, {
+            y: 60,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: bgDecor,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: true,
+            },
+          });
+        }
+      } catch {
+        // GSAP non disponible — l'animation CSS de fallback reste active
+      }
+    }, DOM_STABILIZE_DELAY_MS);
+  }
+
+  /* ==========================================================================
+   * Animations au scroll (après render DOM)
+   * ========================================================================== */
+
+  private async setupAnimations(): Promise<void> {
+    if (this.animService.isReducedMotion()) {
+      // Révéler immédiatement tous les éléments
+      document.querySelectorAll('.homepage__stat-card, .homepage__nav-card').forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+      });
+      return;
+    }
+
+    try {
+      const { gsap, ScrollTrigger } = await this.animService.initGsap();
+
+      // Compteurs de stats
+      this.setupStatsTrigger(gsap, ScrollTrigger);
+
+      // Révélation des cartes de navigation
+      const navCards = document.querySelectorAll('.homepage__nav-card');
+      navCards.forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          { autoAlpha: 0, y: 20, scale: 0.97 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.5,
+            delay: i * 0.08,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 88%',
+              once: true,
+            },
+          },
+        );
+      });
+
+      ScrollTrigger.refresh();
+    } catch {
+      // Fallback : utiliser l'IntersectionObserver classique
+      this.setupStatsObserverFallback();
+    }
+  }
+
+  /* ==========================================================================
+   * Stats — déclenchement au scroll via GSAP ScrollTrigger
+   * ========================================================================== */
+
+  private setupStatsTrigger(gsap: any, _ScrollTrigger: any): void {
+    const statsEl = document.querySelector('.homepage__stats');
+    if (!statsEl) return;
+
+    const scrollerTrigger = {
+      trigger: statsEl,
+      start: 'top 80%',
+      once: true,
+      onEnter: () => {
+        statsEl.classList.add('homepage__stats--visible');
+        if (!this.statsTriggered) {
+          this.statsTriggered = true;
+          this.animateCountersGSAP();
+        }
+      },
+    };
+
+    // ScrollTrigger.create
+    const stInstance = _ScrollTrigger.create ? _ScrollTrigger.create(scrollerTrigger) : null;
+    // Fallback : vérifier manuellement si déjà visible
+    if (!stInstance || !stInstance.kill) {
+      const rect = statsEl.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.8) {
+        scrollerTrigger.onEnter();
+      }
     }
   }
 
   /**
-   * Observe l'entrée dans le viewport de la section statistiques
-   * pour déclencher l'animation des compteurs une seule fois.
+   * Anime les 4 compteurs de 0 vers leur valeur cible avec GSAP.
    */
-  private setupStatsObserver(): void {
-    this.observer = new IntersectionObserver(
+  private animateCountersGSAP(): void {
+    const targets = this.stats.map((s) => s.value);
+    const obj = { v0: 0, v1: 0, v2: 0, v3: 0 };
+
+    this.animService.initGsap().then(({ gsap }) => {
+      gsap.to(obj, {
+        v0: targets[0],
+        v1: targets[1],
+        v2: targets[2],
+        v3: targets[3],
+        duration: COUNTER_ANIMATION_DURATION_MS / 1000,
+        ease: 'power2.out',
+        onUpdate: () => {
+          this.animatedValues.set([
+            Math.round(obj.v0),
+            Math.round(obj.v1),
+            Math.round(obj.v2),
+            Math.round(obj.v3),
+          ]);
+        },
+        onComplete: () => {
+          this.countersDone.set(true);
+        },
+      });
+    }).catch(() => {
+      // Fallback RAF
+      this.animateCountersRAF();
+    });
+  }
+
+  /* ==========================================================================
+   * Fallback — IntersectionObserver + RAF (si GSAP échoue)
+   * ========================================================================== */
+
+  private setupStatsObserverFallback(): void {
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('homepage__stats--visible');
-            if (!this.countersDone()) {
-              this.animateCounters();
+            if (!this.statsTriggered) {
+              this.statsTriggered = true;
+              this.animateCountersRAF();
             }
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
-    /* Délai pour laisser le DOM se stabiliser après le rendu */
     setTimeout(() => {
       const el = document.querySelector('.homepage__stats');
-      if (el) this.observer?.observe(el);
+      if (el) observer.observe(el);
     }, DOM_STABILIZE_DELAY_MS);
   }
 
   /**
-   * Anime les 4 compteurs de 0 vers leur valeur cible.
-   * Utilise requestAnimationFrame avec easing cubic-out.
-   * Durée : 2000ms.
+   * Animation RAF des compteurs (fallback sans GSAP).
    */
-  private animateCounters(): void {
+  private animateCountersRAF(): void {
     const duration = COUNTER_ANIMATION_DURATION_MS;
     const startTime = performance.now();
     const targets = this.stats.map((s) => s.value);
@@ -166,21 +334,22 @@ export class HomepageComponent implements OnInit, OnDestroy {
     const tick = (now: number): void => {
       const elapsed = now - startTime;
       const rawProgress = Math.min(elapsed / duration, 1);
-      /* Easing cubic-out pour un ralentissement naturel */
       const eased = 1 - Math.pow(1 - rawProgress, 3);
-
-      const current = targets.map((t) => Math.round(t * eased));
-      this.animatedValues.set(current);
+      this.animatedValues.set(targets.map((t) => Math.round(t * eased)));
 
       if (rawProgress < 1) {
-        this.rafId = requestAnimationFrame(tick);
+        requestAnimationFrame(tick);
       } else {
         this.countersDone.set(true);
       }
     };
 
-    this.rafId = requestAnimationFrame(tick);
+    requestAnimationFrame(tick);
   }
+
+  /* ==========================================================================
+   * Helpers d'affichage
+   * ========================================================================== */
 
   /** Formate la valeur animée d'un compteur */
   formatStat(index: number): string {

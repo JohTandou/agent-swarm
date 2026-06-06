@@ -1,10 +1,10 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, signal } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef } from '@angular/core';
+import { AnimationService } from '../../shared/services/animation.service';
 
 /* Constantes de configuration */
 const LOADING_SIMULATION_DELAY_MS = 500;
 const READY_CHECK_INTERVAL_MS = 100;
 const READY_CHECK_TIMEOUT_MS = 2000;
-const COUNTER_ANIMATION_DURATION_MS = 1800;
 
 /**
  * Données structurées pour la section Avant/Après.
@@ -341,12 +341,11 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   ];
 
   /* ==========================================================================
-   * Références aux éléments DOM pour les animations
+   * Injection du service d'animation
    * ========================================================================== */
 
-  private counterAnimating = false;
-  private animationFrameId: number | null = null;
-  private _readyCheckInterval: ReturnType<typeof setInterval> | null = null;
+  private readonly animService = inject(AnimationService);
+  private readonly hostRef = inject(ElementRef);
 
   /* ==========================================================================
    * Lifecycle
@@ -377,129 +376,75 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngOnDestroy(): void {
-    this.stopReadyCheck();
-    this.cleanupAnimations();
+    this.animService.killAll();
   }
 
   /* ==========================================================================
-   * Animations au scroll
+   * Animations au scroll — GSAP (fallback CSS)
    * ========================================================================== */
 
-  private setupScrollAnimations(): void {
-    // Attendre que le loading soit terminé
-    this._readyCheckInterval = setInterval(() => {
-      if (!this.loading()) {
-        this.stopReadyCheck();
-        this.observeAnimatedElements();
-      }
-    }, READY_CHECK_INTERVAL_MS);
-
-    // Timeout de sécurité
-    setTimeout(() => this.stopReadyCheck(), READY_CHECK_TIMEOUT_MS);
+  private async setupScrollAnimations(): Promise<void> {
+    if (this.loading()) {
+      const check = setInterval(() => {
+        if (!this.loading()) {
+          clearInterval(check);
+          this.initScrollAnimations();
+        }
+      }, READY_CHECK_INTERVAL_MS);
+      setTimeout(() => clearInterval(check), READY_CHECK_TIMEOUT_MS);
+    } else {
+      this.initScrollAnimations();
+    }
   }
 
-  private observeAnimatedElements(): void {
-    const revealElements = document.querySelectorAll('.reveal-on-scroll');
-    const barElements = document.querySelectorAll('.comparison-bar');
-    const counterElement = document.querySelector('.counter-target');
+  private async initScrollAnimations(): Promise<void> {
+    try {
+      const revealEls = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll');
+      const barEls = this.hostRef.nativeElement.querySelectorAll('.comparison-bar');
+      const counterEl = this.hostRef.nativeElement.querySelector('.counter-target') as HTMLElement;
 
-    // Observer pour les éléments avec reveal-on-scroll
-    const scrollObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
+      if (revealEls.length > 0) {
+        await this.animService.revealOnScroll(Array.from(revealEls), { staggerMs: 80 });
+      }
 
-            // Si c'est une barre de comparaison, animer la largeur
-            if (entry.target.classList.contains('comparison-bar')) {
-              const bar = entry.target as HTMLElement;
-              const targetWidth = bar.getAttribute('data-width');
-              if (targetWidth) {
-                // Délai pour l'effet stagger
-                const index = parseInt(bar.getAttribute('data-index') ?? '0', 10);
-                setTimeout(() => {
-                  bar.style.width = targetWidth;
-                }, index * 100);
-              }
-            }
-
-            scrollObserver.unobserve(entry.target);
+      // Barres de comparaison — animation GSAP de la largeur
+      if (barEls.length > 0) {
+        const { gsap, ScrollTrigger } = await this.animService.initGsap();
+        Array.from(barEls).forEach((el, i) => {
+          const bar = el as HTMLElement;
+          const targetWidth = bar.getAttribute('data-width');
+          if (targetWidth) {
+            gsap.to(bar, {
+              width: targetWidth,
+              duration: 0.8,
+              delay: i * 0.1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: bar,
+                start: 'top 85%',
+                once: true,
+              },
+            });
           }
         });
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-    );
-
-    revealElements.forEach((el) => scrollObserver.observe(el));
-    barElements.forEach((el) => scrollObserver.observe(el));
-
-    // Observer pour le compteur
-    if (counterElement) {
-      const counterObserver = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && !this.counterAnimating) {
-            this.animateCounter(counterElement as HTMLElement);
-            counterObserver.unobserve(counterElement);
-          }
-        },
-        { threshold: 0.5 }
-      );
-      counterObserver.observe(counterElement);
-    }
-  }
-
-  /**
-   * Animation de compteur : fait défiler les chiffres de 0 à 8
-   * avec un easing personnalisé.
-   */
-  private animateCounter(element: HTMLElement): void {
-    this.counterAnimating = true;
-    const target = 8;
-    const duration = COUNTER_ANIMATION_DURATION_MS;
-    const startTime = performance.now();
-
-    const update = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-
-      // Easing cubic-bezier(0.22, 1, 0.36, 1) — spring rebond organique
-      const eased = this.easeOutBack(progress);
-      const currentValue = Math.round(eased * target);
-
-      element.textContent = `${currentValue}×`;
-
-      if (progress < 1) {
-        this.animationFrameId = requestAnimationFrame(update);
-      } else {
-        element.textContent = '8×';
-        this.counterAnimating = false;
       }
-    };
 
-    this.animationFrameId = requestAnimationFrame(update);
-  }
-
-  private stopReadyCheck(): void {
-    if (this._readyCheckInterval) {
-      clearInterval(this._readyCheckInterval);
-      this._readyCheckInterval = null;
-    }
-  }
-
-  /**
-   * Easing "ease-out back" modifié pour un rebond subtil.
-   * cubic-bezier(0.22, 1, 0.36, 1) avec overshoot léger.
-   */
-  private easeOutBack(t: number): number {
-    const c1 = 1.70158;
-    const c3 = c1 + 1;
-    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
-  }
-
-  private cleanupAnimations(): void {
-    if (this.animationFrameId !== null) {
-      cancelAnimationFrame(this.animationFrameId);
-      this.animationFrameId = null;
+      // Compteur 8×
+      if (counterEl) {
+        const { ScrollTrigger } = await this.animService.initGsap();
+        ScrollTrigger.create({
+          trigger: counterEl,
+          start: 'top 85%',
+          once: true,
+          onEnter: () => {
+            this.animService.animateCounter(counterEl, 0, 8, 1800);
+          },
+        });
+      }
+    } catch {
+      // Fallback CSS : révéler immédiatement
+      const all = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll, .comparison-bar');
+      all.forEach((el: Element) => el.classList.add('revealed'));
     }
   }
 }

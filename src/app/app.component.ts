@@ -1,5 +1,5 @@
-import { Component, signal, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { Component, signal, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { RouterOutlet, Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -10,13 +10,15 @@ import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component
 import { TableOfContentsComponent } from './shared/components/table-of-contents/table-of-contents.component';
 import { SearchModalComponent } from './shared/components/search-modal/search-modal.component';
 import { SearchService } from './shared/services/search.service';
+import { AnimationService } from './shared/services/animation.service';
 import type { Breadcrumb } from '@shared/models';
 import type { SearchResult } from '@shared/models';
 
 /**
  * Composant racine — Shell applicatif.
  * Gère le layout responsive (3 colonnes desktop, 1 colonne mobile),
- * l'état de la sidebar, et le mode plein écran pour la page d'accueil.
+ * l'état de la sidebar, le mode plein écran pour la page d'accueil,
+ * et les transitions de page GSAP.
  */
 @Component({
   selector: 'app-root',
@@ -32,6 +34,9 @@ import type { SearchResult } from '@shared/models';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
+  @ViewChild('pageWrapper', { static: false })
+  pageWrapperRef?: ElementRef<HTMLElement>;
+
   /** Détection mobile via BreakpointObserver CDK */
   readonly isMobile = signal(false);
 
@@ -56,6 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     private overlay: Overlay,
     private searchService: SearchService,
+    private animService: AnimationService,
   ) {
     this.subscriptions.add(
       this.breakpointObserver
@@ -77,6 +83,24 @@ export class AppComponent implements OnInit, OnDestroy {
         .subscribe((e) => {
           const url = (e as NavigationEnd).urlAfterRedirects;
           this.isHomepage.set(url === '/' || url === '');
+
+          // Animation d'entrée de page
+          const wrapper = this.pageWrapperRef?.nativeElement;
+          if (wrapper && !this.animService.isReducedMotion()) {
+            this.animService.pageEnter(wrapper);
+          }
+        })
+    );
+
+    // Animation de sortie de page
+    this.subscriptions.add(
+      this.router.events
+        .pipe(filter((e) => e instanceof NavigationStart))
+        .subscribe(() => {
+          const wrapper = this.pageWrapperRef?.nativeElement;
+          if (wrapper && !this.animService.isReducedMotion()) {
+            this.animService.pageExit(wrapper);
+          }
         })
     );
 
@@ -87,6 +111,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    this.animService.killAll();
   }
 
   /** Bascule l'état d'ouverture de la sidebar (mobile uniquement) */

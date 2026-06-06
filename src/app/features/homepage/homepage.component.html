@@ -1,30 +1,38 @@
 <!-- ==========================================================================
      Page d'accueil Swarm Wiki — Immersive Apple-grade
-     Sections plein écran, graphe D3 interactif, animations scroll-driven
+     Sections plein écran, graphe D3 interactif, grille hexagonale animée,
+     animations GSAP scroll-driven
      ========================================================================== -->
 
 <main class="homepage">
 
   <!-- ═══════════════════════════════════════════════════════════════════
        Section 1 : Hero — Tagline + Résumé exécutif (100vh minimum)
+       Grille hexagonale en arrière-plan
        ═══════════════════════════════════════════════════════════════════ -->
   <section class="homepage__hero" aria-label="Présentation du système Swarm">
+    <!-- Décor de fond parallaxe -->
+    <div class="homepage__hero-decor" aria-hidden="true"></div>
+
+    <!-- Grille hexagonale animée -->
+    <app-hex-grid />
+
     <div class="homepage__hero-content">
       <!-- Badge statut -->
-      <div class="homepage__badge" aria-hidden="true">
+      <div class="homepage__badge homepage__hero-stagger" aria-hidden="true">
         <span class="homepage__badge-dot"></span>
         Pipeline d'agents IA &#183; Open Source
       </div>
 
       <!-- Tagline monumentale -->
-      <h1 class="homepage__tagline">
+      <h1 class="homepage__tagline homepage__hero-stagger">
         Le premier pipeline d'agents IA qui
         <span class="homepage__tagline-accent">code, teste, review et déploie</span>
         automatiquement
       </h1>
 
       <!-- Résumé exécutif — 3 phrases percutantes -->
-      <div class="homepage__summary">
+      <div class="homepage__summary homepage__hero-stagger">
         <p class="homepage__summary-text">
           Swarm orchestre <strong>9 agents IA spécialisés</strong> qui collaborent en temps réel&nbsp;:
           de l'analyse du codebase au déploiement, chaque étape est automatisée par un agent dédié.
@@ -41,7 +49,7 @@
     </div>
 
     <!-- Indicateur de scroll -->
-    <div class="homepage__scroll-hint" aria-hidden="true">
+    <div class="homepage__scroll-hint homepage__hero-stagger" aria-hidden="true">
       <span class="homepage__scroll-text">Explorer</span>
       <div class="homepage__scroll-arrow">
         <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
@@ -67,7 +75,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════════
-       Section 3 : Statistiques clés — 4 métriques animées
+       Section 3 : Statistiques clés — 4 métriques animées au scroll GSAP
        ═══════════════════════════════════════════════════════════════════ -->
   <section class="homepage__stats" aria-label="Statistiques clés du Swarm">
     <div class="homepage__stats-grid">
@@ -90,7 +98,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════════
-       Section 4 : Navigation visuelle — 4 cartes vers les sections
+       Section 4 : Navigation visuelle — 4 cartes animées GSAP
        ═══════════════════════════════════════════════════════════════════ -->
   <section class="homepage__navigation" aria-label="Navigation vers les sections du wiki">
     <h2 class="homepage__section-title">Explorez le système</h2>

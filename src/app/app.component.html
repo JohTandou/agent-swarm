@@ -47,9 +47,10 @@
       <app-breadcrumbs [breadcrumbs]="breadcrumbs" />
     }
 
-    <!-- Zone de contenu dynamique -->
+    <!-- Zone de contenu dynamique avec transition de page GSAP -->
     <div
-      class="main-content"
+      #pageWrapper
+      class="main-content page-transition"
       [class.main-content--homepage]="isHomepage()"
     >
       <router-outlet />
