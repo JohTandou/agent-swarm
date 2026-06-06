@@ -52,6 +52,8 @@
       "iterations": 1,
       "agents_used": ["search", "planner", "front", "general", "tester", "reviewer"],
       "retry_reasons": ["tester-TEST_BUG-sidebar-count", "tester-TEST_BUG-routes-count"],
+      "tester_pass": true,
+      "reviewer_approved": true,
       "status": "reviewed"
     }
   ]
