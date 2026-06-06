@@ -32,6 +32,10 @@
    Custom Properties racine — Palette et design tokens natifs
    -------------------------------------------------------------------------- */
 :root {
+  /* Polices — redéclarées hors @theme pour accessibilité CSS custom property */
+  --font-display: "Cabinet Grotesk", sans-serif;
+  --font-body: "Satoshi", sans-serif;
+
   /* Fond et surfaces */
   --color-bg-primary: #3A3530;
   --color-bg-elevated: #4A4540;
