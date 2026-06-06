@@ -2,6 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { of } from 'rxjs';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { importProvidersFrom } from '@angular/core';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -16,7 +20,10 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
       providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
         provideRouter([]),
+        importProvidersFrom(OverlayModule),
         { provide: BreakpointObserver, useValue: breakpointObserverMock },
       ],
     }).compileComponents();
