@@ -8,17 +8,16 @@ Odd numbered Node.js versions will not enter LTS status and should not be used f
 ✔ Building...
 Initial chunk files   | Names                        |  Raw size | Estimated transfer size
 chunk-VWFVD7WK.js     | -                            | 141.88 kB |                42.41 kB
-chunk-SEDTGFPD.js     | -                            |  70.82 kB |                17.65 kB
+chunk-S2QPMPK3.js     | -                            |  70.81 kB |                17.61 kB
 chunk-TPNG27FV.js     | -                            |  51.51 kB |                14.53 kB
 chunk-QLYGZOLS.js     | -                            |  38.90 kB |                10.97 kB
 polyfills-5CFQRCPP.js | polyfills                    |  34.59 kB |                11.33 kB
 styles-LY7SRWNP.css   | styles                       |  28.97 kB |                 6.42 kB
-main-WYT3FVQM.js      | main                         |  27.08 kB |                 6.75 kB
-chunk-OSE4SMVA.js     | -                            |   2.71 kB |               888 bytes
+main-5KXUWLND.js      | main                         |  28.58 kB |                 6.88 kB
 chunk-DGJOY6OK.js     | -                            |   1.64 kB |               753 bytes
 chunk-H7YPFF45.js     | -                            | 345 bytes |               345 bytes
 
-                      | Initial total                | 398.43 kB |               112.04 kB
+                      | Initial total                | 397.21 kB |               111.26 kB
 
 Lazy chunk files      | Names                        |  Raw size | Estimated transfer size
 chunk-ZFU6DGMU.js     | -                            | 600.64 kB |               116.01 kB
@@ -33,20 +32,21 @@ chunk-ZLHVTQHK.js     | cose-bilkent-S5V4N54A        |  82.64 kB |              
 chunk-TANAIQIR.js     | blockDiagram-GPEHLZMM        |  72.51 kB |                18.06 kB
 chunk-67P267GO.js     | index                        |  70.51 kB |                24.99 kB
 chunk-YI7CDJMK.js     | c4Diagram-AAUBKEIU           |  70.31 kB |                15.84 kB
-chunk-LNXQXFLE.js     | flowDiagram-I6XJVG4X         |  61.11 kB |                16.09 kB
-chunk-IME23CIE.js     | -                            |  57.18 kB |                16.74 kB
+chunk-GMBAFH72.js     | flowDiagram-I6XJVG4X         |  61.11 kB |                16.03 kB
+chunk-WFQ7FXVE.js     | -                            |  57.22 kB |                16.74 kB
 chunk-UIIPNG5E.js     | -                            |  53.36 kB |                16.00 kB
-...and 79 more lazy chunks files. Use "--verbose" to show all the files.
+chunk-2A7SF6C4.js     | ganttDiagram-6RSMTGT7        |  50.27 kB |                15.08 kB
+...and 77 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [5.711 seconds]
+Application bundle generation complete. [6.792 seconds]
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 10.08 kB with a total of 18.08 kB.[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 6.67 kB with a total of 14.67 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/mcp-tools/mcp-tools.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 3.86 kB with a total of 11.86 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/mcp-tools/mcp-tools.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 3.67 kB with a total of 11.67 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 10.24 kB with a total of 18.24 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 6.83 kB with a total of 14.83 kB.[0m
 
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'cytoscape-fcose' used by 'node_modules/mermaid/dist/chunks/mermaid.core/architectureDiagram-3BPJPVTR.mjs' is not ESM[0m
@@ -98,4 +98,3 @@ Application bundle generation complete. [5.711 seconds]
 
 
 Output location: /Users/johtnd/swarm-wiki/dist/swarm-wiki
-

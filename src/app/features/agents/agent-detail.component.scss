@@ -202,6 +202,7 @@
   align-items: center;
   gap: 6px;
   padding: 10px 20px;
+  min-height: 44px;
   border: 1px solid rgba(142, 136, 130, 0.2);
   border-radius: 8px;
   color: var(--color-text-secondary);
@@ -264,6 +265,7 @@
   align-items: center;
   gap: 6px;
   padding: 10px 20px;
+  min-height: 44px;
   border: 1px solid rgba(240, 165, 34, 0.3);
   border-radius: 8px;
   color: var(--color-accent);
