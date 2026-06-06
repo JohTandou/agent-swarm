@@ -106,10 +106,10 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: '🔧',
     },
     {
-      title: 'Écosystème',
+      title: 'Outils MCP',
       description:
-        'Supabase, Vercel, Render, Playwright — les intégrations natives.',
-      route: '/ecosysteme',
+        'Supabase, Vercel, Render, Playwright — 4 intégrations natives pour le déploiement.',
+      route: '/outils-mcp',
       icon: '🌐',
     },
   ];
