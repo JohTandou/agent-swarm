@@ -5,12 +5,6 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Variables locales — héritent des CSS custom properties racine
-   -------------------------------------------------------------------------- */
-$ease-natural: var(--ease-natural, cubic-bezier(0.25, 0.46, 0.45, 0.94));
-$ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
-
-/* --------------------------------------------------------------------------
    Conteneur racine — full bleed, pas de contrainte de largeur
    -------------------------------------------------------------------------- */
 .homepage {
@@ -59,7 +53,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   opacity: 0;
-  animation: hero-stagger 0.7s $ease-spring forwards;
+  animation: hero-stagger 0.7s var(--ease-spring) forwards;
 }
 
 .homepage__badge-dot {
@@ -86,7 +80,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   color: var(--color-text-primary, #F5F0EB);
   margin: 0;
   opacity: 0;
-  animation: hero-stagger 0.7s $ease-spring 0.1s forwards;
+  animation: hero-stagger 0.7s var(--ease-spring) 0.1s forwards;
 }
 
 .homepage__tagline-accent {
@@ -115,7 +109,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   gap: clamp(12px, 2vh, 20px);
   max-width: 680px;
   opacity: 0;
-  animation: hero-stagger 0.7s $ease-spring 0.25s forwards;
+  animation: hero-stagger 0.7s var(--ease-spring) 0.25s forwards;
 }
 
 .homepage__summary-text {
@@ -154,7 +148,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   align-items: center;
   gap: 6px;
   opacity: 0;
-  animation: hero-stagger 0.7s $ease-spring 0.5s forwards;
+  animation: hero-stagger 0.7s var(--ease-spring) 0.5s forwards;
 }
 
 .homepage__scroll-text {
@@ -236,7 +230,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   gap: 8px;
   text-align: center;
   opacity: 0;
-  animation: stat-appear 0.6s $ease-spring forwards;
+  animation: stat-appear 0.6s var(--ease-spring) forwards;
   animation-play-state: paused;
 
   .homepage__stats--visible & {
@@ -323,7 +317,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   position: relative;
   overflow: hidden;
   opacity: 0;
-  animation: stat-appear 0.5s $ease-spring forwards;
+  animation: stat-appear 0.5s var(--ease-spring) forwards;
   cursor: pointer;
 
   /* Glow subtil au hover */

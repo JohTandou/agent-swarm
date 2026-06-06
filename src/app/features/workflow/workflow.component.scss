@@ -4,11 +4,8 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Variables locales
+   Variables de layout locales
    -------------------------------------------------------------------------- */
-$ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
-$ease-natural: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 $content-max: 1100px;
 $section-padding: 120px 24px;
 $section-padding-mobile: 64px 20px;
@@ -29,7 +26,7 @@ $section-padding-mobile: 64px 20px;
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 600ms $ease-spring, transform 600ms $ease-spring;
+  transition: opacity 600ms var(--ease-spring), transform 600ms var(--ease-spring);
 }
 
 .reveal-on-scroll.revealed {
@@ -381,7 +378,7 @@ $section-padding-mobile: 64px 20px;
   background: var(--color-bg-elevated);
   border: 1px solid rgba(142, 136, 130, 0.12);
   border-radius: 16px;
-  transition: border-color 300ms $ease-natural, box-shadow 300ms $ease-natural, transform 300ms $ease-natural;
+  transition: border-color 300ms var(--ease-natural), box-shadow 300ms var(--ease-natural), transform 300ms var(--ease-natural);
 
   &:hover {
     border-color: rgba(240, 165, 34, 0.3);
@@ -518,7 +515,7 @@ $section-padding-mobile: 64px 20px;
     height: 30%;
     background: linear-gradient(to top, var(--color-accent), rgba(240, 165, 34, 0.1));
     border-radius: 2px;
-    animation: complexityFill 3000ms $ease-out-expo forwards;
+    animation: complexityFill 3000ms var(--ease-out-expo) forwards;
   }
 
   &__label-top,
@@ -549,7 +546,7 @@ $section-padding-mobile: 64px 20px;
   max-width: $content-max;
   margin: 0 auto;
   width: 100%;
-  transition: box-shadow 800ms $ease-natural;
+  transition: box-shadow 800ms var(--ease-natural);
 
   &.mermaid-visible {
     .mermaid-wrapper {
@@ -565,7 +562,7 @@ $section-padding-mobile: 64px 20px;
   border: 1px solid rgba(142, 136, 130, 0.12);
   border-radius: 20px;
   overflow-x: auto;
-  transition: border-color 600ms $ease-natural, box-shadow 600ms $ease-natural;
+  transition: border-color 600ms var(--ease-natural), box-shadow 600ms var(--ease-natural);
 
   ::ng-deep .markdown-body {
     max-width: 100%;
@@ -668,7 +665,7 @@ $section-padding-mobile: 64px 20px;
   background: var(--color-bg-elevated);
   border: 1px solid rgba(142, 136, 130, 0.12);
   border-radius: 16px;
-  transition: border-color 300ms $ease-natural, box-shadow 300ms $ease-natural;
+  transition: border-color 300ms var(--ease-natural), box-shadow 300ms var(--ease-natural);
 
   &:hover {
     border-color: rgba(240, 165, 34, 0.2);
@@ -839,7 +836,7 @@ $section-padding-mobile: 64px 20px;
     background: var(--color-bg-elevated);
     border: 1px solid rgba(142, 136, 130, 0.15);
     border-radius: 12px;
-    transition: border-color 250ms $ease-natural, box-shadow 250ms $ease-natural, transform 250ms $ease-natural;
+    transition: border-color 250ms var(--ease-natural), box-shadow 250ms var(--ease-natural), transform 250ms var(--ease-natural);
 
     &:hover {
       border-color: rgba(240, 165, 34, 0.25);
@@ -897,7 +894,7 @@ $section-padding-mobile: 64px 20px;
   background: var(--color-bg-elevated);
   border: 1px solid rgba(142, 136, 130, 0.12);
   border-radius: 16px;
-  transition: border-color 300ms $ease-natural, box-shadow 300ms $ease-natural;
+  transition: border-color 300ms var(--ease-natural), box-shadow 300ms var(--ease-natural);
 
   &:hover {
     border-color: rgba(240, 165, 34, 0.2);
