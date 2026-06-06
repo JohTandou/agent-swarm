@@ -158,6 +158,7 @@ $section-padding-mobile: 64px 20px;
 .error-state__retry {
   margin-top: 16px;
   padding: 12px 28px;
+  min-height: 44px;
   background: var(--color-accent);
   color: var(--color-bg-primary);
   font-family: var(--font-display);

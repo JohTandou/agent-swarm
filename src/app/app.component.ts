@@ -46,6 +46,9 @@ export class AppComponent implements OnInit, OnDestroy {
   /** Indique si la route courante est la page d'accueil (full-width) */
   readonly isHomepage = signal(false);
 
+  /** État d'ouverture de l'accordéon TOC sur mobile */
+  readonly tocOpen = signal(false);
+
   /** Fil d'Ariane placeholder en attendant le service de routing contextuel */
   readonly breadcrumbs: Breadcrumb[] = [
     { label: 'Accueil', route: '/' },
@@ -89,6 +92,10 @@ export class AppComponent implements OnInit, OnDestroy {
           if (wrapper && !this.animService.isReducedMotion()) {
             this.animService.pageEnter(wrapper);
           }
+
+          // Ferme la sidebar et le TOC à chaque navigation sur mobile
+          this.sidebarOpen.set(false);
+          this.tocOpen.set(false);
         })
     );
 
@@ -176,5 +183,10 @@ export class AppComponent implements OnInit, OnDestroy {
       this.searchOverlayRef = null;
     }
     this.searchService.close();
+  }
+
+  /** Bascule l'accordéon TOC sur mobile */
+  toggleToc(): void {
+    this.tocOpen.update((open) => !open);
   }
 }

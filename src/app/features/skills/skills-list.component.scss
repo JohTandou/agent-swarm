@@ -65,6 +65,7 @@
   align-items: center;
   gap: 6px;
   padding: 8px 16px;
+  min-height: 44px;
   border: 1px solid rgba(142, 136, 130, 0.15);
   border-radius: 8px;
   background: transparent;
@@ -320,6 +321,7 @@
 
 .skills__empty-reset {
   padding: 8px 20px;
+  min-height: 44px;
   border: 1px solid rgba(240, 165, 34, 0.3);
   border-radius: 8px;
   background: transparent;
