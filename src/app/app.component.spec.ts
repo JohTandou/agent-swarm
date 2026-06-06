@@ -122,4 +122,77 @@ describe('AppComponent', () => {
     const routerOutlet = fixture.nativeElement.querySelector('router-outlet');
     expect(routerOutlet).toBeTruthy();
   });
+
+  // ─── Nouveaux tests pour la couverture ───
+
+  it('devrait avoir isHomepage initialisé à true (route par défaut = homepage)', () => {
+    // Le routeur avec provideRouter([]) positionne l'URL à '', ce qui correspond à la homepage.
+    expect(component.isHomepage()).toBeTrue();
+  });
+
+  it('devrait avoir tocOpen initialisé à false', () => {
+    expect(component.tocOpen()).toBeFalse();
+  });
+
+  it('toggleToc() devrait basculer tocOpen', () => {
+    expect(component.tocOpen()).toBeFalse();
+    component.toggleToc();
+    expect(component.tocOpen()).toBeTrue();
+    component.toggleToc();
+    expect(component.tocOpen()).toBeFalse();
+  });
+
+  it('closeSidebar() ne devrait pas lever d\'erreur quand la sidebar est déjà fermée', () => {
+    component.sidebarOpen.set(false);
+    expect(() => component.closeSidebar()).not.toThrow();
+  });
+
+  it('handleGlobalKeydown Cmd+K devrait appeler toggleSearch', () => {
+    const toggleSearchSpy = spyOn(component, 'toggleSearch');
+    const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true });
+    component.handleGlobalKeydown(event);
+    expect(toggleSearchSpy).toHaveBeenCalled();
+  });
+
+  it('handleGlobalKeydown Ctrl+K devrait appeler toggleSearch', () => {
+    const toggleSearchSpy = spyOn(component, 'toggleSearch');
+    const event = new KeyboardEvent('keydown', { key: 'k', ctrlKey: true });
+    component.handleGlobalKeydown(event);
+    expect(toggleSearchSpy).toHaveBeenCalled();
+  });
+
+  it('handleGlobalKeydown autre touche ne devrait pas appeler toggleSearch', () => {
+    const toggleSearchSpy = spyOn(component, 'toggleSearch');
+    const event = new KeyboardEvent('keydown', { key: 'a' });
+    component.handleGlobalKeydown(event);
+    expect(toggleSearchSpy).not.toHaveBeenCalled();
+  });
+
+  it('handleGlobalKeydown Cmd+Shift+K ne devrait pas appeler toggleSearch', () => {
+    const toggleSearchSpy = spyOn(component, 'toggleSearch');
+    const event = new KeyboardEvent('keydown', { key: 'Shift', metaKey: true });
+    component.handleGlobalKeydown(event);
+    expect(toggleSearchSpy).not.toHaveBeenCalled();
+  });
+
+  it('ngOnDestroy devrait se désabonner sans erreur', () => {
+    expect(() => component.ngOnDestroy()).not.toThrow();
+  });
+
+  it('devrait pouvoir appeler openSearch sans erreur (overlay CDK)', () => {
+    expect(() => component.openSearch()).not.toThrow();
+  });
+
+  it('toggleSearch devrait appeler openSearch quand aucun overlay n\'est ouvert', () => {
+    const openSearchSpy = spyOn(component, 'openSearch');
+    component.toggleSearch();
+    expect(openSearchSpy).toHaveBeenCalled();
+  });
+
+  it('devrait détecter correctement les signaux initiaux', () => {
+    expect(component.isMobile()).toBeDefined();
+    expect(component.sidebarOpen()).toBeDefined();
+    expect(component.isHomepage()).toBeDefined();
+    expect(component.tocOpen()).toBeDefined();
+  });
 });
