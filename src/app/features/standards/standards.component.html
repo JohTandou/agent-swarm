@@ -1,0 +1,292 @@
+<!-- ==========================================================================
+     Page Standards — Template Apple-grade
+     4 sections, animations au scroll, dark mode exclusif
+     ========================================================================== -->
+
+<!-- --------------------------------------------------------------------------
+     État : Chargement (shimmer skeleton)
+     -------------------------------------------------------------------------- -->
+@if (loading()) {
+<div class="page-loader" aria-label="Chargement de la page" role="status">
+  <div class="skeleton-hero">
+    <div class="skeleton-line skeleton-line--title"></div>
+    <div class="skeleton-line skeleton-line--subtitle"></div>
+    <div class="skeleton-line skeleton-line--subtitle skeleton-line--short"></div>
+  </div>
+  <div class="skeleton-section">
+    <div class="skeleton-line skeleton-line--heading"></div>
+    <div class="skeleton-grid">
+      @for (i of [1,2,3]; track i) {
+      <div class="skeleton-card">
+        <div class="skeleton-line skeleton-line--card-title"></div>
+        <div class="skeleton-line skeleton-line--text"></div>
+        <div class="skeleton-line skeleton-line--text skeleton-line--short"></div>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}
+
+<!-- --------------------------------------------------------------------------
+     État : Erreur
+     -------------------------------------------------------------------------- -->
+@if (error()) {
+<div class="error-state" role="alert">
+  <div class="error-state__icon">⚠️</div>
+  <h2 class="error-state__title">Impossible de charger la page</h2>
+  <p class="error-state__message">{{ error() }}</p>
+  <button class="error-state__retry" (click)="retry()">Réessayer</button>
+</div>
+}
+
+<!-- --------------------------------------------------------------------------
+     État : Succès — Contenu principal
+     -------------------------------------------------------------------------- -->
+@if (!loading() && !error()) {
+<main class="page">
+
+  <!-- =======================================================================
+       Section 1 — Standards Apple-grade
+       ======================================================================= -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__bg-decor" aria-hidden="true"></div>
+    <div class="hero__content">
+      <span class="hero__kicker reveal-on-scroll">Conventions du projet</span>
+      <h1 id="hero-title" class="hero__title reveal-on-scroll">Standards</h1>
+      <p class="hero__subtitle reveal-on-scroll">
+        La référence unique pour tout contributeur. Palette, typographie, conventions de code,
+        philosophie de test et règles de documentation — chaque décision du projet est documentée ici.
+      </p>
+    </div>
+    <div class="hero__scroll-hint reveal-on-scroll" aria-hidden="true">
+      <span class="hero__scroll-text">Explorer les standards</span>
+      <span class="hero__scroll-arrow">↓</span>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Sous-section 1.1 — Palette de couleurs
+       ======================================================================= -->
+  <section class="palette" aria-labelledby="palette-title">
+    <div class="section__header reveal-on-scroll">
+      <h2 id="palette-title" class="section__title">Palette de couleurs</h2>
+      <p class="section__intro">
+        Six couleurs exclusives en dark mode. Pas de light mode, pas de toggle.
+        Chaque couleur a un rôle précis et immuable.
+      </p>
+    </div>
+
+    <div class="palette__grid">
+      @for (color of paletteColors; track color.variable; let idx = $index) {
+      <article
+        class="palette-swatch reveal-on-scroll"
+        [style.animation-delay.ms]="idx * 80"
+      >
+        <div
+          class="palette-swatch__color"
+          [style.background-color]="color.hex"
+          aria-hidden="true"
+        ></div>
+        <div class="palette-swatch__info">
+          <span class="palette-swatch__name">{{ color.name }}</span>
+          <code class="palette-swatch__hex">{{ color.hex }}</code>
+          <code class="palette-swatch__var">{{ color.variable }}</code>
+          <span class="palette-swatch__usage">{{ color.usage }}</span>
+        </div>
+      </article>
+      }
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Sous-section 1.2 — Typographie
+       ======================================================================= -->
+  <section class="typography" aria-labelledby="typo-title">
+    <div class="section__header reveal-on-scroll">
+      <h2 id="typo-title" class="section__title">Pairing typographique</h2>
+      <p class="section__intro">
+        Cabinet Grotesk pour les titres et la navigation, Satoshi pour le corps de texte.
+        Deux polices gratuites via Fontshare.
+      </p>
+    </div>
+
+    <div class="typo-demo__grid">
+      @for (pair of typoPairs; track pair.font; let idx = $index) {
+      <article
+        class="typo-demo reveal-on-scroll"
+        [style.animation-delay.ms]="idx * 120"
+      >
+        <div class="typo-demo__header">
+          <span class="typo-demo__label">{{ pair.font }}</span>
+          <span class="typo-demo__role">{{ pair.role }}</span>
+          <span class="typo-demo__weight">{{ pair.weight }}</span>
+        </div>
+        <p [class]="pair.cssClass">{{ pair.sample }}</p>
+      </article>
+      }
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Sous-section 1.3 — Système d'élévation
+       ======================================================================= -->
+  <section class="elevation" aria-labelledby="elevation-title">
+    <div class="section__header reveal-on-scroll">
+      <h2 id="elevation-title" class="section__title">Système d'élévation</h2>
+      <p class="section__intro">
+        Quatre niveaux d'élévation dark — glow borders, pas d'ombres portées.
+        Chaque niveau communique la profondeur et la hiérarchie visuelle.
+      </p>
+    </div>
+
+    <div class="elevation__grid">
+      @for (level of elevationLevels; track level.level; let idx = $index) {
+      <article
+        class="elevation-card reveal-on-scroll"
+        [style.animation-delay.ms]="idx * 100"
+        [class]="'elevation-card--' + level.level.toLowerCase()"
+      >
+        <div class="elevation-card__badge">{{ level.level }}</div>
+        <h3 class="elevation-card__name">{{ level.name }}</h3>
+        <dl class="elevation-card__specs">
+          <dt>Fond</dt>
+          <dd><code>{{ level.background }}</code></dd>
+          <dt>Bordure</dt>
+          <dd><code>{{ level.border }}</code></dd>
+          <dt>Ombre / Effet</dt>
+          <dd><code>{{ level.shadow }}</code></dd>
+        </dl>
+      </article>
+      }
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Sous-section 1.4 — Vocabulaire d'animation
+       ======================================================================= -->
+  <section class="animations" aria-labelledby="anim-title">
+    <div class="section__header reveal-on-scroll">
+      <h2 id="anim-title" class="section__title">Vocabulaire d'animation</h2>
+      <p class="section__intro">
+        Des transitions calibrées pour chaque contexte. Durées, easings et propriétés
+        standardisés pour une cohérence parfaite.
+      </p>
+    </div>
+
+    <div class="animations__table-wrapper reveal-on-scroll">
+      <table class="animations__table" role="table">
+        <thead>
+          <tr>
+            <th scope="col">Contexte</th>
+            <th scope="col">Propriétés</th>
+            <th scope="col">Durée</th>
+            <th scope="col">Easing</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (entry of animationVocabulary; track entry.context) {
+          <tr>
+            <td class="animations__cell-name">{{ entry.context }}</td>
+            <td><code>{{ entry.properties }}</code></td>
+            <td class="animations__cell-mono">{{ entry.duration }}</td>
+            <td><code class="animations__cell-easing">{{ entry.easing }}</code></td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 2 — Conventions de code
+       ======================================================================= -->
+  <section class="conventions" aria-labelledby="conventions-title">
+    <div class="section__header reveal-on-scroll">
+      <h2 id="conventions-title" class="section__title">Conventions de code</h2>
+      <p class="section__intro">
+        Règles strictes qui garantissent un codebase homogène, lisible et maintenable.
+        Appliquées par tous les agents, sans exception.
+      </p>
+    </div>
+
+    <div class="conventions__grid">
+      @for (conv of codeConventions; track conv.title; let idx = $index) {
+      <article
+        class="convention-card reveal-on-scroll"
+        [style.animation-delay.ms]="idx * 80"
+      >
+        <h3 class="convention-card__title">{{ conv.title }}</h3>
+        <p class="convention-card__description">{{ conv.description }}</p>
+        <div class="convention-card__examples">
+          @for (ex of conv.examples; track ex) {
+          <code class="convention-card__code">{{ ex }}</code>
+          }
+        </div>
+      </article>
+      }
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 3 — Philosophie de test
+       ======================================================================= -->
+  <section class="testing" aria-labelledby="testing-title">
+    <div class="section__header reveal-on-scroll">
+      <h2 id="testing-title" class="section__title">Philosophie de test</h2>
+      <p class="section__intro">
+        Tester n'est pas optionnel. Chaque ligne de code livrée est couverte,
+        vérifiée et documentée par des tests automatisés.
+      </p>
+    </div>
+
+    <div class="testing__grid">
+      @for (principle of testPrinciples; track principle.title; let idx = $index) {
+      <article
+        class="test-card reveal-on-scroll"
+        [style.animation-delay.ms]="idx * 80"
+      >
+        <h3 class="test-card__title">{{ principle.title }}</h3>
+        <p class="test-card__description">{{ principle.description }}</p>
+      </article>
+      }
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 4 — Documentation
+       ======================================================================= -->
+  <section class="documentation" aria-labelledby="docs-title">
+    <div class="section__header reveal-on-scroll">
+      <h2 id="docs-title" class="section__title">Documentation</h2>
+      <p class="section__intro">
+        La documentation n'est pas une corvée de fin de sprint. Elle est générée
+        automatiquement, toujours à jour, toujours synchronisée avec le code.
+      </p>
+    </div>
+
+    <div class="documentation__grid">
+      @for (doc of docResources; track doc.title; let idx = $index) {
+      <article
+        class="doc-card reveal-on-scroll"
+        [style.animation-delay.ms]="idx * 80"
+      >
+        <h3 class="doc-card__title">{{ doc.title }}</h3>
+        <p class="doc-card__description">{{ doc.description }}</p>
+      </article>
+      }
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Footer de page
+       ======================================================================= -->
+  <footer class="page-footer" aria-label="Pied de page">
+    <p class="page-footer__text">
+      Ces standards sont le socle de chaque décision du Swarm. Chaque agent,
+      chaque composant, chaque ligne de code s'y conforme — sans exception.
+    </p>
+  </footer>
+
+</main>
+}
