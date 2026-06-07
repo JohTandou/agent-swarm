@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Design System — Variantes de boutons
+   5 variantes : primary, secondary, outline, ghost, destructive
+   États gérés : default, hover, focus-visible, active, disabled
+   ========================================================================== */
+
+/* Classe de base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 200ms var(--ease-out-expo);
+  user-select: none;
+  white-space: nowrap;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+    transition: transform 100ms ease-in-out;
+  }
+}
+
+/* Primary — fond accent */
+.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.1);
+    box-shadow: 0 0 20px rgba(240, 165, 34, 0.25);
+  }
+}
+
+/* Secondary — border accent, fond transparent */
+.btn-secondary {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+
+  &:hover:not(:disabled) {
+    background: rgba(240, 165, 34, 0.08);
+    box-shadow: 0 0 12px rgba(240, 165, 34, 0.06);
+  }
+}
+
+/* Outline — border neutre */
+.btn-outline {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid rgba(142, 136, 130, 0.25);
+
+  &:hover:not(:disabled) {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    box-shadow: 0 0 12px rgba(240, 165, 34, 0.06);
+  }
+}
+
+/* Ghost — sans bordure visible */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+
+  &:hover:not(:disabled) {
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+  }
+}
+
+/* Destructive — fond erreur */
+.btn-destructive {
+  background: var(--color-error);
+  color: var(--color-text-primary);
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.1);
+    box-shadow: 0 0 16px rgba(232, 93, 108, 0.25);
+  }
+}
