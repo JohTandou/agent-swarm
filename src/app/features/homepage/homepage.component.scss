@@ -29,6 +29,59 @@
   text-align: center;
 }
 
+/* Décor de fond parallaxe — couches multiples */
+.homepage__hero-decor {
+  position: absolute;
+  pointer-events: none;
+
+  /* Couche lointaine — grand blob radial subtil */
+  &--far {
+    top: -10%;
+    left: -10%;
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(
+      ellipse at 30% 40%,
+      rgba(142, 136, 130, 0.06) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  /* Couche milieu — cercle avec glow ambré */
+  &--mid {
+    top: 20%;
+    right: -5%;
+    width: 40%;
+    height: 60%;
+    background: radial-gradient(
+      circle at 60% 30%,
+      rgba(240, 165, 34, 0.05) 0%,
+      rgba(240, 165, 34, 0.015) 40%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  /* Couche proche — petite forme géométrique accentuée */
+  &--near {
+    bottom: 5%;
+    left: 5%;
+    width: 25%;
+    height: 35%;
+    background: radial-gradient(
+      ellipse at 40% 60%,
+      rgba(240, 165, 34, 0.08) 0%,
+      rgba(142, 136, 130, 0.04) 35%,
+      transparent 65%
+    );
+    border-radius: 40% 60% 60% 40% / 50% 50% 60% 60%;
+    opacity: 0.7;
+  }
+}
+
 .homepage__hero-content {
   max-width: 860px;
   display: flex;

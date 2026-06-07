@@ -162,20 +162,29 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
           );
         }
 
-        // Parallaxe sur le décor d'arrière-plan
-        const bgDecor = document.querySelector('.homepage__hero-decor') as HTMLElement;
-        if (bgDecor) {
-          const { ScrollTrigger } = await this.animService.initGsap();
-          gsap.to(bgDecor, {
-            y: 60,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: bgDecor,
-              start: 'top top',
-              end: 'bottom top',
-              scrub: true,
-            },
-          });
+        // Parallaxe multi-couches — 3 vitesses différentes
+        const { ScrollTrigger } = await this.animService.initGsap();
+        
+        const parallaxLayers = [
+          { selector: '.homepage__hero-decor--far', y: 80 },
+          { selector: '.homepage__hero-decor--mid', y: 120 },
+          { selector: '.homepage__hero-decor--near', y: 200 },
+        ] as const;
+
+        for (const layer of parallaxLayers) {
+          const el = document.querySelector(layer.selector) as HTMLElement;
+          if (el) {
+            gsap.to(el, {
+              y: layer.y,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: el,
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true,
+              },
+            });
+          }
         }
       } catch {
         // GSAP non disponible — l'animation CSS de fallback reste active

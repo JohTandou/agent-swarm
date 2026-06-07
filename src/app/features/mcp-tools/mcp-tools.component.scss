@@ -25,6 +25,11 @@ $transition-hover: 250ms;
     flex-direction: column;
     gap: 24px;
   }
+
+  /* Wrapper de contenu — animation d'entrée au changement de catégorie */
+  &__content {
+    animation: fadeSlideIn 300ms var(--ease-natural) both;
+  }
 }
 
 .mcp-skeleton {
@@ -372,7 +377,7 @@ $transition-hover: 250ms;
   }
 
   &__tool-name {
-    font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+    font-family: var(--font-body);
     font-size: 0.8125rem;
     color: var(--color-accent);
     background: rgba(240, 165, 34, 0.06);
@@ -384,7 +389,7 @@ $transition-hover: 250ms;
   &__param-badge {
     display: inline-flex;
     align-items: center;
-    font-family: "SF Mono", "Fira Code", monospace;
+    font-family: var(--font-body);
     font-size: 0.6875rem;
     color: var(--color-text-secondary);
     background: var(--color-bg-subtle);
@@ -452,7 +457,7 @@ $transition-hover: 250ms;
     padding: 20px 24px;
     margin: 0;
     overflow-x: auto;
-    font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+    font-family: var(--font-body);
     font-size: 0.8125rem;
     line-height: 1.7;
     color: var(--color-text-secondary);
@@ -643,7 +648,7 @@ $transition-hover: 250ms;
     border-radius: 10px;
     padding: 20px 24px;
     margin: 0;
-    font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+    font-family: var(--font-body);
     font-size: 0.8125rem;
     line-height: 1.7;
     color: var(--color-text-primary);

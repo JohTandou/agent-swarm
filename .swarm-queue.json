@@ -18,7 +18,8 @@
       "title": "Sprint 1 — Design System Foundations",
       "body": "Fondations du design system :\n1. Créer _buttons.scss avec 5 variantes (primary, secondary, outline, ghost, destructive)\n2. Styler :disabled globalement dans styles.css\n3. Ajouter tokens CSS sémantiques (--color-success, --color-error, --color-warning, --color-info) dans styles.css\n4. Ajouter safe-area-inset-* dans styles.css\n5. Ajouter @media (forced-colors: active) dans styles.css\n6. Améliorer :focus-visible avec ring personnalisé\n7. Implémenter ErrorHandler Angular global dans app.config.ts\n\nCritères : boutons avec variantes fonctionnelles, disabled visible, tokens sémantiques définis, forced-colors supporté, ErrorHandler actif.",
       "route": "MEDIUM",
-      "status": "in_progress",
+      "status": "done",
+      "pr_url": "https://github.com/JohTandou/swarm-wiki/pull/44",
       "issue_number": 43,
       "branch": "feature/swarm-sprint1-foundations"
     },
@@ -27,7 +28,9 @@
       "title": "Sprint 2 — Polish & Bento Grid",
       "body": "Polish visuel et bento grid :\n1. Activer le bento grid sur agents-list (1 carte vedette grid-column: span 2)\n2. Activer le bento grid sur skills-list (1 carte vedette grid-column: span 2)\n3. Ajouter parallaxe multi-couches sur la homepage\n4. Ajouter transitions entre catégories MCP tools\n5. Remplacer 'SF Mono'/'Fira Code' par var(--font-body) dans mcp-tools.scss\n\nCritères : grilles asymétriques visibles, parallaxe enrichie, polices cohérentes.",
       "route": "MEDIUM",
-      "status": "pending"
+      "status": "in_progress",
+      "issue_number": 45,
+      "branch": "feature/swarm-sprint2-polish"
     },
     {
       "id": "4",
@@ -37,5 +40,5 @@
       "status": "pending"
     }
   ],
-  "current_index": 1
+  "current_index": 2
 }
