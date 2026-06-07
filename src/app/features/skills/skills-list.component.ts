@@ -95,16 +95,6 @@ export class SkillsListComponent {
     return CATEGORY_LABELS[category];
   }
 
-  /** Détermine si une carte doit être "featured" (grand format) dans la grille */
-  isFeatured(skill: Skill): boolean {
-    return skill.id === 'ui-ux-pro-max';
-  }
-
-  /** Détermine si une carte doit être "wide" (large format) dans la grille */
-  isWide(skill: Skill): boolean {
-    return skill.id === 'tests-create';
-  }
-
   /** Retourne le nombre de skills dans une catégorie donnée */
   getCategoryCount(category: SkillCategory): number {
     return this.skills.filter((s) => s.category === category).length;

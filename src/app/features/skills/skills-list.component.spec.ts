@@ -63,9 +63,10 @@ describe('SkillsListComponent', () => {
     expect(component.filteredSkills().length).toBe(3);
   });
 
-  it('devrait identifier la carte featured (UI/UX Pro Max)', () => {
-    const featured = component.skills.find((s) => component.isFeatured(s));
-    expect(featured?.id).toBe('ui-ux-pro-max');
+  it('la première carte devrait avoir la classe --featured', () => {
+    const firstCard = fixture.nativeElement.querySelector('.skills__card');
+    expect(firstCard).toBeTruthy();
+    expect(firstCard.classList.contains('skills__card--featured')).toBeTrue();
   });
 
   it('devrait retourner le label de catégorie', () => {
