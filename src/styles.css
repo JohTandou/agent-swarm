@@ -71,10 +71,10 @@
   --sidebar-width: 280px;
   --toc-width: 220px;
   --content-max-width: 860px;
-
   /* Safe areas iOS */
   --safe-area-inset-top: env(safe-area-inset-top, 0px);
   --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: dark;
 }
 
 /* --------------------------------------------------------------------------
@@ -94,6 +94,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 body {
@@ -185,6 +187,19 @@ a:hover {
 
 .skip-to-content:focus {
   top: 8px;
+}
+
+/* Screen-reader only — visible uniquement pour les lecteurs d'écran */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* --------------------------------------------------------------------------

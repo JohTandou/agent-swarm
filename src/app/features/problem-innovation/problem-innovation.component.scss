@@ -395,7 +395,8 @@ $section-padding-mobile: 64px 20px;
 }
 
 .comparison-card__col--before .comparison-card__col-label {
-  color: #D4A855;
+  color: var(--color-accent);
+  opacity: 0.85;
 }
 
 .comparison-card__col--after .comparison-card__col-label {
