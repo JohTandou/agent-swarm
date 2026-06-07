@@ -8,7 +8,8 @@
       "title": "Sprint 0 — Quick Wins (audit UX/UI)",
       "body": "5 corrections rapides issues de l'audit UX/UI :\n1. Ajouter font-weight 600 au CDN Fontshare (index.html)\n2. Remplacer #D4A855 par var(--color-accent) avec opacité (problem-innovation.scss:398)\n3. Ajouter color-scheme: dark sur :root (styles.css)\n4. Ajouter -webkit-tap-highlight-color + touch-action globaux (styles.css)\n5. Créer classe .sr-only (styles.css)\n\nCritères : index.html CDN mis à jour, plus aucune couleur hors palette, styles.css enrichi.",
       "route": "ADAPT",
-      "status": "in_progress",
+      "status": "done",
+      "pr_url": "https://github.com/JohTandou/swarm-wiki/pull/42",
       "issue_number": 41,
       "branch": "feature/swarm-sprint0-quick-wins"
     },
@@ -17,7 +18,9 @@
       "title": "Sprint 1 — Design System Foundations",
       "body": "Fondations du design system :\n1. Créer _buttons.scss avec 5 variantes (primary, secondary, outline, ghost, destructive)\n2. Styler :disabled globalement dans styles.css\n3. Ajouter tokens CSS sémantiques (--color-success, --color-error, --color-warning, --color-info) dans styles.css\n4. Ajouter safe-area-inset-* dans styles.css\n5. Ajouter @media (forced-colors: active) dans styles.css\n6. Améliorer :focus-visible avec ring personnalisé\n7. Implémenter ErrorHandler Angular global dans app.config.ts\n\nCritères : boutons avec variantes fonctionnelles, disabled visible, tokens sémantiques définis, forced-colors supporté, ErrorHandler actif.",
       "route": "MEDIUM",
-      "status": "pending"
+      "status": "in_progress",
+      "issue_number": 43,
+      "branch": "feature/swarm-sprint1-foundations"
     },
     {
       "id": "3",
@@ -34,5 +37,5 @@
       "status": "pending"
     }
   ],
-  "current_index": 0
+  "current_index": 1
 }
