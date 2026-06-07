@@ -48,6 +48,7 @@ export class SidebarComponent {
       ],
     },
     { label: 'Workflow', route: '/workflow' },
+    { label: 'Écosystème', route: '/ecosysteme' },
     { label: 'Standards', route: '/normes' },
     {
       label: 'Outils MCP',

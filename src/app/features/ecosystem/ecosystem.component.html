@@ -1,0 +1,228 @@
+<!-- ==========================================================================
+     Page Écosystème — 5 sections Apple-grade
+     Palette 6 couleurs exclusive, dark mode, Cabinet Grotesk + Satoshi
+     ========================================================================== -->
+
+<!-- ======================================================================
+     État : Chargement (shimmer skeleton)
+     ====================================================================== -->
+@if (loading()) {
+  <div class="page-loader">
+    <div class="skeleton-hero">
+      <div class="skeleton-line skeleton-line--title"></div>
+      <div class="skeleton-line skeleton-line--subtitle"></div>
+      <div class="skeleton-line skeleton-line--subtitle skeleton-line--subtitle--short"></div>
+    </div>
+    <div class="skeleton-section">
+      <div class="skeleton-line skeleton-line--heading"></div>
+      <div class="skeleton-line skeleton-line--text"></div>
+      <div class="skeleton-tree">
+        <div class="skeleton-node">
+          <div class="skeleton-line skeleton-line--node-title"></div>
+          <div class="skeleton-line skeleton-line--text"></div>
+        </div>
+        <div class="skeleton-node">
+          <div class="skeleton-line skeleton-line--node-title"></div>
+          <div class="skeleton-line skeleton-line--text"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ======================================================================
+     État : Erreur
+     ====================================================================== -->
+@if (error()) {
+  <div class="error-state">
+    <span class="error-state__icon">⚠️</span>
+    <h2 class="error-state__title">Une erreur est survenue</h2>
+    <p class="error-state__message">{{ error() }}</p>
+    <button class="error-state__retry" (click)="retry()">Réessayer</button>
+  </div>
+}
+
+<!-- ======================================================================
+     Contenu principal
+     ====================================================================== -->
+@if (!loading() && !error()) {
+  <main class="page">
+
+    <!-- ================================================================
+         Section 1 — Hero
+         ================================================================ -->
+    <section class="hero reveal-on-scroll">
+      <div class="hero__bg-decor"></div>
+      <div class="hero__content">
+        <span class="hero__kicker">Infrastructure</span>
+        <h1 class="hero__title">{{ heroTitle }}</h1>
+        <p class="hero__subtitle">{{ heroSubtitle }}</p>
+        <div class="hero__stats">
+          <div class="hero__stat reveal-on-scroll" style="animation-delay: 150ms;">
+            <span class="hero__stat-value">8</span>
+            <span class="hero__stat-label">Fichiers de<br/>configuration</span>
+          </div>
+          <div class="hero__stat-divider"></div>
+          <div class="hero__stat reveal-on-scroll" style="animation-delay: 250ms;">
+            <span class="hero__stat-value">26</span>
+            <span class="hero__stat-label">Skills<br/>spécialisées</span>
+          </div>
+          <div class="hero__stat-divider"></div>
+          <div class="hero__stat reveal-on-scroll" style="animation-delay: 350ms;">
+            <span class="hero__stat-value">9</span>
+            <span class="hero__stat-label">Agents<br/>spécialisés</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero__scroll-hint">
+        <span class="hero__scroll-text">Explorer</span>
+        <span class="hero__scroll-arrow">↓</span>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         Section 2 — Structure .opencode/
+         ================================================================ -->
+    <section class="directory-section reveal-on-scroll" id="structure">
+      <div class="section-header">
+        <span class="section-header__kicker">Architecture</span>
+        <h2 class="section-header__title">Structure .opencode/</h2>
+        <p class="section-header__description">
+          Le répertoire racine contient l'intégralité de la configuration du Swarm. Chaque fichier et dossier a un rôle précis dans l'orchestration du pipeline de développement.
+        </p>
+      </div>
+
+      <div class="tree-container">
+        @for (entry of directoryTree; track entry.name; let i = $index) {
+          <div class="dir-card reveal-on-scroll" [style.animation-delay]="(i * 60) + 'ms'">
+            <div class="dir-card__header">
+              <span class="dir-card__icon">{{ entry.icon }}</span>
+              <span class="dir-card__name">{{ entry.name }}</span>
+              @if (entry.badge) {
+                <span class="dir-card__badge">{{ entry.badge }}</span>
+              }
+            </div>
+            <p class="dir-card__description">{{ entry.description }}</p>
+
+            @if (entry.children) {
+              <div class="dir-card__children">
+                @for (child of entry.children; track child.name; let ci = $index) {
+                  <div class="dir-card__child" [style.animation-delay]="(ci * 40) + 'ms'">
+                    <span class="dir-card__child-icon">{{ child.icon }}</span>
+                    <div class="dir-card__child-content">
+                      <span class="dir-card__child-name">{{ child.name }}</span>
+                      <span class="dir-card__child-desc">{{ child.description }}</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- ================================================================
+         Section 3 — swarm-workflow.json décortiqué
+         ================================================================ -->
+    <section class="config-section reveal-on-scroll" id="workflow-config">
+      <div class="section-header">
+        <span class="section-header__kicker">Configuration</span>
+        <h2 class="section-header__title">swarm-workflow.json</h2>
+        <p class="section-header__description">
+          Le fichier JSON central qui pilote l'ensemble du comportement du Swarm. Chaque paramètre contrôle un aspect précis à travers 4 catégories.
+        </p>
+      </div>
+
+      <div class="config-grid">
+        @for (category of workflowCategories; track category.name; let ci = $index) {
+          <div class="config-category reveal-on-scroll" [style.animation-delay]="(ci * 80) + 'ms'">
+            <div class="config-category__header">
+              <span class="config-category__icon">{{ category.icon }}</span>
+              <div class="config-category__titles">
+                <h3 class="config-category__name">{{ category.name }}</h3>
+                <p class="config-category__desc">{{ category.description }}</p>
+              </div>
+            </div>
+
+            <div class="config-fields">
+              @for (field of category.fields; track field.path; let fi = $index) {
+                <div class="config-field reveal-on-scroll" [style.animation-delay]="(fi * 30) + 'ms'">
+                  <div class="config-field__row">
+                    <span class="config-field__label">{{ field.label }}</span>
+                    <span class="config-field__value config-field__value--{{ field.type }}">{{ field.value }}</span>
+                  </div>
+                  <p class="config-field__desc">{{ field.description }}</p>
+                  <code class="config-field__path">{{ field.path }}</code>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- ================================================================
+         Section 4 — AGENTS.md
+         ================================================================ -->
+    <section class="agentsmd-section reveal-on-scroll" id="agents-md">
+      <div class="section-header">
+        <span class="section-header__kicker">Documentation vivante</span>
+        <h2 class="section-header__title">AGENTS.md — Les Sections</h2>
+        <p class="section-header__description">
+          Le fichier AGENTS.md est la bible du projet. Ses 10 sections couvrent l'intégralité des conventions, de la stack technique à la checklist de livraison.
+        </p>
+      </div>
+
+      <div class="agentsmd-grid">
+        @for (section of agentsMdSections; track section.title; let si = $index) {
+          <div class="agentsmd-card reveal-on-scroll" [style.animation-delay]="(si * 50) + 'ms'">
+            <div class="agentsmd-card__header">
+              <span class="agentsmd-card__icon">{{ section.icon }}</span>
+              <h3 class="agentsmd-card__title">{{ section.title }}</h3>
+            </div>
+            <p class="agentsmd-card__description">{{ section.description }}</p>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- ================================================================
+         Section 5 — Architecture Globale
+         ================================================================ -->
+    <section class="architecture-section reveal-on-scroll" id="architecture">
+      <div class="section-header">
+        <span class="section-header__kicker">Vue d'ensemble</span>
+        <h2 class="section-header__title">Architecture Globale</h2>
+        <p class="section-header__description">
+          Le diagramme ci-dessous illustre l'ensemble du pipeline : de l'IDE aux intégrations MCP, en passant par les agents, les gates qualité et la documentation.
+        </p>
+      </div>
+
+      <div class="mermaid-wrapper">
+        <app-markdown-renderer [content]="mermaidDiagram" [enableMermaid]="true"></app-markdown-renderer>
+      </div>
+
+      <div class="integrations-grid">
+        @for (integration of integrations; track integration.name; let ii = $index) {
+          <div class="integration-card reveal-on-scroll" [style.animation-delay]="(ii * 80) + 'ms'">
+            <div class="integration-card__header">
+              <span class="integration-card__icon">{{ integration.icon }}</span>
+              <div class="integration-card__titles">
+                <h3 class="integration-card__name">{{ integration.name }}</h3>
+                <span class="integration-card__provider">{{ integration.provider }}</span>
+              </div>
+            </div>
+            <p class="integration-card__description">{{ integration.description }}</p>
+            <ul class="integration-card__features">
+              @for (feature of integration.features; track feature) {
+                <li class="integration-card__feature">{{ feature }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    </section>
+
+  </main>
+}

@@ -104,6 +104,27 @@ Ces règles s'appliquent à TOUS les agents, TOUTES les routes, SANS exception. 
 | MEDIUM | `tester PASS` + `reviewer APPROVE` | Oui si nouvelle feature |
 | FULL | `tester PASS` + `reviewer APPROVE` | Oui |
 
+#### 2.5.1 Garde-fou .agent-memory.json
+
+Pour empêcher qu'un humain contourne les gates en appelant `gh pr merge` directement,
+`finish.ts` vérifie l'existence des flags `tester_pass` et `reviewer_approved` dans
+`.agent-memory.json` avant de créer la PR.
+
+L'orchestrateur écrit ces flags **incrémentalement** après chaque gate :
+
+| Après | Flag écrit | Condition |
+|-------|-----------|-----------|
+| `tester` PASS | `tester_pass: true` | Toutes routes sauf DIRECT |
+| `reviewer` APPROVE | `reviewer_approved: true` | Routes MEDIUM et FULL uniquement |
+
+**finish.ts lit le dernier run de `.agent-memory.json` et bloque si :**
+- Route SIMPLE/ADAPT : `tester_pass` absent → **BLOCKED** ⛔
+- Route MEDIUM/FULL : `tester_pass` ou `reviewer_approved` absent → **BLOCKED** ⛔
+- Route DIRECT : aucune vérification → ✅
+
+L'appel à finish.ts inclut désormais la route en 4ᵉ argument :
+`npx tsx finish.ts "Titre" "Body" "MEDIUM"`
+
 **Règles :**
 
 1. **Le merge passe TOUJOURS par `finish.ts`.** L'orchestrateur ne fait JAMAIS `gh pr merge` directement. Si `finish.ts` échoue (build, tests, E2E) → max 2 retries → si toujours échec → **BLOCKED**. La tâche reste `in_progress`, pas de merge.

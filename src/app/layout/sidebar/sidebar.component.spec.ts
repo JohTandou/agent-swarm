@@ -35,8 +35,8 @@ describe('SidebarComponent', () => {
     component.isMobile = false;
     fixture.detectChanges();
     const items = fixture.nativeElement.querySelectorAll('.sidebar__item');
-    // Accueil, À propos, Agents (parent), Skills (parent), Workflow, Standards, Outils MCP (parent) = 7 top-level
-    expect(items.length).toBe(7);
+    // Accueil, À propos, Agents (parent), Skills (parent), Workflow, Écosystème, Standards, Outils MCP (parent) = 8 top-level
+    expect(items.length).toBe(8);
   });
 
   it('devrait masquer le bouton close quand isMobile est false', () => {
