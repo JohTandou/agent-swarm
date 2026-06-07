@@ -61,7 +61,8 @@
             "styles": [
               "src/styles.css",
               "src/styles/animations.scss",
-              "src/styles/prism-theme.css"
+              "src/styles/prism-theme.css",
+              "src/styles/_buttons.scss"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
@@ -132,7 +133,8 @@
             "styles": [
               "src/styles.css",
               "src/styles/animations.scss",
-              "src/styles/prism-theme.css"
+              "src/styles/prism-theme.css",
+              "src/styles/_buttons.scss"
             ],
             "scripts": []
           }

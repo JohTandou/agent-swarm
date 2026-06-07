@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { routes } from './app.routes';
 
 describe('AppRoutes', () => {
-  it('devrait avoir 8 routes définies', () => {
-    expect(routes.length).toBe(10);
+  it('devrait avoir 11 routes définies', () => {
+    expect(routes.length).toBe(11);
   });
 
   it('devrait avoir une route racine avec lazy loading vers homepage', () => {
@@ -38,6 +38,13 @@ describe('AppRoutes', () => {
     const wildcardRoute = routes.find((r) => r.path === '**');
     expect(wildcardRoute).toBeTruthy();
     expect(wildcardRoute?.redirectTo).toBe('');
+  });
+
+  it('devrait avoir une route /normes avec lazy loading vers standards', () => {
+    const standardsRoute = routes.find((r) => r.path === 'normes');
+    expect(standardsRoute).toBeTruthy();
+    expect(standardsRoute?.loadChildren).toBeDefined();
+    expect(typeof standardsRoute?.loadChildren).toBe('function');
   });
 
   it('la fonction lazy load de la route racine devrait retourner une promesse', () => {

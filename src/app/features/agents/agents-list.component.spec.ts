@@ -118,26 +118,18 @@ describe('AgentsListComponent', () => {
     expect(component.getRouteColor('INCONNUE')).toBe('#8E8882'); // fallback
   });
 
-  // TEST 11: isFeatured devrait retourner true pour orchestrateur et contract
-  it('isFeatured devrait identifier les agents "featured"', () => {
-    const orchestrateur = component.agents.find(a => a.id === 'orchestrateur')!;
-    const contract = component.agents.find(a => a.id === 'contract')!;
-    const front = component.agents.find(a => a.id === 'front')!;
-    
-    expect(component.isFeatured(orchestrateur)).toBeTrue();
-    expect(component.isFeatured(contract)).toBeTrue();
-    expect(component.isFeatured(front)).toBeFalse();
+  // TEST 11: la première carte devrait avoir la classe featured (bento grid)
+  it('la première carte devrait avoir la classe --featured', () => {
+    const firstCard = fixture.nativeElement.querySelector('.agents__card');
+    expect(firstCard).toBeTruthy();
+    expect(firstCard.classList.contains('agents__card--featured')).toBeTrue();
   });
 
-  // TEST 12: isWide devrait retourner true pour front et tester
-  it('isWide devrait identifier les agents "wide"', () => {
-    const front = component.agents.find(a => a.id === 'front')!;
-    const tester = component.agents.find(a => a.id === 'tester')!;
-    const orchestrateur = component.agents.find(a => a.id === 'orchestrateur')!;
-    
-    expect(component.isWide(front)).toBeTrue();
-    expect(component.isWide(tester)).toBeTrue();
-    expect(component.isWide(orchestrateur)).toBeFalse();
+  // TEST 12: la troisième carte devrait avoir la classe wide (bento grid)
+  it('la troisième carte devrait avoir la classe --wide', () => {
+    const cards = fixture.nativeElement.querySelectorAll('.agents__card');
+    expect(cards.length).toBeGreaterThanOrEqual(3);
+    expect(cards[2].classList.contains('agents__card--wide')).toBeTrue();
   });
 
   // TEST 13: devrait marquer l'agent back comme inactif

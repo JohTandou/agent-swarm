@@ -35,12 +35,12 @@
 
   <!-- Grille bento -->
   <div class="skills__grid" role="list" aria-label="Liste des skills Swarm">
-    @for (skill of filteredSkills(); track skill.id) {
+    @for (skill of filteredSkills(); track skill.id; let idx = $index) {
       <a
         [routerLink]="['/skills', skill.id]"
         class="skills__card"
-        [class.skills__card--featured]="isFeatured(skill)"
-        [class.skills__card--wide]="isWide(skill)"
+        [class.skills__card--featured]="idx === 0"
+        [class.skills__card--wide]="idx === 2"
         role="listitem"
         [attr.aria-label]="'Fiche de ' + skill.name"
         [attr.data-category]="skill.category"

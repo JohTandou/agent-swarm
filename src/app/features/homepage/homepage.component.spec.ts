@@ -104,7 +104,7 @@ describe('HomepageComponent', () => {
     expect(routes).toContain('/agents');
     expect(routes).toContain('/workflow');
     expect(routes).toContain('/skills');
-    expect(routes).toContain('/ecosysteme');
+    expect(routes).toContain('/outils-mcp');
   });
 
   it('devrait afficher les titres des cartes de navigation', () => {
@@ -113,7 +113,7 @@ describe('HomepageComponent', () => {
     expect(titleTexts).toContain('Agents');
     expect(titleTexts).toContain('Workflow');
     expect(titleTexts).toContain('Skills');
-    expect(titleTexts).toContain('Écosystème');
+    expect(titleTexts).toContain('Outils MCP');
   });
 
   /* ── Footer ── */

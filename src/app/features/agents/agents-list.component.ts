@@ -203,16 +203,6 @@ export class AgentsListComponent {
     return ROUTE_COLORS[route] ?? '#8E8882';
   }
 
-  /** Détermine si une carte doit être "featured" (grand format) dans la grille */
-  isFeatured(agent: Agent): boolean {
-    return agent.id === 'orchestrateur' || agent.id === 'contract';
-  }
-
-  /** Détermine si une carte doit être "wide" (large format) dans la grille */
-  isWide(agent: Agent): boolean {
-    return agent.id === 'front' || agent.id === 'tester';
-  }
-
   /** Retourne le nombre d'agents dans une catégorie donnée */
   getCategoryCount(category: AgentCategory): number {
     return this.agents.filter((a) => a.category === category).length;

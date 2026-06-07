@@ -1,17 +1,24 @@
-import { Component, signal, OnInit, OnDestroy } from '@angular/core';
-import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { Component, signal, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { RouterOutlet, Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { Subscription, filter } from 'rxjs';
 import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component';
 import { TableOfContentsComponent } from './shared/components/table-of-contents/table-of-contents.component';
+import { SearchModalComponent } from './shared/components/search-modal/search-modal.component';
+import { SearchService } from './shared/services/search.service';
+import { AnimationService } from './shared/services/animation.service';
 import type { Breadcrumb } from '@shared/models';
+import type { SearchResult } from '@shared/models';
 
 /**
  * Composant racine — Shell applicatif.
  * Gère le layout responsive (3 colonnes desktop, 1 colonne mobile),
- * l'état de la sidebar, et le mode plein écran pour la page d'accueil.
+ * l'état de la sidebar, le mode plein écran pour la page d'accueil,
+ * et les transitions de page GSAP.
  */
 @Component({
   selector: 'app-root',
@@ -27,6 +34,9 @@ import type { Breadcrumb } from '@shared/models';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
+  @ViewChild('pageWrapper', { static: false })
+  pageWrapperRef?: ElementRef<HTMLElement>;
+
   /** Détection mobile via BreakpointObserver CDK */
   readonly isMobile = signal(false);
 
@@ -36,6 +46,9 @@ export class AppComponent implements OnInit, OnDestroy {
   /** Indique si la route courante est la page d'accueil (full-width) */
   readonly isHomepage = signal(false);
 
+  /** État d'ouverture de l'accordéon TOC sur mobile */
+  readonly tocOpen = signal(false);
+
   /** Fil d'Ariane placeholder en attendant le service de routing contextuel */
   readonly breadcrumbs: Breadcrumb[] = [
     { label: 'Accueil', route: '/' },
@@ -44,9 +57,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private subscriptions = new Subscription();
 
+  private searchOverlayRef: OverlayRef | null = null;
+
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private router: Router
+    private router: Router,
+    private overlay: Overlay,
+    private searchService: SearchService,
+    private animService: AnimationService,
   ) {
     this.subscriptions.add(
       this.breakpointObserver
@@ -68,6 +86,28 @@ export class AppComponent implements OnInit, OnDestroy {
         .subscribe((e) => {
           const url = (e as NavigationEnd).urlAfterRedirects;
           this.isHomepage.set(url === '/' || url === '');
+
+          // Animation d'entrée de page
+          const wrapper = this.pageWrapperRef?.nativeElement;
+          if (wrapper && !this.animService.isReducedMotion()) {
+            this.animService.pageEnter(wrapper);
+          }
+
+          // Ferme la sidebar et le TOC à chaque navigation sur mobile
+          this.sidebarOpen.set(false);
+          this.tocOpen.set(false);
+        })
+    );
+
+    // Animation de sortie de page
+    this.subscriptions.add(
+      this.router.events
+        .pipe(filter((e) => e instanceof NavigationStart))
+        .subscribe(() => {
+          const wrapper = this.pageWrapperRef?.nativeElement;
+          if (wrapper && !this.animService.isReducedMotion()) {
+            this.animService.pageExit(wrapper);
+          }
         })
     );
 
@@ -78,6 +118,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    this.animService.killAll();
   }
 
   /** Bascule l'état d'ouverture de la sidebar (mobile uniquement) */
@@ -88,5 +129,64 @@ export class AppComponent implements OnInit, OnDestroy {
   /** Ferme la sidebar (utilisé par le bouton close et l'overlay) */
   closeSidebar(): void {
     this.sidebarOpen.set(false);
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleGlobalKeydown(event: KeyboardEvent): void {
+    if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+      event.preventDefault();
+      this.toggleSearch();
+    }
+  }
+
+  toggleSearch(): void {
+    if (this.searchOverlayRef) {
+      this.destroySearchOverlay();
+      return;
+    }
+    this.openSearch();
+  }
+
+  openSearch(): void {
+    if (this.searchOverlayRef) return;
+
+    this.searchService.open();
+
+    const positionStrategy = this.overlay
+      .position()
+      .global()
+      .centerHorizontally()
+      .top('0');
+
+    const scrollStrategy = this.overlay.scrollStrategies.block();
+
+    this.searchOverlayRef = this.overlay.create({
+      positionStrategy,
+      scrollStrategy,
+      hasBackdrop: false,
+      panelClass: 'search-overlay-panel',
+    });
+
+    const portal = new ComponentPortal(SearchModalComponent);
+    const componentRef = this.searchOverlayRef.attach(portal);
+
+    componentRef.instance.dismiss.subscribe(() => this.destroySearchOverlay());
+    componentRef.instance.navigate.subscribe((result: SearchResult) => {
+      this.destroySearchOverlay();
+      this.searchService.navigateToResult(result);
+    });
+  }
+
+  private destroySearchOverlay(): void {
+    if (this.searchOverlayRef) {
+      this.searchOverlayRef.dispose();
+      this.searchOverlayRef = null;
+    }
+    this.searchService.close();
+  }
+
+  /** Bascule l'accordéon TOC sur mobile */
+  toggleToc(): void {
+    this.tocOpen.update((open) => !open);
   }
 }

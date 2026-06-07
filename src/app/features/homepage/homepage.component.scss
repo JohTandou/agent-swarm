@@ -5,12 +5,6 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Variables locales — héritent des CSS custom properties racine
-   -------------------------------------------------------------------------- */
-$ease-natural: var(--ease-natural, cubic-bezier(0.25, 0.46, 0.45, 0.94));
-$ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
-
-/* --------------------------------------------------------------------------
    Conteneur racine — full bleed, pas de contrainte de largeur
    -------------------------------------------------------------------------- */
 .homepage {
@@ -35,6 +29,59 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   text-align: center;
 }
 
+/* Décor de fond parallaxe — couches multiples */
+.homepage__hero-decor {
+  position: absolute;
+  pointer-events: none;
+
+  /* Couche lointaine — grand blob radial subtil */
+  &--far {
+    top: -10%;
+    left: -10%;
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(
+      ellipse at 30% 40%,
+      rgba(142, 136, 130, 0.06) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  /* Couche milieu — cercle avec glow ambré */
+  &--mid {
+    top: 20%;
+    right: -5%;
+    width: 40%;
+    height: 60%;
+    background: radial-gradient(
+      circle at 60% 30%,
+      rgba(240, 165, 34, 0.05) 0%,
+      rgba(240, 165, 34, 0.015) 40%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  /* Couche proche — petite forme géométrique accentuée */
+  &--near {
+    bottom: 5%;
+    left: 5%;
+    width: 25%;
+    height: 35%;
+    background: radial-gradient(
+      ellipse at 40% 60%,
+      rgba(240, 165, 34, 0.08) 0%,
+      rgba(142, 136, 130, 0.04) 35%,
+      transparent 65%
+    );
+    border-radius: 40% 60% 60% 40% / 50% 50% 60% 60%;
+    opacity: 0.7;
+  }
+}
+
 .homepage__hero-content {
   max-width: 860px;
   display: flex;
@@ -54,12 +101,12 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   font-family: var(--font-body, 'Satoshi', sans-serif);
   font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--color-text-secondary, #8E8882);
+  color: var(--color-text-secondary, #B0A8A0);
   background: rgba(74, 69, 64, 0.5);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   opacity: 0;
-  animation: hero-stagger 0.7s $ease-spring forwards;
+  animation: hero-stagger 0.7s var(--ease-spring) forwards;
 }
 
 .homepage__badge-dot {
@@ -86,7 +133,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   color: var(--color-text-primary, #F5F0EB);
   margin: 0;
   opacity: 0;
-  animation: hero-stagger 0.7s $ease-spring 0.1s forwards;
+  animation: hero-stagger 0.7s var(--ease-spring) 0.1s forwards;
 }
 
 .homepage__tagline-accent {
@@ -115,14 +162,14 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   gap: clamp(12px, 2vh, 20px);
   max-width: 680px;
   opacity: 0;
-  animation: hero-stagger 0.7s $ease-spring 0.25s forwards;
+  animation: hero-stagger 0.7s var(--ease-spring) 0.25s forwards;
 }
 
 .homepage__summary-text {
   font-family: var(--font-body, 'Satoshi', sans-serif);
   font-size: clamp(1rem, 1.5vw, 1.125rem);
   line-height: 1.7;
-  color: var(--color-text-secondary, #8E8882);
+  color: var(--color-text-secondary, #B0A8A0);
   margin: 0;
 
   strong {
@@ -154,7 +201,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   align-items: center;
   gap: 6px;
   opacity: 0;
-  animation: hero-stagger 0.7s $ease-spring 0.5s forwards;
+  animation: hero-stagger 0.7s var(--ease-spring) 0.5s forwards;
 }
 
 .homepage__scroll-text {
@@ -163,11 +210,11 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text-secondary, #8E8882);
+  color: var(--color-text-secondary, #B0A8A0);
 }
 
 .homepage__scroll-arrow {
-  color: var(--color-text-secondary, #8E8882);
+  color: var(--color-text-secondary, #B0A8A0);
   animation: scroll-bounce 2s ease-in-out infinite;
 }
 
@@ -236,7 +283,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   gap: 8px;
   text-align: center;
   opacity: 0;
-  animation: stat-appear 0.6s $ease-spring forwards;
+  animation: stat-appear 0.6s var(--ease-spring) forwards;
   animation-play-state: paused;
 
   .homepage__stats--visible & {
@@ -267,7 +314,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
 .homepage__stat-label {
   font-family: var(--font-body, 'Satoshi', sans-serif);
   font-size: clamp(0.75rem, 1vw, 0.875rem);
-  color: var(--color-text-secondary, #8E8882);
+  color: var(--color-text-secondary, #B0A8A0);
   letter-spacing: 0.02em;
 }
 
@@ -296,7 +343,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   font-family: var(--font-body, 'Satoshi', sans-serif);
   font-size: clamp(0.9375rem, 1.3vw, 1.0625rem);
   line-height: 1.6;
-  color: var(--color-text-secondary, #8E8882);
+  color: var(--color-text-secondary, #B0A8A0);
   text-align: center;
   margin: 0;
 }
@@ -323,7 +370,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   position: relative;
   overflow: hidden;
   opacity: 0;
-  animation: stat-appear 0.5s $ease-spring forwards;
+  animation: stat-appear 0.5s var(--ease-spring) forwards;
   cursor: pointer;
 
   /* Glow subtil au hover */
@@ -379,7 +426,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
   font-family: var(--font-body, 'Satoshi', sans-serif);
   font-size: 0.8125rem;
   line-height: 1.55;
-  color: var(--color-text-secondary, #8E8882);
+  color: var(--color-text-secondary, #B0A8A0);
   margin: 0;
   flex: 1;
 }
@@ -387,7 +434,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
 .homepage__nav-arrow {
   font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
   font-size: 1rem;
-  color: var(--color-text-secondary, #8E8882);
+  color: var(--color-text-secondary, #B0A8A0);
   align-self: flex-end;
   transition: all 200ms ease-out;
 }
@@ -405,7 +452,7 @@ $ease-spring: var(--ease-spring, cubic-bezier(0.22, 1, 0.36, 1));
 .homepage__footer-text {
   font-family: var(--font-body, 'Satoshi', sans-serif);
   font-size: 0.75rem;
-  color: var(--color-text-secondary, #8E8882);
+  color: var(--color-text-secondary, #B0A8A0);
 }
 
 /* ==========================================================================

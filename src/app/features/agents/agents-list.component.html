@@ -35,12 +35,12 @@
 
   <!-- Grille bento -->
   <div class="agents__grid" role="list" aria-label="Liste des agents Swarm">
-    @for (agent of filteredAgents(); track agent.id) {
+    @for (agent of filteredAgents(); track agent.id; let idx = $index) {
       <a
         [routerLink]="['/agents', agent.id]"
         class="agents__card"
-        [class.agents__card--featured]="isFeatured(agent)"
-        [class.agents__card--wide]="isWide(agent)"
+        [class.agents__card--featured]="idx === 0"
+        [class.agents__card--wide]="idx === 2"
         [class.agents__card--inactive]="!agent.active"
         role="listitem"
         [attr.aria-label]="'Fiche de ' + agent.name"

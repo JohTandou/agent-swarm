@@ -4,10 +4,8 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Variables d'animation locales
+   Variables de layout locales
    -------------------------------------------------------------------------- */
-$ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
-$ease-natural: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $table-stagger: 60ms;
 $transition-hover: 250ms;
 
@@ -26,6 +24,11 @@ $transition-hover: 250ms;
     display: flex;
     flex-direction: column;
     gap: 24px;
+  }
+
+  /* Wrapper de contenu — animation d'entrée au changement de catégorie */
+  &__content {
+    animation: fadeSlideIn 300ms var(--ease-natural) both;
   }
 }
 
@@ -143,6 +146,7 @@ $transition-hover: 250ms;
     display: inline-flex;
     align-items: center;
     padding: 10px 20px;
+    min-height: 44px;
     font-family: var(--font-display);
     font-size: 0.875rem;
     font-weight: 600;
@@ -150,7 +154,7 @@ $transition-hover: 250ms;
     background: var(--color-accent);
     border-radius: 8px;
     text-decoration: none;
-    transition: transform $transition-hover $ease-natural, box-shadow $transition-hover $ease-natural;
+    transition: transform $transition-hover var(--ease-natural), box-shadow $transition-hover var(--ease-natural);
 
     &:hover {
       transform: scale(1.03);
@@ -162,6 +166,7 @@ $transition-hover: 250ms;
     display: inline-flex;
     align-items: center;
     padding: 10px 20px;
+    min-height: 44px;
     font-family: var(--font-display);
     font-size: 0.875rem;
     font-weight: 600;
@@ -170,7 +175,7 @@ $transition-hover: 250ms;
     border: 1px solid rgba(142, 136, 130, 0.2);
     border-radius: 8px;
     cursor: pointer;
-    transition: border-color $transition-hover $ease-natural, transform $transition-hover $ease-natural;
+    transition: border-color $transition-hover var(--ease-natural), transform $transition-hover var(--ease-natural);
 
     &:hover {
       border-color: rgba(240, 165, 34, 0.3);
@@ -197,13 +202,14 @@ $transition-hover: 250ms;
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
+    min-height: 44px;
   font-family: var(--font-display);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-text-secondary);
   text-decoration: none;
   border-radius: 9px;
-  transition: all $transition-hover $ease-natural;
+  transition: all $transition-hover var(--ease-natural);
   white-space: nowrap;
 
   &:hover {
@@ -335,8 +341,8 @@ $transition-hover: 250ms;
   &__row {
     border-bottom: 1px solid rgba(142, 136, 130, 0.06);
     opacity: 0;
-    animation: fadeSlideIn 500ms $ease-spring forwards;
-    transition: background-color $transition-hover $ease-natural;
+    animation: fadeSlideIn 500ms var(--ease-spring) forwards;
+    transition: background-color $transition-hover var(--ease-natural);
 
     &:last-child {
       border-bottom: none;
@@ -371,7 +377,7 @@ $transition-hover: 250ms;
   }
 
   &__tool-name {
-    font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+    font-family: var(--font-body);
     font-size: 0.8125rem;
     color: var(--color-accent);
     background: rgba(240, 165, 34, 0.06);
@@ -383,7 +389,7 @@ $transition-hover: 250ms;
   &__param-badge {
     display: inline-flex;
     align-items: center;
-    font-family: "SF Mono", "Fira Code", monospace;
+    font-family: var(--font-body);
     font-size: 0.6875rem;
     color: var(--color-text-secondary);
     background: var(--color-bg-subtle);
@@ -391,7 +397,7 @@ $transition-hover: 250ms;
     padding: 2px 8px;
     border-radius: 5px;
     white-space: nowrap;
-    transition: border-color $transition-hover $ease-natural;
+    transition: border-color $transition-hover var(--ease-natural);
 
     &:hover {
       border-color: rgba(240, 165, 34, 0.25);
@@ -451,7 +457,7 @@ $transition-hover: 250ms;
     padding: 20px 24px;
     margin: 0;
     overflow-x: auto;
-    font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+    font-family: var(--font-body);
     font-size: 0.8125rem;
     line-height: 1.7;
     color: var(--color-text-secondary);
@@ -555,8 +561,8 @@ $transition-hover: 250ms;
     border: 1px solid rgba(142, 136, 130, 0.15);
     border-radius: 8px;
     padding: 10px 14px;
-    outline: none;
-    transition: border-color $transition-hover $ease-natural, box-shadow $transition-hover $ease-natural;
+    outline: 2px solid transparent;
+    transition: border-color $transition-hover var(--ease-natural), box-shadow $transition-hover var(--ease-natural);
 
     &::placeholder {
       color: rgba(142, 136, 130, 0.5);
@@ -583,6 +589,7 @@ $transition-hover: 250ms;
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
+    min-height: 44px;
     font-family: var(--font-display);
     font-size: 0.875rem;
     font-weight: 700;
@@ -591,7 +598,7 @@ $transition-hover: 250ms;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: transform 150ms $ease-natural, box-shadow 150ms $ease-natural;
+    transition: transform 150ms var(--ease-natural), box-shadow 150ms var(--ease-natural);
 
     &:hover {
       transform: scale(1.03);
@@ -607,7 +614,7 @@ $transition-hover: 250ms;
     margin-top: 28px;
     position: relative;
     z-index: 1;
-    animation: fadeSlideIn 400ms $ease-spring forwards;
+    animation: fadeSlideIn 400ms var(--ease-spring) forwards;
   }
 }
 
@@ -641,7 +648,7 @@ $transition-hover: 250ms;
     border-radius: 10px;
     padding: 20px 24px;
     margin: 0;
-    font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+    font-family: var(--font-body);
     font-size: 0.8125rem;
     line-height: 1.7;
     color: var(--color-text-primary);

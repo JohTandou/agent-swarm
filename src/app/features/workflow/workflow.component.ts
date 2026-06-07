@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef } from '@angular/core';
 import { MarkdownRendererComponent } from '../../shared/components/markdown-renderer/markdown-renderer.component';
+import { AnimationService } from '../../shared/services/animation.service';
 
 /** Délai de simulation du chargement (ms) */
 const LOADING_SIMULATION_MS = 400;
@@ -358,7 +359,7 @@ graph TB
    * Références DOM pour les animations
    * ========================================================================== */
 
-  private _readyCheckInterval: ReturnType<typeof setInterval> | null = null;
+  private readonly animService = inject(AnimationService);
 
   /* ==========================================================================
    * Lifecycle
@@ -386,75 +387,56 @@ graph TB
   }
 
   ngOnDestroy(): void {
-    this.stopReadyCheck();
+    this.animService.killAll();
   }
 
   /* ==========================================================================
-   * Animations au scroll — IntersectionObserver
+   * Animations au scroll — GSAP (fallback CSS)
    * ========================================================================== */
 
-  private setupScrollAnimations(): void {
-    this._readyCheckInterval = setInterval(() => {
-      if (!this.loading()) {
-        this.stopReadyCheck();
-        this.observeAnimatedElements();
-        this.observeMermaidHighlight();
+  private async setupScrollAnimations(): Promise<void> {
+    // Attendre que le loading soit terminé
+    if (this.loading()) {
+      const check = setInterval(() => {
+        if (!this.loading()) {
+          clearInterval(check);
+          this.initScrollAnimations();
+        }
+      }, READY_CHECK_INTERVAL_MS);
+      setTimeout(() => clearInterval(check), READY_CHECK_TIMEOUT_MS);
+    } else {
+      this.initScrollAnimations();
+    }
+  }
+
+  private async initScrollAnimations(): Promise<void> {
+    try {
+      const revealEls = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll');
+      const nodeCards = this.hostRef.nativeElement.querySelectorAll('.node-card');
+
+      if (revealEls.length > 0) {
+        await this.animService.revealOnScroll(Array.from(revealEls), { staggerMs: 80 });
       }
-    }, READY_CHECK_INTERVAL_MS);
+      if (nodeCards.length > 0) {
+        await this.animService.revealOnScroll(Array.from(nodeCards), { staggerMs: 100 });
+      }
 
-    setTimeout(() => this.stopReadyCheck(), READY_CHECK_TIMEOUT_MS);
-  }
-
-  /**
-   * Observe les éléments .reveal-on-scroll et .node-card
-   * pour déclencher les animations d'apparition avec stagger.
-   */
-  private observeAnimatedElements(): void {
-    const revealElements = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll');
-    const nodeCards = this.hostRef.nativeElement.querySelectorAll('.node-card');
-
-    const scrollObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            scrollObserver.unobserve(entry.target);
-          }
+      // Mermaid section highlight
+      const mermaidSection = this.hostRef.nativeElement.querySelector('.mermaid-section');
+      if (mermaidSection) {
+          const { ScrollTrigger } = await this.animService.initGsap();
+            // Utiliser ScrollTrigger pour ajouter la classe mermaid-visible
+        ScrollTrigger.create({
+          trigger: mermaidSection,
+          start: 'top 80%',
+          once: true,
+          onEnter: () => mermaidSection.classList.add('mermaid-visible'),
         });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -30px 0px' },
-    );
-
-    revealElements.forEach((el: Element) => scrollObserver.observe(el));
-    nodeCards.forEach((el: Element) => scrollObserver.observe(el));
-  }
-
-  /**
-   * Observe la section Mermaid pour appliquer un highlight glow
-   * lorsque le diagramme devient visible.
-   */
-  private observeMermaidHighlight(): void {
-    const mermaidSection = this.hostRef.nativeElement.querySelector('.mermaid-section');
-    if (!mermaidSection) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('mermaid-visible');
-          }
-        });
-      },
-      { threshold: 0.2 },
-    );
-
-    observer.observe(mermaidSection);
-  }
-
-  private stopReadyCheck(): void {
-    if (this._readyCheckInterval) {
-      clearInterval(this._readyCheckInterval);
-      this._readyCheckInterval = null;
+      }
+    } catch {
+      // Fallback CSS : ajouter .revealed à tous les éléments .reveal-on-scroll
+      const all = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll, .node-card');
+      all.forEach((el: Element) => el.classList.add('revealed'));
     }
   }
 }

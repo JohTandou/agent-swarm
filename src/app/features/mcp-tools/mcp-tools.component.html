@@ -3,7 +3,7 @@
      Gère 4 états : loading, error, success, empty
      ========================================================================== -->
 
-<section class="mcp-tools" role="main" aria-label="Outils MCP">
+<section class="mcp-tools" aria-label="Outils MCP">
 
   <!-- ====================================================================
        ÉTAT : Chargement — Shimmer skeleton
@@ -53,6 +53,7 @@
        ÉTAT : Succès — Contenu complet
        ==================================================================== -->
   @else {
+    <div class="mcp-tools__content">
     <!-- Navigation entre catégories -->
     <nav class="mcp-tools__nav" aria-label="Catégories d'outils MCP">
       @for (cat of categories; track cat) {
@@ -197,6 +198,7 @@
         }
       </section>
     }
+    </div>
   }
 
 </section>
