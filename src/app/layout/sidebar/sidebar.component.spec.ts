@@ -42,14 +42,14 @@ describe('SidebarComponent', () => {
   it('devrait masquer le bouton close quand isMobile est false', () => {
     component.isMobile = false;
     fixture.detectChanges();
-    const closeBtn = fixture.nativeElement.querySelector('.sidebar__close');
+    const closeBtn = fixture.nativeElement.querySelector('app-ui-button');
     expect(closeBtn).toBeFalsy();
   });
 
   it('devrait afficher le bouton close quand isMobile est true', () => {
     component.isMobile = true;
     fixture.detectChanges();
-    const closeBtn = fixture.nativeElement.querySelector('.sidebar__close');
+    const closeBtn = fixture.nativeElement.querySelector('app-ui-button');
     expect(closeBtn).toBeTruthy();
   });
 
@@ -57,7 +57,7 @@ describe('SidebarComponent', () => {
     component.isMobile = true;
     fixture.detectChanges();
     const emitSpy = spyOn(component.closeSidebar, 'emit');
-    const closeBtn: HTMLButtonElement = fixture.nativeElement.querySelector('.sidebar__close');
+    const closeBtn: HTMLButtonElement = fixture.nativeElement.querySelector('app-ui-button');
     closeBtn.click();
     expect(emitSpy).toHaveBeenCalled();
   });

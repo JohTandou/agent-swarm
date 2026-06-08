@@ -1,5 +1,8 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef } from '@angular/core';
 import { MarkdownRendererComponent } from '../../shared/components/markdown-renderer/markdown-renderer.component';
+import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
+import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
+import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 
 /** Délai de simulation du chargement (ms) */
 const LOADING_SIMULATION_MS = 400;
@@ -63,7 +66,7 @@ interface Integration {
 @Component({
   selector: 'app-ecosystem',
   standalone: true,
-  imports: [MarkdownRendererComponent],
+  imports: [MarkdownRendererComponent, UiButtonComponent, UiSkeletonComponent, UiBadgeComponent],
   templateUrl: './ecosystem.component.html',
   styleUrls: ['./ecosystem.component.scss'],
 })

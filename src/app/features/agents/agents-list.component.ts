@@ -1,6 +1,8 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { ToastService } from '@shared/services/toast.service';
+import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import type { Agent, AgentCategory } from '@shared/models';
 
 /**
@@ -158,7 +160,7 @@ const CATEGORY_LABELS: Record<AgentCategory, string> = {
 @Component({
   selector: 'app-agents-list',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, UiButtonComponent, UiBadgeComponent],
   templateUrl: './agents-list.component.html',
   styleUrls: ['./agents-list.component.scss'],
 })

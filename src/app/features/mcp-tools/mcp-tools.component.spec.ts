@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { convertToParamMap } from '@angular/router';
 import { McpToolsComponent } from './mcp-tools.component';
+import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 
 describe('McpToolsComponent', () => {
   let component: McpToolsComponent;
@@ -13,7 +15,7 @@ describe('McpToolsComponent', () => {
     paramMapSubject = new BehaviorSubject(convertToParamMap({ category: 'supabase' }));
 
     await TestBed.configureTestingModule({
-      imports: [McpToolsComponent],
+      imports: [McpToolsComponent, UiSkeletonComponent],
       providers: [
         provideRouter([]),
         {
@@ -46,12 +48,14 @@ describe('McpToolsComponent', () => {
   });
 
   it('devrait avoir 4 éléments de navigation dans le skeleton', () => {
-    const navItems = fixture.nativeElement.querySelectorAll('.mcp-skeleton__nav-item');
+    const navContainer = fixture.nativeElement.querySelector('.mcp-skeleton__nav');
+    const navItems = navContainer.querySelectorAll('app-ui-skeleton');
     expect(navItems.length).toBe(4);
   });
 
   it('devrait avoir 5 lignes de tableau dans le skeleton', () => {
-    const rows = fixture.nativeElement.querySelectorAll('.mcp-skeleton__row');
+    const tableContainer = fixture.nativeElement.querySelector('.mcp-skeleton__table');
+    const rows = tableContainer.querySelectorAll('app-ui-skeleton');
     expect(rows.length).toBe(5);
   });
 
@@ -183,7 +187,7 @@ describe('McpToolsComponent', () => {
     tick(100);
     fixture.detectChanges();
 
-    const retryBtn = fixture.nativeElement.querySelector('.mcp-error__retry');
+    const retryBtn = fixture.nativeElement.querySelector('.mcp-error__actions app-ui-button');
     expect(retryBtn).toBeTruthy();
     expect(retryBtn.textContent?.trim()).toBe('Réessayer');
   }));
@@ -239,7 +243,7 @@ describe('McpToolsComponent', () => {
     tick(600);
     fixture.detectChanges();
 
-    const btn: HTMLElement = fixture.nativeElement.querySelector('.mcp-playground__button');
+    const btn: HTMLElement = fixture.nativeElement.querySelector('.mcp-playground__actions app-ui-button');
     expect(btn.textContent?.trim()).toContain('Assembler les paramètres');
 
     btn.click();
@@ -252,7 +256,7 @@ describe('McpToolsComponent', () => {
     tick(600);
     fixture.detectChanges();
 
-    const btn: HTMLElement = fixture.nativeElement.querySelector('.mcp-playground__button');
+    const btn: HTMLElement = fixture.nativeElement.querySelector('.mcp-playground__actions app-ui-button');
     btn.click();
     fixture.detectChanges();
 

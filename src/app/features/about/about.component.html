@@ -216,12 +216,8 @@
         du code de qualité.
       </p>
       <nav class="about__cta-links" aria-label="Navigation vers la documentation">
-        <a routerLink="/agents" class="about__cta-btn about__cta-btn--primary">
-          Explorer les agents
-        </a>
-        <a routerLink="/workflow" class="about__cta-btn about__cta-btn--secondary">
-          Voir le pipeline
-        </a>
+        <app-ui-button variant="primary" size="lg" (click)="navigateTo('/agents')">Explorer les agents</app-ui-button>
+        <app-ui-button variant="outline" size="lg" (click)="navigateTo('/workflow')">Voir le pipeline</app-ui-button>
       </nav>
     </div>
   </footer>

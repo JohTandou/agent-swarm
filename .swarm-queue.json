@@ -8,10 +8,10 @@
       "title": "Sprint 0 — Quick Wins (audit UX/UI)",
       "body": "5 corrections rapides issues de l'audit UX/UI :\n1. Ajouter font-weight 600 au CDN Fontshare (index.html)\n2. Remplacer #D4A855 par var(--color-accent) avec opacité (problem-innovation.scss:398)\n3. Ajouter color-scheme: dark sur :root (styles.css)\n4. Ajouter -webkit-tap-highlight-color + touch-action globaux (styles.css)\n5. Créer classe .sr-only (styles.css)\n\nCritères : index.html CDN mis à jour, plus aucune couleur hors palette, styles.css enrichi.",
       "route": "ADAPT",
-      "status": "done",
+      "status": "in_progress",
       "pr_url": "https://github.com/JohTandou/swarm-wiki/pull/42",
-      "issue_number": 41,
-      "branch": "feature/swarm-sprint0-quick-wins"
+      "issue_number": 49,
+      "branch": "feature/swarm-issue-49-sprint-a-fondations-composants"
     },
     {
       "id": "2",

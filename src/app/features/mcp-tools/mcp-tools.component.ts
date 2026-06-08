@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy, inject, signal, computed } from '@angular
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ToastService } from '@shared/services/toast.service';
+import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
+import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
+import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 
 /* ==========================================================================
  * Types — Outil MCP
@@ -216,7 +219,7 @@ const CATEGORY_PREFIXES: Record<string, string> = {
 @Component({
   selector: 'app-mcp-tools',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, UiSkeletonComponent, UiButtonComponent, UiBadgeComponent],
   templateUrl: './mcp-tools.component.html',
   styleUrls: ['./mcp-tools.component.scss'],
 })

@@ -9,18 +9,15 @@
 @if (loading()) {
 <div class="page-loader" aria-label="Chargement de la page" role="status">
   <div class="skeleton-hero">
-    <div class="skeleton-line skeleton-line--title"></div>
-    <div class="skeleton-line skeleton-line--subtitle"></div>
-    <div class="skeleton-line skeleton-line--subtitle skeleton-line--short"></div>
+    <app-ui-skeleton variant="text" width="280px" height="32px"></app-ui-skeleton>
+    <app-ui-skeleton variant="text" width="60%"></app-ui-skeleton>
+    <app-ui-skeleton variant="text" width="40%"></app-ui-skeleton>
   </div>
   <div class="skeleton-section">
-    <div class="skeleton-line skeleton-line--heading"></div>
+    <app-ui-skeleton variant="text" width="180px" height="20px"></app-ui-skeleton>
     <div class="skeleton-tree">
       @for (i of [1,2,3,4,5]; track i) {
-      <div class="skeleton-node">
-        <div class="skeleton-line skeleton-line--node-title"></div>
-        <div class="skeleton-line skeleton-line--text"></div>
-      </div>
+      <app-ui-skeleton variant="card" height="300px" [delay]="i * 80"></app-ui-skeleton>
       }
     </div>
   </div>
@@ -35,7 +32,7 @@
   <div class="error-state__icon" aria-hidden="true">⚠️</div>
   <h2 class="error-state__title">Impossible de charger la page</h2>
   <p class="error-state__message">{{ error() }}</p>
-  <button class="error-state__retry" (click)="retry()">Réessayer</button>
+  <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
 </div>
 }
 
@@ -100,7 +97,7 @@
           [attr.data-route]="node.route"
         >
           <div class="node-card__header">
-            <span class="node-card__route">{{ node.route }}</span>
+            <app-ui-badge variant="info" size="sm">{{ node.route }}</app-ui-badge>
             <span class="node-card__complexity">{{ node.complexity }}</span>
           </div>
           <h3 class="node-card__title">{{ node.label }}</h3>
@@ -189,7 +186,7 @@
           @for (threshold of preSearchThresholds; track threshold.route) {
           <tr>
             <td>
-              <span class="route-badge" [attr.data-route]="threshold.route">{{ threshold.route }}</span>
+              <app-ui-badge variant="info" size="sm">{{ threshold.route }}</app-ui-badge>
             </td>
             <td>{{ threshold.fichiers }}</td>
             <td>{{ threshold.tokens }}</td>

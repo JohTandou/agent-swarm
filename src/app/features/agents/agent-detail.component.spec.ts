@@ -93,19 +93,19 @@ describe('AgentDetailComponent', () => {
     });
 
     it('devrait afficher la route dans les métadonnées', () => {
-      const routeEl = fixture.nativeElement.querySelector('.agent-detail__route');
+      const routeEl = fixture.nativeElement.querySelector('.agent-detail__meta app-ui-badge[variant="info"]');
       expect(routeEl).toBeTruthy();
       expect(routeEl.textContent?.trim()).toContain('FULL');
     });
 
     it('devrait afficher la catégorie', () => {
-      const catEl = fixture.nativeElement.querySelector('.agent-detail__category');
+      const catEl = fixture.nativeElement.querySelector('.agent-detail__meta app-ui-badge[variant="default"]');
       expect(catEl).toBeTruthy();
       expect(catEl.textContent?.trim()).toBe('Build');
     });
 
     it('devrait afficher le badge Actif', () => {
-      const badge = fixture.nativeElement.querySelector('.agent-detail__badge--active');
+      const badge = fixture.nativeElement.querySelector('.ui-badge--success');
       expect(badge).toBeTruthy();
       expect(badge.textContent?.trim()).toBe('Actif');
     });
@@ -151,13 +151,13 @@ describe('AgentDetailComponent', () => {
     });
 
     it('devrait afficher le badge Inactif', () => {
-      const badge = fixture.nativeElement.querySelector('.agent-detail__badge--inactive');
-      expect(badge).toBeTruthy();
-      expect(badge.textContent?.trim()).toBe('Inactif');
+      const allBadges: HTMLElement[] = Array.from(fixture.nativeElement.querySelectorAll('.agent-detail__meta app-ui-badge'));
+      const inactiveBadge = allBadges.find((b) => b.textContent?.trim() === 'Inactif');
+      expect(inactiveBadge).toBeTruthy();
     });
 
     it('ne devrait pas afficher le badge Actif', () => {
-      const badge = fixture.nativeElement.querySelector('.agent-detail__badge--active');
+      const badge = fixture.nativeElement.querySelector('.ui-badge--success');
       expect(badge).toBeFalsy();
     });
   });

@@ -5,13 +5,9 @@
 >
   <!-- Bouton close mobile -->
   @if (isMobile) {
-    <button
-      class="sidebar__close"
-      (click)="closeSidebar.emit()"
-      aria-label="Fermer le menu"
-    >
+    <app-ui-button variant="icon" size="md" (click)="closeSidebar.emit()" aria-label="Fermer le menu">
       <span class="sidebar__close-icon" aria-hidden="true">✕</span>
-    </button>
+    </app-ui-button>
   }
 
   <!-- Liste de navigation -->

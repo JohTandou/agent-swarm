@@ -10,6 +10,7 @@ import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component
 import { TableOfContentsComponent } from './shared/components/table-of-contents/table-of-contents.component';
 import { ToasterComponent } from './shared/components/toaster/toaster.component';
 import { SearchModalComponent } from './shared/components/search-modal/search-modal.component';
+import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { SearchService } from './shared/services/search.service';
 import { AnimationService } from './shared/services/animation.service';
 import type { Breadcrumb } from '@shared/models';
@@ -57,6 +58,7 @@ const DYNAMIC_LABELS: Record<string, string> = {
     BreadcrumbsComponent,
     TableOfContentsComponent,
     ToasterComponent,
+    UiButtonComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

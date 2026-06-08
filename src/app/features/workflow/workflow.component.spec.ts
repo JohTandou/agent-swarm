@@ -70,7 +70,7 @@ describe('WorkflowComponent', () => {
     tick(500);
     fixture.detectChanges();
 
-    const routeBadges: NodeListOf<Element> = fixture.nativeElement.querySelectorAll('.node-card__route');
+    const routeBadges: NodeListOf<Element> = fixture.nativeElement.querySelectorAll('.node-card__header app-ui-badge');
     expect(routeBadges.length).toBe(5);
     expect(routeBadges[0].textContent?.trim()).toBe('DIRECT');
     expect(routeBadges[4].textContent?.trim()).toBe('FULL');
@@ -136,7 +136,7 @@ describe('WorkflowComponent', () => {
     expect(errorState!.textContent).toContain('Test error message');
 
     // Retry
-    const retryBtn: HTMLElement | null = fixture.nativeElement.querySelector('.error-state__retry');
+    const retryBtn: HTMLElement | null = fixture.nativeElement.querySelector('.error-state app-ui-button');
     expect(retryBtn).toBeTruthy();
     retryBtn!.click();
     fixture.detectChanges();

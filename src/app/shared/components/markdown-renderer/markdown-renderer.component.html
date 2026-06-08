@@ -2,9 +2,9 @@
   <!-- État de chargement -->
   @if (isLoading) {
     <div class="markdown-loading" aria-live="polite" aria-busy="true">
-      <div class="markdown-loading__shimmer"></div>
-      <div class="markdown-loading__shimmer markdown-loading__shimmer--short"></div>
-      <div class="markdown-loading__shimmer markdown-loading__shimmer--medium"></div>
+      <app-ui-skeleton variant="text" width="100%"></app-ui-skeleton>
+      <app-ui-skeleton variant="text" width="40%"></app-ui-skeleton>
+      <app-ui-skeleton variant="text" width="70%"></app-ui-skeleton>
     </div>
   }
 

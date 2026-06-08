@@ -1,0 +1,108 @@
+/* ==========================================================================
+   UiEmptyState — État vide design system
+   Palette 6 couleurs exclusive, dark mode exclusif
+   BEM : .ui-empty-state, .ui-empty-state__title, .ui-empty-state__hex-path
+   ========================================================================== */
+
+/* ====== Palette & Design Tokens (référencées via custom properties globales) ====== */
+// --color-bg-primary:    #3A3530;
+// --color-bg-elevated:   #4A4540;
+// --color-text-primary:  #F5F0EB;
+// --color-text-secondary:#B0A8A0;
+// --color-accent:        #F0A522;
+// --ease-natural:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+/* ====== Conteneur principal ====== */
+.ui-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 64px 24px;
+  min-height: 320px;
+  width: 100%;
+}
+
+/* ====== Illustration hexagonale ====== */
+.ui-empty-state__illustration {
+  margin-bottom: 24px;
+
+  .ui-empty-state__hex {
+    width: 80px;
+    height: 80px;
+    color: var(--color-accent);
+    opacity: 0.3;
+  }
+
+  .ui-empty-state__hex-path {
+    animation: hexPulse 2s ease-in-out infinite;
+  }
+}
+
+/* Animation de pulsation du contour hexagonal */
+@keyframes hexPulse {
+  0%, 100% {
+    stroke-dasharray: 0;
+    stroke-dashoffset: 0;
+    opacity: 0.2;
+  }
+  50% {
+    stroke-dasharray: 360;
+    stroke-dashoffset: 360;
+    opacity: 0.4;
+  }
+}
+
+/* ====== Titre ====== */
+.ui-empty-state__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.01em;
+}
+
+/* ====== Description ====== */
+.ui-empty-state__description {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  margin: 0 0 32px 0;
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+/* ====== Zone d'actions ====== */
+.ui-empty-state__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ====== Lien secondaire ====== */
+.ui-empty-state__secondary {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 200ms var(--ease-natural);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  &:hover {
+    color: var(--color-accent);
+
+    .ui-empty-state__arrow {
+      transform: translateX(4px);
+    }
+  }
+}
+
+.ui-empty-state__arrow {
+  transition: transform 200ms var(--ease-natural);
+  font-size: 0.75rem;
+}

@@ -1,0 +1,95 @@
+/* ==========================================================================
+   ui-card — Carte partagée
+   Utilise la palette dark mode du projet via CSS custom properties.
+   Système d'élévation N2/N3, glassmorphism, tilt 3D CSS-only.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Base — surface par défaut (élévation N2)
+   -------------------------------------------------------------------------- */
+.ui-card {
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(142, 136, 130, 0.12);
+  border-radius: 12px;
+  box-shadow: var(--elevation-n2);
+  overflow: hidden;
+  // Contient le contenu projeté (bordures arrondies héritées)
+}
+
+/* --------------------------------------------------------------------------
+   Variant : Glass (fond translucide + flou)
+   -------------------------------------------------------------------------- */
+.ui-card--glass {
+  background: rgba(74, 69, 64, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(142, 136, 130, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   Variant : Hover (tilt 3D CSS-only + glow progressif)
+   -------------------------------------------------------------------------- */
+.ui-card--hover {
+  transition:
+    transform 300ms var(--ease-out-expo),
+    box-shadow 300ms var(--ease-out-expo),
+    border-color 300ms var(--ease-out-expo);
+  // Point d'origine centré pour un tilt équilibré
+  transform-origin: center center;
+
+  &:hover {
+    transform: perspective(800px) rotateX(1deg) rotateY(-1deg) translateY(-2px);
+    box-shadow: var(--elevation-n3);
+    border-color: rgba(240, 165, 34, 0.15);
+  }
+
+  // Retour fluide au relâchement du survol
+  &:not(:hover) {
+    transition:
+      transform 600ms var(--ease-out-expo),
+      box-shadow 600ms var(--ease-out-expo),
+      border-color 600ms var(--ease-out-expo);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Variant : Bento (étend la carte sur 2 colonnes dans une grille parente)
+   Appliqué sur le :host via le binding dynamique dans le décorateur.
+   -------------------------------------------------------------------------- */
+:host(.ui-card--bento) {
+  grid-column: span 2;
+}
+
+/* --------------------------------------------------------------------------
+   Modificateur : Clickable (curseur pointer)
+   -------------------------------------------------------------------------- */
+.ui-card--clickable {
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   Modificateur : Highlight (bordure + glow ambré)
+   -------------------------------------------------------------------------- */
+.ui-card--highlight {
+  border-color: rgba(240, 165, 34, 0.25);
+  box-shadow: 0 0 12px rgba(240, 165, 34, 0.04);
+}
+
+/* --------------------------------------------------------------------------
+   Paddings — tailles via modificateurs BEM
+   -------------------------------------------------------------------------- */
+.ui-card--padding-sm {
+  padding: 16px;
+}
+
+.ui-card--padding-md {
+  padding: 24px;
+}
+
+.ui-card--padding-lg {
+  padding: 32px;
+}
+
+.ui-card--padding-none {
+  padding: 0;
+}

@@ -170,47 +170,6 @@
 }
 
 /* --------------------------------------------------------------------------
-   Skeleton — shimmer animé pendant l'indexation
-   -------------------------------------------------------------------------- */
-.search-modal__skeleton {
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.search-modal__skeleton-line {
-  height: 12px;
-  border-radius: 6px;
-  background: linear-gradient(
-    90deg,
-    rgba(142, 136, 130, 0.12) 0%,
-    rgba(142, 136, 130, 0.05) 50%,
-    rgba(142, 136, 130, 0.12) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s ease-in-out infinite;
-}
-
-.search-modal__skeleton-line--title {
-  width: 60%;
-  height: 14px;
-}
-
-.search-modal__skeleton-line--desc {
-  width: 85%;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-/* --------------------------------------------------------------------------
    État vide
    -------------------------------------------------------------------------- */
 .search-modal__empty {

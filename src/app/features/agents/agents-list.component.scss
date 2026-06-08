@@ -60,34 +60,11 @@
   flex-wrap: wrap;
 }
 
-.agents__filter {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  min-height: 44px;
-  border: 1px solid rgba(142, 136, 130, 0.15);
-  border-radius: 8px;
-  background: transparent;
-  color: var(--color-text-secondary);
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.8125rem;
-  cursor: pointer;
-  transition: all 200ms ease-out;
-
-  &:hover {
-    border-color: rgba(142, 136, 130, 0.3);
-    color: var(--color-text-primary);
-    background: rgba(74, 69, 64, 0.5);
-  }
-
-  &--active {
-    border-color: rgba(240, 165, 34, 0.4);
-    color: var(--color-accent);
-    background: rgba(240, 165, 34, 0.08);
-    box-shadow: 0 0 12px rgba(240, 165, 34, 0.06);
-  }
+.agents__filter--active {
+  border-color: rgba(240, 165, 34, 0.4);
+  color: var(--color-accent);
+  background: rgba(240, 165, 34, 0.08);
+  box-shadow: 0 0 12px rgba(240, 165, 34, 0.06);
 }
 
 .agents__filter-count {
@@ -245,30 +222,6 @@
   margin: 0;
 }
 
-.agents__card-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.6875rem;
-  letter-spacing: 0.02em;
-  line-height: 1.5;
-
-  &--active {
-    background: rgba(240, 165, 34, 0.1);
-    color: var(--color-accent);
-    border: 1px solid rgba(240, 165, 34, 0.2);
-  }
-
-  &--inactive {
-    background: rgba(142, 136, 130, 0.1);
-    color: var(--color-text-secondary);
-    border: 1px solid rgba(142, 136, 130, 0.15);
-  }
-}
-
 .agents__card-role {
   font-family: var(--font-body);
   font-weight: 500;
@@ -394,23 +347,4 @@
   font-size: 1rem;
   color: var(--color-text-secondary);
   margin: 0;
-}
-
-.agents__empty-reset {
-  padding: 8px 20px;
-  min-height: 44px;
-  border: 1px solid rgba(240, 165, 34, 0.3);
-  border-radius: 8px;
-  background: transparent;
-  color: var(--color-accent);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.8125rem;
-  cursor: pointer;
-  transition: all 200ms ease-out;
-
-  &:hover {
-    background: rgba(240, 165, 34, 0.08);
-    box-shadow: 0 0 16px rgba(240, 165, 34, 0.08);
-  }
 }

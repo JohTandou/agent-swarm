@@ -120,21 +120,6 @@
   justify-content: space-between;
   width: 100%;
   min-height: 44px;
-  padding: 10px 16px;
-  background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.15);
-  border-radius: 10px;
-  color: var(--color-text-primary);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: border-color 200ms ease-out, box-shadow 200ms ease-out;
-
-  &:hover {
-    border-color: rgba(240, 165, 34, 0.3);
-    box-shadow: 0 0 12px rgba(240, 165, 34, 0.06);
-  }
 }
 
 .toc-mobile__chevron {

@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ProblemInnovationComponent } from './problem-innovation.component';
+import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 
 describe('ProblemInnovationComponent', () => {
   let component: ProblemInnovationComponent;
@@ -7,7 +9,7 @@ describe('ProblemInnovationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProblemInnovationComponent],
+      imports: [ProblemInnovationComponent, UiSkeletonComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProblemInnovationComponent);
@@ -33,13 +35,19 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait afficher le skeleton-title dans l\'état loading', () => {
-    const title: HTMLElement = fixture.nativeElement.querySelector('.skeleton-line--title');
-    expect(title).toBeTruthy();
+    const skeletons = fixture.debugElement.queryAll(By.css('app-ui-skeleton'));
+    const titleSkeleton = skeletons.find(
+      (el) => el.componentInstance.variant === 'text' && el.componentInstance.width === '280px'
+    );
+    expect(titleSkeleton).toBeTruthy();
   });
 
   it('devrait afficher les skeleton-cards dans l\'état loading', () => {
-    const cards = fixture.nativeElement.querySelectorAll('.skeleton-card');
-    expect(cards.length).toBe(3);
+    const skeletons = fixture.debugElement.queryAll(By.css('app-ui-skeleton'));
+    const cardSkeletons = skeletons.filter(
+      (el) => el.componentInstance.variant === 'card' && el.componentInstance.height === '180px'
+    );
+    expect(cardSkeletons.length).toBe(3);
   });
 
   it('ne devrait pas afficher le contenu principal pendant le loading', () => {
@@ -75,7 +83,7 @@ describe('ProblemInnovationComponent', () => {
     component['error'].set('Erreur');
     fixture.detectChanges();
 
-    const button: HTMLButtonElement = fixture.nativeElement.querySelector('.error-state__retry');
+    const button: HTMLElement = fixture.nativeElement.querySelector('.error-state app-ui-button');
     expect(button).toBeTruthy();
     expect(button.textContent?.trim()).toBe('Réessayer');
   });
