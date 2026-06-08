@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 import { SwarmGraphComponent } from './swarm-graph.component';
 import { HexGridComponent } from './hex-grid.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
+import { SparkleEffectComponent } from '../../shared/components/sparkle-effect/sparkle-effect.component';
 import { AnimationService } from '../../shared/services/animation.service';
 
 /** Délai de stabilisation du DOM après le rendu initial */
@@ -49,7 +50,7 @@ interface NavCard {
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [RouterLink, SwarmGraphComponent, HexGridComponent, TextRevealDirective],
+  imports: [RouterLink, SwarmGraphComponent, HexGridComponent, TextRevealDirective, SparkleEffectComponent],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
 })
@@ -89,21 +90,21 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       title: 'Agents',
       description:
-        'Découvrez les 9 agents spécialisés qui collaborent automatiquement.',
+        'Neuf agents, une équipe de développement complète orchestrée automatiquement pour vous.',
       route: '/agents',
       icon: '🤖',
     },
     {
       title: 'Workflow',
       description:
-        'Comprenez le pipeline orchestré de la tâche au déploiement.',
+        'De l\'idée au déploiement : découvrez comment le pipeline automatise chaque étape sans intervention.',
       route: '/workflow',
       icon: '⚡',
     },
     {
       title: 'Skills',
       description:
-        'Explorez les 26 compétences disponibles pour chaque contexte.',
+        '26 modules activables à la demande. Chaque skill étend vos agents avec une expertise ciblée.',
       route: '/skills',
       icon: '🔧',
     },
@@ -115,6 +116,9 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: '🌐',
     },
   ];
+
+  /** Déclenche l'effet sparkle après le chargement initial */
+  readonly showSparkle = signal(false);
 
   /** Position X du curseur en pourcentage (pour le gradient radial) */
   protected readonly cursorX = signal(50);
@@ -139,6 +143,8 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.setupHeroAnimation();
+    // Sparkle effect après chargement initial
+    setTimeout(() => this.showSparkle.set(true), 800);
   }
 
   ngAfterViewInit(): void {

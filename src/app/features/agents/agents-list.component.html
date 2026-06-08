@@ -82,15 +82,13 @@
       </a>
     }
 
-    @if (filteredAgents().length === 0) {
-      <div class="agents__empty" role="status">
-        <p class="agents__empty-text">
-          Aucun agent dans cette catégorie pour le moment.
-        </p>
-        <app-ui-button variant="outline" size="md" (click)="activeCategory.set(null)">
-          Réinitialiser le filtre
-        </app-ui-button>
-      </div>
+    @empty {
+      <app-ui-empty-state
+        title="Aucun agent trouvé"
+        description="Aucun agent ne correspond à ce filtre. Essayez une autre catégorie."
+        primaryActionLabel="Voir tous les agents"
+        (primaryAction)="resetFilters()"
+      />
     }
   </div>
 </section>

@@ -68,15 +68,13 @@
       </a>
     }
 
-    @if (filteredSkills().length === 0) {
-      <div class="skills__empty" role="status">
-        <p class="skills__empty-text">
-          Aucun skill dans cette catégorie pour le moment.
-        </p>
-        <app-ui-button variant="outline" size="md" (click)="activeCategory.set(null)">
-          Réinitialiser le filtre
-        </app-ui-button>
-      </div>
+    @empty {
+      <app-ui-empty-state
+        title="Aucun skill trouvé"
+        description="Aucun skill ne correspond à ce filtre. Essayez une autre catégorie."
+        primaryActionLabel="Voir tous les skills"
+        (primaryAction)="resetFilters()"
+      />
     }
   </div>
 </section>

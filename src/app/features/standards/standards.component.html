@@ -51,8 +51,7 @@
       <span class="hero__kicker reveal-on-scroll">Conventions du projet</span>
       <h1 id="hero-title" class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">Standards</h1>
       <p class="hero__subtitle reveal-on-scroll">
-        La référence unique pour tout contributeur. Palette, typographie, conventions de code,
-        philosophie de test et règles de documentation — chaque décision du projet est documentée ici.
+        Ce qui rend le code Swarm cohérent, lisible et maintenable. Palette de couleurs, typographie, conventions de code, standards de test — tout ce qu'un agent doit savoir pour produire un code irréprochable.
       </p>
     </div>
     <div class="hero__scroll-hint reveal-on-scroll" aria-hidden="true">
@@ -269,6 +268,34 @@
       >
         <h3 class="doc-card__title">{{ doc.title }}</h3>
         <p class="doc-card__description">{{ doc.description }}</p>
+      </article>
+      }
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 5 — Checklist qualité
+       ======================================================================= -->
+  <section class="quality-checklist" aria-labelledby="checklist-title">
+    <div class="section__header reveal-on-scroll">
+      <h2 id="checklist-title" class="section__title">Checklist qualité</h2>
+      <p class="section__intro">
+        Avant chaque merge, ces {{ qualityChecklist.length }} points sont vérifiés
+        automatiquement par les agents Tester et Reviewer. Aucune exception.
+      </p>
+    </div>
+
+    <div class="checklist__grid" [appStaggerChildren]="60">
+      @for (item of qualityChecklist; track item.title; let idx = $index) {
+      <article
+        class="checklist-card reveal-on-scroll"
+        [style.animation-delay.ms]="idx * 50"
+      >
+        <div class="checklist-card__header">
+          <app-ui-badge variant="default" size="sm">{{ getCheckCategoryLabel(item.category) }}</app-ui-badge>
+          <h3 class="checklist-card__title">{{ item.title }}</h3>
+        </div>
+        <p class="checklist-card__description">{{ item.description }}</p>
       </article>
       }
     </div>

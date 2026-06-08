@@ -66,7 +66,7 @@ describe('HomepageComponent', () => {
   it('devrait afficher le titre de la section graphe', () => {
     const graphTitle: HTMLElement = fixture.nativeElement.querySelector('.homepage__graph-header .homepage__section-title');
     expect(graphTitle).toBeTruthy();
-    expect(graphTitle.textContent?.trim()).toBe('Le réseau d\'agents');
+    expect(graphTitle.textContent?.trim()).toBe('La ruche en action');
   });
 
   /* ── Statistiques ── */

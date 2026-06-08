@@ -34,10 +34,12 @@ describe('AppRoutes', () => {
     expect(typeof skillsRoute?.loadChildren).toBe('function');
   });
 
-  it('devrait avoir une route wildcard ** qui redirige vers "" (accueil)', () => {
+  it('devrait avoir une route wildcard ** avec loadComponent vers NotFoundComponent', () => {
     const wildcardRoute = routes.find((r) => r.path === '**');
     expect(wildcardRoute).toBeTruthy();
-    expect(wildcardRoute?.redirectTo).toBe('');
+    expect(wildcardRoute?.loadComponent).toBeDefined();
+    expect(typeof wildcardRoute?.loadComponent).toBe('function');
+    expect(wildcardRoute?.data).toEqual({ title: 'Page introuvable' });
   });
 
   it('devrait avoir une route /normes avec lazy loading vers standards', () => {

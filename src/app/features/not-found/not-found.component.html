@@ -1,0 +1,46 @@
+<section class="not-found">
+  <!-- Hexagone décoratif -->
+  <svg
+    class="not-found__hex"
+    viewBox="0 0 200 200"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path
+      d="M100 10 L173.2 55 L173.2 145 L100 190 L26.8 145 L26.8 55 Z"
+      stroke="currentColor"
+      stroke-width="1.5"
+      fill="none"
+    />
+    <path
+      d="M100 30 L158.4 65 L158.4 135 L100 170 L41.6 135 L41.6 65 Z"
+      stroke="currentColor"
+      stroke-width="1"
+      fill="none"
+    />
+    <path
+      d="M100 50 L143.6 76 L143.6 124 L100 150 L56.4 124 L56.4 76 Z"
+      stroke="currentColor"
+      stroke-width="0.75"
+      fill="none"
+    />
+  </svg>
+
+  <!-- Contenu principal -->
+  <div class="not-found__content">
+    <h1 class="not-found__code">404</h1>
+    <p class="not-found__message">
+      Cette page s'est perdue dans le swarm. Les agents sont à sa recherche.
+    </p>
+
+    <nav class="not-found__actions" aria-label="Navigation depuis la page 404">
+      <app-ui-button variant="primary" size="lg" routerLink="/">
+        Retour à la ruche
+      </app-ui-button>
+      <app-ui-button variant="outline" size="lg" routerLink="/agents">
+        Explorer les agents
+      </app-ui-button>
+    </nav>
+  </div>
+</section>

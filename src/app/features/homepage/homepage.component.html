@@ -4,6 +4,8 @@
      animations GSAP scroll-driven
      ========================================================================== -->
 
+<app-sparkle-effect [active]="showSparkle()" />
+
 <div class="homepage">
 
   <!-- ═══════════════════════════════════════════════════════════════════
@@ -13,7 +15,7 @@
   <section
     class="homepage__hero"
     [style.background]="'radial-gradient(circle 800px at ' + cursorX() + '% ' + cursorY() + '%, rgba(240,165,34,0.03) 0%, transparent 70%)'"
-    aria-label="Présentation du système Swarm">
+    aria-label="Les agents du Swarm en action">
     <!-- Décor de fond parallaxe -->
     <div class="homepage__hero-decor homepage__hero-decor--far" aria-hidden="true"></div>
     <div class="homepage__hero-decor homepage__hero-decor--mid" aria-hidden="true"></div>
@@ -39,16 +41,16 @@
       <!-- Résumé exécutif — 3 phrases percutantes -->
       <div class="homepage__summary homepage__hero-stagger">
         <p class="homepage__summary-text">
-          Swarm orchestre <strong>9 agents IA spécialisés</strong> qui collaborent en temps réel&nbsp;:
-          de l'analyse du codebase au déploiement, chaque étape est automatisée par un agent dédié.
+          <strong>9 agents IA spécialisés</strong> collaborent en parallèle sur votre projet&nbsp;:
+          de l'analyse à la PR mergée, chaque étape est automatisée sans intervention humaine.
         </p>
         <p class="homepage__summary-text">
-          <strong>26 skills activables</strong> par les agents couvrent l'intégralité du cycle de développement —
-          génération de code, tests, revue, documentation et déploiement sur Supabase, Vercel, Render.
+          <strong>26 skills activables</strong> étendent leurs capacités — génération de composants Apple-grade,
+          tests automatisés, analyse de codebase, documentation vivante. Déploiement natif sur Supabase, Vercel et Render.
         </p>
         <p class="homepage__summary-text">
-          Une session de développement <strong>coûte en moyenne 1.25&nbsp;$</strong>,
-          soit 10× moins qu'un développeur humain pour un résultat de qualité production.
+          Une session de développement <strong>coûte environ 1.25&nbsp;$</strong>,
+          soit jusqu'à 10× moins qu'un développeur humain, pour un code testé, revu et documenté.
         </p>
       </div>
     </div>
@@ -70,10 +72,9 @@
        ═══════════════════════════════════════════════════════════════════ -->
   <section class="homepage__graph" aria-label="Carte interactive des agents du Swarm">
     <div class="homepage__graph-header">
-      <h2 class="homepage__section-title">Le réseau d'agents</h2>
+      <h2 class="homepage__section-title">La ruche en action</h2>
       <p class="homepage__section-subtitle">
-        Chaque nœud est un agent autonome. L'orchestrateur coordonne, les autres exécutent.
-        Survolez les nœuds pour découvrir leur rôle.
+        Neuf agents interconnectés, pilotés par l'orchestrateur. Survolez un nœud pour découvrir son rôle — chaque agent est cliquable pour plus de détails.
       </p>
     </div>
     <app-swarm-graph class="homepage__graph-canvas" />
@@ -106,7 +107,7 @@
        Section 4 : Navigation visuelle — 4 cartes animées GSAP
        ═══════════════════════════════════════════════════════════════════ -->
   <section class="homepage__navigation" aria-label="Navigation vers les sections du wiki">
-    <h2 class="homepage__section-title">Explorez le système</h2>
+    <h2 class="homepage__section-title">Choisissez votre destination</h2>
     <div class="homepage__nav-grid">
       @for (card of navCards; track card.route; let idx = $index) {
         <a

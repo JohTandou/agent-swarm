@@ -18,6 +18,7 @@ import { Subject, debounceTime, distinctUntilChanged, Subscription } from 'rxjs'
 import type { SearchResult } from '@shared/models';
 import { SearchService } from '../../services/search.service';
 import { UiSkeletonComponent } from '../ui-skeleton/ui-skeleton.component';
+import { UiEmptyStateComponent } from '../ui-empty-state/ui-empty-state.component';
 
 /**
  * Modale de recherche Cmd+K.
@@ -34,7 +35,7 @@ import { UiSkeletonComponent } from '../ui-skeleton/ui-skeleton.component';
 @Component({
   selector: 'app-search-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiSkeletonComponent],
+  imports: [CommonModule, FormsModule, UiSkeletonComponent, UiEmptyStateComponent],
   templateUrl: './search-modal.component.html',
   styleUrls: ['./search-modal.component.scss'],
 })

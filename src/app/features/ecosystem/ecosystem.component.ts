@@ -86,9 +86,9 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
    * Données — Section 1 : Hero
    * ========================================================================== */
 
-  protected readonly heroTitle = 'L\'Écosystème Technique';
+  protected readonly heroTitle = 'Les coulisses du Swarm';
   protected readonly heroSubtitle =
-    'Le Swarm ne se résume pas à ses agents. C\'est un écosystème complet de fichiers de configuration, de documentation vivante, de skills spécialisées et d\'intégrations MCP. Cette page décortique chaque composant de l\'infrastructure qui rend l\'orchestration possible.';
+    'Derrière les neuf agents se cache un écosystème complet : configuration centralisée, documentation auto-générée, skills activables à la demande et intégrations natives avec Supabase, Vercel, Render et Playwright. Voici comment tout cela s\'articule.';
 
   /* ==========================================================================
    * Données — Section 2 : Structure .opencode/
