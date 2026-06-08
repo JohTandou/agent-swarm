@@ -1,0 +1,100 @@
+/* ==========================================================================
+   Swarm Wiki — Système d'interactions global
+   Classes utilitaires pour hover, glow, active-press, shimmer
+   Palette dark exclusif, 6 couleurs
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   .hover-lift — Élévation premium au survol
+   translateY(-2px) + scale(1.02) + glow ambré
+   -------------------------------------------------------------------------- */
+.hover-lift {
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+              box-shadow var(--duration-normal) var(--ease-out-expo),
+              border-color var(--duration-normal) var(--ease-out-expo);
+
+  &:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--elevation-n3);
+    border-color: rgba(240, 165, 34, 0.2);
+  }
+
+  &:active {
+    transform: scale(0.97);
+    transition: transform var(--duration-fast) ease-in-out;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   .hover-glow — Glow ambré au survol (sans lift)
+   -------------------------------------------------------------------------- */
+.hover-glow {
+  transition: box-shadow var(--duration-normal) var(--ease-natural),
+              border-color var(--duration-normal) var(--ease-natural);
+
+  &:hover {
+    box-shadow: 0 0 20px rgba(240, 165, 34, 0.08);
+    border-color: rgba(240, 165, 34, 0.15);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   .active-press — Feedback tactile au clic
+   scale(0.97) en 100ms
+   -------------------------------------------------------------------------- */
+.active-press {
+  &:active {
+    transform: scale(0.97);
+    transition: transform var(--duration-fast) ease-in-out;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   .shimmer-sweep — Balayage lumineux au hover
+   Pseudo-element avec gradient transparent → white/8 → transparent
+   Traverse de gauche à droite en 500ms
+   -------------------------------------------------------------------------- */
+.shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    transition: transform 0ms;
+    pointer-events: none;
+  }
+
+  &:hover::after {
+    transform: translateX(100%);
+    transition: transform 500ms var(--ease-out-expo);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Désactivation mobile et reduced-motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hover-lift,
+  .hover-glow,
+  .active-press,
+  .shimmer-sweep,
+  .shimmer-sweep::after {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .shimmer-sweep::after {
+    display: none;
+  }
+}
