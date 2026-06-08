@@ -63,12 +63,11 @@ describe('AppComponent', () => {
     expect(component.sidebarOpen()).toBeFalse();
   });
 
-  it('devrait avoir des breadcrumbs définis', () => {
-    expect(component.breadcrumbs.length).toBe(2);
-    expect(component.breadcrumbs[0].label).toBe('Accueil');
-    expect(component.breadcrumbs[0].route).toBe('/');
-    expect(component.breadcrumbs[1].label).toBe('Documentation');
-    expect(component.breadcrumbs[1].route).toBeUndefined();
+  it('devrait avoir des breadcrumbs dynamiques commençant par Accueil', () => {
+    const crumbs = component.breadcrumbs();
+    expect(crumbs.length).toBeGreaterThanOrEqual(1);
+    expect(crumbs[0].label).toBe('Accueil');
+    expect(crumbs[0].route).toBe('/');
   });
 
   it('devrait afficher le lien skip-to-content', () => {
@@ -194,5 +193,18 @@ describe('AppComponent', () => {
     expect(component.sidebarOpen()).toBeDefined();
     expect(component.isHomepage()).toBeDefined();
     expect(component.tocOpen()).toBeDefined();
+  });
+
+  // ─── Test du fil d'Ariane dynamique ───
+
+  it('le fil d\'Ariane devrait être un signal', () => {
+    expect(component.breadcrumbs).toBeDefined();
+    const crumbs = component.breadcrumbs();
+    expect(Array.isArray(crumbs)).toBeTrue();
+  });
+
+  it('le fil d\'Ariane devrait contenir le composant app-toaster', () => {
+    const toaster = fixture.nativeElement.querySelector('app-toaster');
+    expect(toaster).toBeTruthy();
   });
 });

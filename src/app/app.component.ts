@@ -1,5 +1,5 @@
-import { Component, signal, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
-import { RouterOutlet, Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { Component, signal, OnInit, OnDestroy, HostListener, ViewChild, ElementRef, inject } from '@angular/core';
+import { RouterOutlet, Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -8,6 +8,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component';
 import { TableOfContentsComponent } from './shared/components/table-of-contents/table-of-contents.component';
+import { ToasterComponent } from './shared/components/toaster/toaster.component';
 import { SearchModalComponent } from './shared/components/search-modal/search-modal.component';
 import { SearchService } from './shared/services/search.service';
 import { AnimationService } from './shared/services/animation.service';
@@ -15,10 +16,36 @@ import type { Breadcrumb } from '@shared/models';
 import type { SearchResult } from '@shared/models';
 
 /**
+ * Mapping des segments d'URL vers les labels du fil d'Ariane.
+ * Les routes avec paramètres dynamiques sont détectées via préfixe.
+ */
+const BREADCRUMB_LABELS: Record<string, string> = {
+  'agents': 'Agents',
+  'skills': 'Skills',
+  'workflow': 'Pipeline',
+  'probleme-innovation': 'Problème & Innovation',
+  'normes': 'Standards',
+  'outils-mcp': 'Outils MCP',
+  'a-propos': 'À propos',
+  'demo-markdown': 'Démo Markdown',
+  'ecosysteme': 'Écosystème',
+};
+
+/**
+ * Labels pour les segments dynamiques (ex: /agents/:id).
+ * Le deuxième segment après un préfixe connu prend ce label.
+ */
+const DYNAMIC_LABELS: Record<string, string> = {
+  'agents': 'Agent',
+  'skills': 'Skill',
+  'outils-mcp': 'Catégorie',
+};
+
+/**
  * Composant racine — Shell applicatif.
  * Gère le layout responsive (3 colonnes desktop, 1 colonne mobile),
  * l'état de la sidebar, le mode plein écran pour la page d'accueil,
- * et les transitions de page GSAP.
+ * les transitions de page GSAP, et les toasts de notification.
  */
 @Component({
   selector: 'app-root',
@@ -29,6 +56,7 @@ import type { SearchResult } from '@shared/models';
     SidebarComponent,
     BreadcrumbsComponent,
     TableOfContentsComponent,
+    ToasterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -49,15 +77,16 @@ export class AppComponent implements OnInit, OnDestroy {
   /** État d'ouverture de l'accordéon TOC sur mobile */
   readonly tocOpen = signal(false);
 
-  /** Fil d'Ariane placeholder en attendant le service de routing contextuel */
-  readonly breadcrumbs: Breadcrumb[] = [
+  /** Fil d'Ariane dynamique construit à partir de l'URL courante */
+  readonly breadcrumbs = signal<Breadcrumb[]>([
     { label: 'Accueil', route: '/' },
-    { label: 'Documentation' },
-  ];
+  ]);
 
   private subscriptions = new Subscription();
 
   private searchOverlayRef: OverlayRef | null = null;
+
+  private readonly activatedRoute = inject(ActivatedRoute);
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -79,13 +108,16 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    /* Détecte la page d'accueil à la navigation */
+    /* Détecte la page d'accueil et construit le fil d'Ariane à la navigation */
     this.subscriptions.add(
       this.router.events
         .pipe(filter((e) => e instanceof NavigationEnd))
         .subscribe((e) => {
           const url = (e as NavigationEnd).urlAfterRedirects;
           this.isHomepage.set(url === '/' || url === '');
+
+          // Construit le fil d'Ariane dynamique
+          this.breadcrumbs.set(this.buildBreadcrumbs(url));
 
           // Animation d'entrée de page
           const wrapper = this.pageWrapperRef?.nativeElement;
@@ -114,11 +146,55 @@ export class AppComponent implements OnInit, OnDestroy {
     /* Détection initiale (avant tout événement de navigation) */
     const currentUrl = this.router.url;
     this.isHomepage.set(currentUrl === '/' || currentUrl === '');
+    this.breadcrumbs.set(this.buildBreadcrumbs(currentUrl));
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
     this.animService.killAll();
+  }
+
+  /**
+   * Construit le fil d'Ariane à partir de l'URL courante.
+   * Toujours commence par « Accueil ».
+   * Les segments sont mappés vers des labels français.
+   */
+  private buildBreadcrumbs(url: string): Breadcrumb[] {
+    const crumbs: Breadcrumb[] = [{ label: 'Accueil', route: '/' }];
+    if (!url || url === '/') return crumbs;
+
+    // Nettoie l'URL : retire le leading slash et les query params
+    const segments = url.replace(/^\//, '').split('/').filter((s) => s.length > 0);
+    if (segments.length === 0) return crumbs;
+
+    let accumulatedPath = '';
+
+    for (let i = 0; i < segments.length; i++) {
+      const segment = segments[i];
+      accumulatedPath += '/' + segment;
+
+      // Détermine le label pour ce segment
+      let label: string;
+
+      if (BREADCRUMB_LABELS[segment]) {
+        // Segment connu (ex: "agents", "skills")
+        label = BREADCRUMB_LABELS[segment];
+      } else if (i > 0 && DYNAMIC_LABELS[segments[i - 1]]) {
+        // Segment dynamique après un préfixe connu (ex: /agents/orchestrateur)
+        label = DYNAMIC_LABELS[segments[i - 1]];
+      } else {
+        // Fallback : capitalise le segment
+        label = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+      }
+
+      const isLast = i === segments.length - 1;
+      crumbs.push({
+        label,
+        route: isLast ? undefined : accumulatedPath,
+      });
+    }
+
+    return crumbs;
   }
 
   /** Bascule l'état d'ouverture de la sidebar (mobile uniquement) */

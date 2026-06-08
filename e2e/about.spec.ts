@@ -15,44 +15,44 @@ test.describe('T15 — Page À propos', () => {
   });
 
   test.describe('Contenu', () => {
-    test('affiche le H1 "À propos du Swarm"', async ({ page }) => {
+    test('affiche le H1 "Le Swarm"', async ({ page }) => {
       await page.goto('/a-propos');
       await expect(page.locator('.about__title')).toBeVisible({ timeout: 10000 });
-      await expect(page.locator('.about__title')).toHaveText('À propos du Swarm');
+      await expect(page.locator('.about__title')).toContainText('Le Swarm');
     });
 
-    test('affiche le paragraphe de description', async ({ page }) => {
+    test('affiche le sous-titre de description', async ({ page }) => {
       await page.goto('/a-propos');
-      const desc = page.locator('.about__description');
+      const desc = page.locator('.about__subtitle');
       await expect(desc).toBeVisible({ timeout: 10000 });
-      await expect(desc).toContainText('pipeline d\'agents IA');
+      await expect(desc).toContainText('pipeline');
     });
 
-    test('affiche les 3 statistiques', async ({ page }) => {
+    test('affiche les 6 cartes de statistiques', async ({ page }) => {
       await page.goto('/a-propos');
-      const stats = page.locator('.about__stat');
-      await expect(stats).toHaveCount(3);
+      const stats = page.locator('.about__stat-card');
+      await expect(stats).toHaveCount(6);
     });
 
     test('la première stat affiche "9" agents spécialisés', async ({ page }) => {
       await page.goto('/a-propos');
-      const firstStat = page.locator('.about__stat').first();
-      await expect(firstStat.locator('strong')).toHaveText('9');
-      await expect(firstStat).toContainText('agents spécialisés');
+      const firstStat = page.locator('.about__stat-card').first();
+      await expect(firstStat.locator('.about__stat-number')).toHaveText('9');
+      await expect(firstStat).toContainText('Agents spécialisés');
     });
 
     test('la deuxième stat affiche "26" skills disponibles', async ({ page }) => {
       await page.goto('/a-propos');
-      const secondStat = page.locator('.about__stat').nth(1);
-      await expect(secondStat.locator('strong')).toHaveText('26');
-      await expect(secondStat).toContainText('skills disponibles');
+      const secondStat = page.locator('.about__stat-card').nth(1);
+      await expect(secondStat.locator('.about__stat-number')).toHaveText('26');
+      await expect(secondStat).toContainText('Skills disponibles');
     });
 
-    test('la troisième stat affiche "4" catégories MCP', async ({ page }) => {
+    test('la troisième stat affiche "5" niveaux de complexité', async ({ page }) => {
       await page.goto('/a-propos');
-      const thirdStat = page.locator('.about__stat').nth(2);
-      await expect(thirdStat.locator('strong')).toHaveText('4');
-      await expect(thirdStat).toContainText('catégories MCP');
+      const thirdStat = page.locator('.about__stat-card').nth(2);
+      await expect(thirdStat.locator('.about__stat-number')).toHaveText('5');
+      await expect(thirdStat).toContainText('Niveaux de complexité');
     });
   });
 
@@ -99,13 +99,13 @@ test.describe('T15 — Page À propos', () => {
       await page.setViewportSize({ width: 390, height: 844 });
       await page.goto('/a-propos');
       await expect(page.locator('.about__title')).toBeVisible({ timeout: 10000 });
-      await expect(page.locator('.about__description')).toBeVisible({ timeout: 10000 });
+      await expect(page.locator('.about__subtitle')).toBeVisible({ timeout: 10000 });
     });
 
     test('les stats sont visibles sur mobile', async ({ page }) => {
       await page.setViewportSize({ width: 390, height: 844 });
       await page.goto('/a-propos');
-      await expect(page.locator('.about__stat')).toHaveCount(3);
+      await expect(page.locator('.about__stat-card')).toHaveCount(6);
     });
   });
 

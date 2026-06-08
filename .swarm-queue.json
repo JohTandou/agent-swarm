@@ -28,7 +28,8 @@
       "title": "Sprint 2 — Polish & Bento Grid",
       "body": "Polish visuel et bento grid :\n1. Activer le bento grid sur agents-list (1 carte vedette grid-column: span 2)\n2. Activer le bento grid sur skills-list (1 carte vedette grid-column: span 2)\n3. Ajouter parallaxe multi-couches sur la homepage\n4. Ajouter transitions entre catégories MCP tools\n5. Remplacer 'SF Mono'/'Fira Code' par var(--font-body) dans mcp-tools.scss\n\nCritères : grilles asymétriques visibles, parallaxe enrichie, polices cohérentes.",
       "route": "MEDIUM",
-      "status": "in_progress",
+      "status": "done",
+      "pr_url": "https://github.com/JohTandou/swarm-wiki/pull/46",
       "issue_number": 45,
       "branch": "feature/swarm-sprint2-polish"
     },
@@ -40,5 +41,5 @@
       "status": "pending"
     }
   ],
-  "current_index": 2
+  "current_index": 3
 }

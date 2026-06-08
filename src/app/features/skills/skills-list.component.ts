@@ -1,5 +1,6 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ToastService } from '@shared/services/toast.service';
 import type { Skill, SkillCategory } from '@shared/models';
 
 /**
@@ -59,6 +60,8 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
   styleUrls: ['./skills-list.component.scss'],
 })
 export class SkillsListComponent {
+  private readonly toastService = inject(ToastService);
+
   /** Liste complète des skills */
   readonly skills = SKILLS;
 
@@ -81,12 +84,16 @@ export class SkillsListComponent {
   /**
    * Active ou désactive un filtre de catégorie.
    * Si la catégorie est déjà active → désactive (affiche tout).
+   * Affiche un toast avec le nombre de skills trouvés.
    */
   toggleCategory(category: SkillCategory): void {
     if (this.activeCategory() === category) {
       this.activeCategory.set(null);
+      this.toastService.show(`${this.skills.length} skills affichés`, 'info');
     } else {
       this.activeCategory.set(category);
+      const count = this.getCategoryCount(category);
+      this.toastService.show(`${count} skills trouvés — ${CATEGORY_LABELS[category]}`, 'success');
     }
   }
 
