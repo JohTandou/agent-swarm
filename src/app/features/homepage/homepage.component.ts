@@ -1,5 +1,6 @@
 import {
   Component,
+  HostListener,
   signal,
   OnInit,
   OnDestroy,
@@ -113,6 +114,18 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: '🌐',
     },
   ];
+
+  /** Position X du curseur en pourcentage (pour le gradient radial) */
+  protected readonly cursorX = signal(50);
+  /** Position Y du curseur en pourcentage (pour le gradient radial) */
+  protected readonly cursorY = signal(50);
+
+  @HostListener('mousemove', ['$event'])
+  onMouseMove(event: MouseEvent): void {
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+    this.cursorX.set(((event.clientX - rect.left) / rect.width) * 100);
+    this.cursorY.set(((event.clientY - rect.top) / rect.height) * 100);
+  }
 
   /** Valeurs courantes de l'animation de compteur (0 → cible) */
   readonly animatedValues = signal<number[]>([0, 0, 0, 0]);

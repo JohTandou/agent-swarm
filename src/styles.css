@@ -65,6 +65,36 @@
   --ease-natural: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Spacing system */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Radius system */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* Z-Index system */
+  --z-dropdown: 50;
+  --z-sticky: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+
+  /* Durées standardisées */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-cinematic: 800ms;
+
 
   /* Dimensions shell */
   --header-height: 64px;
@@ -110,6 +140,22 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 0px);
   padding-left: env(safe-area-inset-left, 0px);
   padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* --------------------------------------------------------------------------
+   Grain texture globale — overlay noise subtil sur tout le site
+   Inspiré de TopSeeker : pseudo-element body::after, opacity 0.03
+   -------------------------------------------------------------------------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("/assets/textures/noise.svg");
+  background-repeat: repeat;
+  background-size: 128px 128px;
 }
 
 /* --------------------------------------------------------------------------
@@ -311,3 +357,8 @@ textarea:disabled,
     forced-color-adjust: auto;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Interactions globales — hover, glow, press, shimmer
+   -------------------------------------------------------------------------- */
+@import "./styles/_interactions.scss";
