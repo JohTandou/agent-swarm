@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, HostListener, Input, Output, EventEmitter } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import type { NavItem } from '@shared/models';
@@ -21,6 +21,9 @@ export class SidebarComponent {
 
   /** Émet quand l'utilisateur ferme la sidebar sur mobile */
   @Output() closeSidebar = new EventEmitter<void>();
+
+  /** Position X de départ du touch pour le swipe-to-dismiss */
+  private touchStartX = 0;
 
   /**
    * Structure de navigation hiérarchique.
@@ -63,6 +66,23 @@ export class SidebarComponent {
       ],
     },
   ];
+
+  /** Détecte le début d'un touch pour le swipe-to-dismiss */
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent): void {
+    if (!this.isMobile) return;
+    this.touchStartX = event.touches[0].clientX;
+  }
+
+  /** Détecte la fin d'un touch — ferme la sidebar si swipe > 80px vers la droite */
+  @HostListener('touchend', ['$event'])
+  onTouchEnd(event: TouchEvent): void {
+    if (!this.isMobile) return;
+    const deltaX = event.changedTouches[0].clientX - this.touchStartX;
+    if (deltaX > 80) {
+      this.closeSidebar.emit();
+    }
+  }
 
   /** Bascule l'expansion d'un menu parent */
   toggleExpanded(item: NavItem): void {

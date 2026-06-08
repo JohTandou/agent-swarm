@@ -74,7 +74,7 @@ $section-padding-mobile: 64px 20px;
 
 
 /* ==========================================================================
-   Section 1 — Hero (100vh)
+   Section 1 — Hero (100dvh)
    ========================================================================== */
 .hero {
   position: relative;
@@ -82,7 +82,7 @@ $section-padding-mobile: 64px 20px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 100dvh;
   padding: $section-padding;
   text-align: center;
   overflow: hidden;

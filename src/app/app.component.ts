@@ -14,6 +14,7 @@ import { SearchModalComponent } from './shared/components/search-modal/search-mo
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { SearchService } from './shared/services/search.service';
 import { AnimationService } from './shared/services/animation.service';
+import { ScrollProgressComponent } from './shared/components/scroll-progress/scroll-progress.component';
 import type { Breadcrumb } from '@shared/models';
 import type { SearchResult } from '@shared/models';
 
@@ -60,6 +61,7 @@ const DYNAMIC_LABELS: Record<string, string> = {
     TableOfContentsComponent,
     ToasterComponent,
     UiButtonComponent,
+    ScrollProgressComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
