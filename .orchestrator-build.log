@@ -7,21 +7,21 @@ Odd numbered Node.js versions will not enter LTS status and should not be used f
 ❯ Building...
 ✔ Building...
 Initial chunk files   | Names                        |  Raw size | Estimated transfer size
-chunk-LZLSHFGG.js     | -                            | 149.52 kB |                44.56 kB
-main-DRWV5BX5.js      | main                         | 141.53 kB |                34.33 kB
-chunk-WITZUL4N.js     | -                            |  70.82 kB |                17.63 kB
-chunk-UHQBCUFT.js     | -                            |  51.51 kB |                14.58 kB
-chunk-CF65OTET.js     | -                            |  39.08 kB |                11.02 kB
+main-62PD5JGQ.js      | main                         | 205.89 kB |                50.62 kB
+chunk-L6MTJWQX.js     | -                            | 149.63 kB |                44.49 kB
+chunk-OSIWFR4R.js     | -                            |  70.82 kB |                17.65 kB
+chunk-WUJM737Y.js     | -                            |  51.51 kB |                14.53 kB
+chunk-BE4A3FHJ.js     | -                            |  39.09 kB |                11.03 kB
 polyfills-5CFQRCPP.js | polyfills                    |  34.59 kB |                11.33 kB
 styles-YPFWP2M7.css   | styles                       |  32.37 kB |                 7.17 kB
-chunk-CIMFXDSP.js     | -                            |   4.56 kB |                 1.32 kB
-chunk-CMTEO4XL.js     | -                            |   2.71 kB |               889 bytes
+chunk-D456VLUO.js     | -                            |   4.56 kB |                 1.32 kB
+chunk-6RMWULMH.js     | -                            |   2.71 kB |               889 bytes
 chunk-2WH2EVR6.js     | -                            |   1.80 kB |               808 bytes
-chunk-PNKWBXMD.js     | -                            |   1.24 kB |               591 bytes
-chunk-F5XAFBSJ.js     | -                            | 554 bytes |               554 bytes
-chunk-GLNKQNB4.js     | -                            | 345 bytes |               345 bytes
+chunk-5AL7WLIT.js     | -                            |   1.24 kB |               586 bytes
+chunk-FAWI7DHO.js     | -                            | 554 bytes |               554 bytes
+chunk-JN4ERNF2.js     | -                            | 345 bytes |               345 bytes
 
-                      | Initial total                | 530.62 kB |               145.13 kB
+                      | Initial total                | 595.09 kB |               161.32 kB
 
 Lazy chunk files      | Names                        |  Raw size | Estimated transfer size
 chunk-MEU7XOYO.js     | -                            | 600.64 kB |               116.14 kB
@@ -37,11 +37,11 @@ chunk-NAMCMTY5.js     | blockDiagram-GPEHLZMM        |  72.51 kB |              
 chunk-OOIEVZLO.js     | index                        |  70.51 kB |                25.00 kB
 chunk-34KVRSN5.js     | c4Diagram-AAUBKEIU           |  70.31 kB |                15.84 kB
 chunk-7GS7NYY3.js     | flowDiagram-I6XJVG4X         |  61.11 kB |                16.04 kB
-chunk-5DZSKQ3V.js     | -                            |  56.73 kB |                16.70 kB
+chunk-RYJU6M3T.js     | -                            |  56.73 kB |                16.71 kB
 chunk-TUMWP6IV.js     | -                            |  53.36 kB |                16.03 kB
-...and 82 more lazy chunks files. Use "--verbose" to show all the files.
+...and 84 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [7.937 seconds]
+Application bundle generation complete. [6.889 seconds]
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mAll "@import" rules must come first[0m [invalid-@import]
 
@@ -56,25 +56,25 @@ Application bundle generation complete. [7.937 seconds]
          ╵ [32m^[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mbundle initial exceeded maximum budget. Budget 500.00 kB was not met by 30.62 kB with a total of 530.62 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mbundle initial exceeded maximum budget. Budget 500.00 kB was not met by 95.09 kB with a total of 595.09 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/homepage/homepage.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 416 bytes with a total of 8.42 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/ecosystem/ecosystem.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 2.94 kB with a total of 10.94 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/standards/standards.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 3.10 kB with a total of 11.10 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/mcp-tools/mcp-tools.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 1.58 kB with a total of 9.58 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 8.66 kB with a total of 16.66 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 4.98 kB with a total of 12.98 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/ecosystem/ecosystem.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 2.82 kB with a total of 10.82 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 8.78 kB with a total of 16.78 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 4.88 kB with a total of 12.88 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/standards/standards.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 3.26 kB with a total of 11.26 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/mcp-tools/mcp-tools.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 1.51 kB with a total of 9.51 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/homepage/homepage.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 529 bytes with a total of 8.53 kB.[0m
 
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'cytoscape-fcose' used by 'node_modules/mermaid/dist/chunks/mermaid.core/architectureDiagram-3BPJPVTR.mjs' is not ESM[0m

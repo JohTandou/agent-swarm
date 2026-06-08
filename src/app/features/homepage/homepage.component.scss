@@ -27,6 +27,8 @@
   min-height: 100vh;
   padding: clamp(40px, 8vh, 120px) clamp(24px, 8vw, 120px);
   text-align: center;
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
 /* Décor de fond parallaxe — couches multiples */
@@ -47,6 +49,7 @@
     );
     border-radius: 50%;
     opacity: 0.6;
+    will-change: transform;
   }
 
   /* Couche milieu — cercle avec glow ambré */
@@ -63,6 +66,7 @@
     );
     border-radius: 50%;
     opacity: 0.5;
+    will-change: transform;
   }
 
   /* Couche proche — petite forme géométrique accentuée */
@@ -79,6 +83,7 @@
     );
     border-radius: 40% 60% 60% 40% / 50% 50% 60% 60%;
     opacity: 0.7;
+    will-change: transform;
   }
 }
 

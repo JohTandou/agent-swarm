@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { of } from 'rxjs';
@@ -23,6 +24,7 @@ describe('AppComponent', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideRouter([]),
+        provideAnimationsAsync(),
         importProvidersFrom(OverlayModule),
         { provide: BreakpointObserver, useValue: breakpointObserverMock },
       ],

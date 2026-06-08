@@ -4,6 +4,8 @@ import { AnimationService } from '../../shared/services/animation.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
+import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
+import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 
 /** Délai de simulation du chargement (ms) */
 const LOADING_SIMULATION_MS = 400;
@@ -68,7 +70,7 @@ interface SwarmFile {
 @Component({
   selector: 'app-workflow',
   standalone: true,
-  imports: [MarkdownRendererComponent, UiButtonComponent, UiSkeletonComponent, UiBadgeComponent],
+  imports: [MarkdownRendererComponent, UiButtonComponent, UiSkeletonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
   templateUrl: './workflow.component.html',
   styleUrls: ['./workflow.component.scss'],
 })

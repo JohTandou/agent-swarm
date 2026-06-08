@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
+import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 
 /**
  * Page "À propos du Swarm" — Contenu riche structuré en sections.
@@ -11,7 +13,7 @@ import { UiButtonComponent } from '@shared/components/ui-button/ui-button.compon
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [UiButtonComponent],
+  imports: [UiButtonComponent, StaggerChildrenDirective, TextRevealDirective],
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
 })

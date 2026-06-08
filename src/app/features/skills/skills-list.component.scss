@@ -280,3 +280,8 @@
   color: var(--color-text-secondary);
   margin: 0;
 }
+
+/* Stagger animation delay */
+.skills__grid > * {
+  animation-delay: calc(var(--stagger-index) * 60ms);
+}

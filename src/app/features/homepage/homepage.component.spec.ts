@@ -41,7 +41,7 @@ describe('HomepageComponent', () => {
   it('devrait afficher la tagline', () => {
     const tagline: HTMLElement = fixture.nativeElement.querySelector('.homepage__tagline');
     expect(tagline).toBeTruthy();
-    expect(tagline.textContent).toContain('code, teste, review et déploie');
+    expect((tagline.textContent ?? '').replace(/\u00A0/g, ' ')).toContain('code, teste, review et déploie');
   });
 
   it('devrait afficher le résumé exécutif en 3 phrases', () => {

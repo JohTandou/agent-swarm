@@ -49,7 +49,7 @@
     <div class="hero__bg-decor" aria-hidden="true"></div>
     <div class="hero__content">
       <span class="hero__kicker reveal-on-scroll">Le pipeline d'agents IA</span>
-      <h1 id="hero-title" class="hero__title reveal-on-scroll">{{ heroTitle }}</h1>
+      <h1 id="hero-title" class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">{{ heroTitle }}</h1>
       <p class="hero__subtitle reveal-on-scroll">{{ heroSubtitle }}</p>
       <div class="hero__stats reveal-on-scroll">
         <div class="hero__stat">
@@ -85,7 +85,7 @@
       </p>
     </div>
 
-    <div class="comparison__list">
+    <div class="comparison__list" [appStaggerChildren]="60">
       @for (item of comparisonData; track item.label; let idx = $index) {
       <article class="comparison-card reveal-on-scroll" [style.animation-delay.ms]="idx * 100">
         <h3 class="comparison-card__label">{{ item.label }}</h3>
@@ -182,7 +182,7 @@
       </p>
     </div>
 
-    <div class="pillars__grid">
+    <div class="pillars__grid" [appStaggerChildren]="60">
       @for (pillar of pillars; track pillar.title; let idx = $index) {
       <article
         class="pillar-card reveal-on-scroll"
@@ -294,7 +294,7 @@
       </p>
     </div>
 
-    <div class="limits__grid">
+    <div class="limits__grid" [appStaggerChildren]="60">
       @for (category of limits; track category.category; let idx = $index) {
       <article class="limit-card reveal-on-scroll" [style.animation-delay.ms]="idx * 120">
         <h3 class="limit-card__title">{{ category.category }}</h3>
@@ -319,7 +319,7 @@
       </p>
     </div>
 
-    <div class="audience__grid">
+    <div class="audience__grid" [appStaggerChildren]="60">
       @for (target of targetAudiences; track target.audience; let idx = $index) {
       <article class="audience-card reveal-on-scroll" [style.animation-delay.ms]="idx * 100">
         <h3 class="audience-card__title">{{ target.audience }}</h3>

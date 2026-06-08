@@ -887,3 +887,11 @@ $section-padding-mobile: 64px 20px;
     height: 1px;
   }
 }
+
+/* Stagger animation delay */
+.tree-nodes > *,
+.gates-grid > *,
+.git-pipeline > *,
+.files-grid > * {
+  animation-delay: calc(var(--stagger-index) * 60ms);
+}

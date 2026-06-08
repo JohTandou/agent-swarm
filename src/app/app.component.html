@@ -69,7 +69,9 @@
       class="main-content page-transition"
       [class.main-content--homepage]="isHomepage()"
     >
-      <router-outlet />
+      <div [@routeAnimations]="getRouteState(outlet)">
+        <router-outlet #outlet="outlet" />
+      </div>
     </div>
   </main>
 

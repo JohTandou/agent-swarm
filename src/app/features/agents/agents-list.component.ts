@@ -1,8 +1,10 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { ToastService } from '@shared/services/toast.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
+import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import type { Agent, AgentCategory } from '@shared/models';
 
 /**
@@ -160,7 +162,7 @@ const CATEGORY_LABELS: Record<AgentCategory, string> = {
 @Component({
   selector: 'app-agents-list',
   standalone: true,
-  imports: [RouterLink, UiButtonComponent, UiBadgeComponent],
+  imports: [RouterLink, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
   templateUrl: './agents-list.component.html',
   styleUrls: ['./agents-list.component.scss'],
 })

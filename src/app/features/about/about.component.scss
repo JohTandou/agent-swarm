@@ -412,3 +412,9 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+/* Stagger animation delay */
+.about__team-grid > *,
+.about__stats > * {
+  animation-delay: calc(var(--stagger-index) * 60ms);
+}

@@ -1,5 +1,6 @@
 import { Component, signal, OnInit, OnDestroy, HostListener, ViewChild, ElementRef, inject } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
+import { trigger, transition, query, style, animate, group } from '@angular/animations';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -62,6 +63,22 @@ const DYNAMIC_LABELS: Record<string, string> = {
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('routeAnimations', [
+      transition('* <=> *', [
+        query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
+        group([
+          query(':leave', [
+            animate('250ms var(--ease-out-expo)', style({ opacity: 0, transform: 'translateY(8px)' }))
+          ], { optional: true }),
+          query(':enter', [
+            style({ opacity: 0, transform: 'translateY(12px)' }),
+            animate('350ms var(--ease-out-expo)', style({ opacity: 1, transform: 'translateY(0)' }))
+          ], { optional: true }),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('pageWrapper', { static: false })
@@ -266,5 +283,15 @@ export class AppComponent implements OnInit, OnDestroy {
   /** Bascule l'accordéon TOC sur mobile */
   toggleToc(): void {
     this.tocOpen.update((open) => !open);
+  }
+
+  /**
+   * Retourne l'état de route pour les animations Angular.
+   * Désactive les animations si prefers-reduced-motion est actif
+   * (les transitions GSAP sont déjà gérées séparément par AnimationService).
+   */
+  getRouteState(outlet: RouterOutlet): string {
+    if (this.animService.isReducedMotion()) return 'void';
+    return outlet?.activatedRouteData?.['animation'] ?? 'page';
   }
 }

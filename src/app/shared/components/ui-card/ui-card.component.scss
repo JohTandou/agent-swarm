@@ -38,9 +38,9 @@
   transform-origin: center center;
 
   &:hover {
-    transform: perspective(800px) rotateX(1deg) rotateY(-1deg) translateY(-2px);
-    box-shadow: var(--elevation-n3);
-    border-color: rgba(240, 165, 34, 0.15);
+    transform: perspective(800px) rotateX(1deg) rotateY(-1deg) translateY(-4px) scale(1.03);
+    box-shadow: var(--elevation-n3), 0 0 30px rgba(240, 165, 34, 0.06);
+    border-color: rgba(240, 165, 34, 0.2);
   }
 
   // Retour fluide au relâchement du survol

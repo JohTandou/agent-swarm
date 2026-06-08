@@ -27,7 +27,7 @@ describe('AboutComponent', () => {
 
     const titleEl: HTMLElement = fixture.nativeElement.querySelector('.about__title');
     expect(titleEl).toBeTruthy();
-    expect(titleEl.textContent).toContain('Le Swarm');
+    expect((titleEl.textContent ?? '').replace(/\u00A0/g, ' ')).toContain('Le Swarm');
   });
 
   it('devrait afficher le sous-titre de la section hero', () => {

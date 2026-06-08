@@ -49,7 +49,7 @@
       <div class="hero__bg-decor"></div>
       <div class="hero__content">
         <span class="hero__kicker">Infrastructure</span>
-        <h1 class="hero__title">{{ heroTitle }}</h1>
+        <h1 class="hero__title" appTextReveal [revealDelay]="200">{{ heroTitle }}</h1>
         <p class="hero__subtitle">{{ heroSubtitle }}</p>
         <div class="hero__stats">
           <div class="hero__stat reveal-on-scroll" style="animation-delay: 150ms;">
@@ -86,7 +86,7 @@
         </p>
       </div>
 
-      <div class="tree-container">
+      <div class="tree-container" [appStaggerChildren]="60">
         @for (entry of directoryTree; track entry.name; let i = $index) {
           <div class="dir-card reveal-on-scroll" [style.animation-delay]="(i * 60) + 'ms'">
             <div class="dir-card__header">
@@ -128,7 +128,7 @@
         </p>
       </div>
 
-      <div class="config-grid">
+      <div class="config-grid" [appStaggerChildren]="60">
         @for (category of workflowCategories; track category.name; let ci = $index) {
           <div class="config-category reveal-on-scroll" [style.animation-delay]="(ci * 80) + 'ms'">
             <div class="config-category__header">
@@ -168,7 +168,7 @@
         </p>
       </div>
 
-      <div class="agentsmd-grid">
+      <div class="agentsmd-grid" [appStaggerChildren]="60">
         @for (section of agentsMdSections; track section.title; let si = $index) {
           <div class="agentsmd-card reveal-on-scroll" [style.animation-delay]="(si * 50) + 'ms'">
             <div class="agentsmd-card__header">
@@ -197,7 +197,7 @@
         <app-markdown-renderer [content]="mermaidDiagram" [enableMermaid]="true"></app-markdown-renderer>
       </div>
 
-      <div class="integrations-grid">
+      <div class="integrations-grid" [appStaggerChildren]="60">
         @for (integration of integrations; track integration.name; let ii = $index) {
           <div class="integration-card reveal-on-scroll" [style.animation-delay]="(ii * 80) + 'ms'">
             <div class="integration-card__header">

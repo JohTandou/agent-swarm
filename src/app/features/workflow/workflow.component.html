@@ -49,7 +49,7 @@
     <div class="hero__bg-decor" aria-hidden="true"></div>
     <div class="hero__content">
       <span class="hero__kicker reveal-on-scroll">Le pipeline d'agents IA</span>
-      <h1 id="hero-title" class="hero__title reveal-on-scroll">{{ heroTitle }}</h1>
+      <h1 id="hero-title" class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">{{ heroTitle }}</h1>
       <p class="hero__subtitle reveal-on-scroll">{{ heroSubtitle }}</p>
       <div class="hero__stats reveal-on-scroll">
         <div class="hero__stat">
@@ -89,7 +89,7 @@
 
     <div class="tree-container">
       <!-- Colonne des routes -->
-      <div class="tree-nodes">
+      <div class="tree-nodes" [appStaggerChildren]="60">
         @for (node of decisionNodes; track node.route; let idx = $index) {
         <div
           class="node-card reveal-on-scroll"
@@ -210,7 +210,7 @@
       </p>
     </div>
 
-    <div class="gates-grid">
+    <div class="gates-grid" [appStaggerChildren]="60">
       @for (gate of qualityGates; track gate.name; let idx = $index) {
       <div
         class="gate-card reveal-on-scroll"
@@ -272,7 +272,7 @@
       </p>
     </div>
 
-    <div class="git-pipeline">
+    <div class="git-pipeline" [appStaggerChildren]="60">
       @for (step of gitSteps; track step.step; let idx = $index) {
       <div
         class="git-step reveal-on-scroll"
@@ -307,7 +307,7 @@
       </p>
     </div>
 
-    <div class="files-grid">
+    <div class="files-grid" [appStaggerChildren]="60">
       @for (file of swarmFiles; track file.name; let idx = $index) {
       <div
         class="file-card reveal-on-scroll"
