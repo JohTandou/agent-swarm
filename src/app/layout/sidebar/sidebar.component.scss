@@ -32,6 +32,7 @@
 
 /* Liens et boutons de navigation — style unifié */
 .sidebar__link {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,6 +50,19 @@
   cursor: pointer;
   min-height: 44px;
   transition: all 200ms ease-out;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    bottom: 4px;
+    width: 3px;
+    background: var(--color-accent);
+    border-radius: 0 2px 2px 0;
+    transform: scaleY(0);
+    transition: transform 300ms var(--ease-out-expo);
+  }
 }
 
 /* Hover premium — scale léger + glow ambré */
@@ -61,8 +75,12 @@
 /* État actif */
 .sidebar__link--active {
   color: var(--color-accent);
-  background: rgba(240, 165, 34, 0.08);
+  background: rgba(240, 165, 34, 0.06);
   font-weight: 500;
+
+  &::before {
+    transform: scaleY(1);
+  }
 }
 
 /* Menu parent */

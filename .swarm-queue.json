@@ -38,7 +38,9 @@
       "title": "Sprint 3+ — Excellence & Easter Eggs",
       "body": "Détails premium et wow factor :\n1. Implémenter toast/snackbar minimal CSS-only\n2. Rendre les breadcrumbs dynamiques via Router\n3. Ajouter feedback de succès après actions utilisateur\n4. Remplir la page /a-propos avec contenu réel\n5. Ajouter un Easter egg visuel (interaction cachée)\n6. Version SVG légère des hexagones pour mobile\n\nCritères : toasts fonctionnels, breadcrumbs dynamiques, page à-propos complète, Easter egg découvrable, hexagones mobiles.",
       "route": "MEDIUM",
-      "status": "pending"
+      "status": "in_progress",
+      "issue_number": 55,
+      "branch": "feature/swarm-issue-55-sprint-d-navigation-mobile-premium"
     }
   ],
   "current_index": 3

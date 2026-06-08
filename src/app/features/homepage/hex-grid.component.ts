@@ -33,6 +33,7 @@ import {
     <svg
       class="hex-grid__fallback"
       [class.hex-grid__hidden]="!isMobile()"
+      [class.hex-grid__easter-egg]="easterEggMobile()"
       viewBox="0 0 400 300"
       aria-hidden="true"
       preserveAspectRatio="xMidYMid slice"
@@ -76,6 +77,44 @@ import {
       .hex-grid__hidden {
         display: none;
       }
+
+      /* Animations SVG mobile — hexagones qui pulsent */
+      .hex-grid__fallback use {
+        fill: var(--color-accent);
+        opacity: 0.02;
+        animation: hexPulseMobile 3s ease-in-out infinite;
+      }
+
+      .hex-grid__fallback use:nth-child(1) { animation-delay: 0s; }
+      .hex-grid__fallback use:nth-child(2) { animation-delay: 0.3s; }
+      .hex-grid__fallback use:nth-child(3) { animation-delay: 0.6s; }
+      .hex-grid__fallback use:nth-child(4) { animation-delay: 0.9s; }
+      .hex-grid__fallback use:nth-child(5) { animation-delay: 1.2s; }
+      .hex-grid__fallback use:nth-child(6) { animation-delay: 1.5s; }
+      .hex-grid__fallback use:nth-child(7) { animation-delay: 1.8s; }
+      .hex-grid__fallback use:nth-child(8) { animation-delay: 2.1s; }
+      .hex-grid__fallback use:nth-child(9) { animation-delay: 2.4s; }
+      .hex-grid__fallback use:nth-child(10) { animation-delay: 2.7s; }
+      .hex-grid__fallback use:nth-child(11) { animation-delay: 3.0s; }
+      .hex-grid__fallback use:nth-child(12) { animation-delay: 3.3s; }
+      .hex-grid__fallback use:nth-child(13) { animation-delay: 3.6s; }
+
+      @keyframes hexPulseMobile {
+        0%, 100% { opacity: 0.02; }
+        50% { opacity: 0.08; }
+      }
+
+      .hex-grid__fallback.hex-grid__easter-egg use {
+        opacity: 0.4 !important;
+        animation: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hex-grid__fallback use {
+          animation: none;
+          opacity: 0.04;
+        }
+      }
     `,
   ],
 })
@@ -85,6 +124,9 @@ export class HexGridComponent implements OnInit, OnDestroy {
 
   /** Désactivé sur mobile pour la performance (le SVG fallback prend le relais) */
   readonly isMobile = signal(false);
+
+  /** Easter egg actif sur le SVG mobile */
+  readonly easterEggMobile = signal(false);
 
   private ctx: CanvasRenderingContext2D | null = null;
   private hexagons: HexData[] = [];
@@ -183,7 +225,14 @@ export class HexGridComponent implements OnInit, OnDestroy {
 
   /** Illumine tous les hexagones en #F0A522 pendant 2s */
   private triggerEasterEgg(): void {
-    if (this.easterEggActive || this.isMobile()) return;
+    if (this.easterEggActive) return;
+
+    if (this.isMobile()) {
+      this.easterEggMobile.set(true);
+      setTimeout(() => this.easterEggMobile.set(false), 2000);
+      return;
+    }
+
     this.easterEggActive = true;
 
     // Sauvegarde les opacités d'origine et applique l'illumination

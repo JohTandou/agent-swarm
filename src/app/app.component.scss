@@ -4,7 +4,7 @@
 
 .shell-layout {
   display: flex;
-  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100dvh - var(--header-height));
   margin-top: var(--header-height);
   background: var(--color-bg-primary);
 }
@@ -73,7 +73,7 @@
   position: sticky;
   top: calc(var(--header-height) + 32px);
   align-self: flex-start;
-  max-height: calc(100vh - var(--header-height) - 64px);
+  max-height: calc(100dvh - var(--header-height) - 64px);
   overflow-y: auto;
 }
 
