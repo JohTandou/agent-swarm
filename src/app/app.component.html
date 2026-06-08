@@ -45,7 +45,7 @@
   >
     <!-- Fil d'Ariane — masqué sur la page d'accueil -->
     @if (!isHomepage()) {
-      <app-breadcrumbs [breadcrumbs]="breadcrumbs" />
+      <app-breadcrumbs [breadcrumbs]="breadcrumbs()" />
     }
 
     <!-- TOC accordéon sur mobile -->
@@ -83,3 +83,6 @@
     <app-table-of-contents class="shell-layout__toc" />
   }
 </div>
+
+<!-- Notifications toast -->
+<app-toaster />

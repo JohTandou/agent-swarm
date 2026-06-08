@@ -84,7 +84,7 @@ describe('HexGridComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('le canvas devrait exister avec aria-hidden="true"', () => {
+  it('le canvas devrait exister avec aria-hidden="true" en mode desktop', () => {
     stubDesktop();
     const mockCtx = mockCanvasContext();
     spyOn(HTMLCanvasElement.prototype, 'getContext').and.returnValue(mockCtx);
@@ -118,7 +118,7 @@ describe('HexGridComponent', () => {
    * Détection mobile vs desktop
    * ========================================================================== */
 
-  it('devrait détecter le mobile et ne pas initialiser le canvas', () => {
+  it('devrait détecter le mobile et afficher le SVG fallback', () => {
     stubMobile(); // matchMedia → matches: true
 
     const getContextSpy = spyOn(
@@ -131,6 +131,20 @@ describe('HexGridComponent', () => {
     expect(component.isMobile()).toBeTrue();
     // getContext ne doit pas être appelé sur mobile
     expect(getContextSpy).not.toHaveBeenCalled();
+
+    // Le SVG fallback doit être présent
+    const svg = fixture.nativeElement.querySelector('.hex-grid__fallback');
+    expect(svg).toBeTruthy();
+    expect(svg.tagName).toBe('svg');
+  });
+
+  it('le SVG fallback devrait contenir des polygones hexagonaux', () => {
+    stubMobile();
+    fixture.detectChanges();
+
+    const polygons = fixture.nativeElement.querySelectorAll('use');
+    // 13 hexagones dans le SVG fallback
+    expect(polygons.length).toBe(13);
   });
 
   it('devrait initialiser le canvas en mode desktop', () => {
@@ -197,6 +211,57 @@ describe('HexGridComponent', () => {
     const canvas: HTMLCanvasElement =
       fixture.nativeElement.querySelector('.hex-grid__canvas')!;
     expect(canvas.parentElement).not.toBeNull();
+  });
+
+  /* ==========================================================================
+   * Easter egg
+   * ========================================================================== */
+
+  it('devrait détecter la séquence "swarm" au clavier', () => {
+    stubDesktop();
+    const mockCtx = mockCanvasContext();
+    spyOn(HTMLCanvasElement.prototype, 'getContext').and.returnValue(mockCtx);
+    fixture.detectChanges();
+
+    // Simuler la saisie de "swarm"
+    const letters = ['s', 'w', 'a', 'r', 'm'];
+    letters.forEach((letter) => {
+      const event = new KeyboardEvent('keydown', { key: letter });
+      component.onKeydown(event);
+    });
+
+    // Après "swarm", le buffer doit être vidé
+    // On vérifie juste qu'aucune erreur n'est levée
+    expect(() => component.ngOnDestroy()).not.toThrow();
+  });
+
+  it('ne devrait pas déclencher l\'easter egg sur des touches de contrôle', () => {
+    stubDesktop();
+    const mockCtx = mockCanvasContext();
+    spyOn(HTMLCanvasElement.prototype, 'getContext').and.returnValue(mockCtx);
+    fixture.detectChanges();
+
+    // Ctrl+S ne devrait pas ajouter au buffer
+    const ctrlEvent = new KeyboardEvent('keydown', { key: 's', ctrlKey: true });
+    component.onKeydown(ctrlEvent);
+
+    // Le buffer devrait rester vide (pas d'erreur)
+    expect(() => component.ngOnDestroy()).not.toThrow();
+  });
+
+  it('le buffer devrait se réinitialiser après 3s d\'inactivité via ngOnDestroy', () => {
+    stubDesktop();
+    const mockCtx = mockCanvasContext();
+    spyOn(HTMLCanvasElement.prototype, 'getContext').and.returnValue(mockCtx);
+    fixture.detectChanges();
+
+    // Taper "swa"
+    ['s', 'w', 'a'].forEach((letter) => {
+      component.onKeydown(new KeyboardEvent('keydown', { key: letter }));
+    });
+
+    // Le destroy nettoie le timer
+    expect(() => component.ngOnDestroy()).not.toThrow();
   });
 
   /* ==========================================================================

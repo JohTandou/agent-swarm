@@ -1,5 +1,6 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ToastService } from '@shared/services/toast.service';
 import type { Agent, AgentCategory } from '@shared/models';
 
 /**
@@ -162,6 +163,8 @@ const CATEGORY_LABELS: Record<AgentCategory, string> = {
   styleUrls: ['./agents-list.component.scss'],
 })
 export class AgentsListComponent {
+  private readonly toastService = inject(ToastService);
+
   /** Liste complète des agents */
   readonly agents = AGENTS;
 
@@ -184,12 +187,16 @@ export class AgentsListComponent {
   /**
    * Active ou désactive un filtre de catégorie.
    * Si la catégorie est déjà active → désactive (affiche tout).
+   * Affiche un toast avec le nombre d'agents trouvés.
    */
   toggleCategory(category: AgentCategory): void {
     if (this.activeCategory() === category) {
       this.activeCategory.set(null);
+      this.toastService.show(`${this.agents.length} agents affichés`, 'info');
     } else {
       this.activeCategory.set(category);
+      const count = this.getCategoryCount(category);
+      this.toastService.show(`${count} agents trouvés — ${CATEGORY_LABELS[category]}`, 'success');
     }
   }
 

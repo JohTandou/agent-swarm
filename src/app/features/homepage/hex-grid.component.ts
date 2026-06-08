@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  HostListener,
 } from '@angular/core';
 
 /**
@@ -16,6 +17,8 @@ import {
  *
  * Implémentation Canvas 2D pour éviter la surcharge DOM.
  * Animations pilotées par GSAP (lazy-load via AnimationService).
+ *
+ * Easter egg : tapez "swarm" au clavier pour illuminer tous les hexagones.
  */
 @Component({
   selector: 'app-hex-grid',
@@ -24,8 +27,33 @@ import {
     <canvas
       #hexCanvas
       class="hex-grid__canvas"
+      [class.hex-grid__hidden]="isMobile()"
       aria-hidden="true"
     ></canvas>
+    <svg
+      class="hex-grid__fallback"
+      [class.hex-grid__hidden]="!isMobile()"
+      viewBox="0 0 400 300"
+      aria-hidden="true"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      <defs>
+        <polygon id="hf" points="20,0 30,17 20,34 0,34 -10,17 0,0" />
+      </defs>
+      <use href="#hf" x="40" y="20" fill="var(--color-text-secondary)" opacity="0.04" />
+      <use href="#hf" x="120" y="20" fill="var(--color-text-secondary)" opacity="0.06" />
+      <use href="#hf" x="200" y="20" fill="var(--color-text-secondary)" opacity="0.04" />
+      <use href="#hf" x="80" y="75" fill="var(--color-text-secondary)" opacity="0.05" />
+      <use href="#hf" x="160" y="75" fill="var(--color-text-secondary)" opacity="0.03" />
+      <use href="#hf" x="40" y="130" fill="var(--color-text-secondary)" opacity="0.06" />
+      <use href="#hf" x="120" y="130" fill="var(--color-text-secondary)" opacity="0.04" />
+      <use href="#hf" x="200" y="130" fill="var(--color-text-secondary)" opacity="0.05" />
+      <use href="#hf" x="80" y="185" fill="var(--color-text-secondary)" opacity="0.03" />
+      <use href="#hf" x="160" y="185" fill="var(--color-text-secondary)" opacity="0.06" />
+      <use href="#hf" x="40" y="240" fill="var(--color-text-secondary)" opacity="0.04" />
+      <use href="#hf" x="120" y="240" fill="var(--color-text-secondary)" opacity="0.05" />
+      <use href="#hf" x="200" y="240" fill="var(--color-text-secondary)" opacity="0.03" />
+    </svg>
   `,
   styles: [
     `
@@ -37,6 +65,17 @@ import {
         z-index: 0;
         pointer-events: none;
       }
+      .hex-grid__fallback {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .hex-grid__hidden {
+        display: none;
+      }
     `,
   ],
 })
@@ -44,7 +83,7 @@ export class HexGridComponent implements OnInit, OnDestroy {
   @ViewChild('hexCanvas', { static: true })
   canvasRef!: ElementRef<HTMLCanvasElement>;
 
-  /** Désactivé sur mobile pour la performance */
+  /** Désactivé sur mobile pour la performance (le SVG fallback prend le relais) */
   readonly isMobile = signal(false);
 
   private ctx: CanvasRenderingContext2D | null = null;
@@ -52,6 +91,19 @@ export class HexGridComponent implements OnInit, OnDestroy {
   private animFrameId: number | null = null;
   private resizeObserver: ResizeObserver | null = null;
   private pulseTween: any = null;
+
+  /* ==========================================================================
+   * Easter egg
+   * ========================================================================== */
+
+  /** Buffer accumulant les touches pour détecter "swarm" */
+  private easterEggBuffer = '';
+
+  /** Timer pour reset le buffer après 3s d'inactivité */
+  private easterEggTimer: any = null;
+
+  /** Flag empêchant les déclenchements multiples pendant l'animation */
+  private easterEggActive = false;
 
   /* ==========================================================================
    * Configuration de la grille
@@ -102,6 +154,52 @@ export class HexGridComponent implements OnInit, OnDestroy {
       this.pulseTween.kill();
       this.pulseTween = null;
     }
+    clearTimeout(this.easterEggTimer);
+  }
+
+  /* ==========================================================================
+   * Easter egg — détection clavier "swarm"
+   * ========================================================================== */
+
+  @HostListener('window:keydown', ['$event'])
+  onKeydown(event: KeyboardEvent): void {
+    // Ignore les touches de contrôle et les champs de saisie
+    if (event.ctrlKey || event.metaKey || event.altKey) return;
+    const target = event.target as HTMLElement | null;
+    if (!target) return; // Garde contre les événements dispatchés sur window (tests)
+    if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) return;
+
+    this.easterEggBuffer += event.key.toLowerCase();
+    clearTimeout(this.easterEggTimer);
+    this.easterEggTimer = setTimeout(() => {
+      this.easterEggBuffer = '';
+    }, 3000);
+
+    if (this.easterEggBuffer.includes('swarm')) {
+      this.easterEggBuffer = '';
+      this.triggerEasterEgg();
+    }
+  }
+
+  /** Illumine tous les hexagones en #F0A522 pendant 2s */
+  private triggerEasterEgg(): void {
+    if (this.easterEggActive || this.isMobile()) return;
+    this.easterEggActive = true;
+
+    // Sauvegarde les opacités d'origine et applique l'illumination
+    this.hexagons.forEach((hex) => {
+      (hex as any)._savedOpacity = hex.baseOpacity;
+      hex.baseOpacity = 0.4;
+    });
+
+    // Restauration après 2s
+    setTimeout(() => {
+      this.hexagons.forEach((hex) => {
+        hex.baseOpacity = (hex as any)._savedOpacity ?? 0.03;
+        delete (hex as any)._savedOpacity;
+      });
+      this.easterEggActive = false;
+    }, 2000);
   }
 
   /* ==========================================================================
@@ -242,9 +340,19 @@ export class HexGridComponent implements OnInit, OnDestroy {
 
     ctx.clearRect(0, 0, w, h);
 
+    // Pendant l'easter egg, utiliser la couleur accent
+    const fillColor = this.easterEggActive
+      ? 'rgba(240, 165, 34, '
+      : 'rgba(142, 136, 130, ';
+    const strokeColor = this.easterEggActive
+      ? 'rgba(240, 165, 34, '
+      : 'rgba(142, 136, 130, ';
+
     // Lignes de connexion entre hexagones voisins
-    ctx.strokeStyle = 'rgba(142, 136, 130, 0.06)';
-    ctx.lineWidth = 0.5;
+    ctx.strokeStyle = this.easterEggActive
+      ? 'rgba(240, 165, 34, 0.15)'
+      : 'rgba(142, 136, 130, 0.06)';
+    ctx.lineWidth = this.easterEggActive ? 1 : 0.5;
     this.hexagons.forEach((hex) => {
       hex.neighbors?.forEach((nIdx) => {
         const neighbor = this.hexagons[nIdx];
@@ -258,11 +366,12 @@ export class HexGridComponent implements OnInit, OnDestroy {
 
     // Hexagones
     this.hexagons.forEach((hex) => {
-      const opacity = (hex as any).opacity ?? hex.baseOpacity;
+      // Pendant l'easter egg, ignorer l'opacité GSAP et utiliser baseOpacity=0.4
+      const opacity = this.easterEggActive ? 0.4 : ((hex as any).opacity ?? hex.baseOpacity);
 
-      ctx.fillStyle = `rgba(142, 136, 130, ${opacity})`;
-      ctx.strokeStyle = `rgba(142, 136, 130, ${opacity * 1.5})`;
-      ctx.lineWidth = 0.5;
+      ctx.fillStyle = `${fillColor}${opacity})`;
+      ctx.strokeStyle = `${strokeColor}${opacity * 1.5})`;
+      ctx.lineWidth = this.easterEggActive ? 1 : 0.5;
 
       ctx.beginPath();
       for (let s = 0; s < 6; s++) {
