@@ -1,7 +1,7 @@
 <section class="skills">
   <header class="skills__header">
     <p class="skills__eyebrow">Modules Réutilisables</p>
-    <h1 class="skills__title">Skills</h1>
+    <h1 class="skills__title" appTextReveal [revealDelay]="200">Skills</h1>
     <p class="skills__subtitle">
       Des modules spécialisés que les agents activent à la demande. Chaque skill
       étend les capacités du Swarm avec une expertise ciblée.
@@ -33,7 +33,7 @@
     }
   </nav>
 
-  <div class="skills__grid" role="list" aria-label="Liste des skills Swarm">
+  <div class="skills__grid" role="list" aria-label="Liste des skills Swarm" [appStaggerChildren]="60">
     @for (skill of filteredSkills(); track skill.id; let idx = $index) {
       <a
         [routerLink]="['/skills', skill.id]"

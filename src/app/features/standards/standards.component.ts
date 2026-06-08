@@ -2,6 +2,8 @@ import { Component, AfterViewInit, OnDestroy, ElementRef, signal } from '@angula
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
+import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
+import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 
 /* Constantes de configuration */
 const LOADING_SIMULATION_DELAY_MS = 500;
@@ -77,7 +79,7 @@ interface DocResource {
   standalone: true,
   templateUrl: './standards.component.html',
   styleUrls: ['./standards.component.scss'],
-  imports: [UiButtonComponent, UiSkeletonComponent, UiBadgeComponent],
+  imports: [UiButtonComponent, UiSkeletonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
 })
 export class StandardsComponent implements AfterViewInit, OnDestroy {
   constructor(private elementRef: ElementRef) {}

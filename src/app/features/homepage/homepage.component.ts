@@ -11,6 +11,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { SwarmGraphComponent } from './swarm-graph.component';
 import { HexGridComponent } from './hex-grid.component';
+import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { AnimationService } from '../../shared/services/animation.service';
 
 /** Délai de stabilisation du DOM après le rendu initial */
@@ -48,7 +49,7 @@ interface NavCard {
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [RouterLink, SwarmGraphComponent, HexGridComponent],
+  imports: [RouterLink, SwarmGraphComponent, HexGridComponent, TextRevealDirective],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
 })
@@ -179,25 +180,40 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
         const { ScrollTrigger } = await this.animService.initGsap();
         
         const parallaxLayers = [
-          { selector: '.homepage__hero-decor--far', y: 80 },
-          { selector: '.homepage__hero-decor--mid', y: 120 },
-          { selector: '.homepage__hero-decor--near', y: 200 },
+          { selector: '.homepage__hero-decor--far', y: 80, scale: 1.1, rotateX: -1 },
+          { selector: '.homepage__hero-decor--mid', y: 120, scale: 1.05, rotateX: 0 },
+          { selector: '.homepage__hero-decor--near', y: 200, scale: 0.95, rotateX: 1 },
         ] as const;
 
         for (const layer of parallaxLayers) {
           const el = document.querySelector(layer.selector) as HTMLElement;
           if (el) {
-            gsap.to(el, {
-              y: layer.y,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: el,
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true,
+            gsap.fromTo(
+              el,
+              { y: 0, scale: 1, rotateX: 0 },
+              {
+                y: layer.y,
+                scale: layer.scale,
+                rotateX: layer.rotateX,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: el,
+                  start: 'top top',
+                  end: 'bottom top',
+                  scrub: true,
+                },
               },
-            });
+            );
           }
+        }
+
+        // Active la perspective 3D sur la section hero
+        const heroSection = this.heroSectionRef?.nativeElement;
+        if (heroSection) {
+          gsap.set(heroSection, {
+            perspective: 1000,
+            transformStyle: 'preserve-3d',
+          });
         }
       } catch {
         // GSAP non disponible — l'animation CSS de fallback reste active

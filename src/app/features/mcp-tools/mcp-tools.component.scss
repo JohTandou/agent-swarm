@@ -670,3 +670,8 @@ $transition-hover: 250ms;
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Stagger animation delay */
+.mcp-table__body > * {
+  animation-delay: calc(var(--stagger-index) * 60ms);
+}

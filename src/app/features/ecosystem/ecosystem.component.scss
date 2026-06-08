@@ -732,3 +732,11 @@ $section-padding-mobile: 64px 20px;
     margin-left: 0;
   }
 }
+
+/* Stagger animation delay */
+.tree-container > *,
+.config-grid > *,
+.agentsmd-grid > *,
+.integrations-grid > * {
+  animation-delay: calc(var(--stagger-index) * 60ms);
+}

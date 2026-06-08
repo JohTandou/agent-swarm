@@ -53,7 +53,7 @@ describe('WorkflowComponent', () => {
 
     const title: HTMLElement | null = fixture.nativeElement.querySelector('#hero-title');
     expect(title).toBeTruthy();
-    expect(title!.textContent?.trim()).toBe('Le Pipeline Swarm');
+    expect(title!.textContent?.trim().replace(/\u00A0/g, ' ')).toBe('Le Pipeline Swarm');
   }));
 
   it('devrait afficher les 5 nœuds de décision', fakeAsync(() => {

@@ -107,7 +107,7 @@
               <th scope="col">Paramètres</th>
             </tr>
           </thead>
-          <tbody class="mcp-table__body">
+          <tbody class="mcp-table__body" [appStaggerChildren]="60">
             @for (tool of data.tools; track tool.name; let idx = $index) {
               <tr
                 class="mcp-table__row"

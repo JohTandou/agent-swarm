@@ -1,8 +1,10 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { ToastService } from '@shared/services/toast.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
+import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import type { Skill, SkillCategory } from '@shared/models';
 
 /**
@@ -57,7 +59,7 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
 @Component({
   selector: 'app-skills-list',
   standalone: true,
-  imports: [RouterLink, UiButtonComponent, UiBadgeComponent],
+  imports: [RouterLink, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
   templateUrl: './skills-list.component.html',
   styleUrls: ['./skills-list.component.scss'],
 })

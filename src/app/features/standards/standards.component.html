@@ -49,7 +49,7 @@
     <div class="hero__bg-decor" aria-hidden="true"></div>
     <div class="hero__content">
       <span class="hero__kicker reveal-on-scroll">Conventions du projet</span>
-      <h1 id="hero-title" class="hero__title reveal-on-scroll">Standards</h1>
+      <h1 id="hero-title" class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">Standards</h1>
       <p class="hero__subtitle reveal-on-scroll">
         La référence unique pour tout contributeur. Palette, typographie, conventions de code,
         philosophie de test et règles de documentation — chaque décision du projet est documentée ici.
@@ -73,7 +73,7 @@
       </p>
     </div>
 
-    <div class="palette__grid">
+    <div class="palette__grid" [appStaggerChildren]="60">
       @for (color of paletteColors; track color.variable; let idx = $index) {
       <article
         class="palette-swatch reveal-on-scroll"
@@ -107,7 +107,7 @@
       </p>
     </div>
 
-    <div class="typo-demo__grid">
+    <div class="typo-demo__grid" [appStaggerChildren]="60">
       @for (pair of typoPairs; track pair.font; let idx = $index) {
       <article
         class="typo-demo reveal-on-scroll"
@@ -136,7 +136,7 @@
       </p>
     </div>
 
-    <div class="elevation__grid">
+    <div class="elevation__grid" [appStaggerChildren]="60">
       @for (level of elevationLevels; track level.level; let idx = $index) {
       <article
         class="elevation-card reveal-on-scroll"
@@ -206,7 +206,7 @@
       </p>
     </div>
 
-    <div class="conventions__grid">
+    <div class="conventions__grid" [appStaggerChildren]="60">
       @for (conv of codeConventions; track conv.title; let idx = $index) {
       <article
         class="convention-card reveal-on-scroll"
@@ -236,7 +236,7 @@
       </p>
     </div>
 
-    <div class="testing__grid">
+    <div class="testing__grid" [appStaggerChildren]="60">
       @for (principle of testPrinciples; track principle.title; let idx = $index) {
       <article
         class="test-card reveal-on-scroll"
@@ -261,7 +261,7 @@
       </p>
     </div>
 
-    <div class="documentation__grid">
+    <div class="documentation__grid" [appStaggerChildren]="60">
       @for (doc of docResources; track doc.title; let idx = $index) {
       <article
         class="doc-card reveal-on-scroll"

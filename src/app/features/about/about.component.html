@@ -5,7 +5,7 @@
        ========================================================================= -->
   <header class="about__hero">
     <p class="about__eyebrow">L'intelligence collective</p>
-    <h1 class="about__title">
+    <h1 class="about__title" appTextReveal [revealDelay]="200">
       Le Swarm
       <span class="about__title-accent">— Neuf agents, un pipeline</span>
     </h1>
@@ -104,7 +104,7 @@
       </p>
     </div>
 
-    <div class="about__team-grid">
+    <div class="about__team-grid" [appStaggerChildren]="60">
       <div class="about__team-card">
         <span class="about__team-emoji">🎯</span>
         <h3 class="about__team-name">Orchestrateur</h3>
@@ -170,7 +170,7 @@
       <h2 class="about__section-title">Le Swarm en chiffres</h2>
     </div>
 
-    <div class="about__stats">
+    <div class="about__stats" [appStaggerChildren]="60">
       <div class="about__stat-card">
         <span class="about__stat-number">9</span>
         <span class="about__stat-label">Agents spécialisés</span>

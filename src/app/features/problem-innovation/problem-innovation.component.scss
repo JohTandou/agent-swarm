@@ -1120,3 +1120,11 @@ $section-padding-mobile: 64px 20px;
     animation: none;
   }
 }
+
+/* Stagger animation delay */
+.comparison__list > *,
+.pillars__grid > *,
+.limits__grid > *,
+.audience__grid > * {
+  animation-delay: calc(var(--stagger-index) * 60ms);
+}

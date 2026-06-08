@@ -1,7 +1,7 @@
 <section class="agents">
   <header class="agents__header">
     <p class="agents__eyebrow">Pipeline Swarm</p>
-    <h1 class="agents__title">Agents</h1>
+    <h1 class="agents__title" appTextReveal [revealDelay]="200">Agents</h1>
     <p class="agents__subtitle">
       Chaque agent est une pièce spécialisée du pipeline. Découvrez leurs rôles,
       responsabilités et contraintes — puis explorez leur fiche détaillée.
@@ -33,7 +33,7 @@
     }
   </nav>
 
-  <div class="agents__grid" role="list" aria-label="Liste des agents Swarm">
+  <div class="agents__grid" role="list" aria-label="Liste des agents Swarm" [appStaggerChildren]="60">
     @for (agent of filteredAgents(); track agent.id; let idx = $index) {
       <a
         [routerLink]="['/agents', agent.id]"

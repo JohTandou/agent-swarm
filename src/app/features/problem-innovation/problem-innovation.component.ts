@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef
 import { AnimationService } from '../../shared/services/animation.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
+import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
+import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 
 /* Constantes de configuration */
 const LOADING_SIMULATION_DELAY_MS = 500;
@@ -73,7 +75,7 @@ interface TargetAudience {
 @Component({
   selector: 'app-problem-innovation',
   standalone: true,
-  imports: [UiButtonComponent, UiSkeletonComponent],
+  imports: [UiButtonComponent, UiSkeletonComponent, StaggerChildrenDirective, TextRevealDirective],
   templateUrl: './problem-innovation.component.html',
   styleUrls: ['./problem-innovation.component.scss'],
 })

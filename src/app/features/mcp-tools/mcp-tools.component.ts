@@ -5,6 +5,7 @@ import { ToastService } from '@shared/services/toast.service';
 import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
+import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 
 /* ==========================================================================
  * Types — Outil MCP
@@ -219,7 +220,7 @@ const CATEGORY_PREFIXES: Record<string, string> = {
 @Component({
   selector: 'app-mcp-tools',
   standalone: true,
-  imports: [RouterLink, UiSkeletonComponent, UiButtonComponent, UiBadgeComponent],
+  imports: [RouterLink, UiSkeletonComponent, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective],
   templateUrl: './mcp-tools.component.html',
   styleUrls: ['./mcp-tools.component.scss'],
 })

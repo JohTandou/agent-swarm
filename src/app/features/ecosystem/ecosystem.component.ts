@@ -3,6 +3,8 @@ import { MarkdownRendererComponent } from '../../shared/components/markdown-rend
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
+import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
+import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 
 /** Délai de simulation du chargement (ms) */
 const LOADING_SIMULATION_MS = 400;
@@ -66,7 +68,7 @@ interface Integration {
 @Component({
   selector: 'app-ecosystem',
   standalone: true,
-  imports: [MarkdownRendererComponent, UiButtonComponent, UiSkeletonComponent, UiBadgeComponent],
+  imports: [MarkdownRendererComponent, UiButtonComponent, UiSkeletonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
   templateUrl: './ecosystem.component.html',
   styleUrls: ['./ecosystem.component.scss'],
 })

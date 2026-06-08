@@ -769,3 +769,13 @@ $section-padding-mobile: 64px 20px;
     animation: none;
   }
 }
+
+/* Stagger animation delay */
+.palette__grid > *,
+.typo-demo__grid > *,
+.elevation__grid > *,
+.conventions__grid > *,
+.testing__grid > *,
+.documentation__grid > * {
+  animation-delay: calc(var(--stagger-index) * 60ms);
+}
