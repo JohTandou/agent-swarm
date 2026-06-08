@@ -17,82 +17,10 @@ $transition-hover: 250ms;
   max-width: var(--content-max-width);
   margin: 0 auto;
 
-  /* ========================================================================
-     Skeleton — État de chargement
-     ======================================================================== */
-  &__skeleton {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
   /* Wrapper de contenu — animation d'entrée au changement de catégorie */
   &__content {
     animation: fadeSlideIn 300ms var(--ease-natural) both;
   }
-}
-
-.mcp-skeleton {
-  &__header {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  &__icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-  }
-
-  &__title {
-    width: 280px;
-    height: 36px;
-    border-radius: 6px;
-  }
-
-  &__desc {
-    width: 100%;
-    max-width: 520px;
-    height: 20px;
-    border-radius: 5px;
-  }
-
-  &__nav {
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
-  }
-
-  &__nav-item {
-    width: 130px;
-    height: 40px;
-    border-radius: 8px;
-  }
-
-  &__table {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 8px;
-  }
-
-  &__row {
-    width: 100%;
-    height: 48px;
-    border-radius: 6px;
-  }
-}
-
-.shimmer {
-  background: linear-gradient(
-    90deg,
-    var(--color-bg-elevated) 25%,
-    rgba(240, 165, 34, 0.06) 50%,
-    var(--color-bg-elevated) 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s ease-in-out infinite;
 }
 
 /* ========================================================================
@@ -162,26 +90,6 @@ $transition-hover: 250ms;
     }
   }
 
-  &__retry {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 20px;
-    min-height: 44px;
-    font-family: var(--font-display);
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    background: var(--color-bg-elevated);
-    border: 1px solid rgba(142, 136, 130, 0.2);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: border-color $transition-hover var(--ease-natural), transform $transition-hover var(--ease-natural);
-
-    &:hover {
-      border-color: rgba(240, 165, 34, 0.3);
-      transform: scale(1.03);
-    }
-  }
 }
 
 /* ========================================================================
@@ -386,24 +294,6 @@ $transition-hover: 250ms;
     letter-spacing: 0;
   }
 
-  &__param-badge {
-    display: inline-flex;
-    align-items: center;
-    font-family: var(--font-body);
-    font-size: 0.6875rem;
-    color: var(--color-text-secondary);
-    background: var(--color-bg-subtle);
-    border: 1px solid rgba(142, 136, 130, 0.12);
-    padding: 2px 8px;
-    border-radius: 5px;
-    white-space: nowrap;
-    transition: border-color $transition-hover var(--ease-natural);
-
-    &:hover {
-      border-color: rgba(240, 165, 34, 0.25);
-    }
-  }
-
   &__param-empty {
     font-family: var(--font-display);
     font-size: 0.875rem;
@@ -584,32 +474,6 @@ $transition-hover: 250ms;
     z-index: 1;
   }
 
-  &__button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    min-height: 44px;
-    font-family: var(--font-display);
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: var(--color-bg-primary);
-    background: var(--color-accent);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 150ms var(--ease-natural), box-shadow 150ms var(--ease-natural);
-
-    &:hover {
-      transform: scale(1.03);
-      box-shadow: 0 4px 24px rgba(240, 165, 34, 0.3);
-    }
-
-    &:active {
-      transform: scale(0.97);
-    }
-  }
-
   &__result {
     margin-top: 28px;
     position: relative;
@@ -761,10 +625,6 @@ $transition-hover: 250ms;
       padding: 2px 6px;
     }
 
-    &__param-badge {
-      font-size: 0.625rem;
-      padding: 1px 6px;
-    }
   }
 
   .mcp-playground {
@@ -773,10 +633,6 @@ $transition-hover: 250ms;
       gap: 14px;
     }
 
-    &__button {
-      width: 100%;
-      justify-content: center;
-    }
   }
 
   .mcp-example__code {

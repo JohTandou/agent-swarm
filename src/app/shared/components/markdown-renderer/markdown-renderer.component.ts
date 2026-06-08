@@ -13,6 +13,7 @@ import {
 import { MarkdownComponent, MarkdownService } from 'ngx-markdown';
 import type { TocEntry } from '@shared/models';
 import { ContentService } from '../../services/content.service';
+import { UiSkeletonComponent } from '../ui-skeleton/ui-skeleton.component';
 
 /** Regex pour détecter et transformer les callouts Markdown */
 const CALLOUT_REGEX = /^:::(\w+)\s*\n([\s\S]*?)^:::/gm;
@@ -32,7 +33,7 @@ const VALID_CALLOUTS: Set<string> = new Set(['info', 'warning', 'tip', 'danger']
 @Component({
   selector: 'app-markdown-renderer',
   standalone: true,
-  imports: [MarkdownComponent],
+  imports: [MarkdownComponent, UiSkeletonComponent],
   templateUrl: './markdown-renderer.component.html',
   styleUrls: ['./markdown-renderer.component.scss'],
 })

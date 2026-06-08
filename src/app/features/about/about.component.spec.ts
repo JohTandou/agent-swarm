@@ -93,14 +93,14 @@ describe('AboutComponent', () => {
     const ctaSection = fixture.nativeElement.querySelector('.about__cta');
     expect(ctaSection).toBeTruthy();
 
-    const ctaButtons = fixture.nativeElement.querySelectorAll('.about__cta-btn');
+    const ctaButtons = fixture.nativeElement.querySelectorAll('.about__cta-links app-ui-button');
     expect(ctaButtons.length).toBe(2);
     expect(ctaButtons[0].textContent?.trim()).toContain('Explorer les agents');
     expect(ctaButtons[1].textContent?.trim()).toContain('Voir le pipeline');
   });
 
   it('devrait avoir des liens vers /agents et /workflow dans le CTA', () => {
-    const ctaLinks = fixture.nativeElement.querySelectorAll('.about__cta-btn[href]');
+    const ctaLinks = fixture.nativeElement.querySelectorAll('.about__cta-links app-ui-button');
     // Les RouterLink ne produisent pas d'attribut href dans les tests unitaires
     // On vérifie juste que les boutons existent
     expect(ctaLinks.length).toBeGreaterThanOrEqual(2);

@@ -1,5 +1,4 @@
 <section class="agents">
-  <!-- En-tête section -->
   <header class="agents__header">
     <p class="agents__eyebrow">Pipeline Swarm</p>
     <h1 class="agents__title">Agents</h1>
@@ -9,31 +8,31 @@
     </p>
   </header>
 
-  <!-- Barre de filtres -->
   <nav class="agents__filters" aria-label="Filtrer par catégorie">
-    <button
-      class="agents__filter"
+    <app-ui-button
+      variant="ghost"
+      size="sm"
       [class.agents__filter--active]="activeCategory() === null"
       (click)="activeCategory.set(null)"
       aria-label="Afficher tous les agents"
     >
       Tous
       <span class="agents__filter-count">{{ agents.length }}</span>
-    </button>
+    </app-ui-button>
     @for (category of categories; track category) {
-      <button
-        class="agents__filter"
+      <app-ui-button
+        variant="ghost"
+        size="sm"
         [class.agents__filter--active]="activeCategory() === category"
         (click)="toggleCategory(category)"
         [attr.aria-label]="'Filtrer par ' + getCategoryLabel(category)"
       >
         {{ getCategoryLabel(category) }}
         <span class="agents__filter-count">{{ getCategoryCount(category) }}</span>
-      </button>
+      </app-ui-button>
     }
   </nav>
 
-  <!-- Grille bento -->
   <div class="agents__grid" role="list" aria-label="Liste des agents Swarm">
     @for (agent of filteredAgents(); track agent.id; let idx = $index) {
       <a
@@ -46,31 +45,22 @@
         [attr.aria-label]="'Fiche de ' + agent.name"
         [attr.data-category]="agent.category"
       >
-        <!-- Icône -->
         <span class="agents__card-emoji" aria-hidden="true">{{ agent.emoji }}</span>
 
-        <!-- En-tête carte -->
         <div class="agents__card-header">
           <h2 class="agents__card-name">{{ agent.name }}</h2>
           @if (!agent.active) {
-            <span class="agents__card-badge agents__card-badge--inactive">
-              Inactif
-            </span>
+            <app-ui-badge variant="default" size="sm">Inactif</app-ui-badge>
           }
           @if (agent.active) {
-            <span class="agents__card-badge agents__card-badge--active">
-              Actif
-            </span>
+            <app-ui-badge variant="success" size="sm">Actif</app-ui-badge>
           }
         </div>
 
-        <!-- Rôle -->
         <p class="agents__card-role">{{ agent.role }}</p>
 
-        <!-- Description -->
         <p class="agents__card-desc">{{ agent.description }}</p>
 
-        <!-- Pied de carte — route et pipeline -->
         <div class="agents__card-footer">
           <span
             class="agents__card-route"
@@ -80,7 +70,6 @@
             {{ agent.route }}
           </span>
 
-          <!-- Pipeline miniature animé -->
           <div class="agents__card-pipeline" aria-hidden="true">
             <span class="agents__card-pipeline-dot" style="animation-delay: 0ms"></span>
             <span class="agents__card-pipeline-dot" style="animation-delay: 200ms"></span>
@@ -89,23 +78,18 @@
           </div>
         </div>
 
-        <!-- Glow border hover -->
         <div class="agents__card-glow" aria-hidden="true"></div>
       </a>
     }
 
-    <!-- Empty state — aucun agent ne correspond au filtre -->
     @if (filteredAgents().length === 0) {
       <div class="agents__empty" role="status">
         <p class="agents__empty-text">
           Aucun agent dans cette catégorie pour le moment.
         </p>
-        <button
-          class="agents__empty-reset"
-          (click)="activeCategory.set(null)"
-        >
+        <app-ui-button variant="outline" size="md" (click)="activeCategory.set(null)">
           Réinitialiser le filtre
-        </button>
+        </app-ui-button>
       </div>
     }
   </div>

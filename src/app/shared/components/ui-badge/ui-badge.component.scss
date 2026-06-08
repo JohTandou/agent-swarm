@@ -1,0 +1,78 @@
+/* ==========================================================================
+   ui-badge — Pastille sémantique dark mode exclusif
+   Variantes : default, success, warning, error, info
+   Tailles : sm (compact), md (standard)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Base — style commun à tous les badges
+   -------------------------------------------------------------------------- */
+.ui-badge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  border: 1px solid;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   Tailles
+   -------------------------------------------------------------------------- */
+
+/* Taille compacte — 11px */
+.ui-badge--sm {
+  padding: 2px 8px;
+  font-size: 0.6875rem;
+  border-radius: 4px;
+}
+
+/* Taille standard — 12px */
+.ui-badge--md {
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  border-radius: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Variantes de couleur
+   Fond rgba transparent, texte et bordure adaptés au variant
+   -------------------------------------------------------------------------- */
+
+/* Default — neutre */
+.ui-badge--default {
+  color: var(--color-text-secondary);
+  background: rgba(142, 136, 130, 0.1);
+  border-color: rgba(142, 136, 130, 0.15);
+}
+
+/* Success — vert */
+.ui-badge--success {
+  color: var(--color-success);
+  background: rgba(107, 175, 123, 0.1);
+  border-color: rgba(107, 175, 123, 0.2);
+}
+
+/* Warning — ambre/orange */
+.ui-badge--warning {
+  color: var(--color-warning);
+  background: rgba(232, 168, 76, 0.1);
+  border-color: rgba(232, 168, 76, 0.2);
+}
+
+/* Error — rouge */
+.ui-badge--error {
+  color: var(--color-error);
+  background: rgba(232, 93, 108, 0.1);
+  border-color: rgba(232, 93, 108, 0.2);
+}
+
+/* Info — bleu */
+.ui-badge--info {
+  color: var(--color-info);
+  background: rgba(94, 163, 217, 0.1);
+  border-color: rgba(94, 163, 217, 0.2);
+}

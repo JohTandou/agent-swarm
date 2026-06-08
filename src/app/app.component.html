@@ -51,15 +51,10 @@
     <!-- TOC accordéon sur mobile -->
     @if (isMobile() && !isHomepage()) {
       <div class="toc-mobile">
-        <button
-          class="toc-mobile__toggle"
-          (click)="toggleToc()"
-          [attr.aria-expanded]="tocOpen()"
-          aria-controls="toc-mobile-content"
-        >
+        <app-ui-button variant="secondary" size="md" class="toc-mobile__toggle" (click)="toggleToc()" [attr.aria-expanded]="tocOpen()" aria-controls="toc-mobile-content">
           <span>Sur cette page</span>
           <span class="toc-mobile__chevron" [class.toc-mobile__chevron--open]="tocOpen()" aria-hidden="true">▼</span>
-        </button>
+        </app-ui-button>
         @if (tocOpen()) {
           <div id="toc-mobile-content" class="toc-mobile__content">
             <app-table-of-contents />

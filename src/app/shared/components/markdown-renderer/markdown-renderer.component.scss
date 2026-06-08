@@ -237,30 +237,6 @@
    États — Loading, Empty, Error
    ========================================================================== */
 
-.markdown-loading {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 32px 0;
-
-  &__shimmer {
-    height: 16px;
-    border-radius: 4px;
-    background: linear-gradient(
-      90deg,
-      var(--color-bg-elevated) 0%,
-      rgba(142, 136, 130, 0.12) 50%,
-      var(--color-bg-elevated) 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 2s ease-in-out infinite;
-    width: 100%;
-
-    &--short { width: 40%; }
-    &--medium { width: 70%; }
-  }
-}
-
 .markdown-error {
   padding: 32px;
   border: 1px solid rgba(240, 165, 34, 0.3);

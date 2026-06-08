@@ -9,19 +9,15 @@
 @if (loading()) {
 <div class="page-loader" aria-label="Chargement de la page" role="status">
   <div class="skeleton-hero">
-    <div class="skeleton-line skeleton-line--title"></div>
-    <div class="skeleton-line skeleton-line--subtitle"></div>
-    <div class="skeleton-line skeleton-line--subtitle skeleton-line--short"></div>
+    <app-ui-skeleton variant="text" width="280px" height="32px"></app-ui-skeleton>
+    <app-ui-skeleton variant="text" width="60%"></app-ui-skeleton>
+    <app-ui-skeleton variant="text" width="40%"></app-ui-skeleton>
   </div>
   <div class="skeleton-section">
-    <div class="skeleton-line skeleton-line--heading"></div>
+    <app-ui-skeleton variant="text" width="180px" height="20px"></app-ui-skeleton>
     <div class="skeleton-grid">
       @for (i of [1,2,3]; track i) {
-      <div class="skeleton-card">
-        <div class="skeleton-line skeleton-line--card-title"></div>
-        <div class="skeleton-line skeleton-line--text"></div>
-        <div class="skeleton-line skeleton-line--text skeleton-line--short"></div>
-      </div>
+      <app-ui-skeleton variant="card" height="180px" [delay]="i * 80"></app-ui-skeleton>
       }
     </div>
   </div>
@@ -36,7 +32,7 @@
   <div class="error-state__icon">⚠️</div>
   <h2 class="error-state__title">Impossible de charger la page</h2>
   <p class="error-state__message">{{ error() }}</p>
-  <button class="error-state__retry" (click)="retry()">Réessayer</button>
+  <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
 </div>
 }
 

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 
 /**
  * En-tête fixe glassmorphique.
@@ -9,7 +10,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, UiButtonComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })

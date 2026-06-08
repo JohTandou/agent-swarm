@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import type { SearchResult } from '@shared/models';
 import { SearchService } from '../../services/search.service';
+import { UiSkeletonComponent } from '../ui-skeleton/ui-skeleton.component';
 
 /**
  * Modale de recherche Cmd+K.
@@ -33,7 +34,7 @@ import { SearchService } from '../../services/search.service';
 @Component({
   selector: 'app-search-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, UiSkeletonComponent],
   templateUrl: './search-modal.component.html',
   styleUrls: ['./search-modal.component.scss'],
 })

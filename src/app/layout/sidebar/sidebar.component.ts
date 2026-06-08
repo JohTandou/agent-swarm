@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import type { NavItem } from '@shared/models';
 
 /**
@@ -10,7 +11,7 @@ import type { NavItem } from '@shared/models';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, UiButtonComponent],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })

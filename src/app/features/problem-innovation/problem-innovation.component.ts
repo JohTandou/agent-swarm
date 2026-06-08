@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef } from '@angular/core';
 import { AnimationService } from '../../shared/services/animation.service';
+import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
+import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 
 /* Constantes de configuration */
 const LOADING_SIMULATION_DELAY_MS = 500;
@@ -71,6 +73,7 @@ interface TargetAudience {
 @Component({
   selector: 'app-problem-innovation',
   standalone: true,
+  imports: [UiButtonComponent, UiSkeletonComponent],
   templateUrl: './problem-innovation.component.html',
   styleUrls: ['./problem-innovation.component.scss'],
 })

@@ -1,0 +1,18 @@
+<button
+  class="ui-button ui-button--{{ variant }} ui-button--{{ size }}"
+  [class.ui-button--loading]="loading"
+  [class.ui-button--icon]="variant === 'icon'"
+  [disabled]="disabled || loading"
+  [attr.aria-busy]="loading || null"
+  [type]="type"
+>
+  @if (loading) {
+    <span class="ui-button__dots" aria-hidden="true">
+      <span class="ui-button__dot"></span>
+      <span class="ui-button__dot"></span>
+      <span class="ui-button__dot"></span>
+    </span>
+  } @else {
+    <ng-content />
+  }
+</button>

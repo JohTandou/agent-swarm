@@ -50,8 +50,8 @@
     <div class="search-modal__results" role="listbox" id="search-results-list">
       @for (i of [1, 2, 3]; track i) {
         <div class="search-modal__skeleton">
-          <div class="search-modal__skeleton-line search-modal__skeleton-line--title"></div>
-          <div class="search-modal__skeleton-line search-modal__skeleton-line--desc"></div>
+          <app-ui-skeleton variant="text" width="180px" height="20px"></app-ui-skeleton>
+          <app-ui-skeleton variant="text" width="120px"></app-ui-skeleton>
         </div>
       }
     </div>

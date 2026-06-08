@@ -1,0 +1,13 @@
+<div
+  class="ui-card"
+  [class.ui-card--glass]="variant === 'glass'"
+  [class.ui-card--hover]="variant === 'hover'"
+  [class.ui-card--clickable]="clickable"
+  [class.ui-card--highlight]="highlight"
+  [class.ui-card--padding-sm]="padding === 'sm'"
+  [class.ui-card--padding-md]="padding === 'md'"
+  [class.ui-card--padding-lg]="padding === 'lg'"
+  [class.ui-card--padding-none]="padding === 'none'"
+>
+  <ng-content />
+</div>

@@ -1,0 +1,49 @@
+/* ==========================================================================
+   UI Skeleton — Shared shimmer placeholder
+   Palette : var(--color-xxx) exclusive, dark mode only
+   ========================================================================== */
+
+/* ====== Base ====== */
+.ui-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-elevated) 25%,
+    rgba(240, 165, 34, 0.06) 50%,
+    var(--color-bg-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ====== Variants ====== */
+
+.ui-skeleton--text {
+  height: 16px; /* fallback si height auto */
+  border-radius: 4px;
+}
+
+.ui-skeleton--card {
+  height: 200px; /* fallback si height auto */
+  border-radius: 8px;
+  border: 1px solid rgba(142, 136, 130, 0.08);
+}
+
+.ui-skeleton--circle {
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.ui-skeleton--table-row {
+  height: 48px; /* fallback si height auto */
+  border-radius: 6px;
+}

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 
 /**
  * Page "À propos du Swarm" — Contenu riche structuré en sections.
@@ -10,8 +11,14 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [RouterLink],
+  imports: [UiButtonComponent],
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
 })
-export class AboutComponent {}
+export class AboutComponent {
+  private readonly router = inject(Router);
+
+  navigateTo(path: string): void {
+    this.router.navigate([path]);
+  }
+}

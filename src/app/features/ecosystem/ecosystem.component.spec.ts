@@ -121,7 +121,7 @@ describe('EcosystemComponent', () => {
     expect(errorState).toBeTruthy();
     expect(errorState.textContent).toContain('Test error message');
 
-    const retryBtn = fixture.nativeElement.querySelector('.error-state__retry');
+    const retryBtn = fixture.nativeElement.querySelector('.error-state app-ui-button');
     expect(retryBtn).toBeTruthy();
     retryBtn.click();
     fixture.detectChanges();

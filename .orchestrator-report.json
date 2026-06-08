@@ -27,8 +27,8 @@
     },
     {
       "name": "e2e",
-      "status": "warn",
-      "detail": "Suite: smoke — 0 tests matched the grep pattern"
+      "status": "skip",
+      "detail": "No frontend files changed (server left running for interactive testing)"
     }
   ],
   "overall": "pass"

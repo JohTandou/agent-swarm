@@ -44,7 +44,7 @@ describe('AgentsListComponent', () => {
 
   // TEST 5: devrait avoir des boutons de filtre pour chaque catégorie + "Tous"
   it('devrait avoir des boutons de filtre (Tous + 3 catégories)', () => {
-    const filterButtons = fixture.nativeElement.querySelectorAll('.agents__filter');
+    const filterButtons = fixture.nativeElement.querySelectorAll('nav.agents__filters app-ui-button');
     expect(filterButtons.length).toBe(4); // Tous + build + qualité + infrastructure
   });
 
@@ -52,7 +52,7 @@ describe('AgentsListComponent', () => {
   it('devrait filtrer les agents quand on clique sur une catégorie', () => {
     // Récupérer tous les boutons de filtre
     const filterButtons: HTMLElement[] = Array.from(
-      fixture.nativeElement.querySelectorAll('.agents__filter')
+      fixture.nativeElement.querySelectorAll('nav.agents__filters app-ui-button')
     );
     // Cliquer sur "Build" (2ème bouton, après "Tous")
     const buildButton = filterButtons[1] as HTMLButtonElement;
@@ -68,7 +68,7 @@ describe('AgentsListComponent', () => {
   // TEST 7: devrait désactiver le filtre si on clique deux fois sur la même catégorie
   it('devrait désactiver le filtre si on re-clique sur la même catégorie', () => {
     const filterButtons: HTMLElement[] = Array.from(
-      fixture.nativeElement.querySelectorAll('.agents__filter')
+      fixture.nativeElement.querySelectorAll('nav.agents__filters app-ui-button')
     );
     const buildButton = filterButtons[1] as HTMLButtonElement;
     
@@ -137,7 +137,7 @@ describe('AgentsListComponent', () => {
     const inactiveCards = fixture.nativeElement.querySelectorAll('.agents__card--inactive');
     expect(inactiveCards.length).toBe(1); // seul back est inactif
     const backCard = inactiveCards[0];
-    expect(backCard.querySelector('.agents__card-badge--inactive')?.textContent?.trim()).toBe('Inactif');
+    expect(backCard.querySelector('.ui-badge--default')?.textContent?.trim()).toBe('Inactif');
   });
 
   // TEST 14: getCategoryCount devrait retourner le bon compte
@@ -165,7 +165,7 @@ describe('AgentsListComponent', () => {
 
   // TEST 17: devrait afficher le badge "Actif" pour les agents actifs
   it('devrait afficher le badge Actif pour les agents actifs', () => {
-    const activeBadges = fixture.nativeElement.querySelectorAll('.agents__card-badge--active');
+    const activeBadges = fixture.nativeElement.querySelectorAll('.ui-badge--success');
     expect(activeBadges.length).toBe(10); // 10 agents actifs sur 11
   });
 

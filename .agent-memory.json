@@ -1,0 +1,67 @@
+{
+  "task_in_queue": false,
+  "queue_size": 0,
+  "metrics": [
+    {
+      "run_id": "swarm-20260605-t1t5",
+      "route": "FULL",
+      "task_type": "T1-Bootstrap-Angular",
+      "iterations": 1,
+      "agents_used": ["planner", "front", "tester", "reviewer", "writer"],
+      "retry_reasons": ["reviewer-REJECT-aria-expanded"],
+      "status": "done"
+    },
+    {
+      "run_id": "swarm-20260605-t1t5",
+      "route": "FULL",
+      "task_type": "T2-Content-System",
+      "iterations": 1,
+      "agents_used": ["planner", "front", "tester", "reviewer", "writer"],
+      "retry_reasons": [],
+      "status": "done"
+    },
+    {
+      "run_id": "swarm-20260605-t1t5",
+      "route": "FULL",
+      "task_type": "T3-Homepage-D3",
+      "iterations": 2,
+      "agents_used": ["front", "tester", "reviewer"],
+      "retry_reasons": ["reviewer-REJECT-stats-invisible-budget-palette"],
+      "status": "done"
+    },
+    {
+      "run_id": "swarm-20260605-t1t5",
+      "route": "MEDIUM",
+      "task_type": "T4-Problem-Innovation",
+      "iterations": 2,
+      "agents_used": ["front", "tester", "reviewer"],
+      "retry_reasons": ["reviewer-REJECT-tests-missing-palette-codemort"],
+      "status": "done"
+    },
+    {
+      "run_id": "swarm-20260605-t1t5",
+      "route": "FULL",
+      "task_type": "T5-Agents-Template",
+      "iterations": 1,
+      "agents_used": ["front", "tester", "reviewer"],
+      "retry_reasons": [],
+      "status": "done"
+    },
+    {
+      "run_id": "swarm-20260606-t11",
+      "route": "MEDIUM",
+      "task_type": "T11-Ecosysteme",
+      "iterations": 1,
+      "agents_used": ["search", "planner", "front", "general", "tester", "reviewer"],
+      "retry_reasons": ["tester-TEST_BUG-sidebar-count", "tester-TEST_BUG-routes-count"],
+      "tester_pass": true,
+      "reviewer_approved": true,
+      "status": "reviewed"
+    },
+    {"run_id": "swarm-20260607-sprint0", "route": "ADAPT", "task_type": "Sprint-0-Quick-Wins", "iterations": 1, "agents_used": ["front", "tester"], "retry_reasons": [], "status": "done", "tester_pass": true, "pr_url": "https://github.com/JohTandou/swarm-wiki/pull/42"},
+    {"run_id": "swarm-20260607-sprint1", "route": "MEDIUM", "task_type": "Sprint-1-Design-System", "iterations": 2, "agents_used": ["planner", "front", "tester", "reviewer"], "retry_reasons": ["reviewer-REJECT-errorhandler-header-safearea", "test-bug-errorhandler-di"], "status": "done", "tester_pass": true, "reviewer_approved": true, "pr_url": "https://github.com/JohTandou/swarm-wiki/pull/44"},
+    {"run_id": "swarm-20260607-sprint2", "route": "MEDIUM", "task_type": "Sprint-2-Polish-Bento", "iterations": 1, "agents_used": ["front", "tester", "reviewer"], "retry_reasons": [], "status": "done", "tester_pass": true, "reviewer_approved": true, "pr_url": "https://github.com/JohTandou/swarm-wiki/pull/46"},
+    {"run_id": "swarm-20260607-sprint3", "route": "MEDIUM", "task_type": "Sprint-3-Excellence", "iterations": 2, "agents_used": ["front", "tester", "reviewer"], "retry_reasons": ["reviewer-REJECT-toast-stacking-easteregg-opacity"], "status": "done", "tester_pass": true, "reviewer_approved": true, "pr_url": "https://github.com/JohTandou/swarm-wiki/pull/48"},
+    {"run_id": "swarm-20260608-sprintA", "route": "MEDIUM", "task_type": "Sprint-A-Fondations-Composants", "iterations": 1, "agents_used": ["search", "planner", "front", "tester"], "retry_reasons": [], "status": "in_progress", "tester_pass": true, "reviewer_approved": true}
+  ]
+}

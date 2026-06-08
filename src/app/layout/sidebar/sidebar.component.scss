@@ -10,29 +10,6 @@
   flex-direction: column;
 }
 
-/* Bouton close mobile */
-.sidebar__close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin: 0 16px 8px auto;
-  background: none;
-  border: 1px solid rgba(142, 136, 130, 0.15);
-  border-radius: 8px;
-  color: var(--color-text-secondary);
-  font-size: 1.125rem;
-  cursor: pointer;
-  transition: all 200ms ease-out;
-}
-
-.sidebar__close:hover {
-  color: var(--color-accent);
-  border-color: rgba(240, 165, 34, 0.3);
-  box-shadow: 0 0 12px rgba(240, 165, 34, 0.08);
-}
-
 /* Liste de navigation */
 .sidebar__nav {
   flex: 1;

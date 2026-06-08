@@ -1,6 +1,8 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ToastService } from '@shared/services/toast.service';
+import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
+import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import type { Skill, SkillCategory } from '@shared/models';
 
 /**
@@ -55,7 +57,7 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
 @Component({
   selector: 'app-skills-list',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, UiButtonComponent, UiBadgeComponent],
   templateUrl: './skills-list.component.html',
   styleUrls: ['./skills-list.component.scss'],
 })

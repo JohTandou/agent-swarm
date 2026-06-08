@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { StandardsComponent } from './standards.component';
+import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 
 describe('StandardsComponent', () => {
   let component: StandardsComponent;
@@ -7,7 +9,7 @@ describe('StandardsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StandardsComponent],
+      imports: [StandardsComponent, UiSkeletonComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(StandardsComponent);
@@ -33,12 +35,16 @@ describe('StandardsComponent', () => {
   });
 
   it('devrait afficher le skeleton-title dans l\'état loading', () => {
-    const title: HTMLElement = fixture.nativeElement.querySelector('.skeleton-line--title');
-    expect(title).toBeTruthy();
+    const titleSkeleton = fixture.debugElement.query(
+      By.css('app-ui-skeleton[variant="text"][width="280px"]')
+    );
+    expect(titleSkeleton).toBeTruthy();
   });
 
   it('devrait afficher les skeleton-cards dans l\'état loading', () => {
-    const cards = fixture.nativeElement.querySelectorAll('.skeleton-card');
+    const cards = fixture.debugElement.queryAll(
+      By.css('app-ui-skeleton[variant="card"]')
+    );
     expect(cards.length).toBe(3);
   });
 
@@ -75,7 +81,7 @@ describe('StandardsComponent', () => {
     component['error'].set('Erreur');
     fixture.detectChanges();
 
-    const button: HTMLButtonElement = fixture.nativeElement.querySelector('.error-state__retry');
+    const button: HTMLElement = fixture.nativeElement.querySelector('.error-state app-ui-button');
     expect(button).toBeTruthy();
     expect(button.textContent?.trim()).toBe('Réessayer');
   });

@@ -4,6 +4,7 @@ import { MarkdownRendererComponent } from '../../shared/components/markdown-rend
 import { TocService } from '../../shared/services/toc.service';
 import type { Agent, AgentCategory } from '@shared/models';
 import type { TocEntry } from '@shared/models';
+import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 
 /**
  * Données statiques des agents pour l'affichage du header.
@@ -109,7 +110,7 @@ const CATEGORY_LABELS: Record<AgentCategory, string> = {
 @Component({
   selector: 'app-agent-detail',
   standalone: true,
-  imports: [MarkdownRendererComponent, RouterLink],
+  imports: [MarkdownRendererComponent, RouterLink, UiBadgeComponent],
   templateUrl: './agent-detail.component.html',
   styleUrls: ['./agent-detail.component.scss'],
 })

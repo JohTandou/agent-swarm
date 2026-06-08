@@ -32,7 +32,7 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
     const navEl: HTMLElement = fixture.nativeElement.querySelector('.header__nav');
     expect(navEl).toBeTruthy();
-    const hamburgerEl: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger');
+    const hamburgerEl: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
     expect(hamburgerEl).toBeFalsy();
   });
 
@@ -41,7 +41,7 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
     const navEl: HTMLElement = fixture.nativeElement.querySelector('.header__nav');
     expect(navEl).toBeFalsy();
-    const hamburgerEl: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger');
+    const hamburgerEl: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
     expect(hamburgerEl).toBeTruthy();
   });
 
@@ -49,7 +49,7 @@ describe('HeaderComponent', () => {
     component.isMobile = true;
     fixture.detectChanges();
     const emitSpy = spyOn(component.toggleSidebar, 'emit');
-    const hamburgerBtn: HTMLButtonElement = fixture.nativeElement.querySelector('.header__hamburger');
+    const hamburgerBtn: HTMLButtonElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
     hamburgerBtn.click();
     expect(emitSpy).toHaveBeenCalled();
   });
@@ -58,14 +58,14 @@ describe('HeaderComponent', () => {
     component.isMobile = true;
     component.sidebarOpen = true;
     fixture.detectChanges();
-    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger');
+    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
     expect(hamburgerBtn.classList.contains('header__hamburger--open')).toBeTrue();
   });
 
   it('devrait mettre à jour aria-label du hamburger selon sidebarOpen', () => {
     component.isMobile = true;
     fixture.detectChanges();
-    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger');
+    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
     // sidebarOpen=false → "Ouvrir le menu"
     expect(hamburgerBtn.getAttribute('aria-label')).toBe('Ouvrir le menu');
 
@@ -78,7 +78,7 @@ describe('HeaderComponent', () => {
   it('devrait mettre à jour aria-expanded du hamburger selon sidebarOpen', () => {
     component.isMobile = true;
     fixture.detectChanges();
-    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger');
+    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
     expect(hamburgerBtn.getAttribute('aria-expanded')).toBe('false');
 
     component.sidebarOpen = true;
@@ -100,7 +100,7 @@ describe('HeaderComponent', () => {
     component.isMobile = false;
     fixture.detectChanges();
     const emitSpy = spyOn(component.openSearch, 'emit');
-    const searchBtn: HTMLElement = fixture.nativeElement.querySelector('.header__search-btn');
+    const searchBtn: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="ghost"]');
     searchBtn.click();
     expect(emitSpy).toHaveBeenCalled();
   });

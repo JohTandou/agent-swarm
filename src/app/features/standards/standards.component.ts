@@ -1,4 +1,7 @@
 import { Component, AfterViewInit, OnDestroy, ElementRef, signal } from '@angular/core';
+import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
+import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
+import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 
 /* Constantes de configuration */
 const LOADING_SIMULATION_DELAY_MS = 500;
@@ -74,6 +77,7 @@ interface DocResource {
   standalone: true,
   templateUrl: './standards.component.html',
   styleUrls: ['./standards.component.scss'],
+  imports: [UiButtonComponent, UiSkeletonComponent, UiBadgeComponent],
 })
 export class StandardsComponent implements AfterViewInit, OnDestroy {
   constructor(private elementRef: ElementRef) {}

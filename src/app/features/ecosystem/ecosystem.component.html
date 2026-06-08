@@ -9,22 +9,16 @@
 @if (loading()) {
   <div class="page-loader">
     <div class="skeleton-hero">
-      <div class="skeleton-line skeleton-line--title"></div>
-      <div class="skeleton-line skeleton-line--subtitle"></div>
-      <div class="skeleton-line skeleton-line--subtitle skeleton-line--subtitle--short"></div>
+      <app-ui-skeleton variant="text" width="280px" height="32px"></app-ui-skeleton>
+      <app-ui-skeleton variant="text" width="60%"></app-ui-skeleton>
+      <app-ui-skeleton variant="text" width="40%"></app-ui-skeleton>
     </div>
     <div class="skeleton-section">
-      <div class="skeleton-line skeleton-line--heading"></div>
-      <div class="skeleton-line skeleton-line--text"></div>
+      <app-ui-skeleton variant="text" width="180px" height="20px"></app-ui-skeleton>
+      <app-ui-skeleton variant="text" width="100%"></app-ui-skeleton>
       <div class="skeleton-tree">
-        <div class="skeleton-node">
-          <div class="skeleton-line skeleton-line--node-title"></div>
-          <div class="skeleton-line skeleton-line--text"></div>
-        </div>
-        <div class="skeleton-node">
-          <div class="skeleton-line skeleton-line--node-title"></div>
-          <div class="skeleton-line skeleton-line--text"></div>
-        </div>
+        <app-ui-skeleton variant="card" height="120px" [delay]="0"></app-ui-skeleton>
+        <app-ui-skeleton variant="card" height="120px" [delay]="80"></app-ui-skeleton>
       </div>
     </div>
   </div>
@@ -38,7 +32,7 @@
     <span class="error-state__icon">⚠️</span>
     <h2 class="error-state__title">Une erreur est survenue</h2>
     <p class="error-state__message">{{ error() }}</p>
-    <button class="error-state__retry" (click)="retry()">Réessayer</button>
+    <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
   </div>
 }
 
@@ -99,7 +93,7 @@
               <span class="dir-card__icon">{{ entry.icon }}</span>
               <span class="dir-card__name">{{ entry.name }}</span>
               @if (entry.badge) {
-                <span class="dir-card__badge">{{ entry.badge }}</span>
+                <app-ui-badge variant="default" size="sm">{{ entry.badge }}</app-ui-badge>
               }
             </div>
             <p class="dir-card__description">{{ entry.description }}</p>

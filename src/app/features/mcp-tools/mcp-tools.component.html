@@ -11,18 +11,18 @@
   @if (loading()) {
     <div class="mcp-tools__skeleton" aria-busy="true" aria-label="Chargement des outils">
       <div class="mcp-skeleton__header">
-        <div class="mcp-skeleton__icon shimmer"></div>
-        <div class="mcp-skeleton__title shimmer"></div>
-        <div class="mcp-skeleton__desc shimmer"></div>
+        <app-ui-skeleton variant="circle" width="40px"></app-ui-skeleton>
+        <app-ui-skeleton variant="text" width="200px" height="24px"></app-ui-skeleton>
+        <app-ui-skeleton variant="text" width="160px"></app-ui-skeleton>
       </div>
       <div class="mcp-skeleton__nav">
         @for (cat of categories; track cat) {
-          <div class="mcp-skeleton__nav-item shimmer"></div>
+          <app-ui-skeleton variant="text" width="100%" height="36px"></app-ui-skeleton>
         }
       </div>
       <div class="mcp-skeleton__table">
         @for (i of [1,2,3,4,5]; track i) {
-          <div class="mcp-skeleton__row shimmer"></div>
+          <app-ui-skeleton variant="text" width="100%" height="20px"></app-ui-skeleton>
         }
       </div>
     </div>
@@ -41,9 +41,7 @@
           <a class="mcp-error__link" routerLink="/outils-mcp/supabase">
             Voir les outils Supabase
           </a>
-          <button class="mcp-error__retry" (click)="retry()">
-            Réessayer
-          </button>
+          <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
         </div>
       </div>
     </div>
@@ -124,7 +122,7 @@
                 <td class="mcp-table__cell mcp-table__cell--params">
                   @if (tool.params.length > 0) {
                     @for (param of tool.params; track param) {
-                      <span class="mcp-table__param-badge">{{ param }}</span>
+                      <app-ui-badge variant="default" size="sm">{{ param }}</app-ui-badge>
                     }
                   } @else {
                     <span class="mcp-table__param-empty">—</span>
@@ -174,14 +172,10 @@
         </div>
 
         <div class="mcp-playground__actions">
-          <button
-            class="mcp-playground__button"
-            (click)="togglePlaygroundResult()"
-            [attr.aria-expanded]="playgroundVisible()"
-          >
+          <app-ui-button variant="primary" size="sm" (click)="togglePlaygroundResult()" [attr.aria-expanded]="playgroundVisible()">
             <span aria-hidden="true">⚡</span>
             {{ playgroundVisible() ? 'Masquer le résultat' : 'Assembler les paramètres' }}
-          </button>
+          </app-ui-button>
         </div>
 
         @if (playgroundVisible()) {
