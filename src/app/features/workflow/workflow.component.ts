@@ -88,9 +88,9 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
    * Données — Section 1 : Hero
    * ========================================================================== */
 
-  protected readonly heroTitle = 'Le Pipeline Swarm';
+  protected readonly heroTitle = 'De l\'issue au merge — sans effort';
   protected readonly heroSubtitle =
-    'De la réception d\'une issue GitHub à la pull request mergée, le Swarm orchestre un pipeline d\'agents IA spécialisés. Chaque tâche est automatiquement classifiée, routée, implémentée, testée, revue et documentée — sans intervention humaine.';
+    'Une issue GitHub arrive, une pull request mergée en ressort. Entre les deux : classification automatique, routage intelligent, implémentation parallèle, tests rigoureux et documentation vivante. Le tout orchestré sans que vous leviez le petit doigt.';
 
   /* ==========================================================================
    * Données — Section 2 : Arbre de décision
@@ -207,9 +207,9 @@ graph TB
    * Données — Section 4 : Pré-search
    * ========================================================================== */
 
-  protected readonly preSearchTitle = 'Étape 0.3 — Pre-search';
+  protected readonly preSearchTitle = 'Pré-search : le diagnostic qui évite les erreurs';
   protected readonly preSearchDescription =
-    'Avant toute classification, le Swarm exécute une phase de pre-search : un grep parallèle sur l\'ensemble du codebase pour identifier les fichiers impactés, compter les occurrences et évaluer la complexité réelle de la tâche. Cette étape garantit que la route choisie correspond au niveau de complexité réel, pas à une estimation humaine approximative.';
+    'Avant de classifier votre tâche, les agents du Swarm analysent l\'ensemble du codebase en parallèle. Fichiers impactés, occurrences, complexité réelle — tout est mesuré objectivement. Résultat : la bonne route est choisie à chaque fois, sans tâtonnement.';
 
   protected readonly preSearchThresholds: readonly PreSearchThreshold[] = [
     {

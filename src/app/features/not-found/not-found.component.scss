@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Page 404 — Styles
+   Dark mode exclusif, palette 6 couleurs
+   ========================================================================== */
+
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  background: var(--color-bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Hexagone décoratif — centré en arrière-plan, opacité très basse
+   -------------------------------------------------------------------------- */
+.not-found__hex {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 200px;
+  height: 200px;
+  color: var(--color-accent);
+  opacity: 0.08;
+  pointer-events: none;
+  animation: hexPulse 4s ease-in-out infinite;
+}
+
+@keyframes hexPulse {
+  0%, 100% {
+    opacity: 0.05;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.08;
+    transform: scale(1.04);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Contenu centré
+   -------------------------------------------------------------------------- */
+.not-found__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  max-width: 560px;
+}
+
+/* --------------------------------------------------------------------------
+   "404" — Cabinet Grotesk Extrabold, dégradé ambré sur le texte
+   -------------------------------------------------------------------------- */
+.not-found__code {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(5rem, 12vw, 8rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    var(--color-text-primary) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   Message — Satoshi, texte secondaire
+   -------------------------------------------------------------------------- */
+.not-found__message {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin: 24px 0 40px;
+  max-width: 400px;
+}
+
+/* --------------------------------------------------------------------------
+   Actions — boutons côte à côte
+   -------------------------------------------------------------------------- */
+.not-found__actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive — mobile < 768px
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .not-found__code {
+    font-size: 5rem;
+  }
+
+  .not-found__message {
+    font-size: 0.9375rem;
+    margin: 20px 0 32px;
+  }
+
+  .not-found__hex {
+    width: 140px;
+    height: 140px;
+  }
+}

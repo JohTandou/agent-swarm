@@ -82,16 +82,11 @@
     </div>
   }
 
-  <!-- État : aucun résultat -->
   @if (!loading() && isEmpty()) {
-    <div class="search-modal__empty">
-      <p class="search-modal__empty-text">
-        Aucun résultat pour <strong>{{ query() }}</strong>
-      </p>
-      <p class="search-modal__empty-hint">
-        Essayez avec un autre terme ou vérifiez l'orthographe.
-      </p>
-    </div>
+    <app-ui-empty-state
+      [title]="'Aucun résultat pour « ' + query() + ' »'"
+      description="Essayez avec un autre terme ou vérifiez l'orthographe."
+    />
   }
 
   <!-- Footer avec raccourcis clavier -->

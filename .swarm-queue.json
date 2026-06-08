@@ -41,6 +41,15 @@
       "status": "in_progress",
       "issue_number": 55,
       "branch": "feature/swarm-issue-55-sprint-d-navigation-mobile-premium"
+    },
+    {
+      "id": "5",
+      "title": "Sprint E — Polish & Copywriting",
+      "body": "Polish visuel et rédaction premium :\n1. Audit copywriting de toutes les pages (typos, tonalité, hiérarchie)\n2. Créer moments de surprise visuelle (wow factor)\n3. Peaufiner les animations scroll-driven\n4. Réviser les textes de navigation et états vides\n\nCritères : copywriting cohérent, moments mémorables, animations fluides.",
+      "route": "MEDIUM",
+      "status": "in_progress",
+      "issue_number": 57,
+      "branch": "feature/swarm-issue-57-sprint-e-polish-moments-copywriting"
     }
   ],
   "current_index": 3

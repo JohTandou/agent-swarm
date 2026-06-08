@@ -14,7 +14,7 @@ const AGENTS_MAP: Record<string, Agent> = {
   orchestrateur: {
     id: 'orchestrateur', name: 'Orchestrateur', emoji: '🎯',
     role: "Chef d'orchestre du pipeline — classifie, route et supervise",
-    description: "Point d'entrée unique du système Swarm.",
+    description: "Point d'entrée du pipeline — classifie, route et supervise.",
     route: 'FULL', active: true, category: 'build',
     sourcePath: 'agents/orchestrateur.md',
   },

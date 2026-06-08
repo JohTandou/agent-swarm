@@ -1,12 +1,15 @@
 import {
   Component,
+  effect,
   ElementRef,
+  inject,
   signal,
   OnDestroy,
   OnInit,
   ViewChild,
   HostListener,
 } from '@angular/core';
+import { EasterEggService } from '../../shared/services/easter-egg.service';
 
 /**
  * Grille hexagonale animée — signature visuelle du Swarm.
@@ -122,6 +125,8 @@ export class HexGridComponent implements OnInit, OnDestroy {
   @ViewChild('hexCanvas', { static: true })
   canvasRef!: ElementRef<HTMLCanvasElement>;
 
+  private readonly easterEggService = inject(EasterEggService);
+
   /** Désactivé sur mobile pour la performance (le SVG fallback prend le relais) */
   readonly isMobile = signal(false);
 
@@ -146,6 +151,14 @@ export class HexGridComponent implements OnInit, OnDestroy {
 
   /** Flag empêchant les déclenchements multiples pendant l'animation */
   private easterEggActive = false;
+
+  constructor() {
+    effect(() => {
+      if (this.easterEggService.konamiTriggered()) {
+        this.triggerEasterEgg();
+      }
+    });
+  }
 
   /* ==========================================================================
    * Configuration de la grille

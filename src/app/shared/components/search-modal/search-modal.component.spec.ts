@@ -75,7 +75,7 @@ describe('SearchModalComponent', () => {
     component.isEmpty.set(true);
     component.query.set('zzztest123');
     fixture.detectChanges();
-    const emptyEl = fixture.nativeElement.querySelector('.search-modal__empty');
+    const emptyEl = fixture.nativeElement.querySelector('app-ui-empty-state');
     expect(emptyEl).toBeTruthy();
   });
 
@@ -83,7 +83,7 @@ describe('SearchModalComponent', () => {
     component.loading.set(false);
     component.isEmpty.set(false);
     fixture.detectChanges();
-    const emptyEl = fixture.nativeElement.querySelector('.search-modal__empty');
+    const emptyEl = fixture.nativeElement.querySelector('app-ui-empty-state');
     expect(emptyEl).toBeFalsy();
   });
 

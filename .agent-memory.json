@@ -65,6 +65,7 @@
     {"run_id": "swarm-20260608-sprintA", "route": "MEDIUM", "task_type": "Sprint-A-Fondations-Composants", "iterations": 1, "agents_used": ["search", "planner", "front", "tester"], "retry_reasons": [], "status": "in_progress", "tester_pass": true, "reviewer_approved": true},
     {"run_id": "swarm-20260608-sprintB", "route": "MEDIUM", "task_type": "Sprint-B-Design-System", "iterations": 1, "agents_used": ["front", "tester"], "retry_reasons": [], "status": "in_progress", "tester_pass": true, "reviewer_approved": true},
     {"run_id": "swarm-20260608-sprintC", "route": "MEDIUM", "task_type": "Sprint-C-Animations", "iterations": 1, "agents_used": ["front", "tester"], "retry_reasons": [], "status": "in_progress", "tester_pass": true, "reviewer_approved": true},
-    {"run_id": "swarm-20260608-sprintD", "route": "MEDIUM", "task_type": "Sprint-D-Navigation", "iterations": 1, "agents_used": ["front", "tester"], "retry_reasons": [], "status": "in_progress", "tester_pass": true, "reviewer_approved": true}
-  ]
+      {"run_id": "swarm-20260608-sprintD", "route": "MEDIUM", "task_type": "Sprint-D-Navigation", "iterations": 1, "agents_used": ["front", "tester"], "retry_reasons": [], "status": "in_progress", "tester_pass": true, "reviewer_approved": true},
+      {"run_id": "swarm-20260608-sprintE", "route": "MEDIUM", "task_type": "Sprint-E-Polish", "iterations": 2, "agents_used": ["front", "tester"], "retry_reasons": ["TEST_BUG-search-modal-empty", "TEST_BUG-ecosystem-nbsp"], "status": "in_progress", "tester_pass": true, "reviewer_approved": true}
+    ]
 }

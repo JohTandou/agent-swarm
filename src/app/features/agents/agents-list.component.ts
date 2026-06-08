@@ -5,6 +5,7 @@ import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component
 import { ToastService } from '@shared/services/toast.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
+import { UiEmptyStateComponent } from '@shared/components/ui-empty-state/ui-empty-state.component';
 import type { Agent, AgentCategory } from '@shared/models';
 
 /**
@@ -162,7 +163,7 @@ const CATEGORY_LABELS: Record<AgentCategory, string> = {
 @Component({
   selector: 'app-agents-list',
   standalone: true,
-  imports: [RouterLink, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
+  imports: [RouterLink, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective, UiEmptyStateComponent],
   templateUrl: './agents-list.component.html',
   styleUrls: ['./agents-list.component.scss'],
 })
@@ -217,5 +218,11 @@ export class AgentsListComponent {
   /** Retourne le nombre d'agents dans une catégorie donnée */
   getCategoryCount(category: AgentCategory): number {
     return this.agents.filter((a) => a.category === category).length;
+  }
+
+  /** Réinitialise tous les filtres — affiche tous les agents */
+  resetFilters(): void {
+    this.activeCategory.set(null);
+    this.toastService.show(`${this.agents.length} agents affichés`, 'info');
   }
 }

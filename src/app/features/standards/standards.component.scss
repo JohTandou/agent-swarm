@@ -726,6 +726,62 @@ $section-padding-mobile: 64px 20px;
 }
 
 /* ==========================================================================
+   Section 5 — Checklist qualité
+   ========================================================================== */
+
+.checklist__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.quality-checklist {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.checklist-card {
+  padding: 24px;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(142, 136, 130, 0.12);
+  border-radius: 12px;
+  box-shadow: var(--elevation-n2);
+  transition: transform 250ms var(--ease-natural), box-shadow 250ms var(--ease-natural);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--elevation-n3);
+  }
+}
+
+.checklist-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.checklist-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--color-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.checklist-card__description {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
    Responsive — Mobile
    ========================================================================== */
 @media (max-width: 768px) {
@@ -753,6 +809,10 @@ $section-padding-mobile: 64px 20px;
     grid-template-columns: 1fr;
   }
 
+  .checklist__grid {
+    grid-template-columns: 1fr;
+  }
+
 }
 
 /* ==========================================================================
@@ -776,6 +836,7 @@ $section-padding-mobile: 64px 20px;
 .elevation__grid > *,
 .conventions__grid > *,
 .testing__grid > *,
-.documentation__grid > * {
+.documentation__grid > *,
+.checklist__grid > * {
   animation-delay: calc(var(--stagger-index) * 60ms);
 }

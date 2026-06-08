@@ -52,7 +52,7 @@ describe('EcosystemComponent', () => {
 
     const h1 = fixture.nativeElement.querySelector('.hero__title');
     expect(h1).toBeTruthy();
-    expect(h1.textContent).toContain('Écosystème');
+    const title = h1.textContent!.replace(/\u00A0/g, ' ').trim(); expect(title).toContain('Les coulisses du Swarm');
   }));
 
   it('devrait afficher les 8 entrées du directoryTree', fakeAsync(() => {

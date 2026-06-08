@@ -67,6 +67,13 @@ interface DocResource {
   readonly description: string;
 }
 
+/** Entrée de la checklist qualité */
+interface QualityCheckItem {
+  readonly title: string;
+  readonly description: string;
+  readonly category: 'code' | 'design' | 'test' | 'accessibilité';
+}
+
 /**
  * Page Standards — Référence complète des normes du projet Swarm Wiki.
  *
@@ -312,6 +319,84 @@ export class StandardsComponent implements AfterViewInit, OnDestroy {
       description: 'La documentation est toujours synchronisée avec le code. Après chaque merge, l\'agent writer garantit que les docs reflètent l\'état réel du codebase.',
     },
   ];
+
+  /* ==========================================================================
+   * Section 5 — Checklist qualité
+   * ========================================================================== */
+
+  protected readonly qualityChecklist: readonly QualityCheckItem[] = [
+    {
+      title: 'Palette 6 couleurs respectée',
+      description: 'Aucune couleur hors palette. Pas de violet, pas de bleu, pas d\'indigo. Dark mode exclusif, pas de media query light.',
+      category: 'design',
+    },
+    {
+      title: 'Pairing typographique cohérent',
+      description: 'Cabinet Grotesk pour les titres et la navigation, Satoshi pour le corps de texte. Hiérarchie dramatique avec au moins 3 niveaux de contraste typographique.',
+      category: 'design',
+    },
+    {
+      title: 'Système d\'élévation N1-N4',
+      description: 'Glow borders appliqués correctement selon le niveau de profondeur. Pas d\'ombres portées CSS classiques.',
+      category: 'design',
+    },
+    {
+      title: 'Animations cinématiques au scroll',
+      description: 'Stagger systématique, parallaxe multi-couches, easings personnalisés. Pas de fade-in basique comme seule animation.',
+      category: 'design',
+    },
+    {
+      title: 'Composant < 200 lignes',
+      description: 'Un composant = une responsabilité. Pas d\'abstraction pour usage unique. Pas de logique métier dans le template.',
+      category: 'code',
+    },
+    {
+      title: 'TypeScript strict, zéro `any`',
+      description: 'Mode strict activé. Types explicites sur toutes les signatures publiques. Pas de @ts-ignore. Interfaces dédiées pour les données.',
+      category: 'code',
+    },
+    {
+      title: 'Nommage cohérent',
+      description: 'Fichiers en kebab-case, composants en PascalCase, méthodes en camelCase. Code en anglais, commentaires en français.',
+      category: 'code',
+    },
+    {
+      title: 'Tests unitaires par composant',
+      description: 'Chaque composant et hook exporté a au moins un test unitaire. Pattern AAA (Arrange, Act, Assert). Tests indépendants et déterministes.',
+      category: 'test',
+    },
+    {
+      title: 'Couverture ≥ 80%',
+      description: 'Seuil de couverture global minimum. Les zones critiques (services, utilitaires) visent 90%+.',
+      category: 'test',
+    },
+    {
+      title: 'Tests E2E pour les flux critiques',
+      description: 'Playwright sur Chromium + iPhone 14. Navigation, recherche, rendu Markdown, responsive validés automatiquement.',
+      category: 'test',
+    },
+    {
+      title: 'Navigation clavier complète',
+      description: 'Tab, Enter, Escape, flèches fonctionnels sur tous les composants interactifs. Skip-to-content présent. Pas de piège au clavier.',
+      category: 'accessibilité',
+    },
+    {
+      title: 'Contrastes WCAG AA',
+      description: 'Vérifier les contrastes de la palette dark sur tous les textes. Touch targets ≥ 44×44px. Labels aria sur tous les éléments interactifs.',
+      category: 'accessibilité',
+    },
+  ];
+
+  /** Retourne le label français pour une catégorie de checklist */
+  protected getCheckCategoryLabel(category: QualityCheckItem['category']): string {
+    const labels: Record<QualityCheckItem['category'], string> = {
+      design: 'Design',
+      code: 'Code',
+      test: 'Tests',
+      accessibilité: 'Accessibilité',
+    };
+    return labels[category];
+  }
 
   /* ==========================================================================
    * Références DOM pour animations

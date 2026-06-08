@@ -5,6 +5,7 @@ import { ToastService } from '@shared/services/toast.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
+import { UiEmptyStateComponent } from '@shared/components/ui-empty-state/ui-empty-state.component';
 import type { Skill, SkillCategory } from '@shared/models';
 
 /**
@@ -59,7 +60,7 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
 @Component({
   selector: 'app-skills-list',
   standalone: true,
-  imports: [RouterLink, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
+  imports: [RouterLink, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective, UiEmptyStateComponent],
   templateUrl: './skills-list.component.html',
   styleUrls: ['./skills-list.component.scss'],
 })
@@ -109,5 +110,11 @@ export class SkillsListComponent {
   /** Retourne le nombre de skills dans une catégorie donnée */
   getCategoryCount(category: SkillCategory): number {
     return this.skills.filter((s) => s.category === category).length;
+  }
+
+  /** Réinitialise tous les filtres — affiche tous les skills */
+  resetFilters(): void {
+    this.activeCategory.set(null);
+    this.toastService.show(`${this.skills.length} skills affichés`, 'info');
   }
 }

@@ -16,6 +16,7 @@ import { SearchService } from './shared/services/search.service';
 import { AnimationService } from './shared/services/animation.service';
 import { ScrollProgressComponent } from './shared/components/scroll-progress/scroll-progress.component';
 import type { Breadcrumb } from '@shared/models';
+import { EasterEggService } from './shared/services/easter-egg.service';
 import type { SearchResult } from '@shared/models';
 
 /**
@@ -115,6 +116,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private overlay: Overlay,
     private searchService: SearchService,
     private animService: AnimationService,
+    private easterEggService: EasterEggService,
   ) {
     this.subscriptions.add(
       this.breakpointObserver
@@ -230,6 +232,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event'])
   handleGlobalKeydown(event: KeyboardEvent): void {
+    // Délègue au service easter egg (Konami code, etc.)
+    this.easterEggService.handleKey(event.key);
+
     if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
       event.preventDefault();
       this.toggleSearch();

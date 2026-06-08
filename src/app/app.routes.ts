@@ -1,10 +1,5 @@
 import { Routes } from '@angular/router';
 
-/**
- * Routes racine de l'application.
- * Lazy loading par feature pour optimiser le chargement.
- * Layout shell + homepage chargés eagerly via AppComponent.
- */
 export const routes: Routes = [
   {
     path: '',
@@ -58,6 +53,10 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/standards/standards.routes').then((m) => m.standardsRoutes),
   },
-  /* Route wildcard — redirige vers l'accueil */
-  { path: '**', redirectTo: '' },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./features/not-found/not-found.component').then((m) => m.NotFoundComponent),
+    data: { title: 'Page introuvable' },
+  },
 ];
