@@ -16,7 +16,7 @@
   &:hover {
     transform: translateY(-2px) scale(1.02);
     box-shadow: var(--elevation-n3);
-    border-color: rgba(240, 165, 34, 0.2);
+    border-color: rgba(196, 120, 13, 0.2);
   }
 
   &:active {
@@ -33,8 +33,8 @@
               border-color var(--duration-normal) var(--ease-natural);
 
   &:hover {
-    box-shadow: 0 0 20px rgba(240, 165, 34, 0.08);
-    border-color: rgba(240, 165, 34, 0.15);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.08);
+    border-color: rgba(196, 120, 13, 0.15);
   }
 }
 

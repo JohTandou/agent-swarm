@@ -120,8 +120,8 @@ $section-padding-mobile: 64px 20px;
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 50% at 50% 30%, rgba(240, 165, 34, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 85% 80%, rgba(240, 165, 34, 0.04) 0%, transparent 60%);
+    radial-gradient(ellipse 70% 50% at 50% 30%, rgba(196, 120, 13, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 85% 80%, rgba(196, 120, 13, 0.04) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -242,15 +242,15 @@ $section-padding-mobile: 64px 20px;
 /* Swatch de couleur */
 .palette-swatch {
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 16px;
   overflow: hidden;
   transition: border-color 300ms $ease-natural, transform 250ms $ease-natural;
 
   &:hover {
-    border-color: rgba(240, 165, 34, 0.25);
+    border-color: rgba(196, 120, 13, 0.25);
     transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(240, 165, 34, 0.04);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
   }
 }
 
@@ -279,7 +279,7 @@ $section-padding-mobile: 64px 20px;
   font-family: var(--font-body);
   font-size: 0.8125rem;
   color: var(--color-text-secondary);
-  background: rgba(142, 136, 130, 0.08);
+  background: rgba(122, 136, 153, 0.08);
   padding: 2px 8px;
   border-radius: 4px;
   display: inline-block;
@@ -312,7 +312,7 @@ $section-padding-mobile: 64px 20px;
 
 .typo-demo {
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 16px;
   padding: 40px 36px;
   display: flex;
@@ -321,7 +321,7 @@ $section-padding-mobile: 64px 20px;
   transition: border-color 300ms $ease-natural;
 
   &:hover {
-    border-color: rgba(240, 165, 34, 0.2);
+    border-color: rgba(196, 120, 13, 0.2);
   }
 }
 
@@ -412,17 +412,17 @@ $section-padding-mobile: 64px 20px;
 }
 
 .elevation-card--n2 {
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
 }
 
 .elevation-card--n3 {
-  border: 1px solid rgba(142, 136, 130, 0.2);
-  box-shadow: 0 0 20px rgba(240, 165, 34, 0.04);
+  border: 1px solid rgba(122, 136, 153, 0.2);
+  box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
 }
 
 .elevation-card--n4 {
-  border: 1px solid rgba(142, 136, 130, 0.3);
-  box-shadow: 0 0 40px rgba(240, 165, 34, 0.06);
+  border: 1px solid rgba(122, 136, 153, 0.3);
+  box-shadow: 0 0 40px rgba(196, 120, 13, 0.06);
 }
 
 .elevation-card__name {
@@ -459,7 +459,7 @@ $section-padding-mobile: 64px 20px;
       font-family: var(--font-body);
       font-size: 0.75rem;
       color: var(--color-text-secondary);
-      background: rgba(142, 136, 130, 0.08);
+      background: rgba(122, 136, 153, 0.08);
       padding: 2px 8px;
       border-radius: 4px;
       display: inline-block;
@@ -501,21 +501,21 @@ $section-padding-mobile: 64px 20px;
   text-transform: uppercase;
   color: var(--color-text-secondary);
   text-align: left;
-  border-bottom: 1px solid rgba(142, 136, 130, 0.2);
+  border-bottom: 1px solid rgba(122, 136, 153, 0.2);
   white-space: nowrap;
 }
 
 .animations__table tbody td {
   padding: 14px 20px;
   color: var(--color-text-secondary);
-  border-bottom: 1px solid rgba(142, 136, 130, 0.08);
+  border-bottom: 1px solid rgba(122, 136, 153, 0.08);
   vertical-align: top;
 
   code {
     font-family: var(--font-body);
     font-size: 0.8125rem;
     color: var(--color-text-secondary);
-    background: rgba(142, 136, 130, 0.08);
+    background: rgba(122, 136, 153, 0.08);
     padding: 2px 8px;
     border-radius: 4px;
   }
@@ -556,7 +556,7 @@ $section-padding-mobile: 64px 20px;
 
 .convention-card {
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 14px;
   padding: 32px 28px;
   display: flex;
@@ -565,9 +565,9 @@ $section-padding-mobile: 64px 20px;
   transition: border-color 300ms $ease-natural, transform 250ms $ease-natural;
 
   &:hover {
-    border-color: rgba(240, 165, 34, 0.2);
+    border-color: rgba(196, 120, 13, 0.2);
     transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(240, 165, 34, 0.04);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
   }
 }
 
@@ -599,7 +599,7 @@ $section-padding-mobile: 64px 20px;
   font-family: var(--font-body);
   font-size: 0.8125rem;
   color: var(--color-text-secondary);
-  background: rgba(142, 136, 130, 0.08);
+  background: rgba(122, 136, 153, 0.08);
   padding: 6px 12px;
   border-radius: 6px;
   display: block;
@@ -624,7 +624,7 @@ $section-padding-mobile: 64px 20px;
 
 .test-card {
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 14px;
   padding: 32px 28px;
   display: flex;
@@ -633,9 +633,9 @@ $section-padding-mobile: 64px 20px;
   transition: border-color 300ms $ease-natural, transform 250ms $ease-natural;
 
   &:hover {
-    border-color: rgba(240, 165, 34, 0.2);
+    border-color: rgba(196, 120, 13, 0.2);
     transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(240, 165, 34, 0.04);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
   }
 }
 
@@ -674,7 +674,7 @@ $section-padding-mobile: 64px 20px;
 
 .doc-card {
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 14px;
   padding: 32px 28px;
   display: flex;
@@ -683,9 +683,9 @@ $section-padding-mobile: 64px 20px;
   transition: border-color 300ms $ease-natural, transform 250ms $ease-natural;
 
   &:hover {
-    border-color: rgba(240, 165, 34, 0.2);
+    border-color: rgba(196, 120, 13, 0.2);
     transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(240, 165, 34, 0.04);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
   }
 }
 
@@ -712,7 +712,7 @@ $section-padding-mobile: 64px 20px;
 .page-footer {
   padding: 64px 24px;
   text-align: center;
-  border-top: 1px solid rgba(142, 136, 130, 0.1);
+  border-top: 1px solid rgba(122, 136, 153, 0.1);
 }
 
 .page-footer__text {
@@ -746,7 +746,7 @@ $section-padding-mobile: 64px 20px;
 .checklist-card {
   padding: 24px;
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 12px;
   box-shadow: var(--elevation-n2);
   transition: transform 250ms var(--ease-natural), box-shadow 250ms var(--ease-natural);

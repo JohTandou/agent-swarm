@@ -36,9 +36,9 @@
   width: min(640px, calc(100vw - 48px));
   max-height: min(560px, 60vh);
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.3);
+  border: 1px solid rgba(122, 136, 153, 0.3);
   border-radius: 16px;
-  box-shadow: 0 0 40px rgba(240, 165, 34, 0.06);
+  box-shadow: 0 0 40px rgba(196, 120, 13, 0.06);
   z-index: 101;
   display: flex;
   flex-direction: column;
@@ -65,7 +65,7 @@
   align-items: center;
   gap: 12px;
   padding: 16px 20px;
-  border-bottom: 1px solid rgba(142, 136, 130, 0.12);
+  border-bottom: 1px solid rgba(122, 136, 153, 0.12);
 }
 
 .search-modal__input-icon {
@@ -123,7 +123,7 @@
 
   &:hover,
   &--selected {
-    background: rgba(142, 136, 130, 0.1);
+    background: rgba(122, 136, 153, 0.1);
   }
 
   &:active {
@@ -153,7 +153,7 @@
   color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: rgba(142, 136, 130, 0.1);
+  background: rgba(122, 136, 153, 0.1);
   padding: 2px 8px;
   border-radius: 4px;
 }
@@ -211,7 +211,7 @@
   justify-content: center;
   gap: 24px;
   padding: 12px 20px;
-  border-top: 1px solid rgba(142, 136, 130, 0.12);
+  border-top: 1px solid rgba(122, 136, 153, 0.12);
 }
 
 .search-modal__kbd-group {
@@ -231,8 +231,8 @@
   font-size: 0.6875rem;
   font-weight: 500;
   color: var(--color-text-secondary);
-  background: rgba(142, 136, 130, 0.12);
-  border: 1px solid rgba(142, 136, 130, 0.2);
+  background: rgba(122, 136, 153, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.2);
   border-radius: 4px;
   line-height: 1;
 }

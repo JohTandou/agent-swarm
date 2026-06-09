@@ -124,8 +124,8 @@ $section-padding-mobile: 64px 20px;
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 50% at 50% 40%, rgba(240, 165, 34, 0.04) 0%, transparent 70%),
-      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(142, 136, 130, 0.03) 0%, transparent 60%);
+      radial-gradient(ellipse 60% 50% at 50% 40%, rgba(196, 120, 13, 0.04) 0%, transparent 70%),
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(122, 136, 153, 0.03) 0%, transparent 60%);
     pointer-events: none;
   }
 
@@ -207,7 +207,7 @@ $section-padding-mobile: 64px 20px;
   &__stat-divider {
     width: 1px;
     height: 48px;
-    background: rgba(142, 136, 130, 0.2);
+    background: rgba(122, 136, 153, 0.2);
   }
 
   &__scroll-hint {
@@ -274,13 +274,13 @@ $section-padding-mobile: 64px 20px;
   position: relative;
   padding: 28px 32px;
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 16px;
   transition: border-color 300ms var(--ease-natural), box-shadow 300ms var(--ease-natural), transform 300ms var(--ease-natural);
 
   &:hover {
-    border-color: rgba(240, 165, 34, 0.3);
-    box-shadow: 0 0 24px rgba(240, 165, 34, 0.06);
+    border-color: rgba(196, 120, 13, 0.3);
+    box-shadow: 0 0 24px rgba(196, 120, 13, 0.06);
     transform: translateY(-2px);
   }
 
@@ -352,7 +352,7 @@ $section-padding-mobile: 64px 20px;
     font-size: 0.8125rem;
     color: var(--color-text-secondary);
     padding-top: 12px;
-    border-top: 1px solid rgba(142, 136, 130, 0.08);
+    border-top: 1px solid rgba(122, 136, 153, 0.08);
   }
 
   &__agents-label {
@@ -388,7 +388,7 @@ $section-padding-mobile: 64px 20px;
   &__track {
     width: 4px;
     height: 320px;
-    background: rgba(142, 136, 130, 0.1);
+    background: rgba(122, 136, 153, 0.1);
     border-radius: 2px;
     position: relative;
     overflow: hidden;
@@ -400,7 +400,7 @@ $section-padding-mobile: 64px 20px;
     left: 0;
     right: 0;
     height: 30%;
-    background: linear-gradient(to top, var(--color-accent), rgba(240, 165, 34, 0.1));
+    background: linear-gradient(to top, var(--color-accent), rgba(196, 120, 13, 0.1));
     border-radius: 2px;
     animation: complexityFill 3000ms var(--ease-out-expo) forwards;
   }
@@ -437,8 +437,8 @@ $section-padding-mobile: 64px 20px;
 
   &.mermaid-visible {
     .mermaid-wrapper {
-      box-shadow: 0 0 40px rgba(240, 165, 34, 0.06);
-      border-color: rgba(240, 165, 34, 0.2);
+      box-shadow: 0 0 40px rgba(196, 120, 13, 0.06);
+      border-color: rgba(196, 120, 13, 0.2);
     }
   }
 }
@@ -446,7 +446,7 @@ $section-padding-mobile: 64px 20px;
 .mermaid-wrapper {
   padding: 48px 32px;
   background: var(--color-bg-subtle);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 20px;
   overflow-x: auto;
   transition: border-color 600ms var(--ease-natural), box-shadow 600ms var(--ease-natural);
@@ -473,7 +473,7 @@ $section-padding-mobile: 64px 20px;
   &__table-wrapper {
     overflow-x: auto;
     border-radius: 12px;
-    border: 1px solid rgba(142, 136, 130, 0.12);
+    border: 1px solid rgba(122, 136, 153, 0.12);
   }
 
   &__table {
@@ -490,7 +490,7 @@ $section-padding-mobile: 64px 20px;
       background: var(--color-bg-elevated);
       padding: 16px 20px;
       text-align: left;
-      border-bottom: 1px solid rgba(142, 136, 130, 0.15);
+      border-bottom: 1px solid rgba(122, 136, 153, 0.15);
     }
 
     td {
@@ -498,7 +498,7 @@ $section-padding-mobile: 64px 20px;
       font-size: 0.9375rem;
       color: var(--color-text-secondary);
       padding: 14px 20px;
-      border-bottom: 1px solid rgba(142, 136, 130, 0.06);
+      border-bottom: 1px solid rgba(122, 136, 153, 0.06);
       line-height: 1.5;
     }
 
@@ -511,7 +511,7 @@ $section-padding-mobile: 64px 20px;
     }
 
     tr:hover td {
-      background: rgba(240, 165, 34, 0.04);
+      background: rgba(196, 120, 13, 0.04);
     }
   }
 }
@@ -537,13 +537,13 @@ $section-padding-mobile: 64px 20px;
 .gate-card {
   padding: 32px;
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 16px;
   transition: border-color 300ms var(--ease-natural), box-shadow 300ms var(--ease-natural);
 
   &:hover {
-    border-color: rgba(240, 165, 34, 0.2);
-    box-shadow: 0 0 20px rgba(240, 165, 34, 0.04);
+    border-color: rgba(196, 120, 13, 0.2);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
   }
 
   &__header {
@@ -572,7 +572,7 @@ $section-padding-mobile: 64px 20px;
     color: var(--color-text-secondary);
     margin-bottom: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid rgba(142, 136, 130, 0.08);
+    border-bottom: 1px solid rgba(122, 136, 153, 0.08);
   }
 
   &__criteria {
@@ -614,7 +614,7 @@ $section-padding-mobile: 64px 20px;
   flex-wrap: wrap;
   padding: 40px 32px;
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 16px;
   margin-top: 8px;
   position: relative;
@@ -627,17 +627,17 @@ $section-padding-mobile: 64px 20px;
     padding: 16px 20px;
     border-radius: 12px;
     background: var(--color-bg-subtle);
-    border: 1px solid rgba(142, 136, 130, 0.1);
+    border: 1px solid rgba(122, 136, 153, 0.1);
     transition: border-color 300ms;
 
     &--active {
-      border-color: rgba(240, 165, 34, 0.3);
-      background: rgba(240, 165, 34, 0.05);
+      border-color: rgba(196, 120, 13, 0.3);
+      background: rgba(196, 120, 13, 0.05);
     }
 
     &--success {
-      border-color: rgba(240, 165, 34, 0.4);
-      background: rgba(240, 165, 34, 0.08);
+      border-color: rgba(196, 120, 13, 0.4);
+      background: rgba(196, 120, 13, 0.08);
     }
   }
 
@@ -708,13 +708,13 @@ $section-padding-mobile: 64px 20px;
     gap: 12px;
     padding: 14px 24px;
     background: var(--color-bg-elevated);
-    border: 1px solid rgba(142, 136, 130, 0.15);
+    border: 1px solid rgba(122, 136, 153, 0.15);
     border-radius: 12px;
     transition: border-color 250ms var(--ease-natural), box-shadow 250ms var(--ease-natural), transform 250ms var(--ease-natural);
 
     &:hover {
-      border-color: rgba(240, 165, 34, 0.25);
-      box-shadow: 0 0 16px rgba(240, 165, 34, 0.05);
+      border-color: rgba(196, 120, 13, 0.25);
+      box-shadow: 0 0 16px rgba(196, 120, 13, 0.05);
       transform: translateY(-1px);
     }
   }
@@ -766,13 +766,13 @@ $section-padding-mobile: 64px 20px;
 .file-card {
   padding: 32px;
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 16px;
   transition: border-color 300ms var(--ease-natural), box-shadow 300ms var(--ease-natural);
 
   &:hover {
-    border-color: rgba(240, 165, 34, 0.2);
-    box-shadow: 0 0 20px rgba(240, 165, 34, 0.04);
+    border-color: rgba(196, 120, 13, 0.2);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
   }
 
   &__header {
@@ -791,7 +791,7 @@ $section-padding-mobile: 64px 20px;
     font-size: 0.9375rem;
     font-weight: 500;
     color: var(--color-accent);
-    background: rgba(240, 165, 34, 0.06);
+    background: rgba(196, 120, 13, 0.06);
     padding: 4px 12px;
     border-radius: 6px;
   }
@@ -806,7 +806,7 @@ $section-padding-mobile: 64px 20px;
 
   &__structure {
     background: var(--color-bg-subtle);
-    border: 1px solid rgba(142, 136, 130, 0.1);
+    border: 1px solid rgba(122, 136, 153, 0.1);
     border-radius: 8px;
     padding: 16px;
     overflow-x: auto;

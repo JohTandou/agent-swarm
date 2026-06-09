@@ -37,7 +37,7 @@
   h2 {
     font-size: clamp(1.375rem, 2.5vw, 1.75rem);
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(142, 136, 130, 0.12);
+    border-bottom: 1px solid rgba(122, 136, 153, 0.12);
   }
 
   h3 { font-size: clamp(1.125rem, 2vw, 1.375rem); }
@@ -62,12 +62,12 @@
     color: var(--color-accent);
     text-decoration: none;
     transition: color 200ms ease-out, text-shadow 200ms ease-out;
-    border-bottom: 1px solid rgba(240, 165, 34, 0.2);
+    border-bottom: 1px solid rgba(196, 120, 13, 0.2);
 
     &:hover {
       color: var(--color-accent);
-      text-shadow: 0 0 12px rgba(240, 165, 34, 0.2);
-      border-bottom-color: rgba(240, 165, 34, 0.5);
+      text-shadow: 0 0 12px rgba(196, 120, 13, 0.2);
+      border-bottom-color: rgba(196, 120, 13, 0.5);
     }
   }
 
@@ -85,7 +85,7 @@
     margin: 1.5rem 0;
     padding: 1rem 1.25rem;
     border-left: 3px solid var(--color-accent);
-    background: rgba(240, 165, 34, 0.04);
+    background: rgba(196, 120, 13, 0.04);
     border-radius: 0 6px 6px 0;
 
     p {
@@ -107,7 +107,7 @@
     th, td {
       padding: 0.75rem 1rem;
       text-align: left;
-      border: 1px solid rgba(142, 136, 130, 0.15);
+      border: 1px solid rgba(122, 136, 153, 0.15);
     }
 
     th {
@@ -143,7 +143,7 @@
   /* Blocs de code */
   pre {
     background: var(--color-bg-subtle);
-    border: 1px solid rgba(142, 136, 130, 0.12);
+    border: 1px solid rgba(122, 136, 153, 0.12);
     border-radius: 8px;
     margin: 1.5rem 0;
     padding: 1.25rem 1.5rem;
@@ -180,13 +180,13 @@
     }
 
     &--info {
-      border-left-color: rgba(142, 136, 130, 0.5);
+      border-left-color: rgba(122, 136, 153, 0.5);
       .callout__icon { opacity: 0.7; }
     }
 
     &--warning {
       border-left-color: var(--color-accent);
-      background: rgba(240, 165, 34, 0.05);
+      background: rgba(196, 120, 13, 0.05);
     }
 
     &--tip {
@@ -196,7 +196,7 @@
 
     &--danger {
       border-left-color: var(--color-accent);
-      background: rgba(240, 165, 34, 0.08);
+      background: rgba(196, 120, 13, 0.08);
       border-left-width: 5px;
     }
   }
@@ -222,7 +222,7 @@
   /* Séparateurs */
   hr {
     border: none;
-    border-top: 1px solid rgba(142, 136, 130, 0.15);
+    border-top: 1px solid rgba(122, 136, 153, 0.15);
     margin: 2.5rem 0;
   }
 
@@ -239,9 +239,9 @@
 
 .markdown-error {
   padding: 32px;
-  border: 1px solid rgba(240, 165, 34, 0.3);
+  border: 1px solid rgba(196, 120, 13, 0.3);
   border-radius: 8px;
-  background: rgba(240, 165, 34, 0.04);
+  background: rgba(196, 120, 13, 0.04);
   text-align: center;
 
   &__title {

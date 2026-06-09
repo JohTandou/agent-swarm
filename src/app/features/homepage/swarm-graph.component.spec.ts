@@ -125,13 +125,13 @@ describe('SwarmGraphComponent', () => {
   });
 
   it('getNodeColor devrait retourner la couleur correcte', () => {
-    expect(component.getNodeColor('orchestrateur')).toBe('#F0A522');
+    expect(component.getNodeColor('orchestrateur')).toBe('#C4780D');
     expect(component.getNodeColor('search')).toBe('#B8A878');
     expect(component.getNodeColor('front')).toBe('#9A9590');
   });
 
   it('getNodeColor devrait retourner un fallback pour un id inconnu', () => {
-    expect(component.getNodeColor('inconnu')).toBe('#8E8882');
+    expect(component.getNodeColor('inconnu')).toBe('#7A8899');
   });
 
   it('getNodeLabel devrait retourner le label correct', () => {
@@ -214,7 +214,7 @@ describe('SwarmGraphComponent', () => {
 
   it('devrait avoir l\'orchestrateur comme nœud central', () => {
     expect(component.getNodeRadius('orchestrateur')).toBe(20);
-    expect(component.getNodeColor('orchestrateur')).toBe('#F0A522');
+    expect(component.getNodeColor('orchestrateur')).toBe('#C4780D');
   });
 
   /* ── Nettoyage ── */
@@ -241,7 +241,7 @@ describe('SwarmGraphComponent', () => {
     expect(mainCircle.getAttribute('cx')).toBe('50');
     expect(mainCircle.getAttribute('cy')).toBe('-30');
     expect(mainCircle.getAttribute('r')).toBe('20');
-    expect(mainCircle.getAttribute('fill')).toBe('#F0A522');
+    expect(mainCircle.getAttribute('fill')).toBe('#C4780D');
   });
 
   it('le nœud orchestrateur devrait avoir la classe pulse', () => {

@@ -108,19 +108,19 @@ export class StandardsComponent implements AfterViewInit, OnDestroy {
   protected readonly paletteColors: readonly PaletteColor[] = [
     {
       name: 'Fond principal',
-      hex: '#3A3530',
+      hex: '#1C1812',
       variable: '--color-bg-primary',
       usage: 'Arrière-plan de page, fond général',
     },
     {
       name: 'Surface surélevée',
-      hex: '#4A4540',
+      hex: '#28231C',
       variable: '--color-bg-elevated',
       usage: 'Cartes, conteneurs, composants',
     },
     {
       name: 'Fond profond',
-      hex: '#2A2520',
+      hex: '#0E0C09',
       variable: '--color-bg-subtle',
       usage: 'Zones d\'ombre, footer, blocs de code',
     },
@@ -132,13 +132,13 @@ export class StandardsComponent implements AfterViewInit, OnDestroy {
     },
     {
       name: 'Texte secondaire',
-      hex: '#8E8882',
+      hex: '#7A8899',
       variable: '--color-text-secondary',
       usage: 'Légendes, métadonnées, texte d\'appoint',
     },
     {
       name: 'Accent ambré',
-      hex: '#F0A522',
+      hex: '#C4780D',
       variable: '--color-accent',
       usage: 'Liens, survols, surbrillances, éléments interactifs',
     },
@@ -167,30 +167,30 @@ export class StandardsComponent implements AfterViewInit, OnDestroy {
     {
       level: 'N1',
       name: 'Page',
-      background: '#3A3530',
+      background: '#1C1812',
       border: '—',
       shadow: '—',
     },
     {
       level: 'N2',
       name: 'Carte',
-      background: '#4A4540',
-      border: '1px rgba(142,136,130, 0.12)',
+      background: '#28231C',
+      border: '1px rgba(122,136,153, 0.12)',
       shadow: '—',
     },
     {
       level: 'N3',
       name: 'Carte surélevée',
-      background: '#4A4540',
-      border: '1px rgba(142,136,130, 0.2)',
-      shadow: '0 0 20px rgba(240,165,34, 0.04)',
+      background: '#28231C',
+      border: '1px rgba(122,136,153, 0.2)',
+      shadow: '0 0 20px rgba(196,120,13, 0.04)',
     },
     {
       level: 'N4',
       name: 'Modale',
-      background: '#4A4540',
-      border: '1px rgba(142,136,130, 0.3)',
-      shadow: '0 0 40px rgba(240,165,34, 0.06) + blur(12px)',
+      background: '#28231C',
+      border: '1px rgba(122,136,153, 0.3)',
+      shadow: '0 0 40px rgba(196,120,13, 0.06) + blur(12px)',
     },
   ];
 

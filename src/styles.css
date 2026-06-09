@@ -14,12 +14,12 @@
   --font-body: "Satoshi", sans-serif;
 
   /* Palette */
-  --color-bg-primary: #3A3530;
-  --color-bg-elevated: #4A4540;
-  --color-bg-subtle: #2A2520;
+  --color-bg-primary: #1C1812;
+  --color-bg-elevated: #28231C;
+  --color-bg-subtle: #0E0C09;
   --color-text-primary: #F5F0EB;
-  --color-text-secondary: #8E8882;
-  --color-accent: #F0A522;
+  --color-text-secondary: #7A8899;
+  --color-accent: #C4780D;
 
   /* Breakpoints fluides */
   --breakpoint-sm: 640px;
@@ -37,29 +37,29 @@
   --font-body: "Satoshi", sans-serif;
 
   /* Fond et surfaces */
-  --color-bg-primary: #3A3530;
-  --color-bg-elevated: #4A4540;
-  --color-bg-subtle: #2A2520;
+  --color-bg-primary: #1C1812;
+  --color-bg-elevated: #28231C;
+  --color-bg-subtle: #0E0C09;
 
   /* Texte */
   --color-text-primary: #F5F0EB;
-  --color-text-secondary: #8E8882;
+  --color-text-secondary: #7A8899;
 
   /* Accent */
-  --color-accent: #F0A522;
-  --color-accent-glow: rgba(240, 165, 34, 0.15);
+  --color-accent: #C4780D;
+  --color-accent-glow: rgba(196, 120, 13, 0.15);
 
   /* Couleurs sémantiques — états */
   --color-success: #6BAF7B;
   --color-error:   #E85D6C;
-  --color-warning: #E8A84C;
-  --color-info:    #5EA3D9;
+  --color-warning: #C4953A;
+  --color-info:    #6A8FB0;
 
   /* Élévation dark (glow borders, pas d'ombres) */
   --elevation-n1: none;
-  --elevation-n2: 0 0 0 1px rgba(142, 136, 130, 0.12);
-  --elevation-n3: 0 0 0 1px rgba(142, 136, 130, 0.2), 0 0 20px rgba(240, 165, 34, 0.04);
-  --elevation-n4: 0 0 0 1px rgba(142, 136, 130, 0.3), 0 0 40px rgba(240, 165, 34, 0.06);
+  --elevation-n2: 0 0 0 1px rgba(122, 136, 153, 0.12);
+  --elevation-n3: 0 0 0 1px rgba(122, 136, 153, 0.2), 0 0 20px rgba(196, 120, 13, 0.04);
+  --elevation-n4: 0 0 0 1px rgba(122, 136, 153, 0.3), 0 0 40px rgba(196, 120, 13, 0.06);
 
   /* Animations */
   --ease-natural: cubic-bezier(0.25, 0.46, 0.45, 0.94);

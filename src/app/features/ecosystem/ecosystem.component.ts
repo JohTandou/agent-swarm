@@ -272,19 +272,19 @@ graph TB
         SEARCH -.-> CONTEXT7
         CONTRACT -.-> CONTEXT7
 
-    style IDE fill:#2A2520,stroke:#8E8882,color:#F5F0EB
-    style ORCH fill:#4A4540,stroke:#F0A522,color:#F0A522
-    style BRANCH fill:#3A3530,stroke:#8E8882,color:#F5F0EB
-    style SEARCH fill:#3A3530,stroke:#8E8882,color:#F5F0EB
-    style PLAN fill:#4A4540,stroke:#F0A522,color:#F0A522
-    style FRONT fill:#2A2520,stroke:#8E8882,color:#F5F0EB
-    style BACK fill:#2A2520,stroke:#8E8882,color:#F5F0EB
-    style CONTRACT fill:#2A2520,stroke:#8E8882,color:#F5F0EB
-    style TEST fill:#3A3530,stroke:#F0A522,color:#F0A522
-    style REVIEW fill:#3A3530,stroke:#F0A522,color:#F0A522
-    style MERGE fill:#4A4540,stroke:#F0A522,color:#F0A522
-    style WRITER fill:#2A2520,stroke:#8E8882,color:#8E8882
-    style MCP fill:#2A2520,stroke:#8E8882,color:#8E8882
+    style IDE fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
+    style ORCH fill:#28231C,stroke:#C4780D,color:#C4780D
+    style BRANCH fill:#1C1812,stroke:#7A8899,color:#F5F0EB
+    style SEARCH fill:#1C1812,stroke:#7A8899,color:#F5F0EB
+    style PLAN fill:#28231C,stroke:#C4780D,color:#C4780D
+    style FRONT fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
+    style BACK fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
+    style CONTRACT fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
+    style TEST fill:#1C1812,stroke:#C4780D,color:#C4780D
+    style REVIEW fill:#1C1812,stroke:#C4780D,color:#C4780D
+    style MERGE fill:#28231C,stroke:#C4780D,color:#C4780D
+    style WRITER fill:#0E0C09,stroke:#7A8899,color:#7A8899
+    style MCP fill:#0E0C09,stroke:#7A8899,color:#7A8899
   \`\`\``;
 
   /* ==========================================================================

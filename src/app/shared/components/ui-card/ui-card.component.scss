@@ -9,7 +9,7 @@
    -------------------------------------------------------------------------- */
 .ui-card {
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 12px;
   box-shadow: var(--elevation-n2);
   overflow: hidden;
@@ -23,7 +23,7 @@
   background: rgba(74, 69, 64, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-color: rgba(142, 136, 130, 0.08);
+  border-color: rgba(122, 136, 153, 0.08);
 }
 
 /* --------------------------------------------------------------------------
@@ -39,8 +39,8 @@
 
   &:hover {
     transform: perspective(800px) rotateX(1deg) rotateY(-1deg) translateY(-4px) scale(1.03);
-    box-shadow: var(--elevation-n3), 0 0 30px rgba(240, 165, 34, 0.06);
-    border-color: rgba(240, 165, 34, 0.2);
+    box-shadow: var(--elevation-n3), 0 0 30px rgba(196, 120, 13, 0.06);
+    border-color: rgba(196, 120, 13, 0.2);
   }
 
   // Retour fluide au relâchement du survol
@@ -71,8 +71,8 @@
    Modificateur : Highlight (bordure + glow ambré)
    -------------------------------------------------------------------------- */
 .ui-card--highlight {
-  border-color: rgba(240, 165, 34, 0.25);
-  box-shadow: 0 0 12px rgba(240, 165, 34, 0.04);
+  border-color: rgba(196, 120, 13, 0.25);
+  box-shadow: 0 0 12px rgba(196, 120, 13, 0.04);
 }
 
 /* --------------------------------------------------------------------------

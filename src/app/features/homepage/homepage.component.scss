@@ -44,7 +44,7 @@
     height: 80%;
     background: radial-gradient(
       ellipse at 30% 40%,
-      rgba(142, 136, 130, 0.06) 0%,
+      rgba(122, 136, 153, 0.06) 0%,
       transparent 70%
     );
     border-radius: 50%;
@@ -60,8 +60,8 @@
     height: 60%;
     background: radial-gradient(
       circle at 60% 30%,
-      rgba(240, 165, 34, 0.05) 0%,
-      rgba(240, 165, 34, 0.015) 40%,
+      rgba(196, 120, 13, 0.05) 0%,
+      rgba(196, 120, 13, 0.015) 40%,
       transparent 70%
     );
     border-radius: 50%;
@@ -77,8 +77,8 @@
     height: 35%;
     background: radial-gradient(
       ellipse at 40% 60%,
-      rgba(240, 165, 34, 0.08) 0%,
-      rgba(142, 136, 130, 0.04) 35%,
+      rgba(196, 120, 13, 0.08) 0%,
+      rgba(122, 136, 153, 0.04) 35%,
       transparent 65%
     );
     border-radius: 40% 60% 60% 40% / 50% 50% 60% 60%;
@@ -101,7 +101,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 16px;
-  border: 1px solid rgba(142, 136, 130, 0.2);
+  border: 1px solid rgba(122, 136, 153, 0.2);
   border-radius: 9999px;
   font-family: var(--font-body, 'Satoshi', sans-serif);
   font-size: 0.8125rem;
@@ -119,7 +119,7 @@
   height: 6px;
   border-radius: 50%;
   background: var(--color-accent, #F0A522);
-  box-shadow: 0 0 6px rgba(240, 165, 34, 0.5);
+  box-shadow: 0 0 6px rgba(196, 120, 13, 0.5);
   animation: dot-pulse 2s ease-in-out infinite;
 }
 
@@ -239,7 +239,7 @@
   padding: clamp(40px, 8vh, 100px) clamp(24px, 6vw, 80px);
   background: radial-gradient(
     ellipse 80% 60% at 50% 50%,
-    rgba(240, 165, 34, 0.03) 0%,
+    rgba(196, 120, 13, 0.03) 0%,
     transparent 70%
   );
 }
@@ -268,8 +268,8 @@
   min-height: 60vh;
   padding: clamp(40px, 8vh, 100px) clamp(24px, 8vw, 120px);
   background: var(--color-bg-subtle, #2A2520);
-  border-top: 1px solid rgba(142, 136, 130, 0.06);
-  border-bottom: 1px solid rgba(142, 136, 130, 0.06);
+  border-top: 1px solid rgba(122, 136, 153, 0.06);
+  border-bottom: 1px solid rgba(122, 136, 153, 0.06);
 }
 
 .homepage__stats-grid {
@@ -368,7 +368,7 @@
   gap: 12px;
   padding: clamp(24px, 3vw, 36px) clamp(16px, 2vw, 28px);
   background: var(--color-bg-elevated, #4A4540);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 12px;
   text-decoration: none;
   transition: all 250ms var(--ease-natural, cubic-bezier(0.25, 0.46, 0.45, 0.94));
@@ -386,7 +386,7 @@
     border-radius: inherit;
     background: radial-gradient(
       ellipse at center,
-      rgba(240, 165, 34, 0.06) 0%,
+      rgba(196, 120, 13, 0.06) 0%,
       transparent 70%
     );
     opacity: 0;
@@ -395,8 +395,8 @@
 
   &:hover {
     transform: translateY(-3px);
-    border-color: rgba(240, 165, 34, 0.25);
-    box-shadow: var(--elevation-n3, 0 0 20px rgba(240, 165, 34, 0.04));
+    border-color: rgba(196, 120, 13, 0.25);
+    box-shadow: var(--elevation-n3, 0 0 20px rgba(196, 120, 13, 0.04));
 
     &::before {
       opacity: 1;
@@ -451,7 +451,7 @@
   display: flex;
   justify-content: center;
   padding: clamp(24px, 4vh, 48px) clamp(24px, 6vw, 80px);
-  border-top: 1px solid rgba(142, 136, 130, 0.08);
+  border-top: 1px solid rgba(122, 136, 153, 0.08);
 }
 
 .homepage__footer-text {

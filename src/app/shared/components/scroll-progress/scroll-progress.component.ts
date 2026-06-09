@@ -26,7 +26,7 @@ import { Component, HostListener, signal } from '@angular/core';
       left: 0;
       width: 100%;
       height: 3px;
-      background: linear-gradient(90deg, var(--color-accent), #F0A522, var(--color-accent));
+      background: linear-gradient(90deg, var(--color-accent), #C4780D, var(--color-accent));
       transform-origin: left;
       z-index: var(--z-toast, 400);
       pointer-events: none;

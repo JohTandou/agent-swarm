@@ -40,10 +40,10 @@
 /* Pulsation glow ambrée pour l'accent */
 @keyframes pulseGlow {
   0%, 100% {
-    box-shadow: 0 0 4px rgba(240, 165, 34, 0.1);
+    box-shadow: 0 0 4px rgba(196, 120, 13, 0.1);
   }
   50% {
-    box-shadow: 0 0 16px rgba(240, 165, 34, 0.25);
+    box-shadow: 0 0 16px rgba(196, 120, 13, 0.25);
   }
 }
 
@@ -69,7 +69,7 @@
   background: linear-gradient(
     90deg,
     var(--color-bg-elevated) 0%,
-    rgba(142, 136, 130, 0.15) 50%,
+    rgba(122, 136, 153, 0.15) 50%,
     var(--color-bg-elevated) 100%
   );
   background-size: 200% 100%;

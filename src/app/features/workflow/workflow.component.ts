@@ -187,20 +187,20 @@ graph TB
     MERGE --> DOCS["📚 Writer<br/>Documentation"]
     DOCS --> DONE["🏁 Terminé"]
 
-    style ISSUE fill:#4A4540,stroke:#8E8882,color:#F5F0EB
-    style PRESEARCH fill:#3A3530,stroke:#F0A522,color:#F0A522
-    style CLASSIFY fill:#3A3530,stroke:#F0A522,color:#F0A522
-    style DONE fill:#2A2520,stroke:#8E8882,color:#8E8882
-    style DIRECT fill:#2A2520,stroke:#8E8882,color:#8E8882
-    style SIMPLE fill:#3A3530,stroke:#8E8882,color:#F5F0EB
-    style ADAPT fill:#3A3530,stroke:#8E8882,color:#F5F0EB
-    style MEDIUM fill:#4A4540,stroke:#F0A522,color:#F0A522
-    style FULL fill:#4A4540,stroke:#F0A522,color:#F0A522
-    style REVIEW fill:#3A3530,stroke:#F0A522,color:#F0A522
-    style MERGE fill:#4A4540,stroke:#F0A522,color:#F0A522
-    style DONE_DIRECT fill:#2A2520,stroke:#8E8882,color:#8E8882
-    style DOCS fill:#2A2520,stroke:#8E8882,color:#8E8882
-    style DONE fill:#2A2520,stroke:#F0A522,color:#F0A522
+    style ISSUE fill:#28231C,stroke:#7A8899,color:#F5F0EB
+    style PRESEARCH fill:#1C1812,stroke:#C4780D,color:#C4780D
+    style CLASSIFY fill:#1C1812,stroke:#C4780D,color:#C4780D
+    style DONE fill:#0E0C09,stroke:#7A8899,color:#7A8899
+    style DIRECT fill:#0E0C09,stroke:#7A8899,color:#7A8899
+    style SIMPLE fill:#1C1812,stroke:#7A8899,color:#F5F0EB
+    style ADAPT fill:#1C1812,stroke:#7A8899,color:#F5F0EB
+    style MEDIUM fill:#28231C,stroke:#C4780D,color:#C4780D
+    style FULL fill:#28231C,stroke:#C4780D,color:#C4780D
+    style REVIEW fill:#1C1812,stroke:#C4780D,color:#C4780D
+    style MERGE fill:#28231C,stroke:#C4780D,color:#C4780D
+    style DONE_DIRECT fill:#0E0C09,stroke:#7A8899,color:#7A8899
+    style DOCS fill:#0E0C09,stroke:#7A8899,color:#7A8899
+    style DONE fill:#0E0C09,stroke:#C4780D,color:#C4780D
   \`\`\``;
 
   /* ==========================================================================

@@ -110,12 +110,12 @@ describe('AgentsListComponent', () => {
 
   // TEST 10: getRouteColor devrait retourner les bonnes couleurs
   it('getRouteColor devrait retourner la bonne couleur selon la route', () => {
-    expect(component.getRouteColor('FULL')).toBe('#F0A522');
-    expect(component.getRouteColor('DIRECT')).toBe('#8E8882');
-    expect(component.getRouteColor('SIMPLE')).toBe('#8E8882');
-    expect(component.getRouteColor('ADAPT')).toBe('#F0A522');
-    expect(component.getRouteColor('MEDIUM')).toBe('#F0A522');
-    expect(component.getRouteColor('INCONNUE')).toBe('#8E8882'); // fallback
+    expect(component.getRouteColor('FULL')).toBe('#C4780D');
+    expect(component.getRouteColor('DIRECT')).toBe('#7A8899');
+    expect(component.getRouteColor('SIMPLE')).toBe('#7A8899');
+    expect(component.getRouteColor('ADAPT')).toBe('#C4780D');
+    expect(component.getRouteColor('MEDIUM')).toBe('#C4780D');
+    expect(component.getRouteColor('INCONNUE')).toBe('#7A8899'); // fallback
   });
 
   // TEST 11: la première carte devrait avoir la classe featured (bento grid)
@@ -188,7 +188,7 @@ describe('AgentsListComponent', () => {
     const routeBadge = fixture.nativeElement.querySelector('.agents__card-route') as HTMLElement;
     expect(routeBadge).toBeTruthy();
     expect(routeBadge.textContent?.trim()).toBe('FULL');
-    expect(routeBadge.style.color).toBe('rgb(240, 165, 34)');
+    expect(routeBadge.style.color).toBe('rgb(196, 120, 13)');
   });
 
   // TEST 21: should have pipeline animation dots

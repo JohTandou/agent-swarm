@@ -138,11 +138,11 @@ const AGENTS: Agent[] = [
 
 /** Couleurs associées à chaque route de complexité */
 const ROUTE_COLORS: Record<string, string> = {
-  DIRECT: '#8E8882',
-  SIMPLE: '#8E8882',
-  ADAPT: '#F0A522',
-  MEDIUM: '#F0A522',
-  FULL: '#F0A522',
+  DIRECT: '#7A8899',
+  SIMPLE: '#7A8899',
+  ADAPT: '#C4780D',
+  MEDIUM: '#C4780D',
+  FULL: '#C4780D',
 };
 
 /** Labels des catégories pour les boutons de filtre */
@@ -212,7 +212,7 @@ export class AgentsListComponent {
 
   /** Retourne la couleur associée à une route */
   getRouteColor(route: string): string {
-    return ROUTE_COLORS[route] ?? '#8E8882';
+    return ROUTE_COLORS[route] ?? '#7A8899';
   }
 
   /** Retourne le nombre d'agents dans une catégorie donnée */

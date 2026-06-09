@@ -178,9 +178,9 @@ interface TooltipData {
         border-radius: 50%;
         background: linear-gradient(
           135deg,
-          var(--color-bg-elevated, #4A4540) 0%,
-          rgba(240, 165, 34, 0.1) 40%,
-          var(--color-bg-elevated, #4A4540) 100%
+          var(--color-bg-elevated, #28231C) 0%,
+          rgba(196, 120, 13, 0.1) 40%,
+          var(--color-bg-elevated, #28231C) 100%
         );
         background-size: 200% 200%;
         animation: graph-shimmer 2.2s ease-in-out infinite;
@@ -192,7 +192,7 @@ interface TooltipData {
       .swarm-graph__skeleton-text {
         font-family: var(--font-body, 'Satoshi', sans-serif);
         font-size: 0.875rem;
-        color: var(--color-text-secondary, #8E8882);
+        color: var(--color-text-secondary, #7A8899);
       }
 
       /* --- Error state --- */
@@ -210,7 +210,7 @@ interface TooltipData {
       .swarm-graph__error-message {
         font-family: var(--font-body, 'Satoshi', sans-serif);
         font-size: 0.9375rem;
-        color: var(--color-text-secondary, #8E8882);
+        color: var(--color-text-secondary, #7A8899);
         margin: 0;
         max-width: 320px;
       }
@@ -228,7 +228,7 @@ interface TooltipData {
 
       /* --- Links --- */
       .swarm-graph__link {
-        stroke: rgba(142, 136, 130, 0.18);
+        stroke: rgba(122, 136, 153, 0.18);
         stroke-width: 1.5;
         opacity: 0;
         animation: link-appear 1s var(--ease-natural, cubic-bezier(0.25, 0.46, 0.45, 0.94)) forwards;
@@ -252,7 +252,7 @@ interface TooltipData {
         transition: filter 200ms ease-out;
       }
       .swarm-graph__node-group:hover .swarm-graph__node {
-        filter: brightness(1.35) drop-shadow(0 0 8px rgba(240, 165, 34, 0.35));
+        filter: brightness(1.35) drop-shadow(0 0 8px rgba(196, 120, 13, 0.35));
       }
 
       /* Glow ring */
@@ -279,7 +279,7 @@ interface TooltipData {
         font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
         font-size: 10px;
         font-weight: 700;
-        fill: var(--color-text-secondary, #8E8882);
+        fill: var(--color-text-secondary, #7A8899);
         letter-spacing: 0.03em;
         transition: fill 200ms ease-out;
         pointer-events: none;
@@ -293,12 +293,12 @@ interface TooltipData {
       .swarm-graph__tooltip {
         position: absolute;
         pointer-events: none;
-        background: var(--color-bg-elevated, #4A4540);
-        border: 1px solid rgba(142, 136, 130, 0.3);
+        background: var(--color-bg-elevated, #28231C);
+        border: 1px solid rgba(122, 136, 153, 0.3);
         border-radius: 8px;
         padding: 8px 14px;
         z-index: 50;
-        box-shadow: 0 0 20px rgba(240, 165, 34, 0.06);
+        box-shadow: 0 0 20px rgba(196, 120, 13, 0.06);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         display: flex;
@@ -316,7 +316,7 @@ interface TooltipData {
       .swarm-graph__tooltip-role {
         font-family: var(--font-body, 'Satoshi', sans-serif);
         font-size: 0.6875rem;
-        color: var(--color-text-secondary, #8E8882);
+        color: var(--color-text-secondary, #7A8899);
       }
     `,
   ],
@@ -340,7 +340,7 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
 
   /** Les 9 agents spécialisés du Swarm avec leurs métadonnées */
   private readonly agents: AgentNode[] = [
-    { id: 'orchestrateur', label: 'Orchestrateur', role: 'Coordination centrale du pipeline', color: '#F0A522', radius: 20 },
+    { id: 'orchestrateur', label: 'Orchestrateur', role: 'Coordination centrale du pipeline', color: '#C4780D', radius: 20 },
     { id: 'search', label: 'Search', role: 'Cartographie et analyse du codebase', color: '#B8A878', radius: 14 },
     { id: 'planner', label: 'Planner', role: 'Planification des tâches en étapes', color: '#C8A862', radius: 14 },
     { id: 'contract', label: 'Contract', role: 'Définition des contrats TypeScript', color: '#A89868', radius: 14 },
@@ -459,7 +459,7 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
   }
 
   getNodeColor(id: string): string {
-    return this.agents.find((a) => a.id === id)?.color ?? '#8E8882';
+    return this.agents.find((a) => a.id === id)?.color ?? '#7A8899';
   }
 
   getNodeLabel(id: string): string {

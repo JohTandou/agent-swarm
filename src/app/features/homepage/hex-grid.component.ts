@@ -404,16 +404,16 @@ export class HexGridComponent implements OnInit, OnDestroy {
 
     // Pendant l'easter egg, utiliser la couleur accent
     const fillColor = this.easterEggActive
-      ? 'rgba(240, 165, 34, '
-      : 'rgba(142, 136, 130, ';
+      ? 'rgba(196, 120, 13, '
+      : 'rgba(122, 136, 153, ';
     const strokeColor = this.easterEggActive
-      ? 'rgba(240, 165, 34, '
-      : 'rgba(142, 136, 130, ';
+      ? 'rgba(196, 120, 13, '
+      : 'rgba(122, 136, 153, ';
 
     // Lignes de connexion entre hexagones voisins
     ctx.strokeStyle = this.easterEggActive
-      ? 'rgba(240, 165, 34, 0.15)'
-      : 'rgba(142, 136, 130, 0.06)';
+      ? 'rgba(196, 120, 13, 0.15)'
+      : 'rgba(122, 136, 153, 0.06)';
     ctx.lineWidth = this.easterEggActive ? 1 : 0.5;
     this.hexagons.forEach((hex) => {
       hex.neighbors?.forEach((nIdx) => {

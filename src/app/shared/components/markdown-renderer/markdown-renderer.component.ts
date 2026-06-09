@@ -174,12 +174,12 @@ export class MarkdownRendererComponent implements OnChanges, AfterViewInit {
         startOnLoad: false,
         theme: 'dark',
         themeVariables: {
-          primaryColor: '#3A3530',
+          primaryColor: '#1C1812',
           primaryTextColor: '#F5F0EB',
-          primaryBorderColor: 'rgba(142,136,130,0.3)',
-          lineColor: '#8E8882',
-          secondaryColor: '#4A4540',
-          tertiaryColor: '#2A2520',
+          primaryBorderColor: 'rgba(122,136,153,0.3)',
+          lineColor: '#7A8899',
+          secondaryColor: '#28231C',
+          tertiaryColor: '#0E0C09',
         },
       });
 

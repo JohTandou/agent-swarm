@@ -22,7 +22,7 @@ code[class*="language-"] {
 pre[class*="language-"] {
   padding: 1.25rem 1.5rem;
   border-radius: 8px;
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   overflow-x: auto;
   margin: 1.5rem 0;
 }
@@ -130,7 +130,7 @@ pre[class*="language-"].line-numbers > code {
   left: -3.8em;
   width: 3em;
   letter-spacing: -1px;
-  border-right: 1px solid rgba(142, 136, 130, 0.2);
+  border-right: 1px solid rgba(122, 136, 153, 0.2);
   user-select: none;
 }
 
@@ -166,7 +166,7 @@ div.code-toolbar:hover > .toolbar {
 
 div.code-toolbar > .toolbar button {
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.2);
+  border: 1px solid rgba(122, 136, 153, 0.2);
   border-radius: 4px;
   color: var(--color-text-secondary);
   font-family: var(--font-body);
@@ -178,6 +178,6 @@ div.code-toolbar > .toolbar button {
 
 div.code-toolbar > .toolbar button:hover {
   color: var(--color-accent);
-  border-color: rgba(240, 165, 34, 0.3);
-  box-shadow: 0 0 12px rgba(240, 165, 34, 0.08);
+  border-color: rgba(196, 120, 13, 0.3);
+  box-shadow: 0 0 12px rgba(196, 120, 13, 0.08);
 }

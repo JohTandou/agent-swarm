@@ -11,7 +11,7 @@ export class SparkleEffectComponent implements OnChanges {
 
   particles: { x: number; y: number; delay: number; color: string }[] = [];
 
-  private readonly colors = ['#F0A522', '#F5F0EB', '#8E8882'];
+  private readonly colors = ['#C4780D', '#F5F0EB', '#7A8899'];
   private readonly count = 16;
 
   ngOnChanges(changes: SimpleChanges): void {

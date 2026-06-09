@@ -62,7 +62,7 @@
 
 .about__section {
   padding: 72px 0;
-  border-top: 1px solid rgba(142, 136, 130, 0.1);
+  border-top: 1px solid rgba(122, 136, 153, 0.1);
 }
 
 .about__section--alt {
@@ -163,7 +163,7 @@
   padding: 24px;
   background: var(--color-bg-elevated);
   border-radius: 16px;
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   box-shadow: var(--elevation-n2);
 }
 
@@ -205,7 +205,7 @@
   padding: 32px 24px;
   background: var(--color-bg-elevated);
   border-radius: 16px;
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   box-shadow: var(--elevation-n2);
   flex-wrap: wrap;
 }
@@ -219,12 +219,12 @@
   border-radius: 12px;
   font-size: 1.5rem;
   background: var(--color-bg-subtle);
-  border: 1px solid rgba(142, 136, 130, 0.15);
+  border: 1px solid rgba(122, 136, 153, 0.15);
   transition: transform 250ms var(--ease-natural), box-shadow 250ms var(--ease-natural);
 
   &:hover {
     transform: scale(1.08);
-    box-shadow: 0 0 16px rgba(240, 165, 34, 0.15);
+    box-shadow: 0 0 16px rgba(196, 120, 13, 0.15);
   }
 }
 
@@ -260,7 +260,7 @@
 .about__team-card {
   padding: 24px;
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 12px;
   box-shadow: var(--elevation-n2);
   transition: transform 250ms var(--ease-natural), box-shadow 250ms var(--ease-natural);
@@ -330,7 +330,7 @@
 .about__stat-card {
   padding: 28px 24px;
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 12px;
   box-shadow: var(--elevation-n2);
   text-align: center;
@@ -342,8 +342,8 @@
 }
 
 .about__stat-card--accent {
-  border-color: rgba(240, 165, 34, 0.2);
-  box-shadow: 0 0 20px rgba(240, 165, 34, 0.06);
+  border-color: rgba(196, 120, 13, 0.2);
+  box-shadow: 0 0 20px rgba(196, 120, 13, 0.06);
 }
 
 .about__stat-number {
@@ -381,7 +381,7 @@
 .about__cta {
   padding: 80px 0 64px;
   text-align: center;
-  border-top: 1px solid rgba(142, 136, 130, 0.1);
+  border-top: 1px solid rgba(122, 136, 153, 0.1);
 }
 
 .about__cta-content {
@@ -433,7 +433,7 @@
 .about__pillar {
   padding: 32px 24px;
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 12px;
   box-shadow: var(--elevation-n2);
   text-align: center;
@@ -488,7 +488,7 @@
 .about__contributor {
   padding: 28px 24px;
   background: var(--color-bg-elevated);
-  border: 1px solid rgba(142, 136, 130, 0.12);
+  border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: 12px;
   box-shadow: var(--elevation-n2);
   text-align: center;
