@@ -136,7 +136,10 @@
               "src/styles/prism-theme.css",
               "src/styles/_buttons.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/test-mermaid-shim.js",
+              "node_modules/mermaid/dist/mermaid.min.js"
+            ]
           }
         }
       }

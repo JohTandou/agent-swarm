@@ -3,7 +3,7 @@ import { WorkflowComponent } from './workflow.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideMarkdown } from 'ngx-markdown';
+import { provideMarkdown, MERMAID_OPTIONS } from 'ngx-markdown';
 import { ContentService } from '../../shared/services/content.service';
 
 describe('WorkflowComponent', () => {
@@ -16,7 +16,22 @@ describe('WorkflowComponent', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        provideMarkdown(),
+        provideMarkdown({
+          mermaidOptions: {
+            provide: MERMAID_OPTIONS,
+            useValue: {
+              darkMode: true,
+              themeVariables: {
+                primaryColor: '#1C1812',
+                primaryTextColor: '#F5F0EB',
+                primaryBorderColor: 'rgba(122,136,153,0.3)',
+                lineColor: '#7A8899',
+                secondaryColor: '#28231C',
+                tertiaryColor: '#0E0C09',
+              },
+            },
+          },
+        }),
         ContentService,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

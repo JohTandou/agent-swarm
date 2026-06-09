@@ -26,7 +26,7 @@ const VALID_CALLOUTS: Set<string> = new Set(['info', 'warning', 'tip', 'danger']
  * Supporte :
  * - Rendu ngx-markdown depuis un fichier source
  * - Pre-processing des callouts (:::info, :::warning, etc.)
- * - Post-processing Mermaid.js (lazy-load)
+ * - Rendu Mermaid.js via ngx-markdown natif
  * - Génération automatique des ancres pour le TOC
  * - Intégration Prism.js pour la coloration syntaxique
  */
@@ -147,70 +147,10 @@ export class MarkdownRendererComponent implements OnChanges, AfterViewInit {
     this.processedContent = processed;
   }
 
-  /**
-   * Post-processing après rendu ngx-markdown.
-   * - Mermaid : cherche <code class="language-mermaid"> et render via Mermaid
-   * - Prism : coloration syntaxique
-   */
+  /** Post-processing après rendu ngx-markdown — coloration syntaxique Prism.js */
   private afterRender(): void {
-    if (this.enableMermaid) {
-      this.renderMermaidBlocks();
-    }
     if (this.enablePrism) {
       this.highlightCode();
-    }
-  }
-
-  /** Lazy-load Mermaid.js et render les diagrammes */
-  private async renderMermaidBlocks(): Promise<void> {
-    const host: HTMLElement = this.hostRef.nativeElement;
-    const mermaidBlocks = host.querySelectorAll('code.language-mermaid');
-
-    if (mermaidBlocks.length === 0) return;
-
-    try {
-      const mermaid = await import('mermaid');
-      mermaid.default.initialize({
-        startOnLoad: false,
-        theme: 'dark',
-        themeVariables: {
-          primaryColor: '#1C1812',
-          primaryTextColor: '#F5F0EB',
-          primaryBorderColor: 'rgba(122,136,153,0.3)',
-          lineColor: '#7A8899',
-          secondaryColor: '#28231C',
-          tertiaryColor: '#0E0C09',
-        },
-      });
-
-      for (const block of Array.from(mermaidBlocks)) {
-        const pre = block.parentElement;
-        if (!pre) continue;
-
-        const graphDefinition = block.textContent ?? '';
-        if (!graphDefinition.trim()) continue;
-
-        try {
-          const { svg } = await mermaid.default.render(
-            `mermaid-${Math.random().toString(36).slice(2, 8)}`,
-            graphDefinition,
-          );
-          const container = document.createElement('div');
-          container.className = 'mermaid-diagram';
-          container.innerHTML = svg;
-          pre.replaceWith(container);
-        } catch (mermaidErr) {
-          console.warn(
-            '[MarkdownRenderer] Erreur de rendu Mermaid :',
-            mermaidErr,
-          );
-        }
-      }
-    } catch (importErr) {
-      console.warn(
-        '[MarkdownRenderer] Impossible de charger Mermaid.js :',
-        importErr,
-      );
     }
   }
 

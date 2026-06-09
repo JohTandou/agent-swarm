@@ -374,24 +374,13 @@ Attention : ceci est un avertissement.
       expect(highlightSpy).toHaveBeenCalled();
     });
 
-    it('ne devrait pas appeler renderMermaidBlocks quand enableMermaid est false', () => {
+    it('ne devrait pas lever d\'erreur quand enableMermaid est false (support ngx-markdown natif)', () => {
       component.enableMermaid = false;
       component.processedContent = '# Test';
-      const mermaidSpy = spyOn(component as any, 'renderMermaidBlocks').and.callThrough();
-
+      // afterRender n'appelle plus renderMermaidBlocks, juste highlightCode
       component.ngAfterViewInit();
-
-      expect(mermaidSpy).not.toHaveBeenCalled();
-    });
-
-    it('devrait appeler renderMermaidBlocks quand enableMermaid est true', () => {
-      component.enableMermaid = true;
-      component.processedContent = '# Test';
-      const mermaidSpy = spyOn(component as any, 'renderMermaidBlocks').and.resolveTo();
-
-      component.ngAfterViewInit();
-
-      expect(mermaidSpy).toHaveBeenCalled();
+      // Ne devrait pas planter
+      expect(true).toBeTrue();
     });
 
     it('ne devrait pas appeler highlightCode quand enablePrism est false', () => {
@@ -417,46 +406,6 @@ Attention : ceci est un avertissement.
         '[MarkdownRenderer] Erreur de coloration Prism :',
         jasmine.any(Error)
       );
-    });
-  });
-
-  describe('renderMermaidBlocks — gestion d\'erreur', () => {
-    it('devrait logger un warning si le chargement de Mermaid échoue', async () => {
-      const consoleSpy = spyOn(console, 'warn');
-      // Forcer l'échec d'import en rendant le module indisponible
-      component.enableMermaid = true;
-
-      // Créer un bloc mermaid dans le DOM
-      const pre = document.createElement('pre');
-      const code = document.createElement('code');
-      code.className = 'language-mermaid';
-      code.textContent = 'graph TD; A-->B;';
-      pre.appendChild(code);
-      (component as any).hostRef.nativeElement.appendChild(pre);
-
-      // Espionner l'import dynamique pour éviter le chargement réel
-      const importSpy = spyOn(component as any, 'renderMermaidBlocks').and.callFake(() => {
-        console.warn('[MarkdownRenderer] Impossible de charger Mermaid.js :', 'mock-error');
-        return Promise.resolve();
-      });
-
-      await (component as any).renderMermaidBlocks();
-      expect(consoleSpy).toHaveBeenCalled();
-
-      // Nettoyage
-      if (pre.parentNode) {
-        pre.parentNode.removeChild(pre);
-      }
-    });
-  });
-
-  describe('renderMermaidBlocks — cas sans blocs', () => {
-    it('ne devrait rien faire si aucun bloc mermaid n\'existe', async () => {
-      component.enableMermaid = true;
-      // Pas de bloc mermaid dans le DOM
-      await (component as any).renderMermaidBlocks();
-      // Ne devrait pas planter
-      expect(true).toBeTrue();
     });
   });
 

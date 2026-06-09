@@ -30,7 +30,7 @@
   @if (!isLoading && !errorMessage && processedContent) {
     <markdown
       [data]="processedContent"
-      [mermaid]="false"
+      [mermaid]="enableMermaid"
       [disableSanitizer]="true"
     />
   }
