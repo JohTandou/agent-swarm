@@ -895,3 +895,34 @@ $section-padding-mobile: 64px 20px;
 .files-grid > * {
   animation-delay: calc(var(--stagger-index) * 60ms);
 }
+
+/* --------------------------------------------------------------------------
+   Image d'ambiance pipeline — GPT Image 2.0
+   -------------------------------------------------------------------------- */
+.workflow__pipeline-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/images/pipeline.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.06;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Image d'ambiance gates qualité — GPT Image 2.0
+   -------------------------------------------------------------------------- */
+.workflow__gates-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/images/quality-gates.png');
+  background-size: contain;
+  background-position: center right;
+  background-repeat: no-repeat;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}

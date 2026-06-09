@@ -16,28 +16,17 @@
 /* --------------------------------------------------------------------------
    Hexagone décoratif — centré en arrière-plan, opacité très basse
    -------------------------------------------------------------------------- */
-.not-found__hex {
+.not-found__illustration {
   position: absolute;
   inset: 0;
   margin: auto;
-  width: 200px;
-  height: 200px;
-  color: var(--color-accent);
-  opacity: 0.08;
+  width: 320px;
+  height: 320px;
+  object-fit: contain;
+  opacity: 0.30;
   pointer-events: none;
-  animation: hexPulse 4s ease-in-out infinite;
 }
 
-@keyframes hexPulse {
-  0%, 100% {
-    opacity: 0.05;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.08;
-    transform: scale(1.04);
-  }
-}
 
 /* --------------------------------------------------------------------------
    Contenu centré
@@ -109,8 +98,8 @@
     margin: 20px 0 32px;
   }
 
-  .not-found__hex {
-    width: 140px;
-    height: 140px;
+  .not-found__illustration {
+    width: 220px;
+    height: 220px;
   }
 }

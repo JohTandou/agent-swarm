@@ -1128,3 +1128,32 @@ $section-padding-mobile: 64px 20px;
 .audience__grid > * {
   animation-delay: calc(var(--stagger-index) * 60ms);
 }
+
+/* --------------------------------------------------------------------------
+   Image comparaison coûts — GPT Image 2.0
+   -------------------------------------------------------------------------- */
+.pi__cost-bg {
+  margin-top: 48px;
+  width: 100%;
+  height: 220px;
+  background-image: url('/assets/images/cost-comparison.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.90;
+}
+
+/* --------------------------------------------------------------------------
+   Image double modèle — GPT Image 2.0
+   -------------------------------------------------------------------------- */
+.pi__dual-model-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/images/dual-model.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}

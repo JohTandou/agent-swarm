@@ -42,13 +42,14 @@
     left: -10%;
     width: 60%;
     height: 80%;
-    background: radial-gradient(
-      ellipse at 30% 40%,
-      rgba(122, 136, 153, 0.06) 0%,
-      transparent 70%
-    );
+    background-image:
+      radial-gradient(ellipse at 30% 40%, rgba(122, 136, 153, 0.06) 0%, transparent 70%),
+      url('/assets/images/hero-swarm.png');
+    background-size: auto, cover;
+    background-position: auto, center;
+    background-repeat: no-repeat, no-repeat;
     border-radius: 50%;
-    opacity: 0.6;
+    opacity: 0.25;
     will-change: transform;
   }
 
@@ -58,14 +59,14 @@
     right: -5%;
     width: 40%;
     height: 60%;
-    background: radial-gradient(
-      circle at 60% 30%,
-      rgba(196, 120, 13, 0.05) 0%,
-      rgba(196, 120, 13, 0.015) 40%,
-      transparent 70%
-    );
+    background-image:
+      radial-gradient(circle at 60% 30%, rgba(196, 120, 13, 0.05) 0%, rgba(196, 120, 13, 0.015) 40%, transparent 70%),
+      url('/assets/images/hero-swarm.png');
+    background-size: auto, cover;
+    background-position: auto, center;
+    background-repeat: no-repeat, no-repeat;
     border-radius: 50%;
-    opacity: 0.5;
+    opacity: 0.20;
     will-change: transform;
   }
 
@@ -75,14 +76,14 @@
     left: 5%;
     width: 25%;
     height: 35%;
-    background: radial-gradient(
-      ellipse at 40% 60%,
-      rgba(196, 120, 13, 0.08) 0%,
-      rgba(122, 136, 153, 0.04) 35%,
-      transparent 65%
-    );
+    background-image:
+      radial-gradient(ellipse at 40% 60%, rgba(196, 120, 13, 0.08) 0%, rgba(122, 136, 153, 0.04) 35%, transparent 65%),
+      url('/assets/images/hero-swarm.png');
+    background-size: auto, cover;
+    background-position: auto, center;
+    background-repeat: no-repeat, no-repeat;
     border-radius: 40% 60% 60% 40% / 50% 50% 60% 60%;
-    opacity: 0.7;
+    opacity: 0.12;
     will-change: transform;
   }
 }
