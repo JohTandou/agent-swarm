@@ -937,3 +937,19 @@ $section-padding-mobile: 64px 20px;
   border: 1px solid rgba(122, 136, 153, 0.12);
   border-radius: var(--radius-lg);
 }
+
+/* --------------------------------------------------------------------------
+   Image d'ambiance classification — GPT Image 2.0
+   -------------------------------------------------------------------------- */
+.pre-search__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/images/pre-search-classification.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.06;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+}

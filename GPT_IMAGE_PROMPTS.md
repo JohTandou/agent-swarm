@@ -145,3 +145,23 @@ No text, no typography, no labels, no numbers.
 Style: abstract data art, neural network aesthetic, dark ambient, volumetric glow.
 Negative: text, numbers, people, bees, literal network diagram, grid lines, bright background, cartoon, 3D render.
 ```
+
+---
+
+### IMAGE 8 — Classification automatique « L'arbre de décision »
+**Emplacement :** Page Workflow, section Pré-search (fond d'ambiance)
+**Dimensions :** 1600×900 px
+
+```
+An abstract radial composition representing decision branching in deep near-black space (#1C1812). 
+From a bright central point of amber light (#C4780D), five luminous paths radiate outward in different directions, 
+each path splitting into progressively fainter branches. The paths are rendered as thin glowing threads 
+that grow increasingly translucent as they extend outward, suggesting a classification tree. 
+The outermost branches dissolve into scattered particles of cool blue-gray (#7A8899). 
+The central point is the brightest element — a concentrated core of golden light. 
+No text, no typography, no labels, no numbers. 
+The composition should feel algorithmic, systematic, intelligent — a decision being made through branching logic. 
+Very dark overall — light elements occupy at most 8% of the surface. 
+Style: abstract data art, decision tree aesthetic, minimal, premium dark.
+Negative: text, numbers, literal tree, nature, leaves, people, cartoon, 3D render, bright background.
+```
