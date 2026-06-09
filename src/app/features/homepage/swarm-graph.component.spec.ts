@@ -79,7 +79,7 @@ describe('SwarmGraphComponent', () => {
 
     const svg: SVGElement = fixture.nativeElement.querySelector('.swarm-graph__svg');
     expect(svg).toBeTruthy();
-    expect(svg.getAttribute('aria-label')).toBe('Graphe interactif des 9 agents du Swarm');
+    expect(svg.getAttribute('aria-label')).toBe('Graphe interactif des 9 agents spécialisés du Swarm');
 
     const nodeGroups = fixture.nativeElement.querySelectorAll('.swarm-graph__node-group');
     expect(nodeGroups.length).toBe(2);

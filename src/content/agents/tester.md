@@ -11,6 +11,9 @@ L'agent tester est la première des deux gates qualité du pipeline Swarm. Il es
 ## Responsabilités
 
 - **Génération de tests** : créer les tests unitaires, d'intégration et E2E pour le nouveau code
+- **Phase 0 — Génération** : identifier le scope via git diff, vérifier les tests existants, respecter les conventions du projet, générer la couche manquante. Ne jamais modifier les tests existants.
+- **Catégorisation granulaire** (8 catégories) : BUG_FRONT, BUG_BACK, CONTRACT_VIOLATION, PLAN_ERROR, SPEC_ERROR, ENV_ERROR, FLAKY, TEST_BUG
+- **Format JSON obligatoire** : réponse structurée avec status, coverage_percent, failures (catégorisés), retry_target
 - **Exécution** : lancer la suite de tests complète (`ng test`, `npx playwright test`)
 - **Mesure de couverture** : vérifier que la couverture atteint le seuil de 80%
 - **Catégorisation des erreurs** : classifier les échecs (code vs test, flaky, environnement)
@@ -25,10 +28,10 @@ L'agent tester est la première des deux gates qualité du pipeline Swarm. Il es
 
 ## Outils
 
-- **Jest / Jasmine / Karma** : tests unitaires Angular avec @angular-builders/jest
-- **Playwright** : tests E2E avec snapshots visuels (Chromium + iPhone 14)
-- **Istanbul** : mesure de couverture de code
-- **Analyse de codebase** : détection des patterns de test existants
+- **Vitest / Jest / Pytest** : tests unitaires selon le stack du projet
+- **Playwright** : tests E2E multi-navigateurs (Chromium + iPhone 14)
+- **Délégation shell** : toutes les commandes de test passent par l'agent general via Task — le tester ne lance jamais de commandes directement
+- **Analyse de codebase** : détection des patterns de test existants, identification du scope modifié
 
 ## Routes
 

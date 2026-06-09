@@ -85,7 +85,7 @@ describe('AboutComponent', () => {
     expect(numbers).toContain('26');
     expect(numbers).toContain('5');
     expect(numbers).toContain('80%');
-    expect(numbers).toContain('4');
+    expect(numbers).toContain('6');
     expect(numbers).toContain('~1,25 $');
   });
 

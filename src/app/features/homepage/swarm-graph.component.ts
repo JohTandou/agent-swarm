@@ -50,7 +50,7 @@ interface TooltipData {
 }
 
 /**
- * Graphe interactif du Swarm — 9 agents interconnectés.
+ * Graphe interactif du Swarm — 9 agents spécialisés interconnectés.
  * Utilise D3.js pour la simulation de forces (layout), Angular pour le rendu SVG.
  * Lazy-load D3 pour ne pas bloquer le chargement initial.
  *
@@ -82,7 +82,7 @@ interface TooltipData {
           class="swarm-graph__svg"
           viewBox="-400 -300 800 600"
           preserveAspectRatio="xMidYMid meet"
-          aria-label="Graphe interactif des 9 agents du Swarm"
+          aria-label="Graphe interactif des 9 agents spécialisés du Swarm"
           role="img"
         >
           <!-- Liens entre agents -->
@@ -338,7 +338,7 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
   /** Données du tooltip au survol */
   readonly tooltip = signal<TooltipData | null>(null);
 
-  /** Les 9 agents du Swarm avec leurs métadonnées */
+  /** Les 9 agents spécialisés du Swarm avec leurs métadonnées */
   private readonly agents: AgentNode[] = [
     { id: 'orchestrateur', label: 'Orchestrateur', role: 'Coordination centrale du pipeline', color: '#F0A522', radius: 20 },
     { id: 'search', label: 'Search', role: 'Cartographie et analyse du codebase', color: '#B8A878', radius: 14 },

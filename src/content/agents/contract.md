@@ -14,14 +14,19 @@ L'agent contract est la source de vérité pour tous les contrats du projet. App
 - **Spécification OpenAPI** : produire la spec OpenAPI 3.0 pour les nouvelles routes API
 - **Migrations Supabase** : générer les migrations SQL pour les changements de schéma
 - **Barrel exports** : maintenir les fichiers `index.ts` pour des imports propres
-- **Validation de contrat** : vérifier que les implémentations back/front respectent les contrats
+- **Vérification préalable du schéma DB** : avant toute migration, lister le schéma existant via Supabase MCP
+- **Vérification de faisabilité** : s'assurer que les types sont JSON-serializable, que front peut consommer et back implémenter
+- **Autorité normative** : les contrats qu'il écrit sont la loi pour front et back. La vérification de conformité est assurée par tester et reviewer.
 
 ## Contraintes
 
 - **Route FULL uniquement** : jamais appelé sur SIMPLE, ADAPT ou MEDIUM
 - **Pas d'implémentation** : définit les contrats, ne code ni le front ni le back
 - **Respect absolu des conventions** : suit le code style du projet existant
-- **Pas de modification de contrat existant** sans validation explicite du planner
+- **Modification documentée** : tout changement de contrat existant doit expliquer ce qui change et pourquoi. Un commentaire BREAKING est obligatoire en cas de rupture.
+- **Zéro TBD, zéro TODO** dans les contrats
+- **Réponses d'erreur sur chaque endpoint** (400, 401, 404, 409, 422, 500)
+- **Migrations UP et DOWN obligatoires** pour chaque changement de schéma
 
 ## Outils
 

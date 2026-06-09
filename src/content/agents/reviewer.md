@@ -12,7 +12,9 @@ L'agent reviewer est la deuxième gate qualité du pipeline Swarm. Après le pas
 
 - **Audit sécurité** : détection de vulnérabilités (injection SQL, XSS, secrets exposés, dépendances obsolètes)
 - **Audit qualité** : respect des conventions, complexité cyclomatique, duplication, code mort
-- **Audit des tests** : vérification de la couverture, pertinence des assertions, absence de faux positifs
+- **Audit des tests** (4 étapes) : couverture fichier par fichier, détection des tests triviaux = rejet immédiat, tests insuffisants, routes E2E manquantes pour nouvelles features
+- **Audit supply chain** : vérification des dépendances, pas de `latest` sans hash d'intégrité
+- **Format JSON obligatoire** : réponse structurée avec security_score, quality_score, test_audit détaillé, retry_target
 - **Validation des conventions** : respect du code style, nommage, structure de projet
 - **Décision APPROVE / REJECT** : verdict binaire avec justification détaillée
 
@@ -21,6 +23,7 @@ L'agent reviewer est la deuxième gate qualité du pipeline Swarm. Après le pas
 - **security_score ≥ 1.0** : aucun fichier sensible, secret, token, clé exposé
 - **quality_score ≥ 0.85** : code propre, maintenable, conforme aux conventions
 - **Rejet si diff > 1000 lignes** : divisez le travail en PR plus petites
+- **Warning si diff > 500 lignes** — signaler sans bloquer
 - **Ne modifie pas le code** : identifie les problèmes, ne les corrige pas
 - **APPROVE obligatoire** sur MEDIUM et FULL — bloque le merge si REJECT
 

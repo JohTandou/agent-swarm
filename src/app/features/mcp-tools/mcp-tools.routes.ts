@@ -3,7 +3,7 @@ import { McpToolsComponent } from './mcp-tools.component';
 
 /**
  * Routes pour la section Outils MCP.
- * Route avec paramètre :category pour les 4 catégories :
+ * Route avec paramètre :category pour les 6 catégories :
  * supabase, vercel, render, playwright.
  * Redirection de la racine vers supabase.
  */

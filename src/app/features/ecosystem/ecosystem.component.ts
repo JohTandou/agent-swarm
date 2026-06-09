@@ -111,7 +111,7 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
       name: 'agents/', icon: '🤖', badge: '9 fichiers',
       description: 'Définitions des agents spécialisés. Chaque fichier décrit le rôle, les déclencheurs et le comportement d\'un agent.',
       children: [
-        { name: 'orchestrateur.md', icon: '🎯', description: 'Chef d\'orchestre — interface utilisateur unique et routage des tâches' },
+        { name: 'build.md (orchestrateur)', icon: '🎯', description: 'Chef d\'orchestre — interface utilisateur unique et routage des tâches' },
         { name: 'search.md', icon: '🔎', description: 'Cartographie du codebase, identifie les fichiers impactés, détecte les patterns' },
         { name: 'planner.md', icon: '📐', description: 'Planifie le travail en tâches atomiques, détecte les choix architecturaux' },
         { name: 'contract.md', icon: '📝', description: 'Écrit les types TypeScript, la spécification OpenAPI et les migrations Supabase' },
@@ -123,7 +123,7 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
       ],
     },
     {
-      name: 'skills/', icon: '🧩', badge: '26 dossiers',
+      name: 'skills/', icon: '🧩',       badge: '25 dossiers (+1 skill built-in customize-opencode)',
       description: 'Modules de compétences spécialisées chargés à la demande. Chaque skill est un dossier autonome avec ses propres instructions, workflows et ressources.',
     },
     {
@@ -196,16 +196,14 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
    * ========================================================================== */
 
   protected readonly agentsMdSections: readonly AgentsSection[] = [
-    { title: 'Stack Technique & Langue', icon: '🛠️', description: 'Angular 19 standalone, TypeScript strict, Tailwind v4, palette 6 couleurs, Cabinet Grotesk + Satoshi. Tout le socle technique en un seul endroit.' },
+    { title: 'Architecture Multi-Agents', icon: '🤖', description: 'Définit les 11 agents du Swarm (9 spécialisés + 2 utilitaires), leurs rôles, déclencheurs et interactions. Le cœur de l\'orchestration.' },
+    { title: 'Agents du Pipeline', icon: '🔄', description: 'Planner, contract, front, back, tester, reviewer, writer, search — chaque agent a un fichier .md dédié dans agents/ avec ses instructions précises.' },
+    { title: 'Outils Disponibles', icon: '🔧', description: 'Bash, read, write, glob, grep, task, playwright, context7, magic (21st.dev) — la boîte à outils complète mise à disposition de chaque agent.' },
+    { title: 'Wrapper Playwright', icon: '🎭', description: 'Intégration native de Playwright pour les tests E2E : Chromium + iPhone 14, snapshots visuels, auto-waiting.' },
+    { title: 'Skills & Extensions', icon: '🧩', description: '25 skills dans ~/.opencode/skills/ + 1 skill built-in customize-opencode. Modules activables à la demande : design UI, génération de tests, analyse de codebase, documentation.' },
     { title: 'Protocole Comportemental', icon: '📋', description: 'Règles absolues pour tous les agents : réfléchir avant de coder, simplicité, modifications chirurgicales, exécution guidée par les objectifs.' },
-    { title: 'Merge Gate', icon: '🚪', description: 'Règles de merge strictes : tester PASS obligatoire, reviewer APPROVE pour MEDIUM/FULL, E2E requis pour nouvelles features. Aucune exception.' },
-    { title: 'Philosophie Projet', icon: '💡', description: 'Fusion de trois disciplines : ingénierie logicielle senior, design UX/UI, copywriting technique. Chaque décision est le produit de ces trois rôles.' },
-    { title: 'Standards Apple-Grade', icon: '✨', description: 'Typographie monumentale, animations scroll-driven, dégradés sophistiqués, système d\'élévation dark N1-N4. Chaque pixel est intentionnel.' },
-    { title: 'Directives par Agent', icon: '🤖', description: 'Rôles et responsabilités de chaque agent : front (UI Apple-grade), back (inactif sur ce projet statique), tester, reviewer, writer.' },
-    { title: 'Palette & Typographie', icon: '🎨', description: '6 couleurs exclusives en CSS custom properties. Cabinet Grotesk pour les titres, Satoshi pour le corps. Dark mode natif, pas de toggle.' },
-    { title: 'Standards Techniques', icon: '⚡', description: 'Architecture, performance, accessibilité WCAG AA, contenu statique en Markdown avec frontmatter YAML.' },
-    { title: 'Processus de Génération', icon: '🔄', description: 'Checklist en 7 étapes avant de coder toute interface : palette, typo, élévation, animation, moment ludique, responsive, Apple-grade.' },
-    { title: 'Checklist de Livraison', icon: '✅', description: '16 points de vérification avant de déclarer une tâche terminée — de la palette aux animations en passant par le contenu Markdown.' },
+    { title: 'Merge Gate & Qualité', icon: '🚪', description: 'Règles de merge strictes : tester PASS obligatoire (couverture ≥ 80%), reviewer APPROVE pour MEDIUM/FULL (score ≥ 0.85), E2E requis pour nouvelles features.' },
+    { title: 'Configuration Workspace', icon: '⚙️', description: 'swarm-workflow.json contrôle l\'automatisation des issues, branches, PR, tests et les seuils de qualité. ~40 champs de configuration.' },
   ];
 
   /* ==========================================================================
@@ -217,6 +215,8 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
     { name: 'Vercel', icon: '▲', provider: 'MCP', description: 'Déploiement continu, CDN global, serverless functions. Cible de déploiement par défaut pour les projets frontend.', features: ['Déploiement Git auto', 'CDN global', 'Preview deployments', 'Analytics intégrés'] },
     { name: 'Render', icon: '⚡', provider: 'MCP', description: 'Hébergement de services web, cron jobs, Postgres managé. Utilisé pour les backends et bases de données.', features: ['Web services', 'Cron jobs', 'Postgres', 'Key-Value stores'] },
     { name: 'Playwright', icon: '🎭', provider: 'MCP', description: 'Tests end-to-end cross-browser. Intégré au pipeline Swarm pour valider chaque PR sur Chromium et mobile (iPhone 14).', features: ['Tests multi-navigateurs', 'Auto-waiting', 'Visual comparisons', 'iPhone 14 simulé'] },
+    { name: 'Context7', icon: '📖', provider: 'MCP', description: 'Recherche de documentation temps réel pour tous les frameworks et bibliothèques. Résout les Library ID et interroge la doc à jour pour éviter les APIs obsolètes.', features: ['Recherche documentation', 'Résolution Library ID', 'APIs à jour', 'Multi-framework'] },
+    { name: '21st.dev (Magic)', icon: '🪄', provider: 'MCP', description: 'Génération de composants UI via IA. Recherche, inspiration et raffinement de composants React/Next.js avec design system intégré.', features: ['Génération composants', 'Recherche UI', 'Inspiration design', 'Refinement visuel'] },
   ];
 
   protected readonly mermaidDiagram = `\`\`\`mermaid
@@ -257,15 +257,20 @@ graph TB
         SUPABASE["🗄️ Supabase<br/>Postgres + Auth"]
         VERCEL["▲ Vercel<br/>Déploiement CDN"]
         RENDER["⚡ Render<br/>Services + Cron"]
-        PLAYWRIGHT["🎭 Playwright<br/>Tests E2E"]
-    end
+            PLAYWRIGHT["🎭 Playwright<br/>Tests E2E"]
+            CONTEXT7["📖 Context7<br/>Documentation"]
+            MAGIC["🪄 21st.dev<br/>Composants UI"]
+        end
 
-    FRONT -.-> VERCEL
-    FRONT -.-> PLAYWRIGHT
-    BACK -.-> SUPABASE
-    BACK -.-> RENDER
-    TEST -.-> PLAYWRIGHT
-    WRITER -.-> SUPABASE
+        FRONT -.-> VERCEL
+        FRONT -.-> PLAYWRIGHT
+        FRONT -.-> MAGIC
+        BACK -.-> SUPABASE
+        BACK -.-> RENDER
+        TEST -.-> PLAYWRIGHT
+        WRITER -.-> SUPABASE
+        SEARCH -.-> CONTEXT7
+        CONTRACT -.-> CONTEXT7
 
     style IDE fill:#2A2520,stroke:#8E8882,color:#F5F0EB
     style ORCH fill:#4A4540,stroke:#F0A522,color:#F0A522

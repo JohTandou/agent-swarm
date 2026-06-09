@@ -15,21 +15,22 @@ L'agent back est responsable de l'implémentation backend : APIs REST, scripts, 
 - **Configuration** : variables d'environnement, CORS, middlewares de sécurité
 - **Intégration Supabase** : authentification, base de données, stockage, realtime
 - **Respect des contrats** : implémentation conforme aux types et specs de l'agent contract
+- **Sécurité** : validation des inputs, jamais de secrets hardcodés, error handling explicite, rate limiting
+- **Règle absolue** : ne crée JAMAIS de migrations DB — elles viennent exclusivement de contract
 
 ## Contraintes
 
 - **Respect absolu de la spec OpenAPI** sur la route FULL — pas de déviation
-- **Dépend de Supabase MCP** : toutes les opérations base de données passent par les outils Supabase
+- **Supabase MCP en lecture seule** (list_tables, get_table) — ne modifie jamais la DB. Les migrations sont exclusivement fournies par l'agent contract.
 - **Jamais de modification arbitraire** : suit le contrat défini, ne prend pas d'initiative
 - **Ne déploie pas** : l'implémentation uniquement, le déploiement est géré par la CI/CD
 - **Inactif sur Swarm Wiki** : projet 100% statique, pas de backend, pas d'API
 
 ## Outils
 
-- **Python / FastAPI** : framework backend par défaut
+- **Multi-langage** : s'adapte au stack du projet (Python/FastAPI, Node/Express, Go, Rust). Aucun framework imposé.
 - **Supabase MCP** : migrations, exécution SQL, gestion des branches
 - **context7** : documentation des bibliothèques backend
-- **Render** : déploiement et configuration des services
 
 ## Routes
 

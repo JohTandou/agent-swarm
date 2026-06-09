@@ -130,7 +130,7 @@ describe('HomepageComponent', () => {
     expect(component.stats.length).toBe(4);
     expect(component.stats[0].value).toBe(9);
     expect(component.stats[1].value).toBe(26);
-    expect(component.stats[2].value).toBe(4);
+    expect(component.stats[2].value).toBe(6);
     expect(component.stats[3].value).toBe(125);
   });
 

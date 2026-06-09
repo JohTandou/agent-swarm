@@ -262,7 +262,7 @@ const CATEGORY_PREFIXES: Record<string, string> = {
 /**
  * Page Outils MCP — Composant pur Apple-grade.
  *
- * Présente les 4 catégories d'outils MCP (Supabase, Vercel, Render, Playwright)
+ * Présente les 6 catégories d'outils MCP (Supabase, Vercel, Render, Playwright)
  * avec un tableau des outils, un exemple de code et un mini-playground interactif.
  */
 @Component({

@@ -11,6 +11,7 @@ L'orchestrateur est le point d'entrée unique du système Swarm. Il classifie le
 ## Responsabilités
 
 - **Classification automatique** : analyse la complexité d'une demande et détermine la route (DIRECT → SIMPLE → ADAPT → MEDIUM → FULL)
+- **Pre-search obligatoire** : avant toute classification, extraction de 2-5 termes techniques, grep parallèle, comptage de fichiers distincts par domaine
 - **Routage intelligent** : délègue aux agents spécialisés selon la complexité
 - **Gates qualité** : impose les étapes de validation (tests, review) selon la route
 - **Gestion de file** : maintient `.swarm-queue.json` pour les sessions multi-tâches
@@ -19,16 +20,19 @@ L'orchestrateur est le point d'entrée unique du système Swarm. Il classifie le
 ## Contraintes
 
 - **Ne code jamais** — toute modification de fichier est déléguée aux agents back/front
-- **Pas d'accès shell** — les commandes système passent par l'agent general
+- **Accès shell limité** — git et scripts d'orchestration uniquement (status, commit, push, PR). Pas d'exécution de commandes applicatives (npm, pytest) — délégué à l'agent general.
 - **Max 5 cycles par route** — au-delà, pose une question à l'utilisateur
+- **Skills sur demande uniquement** — ne planifie jamais spontanément
 
 ## Outils
 
-- Lecture/écriture de fichiers
+- **Écriture restreinte** — seuls .agent-memory.json et .swarm-queue.json sont modifiables. Lecture seule sur tout le reste.
 - Recherche (grep, glob)
 - Questions utilisateur
 - Délégation aux sous-agents (task)
 - GitHub (issues, PR, branches)
+- Playwright (navigation web)
+- Supabase MCP, Vercel MCP, Render MCP
 
 ## Routes
 

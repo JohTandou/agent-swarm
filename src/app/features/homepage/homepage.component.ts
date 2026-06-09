@@ -74,7 +74,7 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
       format: (v: number): string => `${v}`,
     },
     {
-      value: 4,
+      value: 6,
       label: 'Catégories MCP',
       format: (v: number): string => `${v}`,
     },
@@ -111,7 +111,7 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       title: 'Outils MCP',
       description:
-        'Supabase, Vercel, Render, Playwright — 4 intégrations natives pour le déploiement.',
+        'Supabase, Vercel, Render, Playwright, Context7, 21st.dev — 6 intégrations natives.',
       route: '/outils-mcp',
       icon: '🌐',
     },

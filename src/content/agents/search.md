@@ -11,10 +11,13 @@ L'agent search est le premier agent activé par l'orchestrateur sur toute route 
 ## Responsabilités
 
 - **Analyse de codebase** : explorer le projet pour comprendre la structure, les conventions et les dépendances
+- **Analyse graphify préalable (si disponible)** : lecture obligatoire de `graphify-out/GRAPH_REPORT.md` et `graph.json` pour identifier les communautés et nœuds pertinents avant toute exploration
 - **Détection de patterns** : identifier les patterns récurrents (composants, services, styles) pour guider l'implémentation
 - **Documentation context7** : consulter la documentation à jour des bibliothèques et frameworks utilisés
 - **Cartographie des dépendances** : tracer le graphe d'imports et les relations entre modules
 - **Rapport structuré** : produire un rapport d'analyse exploitable par le planner
+- **Recherche négative** : documenter systématiquement ce qui était attendu mais introuvable (absence de preuve ≠ preuve d'absence)
+- **Auto-évaluation finale** : attribuer un score de confiance (0.0-1.0) à chaque finding, signaler les hypothèses non vérifiées
 
 ## Contraintes
 

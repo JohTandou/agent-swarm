@@ -79,7 +79,7 @@ describe('EcosystemComponent', () => {
     fixture.detectChanges();
 
     const cards = fixture.nativeElement.querySelectorAll('.agentsmd-card');
-    expect(cards.length).toBe(10);
+    expect(cards.length).toBe(8);
   }));
 
   it('devrait afficher les 4 intégrations', fakeAsync(() => {
@@ -88,7 +88,7 @@ describe('EcosystemComponent', () => {
     fixture.detectChanges();
 
     const integrationCards = fixture.nativeElement.querySelectorAll('.integration-card');
-    expect(integrationCards.length).toBe(4);
+    expect(integrationCards.length).toBe(6);
   }));
 
   it('devrait avoir les 3 statistiques dans le hero', fakeAsync(() => {

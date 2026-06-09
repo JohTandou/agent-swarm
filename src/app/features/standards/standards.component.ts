@@ -132,7 +132,7 @@ export class StandardsComponent implements AfterViewInit, OnDestroy {
     },
     {
       name: 'Texte secondaire',
-      hex: '#B0A8A0',
+      hex: '#8E8882',
       variable: '--color-text-secondary',
       usage: 'Légendes, métadonnées, texte d\'appoint',
     },

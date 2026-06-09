@@ -18,6 +18,14 @@ L'agent front est responsable de toute l'implémentation frontend : composants U
 
 ## Contraintes
 
+**Contraintes universelles (tous projets) :**
+- Contrat = loi absolue sur la route FULL — pas de déviation
+- Pas de `console.log`, pas de `TODO` sans ticket, pas de `any`, pas de `@ts-ignore`
+- Un test minimum par export public
+- Contrat incomplet → BLOCKED (ne pas deviner)
+
+**Contraintes spécifiques à Swarm Wiki :**
+
 - **Respect absolu de la palette** 6 couleurs (pas de bleu/violet/vert)
 - **Standalone components** uniquement (pas de NgModules)
 - **Nouveau control flow** Angular (@if, @for)

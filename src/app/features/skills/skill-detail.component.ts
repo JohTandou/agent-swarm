@@ -20,7 +20,7 @@ const SKILLS_MAP: Record<string, Skill> = {
   'tests-create': {
     id: 'tests-create', name: 'Tests Create', emoji: '🧪',
     description: 'Génération de tests unitaires, fonctionnels, E2E.',
-    tags: ['tests', 'jest', 'playwright'],
+    tags: ['tests', 'jasmine', 'playwright'],
     category: 'qualité',
     sourcePath: 'skills/tests-create.md',
   },

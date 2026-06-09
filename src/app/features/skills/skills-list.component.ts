@@ -27,7 +27,7 @@ const SKILLS: Skill[] = [
     name: 'Tests Create',
     emoji: '🧪',
     description: 'Génération de tests unitaires, fonctionnels, intégration et E2E. Analyse le codebase et suit les conventions existantes.',
-    tags: ['tests', 'jest', 'playwright', 'couverture'],
+    tags: ['tests', 'jasmine', 'playwright', 'couverture'],
     category: 'qualité',
     sourcePath: 'skills/tests-create.md',
   },
