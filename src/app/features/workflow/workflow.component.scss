@@ -123,9 +123,10 @@ $section-padding-mobile: 64px 20px;
   &__bg-decor {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 50% 40%, rgba(196, 120, 13, 0.04) 0%, transparent 70%),
-      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(122, 136, 153, 0.03) 0%, transparent 60%);
+    background-image: url('/assets/images/workflow-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.20;
     pointer-events: none;
   }
 

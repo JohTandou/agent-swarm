@@ -14,8 +14,21 @@
    ========================================================================== */
 
 .about__hero {
+  position: relative;
   padding: 80px 0 64px;
   text-align: center;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/images/about-hero.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    opacity: 0.22;
+    z-index: 0;
+    pointer-events: none;
+  }
 }
 
 .about__eyebrow {

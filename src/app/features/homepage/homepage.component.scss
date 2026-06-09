@@ -29,6 +29,18 @@
   text-align: center;
   perspective: 1000px;
   transform-style: preserve-3d;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/images/homepage-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.18;
+    z-index: 0;
+    pointer-events: none;
+  }
 }
 
 /* Décor de fond parallaxe — couches multiples */

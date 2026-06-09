@@ -91,9 +91,10 @@ $section-padding-mobile: 64px 20px;
 .hero__bg-decor {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 70% 50% at 50% 30%, rgba(196, 120, 13, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 85% 80%, rgba(196, 120, 13, 0.04) 0%, transparent 60%);
+  background-image: url('/assets/images/problem-innovation-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.20;
   pointer-events: none;
 }
 
