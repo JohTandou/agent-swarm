@@ -40,7 +40,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.32;
+    opacity: 0.18;
     z-index: 0;
     transform: translateZ(0);
     pointer-events: none;
@@ -65,7 +65,7 @@
     background-position: auto, center;
     background-repeat: no-repeat, no-repeat;
     border-radius: 50%;
-    opacity: 0.35;
+    opacity: 0.25;
     will-change: transform;
   }
 
@@ -82,7 +82,7 @@
     background-position: auto, center;
     background-repeat: no-repeat, no-repeat;
     border-radius: 50%;
-    opacity: 0.28;
+    opacity: 0.20;
     will-change: transform;
   }
 
@@ -99,7 +99,7 @@
     background-position: auto, center;
     background-repeat: no-repeat, no-repeat;
     border-radius: 40% 60% 60% 40% / 50% 50% 60% 60%;
-    opacity: 0.18;
+    opacity: 0.12;
     will-change: transform;
   }
 }
