@@ -76,6 +76,8 @@ export class MarkdownRendererComponent implements OnChanges, AfterViewInit {
       this.loadFromSource(this.sourcePath);
     } else if (changes['content'] && this.content !== null) {
       this.processContent(this.content);
+      // Planifier le post-processing après mise à jour du DOM (Mermaid, Prism)
+      setTimeout(() => this.afterRender(), 0);
     }
   }
 
