@@ -310,6 +310,17 @@ graph TB
   protected readonly gitScriptsDescription =
     'Deux scripts automatisent le workflow Git : setup.ts initialise la branche et l\'environnement, finish.ts nettoie, documente et prépare la PR.';
 
+  protected readonly gitGraphDiagram = `\`\`\`mermaid
+gitGraph
+   commit id: "main"
+   branch feature/swarm-issue-N
+   commit id: "implémentation"
+   commit id: "tests validés"
+   checkout main
+   merge feature/swarm-issue-N tag: "squash merge"
+   commit id: "main (post-merge)"
+\`\`\``;
+
   /* ==========================================================================
    * Données — Section 7 : Fichiers swarm
    * ========================================================================== */

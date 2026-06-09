@@ -295,6 +295,14 @@
       </div>
       }
     </div>
+    <!-- Diagramme gitGraph Mermaid -->
+    <div class="git-graph-wrapper reveal-on-scroll">
+      <app-markdown-renderer
+        [content]="gitGraphDiagram"
+        [enableMermaid]="true"
+        [enablePrism]="false"
+      />
+    </div>
   </section>
 
   <!-- =======================================================================

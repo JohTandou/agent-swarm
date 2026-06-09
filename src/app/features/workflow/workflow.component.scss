@@ -926,3 +926,14 @@ $section-padding-mobile: 64px 20px;
   pointer-events: none;
   z-index: 0;
 }
+
+/* --------------------------------------------------------------------------
+   Diagramme gitGraph — Mermaid
+   -------------------------------------------------------------------------- */
+.git-graph-wrapper {
+  margin-top: 40px;
+  padding: 32px;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: var(--radius-lg);
+}
