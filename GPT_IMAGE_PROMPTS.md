@@ -120,3 +120,28 @@ A subtle golden underline beneath the Swarm bar reinforces the highlight.
 Style: minimal data art, premium dark infographic, clean geometric.
 Negative: text, numbers, axis labels, grid, cartoon, 3D, photorealistic, chart junk.
 ```
+
+---
+
+## 🟡 Priorité Moyenne (ajout)
+
+### IMAGE 7 — Communication inter-agents « La ruche communique »
+**Emplacement :** Page À propos, section « Un pipeline, neuf expertises »
+**Dimensions :** 1200×800 px
+
+```
+An abstract top-down view of a luminous network of interconnected nodes in deep near-black space (#1C1812). 
+Nine glowing geometric nodes form a loose circular topology: one central node (the orchestrator) radiates 
+bright amber light (#C4780D) in all directions, while eight peripheral nodes pulse with varying intensity 
+in alternating amber (#C4780D) and cool blue-gray (#7A8899). 
+Thin luminous threads connect the central node to each peripheral node, and some peripheral nodes 
+are connected to each other by fainter threads, suggesting both hierarchical and peer-to-peer communication. 
+Along the threads, tiny particles of light travel in slow pulses, suggesting messages being passed. 
+The scene is suspended in complete darkness — no grid, no ground, no background elements. 
+The composition suggests intelligence, coordination, and collective action. 
+It is NOT a literal network diagram — it is an atmospheric, cinematic representation of communication. 
+All nine nodes are clearly visible but the eye is drawn to the center. 
+No text, no typography, no labels, no numbers. 
+Style: abstract data art, neural network aesthetic, dark ambient, volumetric glow.
+Negative: text, numbers, people, bees, literal network diagram, grid lines, bright background, cartoon, 3D render.
+```

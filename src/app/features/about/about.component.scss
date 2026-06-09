@@ -539,3 +539,26 @@
 .about__contributors > * {
   animation-delay: calc(var(--stagger-index) * 60ms);
 }
+
+/* --------------------------------------------------------------------------
+   Section communication inter-agents — illustration GPT Image 2.0
+   -------------------------------------------------------------------------- */
+.about__section--communication {
+  position: relative;
+  min-height: 50dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about__communication-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/images/agent-communication.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 0;
+}
