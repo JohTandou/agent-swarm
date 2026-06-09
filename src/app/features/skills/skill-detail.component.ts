@@ -94,104 +94,7 @@ const SKILLS_MAP: Record<string, Skill> = {
     category: 'création',
     sourcePath: 'skills/background-images.md',
   },
-  'customize-opencode': {
-    id: 'customize-opencode', name: 'Personnalisation OpenCode', emoji: '⚙️',
-    description: 'Édition de la configuration OpenCode.',
-    tags: ['opencode', 'config', 'agents'],
-    category: 'workflow',
-    sourcePath: 'skills/customize-opencode.md',
-  },
-  'dispatching-parallel-agents': {
-    id: 'dispatching-parallel-agents', name: 'Agents Parallèles', emoji: '🔀',
-    description: 'Répartition d\'agents parallèles.',
-    tags: ['parallèle', 'performance', 'workflow'],
-    category: 'workflow',
-    sourcePath: 'skills/dispatching-parallel-agents.md',
-  },
-  'documentation-create': {
-    id: 'documentation-create', name: 'Création Documentation', emoji: '📝',
-    description: 'Génération de documentation technique.',
-    tags: ['documentation', 'technique', 'onboarding'],
-    category: 'création',
-    sourcePath: 'skills/documentation-create.md',
-  },
-  'documentation-update': {
-    id: 'documentation-update', name: 'Mise à Jour Documentation', emoji: '📚',
-    description: 'Mise à jour de la documentation.',
-    tags: ['documentation', 'synchronisation', 'mise à jour'],
-    category: 'documentation',
-    sourcePath: 'skills/documentation-update.md',
-  },
-  'executing-plans': {
-    id: 'executing-plans', name: 'Exécution de Plans', emoji: '📋',
-    description: 'Exécute un plan d\'implémentation.',
-    tags: ['plan', 'exécution', 'workflow'],
-    category: 'workflow',
-    sourcePath: 'skills/executing-plans.md',
-  },
-  'finishing-a-development-branch': {
-    id: 'finishing-a-development-branch', name: 'Finalisation de Branche', emoji: '🌿',
-    description: 'Finalisation de branche de développement.',
-    tags: ['git', 'merge', 'PR', 'branche'],
-    category: 'workflow',
-    sourcePath: 'skills/finishing-a-development-branch.md',
-  },
-  'receiving-code-review': {
-    id: 'receiving-code-review', name: 'Réception Code Review', emoji: '👁️',
-    description: 'Réception de code review.',
-    tags: ['review', 'feedback', 'qualité'],
-    category: 'workflow',
-    sourcePath: 'skills/receiving-code-review.md',
-  },
-  'requesting-code-review': {
-    id: 'requesting-code-review', name: 'Demande Code Review', emoji: '📨',
-    description: 'Demande de code review.',
-    tags: ['review', 'PR', 'qualité'],
-    category: 'workflow',
-    sourcePath: 'skills/requesting-code-review.md',
-  },
-  'subagent-driven-development': {
-    id: 'subagent-driven-development', name: 'Développement par Sous-Agents', emoji: '🤖',
-    description: 'Développement piloté par sous-agents.',
-    tags: ['agents', 'parallèle', 'workflow'],
-    category: 'workflow',
-    sourcePath: 'skills/subagent-driven-development.md',
-  },
-  'test-driven-development': {
-    id: 'test-driven-development', name: 'TDD', emoji: '🔴🟢',
-    description: 'Développement piloté par les tests.',
-    tags: ['TDD', 'tests', 'qualité'],
-    category: 'workflow',
-    sourcePath: 'skills/test-driven-development.md',
-  },
-  'tests-run': {
-    id: 'tests-run', name: 'Exécution des Tests', emoji: '🏃',
-    description: 'Exécute tous les tests de l\'application.',
-    tags: ['tests', 'exécution', 'rapport'],
-    category: 'qualité',
-    sourcePath: 'skills/tests-run.md',
-  },
-  'using-git-worktrees': {
-    id: 'using-git-worktrees', name: 'Git Worktrees', emoji: '🌲',
-    description: 'Utilisation des Git worktrees.',
-    tags: ['git', 'worktree', 'isolation'],
-    category: 'documentation',
-    sourcePath: 'skills/using-git-worktrees.md',
-  },
-  'writing-plans': {
-    id: 'writing-plans', name: 'Rédaction de Plans', emoji: '✍️',
-    description: 'Rédaction de plans d\'implémentation.',
-    tags: ['plan', 'spécification', 'architecture'],
-    category: 'documentation',
-    sourcePath: 'skills/writing-plans.md',
-  },
-  'writing-skills': {
-    id: 'writing-skills', name: 'Création de Skills', emoji: '🛠️',
-    description: 'Création et édition de skills.',
-    tags: ['skills', 'création', 'opencode'],
-    category: 'documentation',
-    sourcePath: 'skills/writing-skills.md',
-  },
+
 };
 
 /** Labels des catégories */
@@ -199,8 +102,6 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
   création: 'Création',
   qualité: 'Qualité',
   analyse: 'Analyse',
-  workflow: 'Workflow',
-  documentation: 'Documentation',
 };
 
 /**

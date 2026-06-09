@@ -51,3 +51,7 @@ Un utilisateur demande : « Ajoute un bouton de téléchargement sur la page rap
 2. Classification : SIMPLE (2 fichiers, front uniquement)
 3. Routage : délègue à l'agent front
 4. Gate : exige test PASS avant commit
+
+## Modèle
+
+Tous les agents du Swarm utilisent **DeepSeek V4 Pro** — contexte de 1M tokens, raisonnement architectural, génération de code. Aucune dégradation entre agents : chacun bénéficie de la pleine puissance du modèle.

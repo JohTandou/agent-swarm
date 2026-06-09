@@ -152,24 +152,26 @@
   font-size: clamp(2.5rem, 6vw, 5rem);
   line-height: 1.05;
   letter-spacing: -0.035em;
-  color: var(--color-text-primary, #F5F0EB);
   margin: 0;
   opacity: 0;
-  animation: hero-stagger 0.7s var(--ease-spring) 0.1s forwards;
-}
-
-.homepage__tagline-accent {
   background: linear-gradient(
     135deg,
-    var(--color-accent, #F0A522) 0%,
-    #F5C86A 50%,
-    var(--color-accent, #F0A522) 100%
+    var(--color-text-primary, #F5F0EB) 0%,
+    var(--color-accent, #C4780D) 50%,
+    var(--color-text-primary, #F5F0EB) 100%
   );
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: accent-shift 4s ease-in-out infinite;
+  animation: hero-stagger 0.7s var(--ease-spring) 0.1s forwards,
+             accent-shift 6s ease-in-out 0.8s infinite;
+}
+
+.homepage__tagline-accent {
+  -webkit-text-fill-color: var(--color-accent, #C4780D);
+  color: var(--color-accent, #C4780D);
+  background: none;
 }
 
 @keyframes accent-shift {

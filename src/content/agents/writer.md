@@ -42,3 +42,7 @@ Un merge de la PR « Ajout du système de notifications » est complété. L'age
 5. Met à jour README : ajout de `@supabase/realtime-js` dans les dépendances
 6. Vérifie qu'aucune modification n'a touché AGENTS.md ou PLAN.md
 7. Commit : « docs: update documentation after notification system merge »
+
+## Modèle
+
+Tous les agents du Swarm utilisent **DeepSeek V4 Pro** — contexte de 1M tokens, raisonnement architectural, génération de code. Aucune dégradation entre agents : chacun bénéficie de la pleine puissance du modèle.

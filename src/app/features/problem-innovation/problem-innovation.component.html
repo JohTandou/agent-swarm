@@ -255,34 +255,31 @@
   </section>
 
   <!-- =======================================================================
-       Section 6 — Modèles d'IA utilisés
+       Section 6 — Modèle d'IA
        ======================================================================= -->
   <section class="models" aria-labelledby="models-title">
-    <div class="pi__dual-model-bg" aria-hidden="true"></div>
     <div class="models__header reveal-on-scroll">
-      <h2 id="models-title" class="models__title">{{ modelTitle }}</h2>
-      <p class="models__intro">{{ modelIntro }}</p>
+      <h2 id="models-title" class="models__title">Modèle d'IA</h2>
+      <p class="models__intro">
+        Tous les agents du Swarm utilisent le même modèle. Pas de dégradation —
+        chaque agent bénéficie de la pleine puissance du raisonnement.
+      </p>
     </div>
 
-    <div class="models__grid">
+    <div class="models__grid models__grid--single">
       <article class="model-card model-card--heavy reveal-on-scroll">
         <div class="model-card__icon" aria-hidden="true">🧠</div>
-        <h3 class="model-card__name">{{ models.heavy.name }}</h3>
-        <span class="model-card__role">{{ models.heavy.role }}</span>
-        <p class="model-card__description">{{ models.heavy.description }}</p>
-        <span class="model-card__cost">{{ models.heavy.costNote }}</span>
-      </article>
-
-      <article class="model-card model-card--light reveal-on-scroll">
-        <div class="model-card__icon" aria-hidden="true">⚡</div>
-        <h3 class="model-card__name">{{ models.light.name }}</h3>
-        <span class="model-card__role">{{ models.light.role }}</span>
-        <p class="model-card__description">{{ models.light.description }}</p>
-        <span class="model-card__cost">{{ models.light.costNote }}</span>
+        <h3 class="model-card__name">{{ modelInfo.name }}</h3>
+        <p class="model-card__description">{{ modelInfo.description }}</p>
+        <ul class="model-card__strengths">
+          <li>Contexte de 1M tokens</li>
+          <li>Raisonnement architectural</li>
+          <li>Génération de code</li>
+          <li>Analyse de codebase</li>
+        </ul>
+        <span class="model-card__cost">{{ modelInfo.costNote }}</span>
       </article>
     </div>
-
-    <p class="models__conclusion reveal-on-scroll">{{ modelConclusion }}</p>
   </section>
 
   <!-- =======================================================================

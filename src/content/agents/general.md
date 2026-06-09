@@ -41,3 +41,7 @@ Tâche : « Vérifie que toutes les dépendances sont à jour et lance les tests
 3. Exécute `ng test` et capture le résultat
 4. Exécute `npx playwright test` pour les tests E2E
 5. Retourne un rapport consolidé : dépendances, vulnérabilités, résultats de tests
+
+## Modèle
+
+Utilise **DeepSeek V4 Pro**, comme tous les agents du Swarm.

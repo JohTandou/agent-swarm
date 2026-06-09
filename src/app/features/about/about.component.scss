@@ -15,7 +15,7 @@
 
 .about__hero {
   position: relative;
-  padding: 80px 0 64px;
+  padding: 80px 24px 64px;
   text-align: center;
 
   &::after {
@@ -77,7 +77,10 @@
    ========================================================================== */
 
 .about__section {
-  padding: 72px 0;
+  padding: 100px 24px;
+  max-width: var(--content-max-width, 860px);
+  margin: 0 auto;
+  width: 100%;
   border-top: 1px solid rgba(122, 136, 153, 0.1);
 }
 
@@ -395,7 +398,7 @@
    ========================================================================== */
 
 .about__cta {
-  padding: 80px 0 64px;
+  padding: 80px 24px 64px;
   text-align: center;
   border-top: 1px solid rgba(122, 136, 153, 0.1);
 }

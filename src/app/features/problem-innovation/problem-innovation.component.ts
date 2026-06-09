@@ -131,7 +131,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
       label: 'Coût',
       withoutSwarm: '150–250 K€/an par développeur senior. Le coût d\'opportunité des bugs est massif',
       withSwarm: '~1,25 $ par session MEDIUM. ~50–150 $/mois en usage intensif via API',
-      improvement: '5–8× moins cher qu\'un abonnement Claude Max',
+      improvement: '2–4× moins cher qu\'un abonnement Claude Max',
     },
   ];
 
@@ -186,7 +186,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
       system: 'Swarm',
       type: 'Pipeline full-stack autonome',
       architecture: 'Routage intelligent → planification → parallélisme → gates → merge',
-      forces: 'Classification automatique. Parallélisme front+back. Gates qualité (tester + reviewer). Intégration Git native (issue→branche→PR→merge). Documentation automatique. Optimisation coût (2 modèles).',
+      forces: 'Classification automatique. Parallélisme front+back. Gates qualité (tester + reviewer). Intégration Git native (issue→branche→PR→merge). Documentation automatique. Coût optimisé via API.',
       weaknesses: 'Limité à 5 cycles et 5 tâches par session. Dépend de la qualité de la planification initiale. Pas de support multi-langages exotiques',
     },
   ];
@@ -234,59 +234,44 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     {
       route: 'SIMPLE',
       tokens: '~50 K',
-      cost: '~0,25 $',
+      cost: '~0,08 $',
       description: 'Correction ciblée, modification d\'un fichier',
     },
     {
       route: 'ADAPT',
       tokens: '~100 K',
-      cost: '~0,50 $',
+      cost: '~0,15 $',
       description: 'Adaptation cross-cutting, 2–3 fichiers',
     },
     {
       route: 'MEDIUM',
       tokens: '~247 K',
-      cost: '~1,25 $',
+      cost: '~0,38 $',
       description: 'Feature multi-fichiers avec tests et revue',
     },
     {
       route: 'FULL',
       tokens: '~500 K',
-      cost: '~2,50 $',
+      cost: '~0,77 $',
       description: 'Fonctionnalité complexe avec contrats, parallélisme et gates',
     },
   ];
 
   protected readonly costComparisonNote =
-    'À titre de comparaison, un abonnement Claude Max coûte 100–200 $/mois pour un agent unique sans parallélisme ni gates qualité. Le Swarm, en usage intensif (40 sessions MEDIUM/mois), revient à ~50 $/mois via API — soit 2 à 4× moins cher pour une solution 5 à 160× plus rapide.';
+    'Estimations basées sur la tarification API publique DeepSeek (mai 2025). Coûts réels variables selon le volume et la complexité des tâches. À titre de comparaison, un abonnement Claude Max coûte 100–200 $/mois pour un agent unique.';
 
   /* ==========================================================================
-   * Données — Section 6 : Modèles d'IA
+   * Données — Section 6 : Modèle d'IA
    * ========================================================================== */
 
-  protected readonly modelTitle = 'Deux modèles, une stratégie';
-  protected readonly modelIntro =
-    'Le Swarm utilise deux modèles complémentaires pour optimiser le rapport qualité/coût.';
-
-  protected readonly models = {
-    heavy: {
-      name: 'DeepSeek V4 Pro',
-      role: 'Agents lourds',
-      description:
-        'Moteur principal pour les agents planner, contract, back, front et reviewer. Excellent en raisonnement architectural, génération de code complexe et audit qualité. Utilisé sur les routes MEDIUM et FULL où la précision est critique.',
-      costNote: 'Coût modéré (~0,50 $/M tokens en entrée)',
-    },
-    light: {
-      name: 'Gemini Flash Lite',
-      role: 'Agents légers',
-      description:
-        'Moteur économique pour les agents search, tester et writer. Rapidité d\'exécution et coût minimal (~0,02 $/M tokens). Utilisé pour les tâches à fort volume mais faible complexité : recherche de patterns, génération de tests, mise à jour de documentation.',
-      costNote: 'Coût ultra-léger (~0,02 $/M tokens en entrée)',
-    },
+  protected readonly modelInfo = {
+    name: 'DeepSeek V4 Pro',
+    description:
+      'Modèle unique utilisé par tous les agents du Swarm — orchestration, planification, implémentation front et back, tests, review et documentation.',
+    strengths:
+      'Contexte de 1M tokens, raisonnement architectural, génération de code, analyse de codebase.',
+    costNote: '~0,50 $/M tokens en entrée, ~2,19 $/M tokens en sortie (tarification API publique).',
   };
-
-  protected readonly modelConclusion =
-    'Cette architecture bi-modèle est un des piliers de l\'efficacité économique du Swarm : les agents lourds (20 % des tokens) font le travail critique, les agents légers (80 % des tokens) font le volume. Résultat : qualité premium, coût maîtrisé.';
 
   /* ==========================================================================
    * Données — Section 7 : Limites du système

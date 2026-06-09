@@ -79,7 +79,7 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
       format: (v: number): string => `${v}`,
     },
     {
-      value: 125,
+      value: 38,
       label: 'par session MEDIUM',
       format: (v: number): string => `1.${String(v).padStart(2, '0')}\u00A0$`,
     },

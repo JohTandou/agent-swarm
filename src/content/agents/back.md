@@ -49,3 +49,7 @@ Tâche : « Créer l'API de gestion des notifications ». L'agent back :
 3. Crée un script cron de nettoyage des notifications expirées
 4. Configure les variables d'environnement (clé Supabase, limites de rate)
 5. Valide que l'implémentation respecte exactement la spec OpenAPI
+
+## Modèle
+
+Tous les agents du Swarm utilisent **DeepSeek V4 Pro** — contexte de 1M tokens, raisonnement architectural, génération de code. Aucune dégradation entre agents : chacun bénéficie de la pleine puissance du modèle.

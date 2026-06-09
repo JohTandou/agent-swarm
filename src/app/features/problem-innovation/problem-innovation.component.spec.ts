@@ -322,12 +322,12 @@ describe('ProblemInnovationComponent', () => {
    * Données — models
    * ========================================================================== */
 
-  it('devrait exposer les données des modèles heavy et light', () => {
-    const models = (component as any).models;
-    expect(models.heavy).toBeTruthy();
-    expect(models.light).toBeTruthy();
-    expect(models.heavy.name).toBe('DeepSeek V4 Pro');
-    expect(models.light.name).toBe('Gemini Flash Lite');
+  it('devrait exposer les données du modèle unique', () => {
+    const modelInfo = (component as any).modelInfo;
+    expect(modelInfo).toBeTruthy();
+    expect(modelInfo.name).toBe('DeepSeek V4 Pro');
+    expect(modelInfo.description).toContain('Modèle unique utilisé par tous les agents');
+    expect(modelInfo.costNote).toContain('0,50 $/M tokens');
   });
 
   /* ==========================================================================

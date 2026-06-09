@@ -151,6 +151,9 @@ export class AppComponent implements OnInit, OnDestroy {
           // Ferme la sidebar et le TOC à chaque navigation sur mobile
           this.sidebarOpen.set(false);
           this.tocOpen.set(false);
+
+          // Reset scroll position on navigation
+          window.scrollTo({ top: 0, behavior: 'instant' });
         })
     );
 

@@ -48,3 +48,7 @@ Tâche : « Ajouter un système de notifications temps réel ». Le planner reç
 3. Détecte le choix architectural : `@supabase/realtime-js` vs implémentation manuelle
 4. Définit les contrats : back doit exposer les types, front doit créer le composant
 5. Retourne une réponse JSON READY avec 4 tâches atomiques, leurs dépendances, critères de succès et une analyse pré-mortem
+
+## Modèle
+
+Tous les agents du Swarm utilisent **DeepSeek V4 Pro** — contexte de 1M tokens, raisonnement architectural, génération de code. Aucune dégradation entre agents : chacun bénéficie de la pleine puissance du modèle.

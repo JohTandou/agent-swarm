@@ -103,7 +103,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       description: 'Modification d\'une ligne, typo, commentaire. Aucun agent spécialisé — la correction est appliquée directement.',
       complexity: 'Minimale',
       tokens: '~5 K',
-      cost: '~0,02 $',
+      cost: '~0,01 $',
       agents: 'Aucun (direct)',
     },
     {
@@ -112,7 +112,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       description: 'Correction ou ajout limité à un fichier. L\'agent adapte le code existant sans planification préalable.',
       complexity: 'Faible',
       tokens: '~50 K',
-      cost: '~0,25 $',
+      cost: '~0,08 $',
       agents: 'Front ou Back',
     },
     {
@@ -121,7 +121,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       description: 'Modification impactant 2–3 fichiers. L\'agent search cartographie les dépendances avant modification.',
       complexity: 'Modérée',
       tokens: '~100 K',
-      cost: '~0,50 $',
+      cost: '~0,15 $',
       agents: 'Search → Front ou Back',
     },
     {
@@ -130,7 +130,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       description: 'Feature complète avec planification, génération de tests et revue de code automatisée.',
       complexity: 'Élevée',
       tokens: '~247 K',
-      cost: '~1,25 $',
+      cost: '~0,38 $',
       agents: 'Planner → Front + Back + Tester + Reviewer',
     },
     {
@@ -139,7 +139,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       description: 'Fonctionnalité majeure nécessitant contrats TypeScript, parallélisme front+back, gates qualité et documentation.',
       complexity: 'Maximale',
       tokens: '~500 K',
-      cost: '~2,50 $',
+      cost: '~0,77 $',
       agents: 'Planner → Contract → Front ∥ Back → Tester → Reviewer → Writer',
     },
   ];
