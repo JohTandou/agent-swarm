@@ -64,7 +64,9 @@
               "src/styles/prism-theme.css",
               "src/styles/_buttons.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/mermaid/dist/mermaid.min.js"
+            ]
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/styles"
