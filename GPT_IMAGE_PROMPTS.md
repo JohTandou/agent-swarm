@@ -10,7 +10,7 @@ Format cible : PNG 24-bit, fond transparent ou #1C1812
 
 ### IMAGE 1 — Hero « La ruche en action »
 **Emplacement :** Couches de parallaxe homepage (`.homepage__hero-decor--far/mid/near`)
-**Dimensions :** 2400×1600 px
+**Dimensions :** 1535×1024 px (ratio 3:2)
 
 ```
 A dark atmospheric abstract composition representing a high-tech beehive intelligence. 
@@ -28,7 +28,7 @@ Negative: white background, bright colors, nature photography, text, letters, nu
 
 ### IMAGE 2 — Pipeline « De l'idée au merge »
 **Emplacement :** Fond de section Mermaid, page Workflow
-**Dimensions :** 1600×900 px
+**Dimensions :** 1535×1024 px (ratio 3:2)
 
 ```
 An abstract visualization of a software development pipeline as a luminous flow. 
@@ -44,7 +44,7 @@ Negative: text, letters, people, 3D render, cartoon, photorealistic, bright back
 
 ### IMAGE 3 — 404 « Perdu dans le swarm »
 **Emplacement :** Remplacer le SVG hexagone dans `not-found.component.html`
-**Dimensions :** 800×800 px, centré
+**Dimensions :** 1672×941 px (ratio 16:9)
 
 ```
 A single large luminous golden hexagon (#C4780D) floating alone in deep dark void (#1C1812). 
@@ -65,7 +65,7 @@ Negative: text, numbers, bright background, cartoon, 3D, photorealistic, insects
 
 ### IMAGE 4 — Double modèle « Deux cerveaux, une stratégie »
 **Emplacement :** Page Problem & Innovation, section « Deux modèles, une stratégie »
-**Dimensions :** 1200×800 px
+**Dimensions :** 1672×941 px (ratio 16:9)
 
 ```
 An abstract dual-structure composition representing two AI models of different scales. 
@@ -85,7 +85,7 @@ Negative: text, letters, numbers, brains, human figures, cartoon, photorealistic
 
 ### IMAGE 5 — Gates qualité « Les deux gardiens »
 **Emplacement :** Page Workflow, section Quality Gates
-**Dimensions :** 1200×800 px
+**Dimensions :** 1535×1024 px (ratio 3:2)
 
 ```
 An abstract representation of two sequential quality checkpoints in a dark void (#1C1812). 
@@ -104,7 +104,7 @@ Negative: text, people, military imagery, cartoon, 3D render, photorealistic, sh
 
 ### IMAGE 6 — Comparaison économique « Le coût du Swarm »
 **Emplacement :** Page Problem & Innovation, section Coûts
-**Dimensions :** 1200×800 px
+**Dimensions :** 1672×941 px (ratio 16:9)
 
 ```
 A minimalist horizontal bar chart rendered as luminous beams in a dark void (#1C1812). 
@@ -127,7 +127,7 @@ Negative: text, numbers, axis labels, grid, cartoon, 3D, photorealistic, chart j
 
 ### IMAGE 7 — Communication inter-agents « La ruche communique »
 **Emplacement :** Page À propos, section « Un pipeline, neuf expertises »
-**Dimensions :** 1200×800 px
+**Dimensions :** 1254×1254 px (ratio 1:1)
 
 ```
 An abstract top-down view of a luminous network of interconnected nodes in deep near-black space (#1C1812). 
@@ -150,7 +150,7 @@ Negative: text, numbers, people, bees, literal network diagram, grid lines, brig
 
 ### IMAGE 8 — Classification automatique « L'arbre de décision »
 **Emplacement :** Page Workflow, section Pré-search (fond d'ambiance)
-**Dimensions :** 1600×900 px
+**Dimensions :** 1254×1254 px (ratio 1:1)
 
 ```
 An abstract radial composition representing decision branching in deep near-black space (#1C1812). 

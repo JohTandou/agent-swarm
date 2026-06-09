@@ -20,8 +20,9 @@
   position: absolute;
   inset: 0;
   margin: auto;
-  width: 320px;
-  height: 320px;
+  width: 400px;
+  max-width: 85vw;
+  height: auto;
   object-fit: contain;
   opacity: 0.30;
   pointer-events: none;
