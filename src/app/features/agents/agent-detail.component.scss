@@ -227,3 +227,27 @@
     box-shadow: 0 0 16px rgba(196, 120, 13, 0.1);
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   Avatar — image de l'agent en page détail
+   -------------------------------------------------------------------------- */
+.agent-detail__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(196, 120, 13, 0.2);
+  box-shadow: 0 0 30px rgba(196, 120, 13, 0.06);
+  margin: 0 auto 32px;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Accessibilité — respect des préférences de mouvement
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .agent-detail__avatar {
+    transition: none;
+  }
+}

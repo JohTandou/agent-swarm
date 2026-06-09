@@ -205,6 +205,35 @@
   display: block;
 }
 
+/* --------------------------------------------------------------------------
+   Avatar — image de l'agent avec fallback emoji
+   -------------------------------------------------------------------------- */
+.agents__card-avatar-wrapper {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+}
+
+.agents__card-avatar {
+  position: absolute;
+  inset: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(122, 136, 153, 0.15);
+  transition: transform 250ms var(--ease-natural),
+              box-shadow 250ms var(--ease-natural),
+              border-color 250ms var(--ease-natural);
+}
+
+.agents__card:hover .agents__card-avatar {
+  transform: scale(1.06);
+  box-shadow: 0 0 24px rgba(196, 120, 13, 0.18);
+  border-color: rgba(196, 120, 13, 0.35);
+}
+
 .agents__card-header {
   display: flex;
   align-items: center;
@@ -354,4 +383,14 @@
    -------------------------------------------------------------------------- */
 .agents__grid > * {
   animation-delay: calc(var(--stagger-index) * 60ms);
+}
+
+
+/* --------------------------------------------------------------------------
+   Accessibilité — respect des préférences de mouvement
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .agents__card-avatar {
+    transition: none;
+  }
 }

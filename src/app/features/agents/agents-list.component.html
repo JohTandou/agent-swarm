@@ -45,7 +45,16 @@
         [attr.aria-label]="'Fiche de ' + agent.name"
         [attr.data-category]="agent.category"
       >
-        <span class="agents__card-emoji" aria-hidden="true">{{ agent.emoji }}</span>
+                      <span class="agents__card-avatar-wrapper">
+                <img
+                  [src]="'/assets/images/avatars/' + agent.id + '.png'"
+                  [alt]="'Avatar de ' + agent.name"
+                  class="agents__card-avatar"
+                  loading="lazy"
+                  (error)="$any($event.target).style.display = 'none'"
+                />
+                <span class="agents__card-emoji">{{ agent.emoji }}</span>
+              </span>
 
         <div class="agents__card-header">
           <h2 class="agents__card-name">{{ agent.name }}</h2>

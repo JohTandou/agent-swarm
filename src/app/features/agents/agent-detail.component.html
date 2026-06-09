@@ -1,5 +1,11 @@
 @if (agent(); as agentData) {
   <section class="agent-detail">
+  <img
+    [src]="'/assets/images/avatars/' + agent().id + '.png'"
+    [alt]="'Avatar de ' + agent().name"
+    class="agent-detail__avatar"
+    loading="lazy"
+  />
     <header class="agent-detail__header">
       <nav class="agent-detail__breadcrumb" aria-label="Fil d'Ariane">
         <a routerLink="/agents" class="agent-detail__breadcrumb-link">Agents</a>
