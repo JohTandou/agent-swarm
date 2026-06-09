@@ -4,6 +4,7 @@
    ========================================================================== */
 
 @import "tailwindcss";
+@import "./styles/_interactions.scss";
 
 /* --------------------------------------------------------------------------
    Thème Tailwind — Design tokens exposés comme utilities Tailwind
@@ -358,7 +359,3 @@ textarea:disabled,
   }
 }
 
-/* --------------------------------------------------------------------------
-   Interactions globales — hover, glow, press, shimmer
-   -------------------------------------------------------------------------- */
-@import "./styles/_interactions.scss";
