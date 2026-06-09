@@ -429,6 +429,7 @@ $section-padding-mobile: 64px 20px;
    ========================================================================== */
 
 .mermaid-section {
+  position: relative;
   padding: $section-padding;
   max-width: $content-max;
   margin: 0 auto;
@@ -465,6 +466,7 @@ $section-padding-mobile: 64px 20px;
    ========================================================================== */
 
 .pre-search {
+  position: relative;
   padding: $section-padding;
   max-width: $content-max;
   margin: 0 auto;
@@ -521,6 +523,7 @@ $section-padding-mobile: 64px 20px;
    ========================================================================== */
 
 .quality-gates {
+  position: relative;
   padding: $section-padding;
   max-width: $content-max;
   margin: 0 auto;

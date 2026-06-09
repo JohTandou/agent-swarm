@@ -745,6 +745,7 @@ $section-padding-mobile: 64px 20px;
    Section 6 — Modèles d'IA
    ========================================================================== */
 .models {
+  position: relative;
   padding: $section-padding;
   max-width: $content-max;
   margin: 0 auto;
