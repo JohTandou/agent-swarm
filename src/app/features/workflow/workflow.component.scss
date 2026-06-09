@@ -967,7 +967,10 @@ $section-padding-mobile: 64px 20px;
 @media (prefers-reduced-motion: reduce) {
   .hero__bg-decor,
   .homepage__hero::before,
-  .about__hero::after {
+  .about__hero::after,
+  .workflow__pipeline-bg,
+  .workflow__gates-bg,
+  .pre-search__bg {
     opacity: 0.06;
   }
 }

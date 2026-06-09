@@ -532,7 +532,8 @@
 @media (prefers-reduced-motion: reduce) {
   .hero__bg-decor,
   .homepage__hero::before,
-  .about__hero::after {
+  .about__hero::after,
+  .homepage__hero-decor {
     opacity: 0.06;
   }
 }

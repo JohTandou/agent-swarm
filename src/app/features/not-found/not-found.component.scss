@@ -104,3 +104,12 @@
     height: 220px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Accessibilité — Réduire le mouvement
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .not-found__illustration {
+    opacity: 0.06;
+  }
+}

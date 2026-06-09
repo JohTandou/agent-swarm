@@ -1169,7 +1169,9 @@ $section-padding-mobile: 64px 20px;
 @media (prefers-reduced-motion: reduce) {
   .hero__bg-decor,
   .homepage__hero::before,
-  .about__hero::after {
+  .about__hero::after,
+  .pi__cost-bg,
+  .pi__dual-model-bg {
     opacity: 0.06;
   }
 }
