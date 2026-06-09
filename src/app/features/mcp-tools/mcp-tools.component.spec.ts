@@ -47,10 +47,10 @@ describe('McpToolsComponent', () => {
     expect(skeleton).toBeTruthy();
   });
 
-  it('devrait avoir 4 éléments de navigation dans le skeleton', () => {
+  it('devrait avoir 6 éléments de navigation dans le skeleton', () => {
     const navContainer = fixture.nativeElement.querySelector('.mcp-skeleton__nav');
     const navItems = navContainer.querySelectorAll('app-ui-skeleton');
-    expect(navItems.length).toBe(4);
+    expect(navItems.length).toBe(6);
   });
 
   it('devrait avoir 5 lignes de tableau dans le skeleton', () => {
@@ -71,12 +71,12 @@ describe('McpToolsComponent', () => {
     expect(nav).toBeTruthy();
   }));
 
-  it('devrait avoir 4 onglets de catégorie', fakeAsync(() => {
+  it('devrait avoir 6 onglets de catégorie', fakeAsync(() => {
     paramMapSubject.next(convertToParamMap({ category: 'supabase' }));
     tick(600);
     fixture.detectChanges();
     const tabs = fixture.nativeElement.querySelectorAll('.mcp-nav__tab');
-    expect(tabs.length).toBe(4);
+    expect(tabs.length).toBe(6);
   }));
 
   it('devrait afficher le titre de la catégorie active', fakeAsync(() => {

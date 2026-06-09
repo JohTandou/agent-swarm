@@ -1,13 +1,13 @@
 import { CONTENT_REGISTRY } from './content-registry';
 
 describe('CONTENT_REGISTRY', () => {
-  it('devrait contenir exactement 36 entrées', () => {
-    expect(CONTENT_REGISTRY.length).toBe(36);
+  it('devrait contenir exactement 37 entrées', () => {
+    expect(CONTENT_REGISTRY.length).toBe(37);
   });
 
-  it('devrait avoir 9 agents', () => {
+  it('devrait avoir 11 agents (9 core + 2 utilitaires)', () => {
     const agents = CONTENT_REGISTRY.filter((e) => e.section === 'Agents');
-    expect(agents.length).toBe(9);
+    expect(agents.length).toBe(11);
     expect(agents.every((a) => a.sourcePath.startsWith('agents/'))).toBe(true);
     expect(agents.every((a) => a.route.startsWith('/agents/'))).toBe(true);
   });
@@ -17,13 +17,6 @@ describe('CONTENT_REGISTRY', () => {
     expect(skills.length).toBe(26);
     expect(skills.every((s) => s.sourcePath.startsWith('skills/'))).toBe(true);
     expect(skills.every((s) => s.route.startsWith('/skills/'))).toBe(true);
-  });
-
-  it('devrait avoir 1 entrée Documentation (demo.md)', () => {
-    const docs = CONTENT_REGISTRY.filter((e) => e.section === 'Documentation');
-    expect(docs.length).toBe(1);
-    expect(docs[0].sourcePath).toBe('demo.md');
-    expect(docs[0].route).toBe('/demo-markdown');
   });
 
   it('tous les sourcePath devraient être uniques', () => {

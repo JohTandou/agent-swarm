@@ -32,7 +32,7 @@ interface McpCategory {
  * ========================================================================== */
 
 const LOADING_SIMULATION_MS = 600;
-const CATEGORIES: readonly string[] = ['supabase', 'vercel', 'render', 'playwright'];
+const CATEGORIES: readonly string[] = ['supabase', 'vercel', 'render', 'playwright', 'context7', 'magic'];
 
 /* ==========================================================================
  * Données statiques — Outils MCP par catégorie
@@ -86,6 +86,18 @@ const PLAYWRIGHT_TOOLS: readonly McpTool[] = [
   { name: 'browser_press_key', description: 'Appuie sur une touche du clavier', params: ['key'] },
   { name: 'browser_select_option', description: 'Sélectionne une option dans un menu déroulant', params: ['target', 'values'] },
   { name: 'browser_wait_for', description: 'Attend l\'apparition ou la disparition d\'un texte', params: ['time', 'text', 'textGone'] },
+];
+
+const CONTEXT7_TOOLS: readonly McpTool[] = [
+  { name: 'resolve-library-id', description: 'Résout un identifiant de bibliothèque à partir du nom et de la version', params: ['libraryName'] },
+  { name: 'query-docs', description: 'Interroge la documentation à jour d\'une bibliothèque', params: ['libraryId', 'query'] },
+];
+
+const MAGIC_TOOLS: readonly McpTool[] = [
+  { name: 'component-builder', description: 'Génère un composant UI à partir d\'une description textuelle', params: ['prompt', 'stack'] },
+  { name: 'inspiration', description: 'Recherche des inspirations de design par mots-clés', params: ['query'] },
+  { name: 'refiner', description: 'Améliore un composant existant avec des standards de qualité', params: ['componentCode', 'improvements'] },
+  { name: 'logo-search', description: 'Recherche des logos d\'entreprise par nom de domaine', params: ['domain'] },
 ];
 
 /* ==========================================================================
@@ -195,6 +207,40 @@ playwright_browser_take_screenshot({
 });`,
     playgroundLabel: 'Simulez un remplissage de formulaire Playwright',
   },
+  context7: {
+    id: 'context7',
+    label: 'Context7',
+    icon: '📚',
+    description: 'Outils MCP pour l\'accès à la documentation des bibliothèques et frameworks : résolution d\'identifiants et interrogation de la documentation à jour.',
+    tools: CONTEXT7_TOOLS,
+    exampleCode: `// Résoudre une bibliothèque et interroger sa documentation
+const libraryId = await context7.resolveLibraryId({
+  libraryName: '@angular/core'
+});
+const docs = await context7.queryDocs({
+  libraryId,
+  query: 'standalone components'
+});`,
+    playgroundLabel: 'Simulez une recherche de documentation Context7',
+  },
+  magic: {
+    id: 'magic',
+    label: '21st.dev',
+    icon: '🪄',
+    description: 'Outils MCP pour la génération et l\'inspiration de composants UI via 21st.dev : création de composants, recherche d\'inspirations, raffinement et logos.',
+    tools: MAGIC_TOOLS,
+    exampleCode: `// Générer un composant bouton premium
+const component = await magic.componentBuilder({
+  prompt: 'A premium dark mode button with amber accent, loading state, and hover glow',
+  stack: 'html'
+});
+
+// Rechercher des inspirations de design
+const inspirations = await magic.inspiration({
+  query: 'dark mode dashboard cards'
+});`,
+    playgroundLabel: 'Simulez la génération d\'un composant 21st.dev',
+  },
 };
 
 /* ==========================================================================
@@ -205,6 +251,8 @@ const CATEGORY_PREFIXES: Record<string, string> = {
   vercel: 'vercel',
   render: 'render',
   playwright: 'playwright',
+  context7: 'context7',
+  magic: 'magic',
 };
 
 /* ==========================================================================

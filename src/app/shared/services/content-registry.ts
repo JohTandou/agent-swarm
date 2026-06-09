@@ -1,7 +1,7 @@
 import type { SearchResult } from '@shared/models';
 
 /**
- * Registre exhaustif des 36 fichiers Markdown du wiki.
+ * Registre exhaustif des 37 fichiers Markdown du wiki.
  * Mapping sourcePath → route → section pour l'indexation de recherche.
  * 
  * Champs :
@@ -11,7 +11,7 @@ import type { SearchResult } from '@shared/models';
  */
 export const CONTENT_REGISTRY: Omit<SearchResult, 'title' | 'description'>[] = [
   // ==========================================================================
-  // Agents (9) — src/content/agents/
+  // Agents (11) — src/content/agents/
   // ==========================================================================
   { sourcePath: 'agents/orchestrateur.md', route: '/agents/orchestrateur', section: 'Agents' },
   { sourcePath: 'agents/front.md', route: '/agents/front', section: 'Agents' },
@@ -22,6 +22,8 @@ export const CONTENT_REGISTRY: Omit<SearchResult, 'title' | 'description'>[] = [
   { sourcePath: 'agents/reviewer.md', route: '/agents/reviewer', section: 'Agents' },
   { sourcePath: 'agents/writer.md', route: '/agents/writer', section: 'Agents' },
   { sourcePath: 'agents/search.md', route: '/agents/search', section: 'Agents' },
+  { sourcePath: 'agents/explore.md', route: '/agents/explore', section: 'Agents' },
+  { sourcePath: 'agents/general.md', route: '/agents/general', section: 'Agents' },
 
   // ==========================================================================
   // Skills (26) — src/content/skills/
@@ -52,9 +54,4 @@ export const CONTENT_REGISTRY: Omit<SearchResult, 'title' | 'description'>[] = [
   { sourcePath: 'skills/using-git-worktrees.md', route: '/skills/using-git-worktrees', section: 'Skills' },
   { sourcePath: 'skills/writing-plans.md', route: '/skills/writing-plans', section: 'Skills' },
   { sourcePath: 'skills/writing-skills.md', route: '/skills/writing-skills', section: 'Skills' },
-
-  // ==========================================================================
-  // Autres (1) — src/content/
-  // ==========================================================================
-  { sourcePath: 'demo.md', route: '/demo-markdown', section: 'Documentation' },
 ];

@@ -21,36 +21,36 @@ describe('SkillsListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('devrait avoir 3 skills', () => {
-    expect(component.skills.length).toBe(3);
+  it('devrait avoir 26 skills', () => {
+    expect(component.skills.length).toBe(26);
   });
 
-  it('devrait avoir 3 catégories de filtre', () => {
-    expect(component.categories.length).toBe(3);
+  it('devrait avoir 5 catégories de filtre', () => {
+    expect(component.categories.length).toBe(5);
   });
 
   it('devrait retourner tous les skills par défaut (pas de filtre)', () => {
-    expect(component.filteredSkills().length).toBe(3);
+    expect(component.filteredSkills().length).toBe(26);
   });
 
   it('devrait filtrer par catégorie création', () => {
     component.toggleCategory('création');
     fixture.detectChanges();
-    expect(component.filteredSkills().length).toBe(1);
+    expect(component.filteredSkills().length).toBe(4);
     expect(component.filteredSkills()[0].id).toBe('ui-ux-pro-max');
   });
 
   it('devrait filtrer par catégorie qualité', () => {
     component.toggleCategory('qualité');
     fixture.detectChanges();
-    expect(component.filteredSkills().length).toBe(1);
+    expect(component.filteredSkills().length).toBe(2);
     expect(component.filteredSkills()[0].id).toBe('tests-create');
   });
 
   it('devrait filtrer par catégorie analyse', () => {
     component.toggleCategory('analyse');
     fixture.detectChanges();
-    expect(component.filteredSkills().length).toBe(1);
+    expect(component.filteredSkills().length).toBe(8);
     expect(component.filteredSkills()[0].id).toBe('graphify');
   });
 
@@ -60,7 +60,7 @@ describe('SkillsListComponent', () => {
     component.toggleCategory('création');
     fixture.detectChanges();
     expect(component.activeCategory()).toBeNull();
-    expect(component.filteredSkills().length).toBe(3);
+    expect(component.filteredSkills().length).toBe(26);
   });
 
   it('la première carte devrait avoir la classe --featured', () => {
@@ -73,11 +73,15 @@ describe('SkillsListComponent', () => {
     expect(component.getCategoryLabel('création')).toBe('Création');
     expect(component.getCategoryLabel('qualité')).toBe('Qualité');
     expect(component.getCategoryLabel('analyse')).toBe('Analyse');
+    expect(component.getCategoryLabel('workflow')).toBe('Workflow');
+    expect(component.getCategoryLabel('documentation')).toBe('Documentation');
   });
 
   it('devrait compter les skills par catégorie', () => {
-    expect(component.getCategoryCount('création')).toBe(1);
-    expect(component.getCategoryCount('qualité')).toBe(1);
-    expect(component.getCategoryCount('analyse')).toBe(1);
+    expect(component.getCategoryCount('création')).toBe(4);
+    expect(component.getCategoryCount('qualité')).toBe(2);
+    expect(component.getCategoryCount('analyse')).toBe(8);
+    expect(component.getCategoryCount('workflow')).toBe(8);
+    expect(component.getCategoryCount('documentation')).toBe(4);
   });
 });

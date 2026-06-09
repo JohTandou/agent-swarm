@@ -132,7 +132,7 @@ export class StandardsComponent implements AfterViewInit, OnDestroy {
     },
     {
       name: 'Texte secondaire',
-      hex: '#8E8882',
+      hex: '#B0A8A0',
       variable: '--color-text-secondary',
       usage: 'Légendes, métadonnées, texte d\'appoint',
     },
@@ -281,7 +281,7 @@ export class StandardsComponent implements AfterViewInit, OnDestroy {
   protected readonly testPrinciples: readonly TestPrinciple[] = [
     {
       title: 'Framework de test',
-      description: 'Tests unitaires avec Jest via @angular-builders/jest. Plus rapide que Karma, support des snapshots et du watch mode efficace.',
+      description: "Tests unitaires avec Jasmine + Karma (karma-jasmine, ChromeHeadless). Configuration native Angular, exécution rapide sans build step supplémentaire.",
     },
     {
       title: 'Couverture de code',
