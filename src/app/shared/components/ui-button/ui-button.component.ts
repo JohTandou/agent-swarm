@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 /** Variants disponibles pour le bouton */
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'icon';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'icon' | 'accent';
 
 /** Tailles disponibles pour le bouton */
 export type ButtonSize = 'sm' | 'md' | 'lg';
