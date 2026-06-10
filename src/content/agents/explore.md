@@ -6,7 +6,7 @@ order: 10
 
 ## Rôle
 
-L'agent explore est un agent léger spécialisé dans la découverte rapide de codebase. Contrairement à search (qui est exhaustif et déclenché sur les routes ADAPT+), explore est utilisé pour des recherches ponctuelles : trouver des fichiers par motif, localiser des patterns de code, répondre à des questions simples sur la structure du projet.
+L'agent explore est un agent léger utilitaire pour la découverte rapide de codebase. Contrairement à search (qui est exhaustif et déclenché sur les routes ADAPT+), explore est utilisé pour des recherches ponctuelles : trouver des fichiers par motif, localiser des patterns de code, répondre à des questions simples sur la structure du projet.
 
 ## Responsabilités
 
@@ -43,4 +43,4 @@ Tâche : « Trouve tous les composants qui utilisent le service Toast ». L'agen
 
 ## Modèle
 
-Utilise **DeepSeek V4 Pro**, comme tous les agents du Swarm.
+Utilise **DeepSeek V4 Pro**, comme tous les agents de la Swarm.

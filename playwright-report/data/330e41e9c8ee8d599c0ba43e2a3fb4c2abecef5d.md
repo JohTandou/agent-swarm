@@ -61,7 +61,7 @@ Call log:
         - paragraph [ref=e38]: Modules Réutilisables
         - heading "Skills" [level=1] [ref=e39]:
           - generic [ref=e40]: Skills
-        - paragraph [ref=e41]: Des modules spécialisés que les agents activent à la demande. Chaque skill étend les capacités du Swarm avec une expertise ciblée.
+        - paragraph [ref=e41]: Des modules spécialisés que les agents activent à la demande. Chaque skill étend les capacités de la Swarm avec une expertise ciblée.
       - navigation "Filtrer par catégorie" [ref=e42]:
         - generic "Afficher tous les skills" [ref=e43]:
           - button "Tous 3" [ref=e44] [cursor=pointer]:

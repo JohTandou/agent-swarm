@@ -44,7 +44,7 @@ test.describe('T3 — Page d\'accueil interactive', () => {
       await expect(svg).toBeVisible({ timeout: 15000 });
     });
 
-    test('affiche les 9 agents du Swarm dans le graphe', async ({ page }) => {
+    test('affiche les 9 agents de la Swarm dans le graphe', async ({ page }) => {
       await page.goto('/');
       const agents = ['Orchestrateur', 'Search', 'Planner', 'Contract', 'Front', 'Back', 'Tester', 'Reviewer', 'Writer'];
       for (const agent of agents) {

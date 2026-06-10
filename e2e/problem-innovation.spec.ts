@@ -3,10 +3,10 @@ import { test, expect } from '@playwright/test';
 test.describe('T4 — Page Problème & Innovation', () => {
 
   test.describe('Section Hero', () => {
-    test('affiche le H1 Pourquoi le Swarm ?', async ({ page }) => {
+    test('affiche le H1 Pourquoi la Swarm ?', async ({ page }) => {
       await page.goto('/probleme-innovation');
       await expect(page.locator('#hero-title')).toBeVisible({ timeout: 10000 });
-      await expect(page.locator('#hero-title')).toHaveText('Pourquoi le Swarm ?');
+      await expect(page.locator('#hero-title')).toHaveText('Pourquoi la Swarm ?');
     });
 
     test('affiche le kicker "Le pipeline d\'agents IA"', async ({ page }) => {

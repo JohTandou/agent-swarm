@@ -59,7 +59,7 @@ interface SwarmFile {
 /**
  * Page Workflow Interactive — Composant pur Apple-grade.
  *
- * Présente le pipeline complet du Swarm en 6 sections plein écran :
+ * Présente le pipeline complet de la Swarm en 6 sections plein écran :
  * 1. Hero
  * 2. Arbre de décision interactif (5 routes)
  * 3. Diagramme Mermaid du pipeline complet
@@ -209,7 +209,7 @@ graph TB
 
   protected readonly preSearchTitle = 'Pré-search : le diagnostic qui évite les erreurs';
   protected readonly preSearchDescription =
-    'Avant de classifier votre tâche, les agents du Swarm analysent l\'ensemble du codebase en parallèle. Fichiers impactés, occurrences, complexité réelle — tout est mesuré objectivement. Résultat : la bonne route est choisie à chaque fois, sans tâtonnement.';
+    'Avant de classifier votre tâche, les agents de la Swarm analysent l\'ensemble du codebase en parallèle. Fichiers impactés, occurrences, complexité réelle — tout est mesuré objectivement. Résultat : la bonne route est choisie à chaque fois, sans tâtonnement.';
 
   protected readonly preSearchThresholds: readonly PreSearchThreshold[] = [
     {
@@ -283,7 +283,7 @@ graph TB
     {
       step: 'Issue GitHub',
       icon: '📋',
-      description: 'Tout commence par une issue. Le Swarm analyse le titre et la description pour classifier automatiquement la tâche.',
+      description: 'Tout commence par une issue. la Swarm analyse le titre et la description pour classifier automatiquement la tâche.',
     },
     {
       step: 'Branche',

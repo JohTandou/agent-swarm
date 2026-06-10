@@ -311,7 +311,7 @@ Appliqués à chaque tâche, sans exception.
 
 Appliqués à tout texte visible par le visiteur.
 
-**Titres et headlines.** Informatifs et précis. Pas « Fonctionnalités » mais « Ce que le Swarm fait pour vous ». Pas « Architecture » mais « Comment les agents collaborent ».
+**Titres et headlines.** Informatifs et précis. Pas « Fonctionnalités » mais « Ce que la Swarm fait pour vous ». Pas « Architecture » mais « Comment les agents collaborent ».
 
 **Navigation et labels.** Courts, évocateurs, hiérarchisés. Pas « Cliquez ici » mais le nom exact de la destination.
 

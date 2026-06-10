@@ -68,7 +68,7 @@ interface TargetAudience {
 /**
  * Page Problème & Innovation — Composant pur Apple-grade.
  *
- * Présente la proposition de valeur du Swarm à travers 8 sections
+ * Présente la proposition de valeur de la Swarm à travers 8 sections
  * en plein écran avec animations au scroll, compteur animé et
  * barres de comparaison.
  */
@@ -94,9 +94,9 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
    * Données — Section 1 : Hero
    * ========================================================================== */
 
-  protected readonly heroTitle = 'Pourquoi le Swarm ?';
+  protected readonly heroTitle = 'Pourquoi la Swarm ?';
   protected readonly heroSubtitle =
-    'Le développement logiciel moderne est fractal : chaque fonctionnalité cache des dizaines de micro-décisions architecturales, de dépendances croisées et de cas limites. Les agents IA isolés savent écrire du code, mais échouent face à la complexité systémique des vrais projets. Le Swarm change la donne.';
+    'Le développement logiciel moderne est fractal : chaque fonctionnalité cache des dizaines de micro-décisions architecturales, de dépendances croisées et de cas limites. Les agents IA isolés savent écrire du code, mais échouent face à la complexité systémique des vrais projets. la Swarm change la donne.';
 
   /* ==========================================================================
    * Données — Section 2 : Avant/Après
@@ -198,7 +198,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   protected readonly pillars: readonly Pillar[] = [
     {
       title: 'Classification automatique de complexité',
-      description: 'Le système évalue chaque tâche et la route sur le pipeline approprié : DIRECT, SIMPLE, ADAPT, MEDIUM ou FULL. Pas de configuration manuelle — le Swarm décide seul du niveau de rigueur nécessaire.',
+      description: 'Le système évalue chaque tâche et la route sur le pipeline approprié : DIRECT, SIMPLE, ADAPT, MEDIUM ou FULL. Pas de configuration manuelle — la Swarm décide seul du niveau de rigueur nécessaire.',
     },
     {
       title: 'Routage intelligent à 5 niveaux',
@@ -218,7 +218,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     },
     {
       title: 'Intégration Git native',
-      description: 'Le pipeline est pensé pour le workflow GitHub : une issue déclenche la création d\'une branche, le Swarm implémente, les gates valident, une PR est créée, et après revue humaine le merge est automatique. Zéro friction d\'intégration.',
+      description: 'Le pipeline est pensé pour le workflow GitHub : une issue déclenche la création d\'une branche, la Swarm implémente, les gates valident, une PR est créée, et après revue humaine le merge est automatique. Zéro friction d\'intégration.',
     },
     {
       title: 'Documentation automatique',
@@ -267,7 +267,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   protected readonly modelInfo = {
     name: 'DeepSeek V4 Pro',
     description:
-      'Modèle unique utilisé par tous les agents du Swarm — orchestration, planification, implémentation front et back, tests, review et documentation.',
+      'Modèle unique utilisé par tous les agents de la Swarm — orchestration, planification, implémentation front et back, tests, review et documentation.',
     strengths:
       'Contexte de 1M tokens, raisonnement architectural, génération de code, analyse de codebase.',
     costNote: '~0,50 $/M tokens en entrée, ~2,19 $/M tokens en sortie (tarification API publique).',
@@ -289,7 +289,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     {
       category: 'Limites architecturales',
       items: [
-        'Pas de support pour les langages exotiques ou les frameworks obscurs — le Swarm s\'appuie sur la documentation disponible',
+        'Pas de support pour les langages exotiques ou les frameworks obscurs — la Swarm s\'appuie sur la documentation disponible',
         'La qualité dépend de la planification initiale — un mauvais plan produit un mauvais résultat',
         'Pas de boucle de rétroaction après merge — chaque session est indépendante',
         'Pas de persistance de la mémoire entre sessions — chaque issue repart de zéro',
@@ -314,15 +314,15 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   protected readonly targetAudiences: readonly TargetAudience[] = [
     {
       audience: 'Recruteurs techniques',
-      description: 'Comprenez en 3 minutes la proposition de valeur unique du Swarm : un pipeline qui transforme une issue GitHub en PR validée, testée et documentée — sans intervention humaine.',
+      description: 'Comprenez en 3 minutes la proposition de valeur unique de la Swarm : un pipeline qui transforme une issue GitHub en PR validée, testée et documentée — sans intervention humaine.',
     },
     {
       audience: 'Tech leads & CTO',
-      description: 'Évaluez le Swarm comme un membre d\'équipe virtuel : parallélisme natif, gates qualité automatisées, documentation vivante. Un multiplicateur de vélocité, pas un remplacement.',
+      description: 'Évaluez la Swarm comme un membre d\'équipe virtuel : parallélisme natif, gates qualité automatisées, documentation vivante. Un multiplicateur de vélocité, pas un remplacement.',
     },
     {
       audience: 'Développeurs',
-      description: 'Voyez comment le Swarm élimine les tâches répétitives (tests, documentation, boilerplate) pour vous concentrer sur l\'architecture et les décisions créatives.',
+      description: 'Voyez comment la Swarm élimine les tâches répétitives (tests, documentation, boilerplate) pour vous concentrer sur l\'architecture et les décisions créatives.',
     },
     {
       audience: 'Startups & indés',

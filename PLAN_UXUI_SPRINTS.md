@@ -196,7 +196,7 @@ Swarm Wiki est un wiki statique Angular 19 documentant le système Swarm (pipeli
 
 ### E.1 — Page 404 avec Personnalité
 - **Design :** grand "404" en Cabinet Grotesk Extrabold avec dégradé ambré, hexagone décoratif
-- **Copy :** « Cette page s'est perdue dans le swarm. Les agents sont à sa recherche. »
+- **Copy :** « Cette page s'est perdue dans la Swarm. Les agents sont à sa recherche. »
 - **Actions :** « Retour à la ruche » (accueil) + « Explorer les agents » (/agents)
 - **Fichiers :** `src/app/features/not-found/`
 
@@ -227,7 +227,7 @@ Swarm Wiki est un wiki statique Angular 19 documentant le système Swarm (pipeli
 
 ### E.7 — Copywriting Review Globale
 - **Revoir chaque texte :** titres de page, descriptions, messages d'erreur, labels, tooltips
-- **Ton cible :** technique accessible, chaleureux, francophone naturel — « Les agents du Swarm » plutôt que « Le système Swarm »
+- **Ton cible :** technique accessible, chaleureux, francophone naturel — « Les agents de la Swarm » plutôt que « Le système Swarm »
 - **Fichiers :** tous les `*.component.html` et `*.component.ts`
 
 ---

@@ -4,9 +4,9 @@ Documentation technique du **Swarm** — pipeline d'agents IA spécialisés qui 
 
 **Cible** : recruteurs, tech leads, managers. Ton accessible, jamais simpliste. Dark mode exclusif, design Apple-grade.
 
-## Pourquoi le Swarm
+## Pourquoi la Swarm
 
-Le Swarm combine **9 agents IA spécialisés** (orchestrateur, search, planner, contract, front, back, tester, reviewer, writer) en un pipeline automatisé. Contrairement aux assistants mono-agents (Claude Code, Cursor, Devin), le Swarm classifie automatiquement la complexité d'une tâche, route vers les agents appropriés, parallélise l'implémentation, génère des tests, et valide la qualité avant merge. Résultat : **5–8× moins cher** qu'une API mono-modèle équivalente, avec des gates qualité systématiques.
+la Swarm combine **9 agents IA spécialisés** (orchestrateur, search, planner, contract, front, back, tester, reviewer, writer) en un pipeline automatisé. Contrairement aux assistants mono-agents (Claude Code, Cursor, Devin), la Swarm classifie automatiquement la complexité d'une tâche, route vers les agents appropriés, parallélise l'implémentation, génère des tests, et valide la qualité avant merge. Résultat : **5–8× moins cher** qu'une API mono-modèle équivalente, avec des gates qualité systématiques.
 
 ## Stack Technique
 

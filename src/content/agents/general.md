@@ -6,7 +6,7 @@ order: 11
 
 ## Rôle
 
-L'agent general est le couteau suisse du Swarm. Il prend en charge les tâches qui ne relèvent pas d'un agent spécialisé : exécution de commandes shell complexes, recherche multi-sources, coordination de sous-tâches, et opérations transverses.
+L'agent general est le couteau suisse de la Swarm. Il prend en charge les tâches qui ne relèvent pas d'un agent spécialisé : exécution de commandes shell complexes, recherche multi-sources, coordination de sous-tâches, et opérations transverses.
 
 ## Responsabilités
 
@@ -44,4 +44,4 @@ Tâche : « Vérifie que toutes les dépendances sont à jour et lance les tests
 
 ## Modèle
 
-Utilise **DeepSeek V4 Pro**, comme tous les agents du Swarm.
+Utilise **DeepSeek V4 Pro**, comme tous les agents de la Swarm.

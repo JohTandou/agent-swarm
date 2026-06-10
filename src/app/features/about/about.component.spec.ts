@@ -21,13 +21,13 @@ describe('AboutComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('devrait afficher le hero avec le titre "Le Swarm"', () => {
+  it('devrait afficher le hero avec le titre "la Swarm"', () => {
     const heroEl: HTMLElement = fixture.nativeElement.querySelector('.about__hero');
     expect(heroEl).toBeTruthy();
 
     const titleEl: HTMLElement = fixture.nativeElement.querySelector('.about__title');
     expect(titleEl).toBeTruthy();
-    expect((titleEl.textContent ?? '').replace(/\u00A0/g, ' ')).toContain('Le Swarm');
+    expect((titleEl.textContent ?? '').replace(/\u00A0/g, ' ')).toContain('la Swarm');
   });
 
   it('devrait afficher le sous-titre de la section hero', () => {
@@ -122,9 +122,9 @@ describe('AboutComponent', () => {
     expect(nodes.length).toBe(9);
   });
 
-  it('devrait avoir la section "Le Swarm en chiffres"', () => {
+  it('devrait avoir la section "la Swarm en chiffres"', () => {
     const sectionTitles = fixture.nativeElement.querySelectorAll('.about__section-title');
     const titles = Array.from<Element>(sectionTitles).map((el) => (el as HTMLElement).textContent?.trim());
-    expect(titles).toContain('Le Swarm en chiffres');
+    expect(titles).toContain('la Swarm en chiffres');
   });
 });

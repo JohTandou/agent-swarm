@@ -35,7 +35,7 @@ interface NavCard {
 }
 
 /**
- * Page d'accueil immersive du Swarm Wiki.
+ * Page d'accueil immersive de la Swarm Wiki.
  *
  * Composition :
  * 1. Hero — tagline animée GSAP + grille hexagonale en arrière-plan

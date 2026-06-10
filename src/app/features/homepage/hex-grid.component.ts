@@ -12,7 +12,7 @@ import {
 import { EasterEggService } from '../../shared/services/easter-egg.service';
 
 /**
- * Grille hexagonale animée — signature visuelle du Swarm.
+ * Grille hexagonale animée — signature visuelle de la Swarm.
  *
  * Métaphore de la ruche : chaque hexagone représente un agent,
  * les lignes les connectent. Pulsation lente, illumination

@@ -15,10 +15,10 @@ test.describe('T15 — Page À propos', () => {
   });
 
   test.describe('Contenu', () => {
-    test('affiche le H1 "Le Swarm"', async ({ page }) => {
+    test('affiche le H1 "la Swarm"', async ({ page }) => {
       await page.goto('/a-propos');
       await expect(page.locator('.about__title')).toBeVisible({ timeout: 10000 });
-      await expect(page.locator('.about__title')).toContainText('Le Swarm');
+      await expect(page.locator('.about__title')).toContainText('la Swarm');
     });
 
     test('affiche le sous-titre de description', async ({ page }) => {

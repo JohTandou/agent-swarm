@@ -42,7 +42,7 @@ Style: abstract light art, long-exposure photography aesthetic, minimal and prem
 Negative: text, letters, people, 3D render, cartoon, photorealistic, bright background.
 ```
 
-### IMAGE 3 — 404 « Perdu dans le swarm »
+### IMAGE 3 — 404 « Perdu dans la Swarm »
 **Emplacement :** Remplacer le SVG hexagone dans `not-found.component.html`
 **Dimensions :** 1672×941 px (ratio 16:9)
 
@@ -102,7 +102,7 @@ Style: sci-fi minimalism, portal/archway aesthetic, volumetric light, premium da
 Negative: text, people, military imagery, cartoon, 3D render, photorealistic, shields.
 ```
 
-### IMAGE 6 — Comparaison économique « Le coût du Swarm »
+### IMAGE 6 — Comparaison économique « Le coût de la Swarm »
 **Emplacement :** Page Problem & Innovation, section Coûts
 **Dimensions :** 1672×941 px (ratio 16:9)
 

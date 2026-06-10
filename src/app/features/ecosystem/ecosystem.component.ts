@@ -58,7 +58,7 @@ interface Integration {
 /**
  * Page Écosystème — Composant pur Apple-grade.
  *
- * Présente l'infrastructure complète du Swarm en 5 sections plein écran :
+ * Présente l'infrastructure complète de la Swarm en 5 sections plein écran :
  * 1. Hero avec statistiques clés
  * 2. Structure .opencode/ — arborescence commentée
  * 3. swarm-workflow.json — configuration décortiquée
@@ -86,7 +86,7 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
    * Données — Section 1 : Hero
    * ========================================================================== */
 
-  protected readonly heroTitle = 'Les coulisses du Swarm';
+  protected readonly heroTitle = 'Les coulisses de la Swarm';
   protected readonly heroSubtitle =
     'Derrière les neuf agents se cache un écosystème complet : configuration centralisée, documentation auto-générée, skills activables à la demande et intégrations natives avec Supabase, Vercel, Render et Playwright. Voici comment tout cela s\'articule.';
 
@@ -149,7 +149,7 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
       name: 'Pipeline', icon: '⚙️',
       description: 'Automatisation du cycle de vie des tâches.',
       fields: [
-        { path: 'swarm.workflow.auto_create_github_issue', label: 'Création automatique d\'issue', type: 'boolean', value: 'true', description: 'Le Swarm crée une issue GitHub pour chaque nouvelle tâche identifiée.' },
+        { path: 'swarm.workflow.auto_create_github_issue', label: 'Création automatique d\'issue', type: 'boolean', value: 'true', description: 'la Swarm crée une issue GitHub pour chaque nouvelle tâche identifiée.' },
         { path: 'swarm.workflow.auto_create_branch', label: 'Création automatique de branche', type: 'boolean', value: 'true', description: 'Une branche feature/ est créée automatiquement au démarrage d\'une tâche.' },
         { path: 'swarm.workflow.auto_create_pr', label: 'Création automatique de PR', type: 'boolean', value: 'true', description: 'Une pull request est ouverte automatiquement après validation des gates.' },
         { path: 'swarm.workflow.pr_draft_by_default', label: 'PR en draft par défaut', type: 'boolean', value: 'true', description: 'Les PR sont créées en mode brouillon, prêtes pour revue humaine optionnelle.' },
@@ -196,7 +196,7 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
    * ========================================================================== */
 
   protected readonly agentsMdSections: readonly AgentsSection[] = [
-    { title: 'Architecture Multi-Agents', icon: '🤖', description: 'Définit les 11 agents du Swarm (9 spécialisés + 2 utilitaires), leurs rôles, déclencheurs et interactions. Le cœur de l\'orchestration.' },
+    { title: 'Architecture Multi-Agents', icon: '🤖', description: 'Définit les 11 agents de la Swarm (9 spécialisés + 2 utilitaires), leurs rôles, déclencheurs et interactions. Le cœur de l\'orchestration.' },
     { title: 'Agents du Pipeline', icon: '🔄', description: 'Planner, contract, front, back, tester, reviewer, writer, search — chaque agent a un fichier .md dédié dans agents/ avec ses instructions précises.' },
     { title: 'Outils Disponibles', icon: '🔧', description: 'Bash, read, write, glob, grep, task, playwright, context7, magic (21st.dev) — la boîte à outils complète mise à disposition de chaque agent.' },
     { title: 'Wrapper Playwright', icon: '🎭', description: 'Intégration native de Playwright pour les tests E2E : Chromium + iPhone 14, snapshots visuels, auto-waiting.' },
@@ -211,7 +211,7 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
    * ========================================================================== */
 
   protected readonly integrations: readonly Integration[] = [
-    { name: 'Supabase', icon: '🗄️', provider: 'MCP', description: 'Base de données Postgres, authentification, Edge Functions et stockage. Utilisé pour les projets full-stack générés par le Swarm.', features: ['Postgres managé', 'Auth intégrée', 'Edge Functions', 'Migrations automatiques'] },
+    { name: 'Supabase', icon: '🗄️', provider: 'MCP', description: 'Base de données Postgres, authentification, Edge Functions et stockage. Utilisé pour les projets full-stack générés par la Swarm.', features: ['Postgres managé', 'Auth intégrée', 'Edge Functions', 'Migrations automatiques'] },
     { name: 'Vercel', icon: '▲', provider: 'MCP', description: 'Déploiement continu, CDN global, serverless functions. Cible de déploiement par défaut pour les projets frontend.', features: ['Déploiement Git auto', 'CDN global', 'Preview deployments', 'Analytics intégrés'] },
     { name: 'Render', icon: '⚡', provider: 'MCP', description: 'Hébergement de services web, cron jobs, Postgres managé. Utilisé pour les backends et bases de données.', features: ['Web services', 'Cron jobs', 'Postgres', 'Key-Value stores'] },
     { name: 'Playwright', icon: '🎭', provider: 'MCP', description: 'Tests end-to-end cross-browser. Intégré au pipeline Swarm pour valider chaque PR sur Chromium et mobile (iPhone 14).', features: ['Tests multi-navigateurs', 'Auto-waiting', 'Visual comparisons', 'iPhone 14 simulé'] },

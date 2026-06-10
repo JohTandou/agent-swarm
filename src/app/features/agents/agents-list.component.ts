@@ -117,7 +117,7 @@ const AGENTS: Agent[] = [
     name: 'Explore',
     emoji: '🗺️',
     role: 'Exploration rapide du codebase pour recherche de fichiers et patterns',
-    description: "Agent spécialisé dans la découverte : recherche par motif, mots-clés, et analyse de structure.",
+    description: "Agent utilitaire pour la découverte : recherche par motif, mots-clés, et analyse de structure.",
     route: 'SIMPLE',
     active: true,
     category: 'infrastructure',

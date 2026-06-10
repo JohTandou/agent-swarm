@@ -188,7 +188,7 @@ describe('ProblemInnovationComponent', () => {
   it('devrait avoir un heroTitle défini', () => {
     const title = (component as any).heroTitle as string;
     expect(title).toBeTruthy();
-    expect(title).toBe('Pourquoi le Swarm ?');
+    expect(title).toBe('Pourquoi la Swarm ?');
   });
 
   it('devrait avoir un heroSubtitle non vide', () => {
@@ -261,7 +261,7 @@ describe('ProblemInnovationComponent', () => {
    * Données — systemComparisons
    * ========================================================================== */
 
-  it('systemComparisons devrait inclure le Swarm', () => {
+  it('systemComparisons devrait inclure la Swarm', () => {
     const systems = (component as any).systemComparisons;
     const swarmEntry = systems.find((s: any) => s.system === 'Swarm');
     expect(swarmEntry).toBeTruthy();

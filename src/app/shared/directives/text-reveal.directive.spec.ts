@@ -8,7 +8,7 @@ import { TextRevealDirective } from './text-reveal.directive';
   imports: [TextRevealDirective],
   template: `
     <h1 appTextReveal [revealDelay]="100" id="test-title">
-      Le Swarm orchestre vos agents
+      la Swarm orchestre vos agents
     </h1>
   `,
 })
@@ -46,7 +46,7 @@ describe('TextRevealDirective', () => {
 
     const title = (fixture.nativeElement as HTMLElement).querySelector('#test-title')!;
     const spans = title.querySelectorAll('span');
-    // "Le Swarm orchestre vos agents" = 5 mots
+    // "la Swarm orchestre vos agents" = 5 mots
     expect(spans.length).toBe(5);
     expect(spans[0].textContent).toContain('Le');
     expect(spans[1].textContent).toContain('Swarm');

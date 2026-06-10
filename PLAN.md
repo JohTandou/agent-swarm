@@ -317,7 +317,7 @@ Cette section documente le système Swarm lui-même — architecture, modèles, 
 
 ### 1. Modèles d'IA
 
-Le Swarm utilise une architecture **bi-modèle** optimisée coût/performance :
+la Swarm utilise une architecture **bi-modèle** optimisée coût/performance :
 
 | Modèle | Agents | Rôle | Contexte max | Sortie max |
 |---|---|---|---|---|
@@ -386,7 +386,7 @@ Si on utilisait Claude 4.5 Sonnet en API pour les mêmes tâches qu'une session 
 | **CrewAI / AutoGen** | Framework multi-agent | Multi-modèle configurable | Flexibilité, Python natif | Nécessite configuration manuelle, pas d'intégration infra (Supabase/Vercel), pas de pipeline CI/CD intégré |
 | **SWARM (ce système)** | **Pipeline multi-agent orchestré** | **Bi-modèle + 9 agents spécialisés** | Parallélisme, gates qualité, intégration Git native, MCP infrastructure, classification automatique | Complexité interne, dépendance à l'infrastructure OpenCode, courbe d'apprentissage du comportement |
 
-**Différenciateur clé** : le Swarm est le seul système qui combine classification automatique de complexité → routage → planification → implémentation parallèle → génération de tests → revue de code → commit → documentation, le tout intégré dans un pipeline Git automatisé (issue → branche → PR → merge).
+**Différenciateur clé** : la Swarm est le seul système qui combine classification automatique de complexité → routage → planification → implémentation parallèle → génération de tests → revue de code → commit → documentation, le tout intégré dans un pipeline Git automatisé (issue → branche → PR → merge).
 
 ### 4. Limites du Système Swarm
 
@@ -404,8 +404,8 @@ Si on utilisait Claude 4.5 Sonnet en API pour les mêmes tâches qu'une session 
 - **Pas d'apprentissage inter-projets** : la mémoire (`.agent-memory.json`) est par projet. Les patterns découverts sur le projet A ne sont pas réutilisés sur le projet B.
 - **Orchestrateur sans shell ni édition** : l'orchestrateur ne peut ni exécuter de commandes ni modifier du code — tout passe par délégation à un sous-agent. Cela garantit la sécurité mais ajoute de la latence.
 - **Gates asymétriques** : le reviewer n'intervient que sur MEDIUM/FULL. Les routes SIMPLE/ADAPT committent directement après tests PASS, sans revue humaine ni automatisée.
-- **Dépendance à l'infrastructure OpenCode** : le Swarm n'est pas un produit standalone — il dépend du runtime OpenCode (gestion des agents, permissions, MCP).
-- **Pas de rollback automatique** : si un commit casse quelque chose, le Swarm ne peut pas revenir en arrière seul. Il faut une intervention manuelle (git revert).
+- **Dépendance à l'infrastructure OpenCode** : la Swarm n'est pas un produit standalone — il dépend du runtime OpenCode (gestion des agents, permissions, MCP).
+- **Pas de rollback automatique** : si un commit casse quelque chose, la Swarm ne peut pas revenir en arrière seul. Il faut une intervention manuelle (git revert).
 
 #### 4.3 Limites par agent
 
@@ -420,10 +420,10 @@ Si on utilisait Claude 4.5 Sonnet en API pour les mêmes tâches qu'une session 
 
 #### 4.4 Cas d'usage inadaptés
 
-- **Projets sans Git** : toutes les gates (tests, review, PR) sont désactivées. Le Swarm fonctionne en mode dégradé.
+- **Projets sans Git** : toutes les gates (tests, review, PR) sont désactivées. la Swarm fonctionne en mode dégradé.
 - **Projets purement backend ou purement frontend** : la moitié des agents sont inactifs, le parallélisme est perdu.
 - **Refactoring massif** (> 30 fichiers) : le reviewer rejette automatiquement. Il faut découper manuellement.
-- **Tâches créatives ouvertes** (design system from scratch, branding) : sans maquette Figma ou spec précise, le Swarm peut produire un résultat incohérent entre les agents.
+- **Tâches créatives ouvertes** (design system from scratch, branding) : sans maquette Figma ou spec précise, la Swarm peut produire un résultat incohérent entre les agents.
 
 ### 5. Métriques Clés (résumé)
 
