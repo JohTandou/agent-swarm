@@ -5,11 +5,13 @@ import {
   signal,
   OnDestroy,
   OnInit,
+  inject,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
-const D3_LINK_DISTANCE = 130;
-const D3_FORCE_STRENGTH = -350;
-const D3_COLLIDE_RADIUS = 38;
+const D3_LINK_DISTANCE = 170;
+const D3_FORCE_STRENGTH = -420;
+const D3_COLLIDE_RADIUS = 48;
 const D3_TOTAL_TICKS = 300;
 
 /** Données d'un agent dans le graphe */
@@ -80,7 +82,7 @@ interface TooltipData {
         <svg
           #graphSvg
           class="swarm-graph__svg"
-          viewBox="-400 -300 800 600"
+           viewBox="-520 -390 1040 780"
           preserveAspectRatio="xMidYMid meet"
           aria-label="Graphe interactif des 9 agents spécialisés du Swarm"
           role="img"
@@ -104,6 +106,7 @@ interface TooltipData {
               <g
                 class="swarm-graph__node-group"
                 [class.swarm-graph__node-group--pulse]="nodePos.id === 'orchestrateur'"
+                (click)="onNodeClick(nodePos.id)"
                 (mouseenter)="onNodeHover($event, nodePos.id)"
                 (mouseleave)="onNodeLeave()"
                 [style.animation-delay.ms]="200 + idx * 50"
@@ -158,7 +161,7 @@ interface TooltipData {
       .swarm-graph {
         position: relative;
         width: 100%;
-        height: clamp(380px, 55vh, 650px);
+        height: clamp(550px, 70vh, 850px);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -277,7 +280,7 @@ interface TooltipData {
       /* --- Labels --- */
       .swarm-graph__label {
         font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 700;
         fill: var(--color-text-secondary, #7A8899);
         letter-spacing: 0.03em;
@@ -338,17 +341,19 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
   /** Données du tooltip au survol */
   readonly tooltip = signal<TooltipData | null>(null);
 
+  private readonly router = inject(Router);
+
   /** Les 9 agents spécialisés du Swarm avec leurs métadonnées */
   private readonly agents: AgentNode[] = [
-    { id: 'orchestrateur', label: 'Orchestrateur', role: 'Coordination centrale du pipeline', color: '#C4780D', radius: 20 },
-    { id: 'search', label: 'Search', role: 'Cartographie et analyse du codebase', color: '#B8A878', radius: 14 },
-    { id: 'planner', label: 'Planner', role: 'Planification des tâches en étapes', color: '#C8A862', radius: 14 },
-    { id: 'contract', label: 'Contract', role: 'Définition des contrats TypeScript', color: '#A89868', radius: 14 },
-    { id: 'front', label: 'Front', role: 'Implémentation des composants UI', color: '#9A9590', radius: 14 },
-    { id: 'back', label: 'Back', role: 'Backend, scripts et configurations', color: '#8A8580', radius: 14 },
-    { id: 'tester', label: 'Tester', role: 'Génération et exécution des tests', color: '#A8907A', radius: 14 },
-    { id: 'reviewer', label: 'Reviewer', role: 'Revue de code et validation qualité', color: '#B09078', radius: 14 },
-    { id: 'writer', label: 'Writer', role: 'Documentation technique et suivi', color: '#9A9088', radius: 14 },
+    { id: 'orchestrateur', label: 'Orchestrateur', role: 'Coordination centrale du pipeline', color: '#C4780D', radius: 26 },
+    { id: 'search', label: 'Search', role: 'Cartographie et analyse du codebase', color: '#B8A878', radius: 18 },
+    { id: 'planner', label: 'Planner', role: 'Planification des tâches en étapes', color: '#C8A862', radius: 18 },
+    { id: 'contract', label: 'Contract', role: 'Définition des contrats TypeScript', color: '#A89868', radius: 18 },
+    { id: 'front', label: 'Front', role: 'Implémentation des composants UI', color: '#9A9590', radius: 18 },
+    { id: 'back', label: 'Back', role: 'Backend, scripts et configurations', color: '#8A8580', radius: 18 },
+    { id: 'tester', label: 'Tester', role: 'Génération et exécution des tests', color: '#A8907A', radius: 18 },
+    { id: 'reviewer', label: 'Reviewer', role: 'Revue de code et validation qualité', color: '#B09078', radius: 18 },
+    { id: 'writer', label: 'Writer', role: 'Documentation technique et suivi', color: '#9A9088', radius: 18 },
   ];
 
   /** Connexions entre agents (orchestrateur ↔ tous + liens transverses) */
@@ -478,6 +483,10 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
       x: event.clientX - rect.left,
       y: event.clientY - rect.top,
     });
+  }
+
+  onNodeClick(nodeId: string): void {
+    this.router.navigate(['/agents', nodeId]);
   }
 
   onNodeLeave(): void {
