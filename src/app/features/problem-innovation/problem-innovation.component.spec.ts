@@ -327,7 +327,7 @@ describe('ProblemInnovationComponent', () => {
     expect(modelInfo).toBeTruthy();
     expect(modelInfo.name).toBe('DeepSeek V4 Pro');
     expect(modelInfo.description).toContain('Modèle unique utilisé par tous les agents');
-    expect(modelInfo.costNote).toContain('0,50 $/M tokens');
+    expect(modelInfo.costNote).toContain('0,435 $/M tokens');
   });
 
   /* ==========================================================================

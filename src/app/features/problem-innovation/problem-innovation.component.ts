@@ -130,7 +130,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     {
       label: 'Coût',
       withoutSwarm: '150–250 K€/an par développeur senior. Le coût d\'opportunité des bugs est massif',
-      withSwarm: '~1,25 $ par session MEDIUM. ~50–150 $/mois en usage intensif via API',
+      withSwarm: '~1,25 $ par session MEDIUM (2,55M tokens). ~50–150 $/mois en usage intensif via API',
       improvement: '2–4× moins cher qu\'un abonnement Claude Max',
     },
   ];
@@ -234,31 +234,31 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     {
       route: 'SIMPLE',
       tokens: '~50 K',
-      cost: '~0,08 $',
+      cost: '~0,02 $',
       description: 'Correction ciblée, modification d\'un fichier',
     },
     {
       route: 'ADAPT',
       tokens: '~100 K',
-      cost: '~0,15 $',
+      cost: '~0,05 $',
       description: 'Adaptation cross-cutting, 2–3 fichiers',
     },
     {
       route: 'MEDIUM',
       tokens: '~247 K',
-      cost: '~0,38 $',
+      cost: '~0,12 $',
       description: 'Feature multi-fichiers avec tests et revue',
     },
     {
       route: 'FULL',
       tokens: '~500 K',
-      cost: '~0,77 $',
+      cost: '~0,25 $',
       description: 'Fonctionnalité complexe avec contrats, parallélisme et gates',
     },
   ];
 
   protected readonly costComparisonNote =
-    'Estimations basées sur la tarification API publique DeepSeek (mai 2025). Coûts réels variables selon le volume et la complexité des tâches. À titre de comparaison, un abonnement Claude Max coûte 100–200 $/mois pour un agent unique.';
+    'Estimations basées sur la tarification API publique DeepSeek V4 Pro. Coûts réels variables selon le volume et la complexité des tâches. À titre de comparaison, un abonnement Claude Max coûte 100–200 $/mois pour un agent unique.';
 
   /* ==========================================================================
    * Données — Section 6 : Modèle d'IA
@@ -270,7 +270,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
       'Modèle unique utilisé par tous les agents de la Swarm — orchestration, planification, implémentation front et back, tests, review et documentation.',
     strengths:
       'Contexte de 1M tokens, raisonnement architectural, génération de code, analyse de codebase.',
-    costNote: '~0,50 $/M tokens en entrée, ~2,19 $/M tokens en sortie (tarification API publique).',
+    costNote: '0,435 $/M tokens en entrée (cache miss), 0,0036 $/M (cache hit), 0,87 $/M en sortie. Soit ~0,49 $/M effectif (65/35 input/output, 35% cache hit). Tarification API DeepSeek V4 Pro, juin 2025.',
   };
 
   /* ==========================================================================
