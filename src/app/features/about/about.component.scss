@@ -221,47 +221,6 @@
 }
 
 /* ==========================================================================
-   Visualisation du pipeline
-   ========================================================================== */
-
-.about__pipeline-viz {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 32px 24px;
-  background: var(--color-bg-elevated);
-  border-radius: 16px;
-  border: 1px solid rgba(122, 136, 153, 0.12);
-  box-shadow: var(--elevation-n2);
-  flex-wrap: wrap;
-}
-
-.about__pipeline-step {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  font-size: 1.5rem;
-  background: var(--color-bg-subtle);
-  border: 1px solid rgba(122, 136, 153, 0.15);
-  transition: transform 250ms var(--ease-natural), box-shadow 250ms var(--ease-natural);
-
-  &:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 16px rgba(196, 120, 13, 0.15);
-  }
-}
-
-.about__pipeline-arrow {
-  font-size: 1.25rem;
-  color: var(--color-text-secondary);
-  opacity: 0.4;
-}
-
-/* ==========================================================================
    Grille de l'équipe
    ========================================================================== */
 
@@ -300,10 +259,13 @@
   }
 }
 
-.about__team-emoji {
+.about__team-avatar {
   display: block;
-  font-size: 2rem;
+  width: 48px;
+  height: 48px;
   margin-bottom: 12px;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
 .about__team-name {

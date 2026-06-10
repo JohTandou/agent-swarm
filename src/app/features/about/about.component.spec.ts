@@ -106,14 +106,6 @@ describe('AboutComponent', () => {
     expect(ctaLinks.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('devrait afficher la visualisation du pipeline', () => {
-    const pipelineViz = fixture.nativeElement.querySelector('.about__pipeline-viz');
-    expect(pipelineViz).toBeTruthy();
-
-    const steps = fixture.nativeElement.querySelectorAll('.about__pipeline-step');
-    expect(steps.length).toBe(6);
-  });
-
   it('devrait afficher le graphique de complexité', () => {
     const complexityGraphic = fixture.nativeElement.querySelector('.about__complexity-graphic');
     expect(complexityGraphic).toBeTruthy();
