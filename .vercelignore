@@ -7,9 +7,6 @@ coverage
 playwright-report
 .playwright-mcp
 e2e
-*.png
-*.jpg
-*.jpeg
 AGENTS.md
 PLAN.md
 .vscode
