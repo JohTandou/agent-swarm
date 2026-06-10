@@ -107,6 +107,12 @@
   align-items: center;
 }
 
+.about__section-grid--reverse {
+  .about__section-text {
+    text-align: center;
+  }
+}
+
 /* Restaure la grille 2 colonnes pour les sections qui le demandent explicitement */
 .about__section-grid--split {
   display: grid;
