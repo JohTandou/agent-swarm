@@ -107,6 +107,27 @@
   align-items: center;
 }
 
+/* Restaure la grille 2 colonnes pour les sections qui le demandent explicitement */
+.about__section-grid--split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  text-align: left;
+
+  .about__section-text {
+    text-align: left;
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .about__section-grid--split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
 @media (max-width: 768px) {
   .about__hero {
     padding: 48px 0 40px;
