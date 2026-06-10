@@ -59,11 +59,10 @@
     width: 60%;
     height: 80%;
     background-image:
-      radial-gradient(ellipse at 30% 40%, rgba(122, 136, 153, 0.06) 0%, transparent 70%),
-      url('/assets/images/hero-swarm.png');
-    background-size: auto, cover;
-    background-position: auto, center;
-    background-repeat: no-repeat, no-repeat;
+      radial-gradient(ellipse at 30% 40%, rgba(122, 136, 153, 0.06) 0%, transparent 70%);
+    background-size: auto;
+    background-position: auto;
+    background-repeat: no-repeat;
     border-radius: 50%;
     opacity: 0.25;
     will-change: transform;
@@ -76,11 +75,10 @@
     width: 40%;
     height: 60%;
     background-image:
-      radial-gradient(circle at 60% 30%, rgba(196, 120, 13, 0.05) 0%, rgba(196, 120, 13, 0.015) 40%, transparent 70%),
-      url('/assets/images/hero-swarm.png');
-    background-size: auto, cover;
-    background-position: auto, center;
-    background-repeat: no-repeat, no-repeat;
+      radial-gradient(circle at 60% 30%, rgba(196, 120, 13, 0.05) 0%, rgba(196, 120, 13, 0.015) 40%, transparent 70%);
+    background-size: auto;
+    background-position: auto;
+    background-repeat: no-repeat;
     border-radius: 50%;
     opacity: 0.20;
     will-change: transform;
@@ -93,11 +91,10 @@
     width: 25%;
     height: 35%;
     background-image:
-      radial-gradient(ellipse at 40% 60%, rgba(196, 120, 13, 0.08) 0%, rgba(122, 136, 153, 0.04) 35%, transparent 65%),
-      url('/assets/images/hero-swarm.png');
-    background-size: auto, cover;
-    background-position: auto, center;
-    background-repeat: no-repeat, no-repeat;
+      radial-gradient(ellipse at 40% 60%, rgba(196, 120, 13, 0.08) 0%, rgba(122, 136, 153, 0.04) 35%, transparent 65%);
+    background-size: auto;
+    background-position: auto;
+    background-repeat: no-repeat;
     border-radius: 40% 60% 60% 40% / 50% 50% 60% 60%;
     opacity: 0.12;
     will-change: transform;
@@ -251,6 +248,7 @@
    SECTION 2 : Graphe interactif
    ========================================================================== */
 .homepage__graph {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -261,15 +259,33 @@
     rgba(196, 120, 13, 0.03) 0%,
     transparent 70%
   );
+
+  /* Fond d'ambiance hex swarm */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/images/hero-swarm.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+  }
 }
 
 .homepage__graph-header {
+  position: relative;
+  z-index: 1;
   text-align: center;
   max-width: 600px;
   margin-bottom: clamp(32px, 6vh, 64px);
 }
 
 .homepage__graph-canvas {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 900px;
   flex: 1;

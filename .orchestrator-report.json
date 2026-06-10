@@ -24,12 +24,7 @@
       "name": "backend-unit-tests",
       "status": "skip",
       "detail": "No backend directory detected"
-    },
-    {
-      "name": "e2e",
-      "status": "skip",
-      "detail": "No frontend files changed (server left running for interactive testing)"
     }
   ],
-  "overall": "pass"
+  "overall": "running"
 }

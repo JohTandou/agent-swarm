@@ -6,128 +6,66 @@ Node.js version v25.4.0 detected.
 Odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.
 ❯ Building...
 ✔ Building...
-Initial chunk files   | Names                        |  Raw size | Estimated transfer size
-main-RZOXW6NA.js      | main                         | 207.67 kB |                51.20 kB
-chunk-7ZCRZPKL.js     | -                            | 149.63 kB |                44.54 kB
-chunk-NQTZHJLL.js     | -                            |  70.82 kB |                17.65 kB
-chunk-RSM2Q53M.js     | -                            |  51.51 kB |                14.57 kB
-chunk-RFY2RYNI.js     | -                            |  39.09 kB |                11.02 kB
-polyfills-5CFQRCPP.js | polyfills                    |  34.59 kB |                11.33 kB
-styles-3O5DZ5TU.css   | styles                       |  32.37 kB |                 7.17 kB
-chunk-IMK3UTFR.js     | -                            |   4.56 kB |                 1.31 kB
-chunk-RF6FHV5V.js     | -                            |   3.93 kB |                 1.27 kB
-chunk-Q7AFHJ5V.js     | -                            |   2.71 kB |               889 bytes
-chunk-2WH2EVR6.js     | -                            |   1.80 kB |               808 bytes
-chunk-2D62X5OX.js     | -                            |   1.24 kB |               581 bytes
-chunk-4BYSG5AW.js     | -                            | 891 bytes |               891 bytes
-chunk-PF3YGHYU.js     | -                            | 554 bytes |               554 bytes
-chunk-S2RT6ME7.js     | -                            | 345 bytes |               345 bytes
+Initial chunk files   | Names                     |  Raw size | Estimated transfer size
+main-IZEME64P.js      | main                      | 207.82 kB |                51.24 kB
+chunk-ZF25YIUU.js     | -                         | 149.63 kB |                44.54 kB
+chunk-F5DWPJON.js     | -                         |  70.82 kB |                17.65 kB
+chunk-DTZ5RPO7.js     | -                         |  51.51 kB |                14.53 kB
+chunk-RDDU4BIZ.js     | -                         |  39.09 kB |                11.02 kB
+polyfills-5CFQRCPP.js | polyfills                 |  34.59 kB |                11.33 kB
+styles-SU7JSNEG.css   | styles                    |  33.63 kB |                 7.38 kB
+chunk-ATURTUDB.js     | -                         |   4.56 kB |                 1.32 kB
+chunk-5FUMJNK6.js     | -                         |   4.23 kB |                 1.38 kB
+chunk-V5YNONZB.js     | -                         |   2.71 kB |               889 bytes
+chunk-PZNONLPT.js     | -                         |   1.36 kB |               621 bytes
+chunk-J6PVADHD.js     | -                         |   1.24 kB |               585 bytes
+chunk-L4P5NMQP.js     | -                         | 891 bytes |               891 bytes
+chunk-AWR7WAD3.js     | -                         | 554 bytes |               554 bytes
 
-                      | Initial total                | 601.69 kB |               164.15 kB
+                      | Initial total             | 602.62 kB |               163.94 kB
 
-Lazy chunk files      | Names                        |  Raw size | Estimated transfer size
-chunk-MEU7XOYO.js     | -                            | 600.64 kB |               116.14 kB
-chunk-SBGK7DE2.js     | -                            | 442.93 kB |               119.56 kB
-chunk-TKE7V7YA.js     | -                            | 277.43 kB |                78.96 kB
-chunk-K43B5VKA.js     | katex                        | 267.72 kB |                63.68 kB
-chunk-PZE24LNF.js     | -                            | 229.70 kB |                27.35 kB
-chunk-S74M5T66.js     | architectureDiagram-3BPJPVTR | 150.70 kB |                36.28 kB
-chunk-RB3FRKNI.js     | sequenceDiagram-3UESZ5HK     | 117.25 kB |                25.75 kB
-chunk-CPFLY6LC.js     | -                            | 101.71 kB |                21.12 kB
-chunk-OFEJI55K.js     | cose-bilkent-S5V4N54A        |  82.64 kB |                19.78 kB
-chunk-NAMCMTY5.js     | blockDiagram-GPEHLZMM        |  72.51 kB |                18.05 kB
-chunk-OOIEVZLO.js     | index                        |  70.51 kB |                25.00 kB
-chunk-34KVRSN5.js     | c4Diagram-AAUBKEIU           |  70.31 kB |                15.84 kB
-chunk-7GS7NYY3.js     | flowDiagram-I6XJVG4X         |  61.11 kB |                16.04 kB
-chunk-Z5YOEUEX.js     | -                            |  56.73 kB |                16.68 kB
-chunk-TUMWP6IV.js     | -                            |  53.36 kB |                16.03 kB
-...and 85 more lazy chunks files. Use "--verbose" to show all the files.
+Lazy chunk files      | Names                     |  Raw size | Estimated transfer size
+chunk-RTORGWQB.js     | index                     | 283.11 kB |                80.97 kB
+chunk-U6COOCJJ.js     | index                     |  70.51 kB |                25.04 kB
+chunk-XWVBBQ6A.js     | -                         |  56.99 kB |                16.77 kB
+chunk-7C7RDDGL.js     | problem-innovation-routes |  45.81 kB |                10.17 kB
+chunk-IT75D7H4.js     | ScrollTrigger             |  43.59 kB |                16.40 kB
+chunk-W76GW3SW.js     | homepage-routes           |  41.02 kB |                10.21 kB
+chunk-IXESUH2H.js     | workflow-routes           |  39.40 kB |                 9.19 kB
+chunk-IKPMW24J.js     | ecosystem-routes          |  37.29 kB |                 9.04 kB
+chunk-ZAB23YVQ.js     | standards-routes          |  34.80 kB |                 7.91 kB
+chunk-SPZHZD3I.js     | mcp-tools-routes          |  30.35 kB |                 7.94 kB
+chunk-DERIIPCK.js     | agents-routes             |  26.82 kB |                 6.16 kB
+chunk-TIOCDWT7.js     | about-routes              |  23.69 kB |                 5.57 kB
+chunk-K7FJITGR.js     | skills-routes             |  21.70 kB |                 5.17 kB
+chunk-JHB2RUSM.js     | not-found-component       |   2.60 kB |                 1.02 kB
+chunk-BRQYRQ6M.js     | -                         |   1.42 kB |               554 bytes
+...and 2 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [6.235 seconds]
+Application bundle generation complete. [4.489 seconds]
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mAll "@import" rules must come first[0m [invalid-@import]
-
-    src/styles.css:364:0:
-[37m      364 │ [32m@import[37m "./styles/_interactions.scss";
-          ╵ [32m~~~~~~~[0m
-
-  This rule cannot come before an "@import" rule
-
-    src/styles.css:11:0:
-[37m      11 │ [32m[37m@theme {
-         ╵ [32m^[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mbundle initial exceeded maximum budget. Budget 500.00 kB was not met by 102.62 kB with a total of 602.62 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mbundle initial exceeded maximum budget. Budget 500.00 kB was not met by 101.69 kB with a total of 601.69 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/about/about.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 1.30 kB with a total of 9.30 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/homepage/homepage.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 532 bytes with a total of 8.53 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/standards/standards.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 4.30 kB with a total of 12.30 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/about/about.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 418 bytes with a total of 8.42 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/homepage/homepage.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 1.49 kB with a total of 9.49 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/standards/standards.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 4.16 kB with a total of 12.16 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 6.11 kB with a total of 14.11 kB.[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 8.78 kB with a total of 16.78 kB.[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 9.39 kB with a total of 17.39 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/ecosystem/ecosystem.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 3.08 kB with a total of 11.08 kB.[0m
 
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/mcp-tools/mcp-tools.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 1.58 kB with a total of 9.58 kB.[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/ecosystem/ecosystem.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 2.94 kB with a total of 10.95 kB.[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 4.99 kB with a total of 12.98 kB.[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'cytoscape-fcose' used by 'node_modules/mermaid/dist/chunks/mermaid.core/architectureDiagram-3BPJPVTR.mjs' is not ESM[0m
-
-  CommonJS or AMD dependencies can cause optimization bailouts.
-  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule '@braintree/sanitize-url' used by 'node_modules/mermaid/dist/chunks/mermaid.core/sequenceDiagram-3UESZ5HK.mjs' is not ESM[0m
-
-  CommonJS or AMD dependencies can cause optimization bailouts.
-  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'dayjs' used by 'node_modules/mermaid/dist/chunks/mermaid.core/ganttDiagram-6RSMTGT7.mjs' is not ESM[0m
-
-  CommonJS or AMD dependencies can cause optimization bailouts.
-  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'dayjs/plugin/isoWeek.js' used by 'node_modules/mermaid/dist/chunks/mermaid.core/ganttDiagram-6RSMTGT7.mjs' is not ESM[0m
-
-  CommonJS or AMD dependencies can cause optimization bailouts.
-  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'dayjs/plugin/customParseFormat.js' used by 'node_modules/mermaid/dist/chunks/mermaid.core/ganttDiagram-6RSMTGT7.mjs' is not ESM[0m
-
-  CommonJS or AMD dependencies can cause optimization bailouts.
-  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'dayjs/plugin/advancedFormat.js' used by 'node_modules/mermaid/dist/chunks/mermaid.core/ganttDiagram-6RSMTGT7.mjs' is not ESM[0m
-
-  CommonJS or AMD dependencies can cause optimization bailouts.
-  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'dayjs/plugin/duration.js' used by 'node_modules/mermaid/dist/chunks/mermaid.core/ganttDiagram-6RSMTGT7.mjs' is not ESM[0m
-
-  CommonJS or AMD dependencies can cause optimization bailouts.
-  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mModule 'cytoscape-cose-bilkent' used by 'node_modules/mermaid/dist/chunks/mermaid.core/cose-bilkent-S5V4N54A.mjs' is not ESM[0m
-
-  CommonJS or AMD dependencies can cause optimization bailouts.
-  For more information see: [4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies[0m
 
 
 Output location: /Users/johtnd/swarm-wiki/dist/swarm-wiki
