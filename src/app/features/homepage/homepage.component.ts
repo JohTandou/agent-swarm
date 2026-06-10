@@ -11,7 +11,6 @@ import {
 import { RouterLink } from '@angular/router';
 import { SwarmGraphComponent } from './swarm-graph.component';
 import { HexGridComponent } from './hex-grid.component';
-import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { SparkleEffectComponent } from '../../shared/components/sparkle-effect/sparkle-effect.component';
 import { AnimationService } from '../../shared/services/animation.service';
 
@@ -50,7 +49,7 @@ interface NavCard {
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [RouterLink, SwarmGraphComponent, HexGridComponent, TextRevealDirective, SparkleEffectComponent],
+  imports: [RouterLink, SwarmGraphComponent, HexGridComponent, SparkleEffectComponent],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
 })
