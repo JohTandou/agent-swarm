@@ -130,7 +130,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     {
       label: 'Coût',
       withoutSwarm: '150–250 K€/an par développeur senior. Le coût d\'opportunité des bugs est massif',
-      withSwarm: '~1,25 $ par session MEDIUM (2,55M tokens). ~50–150 $/mois en usage intensif via API',
+      withSwarm: '~0,12 $ par session MEDIUM (247K tokens). ~5–25 $/mois en usage intensif via API',
       improvement: '2–4× moins cher qu\'un abonnement Claude Max',
     },
   ];

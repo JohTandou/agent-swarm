@@ -66,6 +66,36 @@
     {"run_id": "swarm-20260608-sprintB", "route": "MEDIUM", "task_type": "Sprint-B-Design-System", "iterations": 1, "agents_used": ["front", "tester"], "retry_reasons": [], "status": "in_progress", "tester_pass": true, "reviewer_approved": true},
     {"run_id": "swarm-20260608-sprintC", "route": "MEDIUM", "task_type": "Sprint-C-Animations", "iterations": 1, "agents_used": ["front", "tester"], "retry_reasons": [], "status": "in_progress", "tester_pass": true, "reviewer_approved": true},
       {"run_id": "swarm-20260608-sprintD", "route": "MEDIUM", "task_type": "Sprint-D-Navigation", "iterations": 1, "agents_used": ["front", "tester"], "retry_reasons": [], "status": "in_progress", "tester_pass": true, "reviewer_approved": true},
-      {"run_id": "swarm-20260608-sprintE", "route": "MEDIUM", "task_type": "Sprint-E-Polish", "iterations": 2, "agents_used": ["front", "tester"], "retry_reasons": ["TEST_BUG-search-modal-empty", "TEST_BUG-ecosystem-nbsp"], "status": "in_progress", "tester_pass": true, "reviewer_approved": true}
-    ]
+      {"run_id": "swarm-20260608-sprintE", "route": "MEDIUM", "task_type": "Sprint-E-Polish", "iterations": 2, "agents_used": ["front", "tester"], "retry_reasons": ["TEST_BUG-search-modal-empty", "TEST_BUG-ecosystem-nbsp"], "status": "in_progress", "tester_pass": true, "reviewer_approved": true},
+    {
+      "run_id": "swarm-20260610-avatars",
+      "route": "SIMPLE",
+      "task_type": "Replace-Emojis-With-Avatars",
+      "iterations": 1,
+      "agents_used": ["front", "general"],
+      "retry_reasons": [],
+      "status": "done",
+      "tester_pass": true
+    },
+    {
+      "run_id": "swarm-20260610-accent",
+      "route": "SIMPLE",
+      "task_type": "Add-Accent-Button-Variant",
+      "iterations": 1,
+      "agents_used": ["front", "general"],
+      "retry_reasons": [],
+      "status": "done",
+      "tester_pass": true
+    },
+    {
+      "run_id": "swarm-20260610-pricing",
+      "route": "SIMPLE",
+      "task_type": "Recalculate-Costs-DeepSeek-V4-Pro",
+      "iterations": 1,
+      "agents_used": ["front", "general"],
+      "retry_reasons": [],
+      "status": "done",
+      "tester_pass": true
+    }
+  ]
 }

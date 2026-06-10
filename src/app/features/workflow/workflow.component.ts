@@ -354,8 +354,8 @@ gitGraph
     {
       "id": "uuid",
       "route": "MEDIUM",
-      "tokensUsed": 2550000,
-      "cost": 1.25,
+      "tokensUsed": 247000,
+      "cost": 0.12,
       "duration": "3m42s",
       "testsPassed": 12,
       "coverage": 87
@@ -363,8 +363,8 @@ gitGraph
   ],
   "aggregates": {
     "totalSessions": 42,
-    "totalTokens": 107100000,
-    "totalCost": 52.50,
+    "totalTokens": 10374000,
+    "totalCost": 5.04,
     "avgCoverage": 85
   }
 }`,
