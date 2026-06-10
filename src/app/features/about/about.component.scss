@@ -88,16 +88,14 @@
 }
 
 .about__section--alt {
-  background: var(--color-bg-subtle);
-  max-width: none;
-  margin: 0 calc(-1 * ((100vw - 100%) / 2));
-  padding-left: calc((100vw - 100%) / 2);
-  padding-right: calc((100vw - 100%) / 2);
+  position: relative;
 
-  @media (max-width: 1024px) {
-    margin: 0 -16px;
-    padding-left: 16px;
-    padding-right: 16px;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-bg-subtle);
+    z-index: -1;
   }
 }
 
