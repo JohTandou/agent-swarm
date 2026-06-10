@@ -171,65 +171,63 @@ export class MarkdownRendererComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  /** Charge Mermaid.js depuis CDN et render les diagrammes */
+  /** Charge Mermaid.js depuis CDN et render les diagrammes avec MutationObserver */
   private async renderMermaidBlocks(): Promise<void> {
     const host: HTMLElement = this.hostRef.nativeElement;
-    const mermaidBlocks = host.querySelectorAll('code.language-mermaid');
+    
+    // Fonction de rendu
+    const render = async () => {
+      const mermaidBlocks = host.querySelectorAll('code.language-mermaid');
+      if (mermaidBlocks.length === 0) return;
 
-    if (mermaidBlocks.length === 0) return;
-
-    try {
-      // Charger mermaid depuis CDN (évite le bundling de 3.3MB dans le build Vercel)
-      const MERMAID_CDN = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
-      
-      if (!(window as any).mermaid) {
-        await new Promise<void>((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = MERMAID_CDN;
-          script.onload = () => resolve();
-          script.onerror = () => reject(new Error('Échec du chargement CDN de Mermaid'));
-          document.head.appendChild(script);
-        });
-      }
-
-      const mermaid = (window as any).mermaid;
-      if (!mermaid) return;
-
-      mermaid.initialize({
-        startOnLoad: false,
-        theme: 'dark',
-        themeVariables: {
-          primaryColor: '#1C1812',
-          primaryTextColor: '#F5F0EB',
-          primaryBorderColor: 'rgba(122,136,153,0.3)',
-          lineColor: '#7A8899',
-          secondaryColor: '#28231C',
-          tertiaryColor: '#0E0C09',
-        },
-      });
-
-      for (const block of Array.from(mermaidBlocks)) {
-        const pre = block.parentElement;
-        if (!pre) continue;
-
-        const graphDefinition = block.textContent ?? '';
-        if (!graphDefinition.trim()) continue;
-
-        try {
-          const { svg } = await mermaid.render(
-            `mermaid-${Math.random().toString(36).slice(2, 8)}`,
-            graphDefinition,
-          );
-          const container = document.createElement('div');
-          container.className = 'mermaid-diagram';
-          container.innerHTML = svg;
-          pre.replaceWith(container);
-        } catch (mermaidErr) {
-          console.warn('[MarkdownRenderer] Erreur de rendu Mermaid :', mermaidErr);
+      try {
+        const MERMAID_CDN = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+        if (!(window as any).mermaid) {
+          await new Promise<void>((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = MERMAID_CDN;
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error('Échec chargement CDN'));
+            document.head.appendChild(script);
+          });
         }
+
+        const mermaid = (window as any).mermaid;
+        if (!mermaid) return;
+
+        mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+
+        for (const block of Array.from(mermaidBlocks)) {
+          const pre = block.parentElement;
+          if (!pre || pre.classList.contains('mermaid-rendered')) continue;
+
+          const graphDefinition = block.textContent ?? '';
+          if (!graphDefinition.trim()) continue;
+
+          try {
+            const { svg } = await mermaid.render(
+              `mermaid-${Math.random().toString(36).slice(2, 8)}`,
+              graphDefinition,
+            );
+            const container = document.createElement('div');
+            container.className = 'mermaid-diagram';
+            container.innerHTML = svg;
+            pre.replaceWith(container);
+            pre.classList.add('mermaid-rendered');
+          } catch (mermaidErr) {
+            console.warn('[MarkdownRenderer] Erreur rendu :', mermaidErr);
+          }
+        }
+      } catch (err) {
+        console.warn('[MarkdownRenderer] Mermaid non disponible :', err);
       }
-    } catch (err) {
-      console.warn('[MarkdownRenderer] Mermaid non disponible :', err);
-    }
+    };
+
+    // Observer les changements du DOM pour détecter les blocs mermaid
+    const observer = new MutationObserver(render);
+    observer.observe(host, { childList: true, subtree: true });
+    
+    // Premier rendu
+    render();
   }
 }
