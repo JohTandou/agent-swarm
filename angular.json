@@ -53,6 +53,11 @@
                 "input": "public"
               },
               {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
+              },
+              {
                 "glob": "**/*.md",
                 "input": "src/content",
                 "output": "content"
