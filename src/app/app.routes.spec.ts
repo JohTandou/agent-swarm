@@ -3,7 +3,7 @@ import { routes } from './app.routes';
 
 describe('AppRoutes', () => {
   it('devrait avoir 10 routes définies', () => {
-    expect(routes.length).toBe(10);
+    expect(routes.length).toBe(9);
   });
 
   it('devrait avoir une route racine avec lazy loading vers homepage', () => {
@@ -42,12 +42,6 @@ describe('AppRoutes', () => {
     expect(wildcardRoute?.data).toEqual({ title: 'Page introuvable' });
   });
 
-  it('devrait avoir une route /normes avec lazy loading vers standards', () => {
-    const standardsRoute = routes.find((r) => r.path === 'normes');
-    expect(standardsRoute).toBeTruthy();
-    expect(standardsRoute?.loadChildren).toBeDefined();
-    expect(typeof standardsRoute?.loadChildren).toBe('function');
-  });
 
   it('la fonction lazy load de la route racine devrait retourner une promesse', () => {
     const rootRoute = routes.find((r) => r.path === '');

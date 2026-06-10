@@ -24,19 +24,12 @@ describe('SidebarComponent', () => {
     expect(component.navItems.length).toBeGreaterThan(0);
   });
 
-  it("devrait avoir un item Standards avec la route /normes", () => {
-    const standardsItem = component.navItems.find((item) => item.label === 'Standards');
-    expect(standardsItem).toBeTruthy();
-    expect(standardsItem?.route).toBe('/normes');
-    expect(standardsItem?.children).toBeUndefined();
-  });
-
   it('devrait afficher tous les éléments de navigation', () => {
     component.isMobile = false;
     fixture.detectChanges();
     const items = fixture.nativeElement.querySelectorAll('.sidebar__item');
-    // Accueil, À propos, Agents (parent), Skills (parent), Workflow, Écosystème, Standards, Outils MCP (parent) = 8 top-level
-    expect(items.length).toBe(9);
+    // Accueil, À propos, Agents (parent), Skills (parent), Workflow, Écosystème, Outils MCP (parent) = 7 top-level
+    expect(items.length).toBe(8);
   });
 
   it('devrait masquer le bouton close quand isMobile est false', () => {

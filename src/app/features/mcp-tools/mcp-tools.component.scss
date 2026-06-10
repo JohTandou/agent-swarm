@@ -97,43 +97,45 @@ $transition-hover: 250ms;
    ======================================================================== */
 .mcp-tools__nav {
   display: flex;
-  gap: 6px;
+  gap: 8px;
+  flex-wrap: wrap;
   margin-bottom: 40px;
-  padding: 4px;
-  background: var(--color-bg-subtle);
-  border-radius: 12px;
-  border: 1px solid rgba(122, 136, 153, 0.1);
 }
 
 .mcp-nav__tab {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-    min-height: 44px;
+  gap: 6px;
+  padding: 8px 16px;
+  min-height: 44px;
   font-family: var(--font-display);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--color-text-secondary);
   text-decoration: none;
-  border-radius: 9px;
-  transition: all $transition-hover var(--ease-natural);
+  border-radius: 10px;
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  background: transparent;
+  transition: all 250ms var(--ease-natural);
   white-space: nowrap;
 
   &:hover {
     color: var(--color-text-primary);
-    background: rgba(122, 136, 153, 0.08);
+    border-color: rgba(196, 120, 13, 0.25);
+    background: rgba(196, 120, 13, 0.05);
+    transform: translateY(-1px);
   }
 
   &--active {
-    color: var(--color-bg-primary);
-    background: var(--color-accent);
-    box-shadow: 0 2px 12px rgba(196, 120, 13, 0.2);
+    border-color: rgba(196, 120, 13, 0.4);
+    color: var(--color-accent);
+    background: rgba(196, 120, 13, 0.08);
+    box-shadow: 0 0 12px rgba(196, 120, 13, 0.06);
 
     &:hover {
-      color: var(--color-bg-primary);
-      background: var(--color-accent);
-      transform: scale(1.02);
+      color: var(--color-accent);
+      background: rgba(196, 120, 13, 0.12);
+      transform: none;
     }
   }
 
@@ -144,6 +146,11 @@ $transition-hover: 250ms;
 
   &-label {
     letter-spacing: -0.01em;
+  }
+
+  &-count {
+    font-size: 0.6875rem;
+    opacity: 0.5;
   }
 }
 
@@ -648,13 +655,11 @@ $transition-hover: 250ms;
 
 @media (max-width: 480px) {
   .mcp-tools__nav {
-    flex-wrap: wrap;
+    gap: 6px;
   }
-
   .mcp-nav__tab {
-    flex: 1 1 auto;
-    justify-content: center;
-    min-width: 0;
+    padding: 6px 12px;
+    font-size: 0.75rem;
   }
 }
 

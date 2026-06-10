@@ -54,7 +54,6 @@ export class SidebarComponent {
     { label: 'Workflow', route: '/workflow' },
     { label: 'Problème & Innovation', route: '/probleme-innovation' },
     { label: 'Écosystème', route: '/ecosysteme' },
-    { label: 'Standards', route: '/normes' },
     {
       label: 'Outils MCP',
       route: '/outils-mcp',

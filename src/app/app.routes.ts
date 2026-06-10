@@ -44,11 +44,6 @@ export const routes: Routes = [
       import('./features/mcp-tools/mcp-tools.routes').then((m) => m.mcpToolsRoutes),
   },
   {
-    path: 'normes',
-    loadChildren: () =>
-      import('./features/standards/standards.routes').then((m) => m.standardsRoutes),
-  },
-  {
     path: '**',
     loadComponent: () =>
       import('./features/not-found/not-found.component').then((m) => m.NotFoundComponent),
