@@ -10,6 +10,39 @@ import { ContentService } from '../../shared/services/content.service';
 import { provideMarkdown } from 'ngx-markdown';
 import type { Skill } from '@shared/models';
 
+const MOCK_SKILLS: Skill[] = [
+  {
+    id: 'ui-ux-pro-max',
+    name: 'UI/UX Pro Max',
+    emoji: '🎨',
+    description: 'Intelligence de design : 67 styles, 96 palettes.',
+    tags: ['design', 'UI', 'UX', 'tailwind'],
+    category: 'creation',
+    sourcePath: 'skills/ui-ux-pro-max.md',
+    order: 1,
+  },
+  {
+    id: 'tests-create',
+    name: 'Tests Create',
+    emoji: '🧪',
+    description: 'Génération de tests unitaires, fonctionnels, E2E.',
+    tags: ['tests', 'playwright'],
+    category: 'creation',
+    sourcePath: 'skills/tests-create.md',
+    order: 2,
+  },
+  {
+    id: 'graphify',
+    name: 'Graphify',
+    emoji: '🕸️',
+    description: 'Transforme code et docs en graphes de connaissances.',
+    tags: ['graphe', 'analyse', 'visualisation'],
+    category: 'audit',
+    sourcePath: 'skills/graphify.md',
+    order: 3,
+  },
+];
+
 describe('SkillDetailComponent', () => {
   let component: SkillDetailComponent;
   let fixture: ComponentFixture<SkillDetailComponent>;
@@ -33,6 +66,10 @@ describe('SkillDetailComponent', () => {
         },
       ],
     }).compileComponents();
+
+    // Spy MUST be set up BEFORE createComponent — the constructor calls loadSkillsManifest()
+    const contentService = TestBed.inject(ContentService);
+    spyOn(contentService, 'loadSkillsManifest').and.returnValue(of(MOCK_SKILLS));
 
     fixture = TestBed.createComponent(SkillDetailComponent);
     component = fixture.componentInstance;
@@ -61,8 +98,7 @@ describe('SkillDetailComponent', () => {
     });
 
     it('devrait retourner le label de catégorie en français', () => {
-      const skillData = component.skill() as Skill;
-      expect(component.getCategoryLabel(skillData.category)).toBe('Création');
+      expect(component.getCategoryLabel('creation')).toBe('Création');
     });
   });
 
@@ -101,6 +137,10 @@ describe('SkillDetailComponent', () => {
         ],
       }).compileComponents();
 
+      // Spy MUST be set up BEFORE createComponent
+      const contentService = TestBed.inject(ContentService);
+      spyOn(contentService, 'loadSkillsManifest').and.returnValue(of(MOCK_SKILLS));
+
       fixture = TestBed.createComponent(SkillDetailComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -131,7 +171,7 @@ describe('SkillDetailComponent', () => {
     it('devrait charger les données de graphify', () => {
       expect(component.skill()?.name).toBe('Graphify');
       expect(component.skill()?.emoji).toBe('🕸️');
-      expect(component.skill()?.category).toBe('analyse');
+      expect(component.skill()?.category).toBe('audit');
     });
   });
 
@@ -141,9 +181,10 @@ describe('SkillDetailComponent', () => {
     });
 
     it('devrait retourner le label français pour chaque catégorie', () => {
-      expect(component.getCategoryLabel('création')).toBe('Création');
-      expect(component.getCategoryLabel('qualité')).toBe('Qualité');
-      expect(component.getCategoryLabel('analyse')).toBe('Analyse');
+      expect(component.getCategoryLabel('creation')).toBe('Création');
+      expect(component.getCategoryLabel('audit')).toBe('Audit');
+      expect(component.getCategoryLabel('workflow')).toBe('Workflow');
+      expect(component.getCategoryLabel('documentation')).toBe('Documentation');
     });
   });
 });

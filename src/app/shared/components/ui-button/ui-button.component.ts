@@ -41,6 +41,9 @@ export class UiButtonComponent {
   /** Affiche l'état de chargement avec dots animés */
   @Input() loading = false;
 
+  /** Label accessible pour les lecteurs d'écran et tests E2E */
+  @Input('aria-label') ariaLabel: string | null = null;
+
   /** Type HTML du bouton (button ou submit) */
   @Input() type: ButtonType = 'button';
 }

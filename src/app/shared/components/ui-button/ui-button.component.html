@@ -4,6 +4,7 @@
   [class.ui-button--icon]="variant === 'icon'"
   [disabled]="disabled || loading"
   [attr.aria-busy]="loading || null"
+  [attr.aria-label]="ariaLabel"
   [type]="type"
 >
   @if (loading) {

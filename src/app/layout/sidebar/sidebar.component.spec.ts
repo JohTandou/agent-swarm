@@ -1,19 +1,69 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { of } from 'rxjs';
 import { SidebarComponent } from './sidebar.component';
+import { ContentService } from '@shared/services/content.service';
+import type { Skill } from '@shared/models';
+
+const MOCK_SKILLS: Skill[] = [
+  {
+    id: 'ui-ux-pro-max',
+    name: 'UI/UX Pro Max',
+    emoji: '🎨',
+    description: 'Intelligence de design',
+    tags: [],
+    category: 'creation',
+    sourcePath: 'skills/ui-ux-pro-max.md',
+    order: 1,
+  },
+  {
+    id: 'tests-create',
+    name: 'Tests Create',
+    emoji: '🧪',
+    description: 'Génération de tests',
+    tags: [],
+    category: 'creation',
+    sourcePath: 'skills/tests-create.md',
+    order: 2,
+  },
+  {
+    id: 'graphify',
+    name: 'Graphify',
+    emoji: '🕸️',
+    description: 'Transforme en graphe',
+    tags: [],
+    category: 'audit',
+    sourcePath: 'skills/graphify.md',
+    order: 3,
+  },
+];
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;
+  let contentService: ContentService;
 
   beforeEach(async () => {
+    const mockContentService = {
+      loadSkillsManifest: () => of(MOCK_SKILLS),
+    };
+
     await TestBed.configureTestingModule({
       imports: [SidebarComponent],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: ContentService, useValue: mockContentService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;
+    contentService = TestBed.inject(ContentService);
+    fixture.detectChanges();
   });
 
   it('devrait créer le composant', () => {
@@ -29,7 +79,17 @@ describe('SidebarComponent', () => {
     fixture.detectChanges();
     const items = fixture.nativeElement.querySelectorAll('.sidebar__item');
     // Accueil, À propos, Agents (parent), Skills (parent), Workflow, Écosystème, Outils MCP (parent) = 7 top-level
+    // Plus Problème & Innovation = 8
     expect(items.length).toBe(8);
+  });
+
+  it('devrait charger les skills dynamiquement dans la sidebar', () => {
+    const skillsNode = component.navItems.find((item) => item.label === 'Skills');
+    expect(skillsNode).toBeDefined();
+    expect(skillsNode!.children).toBeDefined();
+    expect(skillsNode!.children!.length).toBe(3);
+    expect(skillsNode!.children![0].label).toBe('UI/UX Pro Max');
+    expect(skillsNode!.children![0].route).toBe('/skills/ui-ux-pro-max');
   });
 
   it('devrait masquer le bouton close quand isMobile est false', () => {
@@ -73,9 +133,9 @@ describe('SidebarComponent', () => {
     const sublist = fixture.nativeElement.querySelector('.sidebar__sublist');
     expect(sublist).toBeTruthy();
     
-    // Vérifie les enfants
+    // Vérifie les enfants — 11 agents maintenant
     const childLinks = sublist.querySelectorAll('.sidebar__link--child');
-    expect(childLinks.length).toBe(3);
+    expect(childLinks.length).toBe(11);
     expect(childLinks[0].textContent?.trim()).toBe('Orchestrateur');
   });
 
@@ -97,7 +157,6 @@ describe('SidebarComponent', () => {
 
   it('should track nav items by route for @for loop stability', () => {
     const routes = component.navItems.map((item) => item.route);
-    // Vérifie que toutes les routes sont uniques (pas de doublon)
     const uniqueRoutes = new Set(routes);
     expect(uniqueRoutes.size).toBe(routes.length);
   });
