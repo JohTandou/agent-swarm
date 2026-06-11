@@ -209,6 +209,17 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+/* Keyframe pour l'indicateur de scroll — préserve le centrage horizontal */
+@keyframes scroll-hint-appear {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 /* Indicateur de scroll */
@@ -222,7 +233,7 @@
   align-items: center;
   gap: 6px;
   opacity: 0;
-  animation: hero-stagger 0.7s var(--ease-spring) 0.5s forwards;
+  animation: scroll-hint-appear 0.7s var(--ease-spring) 0.5s forwards;
 }
 
 .homepage__scroll-text {
@@ -280,7 +291,7 @@
   z-index: 1;
   text-align: center;
   max-width: 600px;
-  margin-bottom: clamp(32px, 6vh, 64px);
+  margin-bottom: clamp(16px, 3vh, 32px);
 }
 
 .homepage__graph-canvas {
