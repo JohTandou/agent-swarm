@@ -141,15 +141,37 @@
 
 .agent-detail__content--spaced {
   padding-top: 16px;
-  
-  p, ul, ol {
-    margin-bottom: 1.2em;
-    line-height: 1.8;
-  }
-  
-  h2, h3 {
-    margin-top: 2em;
-    margin-bottom: 0.8em;
+
+  ::ng-deep {
+    .markdown-body {
+      p, ul, ol {
+        margin-bottom: 1.4em;
+        line-height: 1.9;
+      }
+
+      h2 {
+        margin-top: 2.5em;
+        margin-bottom: 1em;
+      }
+
+      h3 {
+        margin-top: 2em;
+        margin-bottom: 0.8em;
+      }
+
+      li {
+        margin-bottom: 0.6em;
+      }
+
+      pre {
+        margin: 1.5em 0;
+      }
+
+      blockquote {
+        margin: 1.5em 0;
+        padding: 1em 1.2em;
+      }
+    }
   }
 }
 
