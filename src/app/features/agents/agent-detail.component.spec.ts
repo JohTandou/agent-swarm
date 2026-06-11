@@ -93,21 +93,15 @@ describe('AgentDetailComponent', () => {
     });
 
     it('devrait afficher la route dans les métadonnées', () => {
-      const routeEl = fixture.nativeElement.querySelector('.agent-detail__meta app-ui-badge[variant="info"]');
+      const routeEl = fixture.nativeElement.querySelector('.agent-detail__meta .agent-detail__route-badge');
       expect(routeEl).toBeTruthy();
-      expect(routeEl.textContent?.trim()).toContain('FULL');
+      expect(routeEl.textContent?.trim()).toContain('DIRECT');
     });
 
     it('devrait afficher la catégorie', () => {
       const catEl = fixture.nativeElement.querySelector('.agent-detail__meta app-ui-badge[variant="default"]');
       expect(catEl).toBeTruthy();
       expect(catEl.textContent?.trim()).toBe('Build');
-    });
-
-    it('devrait afficher le badge Actif', () => {
-      const badge = fixture.nativeElement.querySelector('.ui-badge--success');
-      expect(badge).toBeTruthy();
-      expect(badge.textContent?.trim()).toBe('Actif');
     });
 
     it('devrait avoir un fil d\'ariane avec lien retour vers /agents', () => {
@@ -141,24 +135,6 @@ describe('AgentDetailComponent', () => {
       component.onTocEntries(entries);
       expect(tocService.entries()).toEqual(entries);
       expect(tocService.entries().length).toBe(2);
-    });
-  });
-
-  // === TESTS AVEC AGENT INACTIF ===
-  describe('avec un agent inactif (back)', () => {
-    beforeEach(async () => {
-      await setupComponent('back');
-    });
-
-    it('devrait afficher le badge Inactif', () => {
-      const allBadges: HTMLElement[] = Array.from(fixture.nativeElement.querySelectorAll('.agent-detail__meta app-ui-badge'));
-      const inactiveBadge = allBadges.find((b) => b.textContent?.trim() === 'Inactif');
-      expect(inactiveBadge).toBeTruthy();
-    });
-
-    it('ne devrait pas afficher le badge Actif', () => {
-      const badge = fixture.nativeElement.querySelector('.ui-badge--success');
-      expect(badge).toBeFalsy();
     });
   });
 

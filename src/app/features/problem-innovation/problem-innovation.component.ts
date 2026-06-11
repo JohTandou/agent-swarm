@@ -300,7 +300,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
       items: [
         'Planner : peut sous-estimer la complexité de tâches inhabituelles',
         'Front : limité par la qualité du contrat — si le contrat est incomplet, l\'agent est bloqué',
-        'Back : inactif sur les projets statiques (comme ce wiki)',
+        'Back : inactif sur les projets statiques',
         'Reviewer : ne détecte pas les incohérences métier subtiles',
         'Writer : génère de la documentation technique, pas du contenu marketing',
       ],

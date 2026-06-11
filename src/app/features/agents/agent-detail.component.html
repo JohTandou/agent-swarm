@@ -19,20 +19,15 @@
           <h1 class="agent-detail__name">{{ agentData.name }}</h1>
           <p class="agent-detail__role">{{ agentData.role }}</p>
           <div class="agent-detail__meta">
-            <app-ui-badge variant="info" size="sm">Route {{ agentData.route }}</app-ui-badge>
+            <span class="agent-detail__route-badge">{{ agentData.route }}</span>
             <app-ui-badge variant="default" size="sm">{{ getCategoryLabel(agentData.category) }}</app-ui-badge>
-            @if (agentData.active) {
-              <app-ui-badge variant="success" size="sm">Actif</app-ui-badge>
-            } @else {
-              <app-ui-badge variant="default" size="sm">Inactif</app-ui-badge>
-            }
           </div>
         </div>
       </div>
     </header>
 
     @if (hasContent()) {
-      <div class="agent-detail__content">
+      <div class="agent-detail__content agent-detail__content--spaced">
         <app-markdown-renderer
           [sourcePath]="sourcePath()"
           [enableMermaid]="false"

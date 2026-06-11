@@ -9,8 +9,8 @@
 .agent-detail {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  padding: 32px 0 80px;
+  gap: 48px;
+  padding: 48px 0 120px;
 }
 
 /* --------------------------------------------------------------------------
@@ -19,8 +19,8 @@
 .agent-detail__header {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding-bottom: 28px;
+  gap: 32px;
+  padding-bottom: 40px;
   border-bottom: 1px solid rgba(122, 136, 153, 0.12);
 }
 
@@ -117,11 +117,40 @@
   margin-top: 4px;
 }
 
+/* Route badge (same style as listing cards) */
+.agent-detail__route-badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  border: 1px solid rgba(196, 120, 13, 0.4);
+  border-radius: 6px;
+  padding: 4px 10px;
+  background: rgba(196, 120, 13, 0.08);
+}
+
 /* --------------------------------------------------------------------------
    Contenu Markdown
    -------------------------------------------------------------------------- */
 .agent-detail__content {
   max-width: var(--content-max-width);
+}
+
+.agent-detail__content--spaced {
+  padding-top: 16px;
+  
+  p, ul, ol {
+    margin-bottom: 1.2em;
+    line-height: 1.8;
+  }
+  
+  h2, h3 {
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+  }
 }
 
 .agent-detail__no-content {

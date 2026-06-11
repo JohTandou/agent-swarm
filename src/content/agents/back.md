@@ -1,12 +1,12 @@
 ---
 title: Back
-description: Implémente le backend en respectant la spécification OpenAPI — inactif sur Swarm Wiki (projet 100% statique)
+description: Implémente le backend en respectant la spécification OpenAPI — scripts, crons et configuration serveur
 order: 6
 ---
 
 ## Rôle
 
-L'agent back est responsable de l'implémentation backend : APIs REST, scripts, cron jobs, configuration serveur. Il respecte la spécification OpenAPI définie par l'agent contract sur la route FULL, et utilise Supabase comme backend-as-a-service. **Sur le projet Swarm Wiki, cet agent est inactif — le wiki est 100% statique, sans backend ni base de données.**
+L'agent back est responsable de l'implémentation backend : APIs REST, scripts, cron jobs, configuration serveur. Il respecte la spécification OpenAPI définie par l'agent contract sur la route FULL, et utilise Supabase comme backend-as-a-service.
 
 ## Responsabilités
 

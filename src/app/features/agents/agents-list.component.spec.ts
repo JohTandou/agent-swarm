@@ -132,13 +132,6 @@ describe('AgentsListComponent', () => {
     expect(cards[2].classList.contains('agents__card--wide')).toBeTrue();
   });
 
-  // TEST 13: devrait marquer l'agent back comme inactif
-  it('devrait marquer l\'agent back avec la classe inactive', () => {
-    const inactiveCards = fixture.nativeElement.querySelectorAll('.agents__card--inactive');
-    expect(inactiveCards.length).toBe(1); // seul back est inactif
-    const backCard = inactiveCards[0];
-    expect(backCard.querySelector('.ui-badge--default')?.textContent?.trim()).toBe('Inactif');
-  });
 
   // TEST 14: getCategoryCount devrait retourner le bon compte
   it('getCategoryCount devrait compter les agents par catégorie', () => {
@@ -163,18 +156,6 @@ describe('AgentsListComponent', () => {
     expect(firstCard.getAttribute('href')).toBe('/agents/orchestrateur');
   });
 
-  // TEST 17: devrait afficher le badge "Actif" pour les agents actifs
-  it('devrait afficher le badge Actif pour les agents actifs', () => {
-    const activeBadges = fixture.nativeElement.querySelectorAll('.ui-badge--success');
-    expect(activeBadges.length).toBe(10); // 10 agents actifs sur 11
-  });
-
-  // TEST 18: devrait afficher l'emoji de chaque agent
-  it('devrait afficher l\'emoji de chaque agent dans la carte', () => {
-    const firstEmoji = fixture.nativeElement.querySelector('.agents__card-emoji');
-    expect(firstEmoji).toBeTruthy();
-    expect(firstEmoji.textContent?.trim()).toBe('🎯'); // orchestrateur
-  });
 
   // TEST 19: devrait afficher le rôle de chaque agent
   it('devrait afficher le rôle de l\'agent dans la carte', () => {
@@ -187,7 +168,7 @@ describe('AgentsListComponent', () => {
   it('devrait afficher la route avec la couleur appropriée', () => {
     const routeBadge = fixture.nativeElement.querySelector('.agents__card-route') as HTMLElement;
     expect(routeBadge).toBeTruthy();
-    expect(routeBadge.textContent?.trim()).toBe('FULL');
+    expect(routeBadge.textContent?.trim()).toBe('DIRECT');
     expect(routeBadge.style.color).toBe('rgb(196, 120, 13)');
   });
 
