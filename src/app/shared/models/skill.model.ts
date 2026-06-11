@@ -2,7 +2,7 @@
  * Catégorie fonctionnelle d'un skill Swarm.
  * Utilisée pour le filtrage sur la page de listing.
  */
-export type SkillCategory = 'création' | 'qualité' | 'analyse';
+export type SkillCategory = 'creation' | 'audit' | 'workflow' | 'documentation';
 
 /**
  * Définition d'un skill du système Swarm.
@@ -29,4 +29,7 @@ export interface Skill {
 
   /** Chemin relatif du fichier Markdown dans src/content/skills/ */
   sourcePath: string;
+
+  /** Ordre d'affichage (défini dans le frontmatter YAML) */
+  order: number;
 }

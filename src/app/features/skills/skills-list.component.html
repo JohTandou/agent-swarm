@@ -21,7 +21,7 @@
       aria-label="Afficher tous les skills"
     >
       Tous
-      <span class="skills__filter-count">{{ skills.length }}</span>
+      <span class="skills__filter-count">{{ skills().length }}</span>
     </app-ui-button>
     @for (category of categories; track category) {
       <app-ui-button
@@ -29,7 +29,7 @@
         size="sm"
         [class.skills__filter--active]="activeCategory() === category"
         (click)="toggleCategory(category)"
-        [attr.aria-label]="'Filtrer par ' + getCategoryLabel(category)"
+        [aria-label]="'Filtrer par ' + getCategoryLabel(category)"
       >
         {{ getCategoryLabel(category) }}
         <span class="skills__filter-count">{{ getCategoryCount(category) }}</span>
@@ -37,6 +37,23 @@
     }
   </nav>
 
+  @if (isLoading()) {
+    <div class="skills__grid" role="status" aria-label="Chargement des skills">
+      @for (i of [1,2,3,4,5,6]; track i) {
+        <div class="skills__card skills__card--skeleton" aria-hidden="true">
+          <div class="skills__card-emoji skills__skeleton-emoji"></div>
+          <div class="skills__card-header">
+            <div class="skills__skeleton-line skills__skeleton-line--title"></div>
+          </div>
+          <div class="skills__skeleton-line skills__skeleton-line--desc"></div>
+          <div class="skills__skeleton-line skills__skeleton-line--desc skills__skeleton-line--short"></div>
+          <div class="skills__card-footer">
+            <div class="skills__skeleton-line skills__skeleton-line--tag"></div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
   <div class="skills__grid" role="list" aria-label="Liste des skills Swarm" [appStaggerChildren]="60">
     @for (skill of filteredSkills(); track skill.id; let idx = $index) {
       <a
@@ -81,4 +98,5 @@
       />
     }
   </div>
+  }
 </section>

@@ -1,6 +1,7 @@
 ---
 title: UI/UX Pro Max (création)
 description: Intelligence de design UI/UX avec 67 styles, 96 palettes, 57 pairings typographiques
+category: creation
 order: 1
 ---
 

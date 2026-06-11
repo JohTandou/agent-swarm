@@ -1,7 +1,8 @@
-import { Component, HostListener, Input, Output, EventEmitter } from '@angular/core';
+import { Component, HostListener, Input, Output, EventEmitter, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ContentService } from '@shared/services/content.service';
+import type { NavItem, Skill } from '@shared/models';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
-import type { NavItem } from '@shared/models';
 
 /**
  * Sidebar de navigation hiérarchique.
@@ -25,6 +26,8 @@ export class SidebarComponent {
   /** Position X de départ du touch pour le swipe-to-dismiss */
   private touchStartX = 0;
 
+  private contentService = inject(ContentService);
+
   /**
    * Structure de navigation hiérarchique.
    * Placeholder — sera remplacé par un service de navigation dynamique (T2).
@@ -40,16 +43,21 @@ export class SidebarComponent {
         { label: 'Orchestrateur', route: '/agents/orchestrateur' },
         { label: 'Front', route: '/agents/front' },
         { label: 'Back', route: '/agents/back' },
+        { label: 'Search', route: '/agents/search' },
+        { label: 'Planner', route: '/agents/planner' },
+        { label: 'Contract', route: '/agents/contract' },
+        { label: 'Tester', route: '/agents/tester' },
+        { label: 'Reviewer', route: '/agents/reviewer' },
+        { label: 'Writer', route: '/agents/writer' },
+        { label: 'Explore', route: '/agents/explore' },
+        { label: 'General', route: '/agents/general' },
       ],
     },
     {
       label: 'Skills',
       route: '/skills',
       expanded: false,
-      children: [
-        { label: 'UI/UX Pro Max', route: '/skills/ui-ux-pro-max' },
-        { label: 'Tests Create', route: '/skills/tests-create' },
-      ],
+      children: [],
     },
     { label: 'Workflow', route: '/workflow' },
     { label: 'Problème & Innovation', route: '/probleme-innovation' },
@@ -68,6 +76,18 @@ export class SidebarComponent {
       ],
     },
   ];
+
+  constructor() {
+    this.contentService.loadSkillsManifest().subscribe((skills: Skill[]) => {
+      const skillsNode = this.navItems.find((item) => item.label === 'Skills');
+      if (skillsNode) {
+        skillsNode.children = skills.map((s) => ({
+          label: s.name,
+          route: `/skills/${s.id}`,
+        }));
+      }
+    });
+  }
 
   /** Détecte le début d'un touch pour le swipe-to-dismiss */
   @HostListener('touchstart', ['$event'])

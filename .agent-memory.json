@@ -106,6 +106,20 @@
       "retry_reasons": [],
       "status": "done",
       "tester_pass": true
+    },
+    {
+      "run_id": "swarm-20260612-t2",
+      "route": "MEDIUM",
+      "task_type": "feature",
+      "task_title": "T2 — Skills page dynamique (26 skills)",
+      "iterations": 3,
+      "agents_used": ["search", "planner", "front", "tester", "reviewer"],
+      "retry_reasons": ["aria-label binding", "E2E selectors obsolete", "UiButton aria-label forwarding"],
+      "status": "APPROVED",
+      "tester_pass": true,
+      "reviewer_approved": true,
+      "task_in_queue": true,
+      "queue_size": 5
     }
   ]
 }

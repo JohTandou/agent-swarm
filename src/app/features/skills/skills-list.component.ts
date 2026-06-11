@@ -1,6 +1,7 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
+import { ContentService } from '@shared/services/content.service';
 import { ToastService } from '@shared/services/toast.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
@@ -8,46 +9,12 @@ import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { UiEmptyStateComponent } from '@shared/components/ui-empty-state/ui-empty-state.component';
 import type { Skill, SkillCategory } from '@shared/models';
 
-/**
- * Définitions statiques des skills Swarm.
- * Chaque skill est documenté en Markdown dans src/content/skills/.
- */
-const SKILLS: Skill[] = [
-  {
-    id: 'ui-ux-pro-max',
-    name: 'UI/UX Pro Max',
-    emoji: '🎨',
-    description: 'Intelligence de design : 67 styles, 96 palettes, 57 pairings typographiques, 13 stacks. Planification, création, revue et amélioration UI/UX.',
-    tags: ['design', 'UI', 'UX', 'tailwind'],
-    category: 'création',
-    sourcePath: 'skills/ui-ux-pro-max.md',
-  },
-  {
-    id: 'tests-create',
-    name: 'Tests Create',
-    emoji: '🧪',
-    description: 'Génération de tests unitaires, fonctionnels, intégration et E2E. Analyse le codebase et suit les conventions existantes.',
-    tags: ['tests', 'jasmine', 'playwright', 'couverture'],
-    category: 'qualité',
-    sourcePath: 'skills/tests-create.md',
-  },
-  {
-    id: 'graphify',
-    name: 'Graphify',
-    emoji: '🕸️',
-    description: 'Transforme code, docs et données en graphes de connaissances avec clustering par communautés. Export HTML + JSON + rapport.',
-    tags: ['graphe', 'analyse', 'visualisation', 'clustering'],
-    category: 'analyse',
-    sourcePath: 'skills/graphify.md',
-  },
-
-];
-
 /** Labels des catégories pour les boutons de filtre */
 const CATEGORY_LABELS: Record<SkillCategory, string> = {
-  création: 'Création',
-  qualité: 'Qualité',
-  analyse: 'Analyse',
+  creation: 'Création',
+  audit: 'Audit',
+  workflow: 'Workflow',
+  documentation: 'Documentation',
 };
 
 /**
@@ -67,22 +34,36 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
 })
 export class SkillsListComponent {
   private readonly toastService = inject(ToastService);
+  private readonly contentService = inject(ContentService);
+
+  constructor() {
+    this.contentService.loadSkillsManifest().subscribe({
+      next: (data) => {
+        this.skills.set(data);
+        this.isLoading.set(false);
+      },
+      error: () => this.isLoading.set(false),
+    });
+  }
 
   /** Liste complète des skills */
-  readonly skills = SKILLS;
+  readonly skills = signal<Skill[]>([]);
 
   /** Catégorie active pour le filtrage (null = toutes) */
   readonly activeCategory = signal<SkillCategory | null>(null);
 
+  /** État de chargement */
+  readonly isLoading = signal(true);
+
   /** Skills filtrés selon la catégorie active */
   readonly filteredSkills = computed<Skill[]>(() => {
     const category = this.activeCategory();
-    if (category === null) return this.skills;
-    return this.skills.filter((s) => s.category === category);
+    if (category === null) return this.skills();
+    return this.skills().filter((s) => s.category === category);
   });
 
   /** Catégories disponibles avec leur label */
-  readonly categories: SkillCategory[] = ['création', 'qualité', 'analyse'];
+  readonly categories: SkillCategory[] = ['creation', 'audit', 'workflow', 'documentation'];
 
   /** Vrai si un filtre est actif */
   readonly isFiltered = computed(() => this.activeCategory() !== null);
@@ -95,7 +76,7 @@ export class SkillsListComponent {
   toggleCategory(category: SkillCategory): void {
     if (this.activeCategory() === category) {
       this.activeCategory.set(null);
-      this.toastService.show(`${this.skills.length} skills affichés`, 'info');
+      this.toastService.show(`${this.skills().length} skills affichés`, 'info');
     } else {
       this.activeCategory.set(category);
       const count = this.getCategoryCount(category);
@@ -110,12 +91,12 @@ export class SkillsListComponent {
 
   /** Retourne le nombre de skills dans une catégorie donnée */
   getCategoryCount(category: SkillCategory): number {
-    return this.skills.filter((s) => s.category === category).length;
+    return this.skills().filter((s) => s.category === category).length;
   }
 
   /** Réinitialise tous les filtres — affiche tous les skills */
   resetFilters(): void {
     this.activeCategory.set(null);
-    this.toastService.show(`${this.skills.length} skills affichés`, 'info');
+    this.toastService.show(`${this.skills().length} skills affichés`, 'info');
   }
 }

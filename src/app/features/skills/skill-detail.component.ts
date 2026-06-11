@@ -1,107 +1,17 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownRendererComponent } from '../../shared/components/markdown-renderer/markdown-renderer.component';
+import { ContentService } from '../../shared/services/content.service';
 import { TocService } from '../../shared/services/toc.service';
 import type { Skill, SkillCategory } from '@shared/models';
 import type { TocEntry } from '@shared/models';
 
-/**
- * Données statiques des skills pour l'affichage du header.
- * Synchronisé avec la liste dans skills-list.component.ts.
- */
-const SKILLS_MAP: Record<string, Skill> = {
-  'ui-ux-pro-max': {
-    id: 'ui-ux-pro-max', name: 'UI/UX Pro Max', emoji: '🎨',
-    description: 'Intelligence de design : 67 styles, 96 palettes.',
-    tags: ['design', 'UI', 'UX', 'tailwind'],
-    category: 'création',
-    sourcePath: 'skills/ui-ux-pro-max.md',
-  },
-  'tests-create': {
-    id: 'tests-create', name: 'Tests Create', emoji: '🧪',
-    description: 'Génération de tests unitaires, fonctionnels, E2E.',
-    tags: ['tests', 'jasmine', 'playwright'],
-    category: 'qualité',
-    sourcePath: 'skills/tests-create.md',
-  },
-  graphify: {
-    id: 'graphify', name: 'Graphify', emoji: '🕸️',
-    description: 'Transforme code et docs en graphes de connaissances.',
-    tags: ['graphe', 'analyse', 'visualisation'],
-    category: 'analyse',
-    sourcePath: 'skills/graphify.md',
-  },
-  'admin-panel': {
-    id: 'admin-panel', name: 'Panel d\'Administration', emoji: '🖥️',
-    description: 'Génère un panel d\'administration complet.',
-    tags: ['admin', 'dashboard', 'CRUD'],
-    category: 'création',
-    sourcePath: 'skills/admin-panel.md',
-  },
-  'audit-gamification': {
-    id: 'audit-gamification', name: 'Audit Gamification', emoji: '🎮',
-    description: 'Audit complet de gamification.',
-    tags: ['audit', 'gamification', 'engagement'],
-    category: 'analyse',
-    sourcePath: 'skills/audit-gamification.md',
-  },
-  'audit-global': {
-    id: 'audit-global', name: 'Audit Global', emoji: '🌍',
-    description: 'Audit global complet du projet.',
-    tags: ['audit', 'qualité', 'performance'],
-    category: 'analyse',
-    sourcePath: 'skills/audit-global.md',
-  },
-  'audit-implementation': {
-    id: 'audit-implementation', name: 'Audit Implémentation', emoji: '📊',
-    description: 'Audite le niveau d\'implémentation.',
-    tags: ['audit', 'implémentation', 'features'],
-    category: 'analyse',
-    sourcePath: 'skills/audit-implementation.md',
-  },
-  'audit-marketing': {
-    id: 'audit-marketing', name: 'Audit Marketing', emoji: '📈',
-    description: 'Audit complet marketing et SEO.',
-    tags: ['marketing', 'SEO', 'visibilité'],
-    category: 'analyse',
-    sourcePath: 'skills/audit-marketing.md',
-  },
-  'audit-production': {
-    id: 'audit-production', name: 'Audit Production', emoji: '🏭',
-    description: 'Audit complet de production-readiness.',
-    tags: ['production', 'déploiement', 'sécurité'],
-    category: 'analyse',
-    sourcePath: 'skills/audit-production.md',
-  },
-  'audit-security': {
-    id: 'audit-security', name: 'Audit Sécurité', emoji: '🔒',
-    description: 'Audit de sécurité ciblé.',
-    tags: ['sécurité', 'injection', 'vulnérabilités'],
-    category: 'analyse',
-    sourcePath: 'skills/audit-security.md',
-  },
-  'audit-uxui': {
-    id: 'audit-uxui', name: 'Audit UX/UI', emoji: '🎨',
-    description: 'Audit UX/UI complet.',
-    tags: ['UX', 'UI', 'design', 'accessibilité'],
-    category: 'analyse',
-    sourcePath: 'skills/audit-uxui.md',
-  },
-  'background-images': {
-    id: 'background-images', name: 'Images de Fond', emoji: '🖼️',
-    description: 'Génération de prompts pour images de fond.',
-    tags: ['images', 'design', 'GPT'],
-    category: 'création',
-    sourcePath: 'skills/background-images.md',
-  },
-
-};
-
 /** Labels des catégories */
 const CATEGORY_LABELS: Record<SkillCategory, string> = {
-  création: 'Création',
-  qualité: 'Qualité',
-  analyse: 'Analyse',
+  creation: 'Création',
+  audit: 'Audit',
+  workflow: 'Workflow',
+  documentation: 'Documentation',
 };
 
 /**
@@ -124,14 +34,20 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
 export class SkillDetailComponent {
   private route = inject(ActivatedRoute);
   private tocService = inject(TocService);
+  private contentService = inject(ContentService);
 
   /** ID du skill extrait de l'URL */
   readonly skillId = signal<string>('');
 
+  /** Tous les skills chargés depuis le manifeste */
+  readonly allSkills = signal<Skill[]>([]);
+
   /** Données du skill (undefined si ID invalide) */
   readonly skill = computed<Skill | undefined>(() => {
     const id = this.skillId();
-    return SKILLS_MAP[id];
+    const skills = this.allSkills();
+    if (!id || skills.length === 0) return undefined;
+    return skills.find((s) => s.id === id);
   });
 
   /** Erreur si skill non trouvé */
@@ -151,6 +67,10 @@ export class SkillDetailComponent {
       const id = params.get('id');
       this.skillId.set(id ?? '');
       this.tocService.clear();
+    });
+
+    this.contentService.loadSkillsManifest().subscribe((skills) => {
+      this.allSkills.set(skills);
     });
   }
 

@@ -1,6 +1,7 @@
 ---
 title: Tests Create (qualité)
 description: Génération optimale de tests unitaires, fonctionnels, intégration et E2E
+category: creation
 order: 2
 ---
 
