@@ -131,7 +131,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
       label: 'Coût',
       withoutSwarm: '150–250 K€/an par développeur senior. Le coût d\'opportunité des bugs est massif',
       withSwarm: '~0,20 $ par session MEDIUM (~400K tokens, 17 appels LLM). ~8–25 $/mois en usage intensif (40–125 sessions)',
-      improvement: '2–4× moins cher qu\'un abonnement Claude Max',
+      improvement: '12–25× moins cher qu\'un abonnement Claude Max',
     },
   ];
 
@@ -419,7 +419,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
         });
       }
 
-      // Compteur 8×
+      // Compteur 12×
       if (counterEl) {
         const { ScrollTrigger } = await this.animService.initGsap();
         ScrollTrigger.create({
@@ -427,7 +427,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
           start: 'top 85%',
           once: true,
           onEnter: () => {
-            this.animService.animateCounter(counterEl, 0, 8, 1800);
+            this.animService.animateCounter(counterEl, 0, 12, 1800);
           },
         });
       }
