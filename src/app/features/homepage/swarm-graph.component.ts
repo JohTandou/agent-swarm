@@ -34,6 +34,8 @@ interface NodePosition {
   id: string;
   x: number;
   y: number;
+  fx?: number | null;
+  fy?: number | null;
 }
 
 /** Position d'un lien pour le rendu */
@@ -49,6 +51,8 @@ interface TooltipData {
   role: string;
   x: number;
   y: number;
+  fx?: number | null;
+  fy?: number | null;
 }
 
 /**
@@ -116,7 +120,6 @@ interface TooltipData {
               <g
                 class="swarm-graph__node-group"
                 [class.swarm-graph__node-group--pulse]="nodePos.id === 'orchestrateur'"
-                (click)="onNodeClick(nodePos.id)"
                 (mouseenter)="onNodeHover($event, nodePos.id)"
                 (mouseleave)="onNodeLeave()"
                 [style.animation-delay.ms]="200 + idx * 50"
@@ -350,6 +353,8 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
   @ViewChild('graphContainer', { static: true })
   containerRef!: ElementRef<HTMLDivElement>;
 
+  @ViewChild('graphSvg', { static: false }) graphSvgRef!: ElementRef<SVGSVGElement>;
+
   /** État : chargement D3 en cours */
   readonly loading = signal(true);
   /** État : erreur de chargement */
@@ -362,6 +367,9 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
   readonly linkPositions = signal<LinkPosition[]>([]);
   /** Données du tooltip au survol */
   readonly tooltip = signal<TooltipData | null>(null);
+
+  private simulation: any = null;
+  private dragActive = false;
 
   private readonly router = inject(Router);
 
@@ -400,10 +408,13 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    /* Nettoyage implicite — la simulation est stoppée après stabilisation */
+    if (this.simulation) {
+      this.simulation.stop();
+      this.simulation = null;
+    }
   }
 
-  /** Charge D3 dynamiquement et lance la simulation de forces */
+  /** Charge D3 dynamiquement, stabilise le layout, puis active le flottement perpétuel + drag */
   private async initGraph(): Promise<void> {
     try {
       const d3 = await import('d3');
@@ -420,7 +431,6 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
         id: `link-${i}`,
         sourceId: l.source,
         targetId: l.target,
-        /* Cast pour compatibilité avec l'API forceLink */
         source: l.source,
         target: l.target,
       }));
@@ -442,13 +452,15 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
         .force('collide', d3.forceCollide(D3_COLLIDE_RADIUS))
         .stop();
 
+      this.simulation = simulation;
+
       /* Exécuter la simulation manuellement jusqu'à stabilisation */
       const totalTicks = D3_TOTAL_TICKS;
       for (let i = 0; i < totalTicks; i++) {
         simulation.tick();
       }
 
-      /* Arrondir les positions pour un rendu plus net */
+      /* Arrondir les positions pour le rendu initial */
       simNodes.forEach((n) => {
         n.x = Math.round(n.x);
         n.y = Math.round(n.y);
@@ -460,8 +472,8 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
         posMap[n.id] = n;
       });
 
-      /* Mettre à jour les signaux → déclenche le rendu */
-      this.nodePositions.set(simNodes);
+      /* Mettre à jour les signaux → déclenche le rendu Angular */
+      this.nodePositions.set(simNodes.map((n) => ({ ...n })));
       this.linkPositions.set(
         this.agentLinks.map((l, i) => ({
           id: `link-${i}`,
@@ -471,12 +483,68 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
       );
       this.linkPositionsMap.set(posMap);
       this.loading.set(false);
+
+      /* Attendre le rendu Angular du SVG, puis activer le mode vivant */
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.activateLiveGraph(d3, simulation, simNodes);
+        });
+      });
     } catch (err) {
       this.error.set(
         'Impossible de charger le graphe interactif. Veuillez réessayer.'
       );
       this.loading.set(false);
     }
+  }
+
+  /** Active le flottement perpétuel et le drag D3 sur le SVG rendu par Angular */
+  private activateLiveGraph(d3: any, simulation: any, simNodes: NodePosition[]): void {
+    const svg = this.graphSvgRef?.nativeElement;
+    if (!svg) return;
+
+    /* Tick handler — met à jour le DOM via les signaux Angular */
+    simulation.on('tick', () => {
+      this.nodePositions.set(simNodes.map((n) => ({ ...n })));
+      const newMap: Record<string, NodePosition> = {};
+      simNodes.forEach((n) => { newMap[n.id] = { ...n }; });
+      this.linkPositionsMap.set(newMap);
+    });
+
+    /* Drag behavior — les nœuds sont saisissables */
+    const drag = d3.drag()
+      .on('start', (event: any, d: NodePosition) => {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+        this.dragActive = false;
+      })
+      .on('drag', (event: any, d: NodePosition) => {
+        d.fx = event.x;
+        d.fy = event.y;
+        this.dragActive = true;
+      })
+      .on('end', (event: any, d: NodePosition) => {
+        if (!event.active) simulation.alphaTarget(0.015);
+        // Relâcher le nœud pour qu'il retourne au flottement
+        d.fx = null;
+        d.fy = null;
+        // Si pas de mouvement → c'était un clic → navigation
+        if (!this.dragActive) {
+          this.router.navigate(['/agents', d.id]);
+        }
+      });
+
+    d3.select(svg)
+      .selectAll('.swarm-graph__node-group')
+      .data(simNodes, (d: any) => d.id)
+      .call(drag);
+
+    /* Lancer le flottement perpétuel */
+    simulation
+      .alphaTarget(0.015)
+      .alphaDecay(0.005)
+      .restart();
   }
 
   /* ── Helpers de rendu ── */
