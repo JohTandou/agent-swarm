@@ -130,7 +130,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     {
       label: 'Coût',
       withoutSwarm: '150–250 K€/an par développeur senior. Le coût d\'opportunité des bugs est massif',
-      withSwarm: '~0,12 $ par session MEDIUM (247K tokens). ~5–25 $/mois en usage intensif via API',
+      withSwarm: '~0,12 $ par session MEDIUM (~250K tokens). ~5–15 $/mois en usage intensif (40–125 sessions, mix de routes)',
       improvement: '2–4× moins cher qu\'un abonnement Claude Max',
     },
   ];
@@ -245,7 +245,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     },
     {
       route: 'MEDIUM',
-      tokens: '~247 K',
+      tokens: '~250 K',
       cost: '~0,12 $',
       description: 'Feature multi-fichiers avec tests et revue',
     },
@@ -258,7 +258,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   ];
 
   protected readonly costComparisonNote =
-    'Estimations basées sur la tarification API publique DeepSeek V4 Pro. Coûts réels variables selon le volume et la complexité des tâches. À titre de comparaison, un abonnement Claude Max coûte 100–200 $/mois pour un agent unique.';
+    'Estimations basées sur la tarification API DeepSeek V4 Pro (juin 2025). 40 sessions MEDIUM/mois = usage intensif (~2 features/jour). Coûts réels variables selon le volume et la complexité. À titre de comparaison : Claude Max (100–200 $/mois, abonnement), Devin (500 $/mois, abonnement). La Swarm fonctionne en API — vous ne payez que les tokens consommés.';
 
   /* ==========================================================================
    * Données — Section 6 : Modèle d'IA

@@ -129,7 +129,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       label: 'Fonctionnalité multi-fichiers',
       description: 'Feature complète avec planification, génération de tests et revue de code automatisée.',
       complexity: 'Élevée',
-      tokens: '~247 K',
+      tokens: '~250 K',
       cost: '~0,12 $',
       agents: 'Planner → Front + Back + Tester + Reviewer',
     },
@@ -354,7 +354,7 @@ gitGraph
     {
       "id": "uuid",
       "route": "MEDIUM",
-      "tokensUsed": 247000,
+      "tokensUsed": 250000,
       "cost": 0.12,
       "duration": "3m42s",
       "testsPassed": 12,
@@ -363,7 +363,7 @@ gitGraph
   ],
   "aggregates": {
     "totalSessions": 42,
-    "totalTokens": 10374000,
+    "totalTokens": 10500000,
     "totalCost": 5.04,
     "avgCoverage": 85
   }
