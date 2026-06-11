@@ -131,7 +131,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
       label: 'Coût',
       withoutSwarm: '150–250 K€/an par développeur senior. Le coût d\'opportunité des bugs est massif',
       withSwarm: '~0,20 $ par session MEDIUM (~400K tokens, 17 appels LLM). ~8–25 $/mois en usage intensif (40–125 sessions)',
-      improvement: '12–25× moins cher qu\'un abonnement Claude Max',
+      improvement: '~8 $/mois en usage intensif. 2,5× moins qu\'un assistant IA, 25× moins qu\'un pipeline agentic comparable',
     },
   ];
 
@@ -141,28 +141,28 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
 
   protected readonly systemComparisons: readonly SystemComparison[] = [
     {
-      system: 'Claude Code',
+      system: 'Agent conversationnel (type Claude Code)',
       type: 'Agent conversationnel',
       architecture: 'Monolithique — un seul agent pour tout',
       forces: 'Excellente compréhension du code, itération rapide en session',
       weaknesses: 'Pas de parallélisme. Pas de gates qualité. Un seul modèle = pas d\'optimisation de coût. Pas d\'intégration Git native (branche→PR→merge)',
     },
     {
-      system: 'Cursor Agent',
+      system: 'IDE agentic (type Cursor)',
       type: 'Agent IDE intégré',
       architecture: 'Agent unique couplé à l\'IDE',
       forces: 'Très bonne expérience développeur, édition inline',
       weaknesses: 'Pas de pipeline. Pas de planification architecturale. Pas de tests automatisés. Dépendant de l\'interface IDE',
     },
     {
-      system: 'GitHub Copilot',
+      system: 'IDE inline (type Copilot)',
       type: 'Auto-complétion + agent',
       architecture: 'Suggestions inline + agent Workspace',
       forces: 'Intégration GitHub native, gratuit pour l\'open source',
       weaknesses: 'Pas de planification. Pas de gates qualité. Un seul modèle. Pas de parallélisme front+back. Pas de documentation automatique',
     },
     {
-      system: 'Devin',
+      system: 'Agent full-stack autonome (type Devin)',
       type: 'Agent full-stack autonome',
       architecture: 'Agent unique avec sandbox',
       forces: 'Autonome, peut exécuter du code en sandbox',
@@ -258,7 +258,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   ];
 
   protected readonly costComparisonNote =
-    'Estimations basées sur la tarification API DeepSeek V4 Pro (juin 2025). 40 sessions MEDIUM/mois = usage intensif (~2 features/jour). Coûts réels variables selon le volume et la complexité. À titre de comparaison : Claude Max (100–200 $/mois, abonnement), Devin (500 $/mois, abonnement). La Swarm fonctionne en API — vous ne payez que les tokens consommés.';
+    'Estimations basées sur la tarification API DeepSeek V4 Pro (juin 2025). 40 sessions MEDIUM/mois = usage intensif (~2 features/jour). Coûts réels variables selon le volume et la complexité. La Swarm fonctionne en API — vous ne payez que les tokens consommés, sans abonnement.';
 
   /* ==========================================================================
    * Données — Section 6 : Modèle d'IA

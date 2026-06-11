@@ -96,6 +96,16 @@
       "retry_reasons": [],
       "status": "done",
       "tester_pass": true
+    },
+    {
+      "run_id": "swarm-20260611-definitive",
+      "route": "SIMPLE",
+      "task_type": "Definitive-Token-Counts-All-Routes",
+      "iterations": 1,
+      "agents_used": ["front"],
+      "retry_reasons": [],
+      "status": "done",
+      "tester_pass": true
     }
   ]
 }

@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-const D3_LINK_DISTANCE = 260;
-const D3_FORCE_STRENGTH = -600;
-const D3_COLLIDE_RADIUS = 72;
+const D3_LINK_DISTANCE = 520;
+const D3_FORCE_STRENGTH = -1200;
+const D3_COLLIDE_RADIUS = 144;
 const D3_TOTAL_TICKS = 300;
 
 /** Données d'un agent dans le graphe */
@@ -82,11 +82,21 @@ interface TooltipData {
         <svg
           #graphSvg
           class="swarm-graph__svg"
-           viewBox="-900 -700 1800 1400"
+           viewBox="-1200 -950 2400 1900"
           preserveAspectRatio="xMidYMid meet"
           aria-label="Graphe interactif des 9 agents spécialisés de la Swarm"
           role="img"
         >
+          <!-- Filtre de glow pour les nœuds -->
+          <defs>
+            <filter id="node-glow-filter" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
           <!-- Liens entre agents -->
           <g class="swarm-graph__links">
             @for (link of linkPositions(); track link.id; let i = $index) {
@@ -161,7 +171,7 @@ interface TooltipData {
       .swarm-graph {
         position: relative;
         width: 100%;
-        height: clamp(500px, 75vh, 900px);
+        height: clamp(800px, 150vh, 2400px);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -252,29 +262,33 @@ interface TooltipData {
         to { opacity: 1; }
       }
       .swarm-graph__node {
-        transition: filter 200ms ease-out;
-      }
-      .swarm-graph__node-group:hover .swarm-graph__node {
-        filter: brightness(1.35) drop-shadow(0 0 8px rgba(196, 120, 13, 0.35));
+        transition: filter 250ms ease-out;
       }
 
-      /* Glow ring */
+      /* Glow ring — base visible + amplified on hover */
       .swarm-graph__node-glow {
-        opacity: 0;
-        transition: opacity 300ms ease-out;
-        stroke-width: 1.5;
+        opacity: 0.18;
+        transition: opacity 350ms ease-out, stroke-width 350ms ease-out, filter 350ms ease-out;
+        stroke-width: 2;
+        filter: url(#node-glow-filter);
       }
       .swarm-graph__node-group:hover .swarm-graph__node-glow {
-        opacity: 0.45;
+        opacity: 0.55;
+        stroke-width: 5;
+      }
+
+      /* Amplified node fill on hover */
+      .swarm-graph__node-group:hover .swarm-graph__node {
+        filter: brightness(1.45) drop-shadow(0 0 18px rgba(196, 120, 13, 0.55));
       }
 
       /* Pulse on orchestrator */
       .swarm-graph__node-group--pulse .swarm-graph__node-glow {
-        animation: pulse-amber 3.5s ease-in-out infinite;
+        animation: pulse-amber 3s ease-in-out infinite;
       }
       @keyframes pulse-amber {
-        0%, 100% { opacity: 0.08; }
-        50% { opacity: 0.3; }
+        0%, 100% { opacity: 0.12; }
+        50% { opacity: 0.5; }
       }
 
       /* --- Labels --- */
@@ -353,15 +367,15 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
 
   /** Les 9 agents spécialisés de la Swarm avec leurs métadonnées */
   private readonly agents: AgentNode[] = [
-    { id: 'orchestrateur', label: 'Orchestrateur', role: 'Coordination centrale du pipeline', color: '#C4780D', radius: 40 },
-    { id: 'search', label: 'Search', role: 'Cartographie et analyse du codebase', color: '#B8A878', radius: 28 },
-    { id: 'planner', label: 'Planner', role: 'Planification des tâches en étapes', color: '#C8A862', radius: 28 },
-    { id: 'contract', label: 'Contract', role: 'Définition des contrats TypeScript', color: '#A89868', radius: 28 },
-    { id: 'front', label: 'Front', role: 'Implémentation des composants UI', color: '#9A9590', radius: 28 },
-    { id: 'back', label: 'Back', role: 'Backend, scripts et configurations', color: '#8A8580', radius: 28 },
-    { id: 'tester', label: 'Tester', role: 'Génération et exécution des tests', color: '#A8907A', radius: 28 },
-    { id: 'reviewer', label: 'Reviewer', role: 'Revue de code et validation qualité', color: '#B09078', radius: 28 },
-    { id: 'writer', label: 'Writer', role: 'Documentation technique et suivi', color: '#9A9088', radius: 28 },
+    { id: 'orchestrateur', label: 'Orchestrateur', role: 'Coordination centrale du pipeline', color: '#C4780D', radius: 80 },
+    { id: 'search', label: 'Search', role: 'Cartographie et analyse du codebase', color: '#B8A878', radius: 56 },
+    { id: 'planner', label: 'Planner', role: 'Planification des tâches en étapes', color: '#C8A862', radius: 56 },
+    { id: 'contract', label: 'Contract', role: 'Définition des contrats TypeScript', color: '#A89868', radius: 56 },
+    { id: 'front', label: 'Front', role: 'Implémentation des composants UI', color: '#9A9590', radius: 56 },
+    { id: 'back', label: 'Back', role: 'Backend, scripts et configurations', color: '#8A8580', radius: 56 },
+    { id: 'tester', label: 'Tester', role: 'Génération et exécution des tests', color: '#A8907A', radius: 56 },
+    { id: 'reviewer', label: 'Reviewer', role: 'Revue de code et validation qualité', color: '#B09078', radius: 56 },
+    { id: 'writer', label: 'Writer', role: 'Documentation technique et suivi', color: '#9A9088', radius: 56 },
   ];
 
   /** Connexions entre agents (orchestrateur ↔ tous + liens transverses) */
