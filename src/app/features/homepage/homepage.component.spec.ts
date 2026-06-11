@@ -31,13 +31,10 @@ describe('HomepageComponent', () => {
 
   /* ── Hero ── */
 
-  it('devrait afficher le badge statut', () => {
+  it('ne devrait pas afficher le badge statut (supprimé intentionnellement)', () => {
     const badge: HTMLElement = fixture.nativeElement.querySelector('.homepage__badge');
-    expect(badge).toBeTruthy();
-    expect(badge.textContent).toContain('Pipeline d\'agents IA');
-    expect(badge.textContent).toContain('Open Source');
+    expect(badge).toBeNull();
   });
-
   it('devrait afficher la tagline', () => {
     const tagline: HTMLElement = fixture.nativeElement.querySelector('.homepage__tagline');
     expect(tagline).toBeTruthy();

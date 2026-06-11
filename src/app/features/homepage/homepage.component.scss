@@ -422,7 +422,6 @@
   position: relative;
   overflow: hidden;
   opacity: 0;
-  animation: stat-appear 0.5s var(--ease-spring) forwards;
   cursor: pointer;
 
   /* Glow subtil au hover */
@@ -528,6 +527,7 @@
 
   .homepage__graph {
     padding: 60px 16px;
+    min-height: auto;
   }
 
   .homepage__navigation {

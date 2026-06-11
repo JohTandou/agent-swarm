@@ -337,7 +337,8 @@ interface TooltipData {
       }
       @media (max-width: 640px) {
         .swarm-graph {
-          height: clamp(500px, 100vh, 1500px);
+          height: auto;
+          aspect-ratio: 2400 / 1900;
         }
         .swarm-graph__label {
           font-size: 11px;
