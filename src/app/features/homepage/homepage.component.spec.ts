@@ -131,13 +131,13 @@ describe('HomepageComponent', () => {
     expect(component.stats[0].value).toBe(9);
     expect(component.stats[1].value).toBe(26);
     expect(component.stats[2].value).toBe(6);
-    expect(component.stats[3].value).toBe(38);
+    expect(component.stats[3].value).toBe(20);
   });
 
   it('formatStat devrait formater le prix correctement', () => {
-    component.animatedValues.set([9, 26, 4, 25]);
+    component.animatedValues.set([9, 26, 4, 20]);
     fixture.detectChanges();
-    expect(component.formatStat(3)).toBe('1.25 $');
+    expect(component.formatStat(3)).toBe('0.20\u00A0$');
   });
 
   it('formatStat devrait formater les entiers', () => {
