@@ -114,9 +114,9 @@ describe('SwarmGraphComponent', () => {
   /* ── Helpers de rendu ── */
 
   it('getNodeRadius devrait retourner le rayon correct', () => {
-    expect(component.getNodeRadius('orchestrateur')).toBe(20);
-    expect(component.getNodeRadius('search')).toBe(14);
-    expect(component.getNodeRadius('tester')).toBe(14);
+    expect(component.getNodeRadius('orchestrateur')).toBe(80);
+    expect(component.getNodeRadius('search')).toBe(56);
+    expect(component.getNodeRadius('tester')).toBe(56);
   });
 
   it('getNodeRadius devrait retourner 14 pour un id inconnu', () => {
@@ -213,7 +213,7 @@ describe('SwarmGraphComponent', () => {
   });
 
   it('devrait avoir l\'orchestrateur comme nœud central', () => {
-    expect(component.getNodeRadius('orchestrateur')).toBe(20);
+    expect(component.getNodeRadius('orchestrateur')).toBe(80);
     expect(component.getNodeColor('orchestrateur')).toBe('#C4780D');
   });
 
@@ -240,7 +240,7 @@ describe('SwarmGraphComponent', () => {
     const mainCircle = fixture.nativeElement.querySelector('.swarm-graph__node');
     expect(mainCircle.getAttribute('cx')).toBe('50');
     expect(mainCircle.getAttribute('cy')).toBe('-30');
-    expect(mainCircle.getAttribute('r')).toBe('20');
+    expect(mainCircle.getAttribute('r')).toBe('80');
     expect(mainCircle.getAttribute('fill')).toBe('#C4780D');
   });
 
