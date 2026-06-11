@@ -120,8 +120,8 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       label: 'Adaptation transversale',
       description: 'Modification impactant 2–3 fichiers. L\'agent search cartographie les dépendances avant modification.',
       complexity: 'Modérée',
-      tokens: '~100 K',
-      cost: '~0,05 $',
+      tokens: '~120 K',
+      cost: '~0,06 $',
       agents: 'Search → Front ou Back',
     },
     {
@@ -129,8 +129,8 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       label: 'Fonctionnalité multi-fichiers',
       description: 'Feature complète avec planification, génération de tests et revue de code automatisée.',
       complexity: 'Élevée',
-      tokens: '~250 K',
-      cost: '~0,12 $',
+      tokens: '~400 K',
+      cost: '~0,20 $',
       agents: 'Planner → Front + Back + Tester + Reviewer',
     },
     {
@@ -138,8 +138,8 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       label: 'Feature complexe avec contrats',
       description: 'Fonctionnalité majeure nécessitant contrats TypeScript, parallélisme front+back, gates qualité et documentation.',
       complexity: 'Maximale',
-      tokens: '~500 K',
-      cost: '~0,25 $',
+      tokens: '~550 K',
+      cost: '~0,27 $',
       agents: 'Planner → Contract → Front ∥ Back → Tester → Reviewer → Writer',
     },
   ];
@@ -227,19 +227,19 @@ graph TB
     {
       route: 'ADAPT',
       fichiers: '2–5 fichiers',
-      tokens: '50–100 K',
+      tokens: '50–130 K',
       classification: 'Adaptation transversale — search + agent',
     },
     {
       route: 'MEDIUM',
       fichiers: '5–15 fichiers, ≥ 1 feature',
-      tokens: '100–300 K',
+      tokens: '130–400 K',
       classification: 'Feature multi-fichiers — planification + tests',
     },
     {
       route: 'FULL',
       fichiers: '> 15 fichiers, contrats nécessaires',
-      tokens: '300 K – 1 M',
+      tokens: '400 K – 600 K',
       classification: 'Feature complexe — pipeline complet avec gates',
     },
   ];
@@ -354,8 +354,8 @@ gitGraph
     {
       "id": "uuid",
       "route": "MEDIUM",
-      "tokensUsed": 250000,
-      "cost": 0.12,
+      "tokensUsed": 400000,
+      "cost": 0.20,
       "duration": "3m42s",
       "testsPassed": 12,
       "coverage": 87
@@ -363,8 +363,8 @@ gitGraph
   ],
   "aggregates": {
     "totalSessions": 42,
-    "totalTokens": 10500000,
-    "totalCost": 5.04,
+    "totalTokens": 16800000,
+    "totalCost": 8.40,
     "avgCoverage": 85
   }
 }`,

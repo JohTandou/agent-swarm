@@ -86,7 +86,7 @@ describe('AboutComponent', () => {
     expect(numbers).toContain('5');
     expect(numbers).toContain('80%');
     expect(numbers).toContain('6');
-    expect(numbers).toContain('~0,12 $');
+    expect(numbers).toContain('~0,20 $');
   });
 
   it('devrait avoir une section CTA avec des boutons de navigation', () => {

@@ -130,7 +130,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     {
       label: 'Coût',
       withoutSwarm: '150–250 K€/an par développeur senior. Le coût d\'opportunité des bugs est massif',
-      withSwarm: '~0,12 $ par session MEDIUM (~250K tokens). ~5–15 $/mois en usage intensif (40–125 sessions, mix de routes)',
+      withSwarm: '~0,20 $ par session MEDIUM (~400K tokens, 17 appels LLM). ~8–25 $/mois en usage intensif (40–125 sessions)',
       improvement: '2–4× moins cher qu\'un abonnement Claude Max',
     },
   ];
@@ -239,20 +239,20 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     },
     {
       route: 'ADAPT',
-      tokens: '~100 K',
-      cost: '~0,05 $',
+      tokens: '~120 K',
+      cost: '~0,06 $',
       description: 'Adaptation cross-cutting, 2–3 fichiers',
     },
     {
       route: 'MEDIUM',
-      tokens: '~250 K',
-      cost: '~0,12 $',
+      tokens: '~400 K',
+      cost: '~0,20 $',
       description: 'Feature multi-fichiers avec tests et revue',
     },
     {
       route: 'FULL',
-      tokens: '~500 K',
-      cost: '~0,25 $',
+      tokens: '~550 K',
+      cost: '~0,27 $',
       description: 'Fonctionnalité complexe avec contrats, parallélisme et gates',
     },
   ];
