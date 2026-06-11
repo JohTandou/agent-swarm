@@ -40,7 +40,6 @@
         class="agents__card"
         [class.agents__card--featured]="idx === 0"
         [class.agents__card--wide]="idx === 2"
-        [class.agents__card--inactive]="!agent.active"
         role="listitem"
         [attr.aria-label]="'Fiche de ' + agent.name"
         [attr.data-category]="agent.category"
@@ -53,17 +52,10 @@
                   loading="lazy"
                   (error)="$any($event.target).style.display = 'none'"
                 />
-                <span class="agents__card-emoji">{{ agent.emoji }}</span>
               </span>
 
         <div class="agents__card-header">
           <h2 class="agents__card-name">{{ agent.name }}</h2>
-          @if (!agent.active) {
-            <app-ui-badge variant="default" size="sm">Inactif</app-ui-badge>
-          }
-          @if (agent.active) {
-            <app-ui-badge variant="success" size="sm">Actif</app-ui-badge>
-          }
         </div>
 
         <p class="agents__card-role">{{ agent.role }}</p>
