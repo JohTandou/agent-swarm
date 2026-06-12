@@ -95,14 +95,19 @@ export class MarkdownRendererComponent implements OnChanges, AfterViewInit {
   private loadFromSource(path: string): void {
     this.isLoading = true;
     this.errorMessage = null;
+    // Garde anti-stale : capture le path au moment de la requête
+    const requestedPath = path;
 
     this.contentService.loadDocument(path).subscribe({
       next: (doc) => {
+        // Vérifie que le sourcePath n'a pas changé depuis la requête
+        if (this.sourcePath !== requestedPath) return;
         this.processContent(doc.content);
         this.tocEntries.emit(doc.tocEntries);
         this.isLoading = false;
       },
       error: (err: Error) => {
+        if (this.sourcePath !== requestedPath) return;
         this.errorMessage = err.message;
         this.isLoading = false;
         this.processedContent = '';
@@ -139,7 +144,7 @@ export class MarkdownRendererComponent implements OnChanges, AfterViewInit {
 
     // Ajout des IDs aux headings pour le scroll-spy
     processed = processed.replace(
-      /^(#{1,4})\s+(.+)$/gm,
+      /^\s*(#{1,6})\s+(.+)$/gm,
       (_match: string, hashes: string, text: string) => {
         const slug = this.contentService.generateSlug(text.trim());
         return `${hashes} <a id="${slug}" class="heading-anchor"></a>${text}`;
