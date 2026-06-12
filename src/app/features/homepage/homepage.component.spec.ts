@@ -53,40 +53,6 @@ describe('HomepageComponent', () => {
     expect(scrollText.textContent?.trim()).toBe('Explorer');
   });
 
-  /* ── Graphe ── */
-
-  it('devrait avoir une section graphe', () => {
-    const graphSection: HTMLElement = fixture.nativeElement.querySelector('.homepage__graph');
-    expect(graphSection).toBeTruthy();
-  });
-
-  it('devrait afficher le titre de la section graphe', () => {
-    const graphTitle: HTMLElement = fixture.nativeElement.querySelector('.homepage__graph-header .homepage__section-title');
-    expect(graphTitle).toBeTruthy();
-    expect(graphTitle.textContent?.trim()).toBe('La ruche en action');
-  });
-
-  /* ── Statistiques ── */
-
-  it('devrait avoir 4 cartes statistiques', () => {
-    const statCards = fixture.nativeElement.querySelectorAll('.homepage__stat-card');
-    expect(statCards.length).toBe(4);
-  });
-
-  it('devrait afficher les labels des statistiques', () => {
-    const labels: NodeListOf<Element> = fixture.nativeElement.querySelectorAll('.homepage__stat-label');
-    const labelTexts = Array.from(labels).map((l: Element) => (l.textContent ?? '').trim());
-    expect(labelTexts).toContain('Agents spécialisés');
-    expect(labelTexts).toContain('Skills disponibles');
-    expect(labelTexts).toContain('Catégories MCP');
-    expect(labelTexts).toContain('par session MEDIUM');
-  });
-
-  it('devrait initialiser les compteurs à 0', () => {
-    expect(component.animatedValues()).toEqual([0, 0, 0, 0]);
-    expect(component.countersDone()).toBeFalse();
-  });
-
   /* ── Navigation ── */
 
   it('devrait avoir 4 cartes de navigation', () => {
@@ -121,27 +87,4 @@ describe('HomepageComponent', () => {
     expect(footer.textContent).toContain('Pipeline d\'agents IA');
   });
 
-  /* ── États du composant ── */
-
-  it('les données des stats devraient être cohérentes', () => {
-    expect(component.stats.length).toBe(4);
-    expect(component.stats[0].value).toBe(9);
-    expect(component.stats[1].value).toBe(26);
-    expect(component.stats[2].value).toBe(6);
-    expect(component.stats[3].value).toBe(20);
-  });
-
-  it('formatStat devrait formater le prix correctement', () => {
-    component.animatedValues.set([9, 26, 4, 20]);
-    fixture.detectChanges();
-    expect(component.formatStat(3)).toBe('0.20\u00A0$');
-  });
-
-  it('formatStat devrait formater les entiers', () => {
-    component.animatedValues.set([9, 26, 4, 0]);
-    fixture.detectChanges();
-    expect(component.formatStat(0)).toBe('9');
-    expect(component.formatStat(1)).toBe('26');
-    expect(component.formatStat(2)).toBe('4');
-  });
 });

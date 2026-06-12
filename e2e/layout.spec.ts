@@ -47,7 +47,7 @@ test.describe('T1 — Layout Shell & Navigation', () => {
 
       test('déplie/replie le menu Agents', async ({ page }) => {
         await page.goto('/a-propos');
-        const agentsBtn = page.getByRole('button', { name: 'Agents' });
+        const agentsBtn = page.getByRole('button', { name: 'Agents' }).first();
 
         // Déplier
         await agentsBtn.click();
@@ -127,7 +127,7 @@ test.describe('T1 — Layout Shell & Navigation', () => {
       await expect(page.locator('.sidebar-overlay')).toBeVisible();
 
       // Fermer via le bouton close (dispatchEvent car display:none)
-      await page.locator('.sidebar__close').dispatchEvent('click');
+      await page.locator('.sidebar__close-icon').dispatchEvent('click');
       await expect(sidebar).not.toBeAttached();
     });
 

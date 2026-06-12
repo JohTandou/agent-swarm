@@ -148,6 +148,18 @@
       "reviewer_approved": true,
       "task_in_queue": true,
       "queue_size": 5
+    },
+    {
+      "run_id": "swarm-20260612-homepage-cleanup",
+      "route": "MEDIUM",
+      "task_type": "cleanup",
+      "task_title": "Suppression graph+stats homepage, espacement cards, hamburger SVG",
+      "iterations": 1,
+      "agents_used": ["front", "tester", "reviewer"],
+      "retry_reasons": ["E2E selectors obsolete"],
+      "status": "APPROVED",
+      "tester_pass": true,
+      "reviewer_approved": true
     }
   ]
 }

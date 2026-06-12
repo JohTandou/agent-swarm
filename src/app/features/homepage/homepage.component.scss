@@ -257,128 +257,14 @@
 }
 
 /* ==========================================================================
-   SECTION 2 : Graphe interactif
-   ========================================================================== */
-.homepage__graph {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100dvh;
-  padding: clamp(40px, 8vh, 100px) clamp(24px, 6vw, 80px);
-  background: radial-gradient(
-    ellipse 80% 60% at 50% 50%,
-    rgba(196, 120, 13, 0.03) 0%,
-    transparent 70%
-  );
-
-  /* Fond d'ambiance hex swarm */
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/assets/images/hero-swarm.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.08;
-    z-index: 0;
-    pointer-events: none;
-  }
-}
-
-.homepage__graph-header {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  max-width: 600px;
-  margin-bottom: clamp(16px, 3vh, 32px);
-}
-
-.homepage__graph-canvas {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 100%;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ==========================================================================
-   SECTION 3 : Statistiques — 4 métriques animées
-   ========================================================================== */
-.homepage__stats {
-  display: flex;
-  justify-content: center;
-  min-height: 60vh;
-  padding: clamp(40px, 8vh, 100px) clamp(24px, 8vw, 120px);
-  background: var(--color-bg-subtle, #2A2520);
-  border-top: 1px solid rgba(122, 136, 153, 0.06);
-  border-bottom: 1px solid rgba(122, 136, 153, 0.06);
-}
-
-.homepage__stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(24px, 4vw, 56px);
-  max-width: 1000px;
-  width: 100%;
-  align-items: center;
-}
-
-.homepage__stat-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-align: center;
-  opacity: 0;
-  animation: stat-appear 0.6s var(--ease-spring) forwards;
-  animation-play-state: paused;
-
-  .homepage__stats--visible & {
-    animation-play-state: running;
-  }
-}
-
-@keyframes stat-appear {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.homepage__stat-value {
-  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
-  font-weight: 800;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  letter-spacing: -0.03em;
-  color: var(--color-text-primary, #F5F0EB);
-  line-height: 1;
-}
-
-.homepage__stat-label {
-  font-family: var(--font-body, 'Satoshi', sans-serif);
-  font-size: clamp(0.75rem, 1vw, 0.875rem);
-  color: var(--color-text-secondary, #B0A8A0);
-  letter-spacing: 0.02em;
-}
-
-/* ==========================================================================
-   SECTION 4 : Navigation visuelle — 4 cartes
+   SECTION 2 : Navigation visuelle — 4 cartes
    ========================================================================== */
 .homepage__navigation {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100dvh;
-  padding: clamp(40px, 8vh, 100px) clamp(24px, 6vw, 80px);
+  min-height: auto;
+  padding: clamp(40px, 8vh, 100px) clamp(24px, 6vw, 80px) clamp(24px, 4vh, 40px);
 }
 
 .homepage__section-title {
@@ -406,7 +292,7 @@
   gap: clamp(16px, 2vw, 24px);
   max-width: 100%;
   width: 100%;
-  margin-top: clamp(40px, 8vh, 72px);
+  margin-top: clamp(24px, 4vh, 40px);
 }
 
 .homepage__nav-card {
@@ -510,11 +396,6 @@
    Responsive — Mobile (< 768px)
    ========================================================================== */
 @media (max-width: 767px) {
-  .homepage__stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-  }
-
   .homepage__nav-grid {
     grid-template-columns: 1fr;
     max-width: 400px;
@@ -525,20 +406,11 @@
     min-height: 90vh;
   }
 
-  .homepage__graph {
-    padding: 60px 16px;
-    min-height: auto;
-  }
-
   .homepage__navigation {
     padding: 60px 20px;
     min-height: auto;
   }
 
-  .homepage__stats {
-    padding: 60px 20px;
-    min-height: auto;
-  }
 }
 
 /* ==========================================================================
@@ -549,7 +421,6 @@
   .homepage__summary,
   .homepage__badge,
   .homepage__scroll-hint,
-  .homepage__stat-card,
   .homepage__nav-card {
     animation: none;
     opacity: 1;

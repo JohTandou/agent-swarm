@@ -61,44 +61,10 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════════════════
-       Section 2 : Graphe interactif D3.js — carte des 9 agents
-       ═══════════════════════════════════════════════════════════════════ -->
-  <section class="homepage__graph" aria-label="Carte interactive des agents de la Swarm">
-    <div class="homepage__graph-header">
-      <h2 class="homepage__section-title">La ruche en action</h2>
-      <p class="homepage__section-subtitle">
-        Neuf agents interconnectés, pilotés par l'orchestrateur. Survolez un nœud pour découvrir son rôle — chaque agent est cliquable pour plus de détails.
-      </p>
-    </div>
-    <app-swarm-graph class="homepage__graph-canvas" />
-  </section>
+
 
   <!-- ═══════════════════════════════════════════════════════════════════
-       Section 3 : Statistiques clés — 4 métriques animées au scroll GSAP
-       ═══════════════════════════════════════════════════════════════════ -->
-  <section class="homepage__stats" aria-label="Statistiques clés de la Swarm">
-    <div class="homepage__stats-grid">
-      @for (stat of stats; track stat.label; let idx = $index) {
-        <div
-          class="homepage__stat-card"
-          [style.animation-delay.ms]="idx * 100"
-        >
-          <div class="homepage__stat-value" [attr.aria-label]="stat.label">
-            @if (idx === 3) {
-              {{ formatStat(idx) }}
-            } @else {
-              {{ animatedValues()[idx] || 0 }}
-            }
-          </div>
-          <div class="homepage__stat-label">{{ stat.label }}</div>
-        </div>
-      }
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════════════════
-       Section 4 : Navigation visuelle — 4 cartes animées GSAP
+       Section 2 : Navigation visuelle — 4 cartes animées GSAP
        ═══════════════════════════════════════════════════════════════════ -->
   <section class="homepage__navigation" aria-label="Navigation vers les sections du wiki">
     <h2 class="homepage__section-title">Choisissez votre destination</h2>
