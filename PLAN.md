@@ -382,7 +382,7 @@ Si on utilisait Claude 4.5 Sonnet en API pour les mêmes tâches qu'une session 
 | **Cursor Agent** | IDE intégré | Mono-modèle + RAG | UX intégrée, rapidité, auto-complétion contextuelle | Pas de pipeline multi-agent, pas de tests automatisés systématiques |
 | **GitHub Copilot** | IDE + agent workspace | Mono-modèle + RAG | Intégration GitHub native, suggestions en temps réel | Pas de planification architecturale, pas de contrat front/back |
 | **Devin** (Cognition) | Agent autonome | Mono-modèle + outils | Autonomie totale, environnement sandbox | Boîte noire, pas de parallélisme, coût prohibitif (~500 $/mois) |
-| **Aider** | Open-source CLI | Mono-modèle + map repo | Gratuit, open-source, multi-modèle | Pas de gates qualité, pas de workflow Git automatisé, pas de MCP |
+| **Aider** | CLI autonome | Mono-modèle + map repo | Gratuit, CLI autonome, multi-modèle | Pas de gates qualité, pas de workflow Git automatisé, pas de MCP |
 | **CrewAI / AutoGen** | Framework multi-agent | Multi-modèle configurable | Flexibilité, Python natif | Nécessite configuration manuelle, pas d'intégration infra (Supabase/Vercel), pas de pipeline CI/CD intégré |
 | **SWARM (ce système)** | **Pipeline multi-agent orchestré** | **Bi-modèle + 9 agents spécialisés** | Parallélisme, gates qualité, intégration Git native, MCP infrastructure, classification automatique | Complexité interne, dépendance à l'infrastructure OpenCode, courbe d'apprentissage du comportement |
 

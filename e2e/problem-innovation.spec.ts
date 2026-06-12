@@ -135,9 +135,9 @@ test.describe('T4 — Page Problème & Innovation', () => {
   });
 
   test.describe('Footer', () => {
-    test('mentionne open source', async ({ page }) => {
+    test('ne mentionne PAS open source', async ({ page }) => {
       await page.goto('/probleme-innovation');
-      await expect(page.locator('.page-footer__text')).toContainText('open source');
+      await expect(page.locator('.page-footer__text')).not.toContainText('open source');
     });
   });
 });

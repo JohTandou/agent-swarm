@@ -158,7 +158,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
       system: 'IDE inline (type Copilot)',
       type: 'Auto-complétion + agent',
       architecture: 'Suggestions inline + agent Workspace',
-      forces: 'Intégration GitHub native, gratuit pour l\'open source',
+      forces: 'Intégration GitHub native, gratuit pour les projets solo',
       weaknesses: 'Pas de planification. Pas de gates qualité. Un seul modèle. Pas de parallélisme front+back. Pas de documentation automatique',
     },
     {
@@ -170,9 +170,9 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     },
     {
       system: 'Aider',
-      type: 'Agent CLI open-source',
+      type: 'Agent CLI autonome',
       architecture: 'Agent unique avec édition de fichiers',
-      forces: 'Open source, multi-modèles, très bon pour l\'édition ciblée',
+      forces: 'Multi-modèles, très bon pour l\'édition ciblée',
       weaknesses: 'Pas de pipeline. Pas de parallélisme. Pas de planification. Pas de gates qualité. Pas de documentation automatique',
     },
     {

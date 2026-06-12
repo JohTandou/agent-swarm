@@ -39,13 +39,6 @@ interface WorkflowCategory {
   readonly fields: readonly WorkflowField[];
 }
 
-/** Section de AGENTS.md */
-interface AgentsSection {
-  readonly title: string;
-  readonly icon: string;
-  readonly description: string;
-}
-
 /** Intégration MCP */
 interface Integration {
   readonly name: string;
@@ -189,21 +182,6 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
         { path: 'swarm.testing.test_scope', label: 'Périmètre des tests', type: 'string', value: 'changed-only', description: 'Seuls les fichiers modifiés sont testés pour optimiser le temps d\'exécution.' },
       ],
     },
-  ];
-
-  /* ==========================================================================
-   * Données — Section 4 : AGENTS.md sections
-   * ========================================================================== */
-
-  protected readonly agentsMdSections: readonly AgentsSection[] = [
-    { title: 'Architecture Multi-Agents', icon: '🤖', description: 'Définit les 11 agents de la Swarm (9 spécialisés + 2 utilitaires), leurs rôles, déclencheurs et interactions. Le cœur de l\'orchestration.' },
-    { title: 'Agents du Pipeline', icon: '🔄', description: 'Planner, contract, front, back, tester, reviewer, writer, search — chaque agent a un fichier .md dédié dans agents/ avec ses instructions précises.' },
-    { title: 'Outils Disponibles', icon: '🔧', description: 'Bash, read, write, glob, grep, task, playwright, context7, magic (21st.dev) — la boîte à outils complète mise à disposition de chaque agent.' },
-    { title: 'Wrapper Playwright', icon: '🎭', description: 'Intégration native de Playwright pour les tests E2E : Chromium + iPhone 14, snapshots visuels, auto-waiting.' },
-    { title: 'Skills & Extensions', icon: '🧩', description: '25 skills dans ~/.opencode/skills/ + 1 skill built-in customize-opencode. Modules activables à la demande : design UI, génération de tests, analyse de codebase, documentation.' },
-    { title: 'Protocole Comportemental', icon: '📋', description: 'Règles absolues pour tous les agents : réfléchir avant de coder, simplicité, modifications chirurgicales, exécution guidée par les objectifs.' },
-    { title: 'Merge Gate & Qualité', icon: '🚪', description: 'Règles de merge strictes : tester PASS obligatoire (couverture ≥ 80%), reviewer APPROVE pour MEDIUM/FULL (score ≥ 0.85), E2E requis pour nouvelles features.' },
-    { title: 'Configuration Workspace', icon: '⚙️', description: 'swarm-workflow.json contrôle l\'automatisation des issues, branches, PR, tests et les seuils de qualité. ~40 champs de configuration.' },
   ];
 
   /* ==========================================================================

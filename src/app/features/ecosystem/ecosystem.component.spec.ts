@@ -88,15 +88,6 @@ describe('EcosystemComponent', () => {
     expect(categories.length).toBe(4);
   }));
 
-  it('devrait afficher les 10 sections AGENTS.md', fakeAsync(() => {
-    fixture.detectChanges();
-    tick(500);
-    fixture.detectChanges();
-
-    const cards = fixture.nativeElement.querySelectorAll('.agentsmd-card');
-    expect(cards.length).toBe(8);
-  }));
-
   it('devrait afficher les 4 intégrations', fakeAsync(() => {
     fixture.detectChanges();
     tick(500);
