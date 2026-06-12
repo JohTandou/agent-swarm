@@ -514,52 +514,6 @@ $section-padding-mobile: 64px 20px;
   width: 100%;
 }
 
-.agentsmd-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.agentsmd-card {
-  padding: 28px;
-  background: var(--color-bg-elevated);
-  border: 1px solid rgba(122, 136, 153, 0.12);
-  border-radius: 16px;
-  transition: border-color 300ms $ease-natural, box-shadow 300ms $ease-natural, transform 300ms $ease-natural;
-
-  &:hover {
-    border-color: rgba(196, 120, 13, 0.2);
-    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
-    transform: translateY(-2px);
-  }
-
-  &__header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-
-  &__icon {
-    font-size: 1.25rem;
-  }
-
-  &__title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--color-text-primary);
-    letter-spacing: -0.01em;
-  }
-
-  &__description {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-  }
-}
-
 /* ==========================================================================
    Section 5 — Architecture Globale
    ========================================================================== */
@@ -683,9 +637,6 @@ $section-padding-mobile: 64px 20px;
     grid-template-columns: 1fr;
   }
 
-  .agentsmd-grid {
-    grid-template-columns: 1fr;
-  }
 
   .integrations-grid {
     grid-template-columns: 1fr;
@@ -740,7 +691,6 @@ $section-padding-mobile: 64px 20px;
 /* Stagger animation delay */
 .tree-container > *,
 .config-grid > *,
-.agentsmd-grid > *,
 .integrations-grid > * {
   animation-delay: calc(var(--stagger-index) * 60ms);
 }

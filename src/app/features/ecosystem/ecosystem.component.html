@@ -162,22 +162,15 @@
     <section class="agentsmd-section reveal-on-scroll" id="agents-md">
       <div class="section-header">
         <span class="section-header__kicker">Documentation vivante</span>
-        <h2 class="section-header__title">AGENTS.md — Les Sections</h2>
+        <h2 class="section-header__title">AGENTS.md</h2>
         <p class="section-header__description">
-          Le fichier AGENTS.md est la bible du projet. Ses 10 sections couvrent l'intégralité des conventions, de la stack technique à la checklist de livraison.
+          Le fichier <code>AGENTS.md</code> (~400 lignes) est la bible du projet —
+          stack technique, conventions de code, palette de couleurs, protocole
+          comportemental et checklist de livraison. Il est lu par l'orchestrateur
+          à chaque exécution et définit l'intégralité des règles que tous les
+          agents doivent respecter. Le contenu complet est disponible dans le
+          dépôt du projet.
         </p>
-      </div>
-
-      <div class="agentsmd-grid" [appStaggerChildren]="60">
-        @for (section of agentsMdSections; track section.title; let si = $index) {
-          <div class="agentsmd-card reveal-on-scroll" [style.animation-delay]="(si * 50) + 'ms'">
-            <div class="agentsmd-card__header">
-              <span class="agentsmd-card__icon">{{ section.icon }}</span>
-              <h3 class="agentsmd-card__title">{{ section.title }}</h3>
-            </div>
-            <p class="agentsmd-card__description">{{ section.description }}</p>
-          </div>
-        }
       </div>
     </section>
 
