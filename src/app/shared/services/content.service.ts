@@ -10,7 +10,7 @@ import type { Skill, SkillCategory } from '@shared/models';
 /** Séparateur de frontmatter YAML dans les fichiers Markdown */
 const FRONTMATTER_REGEX = /^---\s*\n([\s\S]*?)\n---\s*\n/;
 /** Capture les headings h1 à h4 avec leur texte */
-const HEADING_REGEX = /^(#{1,4})\s+(.+)$/gm;
+const HEADING_REGEX = /^\s*(#{1,6})\s+(.+)$/gm;
 
 /**
  * Service de chargement et parsing des documents Markdown.

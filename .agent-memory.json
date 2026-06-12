@@ -1,6 +1,6 @@
 {
-  "task_in_queue": false,
-  "queue_size": 0,
+  "task_in_queue": true,
+  "queue_size": 5,
   "metrics": [
     {
       "run_id": "swarm-20260605-t1t5",
@@ -115,6 +115,20 @@
       "iterations": 3,
       "agents_used": ["search", "planner", "front", "tester", "reviewer"],
       "retry_reasons": ["aria-label binding", "E2E selectors obsolete", "UiButton aria-label forwarding"],
+      "status": "APPROVED",
+      "tester_pass": true,
+      "reviewer_approved": true,
+      "task_in_queue": true,
+      "queue_size": 5
+    },
+    {
+      "run_id": "swarm-20260612-t4",
+      "route": "MEDIUM",
+      "task_type": "bugfix",
+      "task_title": "T4 — Correction bugs Table des Matières",
+      "iterations": 1,
+      "agents_used": ["front", "tester", "reviewer"],
+      "retry_reasons": [],
       "status": "APPROVED",
       "tester_pass": true,
       "reviewer_approved": true,
