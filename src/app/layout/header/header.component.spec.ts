@@ -41,7 +41,7 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
     const navEl: HTMLElement = fixture.nativeElement.querySelector('.header__nav');
     expect(navEl).toBeFalsy();
-    const hamburgerEl: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
+    const hamburgerEl: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger-btn');
     expect(hamburgerEl).toBeTruthy();
   });
 
@@ -49,7 +49,7 @@ describe('HeaderComponent', () => {
     component.isMobile = true;
     fixture.detectChanges();
     const emitSpy = spyOn(component.toggleSidebar, 'emit');
-    const hamburgerBtn: HTMLButtonElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
+    const hamburgerBtn: HTMLButtonElement = fixture.nativeElement.querySelector('.header__hamburger-btn');
     hamburgerBtn.click();
     expect(emitSpy).toHaveBeenCalled();
   });
@@ -58,14 +58,14 @@ describe('HeaderComponent', () => {
     component.isMobile = true;
     component.sidebarOpen = true;
     fixture.detectChanges();
-    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
+    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger-btn');
     expect(hamburgerBtn.classList.contains('header__hamburger--open')).toBeTrue();
   });
 
   it('devrait mettre à jour aria-label du hamburger selon sidebarOpen', () => {
     component.isMobile = true;
     fixture.detectChanges();
-    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
+    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger-btn');
     // sidebarOpen=false → "Ouvrir le menu"
     expect(hamburgerBtn.getAttribute('aria-label')).toBe('Ouvrir le menu');
 
@@ -78,7 +78,7 @@ describe('HeaderComponent', () => {
   it('devrait mettre à jour aria-expanded du hamburger selon sidebarOpen', () => {
     component.isMobile = true;
     fixture.detectChanges();
-    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
+    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger-btn');
     expect(hamburgerBtn.getAttribute('aria-expanded')).toBe('false');
 
     component.sidebarOpen = true;
@@ -86,14 +86,13 @@ describe('HeaderComponent', () => {
     expect(hamburgerBtn.getAttribute('aria-expanded')).toBe('true');
   });
 
-  it('devrait avoir les liens de navigation Accueil, À propos et Standards', () => {
+  it('devrait avoir les liens de navigation Accueil et À propos', () => {
     component.isMobile = false;
     fixture.detectChanges();
     const navLinks = fixture.nativeElement.querySelectorAll('.header__nav-link');
-    expect(navLinks.length).toBe(3);
+    expect(navLinks.length).toBe(2);
     expect(navLinks[0].textContent?.trim()).toBe('Accueil');
     expect(navLinks[1].textContent?.trim()).toBe('À propos');
-    expect(navLinks[2].textContent?.trim()).toBe('Standards');
   });
 
   it('devrait émettre openSearch quand le bouton de recherche est cliqué', () => {

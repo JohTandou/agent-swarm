@@ -115,7 +115,7 @@ test.describe('T1 — Layout Shell & Navigation', () => {
 
     test('le hamburger ouvre/ferme la sidebar overlay', async ({ page }) => {
       await page.goto('/a-propos');
-      const hamburger = page.locator('.header__hamburger');
+      const hamburger = page.locator('.header__hamburger-btn');
       await expect(hamburger).toBeVisible();
       await hamburger.click();
 
@@ -133,7 +133,7 @@ test.describe('T1 — Layout Shell & Navigation', () => {
 
     test("l'overlay ferme la sidebar au tap", async ({ page }) => {
       await page.goto('/a-propos');
-      await page.locator('.header__hamburger').click();
+      await page.locator('.header__hamburger-btn').click();
 
       const overlay = page.locator('.sidebar-overlay');
       await expect(overlay).toBeVisible();
@@ -144,7 +144,7 @@ test.describe('T1 — Layout Shell & Navigation', () => {
 
     test('la sidebar affiche les menus après ouverture', async ({ page }) => {
       await page.goto('/a-propos');
-      await page.locator('.header__hamburger').click();
+      await page.locator('.header__hamburger-btn').click();
       await expect(page.locator('.sidebar__link--parent', { hasText: 'Agents' })).toBeAttached();
     });
   });
