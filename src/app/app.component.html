@@ -13,22 +13,23 @@
 
 <!-- Layout 3 colonnes desktop / 1 colonne mobile -->
 <div class="shell-layout" [class.shell-layout--sidebar-open]="isMobile() && sidebarOpen()">
-  <!-- Sidebar gauche — masquée sur la page d'accueil -->
-  @if (!isHomepage()) {
-    @if (!isMobile()) {
-      <app-sidebar class="shell-layout__sidebar" />
-    } @else {
-      <app-sidebar
-        class="shell-layout__sidebar shell-layout__sidebar--overlay"
-        [class.shell-layout__sidebar--open]="sidebarOpen()"
-        [isMobile]="true"
-        (closeSidebar)="closeSidebar()"
-      />
-    }
+  <!-- Sidebar desktop — masquée sur la page d'accueil -->
+  @if (!isHomepage() && !isMobile()) {
+    <app-sidebar class="shell-layout__sidebar" />
+  }
+
+  <!-- Sidebar mobile overlay — toujours disponible, y compris homepage -->
+  @if (isMobile()) {
+    <app-sidebar
+      class="shell-layout__sidebar shell-layout__sidebar--overlay"
+      [class.shell-layout__sidebar--open]="sidebarOpen()"
+      [isMobile]="true"
+      (closeSidebar)="closeSidebar()"
+    />
   }
 
   <!-- Overlay mobile pour fermer la sidebar au tap -->
-  @if (isMobile() && sidebarOpen() && !isHomepage()) {
+  @if (isMobile() && sidebarOpen()) {
     <div
       class="sidebar-overlay"
       (click)="closeSidebar()"

@@ -118,36 +118,14 @@
 }
 
 /* ==========================================================================
-   Barres du hamburger
-   FIX 2 — largeur 28px (alignée sur l'icône search)
-   FIX 3 — transition 400ms spring organique
+   SVG icône hamburger — remplace les barres natives
    ========================================================================== */
-.header__hamburger-bar {
-  display: block;
-  width: 28px;
-  height: 2px;
-  background: var(--color-text-primary);
-  border-radius: 1px;
-  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 200ms ease-out;
-  transform-origin: center;
+.header__hamburger-btn svg {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ==========================================================================
-   FIX 3 — Animation hamburger → hexagone stylisé
-   Bar 1 + Bar 2 forment le chevron (toit), Bar 3 forme la base plate.
-   Métaphore : cellule de ruche vue de face.
-   ========================================================================== */
-.header__hamburger--open .header__hamburger-bar:nth-child(1) {
-  transform: translateX(12px) translateY(3px) rotate(-35deg);
-}
-
-.header__hamburger--open .header__hamburger-bar:nth-child(2) {
-  transform: translateX(-12px) translateY(-4px) rotate(35deg);
-}
-
-.header__hamburger--open .header__hamburger-bar:nth-child(3) {
-  transform: translateY(0);
+.header__hamburger--open svg {
+  transform: rotate(90deg);
 }
 
 /* Actions container */
@@ -181,11 +159,3 @@
   border-radius: 4px;
 }
 
-/* ==========================================================================
-   Accessibilité — respecte prefers-reduced-motion
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-  .header__hamburger-bar {
-    transition: none;
-  }
-}
