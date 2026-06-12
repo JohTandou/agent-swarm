@@ -38,11 +38,18 @@
             <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16ZM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </app-ui-button>
-        <app-ui-button variant="icon" size="md" [class.header__hamburger--open]="sidebarOpen" (click)="toggleSidebar.emit()" [attr.aria-label]="sidebarOpen ? 'Fermer le menu' : 'Ouvrir le menu'" [attr.aria-expanded]="sidebarOpen">
+        <button
+          type="button"
+          class="header__hamburger-btn"
+          [class.header__hamburger--open]="sidebarOpen"
+          (click)="onToggleSidebar()"
+          [attr.aria-label]="sidebarOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
+          [attr.aria-expanded]="sidebarOpen"
+        >
           <span class="header__hamburger-bar"></span>
           <span class="header__hamburger-bar"></span>
           <span class="header__hamburger-bar"></span>
-        </app-ui-button>
+        </button>
       </div>
     }
   </div>

@@ -18,7 +18,7 @@ export class HeaderComponent {
   /** Détection mobile pour afficher/cacher la nav desktop et le hamburger */
   @Input() isMobile = false;
 
-  /** État de la sidebar pour l'icône hamburger (croix quand ouvert) */
+  /** État de la sidebar pour l'icône hamburger (hexagone quand ouvert) */
   @Input() sidebarOpen = false;
 
   /** Émet quand l'utilisateur clique sur le hamburger */
@@ -26,6 +26,11 @@ export class HeaderComponent {
 
   /** Émet quand l'utilisateur clique sur le bouton de recherche */
   @Output() openSearch = new EventEmitter<void>();
+
+  /** Gère le clic sur le bouton hamburger — émet toggleSidebar vers le parent */
+  onToggleSidebar(): void {
+    this.toggleSidebar.emit();
+  }
 
   onSearchClick(): void {
     this.openSearch.emit();

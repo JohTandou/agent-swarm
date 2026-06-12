@@ -134,6 +134,20 @@
       "reviewer_approved": true,
       "task_in_queue": true,
       "queue_size": 5
+    },
+    {
+      "run_id": "swarm-20260612-t5",
+      "route": "MEDIUM",
+      "task_type": "feature",
+      "task_title": "T5 — Sidebar complète & hamburger hexagone",
+      "iterations": 1,
+      "agents_used": ["front", "tester", "reviewer"],
+      "retry_reasons": ["E2E selector .header__hamburger → .header__hamburger-btn"],
+      "status": "APPROVED",
+      "tester_pass": true,
+      "reviewer_approved": true,
+      "task_in_queue": true,
+      "queue_size": 5
     }
   ]
 }
