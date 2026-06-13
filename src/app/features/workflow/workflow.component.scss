@@ -391,7 +391,7 @@ $section-padding-mobile: 64px 20px;
 
   &__track {
     width: 4px;
-    height: 320px;
+    height: 500px;
     background: rgba(122, 136, 153, 0.1);
     border-radius: 2px;
     position: relative;
@@ -707,7 +707,7 @@ $section-padding-mobile: 64px 20px;
   align-items: center;
   text-align: center;
   max-width: 480px;
-  padding: 24px 0;
+  padding: 12px 0;
 
   &__node {
     display: flex;
@@ -747,7 +747,7 @@ $section-padding-mobile: 64px 20px;
   }
 
   &__connector {
-    padding: 16px 0;
+    padding: 8px 0;
     display: flex;
     justify-content: center;
   }

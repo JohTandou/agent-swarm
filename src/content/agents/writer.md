@@ -41,7 +41,7 @@ Un merge de la PR « Ajout du système de notifications » est complété. L'age
 4. Met à jour ARCHITECTURE.md : nouvelle section sur le pattern de communication temps réel
 5. Met à jour README : ajout de `@supabase/realtime-js` dans les dépendances
 6. Vérifie qu'aucune modification n'a touché AGENTS.md ou PLAN.md
-7. Commit : « docs: update documentation after notification system merge »
+7. Commit : « docs: update CHANGELOG and project documentation »
 
 ## Modèle
 

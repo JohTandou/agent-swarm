@@ -113,7 +113,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       complexity: 'Faible',
       tokens: '~50 K',
       cost: '~0,02 $',
-      agents: 'Front ou Back',
+      agents: 'Front ou Back → Tester',
     },
     {
       route: 'ADAPT',
@@ -122,7 +122,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       complexity: 'Modérée',
       tokens: '~120 K',
       cost: '~0,06 $',
-      agents: 'Search → Front ou Back',
+      agents: 'Search → Front ou Back → Tester',
     },
     {
       route: 'MEDIUM',
@@ -131,7 +131,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       complexity: 'Élevée',
       tokens: '~400 K',
       cost: '~0,20 $',
-      agents: 'Planner → Front + Back + Tester + Reviewer',
+      agents: 'Search → Planner → Front + Back → Tester → Reviewer',
     },
     {
       route: 'FULL',
@@ -140,7 +140,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       complexity: 'Maximale',
       tokens: '~550 K',
       cost: '~0,27 $',
-      agents: 'Planner → Contract → Front ∥ Back → Tester → Reviewer → Writer',
+      agents: 'Search → Planner → Contract → Front ∥ Back → Tester → Reviewer → Writer',
     },
   ];
 
@@ -153,8 +153,8 @@ graph TB
     ISSUE["📋 Issue GitHub"] --> PRESEARCH["🔍 Pre-search<br/>Étape 0.3"]
     PRESEARCH --> CLASSIFY["🏷️ Classification<br/>Route automatique"]
     CLASSIFY --> DIRECT["⚡ DIRECT"]
-    CLASSIFY --> SIMPLE["🔧 SIMPLE"]
     CLASSIFY --> ADAPT["🔄 ADAPT"]
+    CLASSIFY --> SIMPLE["🔧 SIMPLE"]
     CLASSIFY --> MEDIUM["📦 MEDIUM"]
     CLASSIFY --> FULL["🏗️ FULL"]
 
@@ -168,24 +168,26 @@ graph TB
     SEARCH_ADAPT --> IMPL_ADAPT["💻 Implémentation<br/>Cross-cutting"]
     IMPL_ADAPT --> TEST
 
-    MEDIUM --> PLAN["📐 Planner<br/>Planification"]
+    MEDIUM --> SEARCH_MED["🔎 Search<br/>Cartographie"]
+    SEARCH_MED --> PLAN["📐 Planner<br/>Planification"]
     PLAN --> IMPL_MEDIUM["💻 Front ∥ Back<br/>Parallèle"]
     IMPL_MEDIUM --> TEST
 
-    FULL --> PLAN_FULL["📐 Planner<br/>Planification"]
+    FULL --> SEARCH_FULL["🔎 Search<br/>Cartographie"]
+    SEARCH_FULL --> PLAN_FULL["📐 Planner<br/>Planification"]
     PLAN_FULL --> CONTRACT["📝 Contract<br/>Types + API"]
     CONTRACT --> IMPL_FULL["💻 Front ∥ Back<br/>Parallèle"]
     IMPL_FULL --> TEST
 
     TEST --> REVIEW["👁️ Reviewer<br/>Audit qualité"]
-    REVIEW -->|"✅ Approuvé"| COMMIT["📝 Commit<br/>+ Documentation"]
+    REVIEW -->|"✅ Approuvé"| WRITER["📚 Writer<br/>Documentation"]
     REVIEW -->|"❌ Rejeté"| FIX["🔄 Corrections"]
     FIX --> TEST
 
+    WRITER --> COMMIT["📝 Commit"]
     COMMIT --> PR["🔀 Pull Request"]
     PR --> MERGE["🎉 Merge"]
-    MERGE --> DOCS["📚 Writer<br/>Documentation"]
-    DOCS --> DONE["🏁 Terminé"]
+    MERGE --> DONE["🏁 Terminé"]
 
     style ISSUE fill:#28231C,stroke:#7A8899,color:#F5F0EB
     style PRESEARCH fill:#1C1812,stroke:#C4780D,color:#C4780D
