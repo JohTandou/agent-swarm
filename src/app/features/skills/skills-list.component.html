@@ -3,8 +3,7 @@
     <p class="skills__eyebrow">Modules Réutilisables</p>
     <h1 class="skills__title" appTextReveal [revealDelay]="200">Skills</h1>
     <p class="skills__subtitle">
-      Des modules spécialisés que les agents activent à la demande. Chaque skill
-      étend les capacités de la Swarm avec une expertise ciblée.
+      3 modules que les agents activent de façon autonome lorsqu'ils le jugent nécessaire. Chaque skill étend leurs capacités avec une expertise ciblée.
     </p>
     <p class="skills__note">
       Tous les skills sont activables uniquement sur demande explicite de l'utilisateur.
@@ -37,24 +36,7 @@
     }
   </nav>
 
-  @if (isLoading()) {
-    <div class="skills__grid" role="status" aria-label="Chargement des skills">
-      @for (i of [1,2,3,4,5,6]; track i) {
-        <div class="skills__card skills__card--skeleton" aria-hidden="true">
-          <div class="skills__card-emoji skills__skeleton-emoji"></div>
-          <div class="skills__card-header">
-            <div class="skills__skeleton-line skills__skeleton-line--title"></div>
-          </div>
-          <div class="skills__skeleton-line skills__skeleton-line--desc"></div>
-          <div class="skills__skeleton-line skills__skeleton-line--desc skills__skeleton-line--short"></div>
-          <div class="skills__card-footer">
-            <div class="skills__skeleton-line skills__skeleton-line--tag"></div>
-          </div>
-        </div>
-      }
-    </div>
-  } @else {
-  <div class="skills__grid" role="list" aria-label="Liste des skills Swarm" [appStaggerChildren]="60">
+    <div class="skills__grid" role="list" aria-label="Liste des skills Swarm" [appStaggerChildren]="60">
     @for (skill of filteredSkills(); track skill.id; let idx = $index) {
       <a
         [routerLink]="['/skills', skill.id]"
@@ -98,5 +80,5 @@
       />
     }
   </div>
-  }
+
 </section>

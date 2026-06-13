@@ -63,7 +63,7 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       title: 'Skills',
       description:
-        '26 modules activables à la demande. Chaque skill étend vos agents avec une expertise ciblée.',
+        '3 modules que les agents activent de façon autonome lorsqu\'ils le jugent nécessaire.',
       route: '/skills',
       icon: '🔧',
     },

@@ -1,13 +1,19 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
-import { ContentService } from '@shared/services/content.service';
 import { ToastService } from '@shared/services/toast.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { UiEmptyStateComponent } from '@shared/components/ui-empty-state/ui-empty-state.component';
 import type { Skill, SkillCategory } from '@shared/models';
+
+/** Skills hardcodés */
+const SKILLS: Skill[] = [
+  { id: 'ui-ux-pro-max', name: 'UI/UX Pro Max', emoji: '🎨', category: 'creation', sourcePath: 'skills/ui-ux-pro-max.md', order: 1, tags: [], description: 'Intelligence de design UI/UX avec 67 styles, 96 palettes' },
+  { id: 'tests-create', name: 'Tests Create', emoji: '🧪', category: 'creation', sourcePath: 'skills/tests-create.md', order: 2, tags: [], description: 'Génération optimale de tests unitaires, fonctionnels, intégration et E2E' },
+  { id: 'graphify', name: 'Graphify', emoji: '🕸️', category: 'audit', sourcePath: 'skills/graphify.md', order: 3, tags: [], description: 'Transforme code, docs, papiers en graphes de connaissances' },
+];
 
 /** Labels des catégories pour les boutons de filtre */
 const CATEGORY_LABELS: Record<SkillCategory, string> = {
@@ -34,26 +40,15 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
 })
 export class SkillsListComponent {
   private readonly toastService = inject(ToastService);
-  private readonly contentService = inject(ContentService);
 
-  constructor() {
-    this.contentService.loadSkillsManifest().subscribe({
-      next: (data) => {
-        this.skills.set(data);
-        this.isLoading.set(false);
-      },
-      error: () => this.isLoading.set(false),
-    });
-  }
-
-  /** Liste complète des skills */
-  readonly skills = signal<Skill[]>([]);
+  /** Liste complète des skills (hardcodée) */
+  readonly skills = signal<Skill[]>(SKILLS);
 
   /** Catégorie active pour le filtrage (null = toutes) */
   readonly activeCategory = signal<SkillCategory | null>(null);
 
-  /** État de chargement */
-  readonly isLoading = signal(true);
+  /** État de chargement (désactivé — skills hardcodés) */
+  readonly isLoading = signal(false);
 
   /** Skills filtrés selon la catégorie active */
   readonly filteredSkills = computed<Skill[]>(() => {
@@ -63,7 +58,7 @@ export class SkillsListComponent {
   });
 
   /** Catégories disponibles avec leur label */
-  readonly categories: SkillCategory[] = ['creation', 'audit', 'workflow', 'documentation'];
+  readonly categories: SkillCategory[] = ['creation', 'audit'];
 
   /** Vrai si un filtre est actif */
   readonly isFiltered = computed(() => this.activeCategory() !== null);
