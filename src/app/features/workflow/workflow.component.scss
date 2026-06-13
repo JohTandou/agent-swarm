@@ -115,7 +115,7 @@ $section-padding-mobile: 64px 20px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px 24px 64px;
+  padding: 40px 24px 32px;
   position: relative;
   overflow: hidden;
 
@@ -147,7 +147,7 @@ $section-padding-mobile: 64px 20px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-accent);
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
 
   &__title {
@@ -157,7 +157,7 @@ $section-padding-mobile: 64px 20px;
     letter-spacing: -0.04em;
     line-height: 1.05;
     color: var(--color-text-primary);
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 60%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
