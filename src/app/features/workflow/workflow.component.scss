@@ -26,7 +26,7 @@ $section-padding-mobile: 64px 20px;
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 600ms var(--ease-spring), transform 600ms var(--ease-spring);
+  transition: opacity 400ms var(--ease-spring), transform 400ms var(--ease-spring);
 }
 
 .reveal-on-scroll.revealed {
@@ -157,7 +157,7 @@ $section-padding-mobile: 64px 20px;
     letter-spacing: -0.04em;
     line-height: 1.05;
     color: var(--color-text-primary);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 60%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -902,21 +902,7 @@ $section-padding-mobile: 64px 20px;
   animation-delay: calc(var(--stagger-index) * 60ms);
 }
 
-/* --------------------------------------------------------------------------
-   Image d'ambiance pipeline — GPT Image 2.0
-   -------------------------------------------------------------------------- */
-.workflow__pipeline-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('/assets/images/pipeline.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.06;
-  mix-blend-mode: screen;
-  pointer-events: none;
-  z-index: 0;
-}
+
 
 /* --------------------------------------------------------------------------
    Image d'ambiance gates qualité — GPT Image 2.0
@@ -967,7 +953,6 @@ $section-padding-mobile: 64px 20px;
   .hero__bg-decor,
   .homepage__hero::before,
   .about__hero::after,
-  .workflow__pipeline-bg,
   .workflow__gates-bg,
   .pre-search__bg {
     opacity: 0.06;

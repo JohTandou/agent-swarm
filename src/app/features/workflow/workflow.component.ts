@@ -201,7 +201,6 @@ graph TB
     style REVIEW fill:#1C1812,stroke:#C4780D,color:#C4780D
     style MERGE fill:#28231C,stroke:#C4780D,color:#C4780D
     style DONE_DIRECT fill:#0E0C09,stroke:#7A8899,color:#7A8899
-    style DOCS fill:#0E0C09,stroke:#7A8899,color:#7A8899
     style DONE fill:#0E0C09,stroke:#C4780D,color:#C4780D
   \`\`\``;
 
@@ -433,10 +432,10 @@ gitGraph
       const nodeCards = this.hostRef.nativeElement.querySelectorAll('.node-card');
 
       if (revealEls.length > 0) {
-        await this.animService.revealOnScroll(Array.from(revealEls), { staggerMs: 80 });
+        await this.animService.revealOnScroll(Array.from(revealEls), { staggerMs: 50 });
       }
       if (nodeCards.length > 0) {
-        await this.animService.revealOnScroll(Array.from(nodeCards), { staggerMs: 100 });
+        await this.animService.revealOnScroll(Array.from(nodeCards), { staggerMs: 60 });
       }
 
       // Mermaid section highlight
