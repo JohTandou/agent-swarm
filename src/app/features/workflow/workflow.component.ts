@@ -140,7 +140,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
       complexity: 'Maximale',
       tokens: '~550 K',
       cost: '~0,27 $',
-      agents: 'Search → Planner → Contract → Front ∥ Back → Tester → Reviewer → Writer',
+      agents: 'Search → Planner → Contract → Front + Back → Tester → Reviewer → Writer',
     },
   ];
 
@@ -170,13 +170,13 @@ graph TB
 
     MEDIUM --> SEARCH_MED["🔎 Search<br/>Cartographie"]
     SEARCH_MED --> PLAN["📐 Planner<br/>Planification"]
-    PLAN --> IMPL_MEDIUM["💻 Front ∥ Back<br/>Parallèle"]
+    PLAN --> IMPL_MEDIUM["💻 Front + Back<br/>Parallèle"]
     IMPL_MEDIUM --> TEST
 
     FULL --> SEARCH_FULL["🔎 Search<br/>Cartographie"]
     SEARCH_FULL --> PLAN_FULL["📐 Planner<br/>Planification"]
     PLAN_FULL --> CONTRACT["📝 Contract<br/>Types + API"]
-    CONTRACT --> IMPL_FULL["💻 Front ∥ Back<br/>Parallèle"]
+    CONTRACT --> IMPL_FULL["💻 Front + Back<br/>Parallèle"]
     IMPL_FULL --> TEST
 
     TEST --> REVIEW["👁️ Reviewer<br/>Audit qualité"]
