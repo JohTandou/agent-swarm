@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
@@ -18,9 +18,4 @@ import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
   styleUrls: ['./about.component.scss'],
 })
 export class AboutComponent {
-  private readonly router = inject(Router);
-
-  navigateTo(path: string): void {
-    this.router.navigate([path]);
-  }
 }

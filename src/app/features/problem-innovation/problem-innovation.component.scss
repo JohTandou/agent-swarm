@@ -16,7 +16,7 @@ $section-padding-mobile: 64px 20px;
 .page {
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ==========================================================================
@@ -82,8 +82,7 @@ $section-padding-mobile: 64px 20px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100dvh;
-  padding: $section-padding;
+  padding: 80px 24px 64px;
   text-align: center;
   overflow: hidden;
 }
@@ -104,112 +103,38 @@ $section-padding-mobile: 64px 20px;
 .hero__content {
   position: relative;
   z-index: 1;
-  max-width: 820px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
+  text-align: center;
+  max-width: 800px;
 }
 
 .hero__kicker {
+  display: block;
   font-family: var(--font-display);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--color-accent);
+  margin-bottom: 16px;
 }
 
 .hero__title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  letter-spacing: -0.04em;
-  line-height: 0.95;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   color: var(--color-text-primary);
-  max-width: 680px;
+  margin-bottom: 24px;
 }
 
 .hero__subtitle {
   font-family: var(--font-body);
-  font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
-  line-height: 1.75;
+  font-size: 1.125rem;
+  line-height: 1.7;
   color: var(--color-text-secondary);
   max-width: 640px;
-}
-
-/* Stats du hero */
-.hero__stats {
-  display: flex;
-  align-items: center;
-  gap: 48px;
-  margin-top: 48px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.hero__stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.hero__stat-value {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  letter-spacing: -0.03em;
-  color: var(--color-accent);
-  line-height: 1;
-}
-
-.hero__stat-label {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  color: var(--color-text-secondary);
-  text-align: center;
-  line-height: 1.5;
-}
-
-.hero__stat-divider {
-  width: 1px;
-  height: 56px;
-  background: rgba(122, 136, 153, 0.25);
-}
-
-.hero__scroll-hint {
-  position: absolute;
-  bottom: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  opacity: 0.6;
-  transition: opacity 300ms ease;
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.hero__scroll-text {
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
-}
-
-.hero__scroll-arrow {
-  font-size: 1.25rem;
-  color: var(--color-accent);
-  animation: bounceDown 2s ease-in-out infinite;
-}
-
-@keyframes bounceDown {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
+  margin: 0 auto;
 }
 
 /* ==========================================================================
@@ -1044,14 +969,6 @@ $section-padding-mobile: 64px 20px;
    Responsive — Mobile
    ========================================================================== */
 @media (max-width: 768px) {
-  .hero__stats {
-    gap: 32px;
-  }
-
-  .hero__stat-divider {
-    display: none;
-  }
-
   .comparison-card__columns {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -1119,10 +1036,6 @@ $section-padding-mobile: 64px 20px;
 
   .comparison-bar {
     transition: none;
-  }
-
-  .hero__scroll-arrow {
-    animation: none;
   }
 }
 

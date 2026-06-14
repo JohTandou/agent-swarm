@@ -16,7 +16,7 @@ $section-padding-mobile: 64px 20px;
 .page {
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ==========================================================================
@@ -115,7 +115,7 @@ $section-padding-mobile: 64px 20px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 24px 32px;
+  padding: 80px 24px 64px;
   position: relative;
   overflow: hidden;
 
@@ -147,105 +147,29 @@ $section-padding-mobile: 64px 20px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-accent);
-    margin-bottom: 10px;
+    margin-bottom: 16px;
   }
 
   &__title {
     font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    letter-spacing: -0.04em;
-    line-height: 1.05;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
     color: var(--color-text-primary);
-    margin-bottom: 12px;
-    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 60%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    margin-bottom: 24px;
   }
+
 
   &__subtitle {
     font-family: var(--font-body);
-    font-size: clamp(1rem, 1.5vw, 1.1875rem);
+    font-size: 1.125rem;
     line-height: 1.7;
     color: var(--color-text-secondary);
     max-width: 640px;
     margin: 0 auto;
   }
 
-  &__stats {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 48px;
-    flex-wrap: wrap;
-  }
-
-  &__stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  &__stat-value {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 2.5rem;
-    letter-spacing: -0.03em;
-    color: var(--color-accent);
-  }
-
-  &__stat-label {
-    font-family: var(--font-display);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text-secondary);
-    text-align: center;
-    line-height: 1.3;
-  }
-
-  &__stat-divider {
-    width: 1px;
-    height: 48px;
-    background: rgba(122, 136, 153, 0.2);
-  }
-
-  &__scroll-hint {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    cursor: default;
-  }
-
-  &__scroll-text {
-    font-family: var(--font-display);
-    font-size: 0.6875rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-text-secondary);
-    opacity: 0.5;
-  }
-
-  &__scroll-arrow {
-    font-size: 1.25rem;
-    color: var(--color-text-secondary);
-    opacity: 0.4;
-    animation: bounceDown 2s ease-in-out infinite;
-  }
-}
-
-@keyframes bounceDown {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
 }
 
 /* ==========================================================================
@@ -262,7 +186,7 @@ $section-padding-mobile: 64px 20px;
 .tree-container {
   display: flex;
   gap: 48px;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .tree-nodes {
@@ -384,13 +308,10 @@ $section-padding-mobile: 64px 20px;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  position: sticky;
-  top: 100px;
-  padding-top: 20px;
 
   &__track {
     width: 4px;
-    height: 500px;
+    flex: 1;
     background: rgba(122, 136, 153, 0.1);
     border-radius: 2px;
     position: relative;
@@ -857,17 +778,7 @@ $section-padding-mobile: 64px 20px;
     }
   }
 
-  .hero__stats {
-    gap: 24px;
-  }
 
-  .hero__stat-divider {
-    height: 32px;
-  }
-
-  .hero__stat-value {
-    font-size: 1.75rem;
-  }
 
   .mermaid-wrapper {
     padding: 24px 16px;
@@ -883,15 +794,7 @@ $section-padding-mobile: 64px 20px;
 }
 
 @media (max-width: 480px) {
-  .hero__stats {
-    flex-direction: column;
-    gap: 20px;
-  }
 
-  .hero__stat-divider {
-    width: 32px;
-    height: 1px;
-  }
 }
 
 /* Stagger animation delay */
@@ -905,21 +808,6 @@ $section-padding-mobile: 64px 20px;
 
 
 /* --------------------------------------------------------------------------
-   Image d'ambiance gates qualité — GPT Image 2.0
-   -------------------------------------------------------------------------- */
-.workflow__gates-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('/assets/images/quality-gates.png');
-  background-size: contain;
-  background-position: center right;
-  background-repeat: no-repeat;
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* --------------------------------------------------------------------------
    Diagramme gitGraph — Mermaid
    -------------------------------------------------------------------------- */
 .git-graph-wrapper {
@@ -931,30 +819,12 @@ $section-padding-mobile: 64px 20px;
 }
 
 /* --------------------------------------------------------------------------
-   Image d'ambiance classification — GPT Image 2.0
-   -------------------------------------------------------------------------- */
-.pre-search__bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('/assets/images/pre-search-classification.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.06;
-  mix-blend-mode: screen;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* --------------------------------------------------------------------------
    Accessibilité — Réduire le mouvement
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .hero__bg-decor,
   .homepage__hero::before,
-  .about__hero::after,
-  .workflow__gates-bg,
-  .pre-search__bg {
+  .about__hero::after {
     opacity: 0.06;
   }
 }

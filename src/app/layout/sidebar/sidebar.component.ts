@@ -32,6 +32,9 @@ export class SidebarComponent {
   readonly navItems: NavItem[] = [
     { label: 'Accueil', route: '/' },
     { label: 'À propos', route: '/a-propos' },
+    { label: 'Workflow', route: '/workflow' },
+    { label: 'Problème & Innovation', route: '/probleme-innovation' },
+    { label: 'Écosystème', route: '/ecosysteme' },
     {
       label: 'Agents',
       route: '/agents',
@@ -55,14 +58,11 @@ export class SidebarComponent {
       route: '/skills',
       expanded: false,
       children: [
-          { label: 'UI/UX Pro Max', route: '/skills/ui-ux-pro-max' },
-          { label: 'Tests Create', route: '/skills/tests-create' },
-          { label: 'Graphify', route: '/skills/graphify' },
-        ],
+        { label: 'UI/UX Pro Max', route: '/skills/ui-ux-pro-max' },
+        { label: 'Tests Create', route: '/skills/tests-create' },
+        { label: 'Graphify', route: '/skills/graphify' },
+      ],
     },
-    { label: 'Workflow', route: '/workflow' },
-    { label: 'Problème & Innovation', route: '/probleme-innovation' },
-    { label: 'Écosystème', route: '/ecosysteme' },
     {
       label: 'Outils MCP',
       route: '/outils-mcp',

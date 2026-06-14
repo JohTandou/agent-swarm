@@ -12,7 +12,7 @@
   flex-direction: column;
   width: 100%;
   background: var(--color-bg-primary, #3A3530);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ==========================================================================
