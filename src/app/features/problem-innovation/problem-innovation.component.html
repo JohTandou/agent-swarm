@@ -188,47 +188,32 @@
       </p>
     </div>
 
-    <div class="costs__table-wrapper reveal-on-scroll">
-      <table class="costs__table" role="table">
+    <h3 class="costs__comparison-title reveal-on-scroll">Swarm vs Claude Pro vs Claude Max</h3>
+
+    <div class="costs__comparison-table-wrapper reveal-on-scroll">
+      <table class="costs__comparison-table" role="table">
         <thead>
           <tr>
-            <th scope="col">Route</th>
-            <th scope="col">Tokens estimés</th>
-            <th scope="col">Coût par session</th>
-            <th scope="col">Cas d'usage</th>
+            <th scope="col">Capacité</th>
+            <th scope="col" class="costs__comparison-col--swarm">Swarm</th>
+            <th scope="col">Claude Pro</th>
+            <th scope="col">Claude Max</th>
           </tr>
         </thead>
         <tbody>
-          @for (entry of costData; track entry.route) {
-          <tr>
-            <td>
-              <span class="costs__badge">{{ entry.route }}</span>
-            </td>
-            <td class="costs__cell-mono">{{ entry.tokens }}</td>
-            <td class="costs__cell-price">{{ entry.cost }}</td>
-            <td>{{ entry.description }}</td>
+          @for (row of claudeComparisonRows; track row.label; let idx = $index) {
+          <tr [class.costs__comparison-row--alt]="idx % 2 === 1">
+            <td class="costs__comparison-label-cell">{{ row.label }}</td>
+            <td class="costs__comparison-cell--swarm">{{ row.swarm }}</td>
+            <td>{{ row.claudePro }}</td>
+            <td>{{ row.claudeMax }}</td>
           </tr>
           }
         </tbody>
       </table>
     </div>
 
-    <div class="costs__comparison reveal-on-scroll">
-      <div class="costs__comparison-card">
-        <span class="costs__comparison-label">Swarm (40 sessions MEDIUM/mois — intensif)</span>
-        <span class="costs__comparison-value costs__comparison-value--accent">~8 $/mois</span>
-      </div>
-      <div class="costs__comparison-vs" aria-hidden="true">vs</div>
-      <div class="costs__comparison-card costs__comparison-card--muted">
-        <span class="costs__comparison-label">Outils assistant IA (chat, autocomplete)</span>
-        <span class="costs__comparison-value">10–20 $/mois</span>
-      </div>
-      <div class="costs__comparison-vs" aria-hidden="true">vs</div>
-      <div class="costs__comparison-card costs__comparison-card--muted">
-        <span class="costs__comparison-label">Outils agentic (pipeline autonome)</span>
-        <span class="costs__comparison-value">100–500 $/mois</span>
-      </div>
-    </div>
+    <p class="costs__comparison-note reveal-on-scroll">{{ claudeComparisonNote }}</p>
 
     <p class="costs__note reveal-on-scroll">{{ costComparisonNote }}</p>
     <div class="pi__cost-bg" aria-hidden="true"></div>

@@ -59,7 +59,7 @@ describe('AgentDetailComponent', () => {
     it('devrait trouver l\'agent dans la map', () => {
       expect(component.agent()).toBeDefined();
       expect(component.agent()?.name).toBe('Orchestrateur');
-      expect(component.agent()?.emoji).toBe('🎯');
+      expect(component.agent()?.emoji).toBe('🧠');
     });
 
     it('ne devrait pas être en état notFound', () => {
@@ -83,13 +83,13 @@ describe('AgentDetailComponent', () => {
     it('devrait afficher l\'emoji de l\'agent', () => {
       const emojiEl = fixture.nativeElement.querySelector('.agent-detail__emoji');
       expect(emojiEl).toBeTruthy();
-      expect(emojiEl.textContent?.trim()).toBe('🎯');
+      expect(emojiEl.textContent?.trim()).toBe('🧠');
     });
 
     it('devrait afficher le rôle de l\'agent', () => {
       const roleEl = fixture.nativeElement.querySelector('.agent-detail__role');
       expect(roleEl).toBeTruthy();
-      expect(roleEl.textContent).toContain("Chef d'orchestre");
+      expect(roleEl.textContent).toContain('Tech Lead');
     });
 
     it('devrait afficher la route dans les métadonnées', () => {

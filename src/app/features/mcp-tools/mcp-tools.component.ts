@@ -297,16 +297,6 @@ export class McpToolsComponent implements OnInit, OnDestroy {
   });
 
   /* ==========================================================================
-   * État du playground
-   * ========================================================================== */
-
-  /** Valeurs simulées des paramètres dans le playground */
-  protected readonly playgroundValues = signal<Record<string, string>>({});
-
-  /** Affiche le résultat simulé du playground */
-  protected readonly playgroundVisible = signal(false);
-
-  /* ==========================================================================
    * Lifecycle
    * ========================================================================== */
 
@@ -340,8 +330,6 @@ export class McpToolsComponent implements OnInit, OnDestroy {
 
     this.loading.set(true);
     this.error.set(null);
-    this.playgroundValues.set({});
-    this.playgroundVisible.set(false);
 
     setTimeout(() => {
       this.loading.set(false);
@@ -361,38 +349,6 @@ export class McpToolsComponent implements OnInit, OnDestroy {
     this.loading.set(true);
     this.error.set(null);
     this.loadCategoryData();
-  }
-
-  /* ==========================================================================
-   * Méthodes du playground
-   * ========================================================================== */
-
-  /** Met à jour la valeur d'un paramètre dans le playground. */
-  protected updatePlaygroundParam(paramName: string, event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const current = { ...this.playgroundValues() };
-    current[paramName] = input.value;
-    this.playgroundValues.set(current);
-  }
-
-  /** Affiche / masque le résultat simulé du playground. */
-  protected togglePlaygroundResult(): void {
-    this.playgroundVisible.set(!this.playgroundVisible());
-  }
-
-  /** Construit une représentation JSON des valeurs du playground. */
-  protected playgroundPayload(): string {
-    const values = this.playgroundValues();
-    const entries = Object.entries(values).filter(([, v]) => v.trim() !== '');
-    if (entries.length === 0) return '{}';
-    const obj: Record<string, string> = {};
-    entries.forEach(([k, v]) => { obj[k] = v; });
-    return JSON.stringify(obj, null, 2);
-  }
-
-  /** Retourne la valeur d'un paramètre ou une chaîne vide. */
-  protected playgroundValue(param: string): string {
-    return this.playgroundValues()[param] ?? '';
   }
 
   /** Formate l'affichage du nom d'un outil avec le préfixe de la catégorie. */

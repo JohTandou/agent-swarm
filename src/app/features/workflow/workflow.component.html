@@ -117,6 +117,9 @@
         <span class="tree-complexity-bar__label-bottom">Complexité maximale</span>
       </div>
     </div>
+      <p class="tree-note reveal-on-scroll">
+        Coûts estimés avec la tarification API DeepSeek V4 Pro (juin 2025). Tokens et coûts réels variables selon la complexité et le volume.
+      </p>
   </section>
 
   <!-- =======================================================================
@@ -166,7 +169,11 @@
           @for (threshold of preSearchThresholds; track threshold.route) {
           <tr>
             <td>
-              <app-ui-badge variant="info" size="sm">{{ threshold.route }}</app-ui-badge>
+              @if (threshold.route === 'MEDIUM' || threshold.route === 'FULL') {
+                <app-ui-badge variant="info" size="sm" class="pre-search__badge--amber">{{ threshold.route }}</app-ui-badge>
+              } @else {
+                <app-ui-badge variant="info" size="sm">{{ threshold.route }}</app-ui-badge>
+              }
             </td>
             <td>{{ threshold.fichiers }}</td>
             <td>{{ threshold.tokens }}</td>

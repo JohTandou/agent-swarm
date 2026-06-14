@@ -49,7 +49,3 @@ Tâche : « Revue du composant NotificationList (92% coverage) ». L'agent revie
 3. Audit tests : 12 tests unitaires pertinents, 3 E2E couvrant les flux critiques → conforme
 4. Vérifie le diff : 187 lignes (< 1000) → taille acceptable
 5. Décision : **APPROVE** — security_score=1.0, quality_score=0.95, prêt pour merge
-
-## Modèle
-
-Tous les agents de la Swarm utilisent **DeepSeek V4 Pro** — contexte de 1M tokens, raisonnement architectural, génération de code. Aucune dégradation entre agents : chacun bénéficie de la pleine puissance du modèle.

@@ -61,7 +61,3 @@ Tâche : « Créer le composant MarkdownRenderer avec template riche ». L'agent
 4. Crée le thème Prism.js dark (palette 6 couleurs exclusive)
 5. Ajoute 34 tests unitaires couvrant tous les états (loading, empty, error, success)
 6. Lance `ng test` → 34/34 PASS
-
-## Modèle
-
-Tous les agents de la Swarm utilisent **DeepSeek V4 Pro** — contexte de 1M tokens, raisonnement architectural, génération de code. Aucune dégradation entre agents : chacun bénéficie de la pleine puissance du modèle.

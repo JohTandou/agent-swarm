@@ -150,12 +150,12 @@
       }
 
       h2 {
-        margin-top: 0.6em;
+        margin-top: 2.5em;
         margin-bottom: 0.8em;
       }
 
       h3 {
-        margin-top: 1em;
+        margin-top: 1.8em;
         margin-bottom: 0.6em;
       }
 
@@ -292,6 +292,87 @@
   box-shadow: 0 0 30px rgba(196, 120, 13, 0.06);
   margin: 0 auto 32px;
   display: block;
+}
+
+/* ==========================================================================
+   Tableaux de routes — Style carte premium (ui-card design language)
+   ========================================================================== */
+.agent-detail__content--spaced {
+  ::ng-deep .markdown-body {
+    table {
+      display: table;
+      width: 100%;
+      margin: 2rem 0;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid rgba(196, 120, 13, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-bg-elevated);
+      box-shadow: 0 0 20px rgba(196, 120, 13, 0.03);
+    }
+
+    thead {
+      th {
+        padding: 14px 20px;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--color-accent);
+        background: rgba(196, 120, 13, 0.06);
+        border-bottom: 2px solid rgba(196, 120, 13, 0.25);
+        text-align: left;
+
+        &:first-child {
+          border-top-left-radius: 12px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 12px;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        transition: background 200ms ease-out;
+
+        &:hover {
+          background: rgba(196, 120, 13, 0.04);
+        }
+
+        &:not(:last-child) td {
+          border-bottom: 1px solid rgba(122, 136, 153, 0.1);
+        }
+
+        td {
+          padding: 14px 20px;
+          font-size: 0.9375rem;
+          line-height: 1.6;
+          color: var(--color-text-secondary);
+          vertical-align: middle;
+
+          &:first-child {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.8125rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--color-text-primary);
+            white-space: nowrap;
+            width: 1%;
+          }
+        }
+
+        // Alternance subtile
+        &:nth-child(even) td {
+          background: rgba(74, 69, 64, 0.2);
+        }
+      }
+    }
+  }
 }
 
 /* --------------------------------------------------------------------------

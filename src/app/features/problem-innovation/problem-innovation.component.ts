@@ -4,6 +4,7 @@ import { UiButtonComponent } from '@shared/components/ui-button/ui-button.compon
 import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
+import { ROUTE_COSTS } from '@shared/data/routes.data';
 
 /* Constantes de configuration */
 const LOADING_SIMULATION_DELAY_MS = 500;
@@ -36,16 +37,6 @@ interface SystemComparison {
  */
 interface Pillar {
   readonly title: string;
-  readonly description: string;
-}
-
-/**
- * Données structurées pour l'analyse des coûts.
- */
-interface CostEntry {
-  readonly route: string;
-  readonly tokens: string;
-  readonly cost: string;
   readonly description: string;
 }
 
@@ -130,7 +121,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     {
       label: 'Coût',
       withoutSwarm: '150–250 K€/an par développeur senior. Le coût d\'opportunité des bugs est massif',
-      withSwarm: '~0,20 $ par session MEDIUM (~400K tokens, 17 appels LLM). ~8–25 $/mois en usage intensif (40–125 sessions)',
+      withSwarm: `${ROUTE_COSTS['MEDIUM'].cost} par session MEDIUM (${ROUTE_COSTS['MEDIUM'].tokens} tokens, 17 appels LLM, tarification DeepSeek V4 Pro). ~8–25 $/mois en usage intensif (40–125 sessions)`,
       improvement: '~8 $/mois en usage intensif. 2,5× moins qu\'un assistant IA, 25× moins qu\'un pipeline agentic comparable',
     },
   ];
@@ -230,35 +221,81 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
    * Données — Section 5 : Analyse des coûts
    * ========================================================================== */
 
-  protected readonly costData: readonly CostEntry[] = [
+  protected readonly costComparisonNote =
+    'Estimations basées sur la tarification API DeepSeek V4 Pro (juin 2025). 40 sessions MEDIUM/mois = usage intensif (~2 features/jour). Coûts réels variables selon le volume et la complexité. La Swarm fonctionne en API — vous ne payez que les tokens consommés, sans abonnement.';
+
+  /** Données du tableau comparatif Swarm vs Claude */
+  protected readonly claudeComparisonRows: readonly { label: string; swarm: string; claudePro: string; claudeMax: string }[] = [
     {
-      route: 'SIMPLE',
-      tokens: '~50 K',
-      cost: '~0,02 $',
-      description: 'Correction ciblée, modification d\'un fichier',
+      label: 'Prix / mois (usage intensif)',
+      swarm: '~8–25 $',
+      claudePro: '20 $',
+      claudeMax: '100–200 $',
     },
     {
-      route: 'ADAPT',
-      tokens: '~120 K',
-      cost: '~0,06 $',
-      description: 'Adaptation cross-cutting, 2–3 fichiers',
+      label: 'Modèle de tarification',
+      swarm: 'Pay-per-token (DeepSeek V4 Pro)',
+      claudePro: 'Abonnement fixe',
+      claudeMax: 'Abonnement fixe',
     },
     {
-      route: 'MEDIUM',
-      tokens: '~400 K',
-      cost: '~0,20 $',
-      description: 'Feature multi-fichiers avec tests et revue',
+      label: 'Pipeline automatisé (issue→PR→merge)',
+      swarm: '✅ Full auto',
+      claudePro: '❌',
+      claudeMax: '❌',
     },
     {
-      route: 'FULL',
-      tokens: '~550 K',
-      cost: '~0,27 $',
-      description: 'Fonctionnalité complexe avec contrats, parallélisme et gates',
+      label: 'Agents parallèles',
+      swarm: '✅ 9 agents + 2 utilitaires',
+      claudePro: '❌ Mono-agent',
+      claudeMax: '❌ Mono-agent',
+    },
+    {
+      label: 'Gates qualité (tests + review)',
+      swarm: '✅ Tester + Reviewer',
+      claudePro: '❌ Aucune',
+      claudeMax: '❌ Aucune',
+    },
+    {
+      label: 'Intégration Git native',
+      swarm: '✅ Branche → PR → Merge',
+      claudePro: '❌',
+      claudeMax: '❌',
+    },
+    {
+      label: 'Contexte maximum',
+      swarm: '1M tokens (DeepSeek V4 Pro)',
+      claudePro: '~200K tokens',
+      claudeMax: '~200K tokens (usage étendu)',
+    },
+    {
+      label: 'Sessions effectives / jour',
+      swarm: '~2–5 sessions agentiques complètes',
+      claudePro: '~1–2 conversations longues',
+      claudeMax: '~5–10 conversations longues',
+    },
+    {
+      label: 'Déploiement automatisé',
+      swarm: '✅ Vercel + Render + Supabase',
+      claudePro: '❌ Manuel',
+      claudeMax: '❌ Manuel',
+    },
+    {
+      label: 'Documentation auto',
+      swarm: '✅ CHANGELOG, README, ARCHITECTURE',
+      claudePro: '❌',
+      claudeMax: '❌',
+    },
+    {
+      label: 'Contrats TypeScript / OpenAPI',
+      swarm: '✅ Génération automatique',
+      claudePro: '❌',
+      claudeMax: '❌',
     },
   ];
 
-  protected readonly costComparisonNote =
-    'Estimations basées sur la tarification API DeepSeek V4 Pro (juin 2025). 40 sessions MEDIUM/mois = usage intensif (~2 features/jour). Coûts réels variables selon le volume et la complexité. La Swarm fonctionne en API — vous ne payez que les tokens consommés, sans abonnement.';
+  protected readonly claudeComparisonNote =
+    'Comparaison à juin 2025. Les tarifs Claude Pro/Max sont des abonnements fixes sans frais de token supplémentaires dans la limite des quotas. La Swarm fonctionne en API — vous ne payez que les tokens consommés, sans abonnement.';
 
   /* ==========================================================================
    * Données — Section 6 : Modèle d'IA

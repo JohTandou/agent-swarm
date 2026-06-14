@@ -40,7 +40,3 @@ Tâche : « Trouve tous les composants qui utilisent le service Toast ». L'agen
 1. Lance `grep` pour `ToastService` dans tous les fichiers `.ts`
 2. Utilise `glob` pour trouver les fichiers `*.component.ts` qui importent ToastService
 3. Retourne la liste des composants avec leur emplacement
-
-## Modèle
-
-Utilise **DeepSeek V4 Pro**, comme tous les agents de la Swarm.

@@ -51,7 +51,3 @@ Tâche : « Valider le nouveau composant NotificationList ». L'agent tester :
 4. Exécute `ng test` → 12/12 PASS, couverture 92%
 5. Exécute `npx playwright test` → 3/3 PASS
 6. Produit le rapport : « Gate 1 — PASS — Couverture 92% — Prêt pour review »
-
-## Modèle
-
-Tous les agents de la Swarm utilisent **DeepSeek V4 Pro** — contexte de 1M tokens, raisonnement architectural, génération de code. Aucune dégradation entre agents : chacun bénéficie de la pleine puissance du modèle.

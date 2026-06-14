@@ -114,7 +114,7 @@ describe('AgentsListComponent', () => {
     expect(component.getRouteColor('DIRECT')).toBe('#7A8899');
     expect(component.getRouteColor('SIMPLE')).toBe('#7A8899');
     expect(component.getRouteColor('ADAPT')).toBe('#C4780D');
-    expect(component.getRouteColor('MEDIUM')).toBe('#C4780D');
+    expect(component.getRouteColor('MEDIUM')).toBe('#7A8899');
     expect(component.getRouteColor('INCONNUE')).toBe('#7A8899'); // fallback
   });
 
@@ -161,7 +161,7 @@ describe('AgentsListComponent', () => {
   it('devrait afficher le rôle de l\'agent dans la carte', () => {
     const firstRole = fixture.nativeElement.querySelector('.agents__card-role');
     expect(firstRole).toBeTruthy();
-    expect(firstRole.textContent).toContain("Chef d'orchestre");
+    expect(firstRole.textContent).toContain('Tech Lead');
   });
 
   // TEST 20: should render the route badge avec la bonne couleur
@@ -169,7 +169,7 @@ describe('AgentsListComponent', () => {
     const routeBadge = fixture.nativeElement.querySelector('.agents__card-route') as HTMLElement;
     expect(routeBadge).toBeTruthy();
     expect(routeBadge.textContent?.trim()).toBe('DIRECT');
-    expect(routeBadge.style.color).toBe('rgb(196, 120, 13)');
+    expect(routeBadge.style.color).toBe('rgb(122, 136, 153)');
   });
 
   // TEST 21: should have pipeline animation dots

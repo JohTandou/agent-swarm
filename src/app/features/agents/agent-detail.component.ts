@@ -2,100 +2,10 @@ import { Component, signal, computed, inject, effect } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownRendererComponent } from '../../shared/components/markdown-renderer/markdown-renderer.component';
 import { TocService } from '../../shared/services/toc.service';
-import type { Agent, AgentCategory } from '@shared/models';
+import type { AgentCategory } from '@shared/models';
 import type { TocEntry } from '@shared/models';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
-
-/**
- * Données statiques des agents pour l'affichage du header.
- * Synchronisé avec la liste dans agents-list.component.ts.
- */
-const AGENTS_MAP: Record<string, Agent> = {
-  orchestrateur: {
-    id: 'orchestrateur', name: 'Orchestrateur', emoji: '🎯',
-    role: "Chef d'orchestre du pipeline — classifie, route et supervise",
-    description: "Point d'entrée du pipeline — classifie, route et supervise.",
-    route: 'DIRECT', active: true, category: 'build',
-    sourcePath: 'agents/orchestrateur.md',
-  },
-  general: {
-    id: 'general', name: 'General', emoji: '🤖',
-    role: 'Agent polyvalent pour tâches multi-étapes',
-    description: "Exécute des unités de travail indépendantes.",
-    route: 'ADAPT', active: true, category: 'infrastructure',
-    sourcePath: 'agents/general.md',
-  },
-  planner: {
-    id: 'planner', name: 'Planner', emoji: '🧭',
-    role: 'Planifie le travail en tâches atomiques',
-    description: "Détecte les choix architecturaux.",
-    route: 'MEDIUM', active: true, category: 'build',
-    sourcePath: 'agents/planner.md',
-  },
-  explore: {
-    id: 'explore', name: 'Explore', emoji: '🗺️',
-    role: 'Exploration rapide du codebase',
-    description: "Recherche par motif et mots-clés.",
-    route: 'SIMPLE', active: true, category: 'infrastructure',
-    sourcePath: 'agents/explore.md',
-  },
-  search: {
-    id: 'search', name: 'Search', emoji: '🔎',
-    role: 'Analyse le codebase et cartographie les dépendances',
-    description: "LECTURE SEULE absolue.",
-    route: 'ADAPT', active: true, category: 'infrastructure',
-    sourcePath: 'agents/search.md',
-  },
-  contract: {
-    id: 'contract', name: 'Contract', emoji: '📋',
-    role: 'Écrit les types TypeScript, la spec OpenAPI et les migrations',
-    description: "Source de vérité absolue pour front et back.",
-    route: 'FULL', active: true, category: 'qualité',
-    sourcePath: 'agents/contract.md',
-  },
-  front: {
-    id: 'front', name: 'Front', emoji: '🎨',
-    role: 'Implémente le frontend et génère des composants UI Apple-grade',
-    description: "Responsable de tous les composants visibles.",
-    route: 'SIMPLE', active: true, category: 'build',
-    sourcePath: 'agents/front.md',
-  },
-  back: {
-    id: 'back', name: 'Back', emoji: '⚙️',
-    role: 'Implémente le backend, génère scripts, crons et configurations',
-    description: "Respecte strictement la spécification OpenAPI.",
-    route: 'SIMPLE', active: true, category: 'build',
-    sourcePath: 'agents/back.md',
-  },
-  tester: {
-    id: 'tester', name: 'Tester', emoji: '🧪',
-    role: 'Génère les tests manquants et mesure la couverture',
-    description: "Garant de la qualité logicielle. Seuil 80%.",
-    route: 'SIMPLE', active: true, category: 'qualité',
-    sourcePath: 'agents/tester.md',
-  },
-  reviewer: {
-    id: 'reviewer', name: 'Reviewer', emoji: '🔍',
-    role: 'Gate de sécurité, qualité et audit des tests',
-    description: "Intervient après tester PASS.",
-    route: 'MEDIUM', active: true, category: 'qualité',
-    sourcePath: 'agents/reviewer.md',
-  },
-  writer: {
-    id: 'writer', name: 'Writer', emoji: '✍️',
-    role: 'Met à jour la documentation technique',
-    description: "Maintient CHANGELOG, ARCHITECTURE.md et README.",
-    route: 'MEDIUM', active: true, category: 'qualité',
-    sourcePath: 'agents/writer.md',
-  },
-};
-
-/** Labels des catégories */
-const CATEGORY_LABELS: Record<AgentCategory, string> = {
-  build: 'Build',
-  qualité: 'Qualité',
-  infrastructure: 'Infrastructure',
-};
+import { AGENTS_MAP, CATEGORY_LABELS } from '@shared/data/agents.data';
 
 /**
  * Page de détail d'un agent Swarm.
@@ -122,7 +32,7 @@ export class AgentDetailComponent {
   readonly agentId = signal<string>('');
 
   /** Données de l'agent (undefined si ID invalide) */
-  readonly agent = computed<Agent | undefined>(() => {
+  readonly agent = computed(() => {
     const id = this.agentId();
     return AGENTS_MAP[id];
   });

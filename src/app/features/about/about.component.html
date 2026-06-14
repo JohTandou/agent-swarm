@@ -6,7 +6,7 @@
   <header class="about__hero">
     <p class="about__eyebrow">L'intelligence collective</p>
     <h1 class="about__title" appTextReveal [revealDelay]="200">
-      la Swarm
+      La Swarm
       <span class="about__title-accent">— Neuf agents, un pipeline</span>
     </h1>
     <p class="about__subtitle">
@@ -133,66 +133,11 @@
     <div class="about__section-text about__section-text--centered">
       <h2 class="about__section-title">Neuf agents, une équipe de choc</h2>
       <p class="about__section-lead">
-        Chaque agent de la Swarm correspond à un rôle clé dans une équipe de
-        développement logiciel. Ensemble, ils couvrent l'intégralité du
-        cycle de vie d'un projet.
+        Chaque agent correspond à un rôle clé dans une équipe de développement —
+        du Tech Lead à l'Ingénieur QA, en passant par l'Architecte et le Rédacteur Technique.
       </p>
-    </div>
-
-    <div class="about__team-grid" [appStaggerChildren]="60">
-      <a [routerLink]="['/agents', 'orchestrateur']" class="about__team-card">
-        <img src="/assets/images/avatars/orchestrateur.png" alt="Orchestrateur" class="about__team-avatar" loading="lazy" />
-        <h3 class="about__team-name">Orchestrateur</h3>
-        <p class="about__team-role">Tech Lead</p>
-        <p class="about__team-desc">Classifie, route et supervise. Le chef d'orchestre qui garantit la cohérence du pipeline.</p>
-      </a>
-      <a [routerLink]="['/agents', 'contract']" class="about__team-card">
-        <img src="/assets/images/avatars/contract.png" alt="Contract" class="about__team-avatar" loading="lazy" />
-        <h3 class="about__team-name">Contract</h3>
-        <p class="about__team-role">Architecte</p>
-        <p class="about__team-desc">Définit les types, contrats d'API et schémas. La source de vérité que tous les agents consultent.</p>
-      </a>
-      <a [routerLink]="['/agents', 'front']" class="about__team-card">
-        <img src="/assets/images/avatars/front.png" alt="Front" class="about__team-avatar" loading="lazy" />
-        <h3 class="about__team-name">Front</h3>
-        <p class="about__team-role">Développeur Frontend</p>
-        <p class="about__team-desc">Composants UI Apple-grade, animations cinématiques, accessibilité WCAG.</p>
-      </a>
-      <a [routerLink]="['/agents', 'back']" class="about__team-card">
-        <img src="/assets/images/avatars/back.png" alt="Back" class="about__team-avatar" loading="lazy" />
-        <h3 class="about__team-name">Back</h3>
-        <p class="about__team-role">Développeur Backend</p>
-        <p class="about__team-desc">Scripts, crons, configurations. Respect strict des spécifications OpenAPI.</p>
-      </a>
-      <a [routerLink]="['/agents', 'tester']" class="about__team-card">
-        <img src="/assets/images/avatars/tester.png" alt="Tester" class="about__team-avatar" loading="lazy" />
-        <h3 class="about__team-name">Tester</h3>
-        <p class="about__team-role">Ingénieur QA</p>
-        <p class="about__team-desc">Tests unitaires, couverture à 80%, catégorisation granulaire des erreurs.</p>
-      </a>
-      <a [routerLink]="['/agents', 'reviewer']" class="about__team-card">
-        <img src="/assets/images/avatars/reviewer.png" alt="Reviewer" class="about__team-avatar" loading="lazy" />
-        <h3 class="about__team-name">Reviewer</h3>
-        <p class="about__team-role">Code Reviewer</p>
-        <p class="about__team-desc">Gate de qualité et sécurité. Approuve ou rejette avec une liste précise des problèmes.</p>
-      </a>
-      <a [routerLink]="['/agents', 'writer']" class="about__team-card">
-        <img src="/assets/images/avatars/writer.png" alt="Writer" class="about__team-avatar" loading="lazy" />
-        <h3 class="about__team-name">Writer</h3>
-        <p class="about__team-role">Rédacteur Technique</p>
-        <p class="about__team-desc">Documentation à jour : CHANGELOG, README, ARCHITECTURE. Chaque commit est documenté.</p>
-      </a>
-      <a [routerLink]="['/agents', 'planner']" class="about__team-card">
-        <img src="/assets/images/avatars/planner.png" alt="Planner" class="about__team-avatar" loading="lazy" />
-        <h3 class="about__team-name">Planner</h3>
-        <p class="about__team-role">Chef de Projet</p>
-        <p class="about__team-desc">Planifie le travail en tâches atomiques, détecte les choix architecturaux, soumet à validation.</p>
-      </a>
-      <a [routerLink]="['/agents', 'search']" class="about__team-card">
-        <img src="/assets/images/avatars/search.png" alt="Search" class="about__team-avatar" loading="lazy" />
-        <h3 class="about__team-name">Search</h3>
-        <p class="about__team-role">Analyste</p>
-        <p class="about__team-desc">Cartographie le codebase, identifie les patterns et les dépendances. Lecture seule.</p>
+      <a routerLink="/agents" class="about__cta-link">
+        Découvrir les 9 agents →
       </a>
     </div>
   </article>
@@ -212,7 +157,7 @@
         <span class="about__stat-desc">Chacun expert dans son domaine, comme une véritable équipe de développement</span>
       </div>
       <div class="about__stat-card">
-        <span class="about__stat-number">26</span>
+        <span class="about__stat-number">3</span>
         <span class="about__stat-label">Skills disponibles</span>
         <span class="about__stat-desc">Modules activables à la demande pour étendre les capacités du pipeline</span>
       </div>

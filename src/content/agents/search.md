@@ -50,7 +50,3 @@ Tâche : « Ajouter un système de notifications temps réel ». L'agent search 
 3. Consulte la documentation context7 pour l'API temps réel Supabase
 4. Cartographie les imports et dépendances entre modules concernés
 5. Produit un rapport : patterns détectés, dépendances identifiées, documentation applicable
-
-## Modèle
-
-Tous les agents de la Swarm utilisent **DeepSeek V4 Pro** — contexte de 1M tokens, raisonnement architectural, génération de code. Aucune dégradation entre agents : chacun bénéficie de la pleine puissance du modèle.

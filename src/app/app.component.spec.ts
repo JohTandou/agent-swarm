@@ -131,17 +131,6 @@ describe('AppComponent', () => {
     expect(component.isHomepage()).toBeTrue();
   });
 
-  it('devrait avoir tocOpen initialisé à false', () => {
-    expect(component.tocOpen()).toBeFalse();
-  });
-
-  it('toggleToc() devrait basculer tocOpen', () => {
-    expect(component.tocOpen()).toBeFalse();
-    component.toggleToc();
-    expect(component.tocOpen()).toBeTrue();
-    component.toggleToc();
-    expect(component.tocOpen()).toBeFalse();
-  });
 
   it('closeSidebar() ne devrait pas lever d\'erreur quand la sidebar est déjà fermée', () => {
     component.sidebarOpen.set(false);
@@ -194,7 +183,6 @@ describe('AppComponent', () => {
     expect(component.isMobile()).toBeDefined();
     expect(component.sidebarOpen()).toBeDefined();
     expect(component.isHomepage()).toBeDefined();
-    expect(component.tocOpen()).toBeDefined();
   });
 
   // ─── Test du fil d'Ariane dynamique ───

@@ -278,21 +278,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   /* ==========================================================================
-   * Données — costData
-   * ========================================================================== */
-
-  it('costData devrait avoir 4 entrées', () => {
-    const costs = (component as any).costData;
-    expect(costs.length).toBe(4);
-  });
-
-  it('les routes SIMPLE, ADAPT, MEDIUM et FULL devraient être représentées', () => {
-    const costs = (component as any).costData;
-    const routes = costs.map((c: any) => c.route);
-    expect(routes).toEqual(['SIMPLE', 'ADAPT', 'MEDIUM', 'FULL']);
-  });
-
-  /* ==========================================================================
    * Données — targetAudiences
    * ========================================================================== */
 

@@ -49,7 +49,3 @@ Tâche : « Ajouter une API de gestion des rôles utilisateurs ». L'agent contr
 3. Génère la migration Supabase : `CREATE TABLE user_roles (id uuid, role text, ...)`
 4. Met à jour le barrel export `src/shared/types/index.ts`
 5. Valide que les contrats n'entrent pas en conflit avec l'existant
-
-## Modèle
-
-Tous les agents de la Swarm utilisent **DeepSeek V4 Pro** — contexte de 1M tokens, raisonnement architectural, génération de code. Aucune dégradation entre agents : chacun bénéficie de la pleine puissance du modèle.

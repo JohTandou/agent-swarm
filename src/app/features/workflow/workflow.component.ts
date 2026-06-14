@@ -6,6 +6,7 @@ import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
+import { ROUTE_COSTS, type RouteCost } from '@shared/data/routes.data';
 
 /** Délai de simulation du chargement (ms) */
 const LOADING_SIMULATION_MS = 400;
@@ -99,48 +100,48 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
   protected readonly decisionNodes: readonly DecisionNode[] = [
     {
       route: 'DIRECT',
-      label: 'Correction triviale',
-      description: 'Modification d\'une ligne, typo, commentaire. Aucun agent spécialisé — la correction est appliquée directement.',
+      label: 'Réponse textuelle',
+      description: 'Réponse à une question, commande /slash, information. Aucun agent spécialisé — pas de modification de fichier.',
       complexity: 'Minimale',
-      tokens: '~5 K',
-      cost: '~0,002 $',
-      agents: 'Aucun (direct)',
+      tokens: ROUTE_COSTS['DIRECT'].tokens,
+      cost: ROUTE_COSTS['DIRECT'].cost,
+      agents: ROUTE_COSTS['DIRECT'].agents,
     },
     {
       route: 'SIMPLE',
       label: 'Modification ciblée',
       description: 'Correction ou ajout limité à un fichier. L\'agent adapte le code existant sans planification préalable.',
       complexity: 'Faible',
-      tokens: '~50 K',
-      cost: '~0,02 $',
-      agents: 'Front ou Back → Tester',
+      tokens: ROUTE_COSTS['SIMPLE'].tokens,
+      cost: ROUTE_COSTS['SIMPLE'].cost,
+      agents: ROUTE_COSTS['SIMPLE'].agents,
     },
     {
       route: 'ADAPT',
       label: 'Adaptation transversale',
       description: 'Modification impactant 2–3 fichiers. L\'agent search cartographie les dépendances avant modification.',
       complexity: 'Modérée',
-      tokens: '~120 K',
-      cost: '~0,06 $',
-      agents: 'Search → Front ou Back → Tester',
+      tokens: ROUTE_COSTS['ADAPT'].tokens,
+      cost: ROUTE_COSTS['ADAPT'].cost,
+      agents: ROUTE_COSTS['ADAPT'].agents,
     },
     {
       route: 'MEDIUM',
       label: 'Fonctionnalité multi-fichiers',
       description: 'Feature complète avec planification, génération de tests et revue de code automatisée.',
       complexity: 'Élevée',
-      tokens: '~400 K',
-      cost: '~0,20 $',
-      agents: 'Search → Planner → Front + Back → Tester → Reviewer',
+      tokens: ROUTE_COSTS['MEDIUM'].tokens,
+      cost: ROUTE_COSTS['MEDIUM'].cost,
+      agents: ROUTE_COSTS['MEDIUM'].agents,
     },
     {
       route: 'FULL',
       label: 'Feature complexe avec contrats',
       description: 'Fonctionnalité majeure nécessitant contrats TypeScript, parallélisme front+back, gates qualité et documentation.',
       complexity: 'Maximale',
-      tokens: '~550 K',
-      cost: '~0,27 $',
-      agents: 'Search → Planner → Contract → Front + Back → Tester → Reviewer → Writer',
+      tokens: ROUTE_COSTS['FULL'].tokens,
+      cost: ROUTE_COSTS['FULL'].cost,
+      agents: ROUTE_COSTS['FULL'].agents,
     },
   ];
 
@@ -152,20 +153,20 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
 graph TB
     ISSUE["📋 Issue GitHub"] --> PRESEARCH["🔍 Pre-search<br/>Étape 0.3"]
     PRESEARCH --> CLASSIFY["🏷️ Classification<br/>Route automatique"]
-    CLASSIFY --> DIRECT["⚡ DIRECT"]
+
     CLASSIFY --> ADAPT["🔄 ADAPT"]
     CLASSIFY --> SIMPLE["🔧 SIMPLE"]
     CLASSIFY --> MEDIUM["📦 MEDIUM"]
     CLASSIFY --> FULL["🏗️ FULL"]
 
-    DIRECT --> DONE_DIRECT["✅ Correction directe"]
+
 
     SIMPLE --> SEARCH["🔎 Search<br/>Cartographie"]
-    SEARCH --> IMPL_SIMPLE["💻 Implémentation<br/>Front ou Back"]
+    SEARCH --> IMPL_SIMPLE["💻 Front ou Back<br/>Implémentation"]
     IMPL_SIMPLE --> TEST["🧪 Tester<br/>Génération + exécution tests"]
 
-    ADAPT --> SEARCH_ADAPT["🔎 Search<br/>Analyse dépendances"]
-    SEARCH_ADAPT --> IMPL_ADAPT["💻 Implémentation<br/>Cross-cutting"]
+    ADAPT --> SEARCH_ADAPT["🔎 Search<br/>Cartographie"]
+    SEARCH_ADAPT --> IMPL_ADAPT["💻 Front ou Back<br/>Implémentation"]
     IMPL_ADAPT --> TEST
 
     MEDIUM --> SEARCH_MED["🔎 Search<br/>Cartographie"]
@@ -187,21 +188,17 @@ graph TB
     WRITER --> COMMIT["📝 Commit"]
     COMMIT --> PR["🔀 Pull Request"]
     PR --> MERGE["🎉 Merge"]
-    MERGE --> DONE["🏁 Terminé"]
+
 
     style ISSUE fill:#28231C,stroke:#7A8899,color:#F5F0EB
     style PRESEARCH fill:#1C1812,stroke:#C4780D,color:#C4780D
     style CLASSIFY fill:#1C1812,stroke:#C4780D,color:#C4780D
-    style DONE fill:#0E0C09,stroke:#7A8899,color:#7A8899
-    style DIRECT fill:#0E0C09,stroke:#7A8899,color:#7A8899
     style SIMPLE fill:#1C1812,stroke:#7A8899,color:#F5F0EB
     style ADAPT fill:#1C1812,stroke:#7A8899,color:#F5F0EB
     style MEDIUM fill:#28231C,stroke:#C4780D,color:#C4780D
     style FULL fill:#28231C,stroke:#C4780D,color:#C4780D
     style REVIEW fill:#1C1812,stroke:#C4780D,color:#C4780D
     style MERGE fill:#28231C,stroke:#C4780D,color:#C4780D
-    style DONE_DIRECT fill:#0E0C09,stroke:#7A8899,color:#7A8899
-    style DONE fill:#0E0C09,stroke:#C4780D,color:#C4780D
   \`\`\``;
 
   /* ==========================================================================
@@ -215,32 +212,32 @@ graph TB
   protected readonly preSearchThresholds: readonly PreSearchThreshold[] = [
     {
       route: 'DIRECT',
-      fichiers: '1 fichier, ≤ 3 occurrences',
-      tokens: '< 5 K',
-      classification: 'Modification triviale — exécution immédiate',
+      fichiers: '0 fichier',
+      tokens: `${ROUTE_COSTS['DIRECT'].tokens}`,
+      classification: 'Réponse textuelle — aucun agent déclenché',
     },
     {
       route: 'SIMPLE',
       fichiers: '1 fichier, > 3 occurrences',
-      tokens: '5–50 K',
+      tokens: `${ROUTE_COSTS['SIMPLE'].tokens}`,
       classification: 'Modification ciblée — agent unique',
     },
     {
       route: 'ADAPT',
       fichiers: '2–5 fichiers',
-      tokens: '50–130 K',
+      tokens: `${ROUTE_COSTS['ADAPT'].tokens}`,
       classification: 'Adaptation transversale — search + agent',
     },
     {
       route: 'MEDIUM',
       fichiers: '5–15 fichiers, ≥ 1 feature',
-      tokens: '130–400 K',
+      tokens: `${ROUTE_COSTS['MEDIUM'].tokens}`,
       classification: 'Feature multi-fichiers — planification + tests',
     },
     {
       route: 'FULL',
       fichiers: '> 15 fichiers, contrats nécessaires',
-      tokens: '400 K – 600 K',
+      tokens: `${ROUTE_COSTS['FULL'].tokens}`,
       classification: 'Feature complexe — pipeline complet avec gates',
     },
   ];

@@ -8,7 +8,6 @@ import { Subscription, filter } from 'rxjs';
 import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component';
-import { TableOfContentsComponent } from './shared/components/table-of-contents/table-of-contents.component';
 import { ToasterComponent } from './shared/components/toaster/toaster.component';
 import { SearchModalComponent } from './shared/components/search-modal/search-modal.component';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
@@ -59,7 +58,6 @@ const DYNAMIC_LABELS: Record<string, string> = {
     HeaderComponent,
     SidebarComponent,
     BreadcrumbsComponent,
-    TableOfContentsComponent,
     ToasterComponent,
     UiButtonComponent,
     ScrollProgressComponent,
@@ -96,8 +94,6 @@ export class AppComponent implements OnInit, OnDestroy {
   /** Indique si la route courante est la page d'accueil (full-width) */
   readonly isHomepage = signal(false);
 
-  /** État d'ouverture de l'accordéon TOC sur mobile */
-  readonly tocOpen = signal(false);
 
   /** Fil d'Ariane dynamique construit à partir de l'URL courante */
   readonly breadcrumbs = signal<Breadcrumb[]>([
@@ -150,7 +146,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
           // Ferme la sidebar et le TOC à chaque navigation sur mobile
           this.sidebarOpen.set(false);
-          this.tocOpen.set(false);
 
           // Reset scroll position on navigation
           window.scrollTo({ top: 0, behavior: 'instant' });
@@ -290,10 +285,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.searchService.close();
   }
 
-  /** Bascule l'accordéon TOC sur mobile */
-  toggleToc(): void {
-    this.tocOpen.update((open) => !open);
-  }
 
   /**
    * Retourne l'état de route pour les animations Angular.

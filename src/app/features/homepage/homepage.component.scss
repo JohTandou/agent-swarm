@@ -176,29 +176,6 @@
   50% { background-position: 100% 50%; }
 }
 
-/* Résumé exécutif */
-.homepage__summary {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12px, 2vh, 20px);
-  max-width: 680px;
-  opacity: 0;
-  animation: hero-stagger 0.7s var(--ease-spring) 0.25s forwards;
-}
-
-.homepage__summary-text {
-  font-family: var(--font-body, 'Satoshi', sans-serif);
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
-  line-height: 1.7;
-  color: var(--color-text-secondary, #B0A8A0);
-  margin: 0;
-
-  strong {
-    color: var(--color-text-primary, #F5F0EB);
-    font-weight: 500;
-  }
-}
-
 /* Keyframe stagger pour la section hero */
 @keyframes hero-stagger {
   from {
@@ -418,7 +395,6 @@
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   .homepage__tagline,
-  .homepage__summary,
   .homepage__badge,
   .homepage__scroll-hint,
   .homepage__nav-card {

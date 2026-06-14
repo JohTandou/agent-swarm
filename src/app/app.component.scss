@@ -92,47 +92,4 @@
   max-width: 100% !important;
 }
 
-/* ==========================================================================
-   TOC Mobile — Accordéon pliable
-   ========================================================================== */
-.toc-mobile {
-  margin-bottom: 24px;
-}
 
-.toc-mobile__toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 44px;
-}
-
-.toc-mobile__chevron {
-  font-size: 0.625rem;
-  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
-  color: var(--color-text-secondary);
-
-  &--open {
-    transform: rotate(180deg);
-  }
-}
-
-.toc-mobile__content {
-  margin-top: 8px;
-  padding: 12px 16px;
-  background: var(--color-bg-elevated);
-  border: 1px solid rgba(122, 136, 153, 0.1);
-  border-radius: 10px;
-  animation: tocSlideDown 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes tocSlideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}

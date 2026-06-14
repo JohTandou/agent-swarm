@@ -17,15 +17,27 @@
         <li class="sidebar__item">
           @if (item.children && item.children.length > 0) {
             <!-- Menu parent pliable -->
-            <button
+            <div
               class="sidebar__link sidebar__link--parent"
               [class.sidebar__link--expanded]="item.expanded"
-              (click)="toggleExpanded(item)"
-              [attr.aria-expanded]="item.expanded"
+              routerLinkActive="sidebar__link--active"
+              [routerLinkActiveOptions]="{ exact: true }"
             >
-              <span>{{ item.label }}</span>
-              <span class="sidebar__chevron" aria-hidden="true">▼</span>
-            </button>
+              <a
+                class="sidebar__parent-label"
+                [routerLink]="item.route"
+                (click)="isMobile && closeSidebar.emit()"
+              >{{ item.label }}</a>
+              <button
+                class="sidebar__expand-btn"
+                (click)="toggleExpanded(item)"
+                [attr.aria-expanded]="item.expanded"
+                [attr.aria-label]="(item.expanded ? 'Réduire' : 'Déplier') + ' ' + item.label"
+                type="button"
+              >
+                <span class="sidebar__chevron" aria-hidden="true">▼</span>
+              </button>
+            </div>
             @if (item.expanded) {
               <ul class="sidebar__sublist">
                 @for (child of item.children; track child.route) {

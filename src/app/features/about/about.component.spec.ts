@@ -54,25 +54,6 @@ describe('AboutComponent', () => {
     expect(titles).toContain('Un pipeline, neuf expertises');
   });
 
-  it('devrait afficher 9 cartes d\'équipe', () => {
-    const teamCards = fixture.nativeElement.querySelectorAll('.about__team-card');
-    expect(teamCards.length).toBe(9);
-  });
-
-  it('devrait afficher les noms des agents dans les cartes d\'équipe', () => {
-    const teamNames = fixture.nativeElement.querySelectorAll('.about__team-name');
-    const names = Array.from<Element>(teamNames).map((el) => (el as HTMLElement).textContent?.trim());
-    expect(names).toContain('Orchestrateur');
-    expect(names).toContain('Contract');
-    expect(names).toContain('Front');
-    expect(names).toContain('Back');
-    expect(names).toContain('Tester');
-    expect(names).toContain('Reviewer');
-    expect(names).toContain('Writer');
-    expect(names).toContain('Planner');
-    expect(names).toContain('Search');
-  });
-
   it('devrait afficher 6 cartes de statistiques', () => {
     const statCards = fixture.nativeElement.querySelectorAll('.about__stat-card');
     expect(statCards.length).toBe(6);
@@ -82,7 +63,7 @@ describe('AboutComponent', () => {
     const statNumbers = fixture.nativeElement.querySelectorAll('.about__stat-number');
     const numbers = Array.from<Element>(statNumbers).map((el) => (el as HTMLElement).textContent?.trim());
     expect(numbers).toContain('9');
-    expect(numbers).toContain('26');
+    expect(numbers).toContain('3');
     expect(numbers).toContain('5');
     expect(numbers).toContain('80%');
     expect(numbers).toContain('6');

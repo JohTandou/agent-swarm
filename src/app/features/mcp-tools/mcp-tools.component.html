@@ -159,52 +159,7 @@
         </div>
       </section>
 
-      <!-- Wow moment — Playground interactif -->
-      <section class="mcp-tools__playground" aria-label="Essayez les paramètres">
-        <h2 class="mcp-playground__title">Essayez les paramètres</h2>
-        <p class="mcp-playground__subtitle">{{ data.playgroundLabel }}</p>
 
-        <div class="mcp-playground__form">
-          @for (tool of data.tools.slice(0, 4); track tool.name) {
-            @for (param of tool.params; track param) {
-              <div class="mcp-playground__field">
-                <label class="mcp-playground__label" [attr.for]="'param-' + param">
-                  {{ param }}
-                  <span class="mcp-playground__tool-ref">({{ tool.name }})</span>
-                </label>
-                <input
-                  class="mcp-playground__input"
-                  [attr.id]="'param-' + param"
-                  type="text"
-                  [placeholder]="'Valeur pour ' + param + '…'"
-                  [value]="playgroundValue(param)"
-                  (input)="updatePlaygroundParam(param, $event)"
-                />
-              </div>
-            }
-          }
-        </div>
-
-        <div class="mcp-playground__actions">
-          <app-ui-button variant="primary" size="sm" (click)="togglePlaygroundResult()" [attr.aria-expanded]="playgroundVisible()">
-            <span aria-hidden="true">⚡</span>
-            {{ playgroundVisible() ? 'Masquer le résultat' : 'Assembler les paramètres' }}
-          </app-ui-button>
-        </div>
-
-        @if (playgroundVisible()) {
-          <div class="mcp-playground__result" aria-live="polite">
-            <div class="mcp-result__header">
-              <span class="mcp-result__dot" aria-hidden="true"></span>
-              Résultat simulé
-            </div>
-            <pre class="mcp-result__code"><code>{{ playgroundPayload() }}</code></pre>
-            <p class="mcp-result__note">
-              Ceci est une simulation visuelle — aucun appel réel n'est effectué. Dans la Swarm, ces paramètres seraient transmis aux agents via le protocole MCP.
-            </p>
-          </div>
-        }
-      </section>
     }
     </div>
   }

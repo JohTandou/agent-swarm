@@ -819,6 +819,18 @@ $section-padding-mobile: 64px 20px;
 }
 
 /* --------------------------------------------------------------------------
+   Note tarifaire sous l'arbre de décision
+   -------------------------------------------------------------------------- */
+.tree-note {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
    Accessibilité — Réduire le mouvement
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
@@ -826,5 +838,14 @@ $section-padding-mobile: 64px 20px;
   .homepage__hero::before,
   .about__hero::after {
     opacity: 0.06;
+  }
+}
+
+/* Badge ambré pour MEDIUM/FULL dans le tableau pré-search */
+.pre-search__badge--amber {
+  ::ng-deep .ui-badge {
+    color: var(--color-accent) !important;
+    border-color: rgba(196, 120, 13, 0.4) !important;
+    background: rgba(196, 120, 13, 0.08) !important;
   }
 }
