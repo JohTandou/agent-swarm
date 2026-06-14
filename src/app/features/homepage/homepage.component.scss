@@ -188,6 +188,29 @@
   }
 }
 
+/* Résumé exécutif — 3 paragraphes sous la tagline */
+.homepage__summary {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.homepage__summary-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin: 0;
+
+  strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+}
+
 /* Keyframe pour l'indicateur de scroll — préserve le centrage horizontal */
 @keyframes scroll-hint-appear {
   from {
