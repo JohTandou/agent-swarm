@@ -22,17 +22,6 @@ interface ComparisonEntry {
 }
 
 /**
- * Données structurées pour la section Comparaison système.
- */
-interface SystemComparison {
-  readonly system: string;
-  readonly type: string;
-  readonly architecture: string;
-  readonly forces: string;
-  readonly weaknesses: string;
-}
-
-/**
  * Données structurées pour les piliers d'innovation.
  */
 interface Pillar {
@@ -117,68 +106,6 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
       withoutSwarm: 'Souvent obsolète avant même la fin du sprint. Écrite après coup, jamais prioritaire',
       withSwarm: 'Documentation générée automatiquement à chaque merge, toujours à jour, toujours en français',
       improvement: 'Docs vivantes, jamais obsolètes',
-    },
-    {
-      label: 'Coût',
-      withoutSwarm: '150–250 K€/an par développeur senior. Le coût d\'opportunité des bugs est massif',
-      withSwarm: `${ROUTE_COSTS['MEDIUM'].cost} par session MEDIUM (${ROUTE_COSTS['MEDIUM'].tokens} tokens, 17 appels LLM, tarification DeepSeek V4 Pro). ~8–25 $/mois en usage intensif (40–125 sessions)`,
-      improvement: '~8 $/mois en usage intensif. 2,5× moins qu\'un assistant IA, 25× moins qu\'un pipeline agentic comparable',
-    },
-  ];
-
-  /* ==========================================================================
-   * Données — Section 3 : Comparaison systèmes agentiques
-   * ========================================================================== */
-
-  protected readonly systemComparisons: readonly SystemComparison[] = [
-    {
-      system: 'Agent conversationnel (type Claude Code)',
-      type: 'Agent conversationnel',
-      architecture: 'Monolithique — un seul agent pour tout',
-      forces: 'Excellente compréhension du code, itération rapide en session',
-      weaknesses: 'Pas de parallélisme. Pas de gates qualité. Un seul modèle = pas d\'optimisation de coût. Pas d\'intégration Git native (branche→PR→merge)',
-    },
-    {
-      system: 'IDE agentic (type Cursor)',
-      type: 'Agent IDE intégré',
-      architecture: 'Agent unique couplé à l\'IDE',
-      forces: 'Très bonne expérience développeur, édition inline',
-      weaknesses: 'Pas de pipeline. Pas de planification architecturale. Pas de tests automatisés. Dépendant de l\'interface IDE',
-    },
-    {
-      system: 'IDE inline (type Copilot)',
-      type: 'Auto-complétion + agent',
-      architecture: 'Suggestions inline + agent Workspace',
-      forces: 'Intégration GitHub native, gratuit pour les projets solo',
-      weaknesses: 'Pas de planification. Pas de gates qualité. Un seul modèle. Pas de parallélisme front+back. Pas de documentation automatique',
-    },
-    {
-      system: 'Agent full-stack autonome (type Devin)',
-      type: 'Agent full-stack autonome',
-      architecture: 'Agent unique avec sandbox',
-      forces: 'Autonome, peut exécuter du code en sandbox',
-      weaknesses: 'Très lent (heures pour des tâches simples). Pas de parallélisme. Coût élevé (500 $/mois). Pas de classification automatique de complexité. Pas de gates qualité',
-    },
-    {
-      system: 'Aider',
-      type: 'Agent CLI autonome',
-      architecture: 'Agent unique avec édition de fichiers',
-      forces: 'Multi-modèles, très bon pour l\'édition ciblée',
-      weaknesses: 'Pas de pipeline. Pas de parallélisme. Pas de planification. Pas de gates qualité. Pas de documentation automatique',
-    },
-    {
-      system: 'CrewAI / AutoGen',
-      type: 'Framework multi-agents',
-      architecture: 'Orchestrateur + agents spécialisés',
-      forces: 'Multi-agents natif, configuration flexible',
-      weaknesses: 'Nécessite configuration manuelle. Pas de classification automatique. Pas d\'intégration Git native. Pas de gates qualité automatisées. Pas de routine front+back parallèle documentée',
-    },
-    {
-      system: 'Swarm',
-      type: 'Pipeline full-stack autonome',
-      architecture: 'Routage intelligent → planification → parallélisme → gates → merge',
-      forces: 'Classification automatique. Parallélisme front+back. Gates qualité (tester + reviewer). Intégration Git native (issue→branche→PR→merge). Documentation automatique. Coût optimisé via API.',
-      weaknesses: 'Limité à 5 cycles et 5 tâches par session. Dépend de la qualité de la planification initiale. Pas de support multi-langages exotiques',
     },
   ];
 
@@ -265,14 +192,8 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     {
       label: 'Contexte maximum',
       swarm: '1M tokens (DeepSeek V4 Pro)',
-      claudePro: '~200K tokens',
-      claudeMax: '~200K tokens (usage étendu)',
-    },
-    {
-      label: 'Sessions effectives / jour',
-      swarm: '~2–5 sessions agentiques complètes',
-      claudePro: '~1–2 conversations longues',
-      claudeMax: '~5–10 conversations longues',
+      claudePro: '1M tokens (Opus 4.8, Sonnet 4.6)',
+      claudeMax: '1M tokens (Opus 4.8, Sonnet 4.6)',
     },
     {
       label: 'Déploiement automatisé',
@@ -363,7 +284,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     },
     {
       audience: 'Startups & indés',
-      description: 'Un coût mensuel inférieur à un abonnement SaaS premium pour une capacité de développement équivalente à une petite équipe. Idéal pour prototyper, itérer et shipper vite.',
+      description: 'Un pipeline de développement qui transforme une issue GitHub en PR mergée, à la vitesse d\'une petite équipe. Idéal pour prototyper, itérer et shipper sans friction.',
     },
   ];
 

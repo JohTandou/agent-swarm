@@ -61,7 +61,7 @@
     <div class="comparison__header reveal-on-scroll">
       <h2 id="comparison-title" class="comparison__title">Développer sans la Swarm,<br>puis avec</h2>
       <p class="comparison__intro">
-        Cinq dimensions critiques où la Swarm transforme radicalement le cycle de développement.
+        Quatre dimensions critiques où la Swarm transforme radicalement le cycle de développement.
       </p>
     </div>
 
@@ -93,9 +93,8 @@
       @for (bar of [
         { label: 'Vitesse', value: '95%', width: '95%', index: 0 },
         { label: 'Qualité (couverture de tests)', value: '≥ 80%', width: '80%', index: 1 },
-        { label: 'Économie (vs pipelines agentic)', value: '25× moins cher', width: '88%', index: 2 },
-        { label: 'Parallélisme', value: '5 tâches simultanées', width: '75%', index: 3 },
-        { label: 'Documentation', value: '100 % synchronisée', width: '100%', index: 4 }
+        { label: 'Parallélisme', value: '5 tâches simultanées', width: '75%', index: 2 },
+        { label: 'Documentation', value: '100 % synchronisée', width: '100%', index: 3 }
       ]; track bar.label) {
       <div class="comparison-bar-wrapper">
         <span class="comparison-bar-wrapper__label">{{ bar.label }}</span>
@@ -114,45 +113,7 @@
   </section>
 
   <!-- =======================================================================
-       Section 3 — Comparaison détaillée vs systèmes agentiques
-       ======================================================================= -->
-  <section class="systems" aria-labelledby="systems-title">
-    <div class="systems__header reveal-on-scroll">
-      <h2 id="systems-title" class="systems__title">Comparaison avec<br>les systèmes agentiques existants</h2>
-      <p class="systems__intro">
-        Le paysage des agents IA est riche. Voici comment la Swarm se positionne face aux solutions
-        les plus avancées du marché.
-      </p>
-    </div>
-
-    <div class="systems__table-wrapper reveal-on-scroll">
-      <table class="systems__table" role="table">
-        <thead>
-          <tr>
-            <th scope="col">Système</th>
-            <th scope="col">Type</th>
-            <th scope="col">Architecture</th>
-            <th scope="col">Forces</th>
-            <th scope="col">Faiblesses vs Swarm</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (sys of systemComparisons; track sys.system; let isLast = $last) {
-          <tr [class.systems__row--swarm]="sys.system === 'Swarm'">
-            <td class="systems__cell-name">{{ sys.system }}</td>
-            <td>{{ sys.type }}</td>
-            <td>{{ sys.architecture }}</td>
-            <td class="systems__cell-forces">{{ sys.forces }}</td>
-            <td class="systems__cell-weaknesses">{{ sys.weaknesses }}</td>
-          </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- =======================================================================
-       Section 4 — 7 piliers d'innovation
+       Section 3 — 7 piliers d'innovation
        ======================================================================= -->
   <section class="pillars" aria-labelledby="pillars-title">
     <div class="pillars__header reveal-on-scroll">
@@ -177,7 +138,7 @@
   </section>
 
   <!-- =======================================================================
-       Section 5 — Analyse des coûts
+       Section 4 — Analyse des coûts
        ======================================================================= -->
   <section class="costs" aria-labelledby="costs-title">
     <div class="costs__header reveal-on-scroll">
@@ -220,7 +181,7 @@
   </section>
 
   <!-- =======================================================================
-       Section 6 — Modèle d'IA
+       Section 5 — Modèle d'IA
        ======================================================================= -->
   <section class="models" aria-labelledby="models-title">
     <div class="models__header reveal-on-scroll">
@@ -249,7 +210,7 @@
   </section>
 
   <!-- =======================================================================
-       Section 7 — Limites du système
+       Section 6 — Limites du système
        ======================================================================= -->
   <section class="limits" aria-labelledby="limits-title">
     <div class="limits__header reveal-on-scroll">
@@ -274,7 +235,7 @@
   </section>
 
   <!-- =======================================================================
-       Section 8 — Pour qui
+       Section 7 — Pour qui
        ======================================================================= -->
   <section class="audience" aria-labelledby="audience-title">
     <div class="audience__header reveal-on-scroll">

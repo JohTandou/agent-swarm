@@ -125,14 +125,6 @@ describe('ProblemInnovationComponent', () => {
     expect(comparison).toBeTruthy();
   });
 
-  it('devrait afficher la section systems', () => {
-    component['loading'].set(false);
-    fixture.detectChanges();
-
-    const systems: HTMLElement = fixture.nativeElement.querySelector('.systems');
-    expect(systems).toBeTruthy();
-  });
-
   it('devrait afficher la section pillars', () => {
     component['loading'].set(false);
     fixture.detectChanges();
@@ -201,9 +193,9 @@ describe('ProblemInnovationComponent', () => {
    * Données — comparisonData
    * ========================================================================== */
 
-  it('comparisonData devrait avoir 5 entrées', () => {
+  it('comparisonData devrait avoir 4 entrées', () => {
     const data = (component as any).comparisonData;
-    expect(data.length).toBe(5);
+    expect(data.length).toBe(4);
   });
 
   it('chaque entrée de comparisonData devrait avoir label, withoutSwarm, withSwarm, improvement', () => {
@@ -216,12 +208,12 @@ describe('ProblemInnovationComponent', () => {
     }
   });
 
-  it('devrait afficher 5 cartes de comparaison dans la section comparison', () => {
+  it('devrait afficher 4 cartes de comparaison dans la section comparison', () => {
     component['loading'].set(false);
     fixture.detectChanges();
 
     const cards = fixture.nativeElement.querySelectorAll('.comparison-card');
-    expect(cards.length).toBe(5);
+    expect(cards.length).toBe(4);
   });
 
   it('chaque carte de comparaison devrait avoir une amélioration visible', () => {
@@ -229,7 +221,7 @@ describe('ProblemInnovationComponent', () => {
     fixture.detectChanges();
 
     const improvements = fixture.nativeElement.querySelectorAll('.comparison-card__improvement');
-    expect(improvements.length).toBe(5);
+    expect(improvements.length).toBe(4);
   });
 
   /* ==========================================================================
@@ -255,26 +247,6 @@ describe('ProblemInnovationComponent', () => {
 
     const cards = fixture.nativeElement.querySelectorAll('.pillar-card');
     expect(cards.length).toBe(7);
-  });
-
-  /* ==========================================================================
-   * Données — systemComparisons
-   * ========================================================================== */
-
-  it('systemComparisons devrait inclure la Swarm', () => {
-    const systems = (component as any).systemComparisons;
-    const swarmEntry = systems.find((s: any) => s.system === 'Swarm');
-    expect(swarmEntry).toBeTruthy();
-  });
-
-  it('la ligne Swarm devrait avoir la classe systems__row--swarm', () => {
-    component['loading'].set(false);
-    fixture.detectChanges();
-
-    const swarmRow: HTMLElement = fixture.nativeElement.querySelector('.systems__row--swarm');
-    expect(swarmRow).toBeTruthy();
-    const name = swarmRow.querySelector('.systems__cell-name');
-    expect(name?.textContent?.trim()).toBe('Swarm');
   });
 
   /* ==========================================================================

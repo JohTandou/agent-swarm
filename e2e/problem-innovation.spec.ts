@@ -27,42 +27,22 @@ test.describe('T4 — Page Problème & Innovation', () => {
   });
 
   test.describe('Section Avant/Après', () => {
-    test('affiche 5 cartes de comparaison', async ({ page }) => {
+    test('affiche 4 cartes de comparaison', async ({ page }) => {
       await page.goto('/probleme-innovation');
       const cards = page.locator('.comparison-card');
-      await expect(cards).toHaveCount(5);
+      await expect(cards).toHaveCount(4);
     });
 
     test('affiche les barres de comparaison animées', async ({ page }) => {
       await page.goto('/probleme-innovation');
       const bars = page.locator('.comparison-bar');
-      await expect(bars).toHaveCount(5);
+      await expect(bars).toHaveCount(4);
     });
 
     test('les barres ont des largeurs cibles via data-width', async ({ page }) => {
       await page.goto('/probleme-innovation');
       const bar = page.locator('.comparison-bar').first();
       await expect(bar).toHaveAttribute('data-width');
-    });
-  });
-
-  test.describe('Section Comparaison systèmes', () => {
-    test('affiche le tableau avec 7 systèmes', async ({ page }) => {
-      await page.goto('/probleme-innovation');
-      const rows = page.locator('.systems__table tbody tr');
-      await expect(rows).toHaveCount(7);
-    });
-
-    test('la ligne Swarm est surlignée', async ({ page }) => {
-      await page.goto('/probleme-innovation');
-      const swarmRow = page.locator('.systems__row--swarm');
-      await expect(swarmRow).toBeVisible();
-    });
-
-    test('mentionne Claude Code, Cursor, Devin dans le tableau', async ({ page }) => {
-      await page.goto('/probleme-innovation');
-      await expect(page.getByText('Claude Code')).toBeVisible();
-      await expect(page.locator('.systems__table').getByText('Devin')).toBeVisible();
     });
   });
 
@@ -87,10 +67,10 @@ test.describe('T4 — Page Problème & Innovation', () => {
       await expect(table).toBeVisible();
     });
 
-    test('compare Swarm vs Claude Max vs Devin', async ({ page }) => {
+    test('compare Swarm vs Claude Pro vs Claude Max', async ({ page }) => {
       await page.goto('/probleme-innovation');
-      await expect(page.locator('.costs__comparison').getByText('Claude Max')).toBeVisible();
-      await expect(page.locator('.costs__comparison').getByText('Devin')).toBeVisible();
+      await expect(page.locator('.costs__comparison-table').getByText('Claude Pro')).toBeVisible();
+      await expect(page.locator('.costs__comparison-table').getByText('Claude Max')).toBeVisible();
     });
   });
 
