@@ -11,7 +11,7 @@ function skillYaml(title: string, category: string, order: number, desc = '', em
 }
 
 /** Nombre total de skills dans CONTENT_REGISTRY */
-const TOTAL_SKILLS = 26;
+const TOTAL_SKILLS = 3;
 
 describe('ContentService — loadSkillsManifest()', () => {
   let service: ContentService;
@@ -30,7 +30,7 @@ describe('ContentService — loadSkillsManifest()', () => {
   });
 
   function flushAllSkills(withResponses?: Map<string, string | { status: number; statusText: string }>): void {
-    // Utiliser match() car toutes les 26 requêtes sont déjà en attente
+    // Utiliser match() car toutes les 3 requêtes sont déjà en attente
     const requests = httpMock.match((r) => r.url.startsWith('/content/skills/'));
     expect(requests.length).toBe(TOTAL_SKILLS);
     for (const req of requests) {

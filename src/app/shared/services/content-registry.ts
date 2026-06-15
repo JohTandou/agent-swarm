@@ -26,7 +26,7 @@ export const CONTENT_REGISTRY: Omit<SearchResult, 'title' | 'description'>[] = [
   { sourcePath: 'agents/general.md', route: '/agents/general', section: 'Agents' },
 
   // ==========================================================================
-  // Skills (26) — src/content/skills/
+  // Skills (3) — src/content/skills/
   // ==========================================================================
   { sourcePath: 'skills/admin-panel.md', route: '/skills/admin-panel', section: 'Skills' },
   { sourcePath: 'skills/audit-gamification.md', route: '/skills/audit-gamification', section: 'Skills' },

@@ -202,7 +202,7 @@ graph TB
     subgraph IDE["🖥️ OpenCode IDE"]
         AGENTS["📜 AGENTS.md<br/>Bible du projet"]
         CONFIG["⚙️ swarm-workflow.json<br/>Configuration"]
-        SKILLS["🧩 Skills (26)<br/>Modules spécialisés"]
+        SKILLS["🧩 Skills (3)<br/>Modules spécialisés"]
     end
 
     IDE --> ORCH["🎯 Orchestrateur<br/>Classification & Routage"]
