@@ -41,9 +41,9 @@ describe('HomepageComponent', () => {
     expect((tagline.textContent ?? '').replace(/\u00A0/g, ' ')).toContain('code, teste, review et déploie');
   });
 
-  it('devrait afficher le résumé exécutif en 3 phrases', () => {
+  it('devrait afficher le résumé exécutif en 2 phrases', () => {
     const paragraphs = fixture.nativeElement.querySelectorAll('.homepage__summary-text');
-    expect(paragraphs.length).toBe(3);
+    expect(paragraphs.length).toBe(2);
   });
 
   it('devrait avoir un indicateur de scroll', () => {
