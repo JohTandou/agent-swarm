@@ -17,4 +17,7 @@ export interface NavItem {
 
   /** État d'expansion du sous-menu — contrôlé par le toggle utilisateur */
   expanded?: boolean;
+
+  /** Si true, le clic sur le label déclenche toggleExpand() + navigation vers children[0].route */
+  expandOnClick?: boolean;
 }

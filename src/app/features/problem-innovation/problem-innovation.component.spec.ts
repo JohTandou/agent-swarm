@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { ProblemInnovationComponent } from './problem-innovation.component';
-import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 
 describe('ProblemInnovationComponent', () => {
   let component: ProblemInnovationComponent;
@@ -9,7 +7,7 @@ describe('ProblemInnovationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProblemInnovationComponent, UiSkeletonComponent],
+      imports: [ProblemInnovationComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProblemInnovationComponent);
@@ -26,41 +24,10 @@ describe('ProblemInnovationComponent', () => {
   });
 
   /* ==========================================================================
-   * État loading
-   * ========================================================================== */
-
-  it('devrait afficher le shimmer skeleton quand loading est true', () => {
-    const loader: HTMLElement = fixture.nativeElement.querySelector('.page-loader');
-    expect(loader).toBeTruthy();
-  });
-
-  it('devrait afficher le skeleton-title dans l\'état loading', () => {
-    const skeletons = fixture.debugElement.queryAll(By.css('app-ui-skeleton'));
-    const titleSkeleton = skeletons.find(
-      (el) => el.componentInstance.variant === 'text' && el.componentInstance.width === '280px'
-    );
-    expect(titleSkeleton).toBeTruthy();
-  });
-
-  it('devrait afficher les skeleton-cards dans l\'état loading', () => {
-    const skeletons = fixture.debugElement.queryAll(By.css('app-ui-skeleton'));
-    const cardSkeletons = skeletons.filter(
-      (el) => el.componentInstance.variant === 'card' && el.componentInstance.height === '180px'
-    );
-    expect(cardSkeletons.length).toBe(3);
-  });
-
-  it('ne devrait pas afficher le contenu principal pendant le loading', () => {
-    const main = fixture.nativeElement.querySelector('.page');
-    expect(main).toBeFalsy();
-  });
-
-  /* ==========================================================================
    * État erreur
    * ========================================================================== */
 
   it('devrait afficher l\'état d\'erreur quand error est défini', () => {
-    component['loading'].set(false);
     component['error'].set('Une erreur est survenue');
     fixture.detectChanges();
 
@@ -69,7 +36,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait afficher le message d\'erreur', () => {
-    component['loading'].set(false);
     component['error'].set('Erreur de chargement');
     fixture.detectChanges();
 
@@ -79,7 +45,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait avoir un bouton retry visible dans l\'état d\'erreur', () => {
-    component['loading'].set(false);
     component['error'].set('Erreur');
     fixture.detectChanges();
 
@@ -88,21 +53,11 @@ describe('ProblemInnovationComponent', () => {
     expect(button.textContent?.trim()).toBe('Réessayer');
   });
 
-  it('ne devrait pas afficher le loader quand il y a une erreur', () => {
-    component['loading'].set(false);
-    component['error'].set('Erreur');
-    fixture.detectChanges();
-
-    const loader = fixture.nativeElement.querySelector('.page-loader');
-    expect(loader).toBeFalsy();
-  });
-
   /* ==========================================================================
    * État succès
    * ========================================================================== */
 
-  it('devrait afficher le contenu principal quand ni loading ni error', () => {
-    component['loading'].set(false);
+  it('devrait afficher le contenu principal', () => {
     fixture.detectChanges();
 
     const main: HTMLElement = fixture.nativeElement.querySelector('.page');
@@ -110,7 +65,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait afficher la section hero', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const hero: HTMLElement = fixture.nativeElement.querySelector('.hero');
@@ -118,7 +72,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait afficher la section comparison', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const comparison: HTMLElement = fixture.nativeElement.querySelector('.comparison');
@@ -126,7 +79,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait afficher la section pillars', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const pillars: HTMLElement = fixture.nativeElement.querySelector('.pillars');
@@ -134,7 +86,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait afficher la section costs', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const costs: HTMLElement = fixture.nativeElement.querySelector('.costs');
@@ -142,7 +93,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait afficher la section models', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const models: HTMLElement = fixture.nativeElement.querySelector('.models');
@@ -150,7 +100,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait afficher la section limits', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const limits: HTMLElement = fixture.nativeElement.querySelector('.limits');
@@ -158,7 +107,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait afficher la section audience', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const audience: HTMLElement = fixture.nativeElement.querySelector('.audience');
@@ -166,7 +114,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait afficher le footer', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const footer: HTMLElement = fixture.nativeElement.querySelector('.page-footer');
@@ -209,7 +156,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait afficher 4 cartes de comparaison dans la section comparison', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const cards = fixture.nativeElement.querySelectorAll('.comparison-card');
@@ -217,7 +163,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('chaque carte de comparaison devrait avoir une amélioration visible', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const improvements = fixture.nativeElement.querySelectorAll('.comparison-card__improvement');
@@ -242,7 +187,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait rendre 7 cartes de pilier dans la section pillars', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const cards = fixture.nativeElement.querySelectorAll('.pillar-card');
@@ -259,7 +203,6 @@ describe('ProblemInnovationComponent', () => {
   });
 
   it('devrait rendre 4 cartes audience', () => {
-    component['loading'].set(false);
     fixture.detectChanges();
 
     const cards = fixture.nativeElement.querySelectorAll('.audience-card');
@@ -291,26 +234,11 @@ describe('ProblemInnovationComponent', () => {
    * Méthode retry()
    * ========================================================================== */
 
-  it('retry() devrait réinitialiser loading à true', () => {
-    component['loading'].set(false);
-    component['retry']();
-    expect(component['loading']()).toBeTrue();
-  });
-
   it('retry() devrait effacer le message d\'erreur', () => {
-    component['loading'].set(false);
     component['error'].set('Ancienne erreur');
     expect(component['error']()).toBe('Ancienne erreur');
 
     component['retry']();
-    expect(component['error']()).toBeNull();
-  });
-
-  it('retry() devrait relancer le chargement avec loading=true', () => {
-    component['loading'].set(false);
-    component['retry']();
-
-    expect(component['loading']()).toBeTrue();
     expect(component['error']()).toBeNull();
   });
 });

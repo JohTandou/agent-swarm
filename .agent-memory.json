@@ -160,6 +160,20 @@
       "status": "APPROVED",
       "tester_pass": true,
       "reviewer_approved": true
+    },
+    {
+      "run_id": "swarm-20260615-3axes",
+      "route": "MEDIUM",
+      "task_type": "feature",
+      "task_title": "Sidebar MCP toggle, breadcrumbs fix, suppression shadow loading",
+      "iterations": 3,
+      "agents_used": ["explore", "front", "tester"],
+      "retry_reasons": ["spec-test-updates-after-loading-removal", "shimmer-to-progress-bar-test-updates"],
+      "status": "done",
+      "tester_pass": true,
+      "reviewer_approved": true,
+      "issue_number": 73,
+      "branch": "feature/swarm-issue-73-sidebar-mcp-toggle-breadcrumbs-fix-suppression-shadow-loading"
     }
   ]
 }

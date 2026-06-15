@@ -237,6 +237,23 @@
    États — Loading, Empty, Error
    ========================================================================== */
 
+.markdown-renderer__loading {
+  padding: 2rem 0;
+}
+
+.markdown-renderer__progress {
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  animation: progress-indeterminate 1.5s var(--ease-out-expo) infinite;
+}
+
+@keyframes progress-indeterminate {
+  0% { width: 0%; margin-left: 0%; }
+  50% { width: 40%; margin-left: 30%; }
+  100% { width: 0%; margin-left: 100%; }
+}
+
 .markdown-error {
   padding: 32px;
   border: 1px solid rgba(196, 120, 13, 0.3);

@@ -4,7 +4,6 @@ import { ActivatedRoute, provideRouter } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { convertToParamMap } from '@angular/router';
 import { McpToolsComponent } from './mcp-tools.component';
-import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 
 describe('McpToolsComponent', () => {
   let component: McpToolsComponent;
@@ -15,7 +14,7 @@ describe('McpToolsComponent', () => {
     paramMapSubject = new BehaviorSubject(convertToParamMap({ category: 'supabase' }));
 
     await TestBed.configureTestingModule({
-      imports: [McpToolsComponent, UiSkeletonComponent],
+      imports: [McpToolsComponent],
       providers: [
         provideRouter([]),
         {
@@ -39,28 +38,7 @@ describe('McpToolsComponent', () => {
   });
 
   /* ==========================================================================
-   * État loading
-   * ========================================================================== */
-
-  it('devrait afficher le skeleton shimmer quand loading est true', () => {
-    const skeleton: HTMLElement = fixture.nativeElement.querySelector('.mcp-tools__skeleton');
-    expect(skeleton).toBeTruthy();
-  });
-
-  it('devrait avoir 6 éléments de navigation dans le skeleton', () => {
-    const navContainer = fixture.nativeElement.querySelector('.mcp-skeleton__nav');
-    const navItems = navContainer.querySelectorAll('app-ui-skeleton');
-    expect(navItems.length).toBe(6);
-  });
-
-  it('devrait avoir 5 lignes de tableau dans le skeleton', () => {
-    const tableContainer = fixture.nativeElement.querySelector('.mcp-skeleton__table');
-    const rows = tableContainer.querySelectorAll('app-ui-skeleton');
-    expect(rows.length).toBe(5);
-  });
-
-  /* ==========================================================================
-   * État succès — après chargement
+   * État succès — contenu directement affiché (données statiques)
    * ========================================================================== */
 
   it('devrait afficher la navigation entre catégories après chargement', fakeAsync(() => {
@@ -204,7 +182,6 @@ describe('McpToolsComponent', () => {
     // Changer vers une catégorie valide pour que retry puisse réussir
     comp.categoryId.set('supabase');
     comp.retry();
-    expect(comp.loading()).toBeTrue();
     expect(comp.error()).toBeNull();
   }));
 

@@ -4,27 +4,6 @@
      ========================================================================== -->
 
 <!-- --------------------------------------------------------------------------
-     État : Chargement (shimmer skeleton)
-     -------------------------------------------------------------------------- -->
-@if (loading()) {
-<div class="page-loader" aria-label="Chargement de la page" role="status">
-  <div class="skeleton-hero">
-    <app-ui-skeleton variant="text" width="280px" height="32px"></app-ui-skeleton>
-    <app-ui-skeleton variant="text" width="60%"></app-ui-skeleton>
-    <app-ui-skeleton variant="text" width="40%"></app-ui-skeleton>
-  </div>
-  <div class="skeleton-section">
-    <app-ui-skeleton variant="text" width="180px" height="20px"></app-ui-skeleton>
-    <div class="skeleton-grid">
-      @for (i of [1,2,3]; track i) {
-      <app-ui-skeleton variant="card" height="180px" [delay]="i * 80"></app-ui-skeleton>
-      }
-    </div>
-  </div>
-</div>
-}
-
-<!-- --------------------------------------------------------------------------
      État : Erreur
      -------------------------------------------------------------------------- -->
 @if (error()) {
@@ -39,7 +18,7 @@
 <!-- --------------------------------------------------------------------------
      État : Succès — Contenu principal
      -------------------------------------------------------------------------- -->
-@if (!loading() && !error()) {
+@if (!error()) {
 <div class="page">
 
   <!-- =======================================================================

@@ -2,18 +2,10 @@ import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef
 import { MarkdownRendererComponent } from '../../shared/components/markdown-renderer/markdown-renderer.component';
 import { AnimationService } from '../../shared/services/animation.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
-import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { ROUTE_COSTS, type RouteCost } from '@shared/data/routes.data';
-
-/** Délai de simulation du chargement (ms) */
-const LOADING_SIMULATION_MS = 400;
-/** Intervalle de vérification DOM prêt (ms) */
-const READY_CHECK_INTERVAL_MS = 100;
-/** Timeout de sécurité vérification DOM (ms) */
-const READY_CHECK_TIMEOUT_MS = 2000;
 
 /** Nœud de l'arbre de décision (une route du pipeline) */
 interface DecisionNode {
@@ -71,7 +63,7 @@ interface SwarmFile {
 @Component({
   selector: 'app-workflow',
   standalone: true,
-  imports: [MarkdownRendererComponent, UiButtonComponent, UiSkeletonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
+  imports: [MarkdownRendererComponent, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
   templateUrl: './workflow.component.html',
   styleUrls: ['./workflow.component.scss'],
 })
@@ -82,7 +74,6 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
    * État du composant
    * ========================================================================== */
 
-  protected readonly loading = signal(true);
   protected readonly error = signal<string | null>(null);
 
   /* ==========================================================================
@@ -384,16 +375,11 @@ gitGraph
   }
 
   protected retry(): void {
-    this.loading.set(true);
     this.error.set(null);
-    this.initContent();
   }
 
   private initContent(): void {
-    // Simulation d'un court chargement (données statiques, transition fluide)
-    setTimeout(() => {
-      this.loading.set(false);
-    }, LOADING_SIMULATION_MS);
+    // Données statiques — aucune initialisation asynchrone nécessaire
   }
 
   ngAfterViewInit(): void {
@@ -409,18 +395,7 @@ gitGraph
    * ========================================================================== */
 
   private async setupScrollAnimations(): Promise<void> {
-    // Attendre que le loading soit terminé
-    if (this.loading()) {
-      const check = setInterval(() => {
-        if (!this.loading()) {
-          clearInterval(check);
-          this.initScrollAnimations();
-        }
-      }, READY_CHECK_INTERVAL_MS);
-      setTimeout(() => clearInterval(check), READY_CHECK_TIMEOUT_MS);
-    } else {
-      this.initScrollAnimations();
-    }
+    this.initScrollAnimations();
   }
 
   private async initScrollAnimations(): Promise<void> {

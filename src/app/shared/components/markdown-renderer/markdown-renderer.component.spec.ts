@@ -77,13 +77,15 @@ Attention : ceci est un avertissement.
   });
 
   describe('État de chargement', () => {
-    it('devrait afficher le shimmer pendant le chargement', () => {
+    it('devrait afficher la barre de progression pendant le chargement', () => {
       component.isLoading = true;
       fixture.detectChanges();
 
-      const loadingEl = fixture.nativeElement.querySelector('.markdown-loading');
+      const loadingEl = fixture.nativeElement.querySelector('.markdown-renderer__loading');
       expect(loadingEl).toBeTruthy();
       expect(loadingEl.getAttribute('aria-busy')).toBe('true');
+      const progressEl = fixture.nativeElement.querySelector('.markdown-renderer__progress');
+      expect(progressEl).toBeTruthy();
     });
 
     it('devrait cacher le contenu pendant le chargement', () => {
@@ -274,7 +276,7 @@ Attention : ceci est un avertissement.
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('.markdown-empty')).toBeFalsy();
-      expect(fixture.nativeElement.querySelector('.markdown-loading')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('.markdown-renderer__loading')).toBeTruthy();
     });
 
     it('ne devrait pas afficher l\'état vide quand errorMessage est défini', () => {
@@ -293,7 +295,7 @@ Attention : ceci est un avertissement.
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('markdown')).toBeTruthy();
-      expect(fixture.nativeElement.querySelector('.markdown-loading')).toBeFalsy();
+      expect(fixture.nativeElement.querySelector('.markdown-renderer__loading')).toBeFalsy();
       expect(fixture.nativeElement.querySelector('.markdown-error')).toBeFalsy();
       expect(fixture.nativeElement.querySelector('.markdown-empty')).toBeFalsy();
     });

@@ -45,12 +45,6 @@ describe('EcosystemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('devrait afficher le loader au chargement', () => {
-    fixture.detectChanges();
-    const loader = fixture.nativeElement.querySelector('.page-loader');
-    expect(loader).toBeTruthy();
-  });
-
   it('devrait afficher le contenu après le chargement', fakeAsync(() => {
     fixture.detectChanges();
     tick(500);
@@ -130,12 +124,6 @@ describe('EcosystemComponent', () => {
     const retryBtn = fixture.nativeElement.querySelector('.error-state app-ui-button');
     expect(retryBtn).toBeTruthy();
     retryBtn.click();
-    fixture.detectChanges();
-
-    const loader = fixture.nativeElement.querySelector('.page-loader');
-    expect(loader).toBeTruthy();
-
-    tick(500);
     fixture.detectChanges();
 
     const main = fixture.nativeElement.querySelector('.page');

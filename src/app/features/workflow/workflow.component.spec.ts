@@ -46,15 +46,9 @@ describe('WorkflowComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('devrait afficher le loader après initialisation', () => {
-    fixture.detectChanges(); // déclenche ngOnInit → loading = true
-    const loader: HTMLElement | null = fixture.nativeElement.querySelector('.page-loader');
-    expect(loader).toBeTruthy();
-  });
-
   it('devrait afficher le contenu après le chargement', fakeAsync(() => {
-    fixture.detectChanges(); // ngOnInit → loading = true, setTimeout(400ms)
-    tick(500);              // avance le temps → loading = false
+    fixture.detectChanges(); // déclenche ngOnInit
+    tick(500);              // avance le temps
     fixture.detectChanges(); // met à jour la vue
 
     const main: HTMLElement | null = fixture.nativeElement.querySelector('.page');
@@ -68,7 +62,7 @@ describe('WorkflowComponent', () => {
 
     const title: HTMLElement | null = fixture.nativeElement.querySelector('#hero-title');
     expect(title).toBeTruthy();
-    expect(title!.textContent?.trim().replace(/\u00A0/g, ' ')).toBe('De l\'issue au merge — sans effort');
+    expect(title!.textContent?.trim().replace(/\u00A0/g, ' ')).toBe("De l'analyse au merge, chaque étape automatisée");
   }));
 
   it('devrait afficher les 5 nœuds de décision', fakeAsync(() => {
@@ -127,13 +121,14 @@ describe('WorkflowComponent', () => {
     expect(fileCards.length).toBe(2);
   }));
 
-  it('devrait avoir les 3 statistiques dans le hero', fakeAsync(() => {
+  it('devrait avoir la structure du hero complète', fakeAsync(() => {
     fixture.detectChanges();
     tick(500);
     fixture.detectChanges();
 
-    const stats: NodeListOf<Element> = fixture.nativeElement.querySelectorAll('.hero__stat');
-    expect(stats.length).toBe(3);
+    expect(fixture.nativeElement.querySelector('.hero__kicker')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('.hero__title')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('.hero__subtitle')).toBeTruthy();
   }));
 
   it('devrait gérer l\'état d\'erreur via retry()', fakeAsync(() => {
@@ -154,12 +149,6 @@ describe('WorkflowComponent', () => {
     const retryBtn: HTMLElement | null = fixture.nativeElement.querySelector('.error-state app-ui-button');
     expect(retryBtn).toBeTruthy();
     retryBtn!.click();
-    fixture.detectChanges();
-
-    const loader: HTMLElement | null = fixture.nativeElement.querySelector('.page-loader');
-    expect(loader).toBeTruthy();
-
-    tick(500);
     fixture.detectChanges();
 
     const main: HTMLElement | null = fixture.nativeElement.querySelector('.page');

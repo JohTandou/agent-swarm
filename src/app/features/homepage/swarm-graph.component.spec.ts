@@ -27,12 +27,12 @@ describe('SwarmGraphComponent', () => {
     expect(component.tooltip()).toBeNull();
   });
 
-  it('devrait afficher le skeleton de chargement initialement', () => {
+  it('devrait afficher l\'état de chargement initialement', () => {
     fixture.detectChanges();
-    const skeleton: HTMLElement = fixture.nativeElement.querySelector('.swarm-graph__skeleton');
-    expect(skeleton).toBeTruthy();
-    const skeletonText: HTMLElement = fixture.nativeElement.querySelector('.swarm-graph__skeleton-text');
-    expect(skeletonText.textContent?.trim()).toBe("Chargement du graphe d'agents…");
+    const loading: HTMLElement = fixture.nativeElement.querySelector('.swarm-graph__loading');
+    expect(loading).toBeTruthy();
+    const loadingText: HTMLElement = fixture.nativeElement.querySelector('.swarm-graph__loading span');
+    expect(loadingText.textContent?.trim()).toBe('Chargement…');
   });
 
   /* ── État d'erreur ── */
@@ -49,13 +49,13 @@ describe('SwarmGraphComponent', () => {
     expect(errorMsg.textContent?.trim()).toBe('Impossible de charger le graphe.');
   });
 
-  it('ne devrait pas afficher le skeleton en état d\'erreur', () => {
+  it('ne devrait pas afficher l\'état de chargement en état d\'erreur', () => {
     component.loading.set(false);
     component.error.set('Erreur');
     fixture.detectChanges();
 
-    const skeleton = fixture.nativeElement.querySelector('.swarm-graph__skeleton');
-    expect(skeleton).toBeFalsy();
+    const loading = fixture.nativeElement.querySelector('.swarm-graph__loading');
+    expect(loading).toBeFalsy();
   });
 
   /* ── État succès : structure du graphe ── */
@@ -292,14 +292,14 @@ describe('SwarmGraphComponent', () => {
     expect(svg).toBeFalsy();
   });
 
-  it('ne devrait afficher ni skeleton ni erreur en état succès', () => {
+  it('ne devrait afficher ni état de chargement ni erreur en état succès', () => {
     component.loading.set(false);
     component.nodePositions.set([{ id: 'orchestrateur', x: 0, y: 0 }]);
     component.linkPositions.set([]);
     component.linkPositionsMap.set({ orchestrateur: { id: 'orchestrateur', x: 0, y: 0 } });
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.querySelector('.swarm-graph__skeleton')).toBeFalsy();
+    expect(fixture.nativeElement.querySelector('.swarm-graph__loading')).toBeFalsy();
     expect(fixture.nativeElement.querySelector('.swarm-graph__error')).toBeFalsy();
     expect(fixture.nativeElement.querySelector('.swarm-graph__svg')).toBeTruthy();
   });

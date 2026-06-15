@@ -62,12 +62,12 @@ describe('SearchModalComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('devrait afficher le skeleton pendant le chargement', () => {
+  it('devrait afficher le message d\'indexation pendant le chargement', () => {
     component.searchService.isIndexing.set(true);
     fixture.detectChanges();
-    fixture.detectChanges();
-    const skeletons = fixture.nativeElement.querySelectorAll('.search-modal__skeleton');
-    expect(skeletons.length).toBeGreaterThan(0);
+    const indexingEl = fixture.nativeElement.querySelector('.search-modal__indexing');
+    expect(indexingEl).toBeTruthy();
+    expect(indexingEl.textContent?.trim()).toBe('Indexation en cours…');
   });
 
   it('devrait afficher l\'état vide quand isEmpty est true', () => {
