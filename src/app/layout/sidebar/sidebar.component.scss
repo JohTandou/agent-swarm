@@ -154,6 +154,26 @@
   color: var(--color-accent);
 }
 
+/* Parent label en bouton (expandOnClick) — reset et style lien */
+.sidebar__parent-label--btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-accent);
+  }
+}
+
 /* Bouton chevron pour déplier/replier les sous-items */
 .sidebar__expand-btn {
   display: flex;

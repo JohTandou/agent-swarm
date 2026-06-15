@@ -1,15 +1,9 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef } from '@angular/core';
 import { AnimationService } from '../../shared/services/animation.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
-import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { ROUTE_COSTS } from '@shared/data/routes.data';
-
-/* Constantes de configuration */
-const LOADING_SIMULATION_DELAY_MS = 500;
-const READY_CHECK_INTERVAL_MS = 100;
-const READY_CHECK_TIMEOUT_MS = 2000;
 
 /**
  * Données structurées pour la section Avant/Après.
@@ -55,7 +49,7 @@ interface TargetAudience {
 @Component({
   selector: 'app-problem-innovation',
   standalone: true,
-  imports: [UiButtonComponent, UiSkeletonComponent, StaggerChildrenDirective, TextRevealDirective],
+  imports: [UiButtonComponent, StaggerChildrenDirective, TextRevealDirective],
   templateUrl: './problem-innovation.component.html',
   styleUrls: ['./problem-innovation.component.scss'],
 })
@@ -63,9 +57,6 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   /* ==========================================================================
    * État du composant
    * ========================================================================== */
-
-  /** Indique si le contenu est en cours de chargement (shimmer skeleton). */
-  protected readonly loading = signal(true);
 
   /** Message d'erreur éventuel. */
   protected readonly error = signal<string | null>(null);
@@ -303,19 +294,13 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     this.initContent();
   }
 
-  /** Méthode de retry — réinitialise le chargement. */
+  /** Méthode de retry — efface l'erreur. */
   protected retry(): void {
-    this.loading.set(true);
     this.error.set(null);
-    this.initContent();
   }
 
   private initContent(): void {
-    // Simulation d'un court chargement pour afficher le shimmer skeleton
-    // (donne le temps au DOM d'être prêt et crée une transition fluide)
-    setTimeout(() => {
-      this.loading.set(false);
-    }, LOADING_SIMULATION_DELAY_MS);
+    // Données statiques — aucune initialisation asynchrone nécessaire
   }
 
   ngAfterViewInit(): void {
@@ -332,17 +317,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
    * ========================================================================== */
 
   private async setupScrollAnimations(): Promise<void> {
-    if (this.loading()) {
-      const check = setInterval(() => {
-        if (!this.loading()) {
-          clearInterval(check);
-          this.initScrollAnimations();
-        }
-      }, READY_CHECK_INTERVAL_MS);
-      setTimeout(() => clearInterval(check), READY_CHECK_TIMEOUT_MS);
-    } else {
-      this.initScrollAnimations();
-    }
+    this.initScrollAnimations();
   }
 
   private async initScrollAnimations(): Promise<void> {

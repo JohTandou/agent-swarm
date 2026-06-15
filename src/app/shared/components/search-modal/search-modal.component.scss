@@ -170,6 +170,22 @@
 }
 
 /* --------------------------------------------------------------------------
+   État d'indexation — texte avec pulse
+   -------------------------------------------------------------------------- */
+.search-modal__indexing {
+  color: var(--color-text-secondary);
+  font-style: italic;
+  padding: 1rem;
+  text-align: center;
+  animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
    État vide
    -------------------------------------------------------------------------- */
 .search-modal__empty {

@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, inject, signal, computed } from '@angular
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ToastService } from '@shared/services/toast.service';
-import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
@@ -31,7 +30,6 @@ interface McpCategory {
  * Constantes de configuration
  * ========================================================================== */
 
-const LOADING_SIMULATION_MS = 600;
 const CATEGORIES: readonly string[] = ['supabase', 'vercel', 'render', 'playwright', 'context7', 'magic'];
 
 /* ==========================================================================
@@ -268,7 +266,7 @@ const CATEGORY_PREFIXES: Record<string, string> = {
 @Component({
   selector: 'app-mcp-tools',
   standalone: true,
-  imports: [RouterLink, UiSkeletonComponent, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective],
+  imports: [RouterLink, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective],
   templateUrl: './mcp-tools.component.html',
   styleUrls: ['./mcp-tools.component.scss'],
 })
@@ -284,7 +282,6 @@ export class McpToolsComponent implements OnInit, OnDestroy {
    * État du composant
    * ========================================================================== */
 
-  protected readonly loading = signal(true);
   protected readonly error = signal<string | null>(null);
   protected readonly categoryId = signal<string>('supabase');
 
@@ -318,35 +315,28 @@ export class McpToolsComponent implements OnInit, OnDestroy {
    * Méthodes
    * ========================================================================== */
 
-  /** Charge les données de la catégorie avec un délai simulé. */
+  /** Charge les données de la catégorie. */
   private loadCategoryData(): void {
     const id = this.categoryId();
 
     if (!MCP_CATEGORIES[id]) {
-      this.loading.set(false);
       this.error.set(`Catégorie « ${id} » introuvable.`);
       return;
     }
 
-    this.loading.set(true);
     this.error.set(null);
 
-    setTimeout(() => {
-      this.loading.set(false);
-      // Toast de succès après chargement
-      const category = MCP_CATEGORIES[id];
-      if (category) {
-        this.toastService.show(
-          `Catégorie ${category.label} chargée — ${category.tools.length} outils disponibles`,
-          'success',
-        );
-      }
-    }, LOADING_SIMULATION_MS);
+    const category = MCP_CATEGORIES[id];
+    if (category) {
+      this.toastService.show(
+        `Catégorie ${category.label} chargée — ${category.tools.length} outils disponibles`,
+        'success',
+      );
+    }
   }
 
   /** Réinitialise l'état en cas d'erreur. */
   protected retry(): void {
-    this.loading.set(true);
     this.error.set(null);
     this.loadCategoryData();
   }

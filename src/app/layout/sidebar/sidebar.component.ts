@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, Output, EventEmitter, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import type { NavItem } from '@shared/models';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 
@@ -16,6 +16,8 @@ import { UiButtonComponent } from '@shared/components/ui-button/ui-button.compon
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
+  readonly router = inject(Router);
+
   /** Mode mobile pour afficher le bouton close */
   @Input() isMobile = false;
 
@@ -67,6 +69,7 @@ export class SidebarComponent {
       label: 'Outils MCP',
       route: '/outils-mcp',
       expanded: false,
+      expandOnClick: true,
       children: [
         { label: 'Supabase', route: '/outils-mcp/supabase' },
         { label: 'Vercel', route: '/outils-mcp/vercel' },
@@ -97,8 +100,15 @@ export class SidebarComponent {
 
   /** Bascule l'expansion d'un menu parent */
   toggleExpanded(item: NavItem): void {
-    if (item.children) {
-      item.expanded = !item.expanded;
+    if (!item.children) return;
+    item.expanded = !item.expanded;
+    if (item.expandOnClick && item.expanded && item.children.length > 0) {
+      void this.router.navigate([item.children[0].route]);
     }
+  }
+
+  /** Indique si la route courante est un enfant de l'item parent */
+  isParentActive(item: NavItem): boolean {
+    return this.router.url.startsWith(item.route + '/');
   }
 }

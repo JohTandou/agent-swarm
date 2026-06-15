@@ -194,21 +194,22 @@ export class AppComponent implements OnInit, OnDestroy {
       const segment = segments[i];
       accumulatedPath += '/' + segment;
 
+      const isLast = i === segments.length - 1;
+
       // Détermine le label pour ce segment
       let label: string;
 
       if (BREADCRUMB_LABELS[segment]) {
         // Segment connu (ex: "agents", "skills")
         label = BREADCRUMB_LABELS[segment];
-      } else if (i > 0 && DYNAMIC_LABELS[segments[i - 1]]) {
+      } else if (i > 0 && !isLast && DYNAMIC_LABELS[segments[i - 1]]) {
         // Segment dynamique après un préfixe connu (ex: /agents/orchestrateur)
+        // Le dernier segment échappe au label générique pour utiliser capitalize()
         label = DYNAMIC_LABELS[segments[i - 1]];
       } else {
         // Fallback : capitalise le segment
         label = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
       }
-
-      const isLast = i === segments.length - 1;
       crumbs.push({
         label,
         route: isLast ? undefined : accumulatedPath,

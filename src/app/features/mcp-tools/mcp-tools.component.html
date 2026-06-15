@@ -6,32 +6,9 @@
 <section class="mcp-tools" aria-label="Outils MCP">
 
   <!-- ====================================================================
-       ÉTAT : Chargement — Shimmer skeleton
-       ==================================================================== -->
-  @if (loading()) {
-    <div class="mcp-tools__skeleton" aria-busy="true" aria-label="Chargement des outils">
-      <div class="mcp-skeleton__header">
-        <app-ui-skeleton variant="circle" width="40px"></app-ui-skeleton>
-        <app-ui-skeleton variant="text" width="200px" height="24px"></app-ui-skeleton>
-        <app-ui-skeleton variant="text" width="160px"></app-ui-skeleton>
-      </div>
-      <div class="mcp-skeleton__nav">
-        @for (cat of categories; track cat) {
-          <app-ui-skeleton variant="text" width="100%" height="36px"></app-ui-skeleton>
-        }
-      </div>
-      <div class="mcp-skeleton__table">
-        @for (i of [1,2,3,4,5]; track i) {
-          <app-ui-skeleton variant="text" width="100%" height="20px"></app-ui-skeleton>
-        }
-      </div>
-    </div>
-  }
-
-  <!-- ====================================================================
        ÉTAT : Erreur — Message + action de retry
        ==================================================================== -->
-  @else if (error()) {
+  @if (error()) {
     <div class="mcp-tools__error" role="alert">
       <div class="mcp-error__content">
         <span class="mcp-error__icon" aria-hidden="true">⚠️</span>

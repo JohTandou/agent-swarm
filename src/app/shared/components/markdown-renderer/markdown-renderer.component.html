@@ -1,10 +1,8 @@
 <article class="markdown-body" aria-label="Contenu du document">
   <!-- État de chargement -->
   @if (isLoading) {
-    <div class="markdown-loading" aria-live="polite" aria-busy="true">
-      <app-ui-skeleton variant="text" width="100%"></app-ui-skeleton>
-      <app-ui-skeleton variant="text" width="40%"></app-ui-skeleton>
-      <app-ui-skeleton variant="text" width="70%"></app-ui-skeleton>
+    <div class="markdown-renderer__loading" aria-busy="true" aria-label="Chargement du contenu">
+      <div class="markdown-renderer__progress"></div>
     </div>
   }
 

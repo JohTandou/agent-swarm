@@ -1,17 +1,9 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef } from '@angular/core';
 import { MarkdownRendererComponent } from '../../shared/components/markdown-renderer/markdown-renderer.component';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
-import { UiSkeletonComponent } from '@shared/components/ui-skeleton/ui-skeleton.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
-
-/** Délai de simulation du chargement (ms) */
-const LOADING_SIMULATION_MS = 400;
-/** Intervalle de vérification DOM prêt (ms) */
-const READY_CHECK_INTERVAL_MS = 100;
-/** Timeout de sécurité vérification DOM (ms) */
-const READY_CHECK_TIMEOUT_MS = 2000;
 
 /** Entrée de l'arborescence du répertoire */
 interface DirectoryEntry {
@@ -61,7 +53,7 @@ interface Integration {
 @Component({
   selector: 'app-ecosystem',
   standalone: true,
-  imports: [MarkdownRendererComponent, UiButtonComponent, UiSkeletonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
+  imports: [MarkdownRendererComponent, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
   templateUrl: './ecosystem.component.html',
   styleUrls: ['./ecosystem.component.scss'],
 })
@@ -72,7 +64,6 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
    * État du composant
    * ========================================================================== */
 
-  protected readonly loading = signal(true);
   protected readonly error = signal<string | null>(null);
 
   /* ==========================================================================
@@ -269,8 +260,6 @@ graph TB
    * Références DOM pour les animations
    * ========================================================================== */
 
-  private _readyCheckInterval: ReturnType<typeof setInterval> | null = null;
-
   /* ==========================================================================
    * Lifecycle
    * ========================================================================== */
@@ -280,15 +269,11 @@ graph TB
   }
 
   protected retry(): void {
-    this.loading.set(true);
     this.error.set(null);
-    this.initContent();
   }
 
   private initContent(): void {
-    setTimeout(() => {
-      this.loading.set(false);
-    }, LOADING_SIMULATION_MS);
+    // Données statiques — aucune initialisation asynchrone nécessaire
   }
 
   ngAfterViewInit(): void {
@@ -296,7 +281,7 @@ graph TB
   }
 
   ngOnDestroy(): void {
-    this.stopReadyCheck();
+    // Nettoyage automatique via IntersectionObserver.unobserve
   }
 
   /* ==========================================================================
@@ -304,14 +289,7 @@ graph TB
    * ========================================================================== */
 
   private setupScrollAnimations(): void {
-    this._readyCheckInterval = setInterval(() => {
-      if (!this.loading()) {
-        this.stopReadyCheck();
-        this.observeAnimatedElements();
-      }
-    }, READY_CHECK_INTERVAL_MS);
-
-    setTimeout(() => this.stopReadyCheck(), READY_CHECK_TIMEOUT_MS);
+    this.observeAnimatedElements();
   }
 
   /**
@@ -334,12 +312,5 @@ graph TB
     );
 
     revealElements.forEach((el: Element) => scrollObserver.observe(el));
-  }
-
-  private stopReadyCheck(): void {
-    if (this._readyCheckInterval) {
-      clearInterval(this._readyCheckInterval);
-      this._readyCheckInterval = null;
-    }
   }
 }

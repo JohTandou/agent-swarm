@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { of } from 'rxjs';
@@ -115,18 +115,21 @@ describe('SidebarComponent', () => {
     expect(emitSpy).toHaveBeenCalled();
   });
 
-  it('devrait basculer expanded et afficher les enfants au clic sur un parent', () => {
+  it('devrait basculer expanded et afficher les enfants au clic sur le chevron', () => {
     component.isMobile = false;
     fixture.detectChanges();
-    const parentButtons = fixture.nativeElement.querySelectorAll('.sidebar__link--parent');
-    // Cliquer sur "Agents" (premier parent)
-    const agentsBtn: HTMLButtonElement = parentButtons[0];
-    expect(agentsBtn.textContent?.trim()).toContain('Agents');
+    const parentDivs = fixture.nativeElement.querySelectorAll('.sidebar__link--parent');
+    // "Agents" est le premier parent (pas de expandOnClick)
+    const agentsDiv: HTMLElement = parentDivs[0];
+    expect(agentsDiv.textContent?.trim()).toContain('Agents');
     
     // Avant clic : enfants masqués
     expect(fixture.nativeElement.querySelector('.sidebar__sublist')).toBeFalsy();
     
-    agentsBtn.click();
+    // Cliquer sur le bouton chevron à l'intérieur du parent
+    const expandBtn = agentsDiv.querySelector('.sidebar__expand-btn') as HTMLButtonElement;
+    expect(expandBtn).toBeTruthy();
+    expandBtn.click();
     fixture.detectChanges();
     
     // Après clic : enfants visibles
@@ -145,6 +148,21 @@ describe('SidebarComponent', () => {
     const previous = leafItem.expanded;
     component.toggleExpanded(leafItem);
     expect(leafItem.expanded).toBe(previous);
+  });
+
+  it("devrait naviguer vers le premier enfant et basculer expanded quand expandOnClick est true", async () => {
+    const router = TestBed.inject(Router);
+    const navigateSpy = spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
+
+    const outilsMcp = component.navItems.find((item) => item.label === 'Outils MCP');
+    expect(outilsMcp).toBeDefined();
+    expect(outilsMcp!.expandOnClick).toBeTrue();
+    expect(outilsMcp!.expanded).toBeFalse();
+
+    component.toggleExpanded(outilsMcp!);
+
+    expect(outilsMcp!.expanded).toBeTrue();
+    expect(navigateSpy).toHaveBeenCalledWith(['/outils-mcp/supabase']);
   });
 
   it('devrait avoir le role navigation et aria-label', () => {

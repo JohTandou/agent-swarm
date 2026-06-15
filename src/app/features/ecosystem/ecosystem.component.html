@@ -4,27 +4,6 @@
      ========================================================================== -->
 
 <!-- ======================================================================
-     État : Chargement (shimmer skeleton)
-     ====================================================================== -->
-@if (loading()) {
-  <div class="page-loader">
-    <div class="skeleton-hero">
-      <app-ui-skeleton variant="text" width="280px" height="32px"></app-ui-skeleton>
-      <app-ui-skeleton variant="text" width="60%"></app-ui-skeleton>
-      <app-ui-skeleton variant="text" width="40%"></app-ui-skeleton>
-    </div>
-    <div class="skeleton-section">
-      <app-ui-skeleton variant="text" width="180px" height="20px"></app-ui-skeleton>
-      <app-ui-skeleton variant="text" width="100%"></app-ui-skeleton>
-      <div class="skeleton-tree">
-        <app-ui-skeleton variant="card" height="120px" [delay]="0"></app-ui-skeleton>
-        <app-ui-skeleton variant="card" height="120px" [delay]="80"></app-ui-skeleton>
-      </div>
-    </div>
-  </div>
-}
-
-<!-- ======================================================================
      État : Erreur
      ====================================================================== -->
 @if (error()) {
@@ -39,7 +18,7 @@
 <!-- ======================================================================
      Contenu principal
      ====================================================================== -->
-@if (!loading() && !error()) {
+@if (!error()) {
   <main class="page">
 
     <!-- ================================================================

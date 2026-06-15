@@ -56,7 +56,7 @@ interface TooltipData {
  * Utilise D3.js pour la simulation de forces (layout), Angular pour le rendu SVG.
  * Lazy-load D3 pour ne pas bloquer le chargement initial.
  *
- * États gérés : loading (squelette shimmer), error (message + icône), success (graphe interactif).
+ * États gérés : loading (pulse opacity), error (message + icône), success (graphe interactif).
  */
 @Component({
   selector: 'app-swarm-graph',
@@ -65,9 +65,8 @@ interface TooltipData {
     <div class="swarm-graph" #graphContainer>
       <!-- État de chargement -->
       @if (loading()) {
-        <div class="swarm-graph__skeleton" aria-label="Chargement du graphe d'agents">
-          <div class="swarm-graph__skeleton-pulse"></div>
-          <span class="swarm-graph__skeleton-text">Chargement du graphe d'agents…</span>
+        <div class="swarm-graph__loading" aria-label="Chargement du graphe d'agents">
+          <span>Chargement…</span>
         </div>
       }
       <!-- État d'erreur -->
@@ -178,34 +177,21 @@ interface TooltipData {
         overflow: visible;
       }
 
-      /* --- Skeleton loading --- */
-      .swarm-graph__skeleton {
+      /* --- Loading state --- */
+      .swarm-graph__loading {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 16px;
-      }
-      .swarm-graph__skeleton-pulse {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        background: linear-gradient(
-          135deg,
-          var(--color-bg-elevated, #28231C) 0%,
-          rgba(196, 120, 13, 0.1) 40%,
-          var(--color-bg-elevated, #28231C) 100%
-        );
-        background-size: 200% 200%;
-        animation: graph-shimmer 2.2s ease-in-out infinite;
-      }
-      @keyframes graph-shimmer {
-        0%, 100% { background-position: 0% 50%; opacity: 0.4; }
-        50% { background-position: 100% 50%; opacity: 0.75; }
-      }
-      .swarm-graph__skeleton-text {
+        gap: 12px;
+        opacity: 0.6;
+        animation: graph-pulse 1.2s ease-in-out infinite;
         font-family: var(--font-body, 'Satoshi', sans-serif);
-        font-size: 0.875rem;
+        font-size: 0.9375rem;
         color: var(--color-text-secondary, #7A8899);
+      }
+      @keyframes graph-pulse {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 0.8; }
       }
 
       /* --- Error state --- */
