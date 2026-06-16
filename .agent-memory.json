@@ -201,6 +201,19 @@
       "tester_pass": true,
       "issue_number": 77,
       "branch": "feature/swarm-issue-77-workflow-sans-animations-section-3-ecosystem-transitions-fluides"
+    },
+    {
+      "run_id": "swarm-20260615-logo-favicon",
+      "route": "SIMPLE",
+      "task_type": "feature",
+      "task_title": "Nouveau logo et favicon Swarm",
+      "iterations": 1,
+      "agents_used": ["general", "tester"],
+      "retry_reasons": [],
+      "status": "done",
+      "tester_pass": true,
+      "issue_number": 79,
+      "branch": "feature/swarm-issue-79-nouveau-logo-et-favicon-swarm"
     }
   ]
 }

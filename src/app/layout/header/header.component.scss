@@ -74,6 +74,14 @@
   flex-shrink: 0;
 }
 
+/* Logo Swarm */
+.header__brand-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 /* Navigation desktop */
 .header__nav {
   display: flex;
