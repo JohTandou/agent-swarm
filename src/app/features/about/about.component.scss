@@ -139,7 +139,7 @@
   }
 
   .about__section {
-    padding: 48px 0;
+    padding: 48px 24px;
   }
 }
 
@@ -177,47 +177,6 @@
   color: var(--color-text-secondary);
   line-height: 1.7;
   margin: 0 0 32px;
-}
-
-/* ==========================================================================
-   Graphique de complexité (décoratif)
-   ========================================================================== */
-
-.about__complexity-graphic {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 24px;
-  background: var(--color-bg-elevated);
-  border-radius: 16px;
-  border: 1px solid rgba(122, 136, 153, 0.12);
-  box-shadow: var(--elevation-n2);
-}
-
-.about__complexity-node {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--color-accent);
-  opacity: 0;
-  animation: nodePulse 3s ease-in-out infinite;
-
-  @for $i from 1 through 9 {
-    &:nth-child(#{$i}) {
-      animation-delay: #{$i * 0.2}s;
-    }
-  }
-}
-
-@keyframes nodePulse {
-  0%, 100% {
-    opacity: 0.08;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.25;
-    transform: scale(1.1);
-  }
 }
 
 /* ==========================================================================

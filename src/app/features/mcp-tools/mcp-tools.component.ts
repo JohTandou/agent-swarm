@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, inject, signal, computed } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ToastService } from '@shared/services/toast.service';
+
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
@@ -276,7 +276,6 @@ export class McpToolsComponent implements OnInit, OnDestroy {
    * ========================================================================== */
 
   private readonly route = inject(ActivatedRoute);
-  private readonly toastService = inject(ToastService);
 
   /* ==========================================================================
    * État du composant
@@ -326,13 +325,7 @@ export class McpToolsComponent implements OnInit, OnDestroy {
 
     this.error.set(null);
 
-    const category = MCP_CATEGORIES[id];
-    if (category) {
-      this.toastService.show(
-        `Catégorie ${category.label} chargée — ${category.tools.length} outils disponibles`,
-        'success',
-      );
-    }
+    // Toast supprimé — les catégories se chargent sans notification
   }
 
   /** Réinitialise l'état en cas d'erreur. */

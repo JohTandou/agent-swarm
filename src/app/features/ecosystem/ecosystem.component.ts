@@ -212,48 +212,62 @@ graph TB
     BACK --> TEST
     CONTRACT --> TEST
 
-    TEST --> REVIEW["👁️ Reviewer<br/>Score ≥ 0.85"]
+    subgraph finish["finish.ts"]
+      TEST --> REVIEW["👁️ Reviewer<br/>Score ≥ 0.85"]
+      REVIEW -->|"✅ Approuvé"| WRITER["📚 Writer<br/>Documentation"]
+      REVIEW -->|"❌ Rejeté"| FIX["🔄 Corrections"]
+      FIX --> TEST
+      WRITER --> COMMIT["Commit + Push"]
+      COMMIT --> PR["🔀 Pull Request"]
+    end
 
-    REVIEW -->|"✅ Approuvé"| FINISH["🔧 finish.ts<br/>Nettoyage & PR"]
-    REVIEW -->|"❌ Rejeté"| FIX["🔄 Corrections"]
-    FIX --> TEST
-
-    FINISH --> PR["🔀 Pull Request"]
     PR --> MERGE["🎉 Merge sur main"]
-    MERGE --> WRITER["📚 Writer<br/>Documentation"]
 
     subgraph MCP["🔌 Intégrations MCP"]
         SUPABASE["🗄️ Supabase<br/>Postgres + Auth"]
         VERCEL["▲ Vercel<br/>Déploiement CDN"]
         RENDER["⚡ Render<br/>Services + Cron"]
-            PLAYWRIGHT["🎭 Playwright<br/>Tests E2E"]
-            CONTEXT7["📖 Context7<br/>Documentation"]
-            MAGIC["🪄 21st.dev<br/>Composants UI"]
-        end
+        PLAYWRIGHT["🎭 Playwright<br/>Tests E2E"]
+        CONTEXT7["📖 Context7<br/>Documentation"]
+        MAGIC["🪄 21st.dev<br/>Composants UI"]
+    end
 
-        FRONT -.-> VERCEL
-        FRONT -.-> PLAYWRIGHT
-        FRONT -.-> MAGIC
-        BACK -.-> SUPABASE
-        BACK -.-> RENDER
-        TEST -.-> PLAYWRIGHT
-        WRITER -.-> SUPABASE
-        SEARCH -.-> CONTEXT7
-        CONTRACT -.-> CONTEXT7
+    FRONT -.-> VERCEL
+    FRONT -.-> PLAYWRIGHT
+    FRONT -.-> MAGIC
+    BACK -.-> SUPABASE
+    BACK -.-> RENDER
+    TEST -.-> PLAYWRIGHT
+    WRITER -.-> SUPABASE
+    SEARCH -.-> CONTEXT7
+    CONTRACT -.-> CONTEXT7
 
     style IDE fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
-    style ORCH fill:#28231C,stroke:#C4780D,color:#C4780D
+    style AGENTS fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style CONFIG fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style SKILLS fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style ORCH fill:#28231C,stroke:#7A8899,color:#F5F0EB
+    style ISSUE fill:#1C1812,stroke:#7A8899,color:#F5F0EB
     style BRANCH fill:#1C1812,stroke:#7A8899,color:#F5F0EB
     style SEARCH fill:#1C1812,stroke:#7A8899,color:#F5F0EB
-    style PLAN fill:#28231C,stroke:#C4780D,color:#C4780D
+    style PLAN fill:#28231C,stroke:#7A8899,color:#F5F0EB
     style FRONT fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
     style BACK fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
     style CONTRACT fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
     style TEST fill:#1C1812,stroke:#C4780D,color:#C4780D
     style REVIEW fill:#1C1812,stroke:#C4780D,color:#C4780D
-    style MERGE fill:#28231C,stroke:#C4780D,color:#C4780D
-    style WRITER fill:#0E0C09,stroke:#7A8899,color:#7A8899
+    style WRITER fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style COMMIT fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style PR fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style FIX fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style MERGE fill:#28231C,stroke:#7A8899,color:#F5F0EB
     style MCP fill:#0E0C09,stroke:#7A8899,color:#7A8899
+    style SUPABASE fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style VERCEL fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style RENDER fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style PLAYWRIGHT fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style CONTEXT7 fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style MAGIC fill:#0E0C09,stroke:#C4780D,color:#C4780D
   \`\`\``;
 
   /* ==========================================================================
