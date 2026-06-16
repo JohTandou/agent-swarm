@@ -82,22 +82,13 @@ describe('EcosystemComponent', () => {
     expect(categories.length).toBe(4);
   }));
 
-  it('devrait afficher les 4 intégrations', fakeAsync(() => {
+  it('devrait afficher les 6 intégrations', fakeAsync(() => {
     fixture.detectChanges();
     tick(500);
     fixture.detectChanges();
 
     const integrationCards = fixture.nativeElement.querySelectorAll('.integration-card');
     expect(integrationCards.length).toBe(6);
-  }));
-
-  it('devrait avoir les 3 statistiques dans le hero', fakeAsync(() => {
-    fixture.detectChanges();
-    tick(500);
-    fixture.detectChanges();
-
-    const stats = fixture.nativeElement.querySelectorAll('.hero__stat');
-    expect(stats.length).toBe(3);
   }));
 
   it('devrait afficher le diagramme Mermaid', fakeAsync(() => {

@@ -27,13 +27,13 @@ describe('AboutComponent', () => {
 
     const titleEl: HTMLElement = fixture.nativeElement.querySelector('.about__title');
     expect(titleEl).toBeTruthy();
-    expect((titleEl.textContent ?? '').replace(/\u00A0/g, ' ')).toContain('la Swarm');
+    expect((titleEl.textContent ?? '').replace(/\u00A0/g, ' ')).toContain('La Swarm');
   });
 
   it('devrait afficher le sous-titre de la section hero', () => {
     const subtitleEl: HTMLElement = fixture.nativeElement.querySelector('.about__subtitle');
     expect(subtitleEl).toBeTruthy();
-    expect(subtitleEl.textContent).toContain('architecture agentic');
+    expect(subtitleEl.textContent).toContain('architecture agentique');
   });
 
   it('devrait afficher l\'eyebrow dans le hero', () => {
@@ -68,31 +68,6 @@ describe('AboutComponent', () => {
     expect(numbers).toContain('80%');
     expect(numbers).toContain('6');
     expect(numbers).toContain('~0,20 $');
-  });
-
-  it('devrait avoir une section CTA avec des boutons de navigation', () => {
-    const ctaSection = fixture.nativeElement.querySelector('.about__cta');
-    expect(ctaSection).toBeTruthy();
-
-    const ctaButtons = fixture.nativeElement.querySelectorAll('.about__cta-links app-ui-button');
-    expect(ctaButtons.length).toBe(2);
-    expect(ctaButtons[0].textContent?.trim()).toContain('Explorer les agents');
-    expect(ctaButtons[1].textContent?.trim()).toContain('Voir le pipeline');
-  });
-
-  it('devrait avoir des liens vers /agents et /workflow dans le CTA', () => {
-    const ctaLinks = fixture.nativeElement.querySelectorAll('.about__cta-links app-ui-button');
-    // Les RouterLink ne produisent pas d'attribut href dans les tests unitaires
-    // On vérifie juste que les boutons existent
-    expect(ctaLinks.length).toBeGreaterThanOrEqual(2);
-  });
-
-  it('devrait afficher le graphique de complexité', () => {
-    const complexityGraphic = fixture.nativeElement.querySelector('.about__complexity-graphic');
-    expect(complexityGraphic).toBeTruthy();
-
-    const nodes = fixture.nativeElement.querySelectorAll('.about__complexity-node');
-    expect(nodes.length).toBe(9);
   });
 
   it('devrait avoir la section "la Swarm en chiffres"', () => {

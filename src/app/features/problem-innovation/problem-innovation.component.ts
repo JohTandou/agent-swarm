@@ -339,7 +339,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
           if (targetWidth) {
             gsap.to(bar, {
               width: targetWidth,
-              duration: 0.8,
+              duration: 0.5,
               delay: i * 0.1,
               ease: 'power2.out',
               scrollTrigger: {
@@ -360,7 +360,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
           start: 'top 85%',
           once: true,
           onEnter: () => {
-            this.animService.animateCounter(counterEl, 0, 12, 1800);
+            this.animService.animateCounter(counterEl, 0, 12, 1200);
           },
         });
       }

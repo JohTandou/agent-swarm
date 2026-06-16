@@ -93,7 +93,7 @@ export class AnimationService {
     }
 
     const { gsap, ScrollTrigger } = await this.initGsap();
-    const stagger = options?.staggerMs ?? 80;
+    const stagger = options?.staggerMs ?? 60;
 
     elements.forEach((el, i) => {
       const tween = gsap.fromTo(
@@ -102,12 +102,12 @@ export class AnimationService {
         {
           autoAlpha: 1,
           y: 0,
-          duration: 0.6,
+          duration: 0.4,
           delay: i * (stagger / 1000),
           ease: 'power2.out',
           scrollTrigger: {
             trigger: el,
-            start: 'top 85%',
+            start: 'top 75%',
             once: true,
             ...options?.scrollTrigger,
           },

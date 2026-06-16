@@ -182,14 +182,15 @@ graph TB
 
 
     style ISSUE fill:#28231C,stroke:#7A8899,color:#F5F0EB
-    style PRESEARCH fill:#1C1812,stroke:#C4780D,color:#C4780D
-    style CLASSIFY fill:#1C1812,stroke:#C4780D,color:#C4780D
+    style PRESEARCH fill:#1C1812,stroke:#7A8899,color:#7A8899
+    style CLASSIFY fill:#1C1812,stroke:#7A8899,color:#7A8899
     style SIMPLE fill:#1C1812,stroke:#7A8899,color:#F5F0EB
     style ADAPT fill:#1C1812,stroke:#7A8899,color:#F5F0EB
     style MEDIUM fill:#28231C,stroke:#C4780D,color:#C4780D
     style FULL fill:#28231C,stroke:#C4780D,color:#C4780D
     style REVIEW fill:#1C1812,stroke:#C4780D,color:#C4780D
-    style MERGE fill:#28231C,stroke:#C4780D,color:#C4780D
+    style MERGE fill:#28231C,stroke:#7A8899,color:#7A8899
+    style WRITER fill:#28231C,stroke:#C4780D,color:#C4780D
   \`\`\``;
 
   /* ==========================================================================

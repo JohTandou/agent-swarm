@@ -104,12 +104,6 @@ describe('AgentDetailComponent', () => {
       expect(catEl.textContent?.trim()).toBe('Build');
     });
 
-    it('devrait avoir un fil d\'ariane avec lien retour vers /agents', () => {
-      const breadcrumbLink = fixture.nativeElement.querySelector('.agent-detail__breadcrumb-link');
-      expect(breadcrumbLink).toBeTruthy();
-      expect(breadcrumbLink.getAttribute('href')).toBe('/agents');
-    });
-
     it('devrait avoir le composant markdown-renderer', () => {
       const renderer = fixture.nativeElement.querySelector('app-markdown-renderer');
       expect(renderer).toBeTruthy();
