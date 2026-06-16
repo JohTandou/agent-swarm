@@ -48,6 +48,7 @@
   text-decoration: none;
   display: flex;
   align-items: center;
+  gap: 10px;
   min-height: 44px;
   min-width: 44px;
 }
@@ -55,7 +56,8 @@
 .header__brand-text {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.125rem;
+  font-size: 18px;
+  line-height: 1;
   letter-spacing: -0.02em;
   color: var(--color-text-primary);
   transition: color 200ms ease-out, text-shadow 200ms ease-out;
