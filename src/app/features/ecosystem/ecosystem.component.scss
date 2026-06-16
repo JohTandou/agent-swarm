@@ -598,7 +598,7 @@ $section-padding-mobile: 64px 20px;
 .tree-container > *,
 .config-grid > *,
 .integrations-grid > * {
-  animation-delay: calc(var(--stagger-index) * 60ms);
+  transition-delay: calc(var(--stagger-index) * 60ms);
 }
 
 /* --------------------------------------------------------------------------

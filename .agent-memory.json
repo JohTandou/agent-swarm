@@ -188,6 +188,19 @@
       "tester_pass": true,
       "issue_number": 75,
       "branch": "feature/swarm-issue-75-7-corrections-breadcrumbs-dup-about-toasts-animations-graphs"
+    },
+    {
+      "run_id": "swarm-20260615-wf-eco-anim",
+      "route": "SIMPLE",
+      "task_type": "fix",
+      "task_title": "Workflow sans animations section 3+, ecosystem transitions fluides",
+      "iterations": 1,
+      "agents_used": ["explore", "front", "tester"],
+      "retry_reasons": [],
+      "status": "done",
+      "tester_pass": true,
+      "issue_number": 77,
+      "branch": "feature/swarm-issue-77-workflow-sans-animations-section-3-ecosystem-transitions-fluides"
     }
   ]
 }

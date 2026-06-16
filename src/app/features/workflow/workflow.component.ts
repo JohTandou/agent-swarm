@@ -410,19 +410,6 @@ gitGraph
       if (nodeCards.length > 0) {
         await this.animService.revealOnScroll(Array.from(nodeCards), { staggerMs: 60 });
       }
-
-      // Mermaid section highlight
-      const mermaidSection = this.hostRef.nativeElement.querySelector('.mermaid-section');
-      if (mermaidSection) {
-          const { ScrollTrigger } = await this.animService.initGsap();
-            // Utiliser ScrollTrigger pour ajouter la classe mermaid-visible
-        ScrollTrigger.create({
-          trigger: mermaidSection,
-          start: 'top 80%',
-          once: true,
-          onEnter: () => mermaidSection.classList.add('mermaid-visible'),
-        });
-      }
     } catch {
       // Fallback CSS : ajouter .revealed à tous les éléments .reveal-on-scroll
       const all = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll, .node-card');

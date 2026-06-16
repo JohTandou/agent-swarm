@@ -49,7 +49,7 @@
 
       <div class="tree-container" [appStaggerChildren]="60">
         @for (entry of directoryTree; track entry.name; let i = $index) {
-          <div class="dir-card reveal-on-scroll" [style.animation-delay]="(i * 60) + 'ms'">
+          <div class="dir-card reveal-on-scroll" [style.transition-delay]="(i * 60) + 'ms'">
             <div class="dir-card__header">
               <span class="dir-card__icon">{{ entry.icon }}</span>
               <span class="dir-card__name">{{ entry.name }}</span>
@@ -62,7 +62,7 @@
             @if (entry.children) {
               <div class="dir-card__children">
                 @for (child of entry.children; track child.name; let ci = $index) {
-                  <div class="dir-card__child" [style.animation-delay]="(ci * 40) + 'ms'">
+                  <div class="dir-card__child">
                     <span class="dir-card__child-icon">{{ child.icon }}</span>
                     <div class="dir-card__child-content">
                       <span class="dir-card__child-name">{{ child.name }}</span>
@@ -91,7 +91,7 @@
 
       <div class="config-grid" [appStaggerChildren]="60">
         @for (category of workflowCategories; track category.name; let ci = $index) {
-          <div class="config-category reveal-on-scroll" [style.animation-delay]="(ci * 80) + 'ms'">
+          <div class="config-category reveal-on-scroll" [style.transition-delay]="(ci * 80) + 'ms'">
             <div class="config-category__header">
               <span class="config-category__icon">{{ category.icon }}</span>
               <div class="config-category__titles">
@@ -102,7 +102,7 @@
 
             <div class="config-fields">
               @for (field of category.fields; track field.path; let fi = $index) {
-                <div class="config-field reveal-on-scroll" [style.animation-delay]="(fi * 30) + 'ms'">
+                <div class="config-field reveal-on-scroll" [style.transition-delay]="(fi * 30) + 'ms'">
                   <div class="config-field__row">
                     <span class="config-field__label">{{ field.label }}</span>
                     <span class="config-field__value config-field__value--{{ field.type }}">{{ field.value }}</span>
@@ -153,7 +153,7 @@
 
       <div class="integrations-grid" [appStaggerChildren]="60">
         @for (integration of integrations; track integration.name; let ii = $index) {
-          <div class="integration-card reveal-on-scroll" [style.animation-delay]="(ii * 80) + 'ms'">
+          <div class="integration-card reveal-on-scroll" [style.transition-delay]="(ii * 80) + 'ms'">
             <div class="integration-card__header">
               <span class="integration-card__icon">{{ integration.icon }}</span>
               <div class="integration-card__titles">
