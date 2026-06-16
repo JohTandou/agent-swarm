@@ -84,6 +84,12 @@
   flex-shrink: 0;
 }
 
+@media (max-width: 1024px) {
+  .header__brand-logo {
+    height: 14px;
+  }
+}
+
 /* Navigation desktop */
 .header__nav {
   display: flex;
