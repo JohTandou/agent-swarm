@@ -105,7 +105,7 @@
        Section 3 — Diagramme Mermaid du pipeline complet
        ======================================================================= -->
   <section class="mermaid-section" aria-labelledby="pipeline-title">
-    <div class="section-header reveal-on-scroll">
+    <div class="section-header">
       <span class="section-header__kicker">Visualisation</span>
       <h2 id="pipeline-title" class="section-header__title">Pipeline complet</h2>
       <p class="section-header__description">
@@ -115,7 +115,7 @@
       </p>
     </div>
 
-    <div class="mermaid-wrapper reveal-on-scroll">
+    <div class="mermaid-wrapper">
       <app-markdown-renderer
         [content]="mermaidDiagram"
         [enableMermaid]="true"
@@ -128,13 +128,13 @@
        Section 4 — Pré-search expliqué
        ======================================================================= -->
   <section class="pre-search" aria-labelledby="presearch-title">
-      <div class="section-header reveal-on-scroll">
+      <div class="section-header">
       <span class="section-header__kicker">Étape 0.3</span>
       <h2 id="presearch-title" class="section-header__title">{{ preSearchTitle }}</h2>
       <p class="section-header__description">{{ preSearchDescription }}</p>
     </div>
 
-    <div class="pre-search__table-wrapper reveal-on-scroll">
+    <div class="pre-search__table-wrapper">
       <table class="pre-search__table">
         <thead>
           <tr>
@@ -168,7 +168,7 @@
        Section 5 — Gates qualité
        ======================================================================= -->
   <section class="quality-gates" aria-labelledby="gates-title">
-    <div class="section-header reveal-on-scroll">
+    <div class="section-header">
       <span class="section-header__kicker">Contrôle qualité</span>
       <h2 id="gates-title" class="section-header__title">Gates qualité automatisées</h2>
       <p class="section-header__description">
@@ -176,11 +176,10 @@
       </p>
     </div>
 
-    <div class="gates-grid" [appStaggerChildren]="60">
+    <div class="gates-grid">
       @for (gate of qualityGates; track gate.name; let idx = $index) {
       <div
-        class="gate-card reveal-on-scroll"
-        [style.animation-delay]="(idx * 150) + 'ms'"
+        class="gate-card"
       >
         <div class="gate-card__header">
           <span class="gate-card__icon" aria-hidden="true">{{ gate.icon }}</span>
@@ -196,7 +195,7 @@
       }
 
       <!-- Diagramme de flux des gates -->
-      <div class="gate-flow reveal-on-scroll">
+      <div class="gate-flow">
         <div class="gate-flow__step">
           <span class="gate-flow__icon">💻</span>
           <span class="gate-flow__label">Implémentation</span>
@@ -229,7 +228,7 @@
        Section 6 — Intégration Git
        ======================================================================= -->
   <section class="git-integration" aria-labelledby="git-title">
-    <div class="section-header reveal-on-scroll">
+    <div class="section-header">
       <span class="section-header__kicker">Workflow automatisé</span>
       <h2 id="git-title" class="section-header__title">Intégration Git native</h2>
       <p class="section-header__description">
@@ -238,11 +237,10 @@
       </p>
     </div>
 
-    <div class="git-pipeline" [appStaggerChildren]="60">
+    <div class="git-pipeline">
       @for (step of gitSteps; track step.step; let idx = $index) {
       <div
-        class="git-step reveal-on-scroll"
-        [style.animation-delay]="(idx * 120) + 'ms'"
+        class="git-step"
       >
         <div class="git-step__node">
           <span class="git-step__icon" aria-hidden="true">{{ step.icon }}</span>
@@ -260,7 +258,7 @@
       }
     </div>
     <!-- Diagramme gitGraph Mermaid -->
-    <div class="git-graph-wrapper reveal-on-scroll">
+    <div class="git-graph-wrapper">
       <app-markdown-renderer
         [content]="gitGraphDiagram"
         [enableMermaid]="true"
@@ -273,7 +271,7 @@
        Section 7 — Fichiers swarm
        ======================================================================= -->
   <section class="swarm-files" aria-labelledby="files-title">
-    <div class="section-header reveal-on-scroll">
+    <div class="section-header">
       <span class="section-header__kicker">Configuration</span>
       <h2 id="files-title" class="section-header__title">Fichiers Swarm</h2>
       <p class="section-header__description">
@@ -281,11 +279,10 @@
       </p>
     </div>
 
-    <div class="files-grid" [appStaggerChildren]="60">
+    <div class="files-grid">
       @for (file of swarmFiles; track file.name; let idx = $index) {
       <div
-        class="file-card reveal-on-scroll"
-        [style.animation-delay]="(idx * 150) + 'ms'"
+        class="file-card"
       >
         <div class="file-card__header">
           <span class="file-card__icon" aria-hidden="true">{{ file.icon }}</span>
