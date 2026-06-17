@@ -3,18 +3,6 @@
    Header premium + contenu Markdown rendu
    ========================================================================== */
 
-.section--alt {
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--color-bg-subtle);
-    z-index: -1;
-  }
-}
-
 /* --------------------------------------------------------------------------
    Section container
    -------------------------------------------------------------------------- */

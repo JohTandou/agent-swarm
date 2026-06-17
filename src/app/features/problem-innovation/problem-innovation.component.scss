@@ -11,6 +11,46 @@ $section-padding: 100px 24px;
 $section-padding-mobile: 64px 20px;
 
 /* ==========================================================================
+   Section Header — Kicker + titre gradient
+   ========================================================================== */
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 64px;
+
+  &__kicker {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__description {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+}
+
+/* ==========================================================================
    Alternance sections sombres
    ========================================================================== */
 .page > .section--alt {
@@ -89,7 +129,7 @@ $section-padding-mobile: 64px 20px;
 
 
 /* ==========================================================================
-   Section 1 — Hero (100dvh)
+   Section 1 — Hero
    ========================================================================== */
 .hero {
   position: relative;
@@ -160,30 +200,6 @@ $section-padding-mobile: 64px 20px;
   max-width: $content-max;
   margin: 0 auto;
   width: 100%;
-}
-
-.comparison__header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.comparison__title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--color-text-primary);
-  margin-bottom: 16px;
-}
-
-.comparison__intro {
-  font-family: var(--font-body);
-  font-size: 1.125rem;
-  color: var(--color-text-secondary);
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.7;
 }
 
 .comparison__list {
@@ -267,62 +283,6 @@ $section-padding-mobile: 64px 20px;
   font-size: 0.75rem;
 }
 
-/* Barres de comparaison */
-.comparison-bars {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.comparison-bars__title {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--color-text-primary);
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.comparison-bar-wrapper {
-  display: grid;
-  grid-template-columns: 180px 1fr 100px;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.comparison-bar-wrapper__label {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  text-align: right;
-}
-
-.comparison-bar-track {
-  height: 10px;
-  background: rgba(122, 136, 153, 0.15);
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.comparison-bar {
-  height: 100%;
-  border-radius: 5px;
-  transition: width 1200ms var(--ease-out-expo);
-}
-
-.comparison-bar--amber {
-  background: linear-gradient(90deg, rgba(196, 120, 13, 0.7), var(--color-accent));
-  box-shadow: 0 0 8px rgba(196, 120, 13, 0.2);
-}
-
-.comparison-bar-wrapper__value {
-  font-family: var(--font-display);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--color-accent);
-}
-
 /* ==========================================================================
    Section 3 — 7 piliers d'innovation
    ========================================================================== */
@@ -351,30 +311,6 @@ $section-padding-mobile: 64px 20px;
   );
   opacity: 0.4;
   pointer-events: none;
-}
-
-.pillars__header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.pillars__title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--color-text-primary);
-  margin-bottom: 16px;
-}
-
-.pillars__intro {
-  font-family: var(--font-body);
-  font-size: 1.125rem;
-  color: var(--color-text-secondary);
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.7;
 }
 
 .pillars__grid {
@@ -440,30 +376,6 @@ $section-padding-mobile: 64px 20px;
   max-width: $content-max;
   margin: 0 auto;
   width: 100%;
-}
-
-.costs__header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.costs__title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--color-text-primary);
-  margin-bottom: 16px;
-}
-
-.costs__intro {
-  font-family: var(--font-body);
-  font-size: 1.125rem;
-  color: var(--color-text-secondary);
-  max-width: 560px;
-  margin: 0 auto;
-  line-height: 1.7;
 }
 
 .costs__table-wrapper {
@@ -543,30 +455,6 @@ $section-padding-mobile: 64px 20px;
   max-width: $content-max;
   margin: 0 auto;
   width: 100%;
-}
-
-.models__header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.models__title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--color-text-primary);
-  margin-bottom: 16px;
-}
-
-.models__intro {
-  font-family: var(--font-body);
-  font-size: 1.125rem;
-  color: var(--color-text-secondary);
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.7;
 }
 
 .models__grid {
@@ -660,30 +548,6 @@ $section-padding-mobile: 64px 20px;
   width: 100%;
 }
 
-.limits__header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.limits__title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--color-text-primary);
-  margin-bottom: 16px;
-}
-
-.limits__intro {
-  font-family: var(--font-body);
-  font-size: 1.125rem;
-  color: var(--color-text-secondary);
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
-
 .limits__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -740,112 +604,12 @@ $section-padding-mobile: 64px 20px;
 }
 
 /* ==========================================================================
-   Section 7 — Pour qui
-   ========================================================================== */
-.audience {
-  padding: $section-padding;
-  max-width: $content-max;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.audience__header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.audience__title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--color-text-primary);
-  margin-bottom: 16px;
-}
-
-.audience__intro {
-  font-family: var(--font-body);
-  font-size: 1.125rem;
-  color: var(--color-text-secondary);
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
-
-.audience__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-.audience-card {
-  background: var(--color-bg-elevated);
-  border: 1px solid rgba(122, 136, 153, 0.12);
-  border-radius: 14px;
-  padding: 36px;
-  transition: border-color 300ms var(--ease-natural), transform 250ms var(--ease-natural), box-shadow 300ms var(--ease-natural);
-
-  &:hover {
-    border-color: rgba(196, 120, 13, 0.2);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(58, 53, 48, 0.4), 0 0 20px rgba(196, 120, 13, 0.04);
-  }
-}
-
-.audience-card__title {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--color-accent);
-  margin-bottom: 12px;
-}
-
-.audience-card__description {
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
-  line-height: 1.7;
-  color: var(--color-text-secondary);
-  margin: 0;
-}
-
-/* ==========================================================================
-   Footer
-   ========================================================================== */
-.page-footer {
-  padding: 64px 24px;
-  text-align: center;
-  border-top: 1px solid rgba(122, 136, 153, 0.1);
-}
-
-.page-footer__text {
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
-  line-height: 1.7;
-  color: var(--color-text-secondary);
-  max-width: 600px;
-  margin: 0 auto;
-  opacity: 0.8;
-}
-
-/* ==========================================================================
    Responsive — Mobile
    ========================================================================== */
 @media (max-width: 768px) {
   .comparison-card__columns {
     grid-template-columns: 1fr;
     gap: 24px;
-  }
-
-  .comparison-bar-wrapper {
-    grid-template-columns: 110px 1fr 80px;
-    gap: 12px;
-    font-size: 0.8125rem;
-  }
-
-  .comparison-bar-wrapper__label {
-    font-size: 0.75rem;
   }
 
   .pillars::before {
@@ -867,11 +631,6 @@ $section-padding-mobile: 64px 20px;
   .limits__grid {
     grid-template-columns: 1fr;
   }
-
-  .audience__grid {
-    grid-template-columns: 1fr;
-  }
-
 }
 
 /* ==========================================================================
@@ -883,17 +642,12 @@ $section-padding-mobile: 64px 20px;
     transform: none;
     transition: none;
   }
-
-  .comparison-bar {
-    transition: none;
-  }
 }
 
 /* Stagger animation delay */
 .comparison__list > *,
 .pillars__grid > *,
-.limits__grid > *,
-.audience__grid > * {
+.limits__grid > * {
   animation-delay: calc(var(--stagger-index) * 60ms);
 }
 
@@ -909,21 +663,6 @@ $section-padding-mobile: 64px 20px;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.90;
-}
-
-/* --------------------------------------------------------------------------
-   Image double modèle — GPT Image 2.0
-   -------------------------------------------------------------------------- */
-.pi__dual-model-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('/assets/images/dual-model.png');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 0;
 }
 
 /* ==========================================================================
@@ -1027,14 +766,13 @@ $section-padding-mobile: 64px 20px;
 }
 
 /* --------------------------------------------------------------------------
-   Accessibilité — Réduire le mouvement
+   Accessibilité — Réduire le mouvement (images décoratives)
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .hero__bg-decor,
   .homepage__hero::before,
   .about__hero::after,
-  .pi__cost-bg,
-  .pi__dual-model-bg {
+  .pi__cost-bg {
     opacity: 0.06;
   }
 }

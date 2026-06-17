@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef
 import { AnimationService } from '../../shared/services/animation.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
-import { ROUTE_COSTS } from '@shared/data/routes.data';
 
 /**
  * Données structurées pour la section Avant/Après.
@@ -31,19 +30,10 @@ interface LimitCategory {
 }
 
 /**
- * Données structurées pour la section Pour qui.
- */
-interface TargetAudience {
-  readonly audience: string;
-  readonly description: string;
-}
-
-/**
  * Page Problème & Innovation — Composant pur Apple-grade.
  *
- * Présente la proposition de valeur de la Swarm à travers 8 sections
- * en plein écran avec animations au scroll, compteur animé et
- * barres de comparaison.
+ * Présente la proposition de valeur de la Swarm à travers 6 sections
+ * en plein écran avec animations au scroll.
  */
 @Component({
   selector: 'app-problem-innovation',
@@ -100,7 +90,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   ];
 
   /* ==========================================================================
-   * Données — Section 4 : 7 piliers d'innovation
+   * Données — Section 3 : 7 piliers d'innovation
    * ========================================================================== */
 
   protected readonly pillars: readonly Pillar[] = [
@@ -135,7 +125,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   ];
 
   /* ==========================================================================
-   * Données — Section 5 : Analyse des coûts
+   * Données — Section 4 : Analyse des coûts
    * ========================================================================== */
 
   /** Données du tableau comparatif Swarm vs Claude */
@@ -206,7 +196,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     'Comparaison à juin 2025. Les tarifs Claude Pro/Max sont des abonnements fixes sans frais de token supplémentaires dans la limite des quotas. La Swarm fonctionne en API — vous ne payez que les tokens consommés, sans abonnement.';
 
   /* ==========================================================================
-   * Données — Section 6 : Modèle d'IA
+   * Données — Section 5 : Modèle d'IA
    * ========================================================================== */
 
   protected readonly modelInfo = {
@@ -219,7 +209,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   };
 
   /* ==========================================================================
-   * Données — Section 7 : Limites du système
+   * Données — Section 6 : Limites du système
    * ========================================================================== */
 
   protected readonly limits: readonly LimitCategory[] = [
@@ -249,29 +239,6 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
         'Reviewer : ne détecte pas les incohérences métier subtiles',
         'Writer : génère de la documentation technique, pas du contenu marketing',
       ],
-    },
-  ];
-
-  /* ==========================================================================
-   * Données — Section 8 : Pour qui
-   * ========================================================================== */
-
-  protected readonly targetAudiences: readonly TargetAudience[] = [
-    {
-      audience: 'Recruteurs techniques',
-      description: 'Comprenez en 3 minutes la proposition de valeur unique de la Swarm : un pipeline qui transforme une issue GitHub en PR validée, testée et documentée — sans intervention humaine.',
-    },
-    {
-      audience: 'Tech leads & CTO',
-      description: 'Évaluez la Swarm comme un membre d\'équipe virtuel : parallélisme natif, gates qualité automatisées, documentation vivante. Un multiplicateur de vélocité, pas un remplacement.',
-    },
-    {
-      audience: 'Développeurs',
-      description: 'Voyez comment la Swarm élimine les tâches répétitives (tests, documentation, boilerplate) pour vous concentrer sur l\'architecture et les décisions créatives.',
-    },
-    {
-      audience: 'Startups & indés',
-      description: 'Un pipeline de développement qui transforme une issue GitHub en PR mergée, à la vitesse d\'une petite équipe. Idéal pour prototyper, itérer et shipper sans friction.',
     },
   ];
 

@@ -1,6 +1,6 @@
 <!-- ==========================================================================
      Page Problème & Innovation — Template Apple-grade
-     8 sections plein écran, animations au scroll, dark mode exclusif
+     7 sections, animations au scroll, dark mode exclusif
      ========================================================================== -->
 
 <!-- --------------------------------------------------------------------------
@@ -37,11 +37,10 @@
        Section 2 — Avant / Après
        ======================================================================= -->
   <section class="comparison" aria-labelledby="comparison-title">
-    <div class="comparison__header">
-      <h2 id="comparison-title" class="comparison__title">Développer sans la Swarm,<br>puis avec</h2>
-      <p class="comparison__intro">
-        Quatre dimensions critiques où la Swarm transforme radicalement le cycle de développement.
-      </p>
+    <div class="section-header">
+      <span class="section-header__kicker">Avant / Après</span>
+      <h2 class="section-header__title">Développer sans la Swarm,<br>puis avec</h2>
+      <p class="section-header__description">Quatre dimensions critiques où la Swarm transforme radicalement le cycle de développement.</p>
     </div>
 
     <div class="comparison__list">
@@ -65,41 +64,16 @@
       </article>
       }
     </div>
-
-    <!-- Barres de comparaison animées (wow moment) -->
-    <div class="comparison-bars">
-      <h3 class="comparison-bars__title">Impact mesurable</h3>
-      @for (bar of [
-        { label: 'Vitesse', value: '95%', width: '95%', index: 0 },
-        { label: 'Qualité (couverture de tests)', value: '≥ 80%', width: '80%', index: 1 },
-        { label: 'Parallélisme', value: '5 tâches simultanées', width: '75%', index: 2 },
-        { label: 'Documentation', value: '100 % synchronisée', width: '100%', index: 3 }
-      ]; track bar.label) {
-      <div class="comparison-bar-wrapper">
-        <span class="comparison-bar-wrapper__label">{{ bar.label }}</span>
-        <div class="comparison-bar-track">
-          <div
-            class="comparison-bar comparison-bar--amber"
-            [attr.data-width]="bar.width"
-            [attr.data-index]="bar.index"
-            style="width: 0%"
-          ></div>
-        </div>
-        <span class="comparison-bar-wrapper__value">{{ bar.value }}</span>
-      </div>
-      }
-    </div>
   </section>
 
   <!-- =======================================================================
        Section 3 — 7 piliers d'innovation
        ======================================================================= -->
   <section class="pillars section--alt" aria-labelledby="pillars-title">
-    <div class="pillars__header">
-      <h2 id="pillars-title" class="pillars__title">Les 7 piliers<br>d'innovation</h2>
-      <p class="pillars__intro">
-        Chaque pilier résout un problème structurel du développement logiciel assisté par IA.
-      </p>
+    <div class="section-header">
+      <span class="section-header__kicker">Innovation</span>
+      <h2 class="section-header__title">Les 7 piliers<br>d'innovation</h2>
+      <p class="section-header__description">Chaque pilier résout un problème structurel du développement logiciel assisté par IA.</p>
     </div>
 
     <div class="pillars__grid">
@@ -119,12 +93,10 @@
        Section 4 — Analyse des coûts
        ======================================================================= -->
   <section class="costs" aria-labelledby="costs-title">
-    <div class="costs__header">
-      <h2 id="costs-title" class="costs__title">Analyse des coûts</h2>
-      <p class="costs__intro">
-        Transparence totale sur l'économie de la Swarm. Chaque session a un coût prévisible,
-        proportionnel à sa complexité.
-      </p>
+    <div class="section-header">
+      <span class="section-header__kicker">Transparence</span>
+      <h2 class="section-header__title">Analyse des coûts</h2>
+      <p class="section-header__description">Transparence totale sur l'économie de la Swarm. Chaque session a un coût prévisible, proportionnel à sa complexité.</p>
     </div>
 
     <h3 class="costs__comparison-title">Swarm vs Claude Pro vs Claude Max</h3>
@@ -160,12 +132,10 @@
        Section 5 — Modèle d'IA
        ======================================================================= -->
   <section class="models section--alt" aria-labelledby="models-title">
-    <div class="models__header">
-      <h2 id="models-title" class="models__title">Modèle d'IA</h2>
-      <p class="models__intro">
-        Tous les agents de la Swarm utilisent le même modèle. Pas de dégradation —
-        chaque agent bénéficie de la pleine puissance du raisonnement.
-      </p>
+    <div class="section-header">
+      <span class="section-header__kicker">Architecture IA</span>
+      <h2 class="section-header__title">Modèle d'IA</h2>
+      <p class="section-header__description">Tous les agents de la Swarm utilisent le même modèle. Pas de dégradation — chaque agent bénéficie de la pleine puissance du raisonnement.</p>
     </div>
 
     <div class="models__grid models__grid--single">
@@ -182,18 +152,16 @@
         <span class="model-card__cost">{{ modelInfo.costNote }}</span>
       </article>
     </div>
-    <div class="pi__dual-model-bg" aria-hidden="true"></div>
   </section>
 
   <!-- =======================================================================
        Section 6 — Limites du système
        ======================================================================= -->
   <section class="limits" aria-labelledby="limits-title">
-    <div class="limits__header">
-      <h2 id="limits-title" class="limits__title">Limites du système</h2>
-      <p class="limits__intro">
-        Un système honnête expose ses limites. Voici ce que la Swarm ne fait pas — ou pas encore.
-      </p>
+    <div class="section-header">
+      <span class="section-header__kicker">Honnêteté</span>
+      <h2 class="section-header__title">Limites du système</h2>
+      <p class="section-header__description">Un système honnête expose ses limites. Voici ce que la Swarm ne fait pas — ou pas encore.</p>
     </div>
 
     <div class="limits__grid">
@@ -209,37 +177,6 @@
       }
     </div>
   </section>
-
-  <!-- =======================================================================
-       Section 7 — Pour qui
-       ======================================================================= -->
-  <section class="audience section--alt" aria-labelledby="audience-title">
-    <div class="audience__header">
-      <h2 id="audience-title" class="audience__title">Pour qui ?</h2>
-      <p class="audience__intro">
-        la Swarm s'adresse à tous ceux qui construisent, évaluent ou financent du logiciel.
-      </p>
-    </div>
-
-    <div class="audience__grid">
-      @for (target of targetAudiences; track target.audience; let idx = $index) {
-      <article class="audience-card">
-        <h3 class="audience-card__title">{{ target.audience }}</h3>
-        <p class="audience-card__description">{{ target.description }}</p>
-      </article>
-      }
-    </div>
-  </section>
-
-  <!-- =======================================================================
-       Footer de page
-       ======================================================================= -->
-  <footer class="page-footer" aria-label="Pied de page">
-    <p class="page-footer__text">
-      la Swarm est un pipeline d'agents IA. Chaque ligne de code, chaque test, chaque
-      mot de cette page a été généré, vérifié et documenté par le pipeline lui-même.
-    </p>
-  </footer>
 
 </div>
 }
