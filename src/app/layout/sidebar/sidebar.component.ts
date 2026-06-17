@@ -35,8 +35,8 @@ export class SidebarComponent {
     { label: 'Accueil', route: '/' },
     { label: 'À propos', route: '/a-propos' },
     { label: 'Workflow', route: '/workflow' },
-    { label: 'Problème & Innovation', route: '/probleme-innovation' },
     { label: 'Écosystème', route: '/ecosysteme' },
+    { label: 'Problème & Innovation', route: '/probleme-innovation' },
     {
       label: 'Agents',
       route: '/agents',
