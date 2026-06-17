@@ -191,6 +191,10 @@ graph TB
     style REVIEW fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style MERGE fill:#0E0C09,stroke:#7A8899,color:#7A8899
     style WRITER fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style PLAN fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style PLAN_FULL fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style CONTRACT fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style FIX fill:#0E0C09,stroke:#C4780D,color:#C4780D
   \`\`\``;
 
   /* ==========================================================================
