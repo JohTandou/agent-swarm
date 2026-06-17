@@ -161,12 +161,12 @@ graph TB
     IMPL_ADAPT --> TEST
 
     MEDIUM --> SEARCH_MED["🔎 Search<br/>Cartographie"]
-    SEARCH_MED --> PLAN["📐 Planner<br/>Planification"]
+    SEARCH_MED --> PLAN["🧩 Planner<br/>Planification"]
     PLAN --> IMPL_MEDIUM["💻 Front + Back<br/>Parallèle"]
     IMPL_MEDIUM --> TEST
 
     FULL --> SEARCH_FULL["🔎 Search<br/>Cartographie"]
-    SEARCH_FULL --> PLAN_FULL["📐 Planner<br/>Planification"]
+    SEARCH_FULL --> PLAN_FULL["🧩 Planner<br/>Planification"]
     PLAN_FULL --> CONTRACT["📝 Contract<br/>Types + API"]
     CONTRACT --> IMPL_FULL["💻 Front + Back<br/>Parallèle"]
     IMPL_FULL --> TEST

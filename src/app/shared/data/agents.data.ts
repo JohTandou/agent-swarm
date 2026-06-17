@@ -90,7 +90,7 @@ export const CATEGORY_LABELS: Record<AgentCategory, string> = {
 export const ROUTE_COLORS: Record<string, string> = {
   DIRECT: '#7A8899',
   SIMPLE: '#7A8899',
-  ADAPT: '#C4780D',
-  MEDIUM: '#7A8899',
+  ADAPT: '#7A8899',
+  MEDIUM: '#C4780D',
   FULL: '#C4780D',
 };

@@ -208,7 +208,7 @@ graph TB
     ORCH --> ISSUE
 
     BRANCH --> SEARCH["🔎 Search<br/>Cartographie"]
-    SEARCH --> PLAN["📐 Planner<br/>Planification"]
+    SEARCH --> PLAN["🧩 Planner<br/>Planification"]
 
     PLAN --> FRONT["🎨 Front<br/>UI Apple-grade"]
     PLAN --> BACK["⚡ Back<br/>API & configs"]

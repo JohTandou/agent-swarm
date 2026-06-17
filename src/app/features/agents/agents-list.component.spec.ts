@@ -113,8 +113,8 @@ describe('AgentsListComponent', () => {
     expect(component.getRouteColor('FULL')).toBe('#C4780D');
     expect(component.getRouteColor('DIRECT')).toBe('#7A8899');
     expect(component.getRouteColor('SIMPLE')).toBe('#7A8899');
-    expect(component.getRouteColor('ADAPT')).toBe('#C4780D');
-    expect(component.getRouteColor('MEDIUM')).toBe('#7A8899');
+    expect(component.getRouteColor('ADAPT')).toBe('#7A8899');
+    expect(component.getRouteColor('MEDIUM')).toBe('#C4780D');
     expect(component.getRouteColor('INCONNUE')).toBe('#7A8899'); // fallback
   });
 

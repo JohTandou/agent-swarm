@@ -95,10 +95,16 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-accent);
-  border: 1px solid rgba(196, 120, 13, 0.4);
+  color: var(--color-text-secondary);
+  border: 1px solid rgba(122, 136, 153, 0.3);
   border-radius: 6px;
   padding: 4px 10px;
+  background: rgba(122, 136, 153, 0.06);
+}
+
+.agent-detail__route-badge--highlight {
+  color: var(--color-accent);
+  border-color: rgba(196, 120, 13, 0.4);
   background: rgba(196, 120, 13, 0.08);
 }
 

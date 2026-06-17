@@ -14,7 +14,7 @@
           <h1 class="agent-detail__name">{{ agentData.name }}</h1>
           <p class="agent-detail__role">{{ agentData.role }}</p>
           <div class="agent-detail__meta">
-            <span class="agent-detail__route-badge">{{ agentData.route }}</span>
+            <span class="agent-detail__route-badge" [class.agent-detail__route-badge--highlight]="agentData.route === 'MEDIUM' || agentData.route === 'FULL'">{{ agentData.route }}</span>
             <app-ui-badge variant="default" size="sm">{{ getCategoryLabel(agentData.category) }}</app-ui-badge>
           </div>
         </div>
