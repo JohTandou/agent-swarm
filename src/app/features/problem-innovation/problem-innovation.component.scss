@@ -149,7 +149,7 @@ $section-padding-mobile: 64px 20px;
 
 .comparison__header {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .comparison__title {
@@ -175,7 +175,7 @@ $section-padding-mobile: 64px 20px;
   display: flex;
   flex-direction: column;
   gap: 32px;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 /* Carte de comparaison */
@@ -265,7 +265,7 @@ $section-padding-mobile: 64px 20px;
   letter-spacing: -0.02em;
   color: var(--color-text-primary);
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 .comparison-bar-wrapper {
@@ -340,7 +340,7 @@ $section-padding-mobile: 64px 20px;
 
 .pillars__header {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .pillars__title {
@@ -429,7 +429,7 @@ $section-padding-mobile: 64px 20px;
 
 .costs__header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 32px;
 }
 
 .costs__title {
@@ -454,7 +454,7 @@ $section-padding-mobile: 64px 20px;
 .costs__table-wrapper {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin-bottom: 56px;
+  margin-bottom: 32px;
 }
 
 .costs__table {
@@ -532,7 +532,7 @@ $section-padding-mobile: 64px 20px;
 
 .models__header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 32px;
 }
 
 .models__title {
@@ -558,7 +558,7 @@ $section-padding-mobile: 64px 20px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 32px;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
 }
 
 .model-card {
@@ -647,7 +647,7 @@ $section-padding-mobile: 64px 20px;
 
 .limits__header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 32px;
 }
 
 .limits__title {
@@ -736,7 +736,7 @@ $section-padding-mobile: 64px 20px;
 
 .audience__header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 32px;
 }
 
 .audience__title {
