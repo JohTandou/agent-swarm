@@ -220,7 +220,7 @@ graph TB
 
     subgraph finish["finish.ts"]
       TEST --> REVIEW["👁️ Reviewer<br/>Score ≥ 0.85"]
-      REVIEW -->|"✅ Approuvé"| WRITER["📚 Writer<br/>Documentation"]
+      REVIEW -->|"✅ Approuvé"| WRITER["✍️ Writer<br/>Documentation"]
       REVIEW -->|"❌ Rejeté"| FIX["🔄 Corrections"]
       FIX --> TEST
       WRITER --> COMMIT["Commit + Push"]

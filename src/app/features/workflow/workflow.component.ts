@@ -172,11 +172,11 @@ graph TB
     IMPL_FULL --> TEST
 
     TEST --> REVIEW["👁️ Reviewer<br/>Audit qualité"]
-    REVIEW -->|"✅ Approuvé"| WRITER["📚 Writer<br/>Documentation"]
+    REVIEW -->|"✅ Approuvé"| WRITER["✍️ Writer<br/>Documentation"]
     REVIEW -->|"❌ Rejeté"| FIX["🔄 Corrections"]
     FIX --> TEST
 
-    WRITER --> COMMIT["📝 Commit"]
+    WRITER --> COMMIT["📝 Commit + Push"]
     COMMIT --> PR["🔀 Pull Request"]
     PR --> MERGE["🎉 Merge"]
 
