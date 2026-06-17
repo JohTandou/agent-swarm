@@ -65,6 +65,19 @@ $section-padding-mobile: 64px 20px;
   }
 }
 
+// Redondance défensive pour les sections imbriquées
+.pillars.section--alt {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-bg-subtle);
+    z-index: -1;
+  }
+}
+
 /* --------------------------------------------------------------------------
    Page — Conteneur principal
    -------------------------------------------------------------------------- */
