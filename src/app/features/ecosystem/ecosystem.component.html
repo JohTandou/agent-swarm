@@ -24,12 +24,12 @@
     <!-- ================================================================
          Section 1 — Hero
          ================================================================ -->
-    <section class="hero reveal-on-scroll">
+    <section class="hero">
       <div class="hero__bg-decor"></div>
       <div class="hero__content">
-        <span class="hero__kicker">Infrastructure</span>
-        <h1 class="hero__title" appTextReveal [revealDelay]="200">{{ heroTitle }}</h1>
-        <p class="hero__subtitle">{{ heroSubtitle }}</p>
+        <span class="hero__kicker reveal-on-scroll">Infrastructure</span>
+        <h1 class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">{{ heroTitle }}</h1>
+        <p class="hero__subtitle reveal-on-scroll">{{ heroSubtitle }}</p>
 
       </div>
 
@@ -38,7 +38,7 @@
     <!-- ================================================================
          Section 2 — Structure .opencode/
          ================================================================ -->
-    <section class="directory-section reveal-on-scroll" id="structure">
+    <section class="directory-section" id="structure">
       <div class="section-header">
         <span class="section-header__kicker">Architecture</span>
         <h2 class="section-header__title">Structure .opencode/</h2>
@@ -47,9 +47,9 @@
         </p>
       </div>
 
-      <div class="tree-container" [appStaggerChildren]="60">
+      <div class="tree-container">
         @for (entry of directoryTree; track entry.name; let i = $index) {
-          <div class="dir-card reveal-on-scroll" [style.transition-delay]="(i * 60) + 'ms'">
+          <div class="dir-card">
             <div class="dir-card__header">
               <span class="dir-card__icon">{{ entry.icon }}</span>
               <span class="dir-card__name">{{ entry.name }}</span>
@@ -80,7 +80,7 @@
     <!-- ================================================================
          Section 3 — swarm-workflow.json décortiqué
          ================================================================ -->
-    <section class="config-section reveal-on-scroll" id="workflow-config">
+    <section class="config-section" id="workflow-config">
       <div class="section-header">
         <span class="section-header__kicker">Configuration</span>
         <h2 class="section-header__title">swarm-workflow.json</h2>
@@ -89,9 +89,9 @@
         </p>
       </div>
 
-      <div class="config-grid" [appStaggerChildren]="60">
+      <div class="config-grid">
         @for (category of workflowCategories; track category.name; let ci = $index) {
-          <div class="config-category reveal-on-scroll" [style.transition-delay]="(ci * 80) + 'ms'">
+          <div class="config-category">
             <div class="config-category__header">
               <span class="config-category__icon">{{ category.icon }}</span>
               <div class="config-category__titles">
@@ -102,7 +102,7 @@
 
             <div class="config-fields">
               @for (field of category.fields; track field.path; let fi = $index) {
-                <div class="config-field reveal-on-scroll" [style.transition-delay]="(fi * 30) + 'ms'">
+                <div class="config-field">
                   <div class="config-field__row">
                     <span class="config-field__label">{{ field.label }}</span>
                     <span class="config-field__value config-field__value--{{ field.type }}">{{ field.value }}</span>
@@ -120,7 +120,7 @@
     <!-- ================================================================
          Section 4 — AGENTS.md
          ================================================================ -->
-    <section class="agentsmd-section reveal-on-scroll" id="agents-md">
+    <section class="agentsmd-section" id="agents-md">
       <div class="section-header">
         <span class="section-header__kicker">Documentation vivante</span>
         <h2 class="section-header__title">AGENTS.md</h2>
@@ -138,7 +138,7 @@
     <!-- ================================================================
          Section 5 — Architecture Globale
          ================================================================ -->
-    <section class="architecture-section reveal-on-scroll" id="architecture">
+    <section class="architecture-section" id="architecture">
       <div class="section-header">
         <span class="section-header__kicker">Vue d'ensemble</span>
         <h2 class="section-header__title">Architecture Globale</h2>
@@ -151,9 +151,9 @@
         <app-markdown-renderer [content]="mermaidDiagram" [enableMermaid]="true"></app-markdown-renderer>
       </div>
 
-      <div class="integrations-grid" [appStaggerChildren]="60">
+      <div class="integrations-grid">
         @for (integration of integrations; track integration.name; let ii = $index) {
-          <div class="integration-card reveal-on-scroll" [style.transition-delay]="(ii * 80) + 'ms'">
+          <div class="integration-card">
             <div class="integration-card__header">
               <span class="integration-card__icon">{{ integration.icon }}</span>
               <div class="integration-card__titles">

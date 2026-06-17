@@ -4,6 +4,7 @@ import { UiButtonComponent } from '@shared/components/ui-button/ui-button.compon
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
+import { AnimationService } from '../../shared/services/animation.service';
 
 /** Entrée de l'arborescence du répertoire */
 interface DirectoryEntry {
@@ -59,6 +60,7 @@ interface Integration {
 })
 export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
   private hostRef = inject(ElementRef);
+  private readonly animService = inject(AnimationService);
 
   /* ==========================================================================
    * État du composant
@@ -198,8 +200,12 @@ graph TB
 
     IDE --> ORCH["🎯 Orchestrateur<br/>Classification & Routage"]
 
-    ORCH --> ISSUE["📋 Issue GitHub"]
-    ISSUE --> BRANCH["🌿 Branche feature/"]
+    subgraph SOURCE["Source"]
+      ISSUE["📋 Issue GitHub"]
+      ISSUE --> BRANCH["🌿 Branche feature/"]
+    end
+
+    ORCH --> ISSUE
 
     BRANCH --> SEARCH["🔎 Search<br/>Cartographie"]
     SEARCH --> PLAN["📐 Planner<br/>Planification"]
@@ -220,6 +226,8 @@ graph TB
       WRITER --> COMMIT["Commit + Push"]
       COMMIT --> PR["🔀 Pull Request"]
     end
+    style finish fill:transparent,stroke:#7A8899,color:#7A8899
+    style SOURCE fill:transparent,stroke:#7A8899,color:#7A8899
 
     PR --> MERGE["🎉 Merge sur main"]
 
@@ -268,6 +276,8 @@ graph TB
     style PLAYWRIGHT fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style CONTEXT7 fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style MAGIC fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style finish fill:transparent,stroke:#7A8899,color:#7A8899
+    style SOURCE fill:transparent,stroke:#7A8899,color:#7A8899
   \`\`\``;
 
   /* ==========================================================================
@@ -291,40 +301,20 @@ graph TB
   }
 
   ngAfterViewInit(): void {
-    this.setupScrollAnimations();
+    this.initScrollAnimations();
   }
 
   ngOnDestroy(): void {
-    // Nettoyage automatique via IntersectionObserver.unobserve
+    this.animService.killAll();
   }
 
   /* ==========================================================================
-   * Animations au scroll — IntersectionObserver
+   * Animations au scroll — GSAP via AnimationService
    * ========================================================================== */
 
-  private setupScrollAnimations(): void {
-    this.observeAnimatedElements();
-  }
-
-  /**
-   * Observe les éléments .reveal-on-scroll pour déclencher
-   * les animations d'apparition avec stagger.
-   */
-  private observeAnimatedElements(): void {
-    const revealElements = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll');
-
-    const scrollObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            scrollObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -30px 0px' },
-    );
-
-    revealElements.forEach((el: Element) => scrollObserver.observe(el));
+  private initScrollAnimations(): void {
+    const hostEl = this.hostRef.nativeElement as HTMLElement;
+    const revealEls = hostEl.querySelectorAll('.reveal-on-scroll');
+    this.animService.revealOnScroll(Array.from(revealEls), { staggerMs: 80 });
   }
 }

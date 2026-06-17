@@ -26,7 +26,7 @@ $section-padding-mobile: 64px 20px;
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 400ms var(--ease-spring), transform 400ms var(--ease-spring);
+  transition: opacity 600ms var(--ease-spring), transform 600ms var(--ease-spring);
 }
 
 .reveal-on-scroll.revealed {
@@ -838,6 +838,15 @@ $section-padding-mobile: 64px 20px;
   .homepage__hero::before,
   .about__hero::after {
     opacity: 0.06;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mermaid — Épaisseur des arêtes (flowchart edges)
+   -------------------------------------------------------------------------- */
+::ng-deep .mermaid {
+  .flowchart-link {
+    stroke-width: 3px !important;
   }
 }
 

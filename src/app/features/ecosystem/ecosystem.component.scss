@@ -472,6 +472,12 @@ $section-padding-mobile: 64px 20px;
   ::ng-deep .mermaid-diagram {
     margin: 0;
   }
+
+  ::ng-deep .mermaid {
+    .flowchart-link {
+      stroke-width: 3px !important;
+    }
+  }
 }
 
 /* Grille d'intégrations */

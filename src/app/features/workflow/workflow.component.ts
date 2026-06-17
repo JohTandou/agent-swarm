@@ -402,17 +402,13 @@ gitGraph
   private async initScrollAnimations(): Promise<void> {
     try {
       const revealEls = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll');
-      const nodeCards = this.hostRef.nativeElement.querySelectorAll('.node-card');
 
       if (revealEls.length > 0) {
-        await this.animService.revealOnScroll(Array.from(revealEls), { staggerMs: 50 });
-      }
-      if (nodeCards.length > 0) {
-        await this.animService.revealOnScroll(Array.from(nodeCards), { staggerMs: 60 });
+        await this.animService.revealOnScroll(Array.from(revealEls), { staggerMs: 80 });
       }
     } catch {
       // Fallback CSS : ajouter .revealed à tous les éléments .reveal-on-scroll
-      const all = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll, .node-card');
+      const all = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll');
       all.forEach((el: Element) => el.classList.add('revealed'));
     }
   }

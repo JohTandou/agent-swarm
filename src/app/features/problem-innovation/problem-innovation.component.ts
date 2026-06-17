@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef } from '@angular/core';
 import { AnimationService } from '../../shared/services/animation.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
-import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { ROUTE_COSTS } from '@shared/data/routes.data';
 
@@ -49,7 +48,7 @@ interface TargetAudience {
 @Component({
   selector: 'app-problem-innovation',
   standalone: true,
-  imports: [UiButtonComponent, StaggerChildrenDirective, TextRevealDirective],
+  imports: [UiButtonComponent, TextRevealDirective],
   templateUrl: './problem-innovation.component.html',
   styleUrls: ['./problem-innovation.component.scss'],
 })
@@ -323,50 +322,13 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   private async initScrollAnimations(): Promise<void> {
     try {
       const revealEls = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll');
-      const barEls = this.hostRef.nativeElement.querySelectorAll('.comparison-bar');
-      const counterEl = this.hostRef.nativeElement.querySelector('.counter-target') as HTMLElement;
 
       if (revealEls.length > 0) {
         await this.animService.revealOnScroll(Array.from(revealEls), { staggerMs: 80 });
       }
-
-      // Barres de comparaison — animation GSAP de la largeur
-      if (barEls.length > 0) {
-        const { gsap, ScrollTrigger } = await this.animService.initGsap();
-        Array.from(barEls).forEach((el, i) => {
-          const bar = el as HTMLElement;
-          const targetWidth = bar.getAttribute('data-width');
-          if (targetWidth) {
-            gsap.to(bar, {
-              width: targetWidth,
-              duration: 0.5,
-              delay: i * 0.1,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: bar,
-                start: 'top 85%',
-                once: true,
-              },
-            });
-          }
-        });
-      }
-
-      // Compteur 12×
-      if (counterEl) {
-        const { ScrollTrigger } = await this.animService.initGsap();
-        ScrollTrigger.create({
-          trigger: counterEl,
-          start: 'top 85%',
-          once: true,
-          onEnter: () => {
-            this.animService.animateCounter(counterEl, 0, 12, 1200);
-          },
-        });
-      }
     } catch {
       // Fallback CSS : révéler immédiatement
-      const all = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll, .comparison-bar');
+      const all = this.hostRef.nativeElement.querySelectorAll('.reveal-on-scroll');
       all.forEach((el: Element) => el.classList.add('revealed'));
     }
   }

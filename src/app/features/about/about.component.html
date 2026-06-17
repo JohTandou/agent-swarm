@@ -4,12 +4,12 @@
        Hero — Plein écran
        ========================================================================= -->
   <header class="about__hero">
-    <p class="about__eyebrow">L'intelligence collective</p>
-    <h1 class="about__title" appTextReveal [revealDelay]="200">
+    <p class="about__eyebrow reveal-on-scroll">L'intelligence collective</p>
+    <h1 class="about__title reveal-on-scroll" appTextReveal [revealDelay]="200">
       La Swarm
       <span class="about__title-accent">— Neuf agents, un pipeline</span>
     </h1>
-    <p class="about__subtitle">
+    <p class="about__subtitle reveal-on-scroll">
       Une architecture agentique, pensée pour le développement logiciel de bout en bout. Neuf agents spécialisés collaborent pour concevoir, implémenter, tester et documenter — comme une véritable équipe de développement.
     </p>
   </header>
@@ -82,7 +82,7 @@
       <p class="about__section-lead">Découvrez <a routerLink="/probleme-innovation" class="about__inline-link">les 7 piliers d'innovation</a> en détail.</p>
     </div>
 
-    <div class="about__pillars" [appStaggerChildren]="80">
+    <div class="about__pillars">
       <div class="about__pillar">
         <div class="about__pillar-icon">🔄</div>
         <h3 class="about__pillar-title">Pipeline automatisé de bout en bout</h3>
@@ -137,7 +137,7 @@
       <h2 class="about__section-title">la Swarm en chiffres</h2>
     </div>
 
-    <div class="about__stats" [appStaggerChildren]="60">
+    <div class="about__stats">
       <div class="about__stat-card">
         <span class="about__stat-number">9</span>
         <span class="about__stat-label">Agents spécialisés</span>

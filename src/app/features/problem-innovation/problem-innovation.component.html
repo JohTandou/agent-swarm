@@ -37,16 +37,16 @@
        Section 2 — Avant / Après
        ======================================================================= -->
   <section class="comparison" aria-labelledby="comparison-title">
-    <div class="comparison__header reveal-on-scroll">
+    <div class="comparison__header">
       <h2 id="comparison-title" class="comparison__title">Développer sans la Swarm,<br>puis avec</h2>
       <p class="comparison__intro">
         Quatre dimensions critiques où la Swarm transforme radicalement le cycle de développement.
       </p>
     </div>
 
-    <div class="comparison__list" [appStaggerChildren]="60">
+    <div class="comparison__list">
       @for (item of comparisonData; track item.label; let idx = $index) {
-      <article class="comparison-card reveal-on-scroll" [style.animation-delay.ms]="idx * 100">
+      <article class="comparison-card">
         <h3 class="comparison-card__label">{{ item.label }}</h3>
         <div class="comparison-card__columns">
           <div class="comparison-card__col comparison-card__col--before">
@@ -67,7 +67,7 @@
     </div>
 
     <!-- Barres de comparaison animées (wow moment) -->
-    <div class="comparison-bars reveal-on-scroll">
+    <div class="comparison-bars">
       <h3 class="comparison-bars__title">Impact mesurable</h3>
       @for (bar of [
         { label: 'Vitesse', value: '95%', width: '95%', index: 0 },
@@ -95,18 +95,17 @@
        Section 3 — 7 piliers d'innovation
        ======================================================================= -->
   <section class="pillars" aria-labelledby="pillars-title">
-    <div class="pillars__header reveal-on-scroll">
+    <div class="pillars__header">
       <h2 id="pillars-title" class="pillars__title">Les 7 piliers<br>d'innovation</h2>
       <p class="pillars__intro">
         Chaque pilier résout un problème structurel du développement logiciel assisté par IA.
       </p>
     </div>
 
-    <div class="pillars__grid" [appStaggerChildren]="60">
+    <div class="pillars__grid">
       @for (pillar of pillars; track pillar.title; let idx = $index) {
       <article
-        class="pillar-card reveal-on-scroll"
-        [style.animation-delay.ms]="idx * 80"
+        class="pillar-card"
       >
         <span class="pillar-card__number" aria-hidden="true">{{ idx + 1 }}</span>
         <h3 class="pillar-card__title">{{ pillar.title }}</h3>
@@ -120,7 +119,7 @@
        Section 4 — Analyse des coûts
        ======================================================================= -->
   <section class="costs" aria-labelledby="costs-title">
-    <div class="costs__header reveal-on-scroll">
+    <div class="costs__header">
       <h2 id="costs-title" class="costs__title">Analyse des coûts</h2>
       <p class="costs__intro">
         Transparence totale sur l'économie de la Swarm. Chaque session a un coût prévisible,
@@ -128,9 +127,9 @@
       </p>
     </div>
 
-    <h3 class="costs__comparison-title reveal-on-scroll">Swarm vs Claude Pro vs Claude Max</h3>
+    <h3 class="costs__comparison-title">Swarm vs Claude Pro vs Claude Max</h3>
 
-    <div class="costs__comparison-table-wrapper reveal-on-scroll">
+    <div class="costs__comparison-table-wrapper">
       <table class="costs__comparison-table" role="table">
         <thead>
           <tr>
@@ -153,9 +152,9 @@
       </table>
     </div>
 
-    <p class="costs__comparison-note reveal-on-scroll">{{ claudeComparisonNote }}</p>
+    <p class="costs__comparison-note">{{ claudeComparisonNote }}</p>
 
-    <p class="costs__note reveal-on-scroll">{{ costComparisonNote }}</p>
+    <p class="costs__note">{{ costComparisonNote }}</p>
     <div class="pi__cost-bg" aria-hidden="true"></div>
   </section>
 
@@ -163,7 +162,7 @@
        Section 5 — Modèle d'IA
        ======================================================================= -->
   <section class="models" aria-labelledby="models-title">
-    <div class="models__header reveal-on-scroll">
+    <div class="models__header">
       <h2 id="models-title" class="models__title">Modèle d'IA</h2>
       <p class="models__intro">
         Tous les agents de la Swarm utilisent le même modèle. Pas de dégradation —
@@ -172,7 +171,7 @@
     </div>
 
     <div class="models__grid models__grid--single">
-      <article class="model-card model-card--heavy reveal-on-scroll">
+      <article class="model-card model-card--heavy">
         <div class="model-card__icon" aria-hidden="true">🧠</div>
         <h3 class="model-card__name">{{ modelInfo.name }}</h3>
         <p class="model-card__description">{{ modelInfo.description }}</p>
@@ -192,16 +191,16 @@
        Section 6 — Limites du système
        ======================================================================= -->
   <section class="limits" aria-labelledby="limits-title">
-    <div class="limits__header reveal-on-scroll">
+    <div class="limits__header">
       <h2 id="limits-title" class="limits__title">Limites du système</h2>
       <p class="limits__intro">
         Un système honnête expose ses limites. Voici ce que la Swarm ne fait pas — ou pas encore.
       </p>
     </div>
 
-    <div class="limits__grid" [appStaggerChildren]="60">
+    <div class="limits__grid">
       @for (category of limits; track category.category; let idx = $index) {
-      <article class="limit-card reveal-on-scroll" [style.animation-delay.ms]="idx * 120">
+      <article class="limit-card">
         <h3 class="limit-card__title">{{ category.category }}</h3>
         <ul class="limit-card__list">
           @for (item of category.items; track item) {
@@ -217,16 +216,16 @@
        Section 7 — Pour qui
        ======================================================================= -->
   <section class="audience" aria-labelledby="audience-title">
-    <div class="audience__header reveal-on-scroll">
+    <div class="audience__header">
       <h2 id="audience-title" class="audience__title">Pour qui ?</h2>
       <p class="audience__intro">
         la Swarm s'adresse à tous ceux qui construisent, évaluent ou financent du logiciel.
       </p>
     </div>
 
-    <div class="audience__grid" [appStaggerChildren]="60">
+    <div class="audience__grid">
       @for (target of targetAudiences; track target.audience; let idx = $index) {
-      <article class="audience-card reveal-on-scroll" [style.animation-delay.ms]="idx * 100">
+      <article class="audience-card">
         <h3 class="audience-card__title">{{ target.audience }}</h3>
         <p class="audience-card__description">{{ target.description }}</p>
       </article>

@@ -37,7 +37,7 @@
        Section 2 — Arbre de décision interactif
        ======================================================================= -->
   <section class="decision-tree" aria-labelledby="tree-title">
-    <div class="section-header reveal-on-scroll">
+    <div class="section-header">
       <span class="section-header__kicker">Classification automatique</span>
       <h2 id="tree-title" class="section-header__title">Arbre de décision des routes</h2>
       <p class="section-header__description">
@@ -48,11 +48,10 @@
 
     <div class="tree-container">
       <!-- Colonne des routes -->
-      <div class="tree-nodes" [appStaggerChildren]="60">
+      <div class="tree-nodes">
         @for (node of decisionNodes; track node.route; let idx = $index) {
         <div
-          class="node-card reveal-on-scroll"
-          [style.animation-delay]="(idx * 100) + 'ms'"
+          class="node-card"
           [attr.data-route]="node.route"
         >
           <div class="node-card__header">
@@ -96,7 +95,7 @@
         <span class="tree-complexity-bar__label-bottom">Complexité maximale</span>
       </div>
     </div>
-      <p class="tree-note reveal-on-scroll">
+      <p class="tree-note">
         Coûts estimés avec la tarification API DeepSeek V4 Pro (juin 2025). Tokens et coûts réels variables selon la complexité et le volume.
       </p>
   </section>
