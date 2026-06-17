@@ -3,6 +3,18 @@
    Palette 6 couleurs exclusive, Cabinet Grotesk + Satoshi
    ========================================================================== */
 
+.section--alt {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-bg-subtle);
+    z-index: -1;
+  }
+}
+
 /* --------------------------------------------------------------------------
    Variables de layout locales
    -------------------------------------------------------------------------- */
