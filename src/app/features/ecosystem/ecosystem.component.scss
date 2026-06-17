@@ -303,7 +303,6 @@ $section-padding-mobile: 64px 20px;
   max-width: $content-max;
   margin: 0 auto;
   width: 100%;
-  padding-right: 48px;
 }
 
 .config-grid {
@@ -593,6 +592,10 @@ $section-padding-mobile: 64px 20px;
 
   .dir-card {
     padding: 20px 24px;
+  }
+
+  .config-category {
+    padding: 20px;
   }
 }
 
