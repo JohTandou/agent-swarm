@@ -15,6 +15,20 @@
   overflow-x: clip;
 }
 
+/* --------------------------------------------------------------------------
+   Section alternée — fond subtil (commun à toutes les pages)
+   -------------------------------------------------------------------------- */
+.page > .section--alt {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-bg-subtle);
+    z-index: -1;
+  }
+}
+
 /* ==========================================================================
    SECTION 1 : Hero
    ========================================================================== */
