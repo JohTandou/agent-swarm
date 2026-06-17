@@ -15,12 +15,12 @@
   --font-body: "Satoshi", sans-serif;
 
   /* Palette */
-  --color-bg-primary: #1C1812;
-  --color-bg-elevated: #28231C;
-  --color-bg-subtle: #0E0C09;
+  --color-bg-primary: #3A3530;
+  --color-bg-elevated: #4A4540;
+  --color-bg-subtle: #2A2520;
   --color-text-primary: #F5F0EB;
-  --color-text-secondary: #7A8899;
-  --color-accent: #C4780D;
+  --color-text-secondary: #8E8882;
+  --color-accent: #F0A522;
 
   /* Breakpoints fluides */
   --breakpoint-sm: 640px;
@@ -38,16 +38,16 @@
   --font-body: "Satoshi", sans-serif;
 
   /* Fond et surfaces */
-  --color-bg-primary: #1C1812;
-  --color-bg-elevated: #28231C;
-  --color-bg-subtle: #0E0C09;
+  --color-bg-primary: #3A3530;
+  --color-bg-elevated: #4A4540;
+  --color-bg-subtle: #2A2520;
 
   /* Texte */
   --color-text-primary: #F5F0EB;
-  --color-text-secondary: #7A8899;
+  --color-text-secondary: #8E8882;
 
   /* Accent */
-  --color-accent: #C4780D;
+  --color-accent: #F0A522;
   --color-accent-glow: rgba(196, 120, 13, 0.15);
 
   /* Couleurs sémantiques — états */
