@@ -54,15 +54,7 @@ $section-padding-mobile: 64px 20px;
    Alternance sections sombres
    ========================================================================== */
 .page > .section--alt {
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--color-bg-subtle);
-    z-index: -1;
-  }
+  background: var(--color-bg-subtle);
 }
 
 /* --------------------------------------------------------------------------
