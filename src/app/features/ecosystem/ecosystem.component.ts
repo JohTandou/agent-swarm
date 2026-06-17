@@ -109,7 +109,7 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
       ],
     },
     {
-      name: 'skills/', icon: '🧩',       badge: '25 dossiers (+1 skill built-in customize-opencode)',
+      name: 'skills/', icon: '🧩',       badge: '3 skills',
       description: 'Modules de compétences spécialisées chargés à la demande. Chaque skill est un dossier autonome avec ses propres instructions, workflows et ressources.',
     },
     {
