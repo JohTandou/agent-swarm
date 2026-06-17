@@ -106,18 +106,17 @@ describe('ProblemInnovationComponent', () => {
     expect(limits).toBeTruthy();
   });
 
-  it('devrait afficher la section audience', () => {
+  it('chaque section devrait avoir un section-header avec kicker', () => {
     fixture.detectChanges();
 
-    const audience: HTMLElement = fixture.nativeElement.querySelector('.audience');
-    expect(audience).toBeTruthy();
-  });
-
-  it('devrait afficher le footer', () => {
-    fixture.detectChanges();
-
-    const footer: HTMLElement = fixture.nativeElement.querySelector('.page-footer');
-    expect(footer).toBeTruthy();
+    const headers = fixture.nativeElement.querySelectorAll('.section-header');
+    expect(headers.length).toBe(5);
+    
+    const kickers = fixture.nativeElement.querySelectorAll('.section-header__kicker');
+    expect(kickers.length).toBe(5);
+    
+    const titles = fixture.nativeElement.querySelectorAll('.section-header__title');
+    expect(titles.length).toBe(5);
   });
 
   /* ==========================================================================
@@ -191,22 +190,6 @@ describe('ProblemInnovationComponent', () => {
 
     const cards = fixture.nativeElement.querySelectorAll('.pillar-card');
     expect(cards.length).toBe(7);
-  });
-
-  /* ==========================================================================
-   * Données — targetAudiences
-   * ========================================================================== */
-
-  it('targetAudiences devrait avoir 4 audiences cibles', () => {
-    const audiences = (component as any).targetAudiences;
-    expect(audiences.length).toBe(4);
-  });
-
-  it('devrait rendre 4 cartes audience', () => {
-    fixture.detectChanges();
-
-    const cards = fixture.nativeElement.querySelectorAll('.audience-card');
-    expect(cards.length).toBe(4);
   });
 
   /* ==========================================================================
