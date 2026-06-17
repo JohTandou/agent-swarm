@@ -138,9 +138,6 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
    * Données — Section 5 : Analyse des coûts
    * ========================================================================== */
 
-  protected readonly costComparisonNote =
-    'Estimations basées sur la tarification API DeepSeek V4 Pro (juin 2025). 40 sessions MEDIUM/mois = usage intensif (~2 features/jour). Coûts réels variables selon le volume et la complexité. La Swarm fonctionne en API — vous ne payez que les tokens consommés, sans abonnement.';
-
   /** Données du tableau comparatif Swarm vs Claude */
   protected readonly claudeComparisonRows: readonly { label: string; swarm: string; claudePro: string; claudeMax: string }[] = [
     {

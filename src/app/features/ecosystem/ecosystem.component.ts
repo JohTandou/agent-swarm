@@ -254,21 +254,21 @@ graph TB
     style AGENTS fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style CONFIG fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style SKILLS fill:#0E0C09,stroke:#C4780D,color:#C4780D
-    style ORCH fill:#28231C,stroke:#7A8899,color:#F5F0EB
-    style ISSUE fill:#1C1812,stroke:#7A8899,color:#F5F0EB
-    style BRANCH fill:#1C1812,stroke:#7A8899,color:#F5F0EB
-    style SEARCH fill:#1C1812,stroke:#7A8899,color:#F5F0EB
-    style PLAN fill:#28231C,stroke:#7A8899,color:#F5F0EB
+    style ORCH fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
+    style ISSUE fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style BRANCH fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style SEARCH fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
+    style PLAN fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
     style FRONT fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
     style BACK fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
     style CONTRACT fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
-    style TEST fill:#1C1812,stroke:#C4780D,color:#C4780D
-    style REVIEW fill:#1C1812,stroke:#C4780D,color:#C4780D
+    style TEST fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style REVIEW fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style WRITER fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style COMMIT fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style PR fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style FIX fill:#0E0C09,stroke:#C4780D,color:#C4780D
-    style MERGE fill:#28231C,stroke:#7A8899,color:#F5F0EB
+    style MERGE fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
     style MCP fill:#0E0C09,stroke:#7A8899,color:#7A8899
     style SUPABASE fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style VERCEL fill:#0E0C09,stroke:#C4780D,color:#C4780D
