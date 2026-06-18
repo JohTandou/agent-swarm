@@ -148,7 +148,7 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
       name: 'Qualité', icon: '🛡️',
       description: 'Gates qualité et seuils de validation.',
       fields: [
-        { path: 'swarm.workflow.enforce_quality_gates', label: 'Gates qualité obligatoires', type: 'boolean', value: 'true', description: 'Les gates qualité (tester + reviewer) sont appliquées sur les routes MEDIUM et FULL.' },
+        { path: 'swarm.workflow.enforce_quality_gates', label: 'Gates qualité obligatoires', type: 'boolean', value: 'true', description: 'Les gates qualité (tester + reviewer) sont appliquées sur les tâches MEDIUM et FULL.' },
         { path: 'swarm.workflow.require_tester_pass', label: 'Validation tester obligatoire', type: 'boolean', value: 'true', description: 'Le merge est bloqué tant que le tester n\'a pas validé la couverture ≥ 80 %.' },
         { path: 'swarm.workflow.require_reviewer_approve', label: 'Approbation reviewer obligatoire', type: 'boolean', value: 'true', description: 'Le merge est bloqué sans l\'approbation du reviewer (security ≥ 1.0, quality ≥ 0.85).' },
         { path: 'swarm.workflow.require_e2e_for_new_features', label: 'E2E pour nouvelles features', type: 'boolean', value: 'true', description: 'Toute nouvelle feature nécessite au moins un test E2E Playwright avant merge.' },
@@ -198,7 +198,7 @@ graph TB
         SKILLS["🧩 Skills (3)<br/>Modules spécialisés"]
     end
 
-    IDE --> ORCH["🎯 Orchestrateur<br/>Classification & Routage"]
+    IDE --> ORCH["🧠 Orchestrateur<br/>Classification & Routage"]
 
     subgraph SOURCE["Source"]
       ISSUE["📋 Issue GitHub"]
@@ -211,8 +211,8 @@ graph TB
     SEARCH --> PLAN["🧩 Planner<br/>Planification"]
 
     PLAN --> FRONT["🎨 Front<br/>UI Apple-grade"]
-    PLAN --> BACK["⚡ Back<br/>API & configs"]
-    PLAN --> CONTRACT["📝 Contract<br/>Types & OpenAPI"]
+    PLAN --> BACK["⚙️ Back<br/>API & configs"]
+    PLAN --> CONTRACT["📋 Contract<br/>Types & OpenAPI"]
 
     FRONT --> TEST["🧪 Tester<br/>Couverture ≥ 80%"]
     BACK --> TEST

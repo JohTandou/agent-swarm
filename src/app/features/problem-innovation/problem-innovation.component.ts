@@ -108,7 +108,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
     },
     {
       title: 'Implémentation parallèle front+back',
-      description: 'Sur les routes MEDIUM et FULL, les agents front et back travaillent simultanément. Le contract agent définit l\'interface (types + API) en amont, garantissant que les deux flux convergeront sans conflit.',
+      description: 'Sur les tâches MEDIUM et FULL, les agents front et back travaillent simultanément. Le contract agent définit l\'interface (types + API) en amont, garantissant que les deux flux convergeront sans conflit.',
     },
     {
       title: 'Gates qualité automatisées',

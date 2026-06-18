@@ -143,7 +143,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
   protected readonly mermaidDiagram = `\`\`\`mermaid
 graph TB
     ISSUE["📋 Issue GitHub"] --> PRESEARCH["🔍 Pre-search<br/>Étape 0.3"]
-    PRESEARCH --> CLASSIFY["🏷️ Classification<br/>Route automatique"]
+    PRESEARCH --> CLASSIFY["🧠 Orchestrateur<br/>Classification tâche"]
 
     CLASSIFY --> ADAPT["🔄 ADAPT"]
     CLASSIFY --> SIMPLE["🔧 SIMPLE"]
