@@ -192,7 +192,7 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
 
   protected readonly mermaidDiagram = `\`\`\`mermaid
 graph TB
-    subgraph IDE["🖥️ OpenCode IDE"]
+    subgraph IDE["OPENCODE"]
         AGENTS["📜 AGENTS.md<br/>Bible du projet"]
         CONFIG["⚙️ swarm-workflow.json<br/>Configuration"]
         SKILLS["🧩 Skills (3)<br/>Modules spécialisés"]
@@ -200,7 +200,7 @@ graph TB
 
     IDE --> ORCH["🧠 Orchestrateur<br/>Classification & Routage"]
 
-    subgraph SOURCE["Source"]
+    subgraph SOURCE["SETUP.TS"]
       ISSUE["📋 Issue GitHub"]
       ISSUE --> BRANCH["🌿 Branche feature/"]
     end
@@ -218,7 +218,7 @@ graph TB
     BACK --> TEST
     CONTRACT --> TEST
 
-    subgraph finish["finish.ts"]
+    subgraph finish["FINISH.TS"]
       TEST --> REVIEW["👁️ Reviewer<br/>Score ≥ 0.85"]
       REVIEW -->|"✅ Approuvé"| WRITER["✍️ Writer<br/>Documentation"]
       REVIEW -->|"❌ Rejeté"| FIX["🔄 Corrections"]
@@ -229,9 +229,9 @@ graph TB
     style finish fill:transparent,stroke:#7A8899,color:#7A8899
     style SOURCE fill:transparent,stroke:#7A8899,color:#7A8899
 
-    PR --> MERGE["🎉 Merge sur main"]
+    PR --> MERGE["MERGE.TS<br/>Fusion dans main"]
 
-    subgraph MCP["🔌 Intégrations MCP"]
+    subgraph MCP["INTÉGRATIONS MCP"]
         SUPABASE["🗄️ Supabase<br/>Postgres + Auth"]
         VERCEL["▲ Vercel<br/>Déploiement CDN"]
         RENDER["⚡ Render<br/>Services + Cron"]
@@ -278,6 +278,8 @@ graph TB
     style MAGIC fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style finish fill:transparent,stroke:#7A8899,color:#7A8899
     style SOURCE fill:transparent,stroke:#7A8899,color:#7A8899
+    linkStyle 12 color:#0E0C09
+    linkStyle 13 color:#0E0C09
   \`\`\``;
 
   /* ==========================================================================

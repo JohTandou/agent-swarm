@@ -194,6 +194,8 @@ graph TB
     style PLAN_FULL fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style CONTRACT fill:#0E0C09,stroke:#C4780D,color:#C4780D
     style FIX fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    linkStyle 21 color:#0E0C09
+    linkStyle 22 color:#0E0C09
   \`\`\``;
 
   /* ==========================================================================
