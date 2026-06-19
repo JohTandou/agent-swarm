@@ -55,7 +55,7 @@
           [attr.data-route]="node.route"
         >
           <div class="node-card__header">
-            <app-ui-badge variant="info" size="sm">{{ node.route }}</app-ui-badge>
+            <app-ui-badge [variant]="node.route === 'MEDIUM' || node.route === 'FULL' ? 'warning' : 'info'" size="sm">{{ node.route }}</app-ui-badge>
             <span class="node-card__complexity">{{ node.complexity }}</span>
           </div>
           <h3 class="node-card__title">{{ node.label }}</h3>
@@ -96,7 +96,7 @@
       </div>
     </div>
       <p class="tree-note">
-        Coûts estimés avec la tarification API DeepSeek V4 Pro (juin 2025). Tokens et coûts réels variables selon la complexité et le volume.
+        Coûts estimés avec la tarification API DeepSeek V4 Pro (juin 2026). Tokens et coûts réels variables selon la complexité et le volume.
       </p>
   </section>
 

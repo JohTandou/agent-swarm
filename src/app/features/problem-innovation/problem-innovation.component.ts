@@ -193,7 +193,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   ];
 
   protected readonly claudeComparisonNote =
-    'Comparaison à juin 2025. Les tarifs Claude Pro/Max sont des abonnements fixes sans frais de token supplémentaires dans la limite des quotas. La Swarm fonctionne en API — vous ne payez que les tokens consommés, sans abonnement.';
+    'Comparaison à juin 2026. Les tarifs Claude Pro/Max sont des abonnements fixes sans frais de token supplémentaires dans la limite des quotas. La Swarm fonctionne en API — vous ne payez que les tokens consommés, sans abonnement.';
 
   /* ==========================================================================
    * Données — Section 5 : Modèle d'IA
@@ -205,7 +205,7 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
       'Modèle unique utilisé par tous les agents de la Swarm — orchestration, planification, implémentation front et back, tests, review et documentation.',
     strengths:
       'Contexte de 1M tokens, raisonnement architectural, génération de code, analyse de codebase.',
-    costNote: '0,435 $/M tokens en entrée (cache miss), 0,0036 $/M (cache hit), 0,87 $/M en sortie. Soit ~0,49 $/M effectif (65/35 input/output, 35% cache hit). Tarification API DeepSeek V4 Pro, juin 2025.',
+    costNote: '0,435 $/M tokens en entrée (cache miss), 0,0036 $/M (cache hit), 0,87 $/M en sortie. Soit ~0,49 $/M effectif (65/35 input/output, 35% cache hit). Tarification API DeepSeek V4 Pro, juin 2026.',
   };
 
   /* ==========================================================================

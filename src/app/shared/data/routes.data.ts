@@ -1,7 +1,7 @@
 /* ==========================================================================
  * Coûts et tokens par route — source unique
  * Utilisé par workflow (arbre de décision) et problem-innovation (analyse coûts)
- * Tarification API DeepSeek V4 Pro, juin 2025
+ * Tarification API DeepSeek V4 Pro, juin 2026
  * ========================================================================== */
 
 export interface RouteCost {

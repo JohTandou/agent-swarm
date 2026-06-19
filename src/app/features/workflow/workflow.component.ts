@@ -152,8 +152,7 @@ graph TB
 
 
 
-    SIMPLE --> SEARCH["🔎 Search<br/>Cartographie"]
-    SEARCH --> IMPL_SIMPLE["💻 Front ou Back<br/>Implémentation"]
+    SIMPLE --> IMPL_SIMPLE["💻 Front ou Back<br/>Implémentation"]
     IMPL_SIMPLE --> TEST["🧪 Tester<br/>Génération + exécution tests"]
 
     ADAPT --> SEARCH_ADAPT["🔎 Search<br/>Cartographie"]
