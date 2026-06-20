@@ -18,7 +18,9 @@
       "title": "Sprint 2 — Structure & contenu SEO",
       "body": "Étendre SeoService pour meta descriptions dynamiques depuis frontmatter YAML, JSON-LD avancé (TechArticle par agent, HowTo pour workflow, ItemList pour listes, Person+author), canonical URLs, OG images par page, script optimisation images WebP, humans.txt, anchor texts enrichis.\n\nFichiers cibles : seo.service.ts, json-ld.service.ts, agent-detail.component.ts, skill-detail.component.ts, about.component.ts, workflow.component.ts, public/humans.txt, scripts/optimize-images.mjs, templates HTML.",
       "route": "MEDIUM",
-      "status": "pending"
+      "status": "done",
+      "issue_number": 94,
+      "pr_url": "https://github.com/JohTandou/swarm-wiki/pull/95"
     },
     {
       "id": "3",
@@ -28,5 +30,5 @@
       "status": "pending"
     }
   ],
-  "current_index": 1
+  "current_index": 2
 }
