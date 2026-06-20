@@ -1,6 +1,7 @@
 {
   "name": "swarm-wiki",
   "version": "0.0.0",
+  "author": "Joh Tandou",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
