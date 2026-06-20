@@ -3,6 +3,7 @@ title: Audit de Sécurité
 description: Audit ciblé des vulnérabilités : injection SQL, injection de prompt, empoisonnement de contexte
 category: audit
 order: 9
+author: Joh Tandou
 ---
 
 ## Rôle

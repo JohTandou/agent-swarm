@@ -3,6 +3,7 @@ title: Graphify (analyse)
 description: Transforme code, documentation, papiers et images en graphes de connaissances interactifs
 category: audit
 order: 3
+author: Joh Tandou
 ---
 
 ## Rôle

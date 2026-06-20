@@ -1,0 +1,31 @@
+{
+  "session_id": "swarm-20260620-seo-sprints",
+  "original_request": "SEO Sprints 1-3 : audit complet, Title/Meta/JSON-LD dynamiques, sitemap, personal branding discret Joh Tandou, footer global, About contributeurs, README",
+  "created_at": "2026-06-20",
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Sprint 1 — Fondations SEO invisibles",
+      "body": "Créer SeoService (Title + Meta dynamiques), JsonLdService (WebSite, Organization, BreadcrumbList), script sitemap.xml post-build, headers vercel.json Cache-Control/sécurité, ajouter author: Joh Tandou dans 37 frontmatter .md, préparer balise GSC.\n\nFichiers cibles : src/app/shared/services/seo.service.ts (nouveau), src/app/shared/services/json-ld.service.ts (nouveau), scripts/generate-sitemap.mjs (nouveau), vercel.json, src/content/**/*.md (37 fichiers), src/index.html.\n\nNe pas modifier le contenu des .md sauf ajout author: dans le frontmatter.",
+      "route": "MEDIUM",
+      "status": "in_progress",
+      "issue_number": 92,
+      "branch": "feature/swarm-issue-92-seo-sprint1-fondations"
+    },
+    {
+      "id": "2",
+      "title": "Sprint 2 — Structure & contenu SEO",
+      "body": "Étendre SeoService pour meta descriptions dynamiques depuis frontmatter YAML, JSON-LD avancé (TechArticle par agent, HowTo pour workflow, ItemList pour listes, Person+author), canonical URLs, OG images par page, script optimisation images WebP, humans.txt, anchor texts enrichis.\n\nFichiers cibles : seo.service.ts, json-ld.service.ts, agent-detail.component.ts, skill-detail.component.ts, about.component.ts, workflow.component.ts, public/humans.txt, scripts/optimize-images.mjs, templates HTML.",
+      "route": "MEDIUM",
+      "status": "pending"
+    },
+    {
+      "id": "3",
+      "title": "Sprint 3 — Personal branding discret Joh Tandou",
+      "body": "Ajouter footer global dans app.component.html (Conçu et orchestré par Joh Tandou + lien GitHub rel=me), section Contributeurs dans About (grille CSS existante .about__contributors, 1 carte Joh Tandou), section Genèse dans About, reformuler footer homepage (ne plus nier l'humain), README GitHub section Auteur, signature discrète page 404, vérification cohérence cross-canal.\n\nFichiers cibles : src/app/app.component.html, src/app/app.component.scss, src/app/features/about/about.component.html, src/app/features/homepage/homepage.component.html, src/app/features/not-found/not-found.component.html, README.md.\n\nContrainte absolue : 'Joh Tandou' jamais en H1/H2. Uniquement zones périphériques.",
+      "route": "MEDIUM",
+      "status": "pending"
+    }
+  ],
+  "current_index": 0
+}

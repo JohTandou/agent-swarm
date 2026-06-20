@@ -2,6 +2,7 @@
 title: Planner
 description: Planifie le travail en tâches atomiques — décomposition, choix architecturaux, contrats de délégation, estimation de complexité, détecte les choix architecturaux (soumis à l'utilisateur via l'orchestrateur) et délègue la définition des contrats à contract (route FULL uniquement)
 order: 4
+author: Joh Tandou
 ---
 
 ## Rôle

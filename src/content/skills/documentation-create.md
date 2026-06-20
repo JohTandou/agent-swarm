@@ -3,6 +3,7 @@ title: Création de Documentation
 description: Génère une documentation technique complète : architecture, stack, structure, APIs, modèles de données, configuration, déploiement
 category: creation
 order: 13
+author: Joh Tandou
 ---
 
 ## Rôle

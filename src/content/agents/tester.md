@@ -2,6 +2,7 @@
 title: Tester
 description: Première gate qualité — génère les tests manquants, exécute la suite, mesure la couverture avec un seuil minimum de 80%
 order: 7
+author: Joh Tandou
 ---
 
 ## Rôle

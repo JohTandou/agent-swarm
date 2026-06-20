@@ -1,5 +1,5 @@
 import { Component, signal, OnInit, OnDestroy, HostListener, ViewChild, ElementRef, inject } from '@angular/core';
-import { RouterOutlet, Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd, NavigationStart, ActivatedRoute, Data } from '@angular/router';
 import { trigger, transition, query, style, animate, group } from '@angular/animations';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
@@ -14,9 +14,12 @@ import { UiButtonComponent } from '@shared/components/ui-button/ui-button.compon
 import { SearchService } from './shared/services/search.service';
 import { AnimationService } from './shared/services/animation.service';
 import { ScrollProgressComponent } from './shared/components/scroll-progress/scroll-progress.component';
+import { SeoService } from './shared/services/seo.service';
+import { JsonLdService } from './shared/services/json-ld.service';
 import type { Breadcrumb } from '@shared/models';
 import { EasterEggService } from './shared/services/easter-egg.service';
 import type { SearchResult } from '@shared/models';
+import type { SeoConfig } from '@shared/models';
 
 /**
  * Mapping des segments d'URL vers les labels du fil d'Ariane.
@@ -113,6 +116,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private searchService: SearchService,
     private animService: AnimationService,
     private easterEggService: EasterEggService,
+    private readonly seoService: SeoService,
+    private readonly jsonLdService: JsonLdService,
   ) {
     this.subscriptions.add(
       this.breakpointObserver
@@ -137,6 +142,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
           // Construit le fil d'Ariane dynamique
           this.breadcrumbs.set(this.buildBreadcrumbs(url));
+
+          // Mise à jour SEO
+          this.updateSeo(url, url === '/' || url === '');
 
           // Animation d'entrée de page
           const wrapper = this.pageWrapperRef?.nativeElement;
@@ -168,11 +176,15 @@ export class AppComponent implements OnInit, OnDestroy {
     const currentUrl = this.router.url;
     this.isHomepage.set(currentUrl === '/' || currentUrl === '');
     this.breadcrumbs.set(this.buildBreadcrumbs(currentUrl));
+
+    // SEO : mise à jour initiale au premier chargement
+    this.updateSeo(currentUrl, currentUrl === '/' || currentUrl === '');
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
     this.animService.killAll();
+    this.jsonLdService.clearAll();
   }
 
   /**
@@ -217,6 +229,49 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     return crumbs;
+  }
+
+  /**
+   * Récupère les données de la route la plus profonde (enfant le plus imbriqué).
+   * Utilisé pour extraire title et description des route data.
+   */
+  private getDeepestRouteData(): Data {
+    let route = this.activatedRoute;
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+    return route.snapshot.data;
+  }
+
+  /**
+   * Met à jour les métadonnées SEO (titre, meta tags, JSON-LD)
+   * en fonction de l'URL courante et du statut de page d'accueil.
+   */
+  private updateSeo(url: string, isHomepage: boolean): void {
+    const routeData = this.getDeepestRouteData();
+    const pageTitle = routeData['title'] as string | undefined;
+    const pageDescription = routeData['description'] as string | undefined;
+
+    if (pageTitle) {
+      const seoConfig: SeoConfig = {
+        title: pageTitle,
+        description: pageDescription ?? 'Wiki technique du système Swarm — pipeline d\'agents IA orchestré pour le développement logiciel. Neuf agents spécialisés collaborent pour concevoir, implémenter, tester et documenter.',
+        author: 'Joh Tandou',
+        image: 'https://swarm-wiki.vercel.app/assets/images/homepage-hero.jpg',
+      };
+      this.seoService.updatePageMeta(seoConfig);
+    }
+
+    // JSON-LD : BreadcrumbList toujours présent
+    const schemas: object[] = [this.jsonLdService.generateBreadcrumbListSchema(this.breadcrumbs())];
+
+    // Schémas supplémentaires pour la homepage
+    if (isHomepage) {
+      schemas.push(this.jsonLdService.generateWebSiteSchema());
+      schemas.push(this.jsonLdService.generateOrganizationSchema());
+    }
+
+    this.jsonLdService.setSchemas(schemas);
   }
 
   /** Bascule l'état d'ouverture de la sidebar (mobile uniquement) */

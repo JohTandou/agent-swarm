@@ -2,6 +2,7 @@
 title: General
 description: Agent polyvalent pour les tâches de recherche complexes, l'exécution multi-étapes et la délégation de commandes shell
 order: 11
+author: Joh Tandou
 ---
 
 ## Rôle

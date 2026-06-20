@@ -3,6 +3,7 @@ title: Finalisation de Branche
 description: Guide la complétion du travail de développement : options structurées pour merge, PR ou cleanup
 category: workflow
 order: 18
+author: Joh Tandou
 ---
 
 ## Rôle

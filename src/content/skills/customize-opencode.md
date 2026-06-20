@@ -3,6 +3,7 @@ title: Personnalisation OpenCode
 description: Édition de la configuration OpenCode : opencode.json, .opencode/, agents, subagents, skills, plugins, MCP, permissions
 category: workflow
 order: 15
+author: Joh Tandou
 ---
 
 ## Rôle

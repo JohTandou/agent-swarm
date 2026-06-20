@@ -214,6 +214,20 @@
       "tester_pass": true,
       "issue_number": 79,
       "branch": "feature/swarm-issue-79-nouveau-logo-et-favicon-swarm"
+    },
+    {
+      "run_id": "swarm-20260620-sprint1-seo",
+      "route": "MEDIUM",
+      "task_type": "feature",
+      "task_title": "Sprint 1 — Fondations SEO (SeoService, JsonLdService, sitemap, vercel headers, frontmatter author)",
+      "iterations": 1,
+      "agents_used": ["search", "planner", "front", "tester", "reviewer"],
+      "retry_reasons": ["TEST_BUG-app.routes.spec-title"],
+      "status": "APPROVED",
+      "tester_pass": true,
+      "reviewer_approved": true,
+      "issue_number": 92,
+      "branch": "feature/swarm-issue-92-seo-sprint1-fondations"
     }
   ]
 }

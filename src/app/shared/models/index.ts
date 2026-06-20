@@ -16,6 +16,7 @@ export type { Skill, SkillCategory } from './skill.model';
 // Système de contenu (T2)
 export type { CalloutType } from './callout-type.model';
 export type { MarkdownFrontmatter } from './markdown-frontmatter.model';
+export type { SeoConfig } from './seo-config.model';
 export type { HeadingNode } from './heading-node.model';
 export type { MarkdownDocument } from './markdown-document.model';
 export type { MarkdownConfig } from './markdown-config.model';

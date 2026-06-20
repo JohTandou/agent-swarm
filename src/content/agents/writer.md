@@ -2,6 +2,7 @@
 title: Writer
 description: Dernier maillon du pipeline — met à jour CHANGELOG, API.md, ARCHITECTURE.md et README après chaque merge pour maintenir la documentation synchronisée
 order: 9
+author: Joh Tandou
 ---
 
 ## Rôle

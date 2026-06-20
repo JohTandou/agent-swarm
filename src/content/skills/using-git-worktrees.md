@@ -3,6 +3,7 @@ title: Utilisation des Git Worktrees
 description: Crée des worktrees Git isolés pour le travail sur les features, avec vérification de sécurité et sélection intelligente de répertoire
 category: documentation
 order: 24
+author: Joh Tandou
 ---
 
 ## Rôle

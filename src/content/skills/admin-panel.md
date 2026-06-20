@@ -3,6 +3,7 @@ title: Panel d'Administration
 description: Génère un panel d'administration complet et prêt pour la production : CRUD, analytics, gestion utilisateurs, contrôle d'accès par rôles
 category: creation
 order: 11
+author: Joh Tandou
 ---
 
 ## Rôle

@@ -3,6 +3,7 @@ title: Rédaction de Plans
 description: Écrit des plans d'implémentation pour les spécifications multi-étapes, avant de toucher au code
 category: documentation
 order: 25
+author: Joh Tandou
 ---
 
 ## Rôle

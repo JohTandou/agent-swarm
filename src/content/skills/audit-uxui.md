@@ -3,6 +3,7 @@ title: Audit UX/UI
 description: Audit complet de l'expérience utilisateur et du design d'interface : design system, typographie, palette, layout, composants, animations, accessibilité, responsive, copywriting
 category: audit
 order: 10
+author: Joh Tandou
 ---
 
 ## Rôle

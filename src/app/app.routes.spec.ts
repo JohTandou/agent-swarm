@@ -39,7 +39,7 @@ describe('AppRoutes', () => {
     expect(wildcardRoute).toBeTruthy();
     expect(wildcardRoute?.loadComponent).toBeDefined();
     expect(typeof wildcardRoute?.loadComponent).toBe('function');
-    expect(wildcardRoute?.data).toEqual({ title: 'Page introuvable' });
+    expect(wildcardRoute?.data).toEqual({ title: 'Page introuvable — Swarm Wiki' });
   });
 
 

@@ -3,6 +3,7 @@ title: Répartition d'Agents Parallèles
 description: Pour 2+ tâches indépendantes sans état partagé ni dépendances séquentielles
 category: workflow
 order: 16
+author: Joh Tandou
 ---
 
 ## Rôle

@@ -2,6 +2,7 @@
 title: Explore
 description: Agent d'exploration rapide de codebase — recherche par patterns glob et grep, analyse de structure, lecture seule
 order: 10
+author: Joh Tandou
 ---
 
 ## Rôle

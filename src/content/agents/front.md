@@ -2,6 +2,7 @@
 title: Front
 description: Implémente le frontend en respectant les contrats et génère des composants UI de qualité
 order: 3
+author: Joh Tandou
 ---
 
 ## Rôle

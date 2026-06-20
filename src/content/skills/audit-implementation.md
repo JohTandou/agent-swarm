@@ -3,6 +3,7 @@ title: Audit d'Implémentation
 description: Vérifie l'alignement entre PROPOSITION_VALEUR.md et le codebase réel (backend et frontend)
 category: audit
 order: 6
+author: Joh Tandou
 ---
 
 ## Rôle

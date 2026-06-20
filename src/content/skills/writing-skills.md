@@ -3,6 +3,7 @@ title: Rédaction de Skills
 description: Crée, édite ou vérifie des skills avant déploiement
 category: documentation
 order: 3
+author: Joh Tandou
 ---
 
 ## Rôle
