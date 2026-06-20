@@ -95,4 +95,104 @@ describe('JsonLdService', () => {
     expect(schema['@type']).toBe('Organization');
     expect(schema['founder']).toBeDefined();
   });
+
+  /* ==========================================================================
+   * Tests addSchemas
+   * ========================================================================== */
+
+  it('addSchemas devrait ajouter des scripts sans effacer les existants', () => {
+    service.setSchemas([{ '@type': 'WebSite' }]);
+    service.addSchemas([{ '@type': 'Organization' }]);
+
+    const scripts = document.querySelectorAll('script[data-swarm-json-ld]');
+    expect(scripts.length).toBe(2);
+
+    const firstContent = JSON.parse(scripts[0].textContent ?? '{}');
+    const secondContent = JSON.parse(scripts[1].textContent ?? '{}');
+    expect(firstContent['@type']).toBe('WebSite');
+    expect(secondContent['@type']).toBe('Organization');
+  });
+
+  it('addSchemas devrait ajouter plusieurs schémas à la fois', () => {
+    service.setSchemas([{ '@type': 'WebSite' }]);
+    service.addSchemas([{ '@type': 'Organization' }, { '@type': 'Person' }]);
+
+    const scripts = document.querySelectorAll('script[data-swarm-json-ld]');
+    expect(scripts.length).toBe(3);
+
+    const types = Array.from(scripts).map(
+      (s) => JSON.parse((s as HTMLScriptElement).textContent ?? '{}')['@type'],
+    );
+    expect(types).toEqual(['WebSite', 'Organization', 'Person']);
+  });
+
+  /* ==========================================================================
+   * Tests générateurs de schémas
+   * ========================================================================== */
+
+  it('generateTechArticleSchema devrait retourner un schéma TechArticle valide', () => {
+    const schema = service.generateTechArticleSchema({
+      headline: 'Orchestrateur — Agent IA de classification',
+      description: 'Point d\'entrée unique de la Swarm.',
+      authorName: 'Joh Tandou',
+      authorUrl: 'https://github.com/JohTandou',
+      datePublished: '2025-05-15',
+      image: 'https://swarm-wiki.vercel.app/assets/og-image.png',
+      url: 'https://swarm-wiki.vercel.app/agents/orchestrateur',
+    }) as Record<string, unknown>;
+
+    expect(schema['@type']).toBe('TechArticle');
+    expect(schema['headline']).toBe('Orchestrateur — Agent IA de classification');
+    expect(schema['author']).toBeDefined();
+    expect((schema['author'] as Record<string, unknown>)['@type']).toBe('Person');
+    expect((schema['author'] as Record<string, unknown>)['name']).toBe('Joh Tandou');
+    expect(schema['datePublished']).toBe('2025-05-15');
+    expect(schema['image']).toBeDefined();
+  });
+
+  it('generateItemListSchema devrait retourner un schéma ItemList valide', () => {
+    const schema = service.generateItemListSchema([
+      { name: 'Orchestrateur', url: '/agents/orchestrateur', description: 'Tech Lead' },
+      { name: 'Front', url: '/agents/front' },
+    ]) as Record<string, unknown>;
+
+    expect(schema['@type']).toBe('ItemList');
+    const items = schema['itemListElement'] as Array<Record<string, unknown>>;
+    expect(items.length).toBe(2);
+    expect(items[0]['position']).toBe(1);
+    expect(items[0]['name']).toBe('Orchestrateur');
+    expect(items[0]['description']).toBe('Tech Lead');
+    expect(items[1]['position']).toBe(2);
+    expect(items[1]['description']).toBeUndefined();
+  });
+
+  it('generateHowToSchema devrait retourner un schéma HowTo valide avec étapes', () => {
+    const schema = service.generateHowToSchema({
+      name: 'Pipeline de développement Swarm',
+      description: 'Étapes du pipeline agentic de bout en bout.',
+      steps: [
+        { name: 'Pre-search', text: 'Analyse du codebase en parallèle.' },
+        { name: 'Classification', text: 'L\'orchestrateur classifie la tâche.' },
+      ],
+    }) as Record<string, unknown>;
+
+    expect(schema['@type']).toBe('HowTo');
+    expect(schema['name']).toBe('Pipeline de développement Swarm');
+    const steps = schema['step'] as Array<Record<string, unknown>>;
+    expect(steps.length).toBe(2);
+    expect(steps[0]['@type']).toBe('HowToStep');
+    expect(steps[0]['position']).toBe(1);
+    expect(steps[0]['name']).toBe('Pre-search');
+    expect(steps[1]['position']).toBe(2);
+  });
+
+  it('generatePersonSchema devrait retourner un schéma Person pour Joh Tandou', () => {
+    const schema = service.generatePersonSchema() as Record<string, unknown>;
+
+    expect(schema['@type']).toBe('Person');
+    expect(schema['name']).toBe('Joh Tandou');
+    expect(schema['url']).toBe('https://github.com/JohTandou');
+    expect(schema['jobTitle']).toBe('Architecte du système Swarm');
+    expect(schema['description']).toContain('pipeline d\'agents IA');
+  });
 });

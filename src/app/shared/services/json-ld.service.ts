@@ -114,9 +114,102 @@ export class JsonLdService {
   }
 
   /**
+   * Ajoute des schémas JSON-LD supplémentaires sans effacer les scripts existants.
+   * Contrairement à setSchemas(), cette méthode préserve les schémas déjà injectés
+   * (breadcrumbs, etc.) et permet aux composants d'ajouter leurs propres données structurées.
+   * @param schemas Liste d'objets Schema.org à injecter en complément
+   */
+  addSchemas(schemas: object[]): void {
+    for (const schema of schemas) {
+      this.injectScript(schema);
+    }
+  }
+
+  /**
    * Supprime tous les scripts JSON-LD sans en réinjecter.
    */
   clearAll(): void {
     this.removeAllScripts();
+  }
+
+  /**
+   * Génère un schéma TechArticle pour les pages de contenu technique (agents, skills).
+   * @param config Configuration de l'article technique
+   * @returns Objet Schema.org TechArticle
+   */
+  generateTechArticleSchema(config: {
+    headline: string;
+    description: string;
+    authorName: string;
+    authorUrl: string;
+    datePublished: string;
+    image?: string;
+    url: string;
+  }): object {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'TechArticle',
+      headline: config.headline,
+      description: config.description,
+      author: { '@type': 'Person', name: config.authorName, url: config.authorUrl },
+      datePublished: config.datePublished,
+      image: config.image,
+      url: config.url,
+    };
+  }
+
+  /**
+   * Génère un schéma ItemList pour les pages de listing (agents, skills).
+   * @param items Éléments de la liste avec nom, URL et description optionnelle
+   * @returns Objet Schema.org ItemList
+   */
+  generateItemListSchema(items: { name: string; url: string; description?: string }[]): object {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      itemListElement: items.map((item, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: item.name,
+        url: item.url,
+        ...(item.description ? { description: item.description } : {}),
+      })),
+    };
+  }
+
+  /**
+   * Génère un schéma HowTo pour la page workflow décrivant les étapes du pipeline.
+   * @param config Configuration du tutoriel avec nom, description et étapes
+   * @returns Objet Schema.org HowTo
+   */
+  generateHowToSchema(config: { name: string; description: string; steps: { name: string; text: string }[] }): object {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: config.name,
+      description: config.description,
+      step: config.steps.map((step, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: step.name,
+        text: step.text,
+      })),
+    };
+  }
+
+  /**
+   * Génère un schéma Person pour l'auteur du wiki (Joh Tandou).
+   * @returns Objet Schema.org Person
+   */
+  generatePersonSchema(): object {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Joh Tandou',
+      url: 'https://github.com/JohTandou',
+      jobTitle: 'Architecte du système Swarm',
+      description:
+        'Créateur du pipeline d\'agents IA Swarm — orchestration agentic pour le développement logiciel',
+    };
   }
 }

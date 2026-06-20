@@ -9,7 +9,8 @@
     "postbuild": "node scripts/generate-sitemap.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false --browsers=ChromeHeadless",
-    "e2e": "npx playwright test"
+    "e2e": "npx playwright test",
+    "optimize-images": "node scripts/optimize-images.mjs"
   },
   "private": true,
   "dependencies": {
@@ -50,6 +51,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "sharp": "^0.33.0",
     "typescript": "~5.7.2"
   }
 }

@@ -2,8 +2,9 @@ import { Component, signal, computed, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownRendererComponent } from '../../shared/components/markdown-renderer/markdown-renderer.component';
 import { TocService } from '../../shared/services/toc.service';
-import type { Skill, SkillCategory } from '@shared/models';
-import type { TocEntry } from '@shared/models';
+import { SeoService } from '../../shared/services/seo.service';
+import { JsonLdService } from '../../shared/services/json-ld.service';
+import type { Skill, SkillCategory, TocEntry, MarkdownDocument } from '@shared/models';
 
 /** Skills hardcodés */
 const SKILLS: Skill[] = [
@@ -40,6 +41,8 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
 export class SkillDetailComponent {
   private route = inject(ActivatedRoute);
   private tocService = inject(TocService);
+  private seoService = inject(SeoService);
+  private jsonLdService = inject(JsonLdService);
 
   /** ID du skill extrait de l'URL */
   readonly skillId = signal<string>('');
@@ -72,7 +75,79 @@ export class SkillDetailComponent {
       const id = params.get('id');
       this.skillId.set(id ?? '');
       this.tocService.clear();
+      this.setSeoAndSchemas(id);
     });
+  }
+
+  /**
+   * Définit les métadonnées SEO et les schémas JSON-LD initiaux.
+   * Sera mis à jour par onDocumentLoaded() quand le Markdown frontmatter est disponible.
+   * @param id Identifiant du skill extrait de l'URL
+   */
+  private setSeoAndSchemas(id: string | null): void {
+    if (!id) return;
+    const skill = SKILLS.find((s) => s.id === id);
+    if (!skill) return;
+
+    const canonicalUrl = `https://swarm-wiki.vercel.app/skills/${id}`;
+    const ogImage = 'https://swarm-wiki.vercel.app/assets/images/homepage-hero.jpg';
+
+    this.seoService.updatePageMeta({
+      title: skill.name,
+      description: skill.description,
+      canonicalUrl,
+      image: ogImage,
+      type: 'article',
+      author: 'Joh Tandou',
+    });
+
+    const techArticle = this.jsonLdService.generateTechArticleSchema({
+      headline: `${skill.name} — Skill Swarm`,
+      description: skill.description,
+      authorName: 'Joh Tandou',
+      authorUrl: 'https://github.com/JohTandou',
+      datePublished: '2025-05-15',
+      image: ogImage,
+      url: canonicalUrl,
+    });
+
+    this.jsonLdService.addSchemas([techArticle, this.jsonLdService.generatePersonSchema()]);
+  }
+
+  /**
+   * Appelé quand le MarkdownRenderer a terminé le chargement du document.
+   * Met à jour le SEO avec le frontmatter et enrichit le JSON-LD.
+   * @param doc Document Markdown chargé (contient frontmatter, TOC, contenu)
+   */
+  onDocumentLoaded(doc: MarkdownDocument): void {
+    const id = this.skillId();
+    if (!id) return;
+
+    const canonicalUrl = `https://swarm-wiki.vercel.app/skills/${id}`;
+    const ogImage = 'https://swarm-wiki.vercel.app/assets/images/homepage-hero.jpg';
+    const title = doc.frontmatter.title || this.skill()?.name || 'Skill';
+    const description = doc.frontmatter.description || this.skill()?.description || '';
+
+    this.seoService.updatePageMeta({
+      title,
+      description,
+      canonicalUrl,
+      image: ogImage,
+      type: 'article',
+      author: 'Joh Tandou',
+    });
+
+    const techArticleUpdated = this.jsonLdService.generateTechArticleSchema({
+      headline: title,
+      description,
+      authorName: 'Joh Tandou',
+      authorUrl: 'https://github.com/JohTandou',
+      datePublished: '2025-05-15',
+      image: ogImage,
+      url: canonicalUrl,
+    });
+
+    this.jsonLdService.addSchemas([techArticleUpdated, this.jsonLdService.generatePersonSchema()]);
   }
 
   /** Transmet les entrées TOC au service partagé */

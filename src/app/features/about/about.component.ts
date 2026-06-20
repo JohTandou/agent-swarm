@@ -4,6 +4,7 @@ import { StaggerChildrenDirective } from '@shared/directives/stagger-children.di
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { AnimationService } from '@shared/services/animation.service';
+import { JsonLdService } from '@shared/services/json-ld.service';
 
 /**
  * Page "À propos de la Swarm" — Contenu riche structuré en sections.
@@ -22,7 +23,11 @@ export class AboutComponent implements OnDestroy, AfterViewInit {
   constructor(
     private readonly hostRef: ElementRef,
     private readonly animService: AnimationService,
-  ) {}
+    private readonly jsonLdService: JsonLdService,
+  ) {
+    // Ajoute le schéma Person pour l'auteur du wiki
+    this.jsonLdService.addSchemas([this.jsonLdService.generatePersonSchema()]);
+  }
 
   ngAfterViewInit(): void {
     this.initScrollAnimations();
