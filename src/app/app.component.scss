@@ -92,4 +92,46 @@
   max-width: 100% !important;
 }
 
+/* ==========================================================================
+   Footer global — signature discrète
+   ========================================================================== */
+
+.global-footer {
+  border-top: 1px solid rgba(122, 136, 153, 0.08);
+  padding: 16px 0;
+  margin-top: auto;
+  background: var(--color-bg-subtle, #0E0C09);
+
+  &__inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  &__text {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  &__link {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 200ms ease;
+
+    &:hover {
+      color: var(--color-text-primary);
+    }
+  }
+
+  &__sep {
+    margin: 0 8px;
+    opacity: 0.4;
+  }
+}
+
 

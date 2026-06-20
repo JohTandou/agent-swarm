@@ -113,3 +113,23 @@
     opacity: 0.06;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Crédit discret — signature Joh Tandou
+   -------------------------------------------------------------------------- */
+.not-found__credit {
+  margin-top: 32px;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+
+  &-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 200ms ease;
+
+    &:hover {
+      color: var(--color-text-primary);
+    }
+  }
+}

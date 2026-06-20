@@ -242,6 +242,20 @@
       "reviewer_approved": true,
       "issue_number": 94,
       "branch": "feature/swarm-issue-94-seo-sprint2-structure"
+    },
+    {
+      "run_id": "swarm-20260620-sprint3-seo",
+      "route": "MEDIUM",
+      "task_type": "feature",
+      "task_title": "Sprint 3 — Personal branding Joh Tandou (footer global, About contributeurs, README, homepage footer, 404)",
+      "iterations": 1,
+      "agents_used": ["front", "tester", "reviewer"],
+      "retry_reasons": [],
+      "status": "APPROVED",
+      "tester_pass": true,
+      "reviewer_approved": true,
+      "issue_number": 96,
+      "branch": "feature/swarm-issue-96-seo-sprint3-branding"
     }
   ]
 }

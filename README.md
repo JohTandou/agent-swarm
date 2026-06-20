@@ -134,6 +134,12 @@ Déployé sur **Vercel** à l'adresse [swarm-wiki.vercel.app](https://swarm-wiki
 - SPA rewrites : toutes les routes → `/index.html`
 - Déploiement automatique sur merge main
 
+## Auteur
+
+Conçu et développé par **Joh Tandou** — [github.com/JohTandou](https://github.com/JohTandou)
+
+La Swarm est un projet de recherche et développement en architectures agentic. Pour toute question, suggestion ou collaboration, ouvrir une issue sur le dépôt.
+
 ## Licence
 
 Projet privé — documentation interne du système Swarm.
