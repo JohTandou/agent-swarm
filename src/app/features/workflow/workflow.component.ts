@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef } from '@angular/core';
 import { MarkdownRendererComponent } from '../../shared/components/markdown-renderer/markdown-renderer.component';
 import { AnimationService } from '../../shared/services/animation.service';
+import { SeoService } from '../../shared/services/seo.service';
+import { JsonLdService } from '../../shared/services/json-ld.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
@@ -69,6 +71,9 @@ interface SwarmFile {
 })
 export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
   private hostRef = inject(ElementRef);
+  private readonly animService = inject(AnimationService);
+  private readonly seoService = inject(SeoService);
+  private readonly jsonLdService = inject(JsonLdService);
 
   /* ==========================================================================
    * État du composant
@@ -370,14 +375,13 @@ gitGraph
    * Références DOM pour les animations
    * ========================================================================== */
 
-  private readonly animService = inject(AnimationService);
-
   /* ==========================================================================
    * Lifecycle
    * ========================================================================== */
 
   ngOnInit(): void {
     this.initContent();
+    this.initSeoAndSchemas();
   }
 
   protected retry(): void {
@@ -386,6 +390,58 @@ gitGraph
 
   private initContent(): void {
     // Données statiques — aucune initialisation asynchrone nécessaire
+  }
+
+  /** Initialise les métadonnées SEO et le schéma HowTo pour la page workflow */
+  private initSeoAndSchemas(): void {
+    const canonicalUrl = 'https://swarm-wiki.vercel.app/workflow';
+
+    this.seoService.updatePageMeta({
+      title: 'Pipeline de développement',
+      description:
+        'De l\'issue au merge sans effort. Découvrez comment la Swarm orchestre le développement logiciel de bout en bout : classification, routage, implémentation parallèle, tests et revue automatisés.',
+      canonicalUrl,
+      type: 'article',
+      author: 'Joh Tandou',
+    });
+
+    const howToSchema = this.jsonLdService.generateHowToSchema({
+      name: 'Pipeline de développement Swarm',
+      description:
+        'Étapes du pipeline agentic de bout en bout, de l\'issue GitHub au merge automatisé.',
+      steps: [
+        {
+          name: 'Pre-search',
+          text: 'Analyse du codebase en parallèle par les agents de la Swarm pour mesurer l\'impact réel de la tâche.',
+        },
+        {
+          name: 'Classification',
+          text: 'L\'orchestrateur analyse la complexité et choisit la route appropriée : DIRECT, SIMPLE, ADAPT, MEDIUM ou FULL.',
+        },
+        {
+          name: 'Search',
+          text: 'L\'agent Search cartographie le codebase, identifie les fichiers impactés et détecte les patterns.',
+        },
+        {
+          name: 'Plan',
+          text: 'L\'agent Planner décompose la tâche en sous-tâches atomiques et détecte les choix architecturaux.',
+        },
+        {
+          name: 'Implementation',
+          text: 'Les agents Front et Back implémentent en parallèle, guidés par les contrats TypeScript.',
+        },
+        {
+          name: 'Tests',
+          text: 'L\'agent Tester génère et exécute les tests, mesure la couverture (seuil 80 %) et catégorise les erreurs.',
+        },
+        {
+          name: 'Review & Merge',
+          text: 'L\'agent Reviewer audite la qualité et la sécurité. Après approbation, le Writer documente et la PR est mergée.',
+        },
+      ],
+    });
+
+    this.jsonLdService.addSchemas([howToSchema]);
   }
 
   ngAfterViewInit(): void {

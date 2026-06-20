@@ -1,0 +1,10 @@
+/* TEAM */
+Creator: Joh Tandou
+Site: https://swarm-wiki.vercel.app
+Language: French
+
+/* SITE */
+Last update: 2026/06/20
+Standards: HTML5, CSS3, WCAG AA
+Components: Angular 19, Tailwind CSS v4, GSAP, D3.js
+Software: Swarm Wiki — Pipeline d'agents IA pour le développement logiciel

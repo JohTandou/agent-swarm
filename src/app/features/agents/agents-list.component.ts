@@ -6,6 +6,7 @@ import { ToastService } from '@shared/services/toast.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { UiEmptyStateComponent } from '@shared/components/ui-empty-state/ui-empty-state.component';
+import { JsonLdService } from '@shared/services/json-ld.service';
 import type { Agent, AgentCategory } from '@shared/models';
 import { AGENTS, CATEGORY_LABELS, ROUTE_COLORS } from '@shared/data/agents.data';
 
@@ -26,12 +27,23 @@ import { AGENTS, CATEGORY_LABELS, ROUTE_COLORS } from '@shared/data/agents.data'
 })
 export class AgentsListComponent {
   private readonly toastService = inject(ToastService);
+  private readonly jsonLdService = inject(JsonLdService);
 
   /** Liste complète des agents */
   readonly agents = AGENTS;
 
   /** Catégorie active pour le filtrage (null = toutes) */
   readonly activeCategory = signal<AgentCategory | null>(null);
+
+  constructor() {
+    // Schéma ItemList pour le SEO — liste des 11 agents
+    const itemListItems = AGENTS.map((agent) => ({
+      name: agent.name,
+      url: `https://swarm-wiki.vercel.app/agents/${agent.id}`,
+      description: agent.description,
+    }));
+    this.jsonLdService.addSchemas([this.jsonLdService.generateItemListSchema(itemListItems)]);
+  }
 
   /** Agents filtrés selon la catégorie active */
   readonly filteredAgents = computed<Agent[]>(() => {

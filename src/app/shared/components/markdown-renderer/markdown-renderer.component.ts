@@ -11,7 +11,7 @@ import {
   output,
 } from '@angular/core';
 import { MarkdownComponent, MarkdownService } from 'ngx-markdown';
-import type { TocEntry } from '@shared/models';
+import type { TocEntry, MarkdownDocument } from '@shared/models';
 import { ContentService } from '../../services/content.service';
 import { UiSkeletonComponent } from '../ui-skeleton/ui-skeleton.component';
 
@@ -63,6 +63,9 @@ export class MarkdownRendererComponent implements OnChanges, AfterViewInit {
   /** Signal émis quand le contenu est chargé et les headings extraits */
   tocEntries = output<TocEntry[]>();
 
+  /** Signal émis quand le document Markdown complet est chargé (frontmatter, contenu, TOC) */
+  readonly documentLoaded = output<MarkdownDocument>();
+
   /** État de chargement */
   isLoading = false;
 
@@ -104,6 +107,7 @@ export class MarkdownRendererComponent implements OnChanges, AfterViewInit {
         if (this.sourcePath !== requestedPath) return;
         this.processContent(doc.content);
         this.tocEntries.emit(doc.tocEntries);
+        this.documentLoaded.emit(doc);
         this.isLoading = false;
       },
       error: (err: Error) => {

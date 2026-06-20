@@ -29,6 +29,7 @@
           [enableMermaid]="false"
           [enablePrism]="true"
           (tocEntries)="onTocEntries($event)"
+          (documentLoaded)="onDocumentLoaded($event)"
         />
       </div>
     } @else {

@@ -6,6 +6,7 @@ import { UiButtonComponent } from '@shared/components/ui-button/ui-button.compon
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { UiEmptyStateComponent } from '@shared/components/ui-empty-state/ui-empty-state.component';
+import { JsonLdService } from '@shared/services/json-ld.service';
 import type { Skill, SkillCategory } from '@shared/models';
 
 /** Skills hardcodés */
@@ -40,12 +41,23 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
 })
 export class SkillsListComponent {
   private readonly toastService = inject(ToastService);
+  private readonly jsonLdService = inject(JsonLdService);
 
   /** Liste complète des skills (hardcodée) */
   readonly skills = signal<Skill[]>(SKILLS);
 
   /** Catégorie active pour le filtrage (null = toutes) */
   readonly activeCategory = signal<SkillCategory | null>(null);
+
+  constructor() {
+    // Schéma ItemList pour le SEO — liste des skills disponibles
+    const itemListItems = SKILLS.map((skill) => ({
+      name: skill.name,
+      url: `https://swarm-wiki.vercel.app/skills/${skill.id}`,
+      description: skill.description,
+    }));
+    this.jsonLdService.addSchemas([this.jsonLdService.generateItemListSchema(itemListItems)]);
+  }
 
   /** État de chargement (désactivé — skills hardcodés) */
   readonly isLoading = signal(false);
