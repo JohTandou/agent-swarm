@@ -12,6 +12,9 @@ export interface MarkdownFrontmatter {
   /** Ordre de tri dans les listes et la navigation (ordre croissant) */
   order: number;
 
+  /** Auteur du document (optionnel, utilisé pour le SEO) */
+  author?: string;
+
   /** Champs additionnels libres — extensibilité sans rupture de contrat */
   [key: string]: unknown;
 }

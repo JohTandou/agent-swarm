@@ -3,6 +3,7 @@ title: Développement par Sous-Agents
 description: Exécute des plans d'implémentation avec des tâches indépendantes dans la session courante
 category: workflow
 order: 21
+author: Joh Tandou
 ---
 
 ## Rôle

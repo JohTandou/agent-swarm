@@ -3,6 +3,7 @@ title: Développement Piloté par les Tests
 description: TDD : écrire les tests avant le code d'implémentation pour toute fonctionnalité ou correction
 category: workflow
 order: 22
+author: Joh Tandou
 ---
 
 ## Rôle

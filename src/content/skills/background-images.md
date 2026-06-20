@@ -3,6 +3,7 @@ title: Images de Fond
 description: Analyse l'application, identifie les pages qui bénéficieraient d'images de fond et génère des prompts optimaux pour GPT Image
 category: creation
 order: 12
+author: Joh Tandou
 ---
 
 ## Rôle

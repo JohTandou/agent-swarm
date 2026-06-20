@@ -3,6 +3,7 @@ title: Audit de Gamification
 description: Audit complet de gamification : boucles d'engagement, progression, récompenses, rétention, onboarding, équilibre, benchmark
 category: audit
 order: 4
+author: Joh Tandou
 ---
 
 ## Rôle

@@ -3,6 +3,7 @@ title: Audit Marketing & SEO
 description: Audit complet du marketing et du SEO : SEO technique, readiness marketing, optimisation de la présence web
 category: audit
 order: 7
+author: Joh Tandou
 ---
 
 ## Rôle

@@ -3,6 +3,7 @@ title: Demande de Code Review
 description: Demande de code review après complétion de tâches ou fonctionnalités majeures, avant merge
 category: workflow
 order: 20
+author: Joh Tandou
 ---
 
 ## Rôle

@@ -3,6 +3,7 @@ title: Mise à Jour de Documentation
 description: Met à jour TECHNICAL_DOCUMENTATION.md, README.md et PROPOSITION_VALEUR.md en détectant la dérive entre la documentation et le code
 category: documentation
 order: 23
+author: Joh Tandou
 ---
 
 ## Rôle

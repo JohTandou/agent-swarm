@@ -2,6 +2,7 @@
 title: Reviewer
 description: Deuxième gate qualité — audit sécurité, qualité et tests. APPROVE obligatoire avant commit sur les routes MEDIUM et FULL
 order: 8
+author: Joh Tandou
 ---
 
 ## Rôle

@@ -2,6 +2,7 @@
 title: Search
 description: Agent d'analyse de codebase en lecture seule — détection de patterns, documentation context7, cartographie des dépendances
 order: 2
+author: Joh Tandou
 ---
 
 ## Rôle

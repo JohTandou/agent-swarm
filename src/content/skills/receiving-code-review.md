@@ -3,6 +3,7 @@ title: Réception de Code Review
 description: Réception de feedback de code review avec rigueur technique, vérification avant implémentation des suggestions
 category: workflow
 order: 19
+author: Joh Tandou
 ---
 
 ## Rôle

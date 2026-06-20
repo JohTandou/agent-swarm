@@ -2,6 +2,7 @@
 title: Back
 description: Implémente le backend en respectant la spécification OpenAPI — scripts, crons et configuration serveur
 order: 6
+author: Joh Tandou
 ---
 
 ## Rôle

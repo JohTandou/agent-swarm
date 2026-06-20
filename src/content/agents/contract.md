@@ -2,6 +2,7 @@
 title: Contract
 description: Source de vérité pour les types TypeScript, les spécifications OpenAPI et les migrations Supabase — appelé uniquement sur la route FULL
 order: 5
+author: Joh Tandou
 ---
 
 ## Rôle

@@ -3,6 +3,7 @@ title: Exécution des Tests
 description: Exécute tous les tests de l'application, détecte l'infrastructure de test, analyse les échecs et produit un rapport avec correctifs actionnables
 category: creation
 order: 14
+author: Joh Tandou
 ---
 
 ## Rôle

@@ -3,6 +3,7 @@ title: Audit Global
 description: Audit global couvrant complétude d'implémentation, production-readiness, sécurité, performance, qualité de code et marketing/SEO
 category: audit
 order: 5
+author: Joh Tandou
 ---
 
 ## Rôle

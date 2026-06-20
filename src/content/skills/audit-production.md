@@ -3,6 +3,7 @@ title: Audit Production-Readiness
 description: Vérification exhaustive de la readiness pour la production : sécurité, fiabilité, performance, observabilité, infrastructure
 category: audit
 order: 8
+author: Joh Tandou
 ---
 
 ## Rôle

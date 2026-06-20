@@ -3,6 +3,7 @@ title: Exécution de Plans
 description: Exécute un plan d'implémentation écrit dans une session séparée avec des points de contrôle de revue
 category: workflow
 order: 17
+author: Joh Tandou
 ---
 
 ## Rôle
