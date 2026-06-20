@@ -8,9 +8,10 @@
       "title": "Sprint 1 — Fondations SEO invisibles",
       "body": "Créer SeoService (Title + Meta dynamiques), JsonLdService (WebSite, Organization, BreadcrumbList), script sitemap.xml post-build, headers vercel.json Cache-Control/sécurité, ajouter author: Joh Tandou dans 37 frontmatter .md, préparer balise GSC.\n\nFichiers cibles : src/app/shared/services/seo.service.ts (nouveau), src/app/shared/services/json-ld.service.ts (nouveau), scripts/generate-sitemap.mjs (nouveau), vercel.json, src/content/**/*.md (37 fichiers), src/index.html.\n\nNe pas modifier le contenu des .md sauf ajout author: dans le frontmatter.",
       "route": "MEDIUM",
-      "status": "in_progress",
+      "status": "done",
       "issue_number": 92,
-      "branch": "feature/swarm-issue-92-seo-sprint1-fondations"
+      "branch": "feature/swarm-issue-92-seo-sprint1-fondations",
+      "pr_url": "https://github.com/JohTandou/swarm-wiki/pull/93"
     },
     {
       "id": "2",
@@ -27,5 +28,5 @@
       "status": "pending"
     }
   ],
-  "current_index": 0
+  "current_index": 1
 }
