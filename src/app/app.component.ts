@@ -14,6 +14,7 @@ import { UiButtonComponent } from '@shared/components/ui-button/ui-button.compon
 import { SearchService } from './shared/services/search.service';
 import { TranslationService } from './shared/services/translation.service';
 import { AnimationService } from './shared/services/animation.service';
+import { LanguageService } from './shared/services/language.service';
 import { ScrollProgressComponent } from './shared/components/scroll-progress/scroll-progress.component';
 import { SeoService } from './shared/services/seo.service';
 import { JsonLdService } from './shared/services/json-ld.service';
@@ -23,19 +24,19 @@ import type { SearchResult } from '@shared/models';
 import type { SeoConfig } from '@shared/models';
 
 /**
- * Mapping des segments d'URL vers les labels du fil d'Ariane.
+ * Mapping des segments d'URL vers les clés de traduction du fil d'Ariane.
  * Les routes avec paramètres dynamiques sont détectées via préfixe.
  */
 const BREADCRUMB_LABELS: Record<string, string> = {
-  'agents': 'Agents',
-  'skills': 'Skills',
-  'workflow': 'Pipeline',
-  'probleme-innovation': 'Problème & Innovation',
+  'agents': 'nav.agents',
+  'skills': 'nav.skills',
+  'workflow': 'nav.workflow',
+  'probleme-innovation': 'nav.problem',
   'normes': 'Standards',
-  'outils-mcp': 'Outils MCP',
-  'a-propos': 'À propos',
+  'outils-mcp': 'nav.mcp',
+  'a-propos': 'nav.about',
   'demo-markdown': 'Démo Markdown',
-  'ecosysteme': 'Écosystème',
+  'ecosysteme': 'nav.ecosystem',
 };
 
 /**
@@ -46,6 +47,22 @@ const DYNAMIC_LABELS: Record<string, string> = {
   'agents': 'Agent',
   'skills': 'Skill',
   'outils-mcp': 'Catégorie',
+};
+
+/** Mapping fallback des segments FR → clé de traduction (nécessaire pour les URLs non-françaises) */
+const LABEL_MAP: Record<string, string> = {
+  'accueil': 'nav.home',
+  'a-propos': 'nav.about',
+  'agents': 'nav.agents',
+  'skills': 'nav.skills',
+  'workflow': 'nav.workflow',
+  'ecosysteme': 'nav.ecosystem',
+  'probleme-innovation': 'nav.problem',
+  'outils-mcp': 'nav.mcp',
+  'about': 'nav.about',
+  'problem-innovation': 'nav.problem',
+  'mcp-tools': 'nav.mcp',
+  'ecosystem': 'nav.ecosystem',
 };
 
 /**
@@ -120,6 +137,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly seoService: SeoService,
     private readonly jsonLdService: JsonLdService,
     private readonly translationService: TranslationService,
+    private readonly languageService: LanguageService,
   ) {
     this.subscriptions.add(
       this.breakpointObserver
@@ -140,13 +158,14 @@ export class AppComponent implements OnInit, OnDestroy {
         .pipe(filter((e) => e instanceof NavigationEnd))
         .subscribe((e) => {
           const url = (e as NavigationEnd).urlAfterRedirects;
-          this.isHomepage.set(url === '/' || url === '');
+          const isHome = url === '/' || url === '' || url === '/en' || url === '/en/';
+          this.isHomepage.set(isHome);
 
           // Construit le fil d'Ariane dynamique
           this.breadcrumbs.set(this.buildBreadcrumbs(url));
 
           // Mise à jour SEO
-          this.updateSeo(url, url === '/' || url === '');
+          this.updateSeo(url, isHome);
 
           // Animation d'entrée de page
           const wrapper = this.pageWrapperRef?.nativeElement;
@@ -176,11 +195,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
     /* Détection initiale (avant tout événement de navigation) */
     const currentUrl = this.router.url;
-    this.isHomepage.set(currentUrl === '/' || currentUrl === '');
+    const isHome = currentUrl === '/' || currentUrl === '' || currentUrl === '/en' || currentUrl === '/en/';
+    this.isHomepage.set(isHome);
     this.breadcrumbs.set(this.buildBreadcrumbs(currentUrl));
 
     // SEO : mise à jour initiale au premier chargement
-    this.updateSeo(currentUrl, currentUrl === '/' || currentUrl === '');
+    this.updateSeo(currentUrl, isHome);
   }
 
   ngOnDestroy(): void {
@@ -191,12 +211,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   /**
    * Construit le fil d'Ariane à partir de l'URL courante.
-   * Toujours commence par « Accueil ».
-   * Les segments sont mappés vers des labels français.
+   * Toujours commence par « Accueil » (traduit).
+   * Le segment /en est ignoré.
+   * Les segments sont mappés vers des labels traduits selon la langue active.
    */
   private buildBreadcrumbs(url: string): Breadcrumb[] {
-    const crumbs: Breadcrumb[] = [{ label: 'Accueil', route: '/' }];
-    if (!url || url === '/') return crumbs;
+    const isEnglish = this.languageService.currentLang() === 'en';
+    const homeLabel = this.translationService.translate('nav.home');
+    const crumbs: Breadcrumb[] = [{ label: homeLabel, route: '/' }];
+    if (!url || url === '/' || url === '/en' || url === '/en/') return crumbs;
 
     // Nettoie l'URL : retire le leading slash et les query params
     const segments = url.replace(/^\//, '').split('/').filter((s) => s.length > 0);
@@ -206,6 +229,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
     for (let i = 0; i < segments.length; i++) {
       const segment = segments[i];
+
+      // Saute le segment de langue /en
+      if (segment === 'en') {
+        accumulatedPath += '/en';
+        continue;
+      }
+
       accumulatedPath += '/' + segment;
 
       const isLast = i === segments.length - 1;
@@ -214,11 +244,14 @@ export class AppComponent implements OnInit, OnDestroy {
       let label: string;
 
       if (BREADCRUMB_LABELS[segment]) {
-        // Segment connu (ex: "agents", "skills")
-        label = BREADCRUMB_LABELS[segment];
+        // Segment connu (ex: "agents", "skills") → traduire
+        const key = BREADCRUMB_LABELS[segment];
+        label = this.translationService.translate(key);
+      } else if (isEnglish && LABEL_MAP[segment]) {
+        // Fallback : segment anglais mappé → traduire
+        label = this.translationService.translate(LABEL_MAP[segment]);
       } else if (i > 0 && !isLast && DYNAMIC_LABELS[segments[i - 1]]) {
         // Segment dynamique après un préfixe connu (ex: /agents/orchestrateur)
-        // Le dernier segment échappe au label générique pour utiliser capitalize()
         label = DYNAMIC_LABELS[segments[i - 1]];
       } else {
         // Fallback : capitalise le segment

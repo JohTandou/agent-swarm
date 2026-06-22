@@ -14,18 +14,17 @@
 }
 
 /* --------------------------------------------------------------------------
-   Hexagone décoratif — centré en arrière-plan, opacité très basse
+   Hexagone décoratif — plein écran en arrière-plan, opacité très basse
    -------------------------------------------------------------------------- */
 .not-found__illustration {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 400px;
-  max-width: 85vw;
-  height: auto;
-  object-fit: contain;
-  opacity: 0.30;
-  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.15;
 }
 
 
@@ -97,11 +96,6 @@
   .not-found__message {
     font-size: 0.9375rem;
     margin: 20px 0 32px;
-  }
-
-  .not-found__illustration {
-    width: 220px;
-    height: 220px;
   }
 }
 

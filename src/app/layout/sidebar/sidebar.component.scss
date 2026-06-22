@@ -95,7 +95,11 @@
 
 /* Chevron pour menus pliables */
 .sidebar__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.625rem;
+  line-height: 1;
   transition: transform 250ms var(--ease-spring);
 }
 

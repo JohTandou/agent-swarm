@@ -27,10 +27,10 @@
                   [class.sidebar__link--active]="isParentActive(item)"
                   (click)="toggleExpanded(item); isMobile && closeSidebar.emit()"
                   [attr.aria-expanded]="item.expanded"
-                  [attr.aria-label]="(item.expanded ? 'Réduire' : 'Déplier') + ' ' + item.label"
+                  [attr.aria-label]="(item.expanded ? 'Réduire' : 'Déplier') + ' ' + translateNavLabel(item.label)"
                   type="button"
                 >
-                  {{ item.label }}
+                  {{ translateNavLabel(item.label) }}
                   <span class="sidebar__chevron" [class.sidebar__chevron--expanded]="item.expanded" aria-hidden="true">▼</span>
                 </button>
               </div>
@@ -44,14 +44,14 @@
               >
                 <a
                   class="sidebar__parent-label"
-                  [routerLink]="item.route"
+                  [routerLink]="localizeRoute(item.route)"
                   (click)="isMobile && closeSidebar.emit()"
-                >{{ item.label }}</a>
+                >{{ translateNavLabel(item.label) }}</a>
                 <button
                   class="sidebar__expand-btn"
                   (click)="toggleExpanded(item)"
                   [attr.aria-expanded]="item.expanded"
-                  [attr.aria-label]="(item.expanded ? 'Réduire' : 'Déplier') + ' ' + item.label"
+                  [attr.aria-label]="(item.expanded ? 'Réduire' : 'Déplier') + ' ' + translateNavLabel(item.label)"
                   type="button"
                 >
                   <span class="sidebar__chevron" aria-hidden="true">▼</span>
@@ -64,7 +64,7 @@
                   <li class="sidebar__subitem">
                     <a
                       class="sidebar__link sidebar__link--child"
-                      [routerLink]="child.route"
+                      [routerLink]="localizeRoute(child.route)"
                       routerLinkActive="sidebar__link--active"
                       (click)="isMobile && closeSidebar.emit()"
                     >
@@ -78,12 +78,12 @@
             <!-- Lien simple -->
             <a
               class="sidebar__link"
-              [routerLink]="item.route"
+              [routerLink]="localizeRoute(item.route)"
               routerLinkActive="sidebar__link--active"
               [routerLinkActiveOptions]="{ exact: item.route === '/' }"
               (click)="isMobile && closeSidebar.emit()"
             >
-              {{ item.label }}
+              {{ translateNavLabel(item.label) }}
             </a>
           }
         </li>
