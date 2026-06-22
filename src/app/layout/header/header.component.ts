@@ -84,6 +84,10 @@ export class HeaderComponent {
     this.router.navigateByUrl(newPath);
   }
 
+    this.langService.setLang(newLang);
+    this.router.navigateByUrl(newPath);
+  }
+
   /** Route localisée pour le lien "À propos" dans le header */
   get aboutRoute(): string {
     return this.langService.localizeRoute('/a-propos');
