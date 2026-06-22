@@ -84,7 +84,7 @@ describe('HomepageComponent', () => {
   it('devrait avoir un footer', () => {
     const footer: HTMLElement = fixture.nativeElement.querySelector('.homepage__footer');
     expect(footer).toBeTruthy();
-    expect(footer.textContent).toContain('Pipeline d\'agents IA');
+    expect(footer.textContent).toContain('pipeline d\'agents IA');
   });
 
 });
