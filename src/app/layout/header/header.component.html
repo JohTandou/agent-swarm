@@ -37,8 +37,8 @@
         <a routerLink="/" class="header__nav-link" routerLinkActive="header__nav-link--active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">
           Accueil
         </a>
-        <a routerLink="/a-propos" class="header__nav-link" routerLinkActive="header__nav-link--active" ariaCurrentWhenActive="page">
-          À propos
+        <a [routerLink]="aboutRoute" class="header__nav-link" routerLinkActive="header__nav-link--active" ariaCurrentWhenActive="page">
+          {{ langService.currentLang() === 'fr' ? 'À propos' : 'About' }}
         </a>
       </nav>
     }

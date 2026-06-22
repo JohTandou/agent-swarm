@@ -66,4 +66,81 @@ describe('LanguageService', () => {
     svc.setLang('en');
     expect(svc.langPrefix).toBe('/en');
   });
+
+  describe('translatePathToEn', () => {
+    it('devrait traduire /a-propos en /en/about', () => {
+      const svc = TestBed.inject(LanguageService);
+      svc.setLang('fr');
+      expect(svc.translatePathToEn('/a-propos')).toBe('/en/about');
+    });
+
+    it('devrait traduire /outils-mcp/supabase en /en/mcp-tools/supabase', () => {
+      const svc = TestBed.inject(LanguageService);
+      svc.setLang('fr');
+      expect(svc.translatePathToEn('/outils-mcp/supabase')).toBe('/en/mcp-tools/supabase');
+    });
+
+    it('devrait traduire /ecosysteme en /en/ecosystem', () => {
+      const svc = TestBed.inject(LanguageService);
+      svc.setLang('fr');
+      expect(svc.translatePathToEn('/ecosysteme')).toBe('/en/ecosystem');
+    });
+
+    it('devrait traduire /probleme-innovation en /en/problem-innovation', () => {
+      const svc = TestBed.inject(LanguageService);
+      svc.setLang('fr');
+      expect(svc.translatePathToEn('/probleme-innovation')).toBe('/en/problem-innovation');
+    });
+
+    it('devrait garder les segments non mappés', () => {
+      const svc = TestBed.inject(LanguageService);
+      svc.setLang('fr');
+      expect(svc.translatePathToEn('/agents/orchestrateur')).toBe('/en/agents/orchestrateur');
+    });
+
+    it('devrait traduire / en /en', () => {
+      const svc = TestBed.inject(LanguageService);
+      svc.setLang('fr');
+      expect(svc.translatePathToEn('/')).toBe('/en');
+    });
+  });
+
+  describe('translatePathToFr', () => {
+    it('devrait traduire /en/about en /a-propos', () => {
+      const svc = TestBed.inject(LanguageService);
+      expect(svc.translatePathToFr('/en/about')).toBe('/a-propos');
+    });
+
+    it('devrait traduire /en/mcp-tools/supabase en /outils-mcp/supabase', () => {
+      const svc = TestBed.inject(LanguageService);
+      expect(svc.translatePathToFr('/en/mcp-tools/supabase')).toBe('/outils-mcp/supabase');
+    });
+
+    it('devrait traduire /en en /', () => {
+      const svc = TestBed.inject(LanguageService);
+      expect(svc.translatePathToFr('/en')).toBe('/');
+    });
+
+    it('devrait garder les segments non mappés', () => {
+      const svc = TestBed.inject(LanguageService);
+      expect(svc.translatePathToFr('/en/agents/orchestrateur')).toBe('/agents/orchestrateur');
+    });
+  });
+
+  describe('localizeRoute', () => {
+    it('devrait retourner la route FR quand la langue est FR', () => {
+      sessionStorage.clear();
+      history.pushState({}, '', '/');
+      const svc = TestBed.inject(LanguageService);
+      svc.setLang('fr');
+      expect(svc.localizeRoute('/a-propos')).toBe('/a-propos');
+    });
+
+    it('devrait retourner la route EN quand la langue est EN', () => {
+      const svc = TestBed.inject(LanguageService);
+      svc.setLang('en');
+      expect(svc.localizeRoute('/a-propos')).toBe('/en/about');
+      expect(svc.localizeRoute('/')).toBe('/en');
+    });
+  });
 });

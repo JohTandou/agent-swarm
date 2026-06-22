@@ -104,14 +104,9 @@ export class SidebarComponent {
     return key ? this.translationService.translate(key) : frLabel;
   }
 
-  /** Ajoute le préfixe /en à une route si la langue active est l'anglais */
+  /** Localise une route FR vers la langue courante via LanguageService */
   localizeRoute(route: string): string {
-    if (this.langService.currentLang() === 'en') {
-      // La route '/' devient '/en'
-      if (route === '/') return '/en';
-      return '/en' + route;
-    }
-    return route;
+    return this.langService.localizeRoute(route);
   }
 
   /** Détecte le début d'un touch pour le swipe-to-dismiss */

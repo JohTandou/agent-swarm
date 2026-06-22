@@ -165,6 +165,7 @@ describe('SidebarComponent', () => {
     component.toggleExpanded(outilsMcp!);
 
     expect(outilsMcp!.expanded).toBeTrue();
+    // La sidebar est en mode FR (setLang('fr') dans beforeEach), donc la route reste FR
     expect(navigateSpy).toHaveBeenCalledWith(['/outils-mcp/supabase']);
   });
 

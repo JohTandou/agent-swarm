@@ -41,4 +41,62 @@ export class LanguageService {
   get langPrefix(): string {
     return this.currentLang() === 'en' ? '/en' : '';
   }
+
+  /** Mapping des segments de route FR → EN */
+  private readonly ROUTE_MAP_FR_TO_EN: Record<string, string> = {
+    'a-propos': 'about',
+    'ecosysteme': 'ecosystem',
+    'outils-mcp': 'mcp-tools',
+    'probleme-innovation': 'problem-innovation',
+  };
+
+  /** Mapping inverse EN → FR (construit automatiquement) */
+  private get ROUTE_MAP_EN_TO_FR(): Record<string, string> {
+    const inverted: Record<string, string> = {};
+    for (const [fr, en] of Object.entries(this.ROUTE_MAP_FR_TO_EN)) {
+      inverted[en] = fr;
+    }
+    return inverted;
+  }
+
+  /**
+   * Traduit un chemin FR en chemin EN.
+   * /a-propos → /en/about
+   * /outils-mcp/supabase → /en/mcp-tools/supabase
+   * /agents/orchestrateur → /en/agents/orchestrateur (segment non mappé = inchangé)
+   * / → /en
+   */
+  translatePathToEn(frPath: string): string {
+    if (frPath === '/' || frPath === '') return '/en';
+    const segments = frPath.split('/').filter(Boolean);
+    const translated = segments.map((seg) => this.ROUTE_MAP_FR_TO_EN[seg] ?? seg);
+    return '/en/' + translated.join('/');
+  }
+
+  /**
+   * Traduit un chemin EN (avec préfixe /en) en chemin FR.
+   * /en/about → /a-propos
+   * /en/mcp-tools/supabase → /outils-mcp/supabase
+   * /en → /
+   */
+  translatePathToFr(enPath: string): string {
+    const withoutPrefix = enPath.replace(/^\/en\/?/, '');
+    if (!withoutPrefix) return '/';
+    const segments = withoutPrefix.split('/').filter(Boolean);
+    const map = this.ROUTE_MAP_EN_TO_FR;
+    const translated = segments.map((seg) => map[seg] ?? seg);
+    return '/' + translated.join('/');
+  }
+
+  /**
+   * Localise une route FR vers la langue courante.
+   * En mode EN : /a-propos → /en/about
+   * En mode FR : retourne la route inchangée
+   */
+  localizeRoute(route: string): string {
+    if (this.currentLang() === 'en') {
+      return this.translatePathToEn(route);
+    }
+    return route;
+  }
 }
