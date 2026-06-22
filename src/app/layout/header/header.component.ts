@@ -10,6 +10,7 @@ import { TranslationService } from '@shared/services/translation.service';
  * + language switcher FR/EN.
  * Touch targets ≥ 44×44px sur mobile.
  */
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -33,6 +34,16 @@ export class HeaderComponent {
   readonly langService = inject(LanguageService);
   private readonly translationService = inject(TranslationService);
   private readonly router = inject(Router);
+
+  /** Lien d'accueil tenant compte de la langue courante */
+  get homeLink(): string {
+    return this.langService.currentLang() === 'en' ? '/en' : '/';
+  }
+
+  /** Lien À propos tenant compte de la langue courante */
+  get aboutLink(): string {
+    return this.langService.currentLang() === 'en' ? '/en/about' : '/a-propos';
+  }
 
   /** Retourne la traduction pour la clé donnée dans la langue courante */
   t(key: string): string {

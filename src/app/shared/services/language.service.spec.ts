@@ -21,8 +21,8 @@ describe('LanguageService', () => {
 
   /**
    * Helper: définit la langue stockée dans sessionStorage avant création du service.
-   * Le service lit sessionStorage en premier (detectInitialLang),
-   * puis seulement window.location.pathname.
+   * Le service lit l'URL en premier (detectInitialLang),
+   * puis utilise sessionStorage comme fallback.
    */
   function presetStoredLang(lang: string | null): void {
     sessionStorage.clear();

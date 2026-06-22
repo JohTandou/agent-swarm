@@ -256,6 +256,20 @@
       "reviewer_approved": true,
       "issue_number": 96,
       "branch": "feature/swarm-issue-96-seo-sprint3-branding"
+    },
+    {
+      "run_id": "swarm-20260622-i18n-full-en",
+      "route": "MEDIUM",
+      "task_type": "feature",
+      "task_title": "i18n: complete English translation — all UI components, feature pages, layout, services",
+      "iterations": 2,
+      "agents_used": ["planner", "front", "tester", "reviewer"],
+      "retry_reasons": ["reviewer-REJECT-insufficient-english-tests"],
+      "status": "APPROVED",
+      "tester_pass": true,
+      "reviewer_approved": true,
+      "issue_number": 107,
+      "branch": "feature/swarm-i18n-full-english"
     }
   ]
 }

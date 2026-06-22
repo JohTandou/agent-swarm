@@ -19,7 +19,7 @@
       </button>
 
       <!-- Brand -->
-      <a routerLink="/" class="header__brand" [attr.aria-label]="t('header.brand.ariaLabel')">
+      <a [routerLink]="homeLink" class="header__brand" [attr.aria-label]="t('header.brand.ariaLabel')">
         <img
           class="header__brand-logo"
           src="/assets/images/bee-logo-48.png"
@@ -34,7 +34,7 @@
     <!-- Navigation primaire desktop -->
     @if (!isMobile) {
       <nav class="header__nav" [attr.aria-label]="t('header.nav.main')">
-        <a routerLink="/" class="header__nav-link" routerLinkActive="header__nav-link--active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">
+        <a [routerLink]="homeLink" class="header__nav-link" routerLinkActive="header__nav-link--active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">
           {{ t('nav.home') }}
         </a>
         <a [routerLink]="aboutRoute" class="header__nav-link" routerLinkActive="header__nav-link--active" ariaCurrentWhenActive="page">

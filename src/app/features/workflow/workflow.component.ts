@@ -57,13 +57,15 @@ interface SwarmFile {
  * Données bilingues — Section 1 : Hero
  * ========================================================================== */
 
-const HERO: Record<Lang, { title: string; subtitle: string }> = {
+const HERO: Record<Lang, { kicker: string; title: string; subtitle: string }> = {
   fr: {
-    title: 'De l\'issue au merge — sans effort',
+    kicker: 'Le pipeline d\'agents IA',
+    title: 'De l\'analyse au merge, chaque étape automatisée',
     subtitle: 'Une issue GitHub arrive, une pull request mergée en ressort. Entre les deux : classification automatique, routage intelligent, implémentation parallèle, tests rigoureux et documentation vivante. Le tout orchestré sans que vous leviez le petit doigt.',
   },
   en: {
-    title: 'From issue to merge — effortlessly',
+    kicker: 'The AI agent pipeline',
+    title: 'From issue to merge — entirely automated',
     subtitle: 'A GitHub issue comes in, a merged pull request comes out. In between: automatic classification, intelligent routing, parallel implementation, rigorous testing, and living documentation. All orchestrated without you lifting a finger.',
   },
 };
@@ -408,6 +410,98 @@ const SWARM_FILES: Record<Lang, Pick<SwarmFile, 'description'>[]> = {
 };
 
 /* ==========================================================================
+ * Données bilingues — En-têtes de section et textes statiques
+ * ========================================================================== */
+
+const SECTION_TEXTS: Record<Lang, {
+  decisionTree: { kicker: string; title: string; description: string };
+  treeNote: string;
+  mermaid: { kicker: string; title: string; description: string };
+  preSearchKicker: string;
+  qualityGates: { kicker: string; title: string; description: string };
+  gateFlow: { implementation: string; tester: string; testerThreshold: string; reviewer: string; reviewerThreshold: string; prValidated: string; rejected: string };
+  git: { kicker: string; title: string; description: string };
+  swarmFiles: { kicker: string; title: string; description: string };
+}> = {
+  fr: {
+    decisionTree: {
+      kicker: 'Classification automatique',
+      title: 'Arbre de décision des routes',
+      description: 'Chaque tâche est automatiquement classifiée sur l\'une des 5 routes du pipeline. La complexité croissante détermine le nombre d\'agents mobilisés et la rigueur des gates qualité.',
+    },
+    treeNote: 'Coûts estimés avec la tarification API DeepSeek V4 Pro (juin 2026). Tokens et coûts réels variables selon la complexité et le volume.',
+    mermaid: {
+      kicker: 'Visualisation',
+      title: 'Pipeline complet',
+      description: 'Le diagramme ci-dessous illustre le flux complet : de l\'issue GitHub au merge final. Chaque étape est automatisée. Les tâches MEDIUM et FULL activent le parallélisme front+back et les gates qualité (tester + reviewer).',
+    },
+    preSearchKicker: 'Étape 0.3',
+    qualityGates: {
+      kicker: 'Contrôle qualité',
+      title: 'Gates qualité automatisées',
+      description: 'Deux gates successives garantissent que chaque modification est testée et revue avant d\'atteindre la branche principale.',
+    },
+    gateFlow: {
+      implementation: 'Implémentation',
+      tester: 'Tester',
+      testerThreshold: 'Seuil : ≥ 80 %',
+      reviewer: 'Reviewer',
+      reviewerThreshold: 'Score : ≥ 0.85',
+      prValidated: 'PR Validée',
+      rejected: '❌ Rejeté → Corrections → Retest',
+    },
+    git: {
+      kicker: 'Workflow automatisé',
+      title: 'Intégration Git native',
+      description: 'Le pipeline Swarm est pensé pour le flux GitHub : chaque étape, de la création de branche au merge, est automatisée.',
+    },
+    swarmFiles: {
+      kicker: 'Configuration',
+      title: 'Fichiers Swarm',
+      description: 'Deux fichiers de configuration gouvernent l\'état et la mémoire du pipeline entre les sessions.',
+    },
+  },
+  en: {
+    decisionTree: {
+      kicker: 'Automatic classification',
+      title: 'Route decision tree',
+      description: 'Each task is automatically classified into one of the 5 pipeline routes. Increasing complexity determines the number of agents mobilized and the rigor of quality gates.',
+    },
+    treeNote: 'Estimated costs based on DeepSeek V4 Pro API pricing (June 2026). Tokens and actual costs vary by complexity and volume.',
+    mermaid: {
+      kicker: 'Visualization',
+      title: 'Complete pipeline',
+      description: 'The diagram below illustrates the complete flow: from GitHub issue to final merge. Each step is automated. MEDIUM and FULL tasks activate front+back parallelism and quality gates (tester + reviewer).',
+    },
+    preSearchKicker: 'Step 0.3',
+    qualityGates: {
+      kicker: 'Quality control',
+      title: 'Automated quality gates',
+      description: 'Two successive gates ensure that every modification is tested and reviewed before reaching the main branch.',
+    },
+    gateFlow: {
+      implementation: 'Implementation',
+      tester: 'Tester',
+      testerThreshold: 'Threshold: ≥ 80%',
+      reviewer: 'Reviewer',
+      reviewerThreshold: 'Score: ≥ 0.85',
+      prValidated: 'PR Validated',
+      rejected: '❌ Rejected → Corrections → Retest',
+    },
+    git: {
+      kicker: 'Automated workflow',
+      title: 'Native Git integration',
+      description: 'The Swarm pipeline is designed for the GitHub flow: every step, from branch creation to merge, is automated.',
+    },
+    swarmFiles: {
+      kicker: 'Configuration',
+      title: 'Swarm Files',
+      description: 'Two configuration files govern the pipeline state and memory between sessions.',
+    },
+  },
+};
+
+/* ==========================================================================
  * Données bilingues — SEO & Schema
  * ========================================================================== */
 
@@ -485,12 +579,26 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
    * Données — Section 1 : Hero
    * ========================================================================== */
 
+  protected get heroKicker(): string { return HERO[this.lang].kicker; }
   protected get heroTitle(): string { return HERO[this.lang].title; }
   protected get heroSubtitle(): string { return HERO[this.lang].subtitle; }
 
   /* ==========================================================================
    * Données — Section 2 : Arbre de décision
    * ========================================================================== */
+
+  protected get decisionTree(): { kicker: string; title: string; description: string } {
+    return SECTION_TEXTS[this.lang].decisionTree;
+  }
+  protected get treeNote(): string { return SECTION_TEXTS[this.lang].treeNote; }
+
+  /* ==========================================================================
+   * Données — Section 3 : Diagramme Mermaid
+   * ========================================================================== */
+
+  protected get mermaidSection(): { kicker: string; title: string; description: string } {
+    return SECTION_TEXTS[this.lang].mermaid;
+  }
 
   protected get decisionNodes(): readonly DecisionNode[] {
     const l = DECISION_NODES[this.lang];
@@ -515,6 +623,7 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
    * Données — Section 4 : Pré-search
    * ========================================================================== */
 
+  protected get preSearchKicker(): string { return SECTION_TEXTS[this.lang].preSearchKicker; }
   protected get preSearchTitle(): string { return PRESEARCH[this.lang].title; }
   protected get preSearchDescription(): string { return PRESEARCH[this.lang].description; }
 
@@ -532,6 +641,11 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
    * Données — Section 5 : Gates qualité
    * ========================================================================== */
 
+  protected get qualityGatesSection(): { kicker: string; title: string; description: string } {
+    return SECTION_TEXTS[this.lang].qualityGates;
+  }
+  protected get gateFlowLabels() { return SECTION_TEXTS[this.lang].gateFlow; }
+
   protected get qualityGates(): readonly QualityGate[] {
     const l = QUALITY_GATES[this.lang];
     return [
@@ -543,6 +657,10 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
   /* ==========================================================================
    * Données — Section 6 : Intégration Git
    * ========================================================================== */
+
+  protected get gitSection(): { kicker: string; title: string; description: string } {
+    return SECTION_TEXTS[this.lang].git;
+  }
 
   protected get gitSteps(): readonly GitStep[] {
     return GIT_STEPS[this.lang].map((s, i) => ({
@@ -558,6 +676,10 @@ export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
   /* ==========================================================================
    * Données — Section 7 : Fichiers swarm
    * ========================================================================== */
+
+  protected get swarmFilesSection(): { kicker: string; title: string; description: string } {
+    return SECTION_TEXTS[this.lang].swarmFiles;
+  }
 
   protected get swarmFiles(): readonly SwarmFile[] {
     return SWARM_FILES[this.lang].map((s, i) => ({
