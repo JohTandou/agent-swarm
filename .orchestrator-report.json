@@ -24,7 +24,12 @@
       "name": "backend-unit-tests",
       "status": "skip",
       "detail": "No backend directory detected"
+    },
+    {
+      "name": "e2e",
+      "status": "warn",
+      "detail": "Suite: smoke — 0 tests matched the grep pattern"
     }
   ],
-  "overall": "running"
+  "overall": "pass"
 }

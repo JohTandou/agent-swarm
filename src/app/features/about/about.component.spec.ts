@@ -1,12 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { AboutComponent } from './about.component';
+import { LanguageService } from '../../shared/services/language.service';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;
   let fixture: ComponentFixture<AboutComponent>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [AboutComponent],
       providers: [provideRouter([])],
@@ -14,6 +16,7 @@ describe('AboutComponent', () => {
 
     fixture = TestBed.createComponent(AboutComponent);
     component = fixture.componentInstance;
+    TestBed.inject(LanguageService).setLang('fr');
     fixture.detectChanges();
   });
 

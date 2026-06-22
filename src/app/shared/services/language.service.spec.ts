@@ -3,26 +3,20 @@ import { LanguageService } from './language.service';
 
 describe('LanguageService', () => {
   let service: LanguageService;
-  let originalPathname: string;
+  const originalHref: string = window.location.href;
 
   beforeEach(() => {
+    sessionStorage.clear();
     TestBed.configureTestingModule({});
-    originalPathname = window.location.pathname;
   });
 
   afterEach(() => {
-    // Restaure le pathname original pour ne pas affecter les autres tests
-    Object.defineProperty(window, 'location', {
-      value: { ...window.location, pathname: originalPathname },
-      writable: true,
-    });
+    sessionStorage.removeItem('swarm-lang');
+    history.replaceState({}, '', originalHref);
   });
 
   function setPathname(pathname: string): void {
-    Object.defineProperty(window, 'location', {
-      value: { ...window.location, pathname },
-      writable: true,
-    });
+    history.pushState({}, '', pathname);
   }
 
   it('devrait détecter le français par défaut quand le pathname ne contient pas /en', () => {

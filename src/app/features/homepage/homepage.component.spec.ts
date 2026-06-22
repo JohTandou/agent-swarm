@@ -8,6 +8,7 @@ describe('HomepageComponent', () => {
   let fixture: ComponentFixture<HomepageComponent>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [HomepageComponent],
       providers: [provideRouter([])],

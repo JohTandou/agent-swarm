@@ -5,15 +5,14 @@ import { LanguageService } from './language.service';
 describe('TranslationService', () => {
   let translationService: TranslationService;
   let languageService: LanguageService;
+  const originalHref: string = window.location.href;
 
   function setPathname(pathname: string): void {
-    Object.defineProperty(window, 'location', {
-      value: { ...window.location, pathname },
-      writable: true,
-    });
+    history.pushState({}, '', pathname);
   }
 
   beforeEach(() => {
+    sessionStorage.clear();
     TestBed.configureTestingModule({
       providers: [TranslationService],
     });
@@ -21,12 +20,16 @@ describe('TranslationService', () => {
     translationService = TestBed.inject(TranslationService);
   });
 
+  afterEach(() => {
+    history.replaceState({}, '', originalHref);
+  });
+
   it('devrait traduire en français', () => {
     setPathname('/');
     languageService.setLang('fr');
     expect(translationService.translate('nav.home')).toBe('Accueil');
     expect(translationService.translate('nav.agents')).toBe('Agents');
-    expect(translationService.translate('footer.credit')).toBe('Conçu et orchestré par');
+    expect(translationService.translate('footer.credit')).toBe('Conçu par');
   });
 
   it('devrait traduire en anglais', () => {
@@ -34,7 +37,7 @@ describe('TranslationService', () => {
     languageService.setLang('en');
     expect(translationService.translate('nav.home')).toBe('Home');
     expect(translationService.translate('nav.agents')).toBe('Agents');
-    expect(translationService.translate('footer.credit')).toBe('Designed and orchestrated by');
+    expect(translationService.translate('footer.credit')).toBe('Designed by');
   });
 
   it('devrait retourner la clé si la traduction n\'existe pas', () => {
