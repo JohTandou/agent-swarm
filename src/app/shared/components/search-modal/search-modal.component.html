@@ -1,0 +1,105 @@
+<!-- Backdrop plein écran avec blur -->
+<div class="search-modal__backdrop" (click)="onBackdropClick()" role="presentation"></div>
+
+<!-- Panel de recherche N4 -->
+<div
+  class="search-modal__panel" #searchPanel
+  (click)="onPanelClick($event)"
+  role="dialog"
+  aria-label="Recherche rapide"
+  aria-modal="true"
+>
+  <!-- Barre de recherche -->
+  <div class="search-modal__input-wrapper">
+    <svg
+      class="search-modal__input-icon"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16ZM19 19l-4.35-4.35"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    <input
+      #searchInput
+      type="text"
+      class="search-modal__input"
+      [ngModel]="query()"
+      (ngModelChange)="onQueryChange($event)"
+      placeholder="Rechercher un agent, un skill, une page..."
+      autocomplete="off"
+      spellcheck="false"
+      role="combobox"
+      [attr.aria-expanded]="results().length > 0 || loading()"
+      aria-haspopup="listbox"
+      aria-controls="search-results-list"
+      [attr.aria-activedescendant]="selectedIndex() >= 0 ? getResultId(selectedIndex()) : ''"
+      aria-label="Rechercher dans le wiki"
+    />
+  </div>
+
+  <!-- État : indexation en cours -->
+  @if (loading()) {
+    <div class="search-modal__indexing" role="status">
+      Indexation en cours…
+    </div>
+  }
+
+  <!-- État : résultats -->
+  @if (!loading() && results().length > 0) {
+    <div class="search-modal__results" role="listbox" id="search-results-list">
+      @for (result of results(); track result.sourcePath; let i = $index) {
+        <button
+          class="search-modal__result"
+          [class.search-modal__result--selected]="selectedIndex() === i"
+          [id]="getResultId(i)"
+          role="option"
+          [attr.aria-selected]="selectedIndex() === i"
+          (click)="selectResult(result)"
+          (mouseenter)="selectedIndex.set(i)"
+        >
+          <div class="search-modal__result-main">
+            <span class="search-modal__result-title">{{ result.title }}</span>
+            <span class="search-modal__result-section">{{ result.section }}</span>
+          </div>
+          @if (result.description) {
+            <p class="search-modal__result-description">{{ result.description }}</p>
+          }
+        </button>
+      }
+    </div>
+  }
+
+  @if (!loading() && isEmpty()) {
+    <app-ui-empty-state
+      [title]="'Aucun résultat pour « ' + query() + ' »'"
+      description="Essayez avec un autre terme ou vérifiez l'orthographe."
+    />
+  }
+
+  <!-- Footer avec raccourcis clavier -->
+  @if (!loading()) {
+    <div class="search-modal__footer">
+      <div class="search-modal__kbd-group">
+        <kbd class="search-modal__kbd">↵</kbd>
+        <span class="search-modal__kbd-label">Ouvrir</span>
+      </div>
+      <div class="search-modal__kbd-group">
+        <kbd class="search-modal__kbd">↑</kbd>
+        <kbd class="search-modal__kbd">↓</kbd>
+        <span class="search-modal__kbd-label">Naviguer</span>
+      </div>
+      <div class="search-modal__kbd-group">
+        <kbd class="search-modal__kbd">Esc</kbd>
+        <span class="search-modal__kbd-label">Fermer</span>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,30 @@
+{
+  "steps": [
+    {
+      "name": "mock-setup",
+      "status": "skip",
+      "detail": "No mock setup found"
+    },
+    {
+      "name": "build",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "name": "unit-tests",
+      "status": "pass",
+      "detail": "passed"
+    },
+    {
+      "name": "backend-start",
+      "status": "skip",
+      "detail": "No backend directory detected"
+    },
+    {
+      "name": "backend-unit-tests",
+      "status": "skip",
+      "detail": "No backend directory detected"
+    }
+  ],
+  "overall": "running"
+}

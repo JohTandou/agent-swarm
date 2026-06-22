@@ -1,0 +1,58 @@
+import { CONTENT_REGISTRY } from './content-registry';
+
+describe('CONTENT_REGISTRY', () => {
+  it('devrait contenir exactement 37 entrées', () => {
+    expect(CONTENT_REGISTRY.length).toBe(37);
+  });
+
+  it('devrait avoir 11 agents (9 core + 2 utilitaires)', () => {
+    const agents = CONTENT_REGISTRY.filter((e) => e.section === 'Agents');
+    expect(agents.length).toBe(11);
+    expect(agents.every((a) => a.sourcePath.startsWith('agents/'))).toBe(true);
+    expect(agents.every((a) => a.route.startsWith('/agents/'))).toBe(true);
+  });
+
+  it('devrait avoir 3 skills', () => {
+    const skills = CONTENT_REGISTRY.filter((e) => e.section === 'Skills');
+    expect(skills.length).toBe(3);
+    expect(skills.every((s) => s.sourcePath.startsWith('skills/'))).toBe(true);
+    expect(skills.every((s) => s.route.startsWith('/skills/'))).toBe(true);
+  });
+
+  it('tous les sourcePath devraient être uniques', () => {
+    const paths = CONTENT_REGISTRY.map((e) => e.sourcePath);
+    const unique = new Set(paths);
+    expect(unique.size).toBe(paths.length);
+  });
+
+  it('toutes les routes devraient être uniques', () => {
+    const routes = CONTENT_REGISTRY.map((e) => e.route);
+    const unique = new Set(routes);
+    expect(unique.size).toBe(routes.length);
+  });
+
+  it('tous les sourcePath devraient terminer par .md', () => {
+    expect(CONTENT_REGISTRY.every((e) => e.sourcePath.endsWith('.md'))).toBe(true);
+  });
+
+  it('tous les éléments devraient avoir une section parmi les 3 attendues', () => {
+    const validSections = ['Agents', 'Skills', 'Documentation'];
+    expect(
+      CONTENT_REGISTRY.every((e) => validSections.includes(e.section))
+    ).toBe(true);
+  });
+
+  it('les agents devraient inclure orchestrateur.md', () => {
+    const orchestrateur = CONTENT_REGISTRY.find(
+      (e) => e.sourcePath === 'agents/orchestrateur.md'
+    );
+    expect(orchestrateur).toBeDefined();
+    expect(orchestrateur!.route).toBe('/agents/orchestrateur');
+    expect(orchestrateur!.section).toBe('Agents');
+  });
+
+  it('devrait être un tableau gelé (readonly via const)', () => {
+    expect(Array.isArray(CONTENT_REGISTRY)).toBe(true);
+    expect(CONTENT_REGISTRY.length).toBeGreaterThan(0);
+  });
+});

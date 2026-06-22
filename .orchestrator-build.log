@@ -1,0 +1,72 @@
+
+> swarm-wiki@0.0.0 build
+> ng build
+
+Node.js version v25.4.0 detected.
+Odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.
+❯ Building...
+✔ Building...
+Initial chunk files   | Names                     |  Raw size | Estimated transfer size
+main-IZEME64P.js      | main                      | 207.82 kB |                51.24 kB
+chunk-ZF25YIUU.js     | -                         | 149.63 kB |                44.54 kB
+chunk-F5DWPJON.js     | -                         |  70.82 kB |                17.65 kB
+chunk-DTZ5RPO7.js     | -                         |  51.51 kB |                14.53 kB
+chunk-RDDU4BIZ.js     | -                         |  39.09 kB |                11.02 kB
+polyfills-5CFQRCPP.js | polyfills                 |  34.59 kB |                11.33 kB
+styles-SU7JSNEG.css   | styles                    |  33.63 kB |                 7.38 kB
+chunk-ATURTUDB.js     | -                         |   4.56 kB |                 1.32 kB
+chunk-5FUMJNK6.js     | -                         |   4.23 kB |                 1.38 kB
+chunk-V5YNONZB.js     | -                         |   2.71 kB |               889 bytes
+chunk-PZNONLPT.js     | -                         |   1.36 kB |               621 bytes
+chunk-J6PVADHD.js     | -                         |   1.24 kB |               585 bytes
+chunk-L4P5NMQP.js     | -                         | 891 bytes |               891 bytes
+chunk-AWR7WAD3.js     | -                         | 554 bytes |               554 bytes
+
+                      | Initial total             | 602.62 kB |               163.94 kB
+
+Lazy chunk files      | Names                     |  Raw size | Estimated transfer size
+chunk-RTORGWQB.js     | index                     | 283.11 kB |                80.97 kB
+chunk-U6COOCJJ.js     | index                     |  70.51 kB |                25.04 kB
+chunk-XWVBBQ6A.js     | -                         |  56.99 kB |                16.77 kB
+chunk-7C7RDDGL.js     | problem-innovation-routes |  45.81 kB |                10.17 kB
+chunk-IT75D7H4.js     | ScrollTrigger             |  43.59 kB |                16.40 kB
+chunk-W76GW3SW.js     | homepage-routes           |  41.02 kB |                10.21 kB
+chunk-IXESUH2H.js     | workflow-routes           |  39.40 kB |                 9.19 kB
+chunk-IKPMW24J.js     | ecosystem-routes          |  37.29 kB |                 9.04 kB
+chunk-ZAB23YVQ.js     | standards-routes          |  34.80 kB |                 7.91 kB
+chunk-SPZHZD3I.js     | mcp-tools-routes          |  30.35 kB |                 7.94 kB
+chunk-DERIIPCK.js     | agents-routes             |  26.82 kB |                 6.16 kB
+chunk-TIOCDWT7.js     | about-routes              |  23.69 kB |                 5.57 kB
+chunk-K7FJITGR.js     | skills-routes             |  21.70 kB |                 5.17 kB
+chunk-JHB2RUSM.js     | not-found-component       |   2.60 kB |                 1.02 kB
+chunk-BRQYRQ6M.js     | -                         |   1.42 kB |               554 bytes
+...and 2 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [4.489 seconds]
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mbundle initial exceeded maximum budget. Budget 500.00 kB was not met by 102.62 kB with a total of 602.62 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/about/about.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 1.30 kB with a total of 9.30 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/standards/standards.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 4.30 kB with a total of 12.30 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/homepage/homepage.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 1.49 kB with a total of 9.49 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 6.11 kB with a total of 14.11 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 9.39 kB with a total of 17.39 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/ecosystem/ecosystem.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 3.08 kB with a total of 11.08 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/mcp-tools/mcp-tools.component.scss exceeded maximum budget. Budget 8.00 kB was not met by 1.58 kB with a total of 9.58 kB.[0m
+
+
+Output location: /Users/johtnd/swarm-wiki/dist/swarm-wiki
+

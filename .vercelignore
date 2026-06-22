@@ -1,0 +1,12 @@
+.git
+.angular
+.angular/cache
+node_modules
+dist
+coverage
+playwright-report
+.playwright-mcp
+e2e
+AGENTS.md
+PLAN.md
+.vscode
