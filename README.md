@@ -1,7 +1,7 @@
 # Swarm Wiki
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Site](https://img.shields.io/badge/site-swarm--wiki.vercel.app-C4780D)](https://swarm-wiki.vercel.app)
+[![Site](https://img.shields.io/badge/site-swarm--wiki.vercel.app-C4780D)](https://swarm-wiki.vercel.app/en)
 
 Documentation technique du **Swarm** — un pipeline de 9 agents IA spécialisés qui
 collaborent pour concevoir, implémenter, tester et documenter des projets

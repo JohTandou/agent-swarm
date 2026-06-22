@@ -2,11 +2,26 @@ import { Component, HostListener, Input, Output, EventEmitter, inject } from '@a
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import type { NavItem } from '@shared/models';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
+import { TranslationService } from '@shared/services/translation.service';
+import { LanguageService } from '@shared/services/language.service';
+
+/** Mapping des labels français du menu → clés de traduction i18n */
+const NAV_LABEL_KEYS: Record<string, string> = {
+  'Accueil': 'nav.home',
+  'À propos': 'nav.about',
+  'Workflow': 'nav.workflow',
+  'Écosystème': 'nav.ecosystem',
+  'Problème & Innovation': 'nav.problem',
+  'Agents': 'nav.agents',
+  'Skills': 'nav.skills',
+  'Outils MCP': 'nav.mcp',
+};
 
 /**
  * Sidebar de navigation hiérarchique.
  * 280px fixed left desktop, overlay mobile.
  * Menus pliables, hover premium (scale + glow ambré).
+ * Labels et routes adaptés dynamiquement à la langue active.
  */
 @Component({
   selector: 'app-sidebar',
@@ -17,6 +32,8 @@ import { UiButtonComponent } from '@shared/components/ui-button/ui-button.compon
 })
 export class SidebarComponent {
   readonly router = inject(Router);
+  private readonly translationService = inject(TranslationService);
+  private readonly langService = inject(LanguageService);
 
   /** Mode mobile pour afficher le bouton close */
   @Input() isMobile = false;
@@ -81,6 +98,22 @@ export class SidebarComponent {
     },
   ];
 
+  /** Traduit un label de navigation français via le dictionnaire i18n */
+  translateNavLabel(frLabel: string): string {
+    const key = NAV_LABEL_KEYS[frLabel];
+    return key ? this.translationService.translate(key) : frLabel;
+  }
+
+  /** Ajoute le préfixe /en à une route si la langue active est l'anglais */
+  localizeRoute(route: string): string {
+    if (this.langService.currentLang() === 'en') {
+      // La route '/' devient '/en'
+      if (route === '/') return '/en';
+      return '/en' + route;
+    }
+    return route;
+  }
+
   /** Détecte le début d'un touch pour le swipe-to-dismiss */
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent): void {
@@ -103,12 +136,12 @@ export class SidebarComponent {
     if (!item.children) return;
     item.expanded = !item.expanded;
     if (item.expandOnClick && item.expanded && item.children.length > 0) {
-      void this.router.navigate([item.children[0].route]);
+      void this.router.navigate([this.localizeRoute(item.children[0].route)]);
     }
   }
 
   /** Indique si la route courante est un enfant de l'item parent */
   isParentActive(item: NavItem): boolean {
-    return this.router.url.startsWith(item.route + '/');
+    return this.router.url.startsWith(this.localizeRoute(item.route) + '/');
   }
 }
