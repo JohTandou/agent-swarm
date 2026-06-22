@@ -32,6 +32,7 @@ Déploiement via Vercel.
 `;
 
   beforeEach(() => {
+    sessionStorage.clear();
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting(), ContentService],
     });

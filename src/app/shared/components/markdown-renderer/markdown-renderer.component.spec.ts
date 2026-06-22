@@ -3,6 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { MarkdownRendererComponent } from './markdown-renderer.component';
 import { ContentService } from '../../services/content.service';
+import { LanguageService } from '../../services/language.service';
 import { provideMarkdown } from 'ngx-markdown';
 
 describe('MarkdownRendererComponent', () => {
@@ -34,6 +35,7 @@ Attention : ceci est un avertissement.
 `;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [MarkdownRendererComponent],
       providers: [
@@ -47,6 +49,7 @@ Attention : ceci est un avertissement.
     fixture = TestBed.createComponent(MarkdownRendererComponent);
     component = fixture.componentInstance;
     httpMock = TestBed.inject(HttpTestingController);
+    TestBed.inject(LanguageService).setLang('fr');
     fixture.detectChanges();
   });
 

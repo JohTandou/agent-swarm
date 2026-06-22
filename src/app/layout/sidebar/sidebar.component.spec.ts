@@ -5,6 +5,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { SidebarComponent } from './sidebar.component';
 import { ContentService } from '@shared/services/content.service';
+import { LanguageService } from '@shared/services/language.service';
 import type { Skill } from '@shared/models';
 
 const MOCK_SKILLS: Skill[] = [
@@ -46,6 +47,7 @@ describe('SidebarComponent', () => {
   let contentService: ContentService;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     const mockContentService = {
       loadSkillsManifest: () => of(MOCK_SKILLS),
     };
@@ -63,6 +65,7 @@ describe('SidebarComponent', () => {
     fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;
     contentService = TestBed.inject(ContentService);
+    TestBed.inject(LanguageService).setLang('fr');
     fixture.detectChanges();
   });
 

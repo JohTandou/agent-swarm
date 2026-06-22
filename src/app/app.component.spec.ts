@@ -15,6 +15,7 @@ describe('AppComponent', () => {
   let breakpointObserverMock: jasmine.SpyObj<BreakpointObserver>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     breakpointObserverMock = jasmine.createSpyObj('BreakpointObserver', ['observe']);
     breakpointObserverMock.observe.and.returnValue(of({ matches: false, breakpoints: {} }));
 
