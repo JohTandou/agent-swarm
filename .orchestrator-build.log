@@ -7,45 +7,45 @@ Odd numbered Node.js versions will not enter LTS status and should not be used f
 ❯ Building...
 ✔ Building...
 Initial chunk files   | Names                     |  Raw size | Estimated transfer size
-main-5ZIP3RZW.js      | main                      | 208.25 kB |                51.48 kB
+main-KTVWTMZJ.js      | main                      | 208.46 kB |                51.55 kB
 chunk-VVTI5S3N.js     | -                         | 149.41 kB |                44.48 kB
 chunk-L5ZGTHOD.js     | -                         |  70.82 kB |                17.66 kB
 chunk-KCBQG3RV.js     | -                         |  54.79 kB |                15.04 kB
 chunk-44AM7WGY.js     | -                         |  40.72 kB |                11.45 kB
 polyfills-5CFQRCPP.js | polyfills                 |  34.59 kB |                11.33 kB
 styles-KLVKW5XS.css   | styles                    |  33.83 kB |                 7.46 kB
-chunk-PS7UIFVO.js     | -                         |  27.52 kB |                 6.48 kB
+chunk-S2K67QSX.js     | -                         |  27.52 kB |                 6.48 kB
 chunk-JV5GO7VZ.js     | -                         |   4.99 kB |                 1.39 kB
 chunk-25HFDMPO.js     | -                         |   3.93 kB |                 1.27 kB
 chunk-TY43ZZKL.js     | -                         |   2.76 kB |               946 bytes
 chunk-KPSPRZS6.js     | -                         |   2.71 kB |               889 bytes
-chunk-PDATOLKD.js     | -                         |   2.03 kB |               750 bytes
+chunk-TG4OHOKG.js     | -                         |   2.03 kB |               749 bytes
+chunk-A3NIUOBY.js     | -                         |   1.18 kB |               554 bytes
 chunk-PV34IWFT.js     | -                         | 891 bytes |               891 bytes
 chunk-4CLCTAJ7.js     | -                         | 830 bytes |               830 bytes
-chunk-2KQEXO4N.js     | -                         | 567 bytes |               567 bytes
 chunk-JVPF3YJZ.js     | -                         | 554 bytes |               554 bytes
 
-                      | Initial total             | 639.18 kB |               173.48 kB
+                      | Initial total             | 640.00 kB |               173.53 kB
 
 Lazy chunk files      | Names                     |  Raw size | Estimated transfer size
 chunk-AQ7UY2OY.js     | index                     |  70.51 kB |                25.03 kB
-chunk-YRZVYMTA.js     | -                         |  58.51 kB |                17.23 kB
+chunk-OCORE527.js     | -                         |  58.51 kB |                17.20 kB
 chunk-PTNTPL5X.js     | ScrollTrigger             |  43.59 kB |                16.40 kB
-chunk-AFMQMIQM.js     | workflow-routes           |  37.07 kB |                 9.04 kB
-chunk-EUBLYEKW.js     | ecosystem-routes          |  30.67 kB |                 7.68 kB
+chunk-UIG7EFLF.js     | workflow-routes           |  37.07 kB |                 9.02 kB
+chunk-YD5O2OTH.js     | ecosystem-routes          |  30.67 kB |                 7.67 kB
 chunk-PFQH6XLG.js     | problem-innovation-routes |  28.67 kB |                 7.08 kB
-chunk-LJ2C26WC.js     | agents-routes             |  27.27 kB |                 6.56 kB
+chunk-GXD23APQ.js     | agents-routes             |  27.27 kB |                 6.58 kB
 chunk-3UOJWAGF.js     | mcp-tools-routes          |  27.06 kB |                 6.98 kB
-chunk-OOAK36DK.js     | homepage-routes           |  25.46 kB |                 6.73 kB
-chunk-RCDI7Y6Y.js     | skills-routes             |  22.59 kB |                 5.16 kB
-chunk-MK5OQ4GT.js     | about-routes              |  16.57 kB |                 4.35 kB
-chunk-ANFRZ3CC.js     | not-found-component       |   3.02 kB |                 1.09 kB
+chunk-H5FLE64R.js     | homepage-routes           |  25.46 kB |                 6.74 kB
+chunk-ND5C27SZ.js     | skills-routes             |  22.59 kB |                 5.18 kB
+chunk-637ZYCON.js     | about-routes              |  16.57 kB |                 4.31 kB
+chunk-B2G3GZMT.js     | not-found-component       |   3.02 kB |                 1.10 kB
 chunk-XGNUN5MB.js     | -                         |   1.42 kB |               548 bytes
 chunk-GIO7ZE7N.js     | -                         |   1.28 kB |               542 bytes
 chunk-VV5OATQW.js     | -                         | 446 bytes |               446 bytes
 ...and 1 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [2.529 seconds]
+Application bundle generation complete. [2.588 seconds]
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: UiButtonComponent is not used within the template of AppComponent[0m [1m[35m[plugin angular-compiler][0m
 
@@ -103,10 +103,10 @@ Application bundle generation complete. [2.529 seconds]
          ╵                          [32m~~~~~~~~~~~~~~~~~~~[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 10.00 kB was not met by 1.57 kB with a total of 11.57 kB.[0m
-
-
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 10.00 kB was not met by 2.19 kB with a total of 12.19 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 10.00 kB was not met by 1.57 kB with a total of 11.57 kB.[0m
 
 
 Output location: /Users/johtnd/swarm-wiki/dist/swarm-wiki
