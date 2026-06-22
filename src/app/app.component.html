@@ -1,0 +1,80 @@
+<app-scroll-progress />
+
+<!-- Lien d'accès rapide — accessibilité clavier -->
+<a href="#main-content" class="skip-to-content">Aller au contenu principal</a>
+
+<!-- En-tête fixe glassmorphique -->
+<app-header
+  [isMobile]="isMobile()"
+  [sidebarOpen]="sidebarOpen()"
+  (toggleSidebar)="toggleSidebar()"
+  (openSearch)="openSearch()"
+/>
+
+<!-- Layout 3 colonnes desktop / 1 colonne mobile -->
+<div class="shell-layout" [class.shell-layout--sidebar-open]="isMobile() && sidebarOpen()">
+  <!-- Sidebar desktop — masquée sur la page d'accueil -->
+  @if (!isHomepage() && !isMobile()) {
+    <app-sidebar class="shell-layout__sidebar" />
+  }
+
+  <!-- Sidebar mobile overlay — toujours disponible, y compris homepage -->
+  @if (isMobile()) {
+    <app-sidebar
+      class="shell-layout__sidebar shell-layout__sidebar--overlay"
+      [class.shell-layout__sidebar--open]="sidebarOpen()"
+      [isMobile]="true"
+      (closeSidebar)="closeSidebar()"
+    />
+  }
+
+  <!-- Overlay mobile pour fermer la sidebar au tap -->
+  @if (isMobile() && sidebarOpen()) {
+    <div
+      class="sidebar-overlay"
+      (click)="closeSidebar()"
+      (keydown.escape)="closeSidebar()"
+      role="presentation"
+      tabindex="-1"
+    ></div>
+  }
+
+  <!-- Contenu principal -->
+  <main
+    id="main-content"
+    class="content-area"
+    [class.content-area--homepage]="isHomepage()"
+    tabindex="-1"
+  >
+    <!-- Fil d'Ariane — masqué sur la page d'accueil -->
+    @if (!isHomepage()) {
+      <app-breadcrumbs [breadcrumbs]="breadcrumbs()" />
+    }
+
+    <!-- Zone de contenu dynamique avec transition de page GSAP -->
+    <div
+      #pageWrapper
+      class="main-content page-transition"
+      [class.main-content--homepage]="isHomepage()"
+    >
+      <div [@routeAnimations]="getRouteState(outlet)">
+        <router-outlet #outlet="outlet" />
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<!-- Footer global — signature discrète -->
+<footer class="global-footer" role="contentinfo">
+  <div class="global-footer__inner">
+    <p class="global-footer__text">
+      Conçu et orchestré par <a href="https://github.com/JohTandou" rel="me" target="_blank" class="global-footer__link">Joh Tandou</a>
+      <span class="global-footer__sep">·</span>
+      <a href="https://github.com/JohTandou/swarm-wiki" rel="me" target="_blank" class="global-footer__link">Swarm Wiki sur GitHub</a>
+    </p>
+  </div>
+</footer>
+
+<!-- Notifications toast -->
+<app-toaster />

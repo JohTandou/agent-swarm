@@ -1,0 +1,361 @@
+/* ==========================================================================
+   Swarm Wiki — Styles globaux
+   Dark mode exclusif, palette 6 couleurs, Tailwind v4 CSS-first
+   ========================================================================== */
+
+@import "tailwindcss";
+@import "./styles/_interactions.scss";
+
+/* --------------------------------------------------------------------------
+   Thème Tailwind — Design tokens exposés comme utilities Tailwind
+   -------------------------------------------------------------------------- */
+@theme {
+  /* Polices */
+  --font-display: "Cabinet Grotesk", sans-serif;
+  --font-body: "Satoshi", sans-serif;
+
+  /* Palette */
+  --color-bg-primary: #1C1812;
+  --color-bg-elevated: #28231C;
+  --color-bg-subtle: #0E0C09;
+  --color-text-primary: #F5F0EB;
+  --color-text-secondary: #7A8899;
+  --color-accent: #C4780D;
+
+  /* Breakpoints fluides */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+/* --------------------------------------------------------------------------
+   Custom Properties racine — Palette et design tokens natifs
+   -------------------------------------------------------------------------- */
+:root {
+  /* Polices — redéclarées hors @theme pour accessibilité CSS custom property */
+  --font-display: "Cabinet Grotesk", sans-serif;
+  --font-body: "Satoshi", sans-serif;
+
+  /* Fond et surfaces */
+  --color-bg-primary: #1C1812;
+  --color-bg-elevated: #28231C;
+  --color-bg-subtle: #0E0C09;
+
+  /* Texte */
+  --color-text-primary: #F5F0EB;
+  --color-text-secondary: #7A8899;
+
+  /* Accent */
+  --color-accent: #C4780D;
+  --color-accent-glow: rgba(196, 120, 13, 0.15);
+
+  /* Couleurs sémantiques — états */
+  --color-success: #6BAF7B;
+  --color-error:   #E85D6C;
+  --color-warning: #C4953A;
+  --color-info:    #6A8FB0;
+
+  /* Élévation dark (glow borders, pas d'ombres) */
+  --elevation-n1: none;
+  --elevation-n2: 0 0 0 1px rgba(122, 136, 153, 0.12);
+  --elevation-n3: 0 0 0 1px rgba(122, 136, 153, 0.2), 0 0 20px rgba(196, 120, 13, 0.04);
+  --elevation-n4: 0 0 0 1px rgba(122, 136, 153, 0.3), 0 0 40px rgba(196, 120, 13, 0.06);
+
+  /* Animations */
+  --ease-natural: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Spacing system */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Radius system */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* Z-Index system */
+  --z-dropdown: 50;
+  --z-sticky: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+
+  /* Durées standardisées */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-cinematic: 800ms;
+
+
+  /* Dimensions shell */
+  --header-height: 64px;
+  --sidebar-width: 280px;
+  --toc-width: 220px;
+  --content-max-width: 860px;
+  /* Safe areas iOS */
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: dark;
+}
+
+/* --------------------------------------------------------------------------
+   Reset CSS — fondation dark exclusive
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  min-height: 100dvh;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* --------------------------------------------------------------------------
+   Grain texture globale — overlay noise subtil sur tout le site
+   Inspiré de TopSeeker : pseudo-element body::after, opacity 0.03
+   -------------------------------------------------------------------------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("/assets/textures/noise.svg");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* --------------------------------------------------------------------------
+   Typographie — Cabinet Grotesk (display) + Satoshi (body)
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: 1.125rem;
+}
+
+h6 {
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--color-text-secondary);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 200ms ease-out;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+/* --------------------------------------------------------------------------
+   Skip-to-content — Accessibilité
+   -------------------------------------------------------------------------- */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: top 200ms ease-out;
+}
+
+.skip-to-content:focus {
+  top: 8px;
+}
+
+/* Screen-reader only — visible uniquement pour les lecteurs d'écran */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Scrollbar custom dark
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-text-secondary) var(--color-bg-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Utilitaires globaux
+   -------------------------------------------------------------------------- */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* État désactivé global pour les éléments interactifs */
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled,
+[role="button"][aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Focus visible — système à deux niveaux
+   Niveau 1 : ring standard (tous les éléments)
+   Niveau 2 : ring renforcé (composants critiques : modales, recherche)
+   -------------------------------------------------------------------------- */
+
+/* Niveau 1 — ring par défaut */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Niveau 2 — ring renforcé pour composants critiques */
+.focus-ring-reinforced:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--color-accent-glow);
+}
+
+/* Supprimer le focus visible des clics souris */
+:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   Mode contraste élevé (Windows, forced-colors)
+   -------------------------------------------------------------------------- */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid Highlight;
+  }
+
+  a {
+    color: LinkText;
+  }
+
+  button {
+    border: 1px solid ButtonText;
+    color: ButtonText;
+    background: ButtonFace;
+  }
+
+  .btn-primary {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  img,
+  svg {
+    forced-color-adjust: auto;
+  }
+}
+

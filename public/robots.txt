@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /assets/images/
+Sitemap: https://swarm-wiki.vercel.app/sitemap.xml
