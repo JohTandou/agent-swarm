@@ -330,4 +330,60 @@ describe('McpToolsComponent', () => {
     component.ngOnDestroy();
     expect(unsubSpy).toHaveBeenCalled();
   });
+
+});
+
+/* ==========================================================================
+ * Langue anglaise — mcpCategories descriptions
+ * ========================================================================== */
+
+describe('McpToolsComponent — English', () => {
+  let component: McpToolsComponent;
+  let fixture: ComponentFixture<McpToolsComponent>;
+  let enParamMapSubject: BehaviorSubject<any>;
+
+  beforeEach(async () => {
+    TestBed.resetTestingModule();
+    enParamMapSubject = new BehaviorSubject(convertToParamMap({ category: 'supabase' }));
+
+    await TestBed.configureTestingModule({
+      imports: [McpToolsComponent],
+      providers: [
+        provideRouter([]),
+        { provide: LanguageService, useValue: { currentLang: signal('en' as const), langPrefix: '/en' } },
+        {
+          provide: ActivatedRoute,
+          useValue: { paramMap: enParamMapSubject.asObservable() },
+        },
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(McpToolsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('first MCP category (supabase) should have English description', () => {
+    const categories = (component as any).mcpCategories;
+    const supabase = categories['supabase'];
+    expect(supabase).toBeTruthy();
+    expect(supabase.description).toContain('MCP tools for Supabase database management');
+    expect(supabase.description).not.toContain('Outils MCP pour');
+  });
+
+  it('at least one Supabase tool should have English description', () => {
+    const categories = (component as any).mcpCategories;
+    const supabaseTools = categories['supabase'].tools;
+    expect(supabaseTools[0].description).toBe('Applies a DDL migration to the database');
+  });
+
+  it('should display English description in categoryData computed signal', fakeAsync(() => {
+    enParamMapSubject.next(convertToParamMap({ category: 'supabase' }));
+    tick(600);
+    fixture.detectChanges();
+
+    const data = (component as any).categoryData();
+    expect(data).toBeTruthy();
+    expect(data!.description).toContain('MCP tools for Supabase database management');
+  }));
 });

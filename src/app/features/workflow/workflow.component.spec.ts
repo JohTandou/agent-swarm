@@ -157,4 +157,47 @@ describe('WorkflowComponent', () => {
     const main: HTMLElement | null = fixture.nativeElement.querySelector('.page');
     expect(main).toBeTruthy();
   }));
+
+});
+
+/* ==========================================================================
+ * Langue anglaise — heroTitle, decisionNodes, qualityGates
+ * ========================================================================== */
+
+describe('WorkflowComponent — English', () => {
+  let component: WorkflowComponent;
+  let fixture: ComponentFixture<WorkflowComponent>;
+
+  beforeEach(async () => {
+    TestBed.resetTestingModule();
+    await TestBed.configureTestingModule({
+      imports: [WorkflowComponent],
+      providers: [
+        { provide: LanguageService, useValue: { currentLang: signal('en' as const), langPrefix: '/en' } },
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(WorkflowComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('heroTitle should return English text', () => {
+    expect(component['heroTitle']).toBe('From issue to merge — entirely automated');
+  });
+
+  it('decisionNodes first node should have English description', () => {
+    const nodes = component['decisionNodes'];
+    expect(nodes[0].description).toContain('Answer to a question');
+    expect(nodes[0].description).toContain('No specialized agent');
+  });
+
+  it('at least 2 qualityGates should have English descriptions', () => {
+    const gates = component['qualityGates'];
+    expect(gates.length).toBe(2);
+    expect(gates[0].description).toContain('Systematic test generation');
+    expect(gates[0].description).toContain('Blocking threshold: 80%');
+    expect(gates[1].description).toContain('Security, quality, and consistency audit');
+    expect(gates[1].criteria[0]).toContain('Security score');
+  });
 });

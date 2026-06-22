@@ -231,4 +231,43 @@ describe('ProblemInnovationComponent', () => {
     component['retry']();
     expect(component['error']()).toBeNull();
   });
+
+});
+
+/* ==========================================================================
+ * Langue anglaise — heroTitle, pillars, comparisonData
+ * ========================================================================== */
+
+describe('ProblemInnovationComponent — English', () => {
+  let component: ProblemInnovationComponent;
+  let fixture: ComponentFixture<ProblemInnovationComponent>;
+
+  beforeEach(async () => {
+    TestBed.resetTestingModule();
+    await TestBed.configureTestingModule({
+      imports: [ProblemInnovationComponent],
+      providers: [
+        { provide: LanguageService, useValue: { currentLang: signal('en' as const), langPrefix: '/en' } },
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ProblemInnovationComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('heroTitle should return English text', () => {
+    expect(component['heroTitle']).toBe('Why the Swarm?');
+  });
+
+  it('first pillar should have English title', () => {
+    const pillars = component['pillars'];
+    expect(pillars[0].title).toBe('Automatic complexity classification');
+  });
+
+  it('first comparisonData entry should have English withoutSwarm and withSwarm', () => {
+    const data = component['comparisonData'];
+    expect(data[0].withoutSwarm).toContain('3–5 days');
+    expect(data[0].withSwarm).toContain('15–45 minutes');
+  });
 });
