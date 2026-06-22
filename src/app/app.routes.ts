@@ -10,7 +10,7 @@ export const routes: Routes = [
   },
   {
     path: 'a-propos',
-    data: { title: 'À propos — La Swarm, neuf agents, un pipeline' },
+    data: { title: 'À propos — La Swarm, intelligence orchestrée' },
     loadChildren: () =>
       import('./features/about/about.routes').then((m) => m.aboutRoutes),
   },
@@ -65,7 +65,7 @@ export const routes: Routes = [
       },
       {
         path: 'about',
-        data: { title: 'About — The Swarm, nine agents, one pipeline' },
+        data: { title: 'About — The Swarm, orchestrated intelligence' },
         loadChildren: () =>
           import('./features/about/about.routes').then((m) => m.aboutRoutes),
       },

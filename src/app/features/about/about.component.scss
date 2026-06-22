@@ -357,16 +357,11 @@
    ========================================================================== */
 
 .about__contributors {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 24px;
   margin-top: 40px;
-}
-
-@media (max-width: 768px) {
-  .about__contributors {
-    grid-template-columns: 1fr;
-  }
 }
 
 .about__contributor {
@@ -377,6 +372,8 @@
   box-shadow: var(--elevation-n2);
   text-align: center;
   transition: transform 250ms var(--ease-natural);
+  max-width: 380px;
+  width: 100%;
 
   &:hover {
     transform: translateY(-2px);
