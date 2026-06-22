@@ -1,0 +1,94 @@
+<!-- ==========================================================================
+     Page d'accueil Swarm Wiki — Immersive Apple-grade
+     Sections plein écran, graphe D3 interactif, grille hexagonale animée,
+     animations GSAP scroll-driven
+     ========================================================================== -->
+
+<app-sparkle-effect [active]="showSparkle()" />
+
+<div class="homepage">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Section 1 : Hero — Tagline + Résumé exécutif (100vh minimum)
+       Grille hexagonale en arrière-plan
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section
+    class="homepage__hero"
+    [style.background]="'radial-gradient(circle 800px at ' + cursorX() + '% ' + cursorY() + '%, rgba(196,120,13,0.03) 0%, transparent 70%)'"
+    aria-label="Les agents de la Swarm en action">
+    <!-- Décor de fond parallaxe -->
+    <div class="homepage__hero-decor homepage__hero-decor--far" aria-hidden="true"></div>
+    <div class="homepage__hero-decor homepage__hero-decor--mid" aria-hidden="true"></div>
+    <div class="homepage__hero-decor homepage__hero-decor--near" aria-hidden="true"></div>
+
+    <!-- Grille hexagonale animée -->
+    <app-hex-grid />
+
+    <div class="homepage__hero-content">
+      <!-- Tagline monumentale -->
+      <h1 class="homepage__tagline homepage__hero-stagger">
+        Le pipeline d'agents IA qui
+        <span class="homepage__tagline-accent">code, teste, review et déploie</span>
+        automatiquement
+      </h1>
+
+      <!-- Résumé exécutif — 2 phrases percutantes -->
+      <div class="homepage__summary homepage__hero-stagger">
+        <p class="homepage__summary-text">
+          <strong>9 agents IA spécialisés</strong> + 2 agents utilitaires collaborent en parallèle sur votre projet.
+          En <strong>2 à 4 heures</strong>, de l'analyse à la PR mergée, chaque étape est automatisée
+          sans intervention humaine.
+        </p>
+        <p class="homepage__summary-text">
+          <strong>3 skills activables</strong> étendent leurs capacités — génération de composants Apple-grade,
+          tests automatisés, analyse de codebase, documentation vivante. Déploiement natif sur Supabase, Vercel et Render.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Indicateur de scroll -->
+    <div class="homepage__scroll-hint homepage__hero-stagger" aria-hidden="true">
+      <span class="homepage__scroll-text">Explorer</span>
+      <div class="homepage__scroll-arrow">
+        <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+          <rect x="6" y="2" width="4" height="8" rx="2" fill="currentColor" opacity="0.6"/>
+          <rect x="7" y="12" width="2" height="10" rx="1" fill="currentColor" opacity="0.3"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Section 2 : Navigation visuelle — 4 cartes animées GSAP
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="homepage__navigation section--alt" aria-label="Navigation vers les sections du wiki">
+    <h2 class="homepage__section-title">Choisissez votre destination</h2>
+    <div class="homepage__nav-grid">
+      @for (card of navCards; track card.route; let idx = $index) {
+        <a
+          [routerLink]="card.route"
+          class="homepage__nav-card"
+          [attr.aria-label]="card.title + ' — ' + card.description"
+        >
+          <span class="homepage__nav-icon" aria-hidden="true">{{ card.icon }}</span>
+          <h3 class="homepage__nav-title">{{ card.title }}</h3>
+          <p class="homepage__nav-description">{{ card.description }}</p>
+          <span class="homepage__nav-arrow" aria-hidden="true">→</span>
+        </a>
+      }
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Footer minimal
+       ═══════════════════════════════════════════════════════════════════ -->
+  <footer class="homepage__footer">
+    <span class="homepage__footer-text">
+      La Swarm est un pipeline d'agents IA orchestré par Joh Tandou. Chaque ligne de code, chaque test, chaque mot de cette page a été généré, vérifié et documenté par le pipeline — sous supervision humaine.
+    </span>
+  </footer>
+
+</div>

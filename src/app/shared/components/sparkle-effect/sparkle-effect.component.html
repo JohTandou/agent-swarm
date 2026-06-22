@@ -1,0 +1,13 @@
+@if (active) {
+  <div class="sparkle-container" aria-hidden="true">
+    @for (particle of particles; track $index) {
+      <span
+        class="sparkle"
+        [style.--x]="particle.x + '%'"
+        [style.--y]="particle.y + '%'"
+        [style.--delay]="particle.delay + 'ms'"
+        [style.--color]="particle.color"
+      ></span>
+    }
+  </div>
+}

@@ -1,0 +1,106 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { HeaderComponent } from './header.component';
+
+describe('HeaderComponent', () => {
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [HeaderComponent],
+      providers: [provideRouter([])],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HeaderComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('devrait créer le composant', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('devrait afficher la marque "Swarm Wiki"', () => {
+    fixture.detectChanges();
+    const brandEl: HTMLElement = fixture.nativeElement.querySelector('.header__brand');
+    expect(brandEl).toBeTruthy();
+    expect(brandEl.textContent?.trim()).toContain('Swarm Wiki');
+  });
+
+  it('devrait afficher la navigation desktop quand isMobile est false', () => {
+    component.isMobile = false;
+    fixture.detectChanges();
+    const navEl: HTMLElement = fixture.nativeElement.querySelector('.header__nav');
+    expect(navEl).toBeTruthy();
+    const hamburgerEl: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="icon"]:last-of-type');
+    expect(hamburgerEl).toBeFalsy();
+  });
+
+  it('devrait masquer la navigation desktop et afficher le hamburger quand isMobile est true', () => {
+    component.isMobile = true;
+    fixture.detectChanges();
+    const navEl: HTMLElement = fixture.nativeElement.querySelector('.header__nav');
+    expect(navEl).toBeFalsy();
+    const hamburgerEl: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger-btn');
+    expect(hamburgerEl).toBeTruthy();
+  });
+
+  it('devrait émettre toggleSidebar quand le hamburger est cliqué (isMobile=true)', () => {
+    component.isMobile = true;
+    fixture.detectChanges();
+    const emitSpy = spyOn(component.toggleSidebar, 'emit');
+    const hamburgerBtn: HTMLButtonElement = fixture.nativeElement.querySelector('.header__hamburger-btn');
+    hamburgerBtn.click();
+    expect(emitSpy).toHaveBeenCalled();
+  });
+
+  it('devrait ajouter la classe --open au hamburger quand sidebarOpen est true', () => {
+    component.isMobile = true;
+    component.sidebarOpen = true;
+    fixture.detectChanges();
+    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger-btn');
+    expect(hamburgerBtn.classList.contains('header__hamburger--open')).toBeTrue();
+  });
+
+  it('devrait mettre à jour aria-label du hamburger selon sidebarOpen', () => {
+    component.isMobile = true;
+    fixture.detectChanges();
+    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger-btn');
+    // sidebarOpen=false → "Ouvrir le menu"
+    expect(hamburgerBtn.getAttribute('aria-label')).toBe('Ouvrir le menu');
+
+    component.sidebarOpen = true;
+    fixture.detectChanges();
+    // sidebarOpen=true → "Fermer le menu"
+    expect(hamburgerBtn.getAttribute('aria-label')).toBe('Fermer le menu');
+  });
+
+  it('devrait mettre à jour aria-expanded du hamburger selon sidebarOpen', () => {
+    component.isMobile = true;
+    fixture.detectChanges();
+    const hamburgerBtn: HTMLElement = fixture.nativeElement.querySelector('.header__hamburger-btn');
+    expect(hamburgerBtn.getAttribute('aria-expanded')).toBe('false');
+
+    component.sidebarOpen = true;
+    fixture.detectChanges();
+    expect(hamburgerBtn.getAttribute('aria-expanded')).toBe('true');
+  });
+
+  it('devrait avoir les liens de navigation Accueil et À propos', () => {
+    component.isMobile = false;
+    fixture.detectChanges();
+    const navLinks = fixture.nativeElement.querySelectorAll('.header__nav-link');
+    expect(navLinks.length).toBe(2);
+    expect(navLinks[0].textContent?.trim()).toBe('Accueil');
+    expect(navLinks[1].textContent?.trim()).toBe('À propos');
+  });
+
+  it('devrait émettre openSearch quand le bouton de recherche est cliqué', () => {
+    component.isMobile = false;
+    fixture.detectChanges();
+    const emitSpy = spyOn(component.openSearch, 'emit');
+    const searchBtn: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="ghost"]');
+    searchBtn.click();
+    expect(emitSpy).toHaveBeenCalled();
+  });
+});

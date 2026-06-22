@@ -1,0 +1,93 @@
+<aside
+  class="sidebar"
+  role="navigation"
+  aria-label="Navigation principale"
+>
+  <!-- Bouton close mobile -->
+  @if (isMobile) {
+    <app-ui-button variant="icon" size="md" (click)="closeSidebar.emit()" aria-label="Fermer le menu">
+      <span class="sidebar__close-icon" aria-hidden="true">✕</span>
+    </app-ui-button>
+  }
+
+  <!-- Liste de navigation -->
+  <nav class="sidebar__nav">
+    <ul class="sidebar__list">
+      @for (item of navItems; track item.route) {
+        <li class="sidebar__item">
+          @if (item.children && item.children.length > 0) {
+            @if (item.expandOnClick) {
+              <!-- Label bouton : toggle + navigation -->
+              <div
+                class="sidebar__link sidebar__link--parent"
+                [class.sidebar__link--expanded]="item.expanded"
+              >
+                <button
+                  class="sidebar__parent-label sidebar__parent-label--btn"
+                  [class.sidebar__link--active]="isParentActive(item)"
+                  (click)="toggleExpanded(item); isMobile && closeSidebar.emit()"
+                  [attr.aria-expanded]="item.expanded"
+                  [attr.aria-label]="(item.expanded ? 'Réduire' : 'Déplier') + ' ' + item.label"
+                  type="button"
+                >
+                  {{ item.label }}
+                  <span class="sidebar__chevron" [class.sidebar__chevron--expanded]="item.expanded" aria-hidden="true">▼</span>
+                </button>
+              </div>
+            } @else {
+              <!-- Menu parent pliable standard -->
+              <div
+                class="sidebar__link sidebar__link--parent"
+                [class.sidebar__link--expanded]="item.expanded"
+                routerLinkActive="sidebar__link--active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <a
+                  class="sidebar__parent-label"
+                  [routerLink]="item.route"
+                  (click)="isMobile && closeSidebar.emit()"
+                >{{ item.label }}</a>
+                <button
+                  class="sidebar__expand-btn"
+                  (click)="toggleExpanded(item)"
+                  [attr.aria-expanded]="item.expanded"
+                  [attr.aria-label]="(item.expanded ? 'Réduire' : 'Déplier') + ' ' + item.label"
+                  type="button"
+                >
+                  <span class="sidebar__chevron" aria-hidden="true">▼</span>
+                </button>
+              </div>
+            }
+            @if (item.expanded) {
+              <ul class="sidebar__sublist">
+                @for (child of item.children; track child.route) {
+                  <li class="sidebar__subitem">
+                    <a
+                      class="sidebar__link sidebar__link--child"
+                      [routerLink]="child.route"
+                      routerLinkActive="sidebar__link--active"
+                      (click)="isMobile && closeSidebar.emit()"
+                    >
+                      {{ child.label }}
+                    </a>
+                  </li>
+                }
+              </ul>
+            }
+          } @else {
+            <!-- Lien simple -->
+            <a
+              class="sidebar__link"
+              [routerLink]="item.route"
+              routerLinkActive="sidebar__link--active"
+              [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+              (click)="isMobile && closeSidebar.emit()"
+            >
+              {{ item.label }}
+            </a>
+          }
+        </li>
+      }
+    </ul>
+  </nav>
+</aside>
