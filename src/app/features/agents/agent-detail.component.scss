@@ -1,0 +1,361 @@
+/* ==========================================================================
+   Agent Detail — Page de détail d'un agent Swarm
+   Header premium + contenu Markdown rendu
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Section container
+   -------------------------------------------------------------------------- */
+.agent-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 48px 0 120px;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.agent-detail__header {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(122, 136, 153, 0.12);
+}
+
+/* Hero section */
+.agent-detail__hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+}
+
+.agent-detail__emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  background: rgba(196, 120, 13, 0.06);
+  border: 1px solid rgba(196, 120, 13, 0.12);
+}
+
+.agent-detail__hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.agent-detail__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.agent-detail__role {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.0625rem;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 640px;
+}
+
+.agent-detail__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+/* Route badge (same style as listing cards) */
+.agent-detail__route-badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  border: 1px solid rgba(122, 136, 153, 0.3);
+  border-radius: 6px;
+  padding: 4px 10px;
+  background: rgba(122, 136, 153, 0.06);
+}
+
+.agent-detail__route-badge--highlight {
+  color: var(--color-accent);
+  border-color: rgba(196, 120, 13, 0.4);
+  background: rgba(196, 120, 13, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   Contenu Markdown
+   -------------------------------------------------------------------------- */
+.agent-detail__content {
+  max-width: var(--content-max-width);
+}
+
+.agent-detail__content--spaced {
+  padding-top: 8px;
+
+  ::ng-deep {
+    .markdown-body {
+      p, ul, ol {
+        margin-bottom: 1.4em;
+        line-height: 1.9;
+      }
+
+      h2 {
+        margin-top: 2.5em;
+        margin-bottom: 0.8em;
+      }
+
+      h3 {
+        margin-top: 1.8em;
+        margin-bottom: 0.6em;
+      }
+
+      li {
+        margin-bottom: 0.6em;
+      }
+
+      pre {
+        margin: 1.5em 0;
+      }
+
+      blockquote {
+        margin: 1.5em 0;
+        padding: 1em 1.2em;
+      }
+    }
+  }
+}
+
+.agent-detail__no-content {
+  padding: 48px 0;
+  text-align: center;
+
+  p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Navigation pied de page
+   -------------------------------------------------------------------------- */
+.agent-detail__footer {
+  padding-top: 28px;
+  border-top: 1px solid rgba(122, 136, 153, 0.12);
+}
+
+.agent-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  min-height: 44px;
+  border: 1px solid rgba(122, 136, 153, 0.2);
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 200ms ease-out;
+
+  &:hover {
+    border-color: rgba(196, 120, 13, 0.3);
+    color: var(--color-accent);
+    background: rgba(196, 120, 13, 0.06);
+    box-shadow: 0 0 16px rgba(196, 120, 13, 0.08);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   État erreur — agent introuvable
+   -------------------------------------------------------------------------- */
+.agent-detail--error {
+  min-height: 60vh;
+}
+
+.agent-detail__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  padding: 80px 24px;
+  flex: 1;
+}
+
+.agent-detail__error-emoji {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.agent-detail__error-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.agent-detail__error-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  max-width: 420px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.agent-detail__error-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  min-height: 44px;
+  border: 1px solid rgba(196, 120, 13, 0.3);
+  border-radius: 8px;
+  color: var(--color-accent);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  transition: all 200ms ease-out;
+
+  &:hover {
+    background: rgba(196, 120, 13, 0.08);
+    box-shadow: 0 0 16px rgba(196, 120, 13, 0.1);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   Avatar — image de l'agent en page détail
+   -------------------------------------------------------------------------- */
+.agent-detail__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(196, 120, 13, 0.2);
+  box-shadow: 0 0 30px rgba(196, 120, 13, 0.06);
+  margin: 0 auto 32px;
+  display: block;
+}
+
+/* ==========================================================================
+   Tableaux de routes — Style carte premium (ui-card design language)
+   ========================================================================== */
+.agent-detail__content--spaced {
+  ::ng-deep .markdown-body {
+    table {
+      display: table;
+      width: 100%;
+      margin: 2rem 0;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid rgba(196, 120, 13, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-bg-elevated);
+      box-shadow: 0 0 20px rgba(196, 120, 13, 0.03);
+    }
+
+    thead {
+      th {
+        padding: 14px 20px;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--color-accent);
+        background: rgba(196, 120, 13, 0.06);
+        border-bottom: 2px solid rgba(196, 120, 13, 0.25);
+        text-align: left;
+
+        &:first-child {
+          border-top-left-radius: 12px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 12px;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        transition: background 200ms ease-out;
+
+        &:hover {
+          background: rgba(196, 120, 13, 0.04);
+        }
+
+        &:not(:last-child) td {
+          border-bottom: 1px solid rgba(122, 136, 153, 0.1);
+        }
+
+        td {
+          padding: 14px 20px;
+          font-size: 0.9375rem;
+          line-height: 1.6;
+          color: var(--color-text-secondary);
+          vertical-align: middle;
+
+          &:first-child {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.8125rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--color-text-primary);
+            white-space: nowrap;
+            width: 1%;
+          }
+        }
+
+        // Alternance subtile
+        &:nth-child(even) td {
+          background: rgba(74, 69, 64, 0.2);
+        }
+      }
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Accessibilité — respect des préférences de mouvement
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .agent-detail__avatar {
+    transition: none;
+  }
+}

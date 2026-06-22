@@ -1,0 +1,95 @@
+<section class="agents">
+  <header class="agents__header">
+    <p class="agents__eyebrow">Neuf agents, un collectif</p>
+    <h1 class="agents__title" appTextReveal [revealDelay]="200">Agents</h1>
+    <p class="agents__subtitle">
+      Chaque agent est une pièce spécialisée du pipeline. Découvrez leurs rôles,
+      responsabilités et contraintes — puis explorez leur fiche détaillée.
+    </p>
+  </header>
+
+  <nav class="agents__filters" aria-label="Filtrer par catégorie">
+    <app-ui-button
+      variant="ghost"
+      size="sm"
+      [class.agents__filter--active]="activeCategory() === null"
+      (click)="activeCategory.set(null)"
+      aria-label="Afficher tous les agents"
+    >
+      Tous
+      <span class="agents__filter-count">{{ agents.length }}</span>
+    </app-ui-button>
+    @for (category of categories; track category) {
+      <app-ui-button
+        variant="ghost"
+        size="sm"
+        [class.agents__filter--active]="activeCategory() === category"
+        (click)="toggleCategory(category)"
+        [attr.aria-label]="'Filtrer par ' + getCategoryLabel(category)"
+      >
+        {{ getCategoryLabel(category) }}
+        <span class="agents__filter-count">{{ getCategoryCount(category) }}</span>
+      </app-ui-button>
+    }
+  </nav>
+
+  <div class="agents__grid" role="list" aria-label="Liste des agents Swarm" [appStaggerChildren]="60">
+    @for (agent of filteredAgents(); track agent.id; let idx = $index) {
+      <a
+        [routerLink]="['/agents', agent.id]"
+        class="agents__card"
+        [class.agents__card--featured]="idx === 0"
+        [class.agents__card--wide]="idx === 2"
+        role="listitem"
+        [attr.aria-label]="'Fiche de ' + agent.name"
+        [attr.data-category]="agent.category"
+      >
+                      <span class="agents__card-avatar-wrapper">
+                <img
+                  [src]="'/assets/images/avatars/' + agent.id + '.png'"
+                  [alt]="'Avatar de ' + agent.name"
+                  class="agents__card-avatar"
+                  loading="lazy"
+                  (error)="$any($event.target).style.display = 'none'"
+                />
+              </span>
+
+        <div class="agents__card-header">
+          <h2 class="agents__card-name">{{ agent.name }}</h2>
+        </div>
+
+        <p class="agents__card-role">{{ agent.role }}</p>
+
+        <p class="agents__card-desc">{{ agent.description }}</p>
+
+        <div class="agents__card-footer">
+          <span
+            class="agents__card-route"
+            [style.border-color]="getRouteColor(agent.route)"
+            [style.color]="getRouteColor(agent.route)"
+          >
+            {{ agent.route }}
+          </span>
+
+          <div class="agents__card-pipeline" aria-hidden="true">
+            <span class="agents__card-pipeline-dot" style="animation-delay: 0ms"></span>
+            <span class="agents__card-pipeline-dot" style="animation-delay: 200ms"></span>
+            <span class="agents__card-pipeline-dot" style="animation-delay: 400ms"></span>
+            <span class="agents__card-pipeline-dot" style="animation-delay: 600ms"></span>
+          </div>
+        </div>
+
+        <div class="agents__card-glow" aria-hidden="true"></div>
+      </a>
+    }
+
+    @empty {
+      <app-ui-empty-state
+        title="Aucun agent trouvé"
+        description="Aucun agent ne correspond à ce filtre. Essayez une autre catégorie."
+        primaryActionLabel="Voir tous les agents"
+        (primaryAction)="resetFilters()"
+      />
+    }
+  </div>
+</section>
