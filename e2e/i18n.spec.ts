@@ -26,6 +26,7 @@ test.describe('T18 — i18n — English language routes', () => {
   test.describe('Workflow', () => {
     test('/en/workflow displays English hero', async ({ page }) => {
       await page.goto('/en/workflow');
+      await page.waitForLoadState('networkidle');
       await expect(page.locator('body')).toContainText('From issue to merge');
     });
   });
@@ -54,7 +55,7 @@ test.describe('T18 — i18n — English language routes', () => {
 
   test.describe('Language switcher', () => {
     test('toggles from FR to EN and back', async ({ page }) => {
-      await page.goto('/about');
+      await page.goto('/a-propos');
       // Should be in French
       await expect(page.locator('body')).toContainText('collective');
       // Switch to English
@@ -63,7 +64,7 @@ test.describe('T18 — i18n — English language routes', () => {
       await expect(page.locator('body')).toContainText('Collective Intelligence');
       // Switch back to French
       await page.click('.header__lang-switch');
-      await page.waitForURL('**/about');
+      await page.waitForURL('**/a-propos');
       await expect(page.locator('body')).toContainText('collective');
     });
   });
@@ -81,7 +82,7 @@ test.describe('T18 — i18n — English language routes', () => {
       await page.goto('/en/about');
       await expect(page.locator('body')).toContainText('Collective Intelligence');
       // Naviguer vers Agents via le header
-      const agentsLink = page.locator('.header__nav').getByRole('link', { name: 'Agents' });
+      const agentsLink = page.locator('.sidebar__nav').getByRole('link', { name: 'Agents' });
       await expect(agentsLink).toBeVisible({ timeout: 10000 });
       await agentsLink.click();
       await expect(page).toHaveURL('/en/agents', { timeout: 5000 });
