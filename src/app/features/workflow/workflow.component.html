@@ -1,0 +1,298 @@
+<!-- ==========================================================================
+     Page Workflow — Template Apple-grade
+     7 sections, animations au scroll, dark mode exclusif
+     ========================================================================== -->
+
+<!-- --------------------------------------------------------------------------
+     État : Erreur
+     -------------------------------------------------------------------------- -->
+@if (error()) {
+<div class="error-state" role="alert">
+  <div class="error-state__icon" aria-hidden="true">⚠️</div>
+  <h2 class="error-state__title">Impossible de charger la page</h2>
+  <p class="error-state__message">{{ error() }}</p>
+  <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
+</div>
+}
+
+<!-- --------------------------------------------------------------------------
+     État : Succès — Contenu principal
+     -------------------------------------------------------------------------- -->
+@if (!error()) {
+<div class="page">
+
+  <!-- =======================================================================
+       Section 1 — Hero
+       ======================================================================= -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__bg-decor" aria-hidden="true"></div>
+    <div class="hero__content">
+      <span class="hero__kicker reveal-on-scroll">Le pipeline d'agents IA</span>
+      <h1 id="hero-title" class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">De l'analyse au merge, chaque étape automatisée</h1>
+      <p class="hero__subtitle reveal-on-scroll">{{ heroSubtitle }}</p>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 2 — Arbre de décision interactif
+       ======================================================================= -->
+  <section class="decision-tree" aria-labelledby="tree-title">
+    <div class="section-header">
+      <span class="section-header__kicker">Classification automatique</span>
+      <h2 id="tree-title" class="section-header__title">Arbre de décision des routes</h2>
+      <p class="section-header__description">
+        Chaque tâche est automatiquement classifiée sur l'une des 5 routes du pipeline.
+        La complexité croissante détermine le nombre d'agents mobilisés et la rigueur des gates qualité.
+      </p>
+    </div>
+
+    <div class="tree-container">
+      <!-- Colonne des routes -->
+      <div class="tree-nodes">
+        @for (node of decisionNodes; track node.route; let idx = $index) {
+        <div
+          class="node-card"
+          [attr.data-route]="node.route"
+        >
+          <div class="node-card__header">
+            <app-ui-badge [variant]="node.route === 'MEDIUM' || node.route === 'FULL' ? 'warning' : 'info'" size="sm">{{ node.route }}</app-ui-badge>
+            <span class="node-card__complexity">{{ node.complexity }}</span>
+          </div>
+          <h3 class="node-card__title">{{ node.label }}</h3>
+          <p class="node-card__description">{{ node.description }}</p>
+          <div class="node-card__meta">
+            <span class="node-card__meta-item">
+              <span class="node-card__meta-label">Tokens</span>
+              <span class="node-card__meta-value">{{ node.tokens }}</span>
+            </span>
+            <span class="node-card__meta-item">
+              <span class="node-card__meta-label">Coût</span>
+              <span class="node-card__meta-value">{{ node.cost }}</span>
+            </span>
+          </div>
+          <div class="node-card__agents">
+            <span class="node-card__agents-label">Agents : </span>
+            <span class="node-card__agents-value">{{ node.agents }}</span>
+          </div>
+          <!-- Ligne de connexion vers le bas (sauf dernier) -->
+          @if (idx < decisionNodes.length - 1) {
+          <div class="node-card__connector" aria-hidden="true">
+            <svg width="2" height="32" viewBox="0 0 2 32" class="node-card__connector-line">
+              <line x1="1" y1="0" x2="1" y2="32" stroke="rgba(122,136,153,0.2)" stroke-width="2" stroke-dasharray="4 4"/>
+            </svg>
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Indicateur de complexité latéral -->
+      <div class="tree-complexity-bar" aria-hidden="true">
+        <span class="tree-complexity-bar__label-top">Complexité minimale</span>
+        <div class="tree-complexity-bar__track">
+          <div class="tree-complexity-bar__fill"></div>
+        </div>
+        <span class="tree-complexity-bar__label-bottom">Complexité maximale</span>
+      </div>
+    </div>
+      <p class="tree-note">
+        Coûts estimés avec la tarification API DeepSeek V4 Pro (juin 2026). Tokens et coûts réels variables selon la complexité et le volume.
+      </p>
+  </section>
+
+  <!-- =======================================================================
+       Section 3 — Diagramme Mermaid du pipeline complet
+       ======================================================================= -->
+  <section class="mermaid-section section--alt" aria-labelledby="pipeline-title">
+    <div class="section-header">
+      <span class="section-header__kicker">Visualisation</span>
+      <h2 id="pipeline-title" class="section-header__title">Pipeline complet</h2>
+      <p class="section-header__description">
+        Le diagramme ci-dessous illustre le flux complet : de l'issue GitHub au merge final.
+        Chaque étape est automatisée. Les tâches MEDIUM et FULL activent le parallélisme front+back
+        et les gates qualité (tester + reviewer).
+      </p>
+    </div>
+
+    <div class="mermaid-wrapper">
+      <app-markdown-renderer
+        [content]="mermaidDiagram"
+        [enableMermaid]="true"
+        [enablePrism]="false"
+      />
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 4 — Pré-search expliqué
+       ======================================================================= -->
+  <section class="pre-search" aria-labelledby="presearch-title">
+      <div class="section-header">
+      <span class="section-header__kicker">Étape 0.3</span>
+      <h2 id="presearch-title" class="section-header__title">{{ preSearchTitle }}</h2>
+      <p class="section-header__description">{{ preSearchDescription }}</p>
+    </div>
+
+    <div class="pre-search__table-wrapper">
+      <table class="pre-search__table">
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Fichiers impactés</th>
+            <th>Tokens estimés</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (threshold of preSearchThresholds; track threshold.route) {
+          <tr>
+            <td>
+              @if (threshold.route === 'MEDIUM' || threshold.route === 'FULL') {
+                <app-ui-badge variant="info" size="sm" class="pre-search__badge--amber">{{ threshold.route }}</app-ui-badge>
+              } @else {
+                <app-ui-badge variant="info" size="sm">{{ threshold.route }}</app-ui-badge>
+              }
+            </td>
+            <td>{{ threshold.fichiers }}</td>
+            <td>{{ threshold.tokens }}</td>
+            <td>{{ threshold.classification }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 5 — Gates qualité
+       ======================================================================= -->
+  <section class="quality-gates section--alt" aria-labelledby="gates-title">
+    <div class="section-header">
+      <span class="section-header__kicker">Contrôle qualité</span>
+      <h2 id="gates-title" class="section-header__title">Gates qualité automatisées</h2>
+      <p class="section-header__description">
+        Deux gates successives garantissent que chaque modification est testée et revue avant d'atteindre la branche principale.
+      </p>
+    </div>
+
+    <div class="gates-grid">
+      @for (gate of qualityGates; track gate.name; let idx = $index) {
+      <div
+        class="gate-card"
+      >
+        <div class="gate-card__header">
+          <span class="gate-card__icon" aria-hidden="true">{{ gate.icon }}</span>
+          <h3 class="gate-card__name">{{ gate.name }}</h3>
+        </div>
+        <p class="gate-card__description">{{ gate.description }}</p>
+        <ul class="gate-card__criteria">
+          @for (criterion of gate.criteria; track $index) {
+          <li class="gate-card__criterion">{{ criterion }}</li>
+          }
+        </ul>
+      </div>
+      }
+
+      <!-- Diagramme de flux des gates -->
+      <div class="gate-flow">
+        <div class="gate-flow__step">
+          <span class="gate-flow__icon">💻</span>
+          <span class="gate-flow__label">Implémentation</span>
+        </div>
+        <div class="gate-flow__arrow">→</div>
+        <div class="gate-flow__step gate-flow__step--active">
+          <span class="gate-flow__icon">🧪</span>
+          <span class="gate-flow__label">Tester</span>
+          <span class="gate-flow__threshold">Seuil : ≥ 80 %</span>
+        </div>
+        <div class="gate-flow__arrow">→</div>
+        <div class="gate-flow__step gate-flow__step--active">
+          <span class="gate-flow__icon">👁️</span>
+          <span class="gate-flow__label">Reviewer</span>
+          <span class="gate-flow__threshold">Score : ≥ 0.85</span>
+        </div>
+        <div class="gate-flow__arrow">→</div>
+        <div class="gate-flow__step gate-flow__step--success">
+          <span class="gate-flow__icon">✅</span>
+          <span class="gate-flow__label">PR Validée</span>
+        </div>
+        <div class="gate-flow__branch gate-flow__branch--reject" aria-hidden="true">
+          <span>❌ Rejeté → Corrections → Retest</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 6 — Intégration Git
+       ======================================================================= -->
+  <section class="git-integration" aria-labelledby="git-title">
+    <div class="section-header">
+      <span class="section-header__kicker">Workflow automatisé</span>
+      <h2 id="git-title" class="section-header__title">Intégration Git native</h2>
+      <p class="section-header__description">
+        Le pipeline Swarm est pensé pour le flux GitHub : chaque étape, de la création de branche au merge, est automatisée.
+        {{ gitScriptsDescription }}
+      </p>
+    </div>
+
+    <div class="git-pipeline">
+      @for (step of gitSteps; track step.step; let idx = $index) {
+      <div
+        class="git-step"
+      >
+        <div class="git-step__node">
+          <span class="git-step__icon" aria-hidden="true">{{ step.icon }}</span>
+          <span class="git-step__name">{{ step.step }}</span>
+        </div>
+        <p class="git-step__description">{{ step.description }}</p>
+        @if (idx < gitSteps.length - 1) {
+        <div class="git-step__connector" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="rgba(122,136,153,0.3)" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+        }
+      </div>
+      }
+    </div>
+    <!-- Diagramme gitGraph Mermaid -->
+    <div class="git-graph-wrapper">
+      <app-markdown-renderer
+        [content]="gitGraphDiagram"
+        [enableMermaid]="true"
+        [enablePrism]="false"
+      />
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 7 — Fichiers swarm
+       ======================================================================= -->
+  <section class="swarm-files section--alt" aria-labelledby="files-title">
+    <div class="section-header">
+      <span class="section-header__kicker">Configuration</span>
+      <h2 id="files-title" class="section-header__title">Fichiers Swarm</h2>
+      <p class="section-header__description">
+        Deux fichiers de configuration gouvernent l'état et la mémoire du pipeline entre les sessions.
+      </p>
+    </div>
+
+    <div class="files-grid">
+      @for (file of swarmFiles; track file.name; let idx = $index) {
+      <div
+        class="file-card"
+      >
+        <div class="file-card__header">
+          <span class="file-card__icon" aria-hidden="true">{{ file.icon }}</span>
+          <code class="file-card__name">{{ file.name }}</code>
+        </div>
+        <p class="file-card__description">{{ file.description }}</p>
+        <pre class="file-card__structure"><code>{{ file.structure }}</code></pre>
+      </div>
+      }
+    </div>
+  </section>
+
+</div>
+}

@@ -1,0 +1,871 @@
+/* ==========================================================================
+   Page Workflow — Styles Apple-grade
+   Palette 6 couleurs exclusive, dark mode, Cabinet Grotesk + Satoshi
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Variables de layout locales
+   -------------------------------------------------------------------------- */
+$content-max: 1100px;
+$section-padding: 100px 24px;
+$section-padding-mobile: 64px 20px;
+
+/* ==========================================================================
+   Alternance sections sombres
+   ========================================================================== */
+.page > .section--alt {
+  background: var(--color-bg-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   Page — Conteneur principal
+   -------------------------------------------------------------------------- */
+.page {
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+}
+
+/* ==========================================================================
+   Utilitaires d'animation
+   ========================================================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms var(--ease-spring), transform 600ms var(--ease-spring);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   État : Erreur
+   ========================================================================== */
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 64px 24px;
+  text-align: center;
+  gap: 16px;
+
+  &__icon { font-size: 3rem; }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-text-primary);
+  }
+
+  &__message {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    max-width: 480px;
+  }
+
+}
+
+/* ==========================================================================
+   Section Header (commun à toutes les sections)
+   ========================================================================== */
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 64px;
+
+  &__kicker {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__description {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+}
+
+/* ==========================================================================
+   Section 1 — Hero
+   ========================================================================== */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px 64px;
+  position: relative;
+  overflow: hidden;
+
+  &__bg-decor {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to bottom, rgba(28, 24, 18, 0.35) 0%, transparent 50%),
+      url('/assets/images/workflow-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.20;
+    pointer-events: none;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  &__kicker {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+    margin-bottom: 24px;
+  }
+
+
+  &__subtitle {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+}
+
+/* ==========================================================================
+   Section 2 — Arbre de décision
+   ========================================================================== */
+
+.decision-tree {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tree-container {
+  display: flex;
+  gap: 48px;
+  align-items: stretch;
+}
+
+.tree-nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+/* Carte de nœud */
+.node-card {
+  position: relative;
+  padding: 28px 32px;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 16px;
+  transition: border-color 300ms var(--ease-natural), box-shadow 300ms var(--ease-natural), transform 300ms var(--ease-natural);
+
+  &:hover {
+    border-color: rgba(196, 120, 13, 0.3);
+    box-shadow: 0 0 24px rgba(196, 120, 13, 0.06);
+    transform: translateY(-2px);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  &__complexity {
+    font-family: var(--font-display);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.125rem;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+    margin-bottom: 8px;
+  }
+
+  &__description {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+  }
+
+  &__meta {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 12px;
+  }
+
+  &__meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__meta-label {
+    font-family: var(--font-display);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    opacity: 0.5;
+  }
+
+  &__meta-value {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  &__agents {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    padding-top: 12px;
+    border-top: 1px solid rgba(122, 136, 153, 0.08);
+  }
+
+  &__agents-label {
+    opacity: 0.6;
+  }
+
+  &__agents-value {
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  &__connector {
+    display: flex;
+    justify-content: center;
+    padding: 4px 0;
+  }
+
+  &__connector-line {
+    opacity: 0.4;
+  }
+}
+
+/* Barre de complexité latérale */
+.tree-complexity-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  &__track {
+    width: 4px;
+    flex: 1;
+    background: rgba(122, 136, 153, 0.1);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(to top, var(--color-accent), rgba(196, 120, 13, 0.1));
+    border-radius: 2px;
+    animation: complexityFill 3000ms var(--ease-out-expo) forwards;
+  }
+
+  &__label-top,
+  &__label-bottom {
+    font-family: var(--font-display);
+    font-size: 0.5625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    opacity: 0.4;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+}
+
+@keyframes complexityFill {
+  from { height: 0%; }
+  to { height: 100%; }
+}
+
+/* ==========================================================================
+   Section 3 — Diagramme Mermaid
+   ========================================================================== */
+
+.mermaid-section {
+  position: relative;
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+  transition: box-shadow 800ms var(--ease-natural);
+
+  &.mermaid-visible {
+    .mermaid-wrapper {
+      box-shadow: 0 0 40px rgba(196, 120, 13, 0.06);
+      border-color: rgba(196, 120, 13, 0.2);
+    }
+  }
+}
+
+.mermaid-wrapper {
+  padding: 48px 32px;
+  background: var(--color-bg-subtle);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 20px;
+  overflow-x: auto;
+  transition: border-color 600ms var(--ease-natural), box-shadow 600ms var(--ease-natural);
+
+  ::ng-deep .markdown-body {
+    max-width: 100%;
+  }
+
+  ::ng-deep .mermaid-diagram {
+    margin: 0;
+  }
+}
+
+/* ==========================================================================
+   Section 4 — Pré-search
+   ========================================================================== */
+
+.pre-search {
+  position: relative;
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+
+  &__table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(122, 136, 153, 0.12);
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-primary);
+      background: var(--color-bg-elevated);
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid rgba(122, 136, 153, 0.15);
+    }
+
+    td {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--color-text-secondary);
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(122, 136, 153, 0.06);
+      line-height: 1.5;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(74, 69, 64, 0.2);
+    }
+
+    tr:hover td {
+      background: rgba(196, 120, 13, 0.04);
+    }
+  }
+}
+
+/* ==========================================================================
+   Section 5 — Gates qualité
+   ========================================================================== */
+
+.quality-gates {
+  position: relative;
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.gates-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* Carte de gate */
+.gate-card {
+  padding: 32px;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 16px;
+  transition: border-color 300ms var(--ease-natural), box-shadow 300ms var(--ease-natural);
+
+  &:hover {
+    border-color: rgba(196, 120, 13, 0.2);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  &__icon {
+    font-size: 1.75rem;
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+  }
+
+  &__description {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(122, 136, 153, 0.08);
+  }
+
+  &__criteria {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+  }
+
+  &__criterion {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    padding-left: 20px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      opacity: 0.6;
+    }
+  }
+}
+
+/* Flux des gates */
+.gate-flow {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 40px 32px;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 16px;
+  margin-top: 8px;
+  position: relative;
+
+  &__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    background: var(--color-bg-subtle);
+    border: 1px solid rgba(122, 136, 153, 0.1);
+    transition: border-color 300ms;
+
+    &--active {
+      border-color: rgba(196, 120, 13, 0.3);
+      background: rgba(196, 120, 13, 0.05);
+    }
+
+    &--success {
+      border-color: rgba(196, 120, 13, 0.4);
+      background: rgba(196, 120, 13, 0.08);
+    }
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+  }
+
+  &__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    color: var(--color-text-primary);
+  }
+
+  &__threshold {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  &__arrow {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    opacity: 0.3;
+  }
+
+  &__branch {
+    position: absolute;
+    bottom: -28px;
+    right: 32px;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   Section 6 — Intégration Git
+   ========================================================================== */
+
+.git-integration {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.git-pipeline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.git-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 480px;
+  padding: 12px 0;
+
+  &__node {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    background: var(--color-bg-elevated);
+    border: 1px solid rgba(122, 136, 153, 0.15);
+    border-radius: 12px;
+    transition: border-color 250ms var(--ease-natural), box-shadow 250ms var(--ease-natural), transform 250ms var(--ease-natural);
+
+    &:hover {
+      border-color: rgba(196, 120, 13, 0.25);
+      box-shadow: 0 0 16px rgba(196, 120, 13, 0.05);
+      transform: translateY(-1px);
+    }
+  }
+
+  &__icon {
+    font-size: 1.25rem;
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: var(--color-text-primary);
+  }
+
+  &__description {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-top: 12px;
+    max-width: 400px;
+  }
+
+  &__connector {
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Section 7 — Fichiers swarm
+   ========================================================================== */
+
+.swarm-files {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.files-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.file-card {
+  padding: 32px;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 16px;
+  transition: border-color 300ms var(--ease-natural), box-shadow 300ms var(--ease-natural);
+
+  &:hover {
+    border-color: rgba(196, 120, 13, 0.2);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+  }
+
+  &__name {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    background: rgba(196, 120, 13, 0.06);
+    padding: 4px 12px;
+    border-radius: 6px;
+  }
+
+  &__description {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+  }
+
+  &__structure {
+    background: var(--color-bg-subtle);
+    border: 1px solid rgba(122, 136, 153, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+
+    code {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      color: var(--color-text-secondary);
+      white-space: pre;
+      line-height: 1.5;
+    }
+  }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .tree-container {
+    flex-direction: column;
+  }
+
+  .tree-complexity-bar {
+    display: none;
+  }
+
+  .gates-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .files-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gate-flow {
+    flex-direction: column;
+    gap: 12px;
+
+    &__arrow {
+      transform: rotate(90deg);
+    }
+  }
+
+
+
+  .mermaid-wrapper {
+    padding: 24px 16px;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .node-card {
+    padding: 20px 24px;
+  }
+
+  .file-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+
+}
+
+/* Stagger animation delay */
+.tree-nodes > *,
+.gates-grid > *,
+.git-pipeline > *,
+.files-grid > * {
+  animation-delay: calc(var(--stagger-index) * 60ms);
+}
+
+
+
+/* --------------------------------------------------------------------------
+   Diagramme gitGraph — Mermaid
+   -------------------------------------------------------------------------- */
+.git-graph-wrapper {
+  margin-top: 40px;
+  padding: 32px;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: var(--radius-lg);
+}
+
+/* --------------------------------------------------------------------------
+   Note tarifaire sous l'arbre de décision
+   -------------------------------------------------------------------------- */
+.tree-note {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Accessibilité — Réduire le mouvement
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg-decor,
+  .homepage__hero::before,
+  .about__hero::after {
+    opacity: 0.06;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mermaid — Épaisseur des arêtes (flowchart edges)
+   -------------------------------------------------------------------------- */
+::ng-deep .mermaid {
+  .flowchart-link {
+    stroke-width: 3px !important;
+  }
+}
+
+/* Badge ambré pour MEDIUM/FULL dans le tableau pré-search */
+.pre-search__badge--amber {
+  ::ng-deep .ui-badge {
+    color: var(--color-accent) !important;
+    border-color: rgba(196, 120, 13, 0.4) !important;
+    background: rgba(196, 120, 13, 0.08) !important;
+  }
+}

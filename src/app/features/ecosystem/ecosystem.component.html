@@ -1,0 +1,176 @@
+<!-- ==========================================================================
+     Page Écosystème — 5 sections Apple-grade
+     Palette 6 couleurs exclusive, dark mode, Cabinet Grotesk + Satoshi
+     ========================================================================== -->
+
+<!-- ======================================================================
+     État : Erreur
+     ====================================================================== -->
+@if (error()) {
+  <div class="error-state">
+    <span class="error-state__icon">⚠️</span>
+    <h2 class="error-state__title">Une erreur est survenue</h2>
+    <p class="error-state__message">{{ error() }}</p>
+    <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
+  </div>
+}
+
+<!-- ======================================================================
+     Contenu principal
+     ====================================================================== -->
+@if (!error()) {
+  <main class="page">
+
+    <!-- ================================================================
+         Section 1 — Hero
+         ================================================================ -->
+    <section class="hero">
+      <div class="hero__bg-decor"></div>
+      <div class="hero__content">
+        <span class="hero__kicker reveal-on-scroll">Infrastructure</span>
+        <h1 class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">{{ heroTitle }}</h1>
+        <p class="hero__subtitle reveal-on-scroll">{{ heroSubtitle }}</p>
+
+      </div>
+
+    </section>
+
+    <!-- ================================================================
+         Section 2 — Structure .opencode/
+         ================================================================ -->
+    <section class="directory-section" id="structure">
+      <div class="section-header">
+        <span class="section-header__kicker">Architecture</span>
+        <h2 class="section-header__title">Structure .opencode/</h2>
+        <p class="section-header__description">
+          Le répertoire racine contient l'intégralité de la configuration de la Swarm. Chaque fichier et dossier a un rôle précis dans l'orchestration du pipeline de développement.
+        </p>
+      </div>
+
+      <div class="tree-container">
+        @for (entry of directoryTree; track entry.name; let i = $index) {
+          <div class="dir-card">
+            <div class="dir-card__header">
+              <span class="dir-card__icon">{{ entry.icon }}</span>
+              <span class="dir-card__name">{{ entry.name }}</span>
+              @if (entry.badge) {
+                <app-ui-badge variant="default" size="sm">{{ entry.badge }}</app-ui-badge>
+              }
+            </div>
+            <p class="dir-card__description">{{ entry.description }}</p>
+
+            @if (entry.children) {
+              <div class="dir-card__children">
+                @for (child of entry.children; track child.name; let ci = $index) {
+                  <div class="dir-card__child">
+                    <span class="dir-card__child-icon">{{ child.icon }}</span>
+                    <div class="dir-card__child-content">
+                      <span class="dir-card__child-name">{{ child.name }}</span>
+                      <span class="dir-card__child-desc">{{ child.description }}</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- ================================================================
+         Section 3 — swarm-workflow.json décortiqué
+         ================================================================ -->
+    <section class="config-section section--alt" id="workflow-config">
+      <div class="section-header">
+        <span class="section-header__kicker">Configuration</span>
+        <h2 class="section-header__title">swarm-workflow.json</h2>
+        <p class="section-header__description">
+          Le fichier JSON central qui pilote l'ensemble du comportement de la Swarm. Chaque paramètre contrôle un aspect précis à travers 4 catégories. Extrait — 20 champs affichés sur ~40. Configuration complète dans <code>~/.opencode/swarm-workflow.json</code>.
+        </p>
+      </div>
+
+      <div class="config-grid">
+        @for (category of workflowCategories; track category.name; let ci = $index) {
+          <div class="config-category">
+            <div class="config-category__header">
+              <span class="config-category__icon">{{ category.icon }}</span>
+              <div class="config-category__titles">
+                <h3 class="config-category__name">{{ category.name }}</h3>
+                <p class="config-category__desc">{{ category.description }}</p>
+              </div>
+            </div>
+
+            <div class="config-fields">
+              @for (field of category.fields; track field.path; let fi = $index) {
+                <div class="config-field">
+                  <div class="config-field__row">
+                    <span class="config-field__label">{{ field.label }}</span>
+                    <span class="config-field__value config-field__value--{{ field.type }}">{{ field.value }}</span>
+                  </div>
+                  <p class="config-field__desc">{{ field.description }}</p>
+                  <code class="config-field__path">{{ field.path }}</code>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- ================================================================
+         Section 4 — AGENTS.md
+         ================================================================ -->
+    <section class="agentsmd-section" id="agents-md">
+      <div class="section-header">
+        <span class="section-header__kicker">Documentation vivante</span>
+        <h2 class="section-header__title">AGENTS.md</h2>
+        <p class="section-header__description">
+          Le fichier <code>AGENTS.md</code> (~400 lignes) est la bible du projet —
+          stack technique, conventions de code, palette de couleurs, protocole
+          comportemental et checklist de livraison. Il est lu par l'orchestrateur
+          à chaque exécution et définit l'intégralité des règles que tous les
+          agents doivent respecter. Le contenu complet est disponible dans le
+          dépôt du projet.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         Section 5 — Architecture Globale
+         ================================================================ -->
+    <section class="architecture-section section--alt" id="architecture">
+      <div class="section-header">
+        <span class="section-header__kicker">Vue d'ensemble</span>
+        <h2 class="section-header__title">Architecture Globale</h2>
+        <p class="section-header__description">
+          Le diagramme ci-dessous illustre l'ensemble du pipeline : de l'IDE aux intégrations MCP, en passant par les agents, les gates qualité et la documentation.
+        </p>
+      </div>
+
+      <div class="mermaid-wrapper">
+        <app-markdown-renderer [content]="mermaidDiagram" [enableMermaid]="true"></app-markdown-renderer>
+      </div>
+
+      <div class="integrations-grid">
+        @for (integration of integrations; track integration.name; let ii = $index) {
+          <div class="integration-card">
+            <div class="integration-card__header">
+              <span class="integration-card__icon">{{ integration.icon }}</span>
+              <div class="integration-card__titles">
+                <h3 class="integration-card__name">{{ integration.name }}</h3>
+                <span class="integration-card__provider">{{ integration.provider }}</span>
+              </div>
+            </div>
+            <p class="integration-card__description">{{ integration.description }}</p>
+            <ul class="integration-card__features">
+              @for (feature of integration.features; track feature) {
+                <li class="integration-card__feature">{{ feature }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    </section>
+
+  </main>
+}

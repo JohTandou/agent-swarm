@@ -1,0 +1,770 @@
+/* ==========================================================================
+   Page Problème & Innovation — Styles Apple-grade
+   Palette 6 couleurs exclusive, dark mode, Cabinet Grotesk + Satoshi
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Variables de layout locales
+   -------------------------------------------------------------------------- */
+$content-max: 1100px;
+$section-padding: 100px 24px;
+$section-padding-mobile: 64px 20px;
+
+/* ==========================================================================
+   Section Header — Kicker + titre gradient
+   ========================================================================== */
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 64px;
+
+  &__kicker {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__description {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+}
+
+/* ==========================================================================
+   Alternance sections sombres
+   ========================================================================== */
+.page > .section--alt {
+  background: var(--color-bg-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   Page — Conteneur principal
+   -------------------------------------------------------------------------- */
+.page {
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+}
+
+/* ==========================================================================
+   Utilitaires d'animation
+   ========================================================================== */
+
+/* Les éléments marqués .reveal-on-scroll sont masqués jusqu'à l'intersection */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms var(--ease-spring), transform 600ms var(--ease-spring);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger manuel via animation-delay inline (géré dans le template) */
+
+/* ==========================================================================
+   État : Erreur
+   ========================================================================== */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  text-align: center;
+  padding: $section-padding;
+  gap: 16px;
+}
+
+.error-state__icon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.error-state__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.error-state__message {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+  max-width: 500px;
+  line-height: 1.7;
+}
+
+
+/* ==========================================================================
+   Section 1 — Hero
+   ========================================================================== */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px 64px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero__bg-decor {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to bottom, rgba(28, 24, 18, 0.35) 0%, transparent 50%),
+    url('/assets/images/problem-innovation-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.20;
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+}
+
+.hero__kicker {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin-bottom: 24px;
+}
+
+.hero__subtitle {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Section 2 — Avant / Après
+   ========================================================================== */
+.comparison {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.comparison__list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+/* Carte de comparaison */
+.comparison-card {
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 16px;
+  padding: 36px 40px;
+  transition: border-color 300ms var(--ease-natural), box-shadow 300ms var(--ease-natural);
+
+  &:hover {
+    border-color: rgba(196, 120, 13, 0.25);
+    box-shadow: 0 0 0 1px rgba(122, 136, 153, 0.2), 0 0 20px rgba(196, 120, 13, 0.04);
+  }
+}
+
+.comparison-card__label {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin-bottom: 20px;
+}
+
+.comparison-card__columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.comparison-card__col-label {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.comparison-card__col--before .comparison-card__col-label {
+  color: var(--color-accent);
+  opacity: 0.85;
+}
+
+.comparison-card__col--after .comparison-card__col-label {
+  color: var(--color-accent);
+}
+
+.comparison-card__text {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.comparison-card__improvement {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(122, 136, 153, 0.1);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comparison-card__improvement-icon {
+  font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   Section 3 — 7 piliers d'innovation
+   ========================================================================== */
+.pillars {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+/* Ligne verticale décorative */
+.pillars::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 200px;
+  bottom: 80px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(196, 120, 13, 0.2),
+    rgba(196, 120, 13, 0.2),
+    transparent
+  );
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.pillars__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+/* Carte pilier */
+.pillar-card {
+  position: relative;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 14px;
+  padding: 28px 32px 28px 80px;
+  transition: border-color 300ms var(--ease-natural), transform 250ms var(--ease-natural), box-shadow 300ms var(--ease-natural);
+
+  &:hover {
+    border-color: rgba(196, 120, 13, 0.2);
+    transform: translateX(6px);
+    box-shadow: 0 0 24px rgba(196, 120, 13, 0.04);
+  }
+}
+
+.pillar-card__number {
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  opacity: 0.35;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.pillar-card__title {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+
+.pillar-card__description {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Section 4 — Analyse des coûts
+   ========================================================================== */
+.costs {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.costs__table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 32px;
+}
+
+.costs__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.costs__table thead th {
+  padding: 14px 20px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  text-align: left;
+  border-bottom: 1px solid rgba(122, 136, 153, 0.2);
+}
+
+.costs__table tbody td {
+  padding: 16px 20px;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid rgba(122, 136, 153, 0.08);
+}
+
+.costs__badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(196, 120, 13, 0.12);
+  color: var(--color-accent);
+}
+
+.costs__cell-mono {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--color-text-primary) !important;
+}
+
+.costs__cell-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-accent) !important;
+}
+
+.costs__note {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Section 5 — Modèles d'IA
+   ========================================================================== */
+.models {
+  position: relative;
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.models__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.model-card {
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 16px;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  transition: border-color 300ms var(--ease-natural), box-shadow 300ms var(--ease-natural);
+}
+
+.model-card:hover {
+  border-color: rgba(196, 120, 13, 0.2);
+  box-shadow: 0 0 24px rgba(196, 120, 13, 0.04);
+}
+
+.model-card--heavy {
+  border-top: 3px solid var(--color-accent);
+}
+
+.model-card--light {
+  border-top: 3px solid rgba(196, 120, 13, 0.4);
+}
+
+.model-card__icon {
+  font-size: 2rem;
+  margin-bottom: 4px;
+}
+
+.model-card__name {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.model-card__role {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.model-card__description {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.model-card__cost {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.models__conclusion {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Section 6 — Limites du système
+   ========================================================================== */
+.limits {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.limits__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.limit-card {
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 14px;
+  padding: 32px 28px;
+  transition: border-color 300ms var(--ease-natural);
+}
+
+.limit-card:hover {
+  border-color: rgba(122, 136, 153, 0.25);
+}
+
+.limit-card__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(122, 136, 153, 0.1);
+}
+
+.limit-card__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.limit-card__item {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  padding-left: 18px;
+  position: relative;
+
+  &::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-secondary);
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   Responsive — Mobile
+   ========================================================================== */
+@media (max-width: 768px) {
+  .comparison-card__columns {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .pillars::before {
+    display: none;
+  }
+
+  .pillar-card {
+    padding: 24px 24px 24px 64px;
+  }
+
+  .pillar-card__number {
+    left: 20px;
+  }
+
+  .models__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .limits__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Accessibilité — Reduced motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Stagger animation delay */
+.comparison__list > *,
+.pillars__grid > *,
+.limits__grid > * {
+  animation-delay: calc(var(--stagger-index) * 60ms);
+}
+
+/* --------------------------------------------------------------------------
+   Image comparaison coûts — GPT Image 2.0
+   -------------------------------------------------------------------------- */
+.pi__cost-bg {
+  margin-top: 48px;
+  width: 100%;
+  height: 220px;
+  background-image: url('/assets/images/cost-comparison.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.90;
+}
+
+/* ==========================================================================
+   Tableau comparatif Swarm vs Claude
+   ========================================================================== */
+.costs__comparison-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-text-primary);
+  margin: 40px 0 20px;
+  text-align: center;
+}
+
+.costs__comparison-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.costs__comparison-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid rgba(196, 120, 13, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--color-bg-elevated);
+  box-shadow: 0 0 20px rgba(196, 120, 13, 0.03);
+  font-size: 0.875rem;
+
+  thead th {
+    padding: 14px 16px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent);
+    background: rgba(196, 120, 13, 0.06);
+    border-bottom: 2px solid rgba(196, 120, 13, 0.25);
+    text-align: left;
+
+    &:first-child {
+      border-top-left-radius: 12px;
+      width: 35%;
+    }
+
+    &:last-child {
+      border-top-right-radius: 12px;
+    }
+  }
+
+  tbody {
+    tr {
+      transition: background 200ms ease-out;
+
+      &:hover {
+        background: rgba(196, 120, 13, 0.04);
+      }
+
+      &:not(:last-child) td {
+        border-bottom: 1px solid rgba(122, 136, 153, 0.1);
+      }
+
+      td {
+        padding: 12px 16px;
+        line-height: 1.5;
+        color: var(--color-text-secondary);
+        vertical-align: middle;
+      }
+    }
+
+    .costs__comparison-row--alt td {
+      background: rgba(74, 69, 64, 0.2);
+    }
+  }
+
+  .costs__comparison-label-cell {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: 0.8125rem;
+  }
+
+  .costs__comparison-col--swarm,
+  .costs__comparison-cell--swarm {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+}
+
+.costs__comparison-note {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  text-align: center;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Accessibilité — Réduire le mouvement (images décoratives)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg-decor,
+  .homepage__hero::before,
+  .about__hero::after,
+  .pi__cost-bg {
+    opacity: 0.06;
+  }
+}

@@ -1,0 +1,144 @@
+<!-- ==========================================================================
+     Page Outils MCP — Composant pur Apple-grade
+     Gère 4 états : loading, error, success, empty
+     ========================================================================== -->
+
+<section class="mcp-tools" aria-label="Outils MCP">
+
+  <!-- ====================================================================
+       ÉTAT : Erreur — Message + action de retry
+       ==================================================================== -->
+  @if (error()) {
+    <div class="mcp-tools__error" role="alert">
+      <div class="mcp-error__content">
+        <span class="mcp-error__icon" aria-hidden="true">⚠️</span>
+        <h2 class="mcp-error__title">Catégorie introuvable</h2>
+        <p class="mcp-error__message">{{ error() }}</p>
+        <div class="mcp-error__actions">
+          <a class="mcp-error__link" routerLink="/outils-mcp/supabase">
+            Voir les outils Supabase
+          </a>
+          <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- ====================================================================
+       ÉTAT : Succès — Contenu complet
+       ==================================================================== -->
+  @else {
+    <div class="mcp-tools__content">
+    <!-- Navigation entre catégories -->
+    <nav class="mcp-tools__nav" aria-label="Catégories d'outils MCP">
+      @for (cat of categories; track cat) {
+        <a
+          class="mcp-nav__tab"
+          [class.mcp-nav__tab--active]="categoryId() === cat"
+          [routerLink]="['/outils-mcp', cat]"
+          [attr.aria-current]="categoryId() === cat ? 'page' : undefined"
+        >
+          <span class="mcp-nav__tab-icon" aria-hidden="true">
+            @switch (cat) {
+              @case ('supabase') { 🗄️ }
+              @case ('vercel') { ▲ }
+              @case ('render') { ⚡ }
+              @case ('playwright') { 🎭 }
+              @case ('context7') { 📚 }
+              @case ('magic') { 🪄 }
+            }
+          </span>
+          <span class="mcp-nav__tab-label">
+            @switch (cat) {
+              @case ('supabase') { Supabase }
+              @case ('vercel') { Vercel }
+              @case ('render') { Render }
+              @case ('playwright') { Playwright }
+              @case ('context7') { Context7 }
+              @case ('magic') { 21st.dev }
+            }
+          </span>
+          <span class="mcp-nav__tab-count">
+            @switch (cat) {
+              @case ('supabase') { 10 }
+              @case ('vercel') { 18 }
+              @case ('render') { 9 }
+              @case ('playwright') { 10 }
+              @case ('context7') { 1 }
+              @case ('magic') { 1 }
+            }
+          </span>
+        </a>
+      }
+    </nav>
+
+    <!-- Header de catégorie -->
+    @if (categoryData(); as data) {
+      <header class="mcp-tools__header">
+        <div class="mcp-header__icon" aria-hidden="true">{{ data.icon }}</div>
+        <div class="mcp-header__text">
+          <h1 class="mcp-header__title">{{ data.label }}</h1>
+          <p class="mcp-header__description">{{ data.description }}</p>
+          <p class="mcp-header__count">
+            {{ data.tools.length }} outil{{ data.tools.length > 1 ? 's' : '' }} MCP disponible{{ data.tools.length > 1 ? 's' : '' }}
+          </p>
+        </div>
+      </header>
+
+      <!-- Tableau des outils -->
+      <div class="mcp-tools__table-wrapper">
+        <table
+          class="mcp-tools__table"
+          [attr.aria-label]="'Liste des outils ' + data.label"
+        >
+          <thead class="mcp-table__head">
+            <tr>
+              <th scope="col">Outil</th>
+              <th scope="col">Description</th>
+              <th scope="col">Paramètres</th>
+            </tr>
+          </thead>
+          <tbody class="mcp-table__body" [appStaggerChildren]="60">
+            @for (tool of data.tools; track tool.name; let idx = $index) {
+              <tr
+                class="mcp-table__row"
+                [style.animation-delay]="(idx * 60) + 'ms'"
+              >
+                <td class="mcp-table__cell mcp-table__cell--name">
+                  <code class="mcp-table__tool-name">{{ displayToolName(tool) }}</code>
+                </td>
+                <td class="mcp-table__cell mcp-table__cell--desc">
+                  {{ tool.description }}
+                </td>
+                <td class="mcp-table__cell mcp-table__cell--params">
+                  @if (tool.params.length > 0) {
+                    @for (param of tool.params; track param) {
+                      <app-ui-badge variant="default" size="sm">{{ param }}</app-ui-badge>
+                    }
+                  } @else {
+                    <span class="mcp-table__param-empty">—</span>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Exemple d'utilisation -->
+      <section class="mcp-tools__example" aria-label="Exemple d'utilisation">
+        <h2 class="mcp-example__title">Exemple d'utilisation</h2>
+        <p class="mcp-example__subtitle">
+          Cas concret avec les outils {{ data.label }}
+        </p>
+        <div class="mcp-example__code-wrapper">
+          <pre class="mcp-example__code"><code>{{ data.exampleCode }}</code></pre>
+        </div>
+      </section>
+
+
+    }
+    </div>
+  }
+
+</section>

@@ -1,0 +1,29 @@
+<section class="not-found">
+  <img
+    src="/assets/images/not-found-hex.png"
+    alt=""
+    class="not-found__illustration"
+    aria-hidden="true"
+  />
+
+  <!-- Contenu principal -->
+  <div class="not-found__content">
+    <h1 class="not-found__code">404</h1>
+    <p class="not-found__message">
+      Cette page s'est perdue dans la Swarm. Les agents sont à sa recherche.
+    </p>
+
+    <nav class="not-found__actions" aria-label="Navigation depuis la page 404">
+      <app-ui-button variant="accent" size="lg" routerLink="/">
+        Retour à la ruche
+      </app-ui-button>
+      <app-ui-button variant="outline" size="lg" routerLink="/agents">
+        Explorer les agents
+      </app-ui-button>
+    </nav>
+
+    <p class="not-found__credit">
+      Les agents de <a href="https://github.com/JohTandou" rel="me" target="_blank" class="not-found__credit-link">Joh Tandou</a> sont toujours à la recherche de cette page.
+    </p>
+  </div>
+</section>

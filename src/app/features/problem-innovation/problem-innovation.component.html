@@ -1,0 +1,182 @@
+<!-- ==========================================================================
+     Page Problème & Innovation — Template Apple-grade
+     7 sections, animations au scroll, dark mode exclusif
+     ========================================================================== -->
+
+<!-- --------------------------------------------------------------------------
+     État : Erreur
+     -------------------------------------------------------------------------- -->
+@if (error()) {
+<div class="error-state" role="alert">
+  <div class="error-state__icon">⚠️</div>
+  <h2 class="error-state__title">Impossible de charger la page</h2>
+  <p class="error-state__message">{{ error() }}</p>
+  <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
+</div>
+}
+
+<!-- --------------------------------------------------------------------------
+     État : Succès — Contenu principal
+     -------------------------------------------------------------------------- -->
+@if (!error()) {
+<div class="page">
+
+  <!-- =======================================================================
+       Section 1 — Hero
+       ======================================================================= -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__bg-decor" aria-hidden="true"></div>
+    <div class="hero__content">
+      <span class="hero__kicker reveal-on-scroll">Constat &amp; Vision</span>
+      <h1 id="hero-title" class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">{{ heroTitle }}</h1>
+      <p class="hero__subtitle reveal-on-scroll">{{ heroSubtitle }}</p>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 2 — Avant / Après
+       ======================================================================= -->
+  <section class="comparison" aria-labelledby="comparison-title">
+    <div class="section-header">
+      <span class="section-header__kicker">Avant / Après</span>
+      <h2 class="section-header__title">Développer sans la Swarm,<br>puis avec</h2>
+      <p class="section-header__description">Quatre dimensions critiques où la Swarm transforme radicalement le cycle de développement.</p>
+    </div>
+
+    <div class="comparison__list">
+      @for (item of comparisonData; track item.label; let idx = $index) {
+      <article class="comparison-card">
+        <h3 class="comparison-card__label">{{ item.label }}</h3>
+        <div class="comparison-card__columns">
+          <div class="comparison-card__col comparison-card__col--before">
+            <span class="comparison-card__col-label">Sans la Swarm</span>
+            <p class="comparison-card__text">{{ item.withoutSwarm }}</p>
+          </div>
+          <div class="comparison-card__col comparison-card__col--after">
+            <span class="comparison-card__col-label">Avec la Swarm</span>
+            <p class="comparison-card__text">{{ item.withSwarm }}</p>
+          </div>
+        </div>
+        <div class="comparison-card__improvement">
+          <span class="comparison-card__improvement-icon">✦</span>
+          <span>{{ item.improvement }}</span>
+        </div>
+      </article>
+      }
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 3 — 7 piliers d'innovation
+       ======================================================================= -->
+  <section class="pillars section--alt" aria-labelledby="pillars-title">
+    <div class="section-header">
+      <span class="section-header__kicker">Innovation</span>
+      <h2 class="section-header__title">Les 7 piliers<br>d'innovation</h2>
+      <p class="section-header__description">Chaque pilier résout un problème structurel du développement logiciel assisté par IA.</p>
+    </div>
+
+    <div class="pillars__grid">
+      @for (pillar of pillars; track pillar.title; let idx = $index) {
+      <article
+        class="pillar-card"
+      >
+        <span class="pillar-card__number" aria-hidden="true">{{ idx + 1 }}</span>
+        <h3 class="pillar-card__title">{{ pillar.title }}</h3>
+        <p class="pillar-card__description">{{ pillar.description }}</p>
+      </article>
+      }
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 4 — Analyse des coûts
+       ======================================================================= -->
+  <section class="costs" aria-labelledby="costs-title">
+    <div class="section-header">
+      <span class="section-header__kicker">Transparence</span>
+      <h2 class="section-header__title">Analyse des coûts</h2>
+      <p class="section-header__description">Transparence totale sur l'économie de la Swarm. Chaque session a un coût prévisible, proportionnel à sa complexité.</p>
+    </div>
+
+    <h3 class="costs__comparison-title">Swarm vs Claude Pro vs Claude Max</h3>
+
+    <div class="costs__comparison-table-wrapper">
+      <table class="costs__comparison-table" role="table">
+        <thead>
+          <tr>
+            <th scope="col">Capacité</th>
+            <th scope="col" class="costs__comparison-col--swarm">Swarm</th>
+            <th scope="col">Claude Pro</th>
+            <th scope="col">Claude Max</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of claudeComparisonRows; track row.label; let idx = $index) {
+          <tr [class.costs__comparison-row--alt]="idx % 2 === 1">
+            <td class="costs__comparison-label-cell">{{ row.label }}</td>
+            <td class="costs__comparison-cell--swarm">{{ row.swarm }}</td>
+            <td>{{ row.claudePro }}</td>
+            <td>{{ row.claudeMax }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p class="costs__comparison-note">{{ claudeComparisonNote }}</p>
+
+  </section>
+
+  <!-- =======================================================================
+       Section 5 — Modèle d'IA
+       ======================================================================= -->
+  <section class="models section--alt" aria-labelledby="models-title">
+    <div class="section-header">
+      <span class="section-header__kicker">Raisonnement</span>
+      <h2 class="section-header__title">Modèle d'IA</h2>
+      <p class="section-header__description">Tous les agents de la Swarm utilisent le même modèle. Pas de dégradation — chaque agent bénéficie de la pleine puissance du raisonnement.</p>
+    </div>
+
+    <div class="models__grid models__grid--single">
+      <article class="model-card model-card--heavy">
+        <div class="model-card__icon" aria-hidden="true">🧠</div>
+        <h3 class="model-card__name">{{ modelInfo.name }}</h3>
+        <p class="model-card__description">{{ modelInfo.description }}</p>
+        <ul class="model-card__strengths">
+          <li>Contexte de 1M tokens</li>
+          <li>Raisonnement architectural</li>
+          <li>Génération de code</li>
+          <li>Analyse de codebase</li>
+        </ul>
+        <span class="model-card__cost">{{ modelInfo.costNote }}</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       Section 6 — Limites du système
+       ======================================================================= -->
+  <section class="limits" aria-labelledby="limits-title">
+    <div class="section-header">
+      <span class="section-header__kicker">Honnêteté</span>
+      <h2 class="section-header__title">Limites du système</h2>
+      <p class="section-header__description">Un système honnête expose ses limites. Voici ce que la Swarm ne fait pas — ou pas encore.</p>
+    </div>
+
+    <div class="limits__grid">
+      @for (category of limits; track category.category; let idx = $index) {
+      <article class="limit-card">
+        <h3 class="limit-card__title">{{ category.category }}</h3>
+        <ul class="limit-card__list">
+          @for (item of category.items; track item) {
+          <li class="limit-card__item">{{ item }}</li>
+          }
+        </ul>
+      </article>
+      }
+    </div>
+  </section>
+
+</div>
+}

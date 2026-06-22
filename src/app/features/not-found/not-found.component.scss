@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Page 404 — Styles
+   Dark mode exclusif, palette 6 couleurs
+   ========================================================================== */
+
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  background: var(--color-bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Hexagone décoratif — centré en arrière-plan, opacité très basse
+   -------------------------------------------------------------------------- */
+.not-found__illustration {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 400px;
+  max-width: 85vw;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.30;
+  pointer-events: none;
+}
+
+
+/* --------------------------------------------------------------------------
+   Contenu centré
+   -------------------------------------------------------------------------- */
+.not-found__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  max-width: 560px;
+}
+
+/* --------------------------------------------------------------------------
+   "404" — Cabinet Grotesk Extrabold, dégradé ambré sur le texte
+   -------------------------------------------------------------------------- */
+.not-found__code {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(5rem, 12vw, 8rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    var(--color-text-primary) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   Message — Satoshi, texte secondaire
+   -------------------------------------------------------------------------- */
+.not-found__message {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin: 24px 0 40px;
+  max-width: 400px;
+}
+
+/* --------------------------------------------------------------------------
+   Actions — boutons côte à côte
+   -------------------------------------------------------------------------- */
+.not-found__actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive — mobile < 768px
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .not-found__code {
+    font-size: 5rem;
+  }
+
+  .not-found__message {
+    font-size: 0.9375rem;
+    margin: 20px 0 32px;
+  }
+
+  .not-found__illustration {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Accessibilité — Réduire le mouvement
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .not-found__illustration {
+    opacity: 0.06;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Crédit discret — signature Joh Tandou
+   -------------------------------------------------------------------------- */
+.not-found__credit {
+  margin-top: 32px;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+
+  &-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 200ms ease;
+
+    &:hover {
+      color: var(--color-text-primary);
+    }
+  }
+}

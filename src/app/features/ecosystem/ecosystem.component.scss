@@ -1,0 +1,630 @@
+/* ==========================================================================
+   Page Écosystème — Styles Apple-grade
+   Palette 6 couleurs exclusive, dark mode, Cabinet Grotesk + Satoshi
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Variables locales
+   -------------------------------------------------------------------------- */
+$ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+$ease-natural: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+$content-max: 1100px;
+$section-padding: 100px 24px;
+$section-padding-mobile: 64px 20px;
+
+/* ==========================================================================
+   Alternance sections sombres
+   ========================================================================== */
+.page > .section--alt {
+  background: var(--color-bg-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   Page — Conteneur principal
+   -------------------------------------------------------------------------- */
+.page {
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+}
+
+/* ==========================================================================
+   Utilitaires d'animation
+   ========================================================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms $ease-spring, transform 600ms $ease-spring;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   État : Erreur
+   ========================================================================== */
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 64px 24px;
+  text-align: center;
+  gap: 16px;
+
+  &__icon { font-size: 3rem; }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-text-primary);
+  }
+
+  &__message {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    max-width: 480px;
+  }
+
+}
+
+/* ==========================================================================
+   Section Header (commun à toutes les sections)
+   ========================================================================== */
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 64px;
+
+  &__kicker {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__description {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+}
+
+/* ==========================================================================
+   Section 1 — Hero
+   ========================================================================== */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px 64px;
+  position: relative;
+  overflow: hidden;
+
+  &__bg-decor {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to bottom, rgba(28, 24, 18, 0.35) 0%, transparent 50%),
+      url('/assets/images/ecosystem-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.20;
+    pointer-events: none;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  &__kicker {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+    margin-bottom: 24px;
+  }
+
+  &__subtitle {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+
+
+
+}
+
+
+/* ==========================================================================
+   Section 2 — Structure .opencode/ (arborescence)
+   ========================================================================== */
+
+.directory-section {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tree-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Carte de répertoire */
+.dir-card {
+  padding: 28px 32px;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 16px;
+  border-left: 3px solid transparent;
+  transition: border-color 300ms $ease-natural, box-shadow 300ms $ease-natural, border-left-color 300ms $ease-natural;
+
+  &:hover {
+    border-color: rgba(196, 120, 13, 0.15);
+    border-left-color: var(--color-accent);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  &__description {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 0;
+  }
+
+  &__children {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(122, 136, 153, 0.08);
+  }
+
+  &__child {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: background 200ms ease-out;
+
+    &:hover {
+      background: rgba(196, 120, 13, 0.04);
+    }
+  }
+
+  &__child-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  &__child-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__child-name {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--color-accent);
+  }
+
+  &__child-desc {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+  }
+}
+
+/* ==========================================================================
+   Section 3 — swarm-workflow.json
+   ========================================================================== */
+
+.config-section {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.config-category {
+  padding: 32px;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 16px;
+  transition: border-color 300ms $ease-natural, box-shadow 300ms $ease-natural;
+
+  &:hover {
+    border-color: rgba(196, 120, 13, 0.2);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(122, 136, 153, 0.08);
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+  }
+
+  &__titles {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  &__desc {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+  }
+}
+
+.config-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.config-field {
+  padding: 12px 14px;
+  background: var(--color-bg-subtle);
+  border-radius: 10px;
+  border: 1px solid rgba(122, 136, 153, 0.06);
+  transition: border-color 200ms ease-out;
+
+  &:hover {
+    border-color: rgba(196, 120, 13, 0.12);
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  &__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    color: var(--color-text-primary);
+  }
+
+  &__value {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    &--boolean {
+      background: rgba(196, 120, 13, 0.1);
+      color: var(--color-accent);
+    }
+
+    &--number {
+      background: rgba(122, 136, 153, 0.1);
+      color: var(--color-text-primary);
+    }
+
+    &--string {
+      background: rgba(122, 136, 153, 0.08);
+      color: var(--color-text-secondary);
+    }
+  }
+
+  &__desc {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+  }
+
+  &__path {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    color: var(--color-text-secondary);
+    opacity: 0.5;
+    background: none;
+    padding: 0;
+  }
+}
+
+/* ==========================================================================
+   Section 4 — AGENTS.md
+   ========================================================================== */
+
+.agentsmd-section {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ==========================================================================
+   Section 5 — Architecture Globale
+   ========================================================================== */
+
+.architecture-section {
+  padding: $section-padding;
+  max-width: $content-max;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.mermaid-wrapper {
+  padding: 48px 32px;
+  background: var(--color-bg-subtle);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 20px;
+  overflow-x: auto;
+  margin-bottom: 48px;
+  transition: border-color 600ms $ease-natural, box-shadow 600ms $ease-natural;
+
+  &:hover {
+    border-color: rgba(196, 120, 13, 0.15);
+    box-shadow: 0 0 30px rgba(196, 120, 13, 0.04);
+  }
+
+  ::ng-deep .markdown-body {
+    max-width: 100%;
+  }
+
+  ::ng-deep .mermaid-diagram {
+    margin: 0;
+  }
+
+  ::ng-deep .mermaid {
+    .flowchart-link {
+      stroke-width: 3px !important;
+    }
+  }
+}
+
+/* Grille d'intégrations */
+.integrations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.integration-card {
+  padding: 32px;
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(122, 136, 153, 0.12);
+  border-radius: 16px;
+  transition: border-color 300ms $ease-natural, box-shadow 300ms $ease-natural;
+
+  &:hover {
+    border-color: rgba(196, 120, 13, 0.2);
+    box-shadow: 0 0 20px rgba(196, 120, 13, 0.04);
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  &__icon {
+    font-size: 1.75rem;
+  }
+
+  &__titles {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  &__provider {
+    font-family: var(--font-display);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+  }
+
+  &__description {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+  }
+
+  &__features {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+  }
+
+  &__feature {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-subtle);
+    padding: 4px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(122, 136, 153, 0.08);
+  }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .config-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .integrations-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .mermaid-wrapper {
+    padding: 24px 16px;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .dir-card {
+    padding: 20px 24px;
+  }
+
+  .config-category {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .dir-card__header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .dir-card__badge {
+    margin-left: 0;
+  }
+}
+
+/* Stagger animation delay */
+.tree-container > *,
+.config-grid > *,
+.integrations-grid > * {
+  transition-delay: calc(var(--stagger-index) * 60ms);
+}
+
+/* --------------------------------------------------------------------------
+   Accessibilité — Réduire le mouvement
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg-decor,
+  .homepage__hero::before,
+  .about__hero::after {
+    opacity: 0.06;
+  }
+}

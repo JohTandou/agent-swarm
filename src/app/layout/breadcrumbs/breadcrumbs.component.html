@@ -1,0 +1,25 @@
+@if (breadcrumbs.length > 0) {
+  <nav class="breadcrumbs" aria-label="Fil d'Ariane">
+    <ol class="breadcrumbs__list">
+      @for (crumb of breadcrumbs; track crumb.label; let last = $last) {
+        <li class="breadcrumbs__item">
+          @if (!last && crumb.route !== undefined) {
+            <a
+              class="breadcrumbs__link"
+              [routerLink]="crumb.route"
+            >
+              {{ crumb.label }}
+            </a>
+          } @else {
+            <span class="breadcrumbs__current" aria-current="page">
+              {{ crumb.label }}
+            </span>
+          }
+          @if (!last) {
+            <span class="breadcrumbs__separator" aria-hidden="true">›</span>
+          }
+        </li>
+      }
+    </ol>
+  </nav>
+}
