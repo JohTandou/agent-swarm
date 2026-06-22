@@ -3,12 +3,13 @@ import { RouterLink } from '@angular/router';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { ToastService } from '@shared/services/toast.service';
+import { TranslationService } from '@shared/services/translation.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { UiEmptyStateComponent } from '@shared/components/ui-empty-state/ui-empty-state.component';
 import { JsonLdService } from '@shared/services/json-ld.service';
 import type { Agent, AgentCategory } from '@shared/models';
-import { AGENTS, CATEGORY_LABELS, ROUTE_COLORS } from '@shared/data/agents.data';
+import { AGENTS, ROUTE_COLORS } from '@shared/data/agents.data';
 
 /**
  * Page listing des agents Swarm — grille bento asymétrique.
@@ -26,6 +27,7 @@ import { AGENTS, CATEGORY_LABELS, ROUTE_COLORS } from '@shared/data/agents.data'
   styleUrls: ['./agents-list.component.scss'],
 })
 export class AgentsListComponent {
+  private readonly translate = inject(TranslationService);
   private readonly toastService = inject(ToastService);
   private readonly jsonLdService = inject(JsonLdService);
 
@@ -43,6 +45,11 @@ export class AgentsListComponent {
       description: agent.description,
     }));
     this.jsonLdService.addSchemas([this.jsonLdService.generateItemListSchema(itemListItems)]);
+  }
+
+  /** Raccourci pour les traductions dans le template */
+  t(key: string): string {
+    return this.translate.translate(key);
   }
 
   /** Agents filtrés selon la catégorie active */
@@ -66,17 +73,24 @@ export class AgentsListComponent {
   toggleCategory(category: AgentCategory): void {
     if (this.activeCategory() === category) {
       this.activeCategory.set(null);
-      this.toastService.show(`${this.agents.length} agents affichés`, 'info');
+      this.toastService.show(
+        this.translate.translate('toast.agents.all').replace('{n}', String(this.agents.length)),
+        'info',
+      );
     } else {
       this.activeCategory.set(category);
       const count = this.getCategoryCount(category);
-      this.toastService.show(`${count} agents trouvés — ${CATEGORY_LABELS[category]}`, 'success');
+      const categoryLabel = this.translate.translate('agents.category.' + category);
+      this.toastService.show(
+        this.translate.translate('toast.agents.filtered').replace('{n}', String(count)).replace('{category}', categoryLabel),
+        'success',
+      );
     }
   }
 
-  /** Retourne le label français pour une catégorie */
+  /** Retourne le label traduit pour une catégorie */
   getCategoryLabel(category: AgentCategory): string {
-    return CATEGORY_LABELS[category];
+    return this.translate.translate('agents.category.' + category);
   }
 
   /** Retourne la couleur associée à une route */
@@ -92,6 +106,9 @@ export class AgentsListComponent {
   /** Réinitialise tous les filtres — affiche tous les agents */
   resetFilters(): void {
     this.activeCategory.set(null);
-    this.toastService.show(`${this.agents.length} agents affichés`, 'info');
+    this.toastService.show(
+      this.translate.translate('toast.agents.all').replace('{n}', String(this.agents.length)),
+      'info',
+    );
   }
 }

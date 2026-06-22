@@ -32,10 +32,10 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   'skills': 'nav.skills',
   'workflow': 'nav.workflow',
   'probleme-innovation': 'nav.problem',
-  'normes': 'Standards',
+  'normes': 'breadcrumb.standards',
   'outils-mcp': 'nav.mcp',
   'a-propos': 'nav.about',
-  'demo-markdown': 'Démo Markdown',
+  'demo-markdown': 'breadcrumb.demo',
   'ecosysteme': 'nav.ecosystem',
 };
 
@@ -44,9 +44,9 @@ const BREADCRUMB_LABELS: Record<string, string> = {
  * Le deuxième segment après un préfixe connu prend ce label.
  */
 const DYNAMIC_LABELS: Record<string, string> = {
-  'agents': 'Agent',
-  'skills': 'Skill',
-  'outils-mcp': 'Catégorie',
+  'agents': 'breadcrumb.agent',
+  'skills': 'breadcrumb.skill',
+  'outils-mcp': 'breadcrumb.category',
 };
 
 /** Mapping fallback des segments FR → clé de traduction (nécessaire pour les URLs non-françaises) */
@@ -252,7 +252,7 @@ export class AppComponent implements OnInit, OnDestroy {
         label = this.translationService.translate(LABEL_MAP[segment]);
       } else if (i > 0 && !isLast && DYNAMIC_LABELS[segments[i - 1]]) {
         // Segment dynamique après un préfixe connu (ex: /agents/orchestrateur)
-        label = DYNAMIC_LABELS[segments[i - 1]];
+        label = this.translationService.translate(DYNAMIC_LABELS[segments[i - 1]]);
       } else {
         // Fallback : capitalise le segment
         label = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
@@ -290,7 +290,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (pageTitle) {
       const seoConfig: SeoConfig = {
         title: pageTitle,
-        description: pageDescription ?? 'Wiki technique du système Swarm — pipeline d\'agents IA orchestré pour le développement logiciel. Neuf agents spécialisés collaborent pour concevoir, implémenter, tester et documenter.',
+        description: pageDescription ?? this.translationService.translate('seo.defaultDescription'),
         author: 'Joh Tandou',
         image: 'https://swarm-wiki.vercel.app/assets/images/homepage-hero.jpg',
       };

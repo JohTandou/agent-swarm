@@ -25,7 +25,6 @@ describe('TranslationService', () => {
   });
 
   it('devrait traduire en français', () => {
-    setPathname('/');
     languageService.setLang('fr');
     expect(translationService.translate('nav.home')).toBe('Accueil');
     expect(translationService.translate('nav.agents')).toBe('Agents');
@@ -33,7 +32,6 @@ describe('TranslationService', () => {
   });
 
   it('devrait traduire en anglais', () => {
-    setPathname('/en/');
     languageService.setLang('en');
     expect(translationService.translate('nav.home')).toBe('Home');
     expect(translationService.translate('nav.agents')).toBe('Agents');

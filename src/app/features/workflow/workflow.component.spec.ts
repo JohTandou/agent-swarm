@@ -1,10 +1,12 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { WorkflowComponent } from './workflow.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideMarkdown, MERMAID_OPTIONS } from 'ngx-markdown';
 import { ContentService } from '../../shared/services/content.service';
+import { LanguageService } from '../../shared/services/language.service';
 
 describe('WorkflowComponent', () => {
   let component: WorkflowComponent;
@@ -33,6 +35,7 @@ describe('WorkflowComponent', () => {
           },
         }),
         ContentService,
+        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

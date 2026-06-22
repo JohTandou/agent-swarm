@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { convertToParamMap } from '@angular/router';
 import { McpToolsComponent } from './mcp-tools.component';
+import { LanguageService } from '../../shared/services/language.service';
 
 describe('McpToolsComponent', () => {
   let component: McpToolsComponent;
@@ -17,6 +19,7 @@ describe('McpToolsComponent', () => {
       imports: [McpToolsComponent],
       providers: [
         provideRouter([]),
+        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
         {
           provide: ActivatedRoute,
           useValue: { paramMap: paramMapSubject.asObservable() },

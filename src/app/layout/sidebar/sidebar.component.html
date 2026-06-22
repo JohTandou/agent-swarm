@@ -1,11 +1,11 @@
 <aside
   class="sidebar"
   role="navigation"
-  aria-label="Navigation principale"
+  [attr.aria-label]="t('sidebar.nav.ariaLabel')"
 >
   <!-- Bouton close mobile -->
   @if (isMobile) {
-    <app-ui-button variant="icon" size="md" (click)="closeSidebar.emit()" aria-label="Fermer le menu">
+    <app-ui-button variant="icon" size="md" (click)="closeSidebar.emit()" [attr.aria-label]="t('sidebar.close')">
       <span class="sidebar__close-icon" aria-hidden="true">✕</span>
     </app-ui-button>
   }
@@ -27,7 +27,7 @@
                   [class.sidebar__link--active]="isParentActive(item)"
                   (click)="toggleExpanded(item); isMobile && closeSidebar.emit()"
                   [attr.aria-expanded]="item.expanded"
-                  [attr.aria-label]="(item.expanded ? 'Réduire' : 'Déplier') + ' ' + translateNavLabel(item.label)"
+                  [attr.aria-label]="(item.expanded ? t('sidebar.collapse') : t('sidebar.expand')) + ' ' + translateNavLabel(item.label)"
                   type="button"
                 >
                   {{ translateNavLabel(item.label) }}
@@ -51,7 +51,7 @@
                   class="sidebar__expand-btn"
                   (click)="toggleExpanded(item)"
                   [attr.aria-expanded]="item.expanded"
-                  [attr.aria-label]="(item.expanded ? 'Réduire' : 'Déplier') + ' ' + translateNavLabel(item.label)"
+                  [attr.aria-label]="(item.expanded ? t('sidebar.collapse') : t('sidebar.expand')) + ' ' + translateNavLabel(item.label)"
                   type="button"
                 >
                   <span class="sidebar__chevron" aria-hidden="true">▼</span>
@@ -68,7 +68,7 @@
                       routerLinkActive="sidebar__link--active"
                       (click)="isMobile && closeSidebar.emit()"
                     >
-                      {{ child.label }}
+                      {{ translateNavLabel(child.label) }}
                     </a>
                   </li>
                 }

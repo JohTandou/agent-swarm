@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HomepageComponent } from './homepage.component';
+import { LanguageService } from '../../shared/services/language.service';
 
 describe('HomepageComponent', () => {
   let component: HomepageComponent;
@@ -11,7 +13,10 @@ describe('HomepageComponent', () => {
     sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [HomepageComponent],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+      ],
       /* SwarmGraphComponent charge D3 dynamiquement — ignoré en test unitaire */
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

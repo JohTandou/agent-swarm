@@ -9,9 +9,9 @@
 @if (error()) {
 <div class="error-state" role="alert">
   <div class="error-state__icon" aria-hidden="true">⚠️</div>
-  <h2 class="error-state__title">Impossible de charger la page</h2>
+  <h2 class="error-state__title">{{ t('workflow.pageLoadError') }}</h2>
   <p class="error-state__message">{{ error() }}</p>
-  <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
+  <app-ui-button variant="primary" size="md" (click)="retry()">{{ t('workflow.retry') }}</app-ui-button>
 </div>
 }
 

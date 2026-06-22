@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
+import { LanguageService } from '../../shared/services/language.service';
 import type { Breadcrumb } from '@shared/models';
 
 describe('BreadcrumbsComponent', () => {
@@ -16,7 +18,10 @@ describe('BreadcrumbsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BreadcrumbsComponent],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BreadcrumbsComponent);

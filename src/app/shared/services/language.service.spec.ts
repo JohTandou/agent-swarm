@@ -19,26 +19,30 @@ describe('LanguageService', () => {
     history.pushState({}, '', pathname);
   }
 
-  it('devrait détecter le français par défaut quand le pathname ne contient pas /en', () => {
-    setPathname('/');
+  /**
+   * Helper: définit la langue stockée dans sessionStorage avant création du service.
+   * Le service lit sessionStorage en premier (detectInitialLang),
+   * puis seulement window.location.pathname.
+   */
+  function presetStoredLang(lang: string | null): void {
+    sessionStorage.clear();
+    if (lang) sessionStorage.setItem('swarm-lang', lang);
+  }
+
+  it('devrait détecter le français par défaut quand rien n\'est stocké', () => {
+    presetStoredLang(null);
     const svc = TestBed.inject(LanguageService);
     expect(svc.currentLang()).toBe('fr');
   });
 
-  it('devrait détecter le français sur un pathname français', () => {
-    setPathname('/agents/orchestrateur');
+  it('devrait utiliser la langue stockée en session quand elle existe', () => {
+    presetStoredLang('fr');
     const svc = TestBed.inject(LanguageService);
     expect(svc.currentLang()).toBe('fr');
   });
 
-  it('devrait détecter l\'anglais quand le pathname commence par /en/', () => {
-    setPathname('/en/agents/orchestrator');
-    const svc = TestBed.inject(LanguageService);
-    expect(svc.currentLang()).toBe('en');
-  });
-
-  it('devrait détecter l\'anglais quand le pathname est exactement /en', () => {
-    setPathname('/en');
+  it('devrait détecter l\'anglais depuis le sessionStorage', () => {
+    presetStoredLang('en');
     const svc = TestBed.inject(LanguageService);
     expect(svc.currentLang()).toBe('en');
   });
@@ -58,7 +62,7 @@ describe('LanguageService', () => {
   });
 
   it('setLang devrait changer la langue courante', () => {
-    setPathname('/');
+    presetStoredLang('fr');
     const svc = TestBed.inject(LanguageService);
     expect(svc.currentLang()).toBe('fr');
     svc.setLang('en');
@@ -67,15 +71,24 @@ describe('LanguageService', () => {
     expect(svc.currentLang()).toBe('fr');
   });
 
+  it('devrait persister dans sessionStorage après setLang', () => {
+    presetStoredLang('fr');
+    const svc = TestBed.inject(LanguageService);
+    svc.setLang('en');
+    expect(sessionStorage.getItem('swarm-lang')).toBe('en');
+    svc.setLang('fr');
+    expect(sessionStorage.getItem('swarm-lang')).toBe('fr');
+  });
+
   it('langPrefix devrait retourner une chaîne vide pour le français', () => {
-    setPathname('/');
+    presetStoredLang('fr');
     const svc = TestBed.inject(LanguageService);
     svc.setLang('fr');
     expect(svc.langPrefix).toBe('');
   });
 
   it('langPrefix devrait retourner /en pour l\'anglais', () => {
-    setPathname('/');
+    presetStoredLang('fr');
     const svc = TestBed.inject(LanguageService);
     svc.setLang('en');
     expect(svc.langPrefix).toBe('/en');

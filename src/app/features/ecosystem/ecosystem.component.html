@@ -9,9 +9,9 @@
 @if (error()) {
   <div class="error-state">
     <span class="error-state__icon">⚠️</span>
-    <h2 class="error-state__title">Une erreur est survenue</h2>
+    <h2 class="error-state__title">{{ t('error.generic') }}</h2>
     <p class="error-state__message">{{ error() }}</p>
-    <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
+    <app-ui-button variant="primary" size="md" (click)="retry()">{{ t('error.retry') }}</app-ui-button>
   </div>
 }
 
@@ -152,7 +152,7 @@
       </div>
 
       <div class="integrations-grid">
-        @for (integration of integrations; track integration.name; let ii = $index) {
+         @for (integration of localizedIntegrations; track integration.name; let ii = $index) {
           <div class="integration-card">
             <div class="integration-card__header">
               <span class="integration-card__icon">{{ integration.icon }}</span>

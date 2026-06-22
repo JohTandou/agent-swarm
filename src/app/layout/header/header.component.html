@@ -8,7 +8,7 @@
         class="header__sidebar-btn"
         [class.header__sidebar-btn--open]="sidebarOpen"
         (click)="onToggleSidebar()"
-        [attr.aria-label]="sidebarOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
+        [attr.aria-label]="sidebarOpen ? t('header.sidebar.close') : t('header.sidebar.open')"
         [attr.aria-expanded]="sidebarOpen"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -19,7 +19,7 @@
       </button>
 
       <!-- Brand -->
-      <a routerLink="/" class="header__brand" aria-label="Swarm Wiki — Accueil">
+      <a routerLink="/" class="header__brand" [attr.aria-label]="t('header.brand.ariaLabel')">
         <img
           class="header__brand-logo"
           src="/assets/images/bee-logo-48.png"
@@ -33,9 +33,9 @@
 
     <!-- Navigation primaire desktop -->
     @if (!isMobile) {
-      <nav class="header__nav" aria-label="Navigation principale">
+      <nav class="header__nav" [attr.aria-label]="t('header.nav.main')">
         <a routerLink="/" class="header__nav-link" routerLinkActive="header__nav-link--active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">
-          Accueil
+          {{ t('nav.home') }}
         </a>
         <a [routerLink]="aboutRoute" class="header__nav-link" routerLinkActive="header__nav-link--active" ariaCurrentWhenActive="page">
           {{ langService.currentLang() === 'fr' ? 'À propos' : 'About' }}
@@ -49,22 +49,22 @@
       <button
         class="header__lang-switch"
         (click)="toggleLang()"
-        [attr.aria-label]="langService.currentLang() === 'fr' ? 'Switch to English' : 'Passer en français'"
-        [attr.title]="langService.currentLang() === 'fr' ? 'Switch to English' : 'Passer en français'"
+        [attr.aria-label]="langService.currentLang() === 'fr' ? t('nav.switchToEn') : t('nav.switchToFr')"
+        [attr.title]="langService.currentLang() === 'fr' ? t('nav.switchToEn') : t('nav.switchToFr')"
       >
-        {{ langService.currentLang() === 'fr' ? 'EN' : 'FR' }}
+        {{ langService.currentLang() === 'fr' ? t('lang.en') : t('lang.fr') }}
       </button>
       @if (!isMobile) {
-        <app-ui-button variant="ghost" size="md" (click)="onSearchClick()" aria-label="Rechercher (Cmd+K)" title="Rechercher (Cmd+K)">
+        <app-ui-button variant="ghost" size="md" (click)="onSearchClick()" [attr.aria-label]="t('header.search.ariaLabel')" [attr.title]="t('header.search.ariaLabel')">
           <svg class="header__search-icon" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16ZM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span class="header__search-text">Rechercher</span>
+          <span class="header__search-text">{{ t('header.search.text') }}</span>
           <kbd class="header__search-kbd">⌘K</kbd>
         </app-ui-button>
       }
       @if (isMobile) {
-        <app-ui-button variant="icon" size="md" (click)="onSearchClick()" aria-label="Rechercher">
+        <app-ui-button variant="icon" size="md" (click)="onSearchClick()" [attr.aria-label]="t('header.search.ariaLabel')">
           <svg class="header__search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16ZM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>

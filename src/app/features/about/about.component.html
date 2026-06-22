@@ -8,9 +8,7 @@
     <h1 class="about__title reveal-on-scroll" appTextReveal [revealDelay]="200">
       {{ t('about.title') }}
     </h1>
-    <p class="about__subtitle reveal-on-scroll">
-      Une architecture agentique, pensée pour le développement logiciel de bout en bout. Neuf agents spécialisés collaborent pour concevoir, implémenter, tester et documenter — comme une véritable équipe de développement.
-    </p>
+    <p class="about__subtitle reveal-on-scroll">{{ t('about.subtitle') }}</p>
   </header>
 
   <!-- =========================================================================
@@ -20,9 +18,9 @@
     <div class="about__section-grid">
       <div class="about__section-text">
         <div class="section-header">
-          <span class="section-header__kicker">Le constat</span>
-          <h2 class="section-header__title">Le développement moderne est fractal</h2>
-          <p class="section-header__description">Chaque fonctionnalité exige de naviguer entre une dizaine de contextes : types TypeScript, schémas de base de données, routes API, conventions UI, tests unitaires, E2E, documentation. La charge cognitive explose.</p>
+          <span class="section-header__kicker">{{ t('about.section.problemKicker') }}</span>
+          <h2 class="section-header__title">{{ t('about.section.problemTitle') }}</h2>
+          <p class="section-header__description">{{ t('about.section.problemDesc') }}</p>
         </div>
       </div>
     </div>
@@ -35,17 +33,11 @@
     <div class="about__section-grid about__section-grid--reverse">
       <div class="about__section-text">
         <div class="section-header">
-          <span class="section-header__kicker">La solution</span>
-          <h2 class="section-header__title">Un pipeline, neuf expertises</h2>
-          <p class="section-header__description">la Swarm décompose le développement logiciel en responsabilités distinctes, chacune confiée à un agent spécialisé. Comme une équipe de développement senior, chaque agent excelle dans son domaine et collabore avec les autres via un protocole de communication structuré.</p>
+          <span class="section-header__kicker">{{ t('about.section.solutionKicker') }}</span>
+          <h2 class="section-header__title">{{ t('about.section.solutionTitle') }}</h2>
+          <p class="section-header__description">{{ t('about.section.solutionDesc') }}</p>
         </div>
-        <p>
-          L'orchestrateur classifie la demande et active les agents
-          pertinents. Le pipeline s'adapte automatiquement à la complexité
-          de la tâche — de la correction rapide (route DIRECT) au
-          développement complet avec contrats, tests et documentation
-          (route FULL).
-        </p>
+        <p>{{ t('about.section.solutionBody') }}</p>
       </div>
     </div>
   </article>
@@ -55,9 +47,9 @@
   <article class="about__section about__section--communication">
     <div class="about__section-text about__section-text--centered">
       <div class="section-header">
-        <span class="section-header__kicker">Communication</span>
-        <h2 class="section-header__title">La ruche communique</h2>
-        <p class="section-header__description">Les neuf agents ne travaillent pas en silos. Ils échangent des contrats, des rapports d'analyse et des validations — chaque interaction est orchestrée pour produire un code cohérent, testé et documenté.</p>
+        <span class="section-header__kicker">{{ t('about.section.communicationKicker') }}</span>
+        <h2 class="section-header__title">{{ t('about.section.communicationTitle') }}</h2>
+        <p class="section-header__description">{{ t('about.section.communicationDesc') }}</p>
       </div>
     </div>
   </article>
@@ -69,40 +61,28 @@
   <article class="about__section about__section--alt">
     <div class="about__section-text about__section-text--centered">
       <div class="section-header">
-        <span class="section-header__kicker">Différenciation</span>
-        <h2 class="section-header__title">Pourquoi la Swarm</h2>
-        <p class="section-header__description">Trois piliers qui distinguent cette architecture des assistants IA classiques.</p>
+        <span class="section-header__kicker">{{ t('about.section.differentiationKicker') }}</span>
+        <h2 class="section-header__title">{{ t('about.section.differentiationTitle') }}</h2>
+        <p class="section-header__description">{{ t('about.section.differentiationDesc') }}</p>
       </div>
-      <p class="about__section-lead">Découvrez <a routerLink="/probleme-innovation" class="about__inline-link">les 7 piliers d'innovation</a> en détail.</p>
+      <p class="about__section-lead">{{ t('about.section.differentiationLead') }}</p>
     </div>
 
     <div class="about__pillars">
       <div class="about__pillar">
         <div class="about__pillar-icon">🔄</div>
-        <h3 class="about__pillar-title">Pipeline automatisé de bout en bout</h3>
-        <p class="about__pillar-desc">
-          Contrairement aux assistants qui génèrent du code sans contexte, la Swarm orchestre
-          l'intégralité du cycle de vie : analyse, conception, implémentation, test, revue
-          et documentation. Chaque étape est validée avant de passer à la suivante.
-        </p>
+        <h3 class="about__pillar-title">{{ t('about.pillar.pipeline.title') }}</h3>
+        <p class="about__pillar-desc">{{ t('about.pillar.pipeline.desc') }}</p>
       </div>
       <div class="about__pillar">
         <div class="about__pillar-icon">🧠</div>
-        <h3 class="about__pillar-title">Spécialisation par agent</h3>
-        <p class="about__pillar-desc">
-          Plutôt qu'un modèle unique qui fait tout moyennement, chaque agent excelle dans
-          un domaine précis. Comme une équipe de développement senior, la somme des
-          expertises dépasse celle d'un généraliste.
-        </p>
+        <h3 class="about__pillar-title">{{ t('about.pillar.specialization.title') }}</h3>
+        <p class="about__pillar-desc">{{ t('about.pillar.specialization.desc') }}</p>
       </div>
       <div class="about__pillar">
         <div class="about__pillar-icon">📐</div>
-        <h3 class="about__pillar-title">Contrats et standards, pas de magie</h3>
-        <p class="about__pillar-desc">
-          Chaque interaction entre agents est régie par des contrats TypeScript explicites.
-          Les types, les schémas et les spécifications sont la source unique de vérité.
-          Rien n'est implicite, tout est vérifiable.
-        </p>
+        <h3 class="about__pillar-title">{{ t('about.pillar.contracts.title') }}</h3>
+        <p class="about__pillar-desc">{{ t('about.pillar.contracts.desc') }}</p>
       </div>
     </div>
   </article>
@@ -113,13 +93,11 @@
   <article class="about__section">
     <div class="about__section-text about__section-text--centered">
       <div class="section-header">
-        <span class="section-header__kicker">L'équipe</span>
-        <h2 class="section-header__title">Neuf agents, une équipe de choc</h2>
-        <p class="section-header__description">Chaque agent correspond à un rôle clé dans une équipe de développement — du Tech Lead à l'Ingénieur QA, en passant par l'Architecte et le Rédacteur Technique.</p>
+        <span class="section-header__kicker">{{ t('about.section.teamKicker') }}</span>
+        <h2 class="section-header__title">{{ t('about.section.teamTitle') }}</h2>
+        <p class="section-header__description">{{ t('about.section.teamDesc') }}</p>
       </div>
-      <a routerLink="/agents" class="about__cta-link">
-        Explorer les 9 agents IA spécialisés →
-      </a>
+      <a routerLink="/agents" class="about__cta-link">{{ t('about.section.teamCta') }}</a>
     </div>
   </article>
 
@@ -153,41 +131,41 @@
   <article class="about__section about__section--alt">
     <div class="about__section-text about__section-text--centered">
       <div class="section-header">
-        <span class="section-header__kicker">Impact</span>
-        <h2 class="section-header__title">la Swarm en chiffres</h2>
+        <span class="section-header__kicker">{{ t('about.section.impactKicker') }}</span>
+        <h2 class="section-header__title">{{ t('about.section.impactTitle') }}</h2>
       </div>
     </div>
 
     <div class="about__stats">
       <div class="about__stat-card">
         <span class="about__stat-number">9</span>
-        <span class="about__stat-label">Agents spécialisés</span>
-        <span class="about__stat-desc">Chacun expert dans son domaine, comme une véritable équipe de développement</span>
+        <span class="about__stat-label">{{ t('about.stat.agents') }}</span>
+        <span class="about__stat-desc">{{ t('about.stat.agentsDesc') }}</span>
       </div>
       <div class="about__stat-card">
         <span class="about__stat-number">3</span>
-        <span class="about__stat-label">Skills disponibles</span>
-        <span class="about__stat-desc">Modules activables à la demande pour étendre les capacités du pipeline</span>
+        <span class="about__stat-label">{{ t('about.stat.skillsList') }}</span>
+        <span class="about__stat-desc">{{ t('about.stat.skillsListDesc') }}</span>
       </div>
       <div class="about__stat-card">
         <span class="about__stat-number">5</span>
-        <span class="about__stat-label">Niveaux de complexité</span>
-        <span class="about__stat-desc">De DIRECT à FULL, le pipeline s'adapte à chaque demande</span>
+        <span class="about__stat-label">{{ t('about.stat.levelsList') }}</span>
+        <span class="about__stat-desc">{{ t('about.stat.levelsListDesc') }}</span>
       </div>
       <div class="about__stat-card">
         <span class="about__stat-number">80%</span>
-        <span class="about__stat-label">Couverture de tests</span>
-        <span class="about__stat-desc">Seuil minimum imposé par l'agent Tester avant tout merge</span>
+        <span class="about__stat-label">{{ t('about.stat.coverageList') }}</span>
+        <span class="about__stat-desc">{{ t('about.stat.coverageListDesc') }}</span>
       </div>
       <div class="about__stat-card">
         <span class="about__stat-number">6</span>
-        <span class="about__stat-label">Intégrations MCP</span>
-        <span class="about__stat-desc">Supabase, Vercel, Render, Playwright, Context7, 21st.dev — connecteurs natifs</span>
+        <span class="about__stat-label">{{ t('about.stat.mcpList') }}</span>
+        <span class="about__stat-desc">{{ t('about.stat.mcpListDesc') }}</span>
       </div>
       <div class="about__stat-card about__stat-card--accent">
         <span class="about__stat-number">~0,20 $</span>
-        <span class="about__stat-label">Par session</span>
-        <span class="about__stat-desc">Coût d'une session de développement complète sur une route MEDIUM (~400K tokens, 17 appels LLM, tarification DeepSeek V4 Pro)</span>
+        <span class="about__stat-label">{{ t('about.stat.costList') }}</span>
+        <span class="about__stat-desc">{{ t('about.stat.costListDesc') }}</span>
       </div>
     </div>
   </article>

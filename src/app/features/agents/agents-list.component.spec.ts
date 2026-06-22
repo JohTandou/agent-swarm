@@ -1,15 +1,41 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { AgentsListComponent } from './agents-list.component';
+import { LanguageService } from '../../shared/services/language.service';
+import { TranslationService } from '../../shared/services/translation.service';
 
 describe('AgentsListComponent', () => {
   let component: AgentsListComponent;
   let fixture: ComponentFixture<AgentsListComponent>;
 
   beforeEach(async () => {
+    const mockTranslationService = {
+      translate: jasmine.createSpy('translate').and.callFake((key: string) => {
+        const map: Record<string, string> = {
+          'agents.list.title': 'Agents',
+          'agents.list.subtitle': 'Chaque agent est une pièce spécialisée',
+          'agents.list.filter.all': 'Tous',
+          'agents.list.eyebrow': 'Neuf agents, un collectif',
+          'agents.category.build': 'Build',
+          'agents.category.qualité': 'Qualité',
+          'agents.category.infrastructure': 'Infrastructure',
+          'toast.agents.all': '{n} agents affichés',
+          'toast.agents.filtered': '{n} agents trouvés — {category}',
+          'toast.skills.all': '{n} skills affichés',
+          'toast.skills.filtered': '{n} skills trouvés — {category}',
+        };
+        return map[key] ?? key;
+      }),
+    };
+
     await TestBed.configureTestingModule({
       imports: [AgentsListComponent],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        { provide: TranslationService, useValue: mockTranslationService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AgentsListComponent);

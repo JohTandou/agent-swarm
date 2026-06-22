@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { ProblemInnovationComponent } from './problem-innovation.component';
+import { LanguageService } from '../../shared/services/language.service';
 
 describe('ProblemInnovationComponent', () => {
   let component: ProblemInnovationComponent;
@@ -8,6 +10,9 @@ describe('ProblemInnovationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ProblemInnovationComponent],
+      providers: [
+        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProblemInnovationComponent);
@@ -206,11 +211,13 @@ describe('ProblemInnovationComponent', () => {
    * ========================================================================== */
 
   it('devrait exposer les données du modèle unique', () => {
-    const modelInfo = (component as any).modelInfo;
-    expect(modelInfo).toBeTruthy();
-    expect(modelInfo.name).toBe('DeepSeek V4 Pro');
-    expect(modelInfo.description).toContain('Modèle unique utilisé par tous les agents');
-    expect(modelInfo.costNote).toContain('0,435 $/M tokens');
+    const modelName = (component as any).modelName as string;
+    expect(modelName).toBeTruthy();
+    expect(modelName).toBe('DeepSeek V4 Pro');
+    const modelDescription = (component as any).modelDescription as string;
+    expect(modelDescription).toContain('Modèle unique');
+    const modelCostNote = (component as any).modelCostNote as string;
+    expect(modelCostNote).toContain('0,435 $/M tokens');
   });
 
   /* ==========================================================================

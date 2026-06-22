@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { ToastService } from './toast.service';
+import { TranslationService } from './translation.service';
 
 const KONAMI_SEQUENCE = [
   'ArrowUp',
@@ -18,13 +19,12 @@ const BUFFER_SIZE = 10;
 
 const RESET_DELAY_MS = 3000;
 
-const TOAST_MESSAGE = '🐝 Code activé ! Bienvenue dans la ruche.';
-
 @Injectable({ providedIn: 'root' })
 export class EasterEggService {
   readonly konamiTriggered = signal(false);
 
   private buffer: string[] = [];
+  private readonly translationService = inject(TranslationService);
 
   constructor(private readonly toastService: ToastService) {}
 
@@ -42,7 +42,7 @@ export class EasterEggService {
       }
 
       this.konamiTriggered.set(true);
-      this.toastService.show(TOAST_MESSAGE, 'success');
+      this.toastService.show(this.translationService.translate('easter.konami'), 'success');
 
       setTimeout(() => {
         this.konamiTriggered.set(false);

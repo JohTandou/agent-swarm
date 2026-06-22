@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideRouter, Router } from '@angular/router';
 import { HeaderComponent } from './header.component';
 import { LanguageService } from '@shared/services/language.service';
@@ -10,7 +11,10 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);

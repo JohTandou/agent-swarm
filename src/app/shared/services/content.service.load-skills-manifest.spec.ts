@@ -1,7 +1,9 @@
 import { TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ContentService } from './content.service';
+import { LanguageService } from './language.service';
 import type { Skill } from '@shared/models';
 
 /** Génère un contenu Markdown avec frontmatter YAML valide */
@@ -19,7 +21,12 @@ describe('ContentService — loadSkillsManifest()', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting(), ContentService],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        ContentService,
+        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '', setLang: () => {} } },
+      ],
     });
     service = TestBed.inject(ContentService);
     httpMock = TestBed.inject(HttpTestingController);

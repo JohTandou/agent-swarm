@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -7,6 +8,7 @@ import { of } from 'rxjs';
 import { SkillDetailComponent } from './skill-detail.component';
 import { TocService } from '../../shared/services/toc.service';
 import { ContentService } from '../../shared/services/content.service';
+import { LanguageService } from '../../shared/services/language.service';
 import { provideMarkdown } from 'ngx-markdown';
 import type { Skill } from '@shared/models';
 
@@ -58,6 +60,7 @@ describe('SkillDetailComponent', () => {
         provideMarkdown(),
         ContentService,
         TocService,
+        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
         {
           provide: ActivatedRoute,
           useValue: {

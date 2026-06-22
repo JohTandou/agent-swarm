@@ -4,6 +4,7 @@ import { MarkdownRendererComponent } from '../../shared/components/markdown-rend
 import { TocService } from '../../shared/services/toc.service';
 import { SeoService } from '../../shared/services/seo.service';
 import { JsonLdService } from '../../shared/services/json-ld.service';
+import { TranslationService } from '../../shared/services/translation.service';
 import type { Skill, SkillCategory, TocEntry, MarkdownDocument } from '@shared/models';
 
 /** Skills hardcodés */
@@ -12,14 +13,6 @@ const SKILLS: Skill[] = [
   { id: 'tests-create', name: 'Tests Create', emoji: '🧪', category: 'creation', sourcePath: 'skills/tests-create.md', order: 2, tags: [], description: 'Génération optimale de tests unitaires, fonctionnels, intégration et E2E' },
   { id: 'graphify', name: 'Graphify', emoji: '🕸️', category: 'audit', sourcePath: 'skills/graphify.md', order: 3, tags: [], description: 'Transforme code, docs, papiers en graphes de connaissances' },
 ];
-
-/** Labels des catégories */
-const CATEGORY_LABELS: Record<SkillCategory, string> = {
-  creation: 'Création',
-  audit: 'Audit',
-  workflow: 'Workflow',
-  documentation: 'Documentation',
-};
 
 /**
  * Page de détail d'un skill Swarm.
@@ -43,6 +36,7 @@ export class SkillDetailComponent {
   private tocService = inject(TocService);
   private seoService = inject(SeoService);
   private jsonLdService = inject(JsonLdService);
+  private readonly translate = inject(TranslationService);
 
   /** ID du skill extrait de l'URL */
   readonly skillId = signal<string>('');
@@ -77,6 +71,11 @@ export class SkillDetailComponent {
       this.tocService.clear();
       this.setSeoAndSchemas(id);
     });
+  }
+
+  /** Raccourci pour les traductions dans le template */
+  t(key: string): string {
+    return this.translate.translate(key);
   }
 
   /**
@@ -155,8 +154,8 @@ export class SkillDetailComponent {
     this.tocService.setEntries(entries);
   }
 
-  /** Retourne le label français pour une catégorie */
+  /** Retourne le label traduit pour une catégorie */
   getCategoryLabel(category: SkillCategory): string {
-    return CATEGORY_LABELS[category];
+    return this.translate.translate('skills.category.' + category);
   }
 }

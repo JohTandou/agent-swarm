@@ -1,7 +1,7 @@
-<article class="markdown-body" aria-label="Contenu du document">
+<article class="markdown-body" [attr.aria-label]="t('markdown.ariaLabel')">
   <!-- État de chargement -->
   @if (isLoading) {
-    <div class="markdown-renderer__loading" aria-busy="true" aria-label="Chargement du contenu">
+    <div class="markdown-renderer__loading" aria-busy="true" [attr.aria-label]="t('markdown.loading')">
       <div class="markdown-renderer__progress"></div>
     </div>
   }
@@ -9,7 +9,7 @@
   <!-- État d'erreur -->
   @if (errorMessage) {
     <div class="markdown-error" role="alert">
-      <p class="markdown-error__title">Impossible de charger le document</p>
+      <p class="markdown-error__title">{{ t('markdown.error.title') }}</p>
       <p class="markdown-error__message">{{ errorMessage }}</p>
     </div>
   }
@@ -17,9 +17,9 @@
   <!-- État vide -->
   @if (!isLoading && !errorMessage && !processedContent) {
     <div class="markdown-empty">
-      <p class="markdown-empty__text">Aucun contenu à afficher.</p>
+      <p class="markdown-empty__text">{{ t('markdown.empty.title') }}</p>
       <p class="markdown-empty__hint">
-        Le document est peut-être vide ou n'a pas encore été chargé.
+        {{ t('markdown.empty.hint') }}
       </p>
     </div>
   }

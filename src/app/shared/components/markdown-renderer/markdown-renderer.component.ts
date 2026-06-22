@@ -13,6 +13,7 @@ import {
 import { MarkdownComponent, MarkdownService } from 'ngx-markdown';
 import type { TocEntry, MarkdownDocument } from '@shared/models';
 import { ContentService } from '../../services/content.service';
+import { TranslationService } from '../../services/translation.service';
 import { UiSkeletonComponent } from '../ui-skeleton/ui-skeleton.component';
 
 /** Regex pour détecter et transformer les callouts Markdown */
@@ -41,6 +42,12 @@ export class MarkdownRendererComponent implements OnChanges, AfterViewInit {
   private contentService = inject(ContentService);
   private markdownService = inject(MarkdownService);
   private hostRef = inject(ElementRef);
+  private readonly translationService = inject(TranslationService);
+
+  /** Retourne la traduction pour la clé donnée dans la langue courante */
+  t(key: string): string {
+    return this.translationService.translate(key);
+  }
 
   /** Chemin source du fichier Markdown (relatif à src/content/) */
   @Input() sourcePath: string | null = null;

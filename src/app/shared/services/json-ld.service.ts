@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { TranslationService } from './translation.service';
 import type { Breadcrumb } from '@shared/models';
 
 /**
@@ -8,6 +9,7 @@ import type { Breadcrumb } from '@shared/models';
  */
 @Injectable({ providedIn: 'root' })
 export class JsonLdService {
+  private readonly translationService = inject(TranslationService);
   /** Attribut HTML utilisé pour identifier les scripts JSON-LD injectés par ce service */
   private readonly ATTR = 'data-swarm-json-ld';
 
@@ -44,7 +46,7 @@ export class JsonLdService {
       '@type': 'WebSite',
       url: this.BASE_URL,
       name: 'Swarm Wiki',
-      description: 'Wiki technique du système Swarm — pipeline d\'agents IA orchestré pour le développement logiciel.',
+      description: this.translationService.translate('seo.defaultDescription'),
       potentialAction: {
         '@type': 'SearchAction',
         'target': {

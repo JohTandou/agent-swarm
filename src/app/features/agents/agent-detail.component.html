@@ -2,7 +2,7 @@
   <section class="agent-detail">
   <img
     [src]="'/assets/images/avatars/' + agentData.id + '.png'"
-    [alt]="'Avatar de ' + agentData.name"
+    [alt]="t('agents.detail.avatarAlt') + ' ' + agentData.name"
     class="agent-detail__avatar"
     loading="lazy"
   />
@@ -33,13 +33,13 @@
       </div>
     } @else {
       <div class="agent-detail__no-content">
-        <p>La documentation détaillée de cet agent sera disponible prochainement.</p>
+        <p>{{ t('agents.detail.comingSoon') }}</p>
       </div>
     }
 
     <footer class="agent-detail__footer">
       <a routerLink="/agents" class="agent-detail__back">
-        ← Retour au listing
+        {{ t('agents.detail.back') }}
       </a>
     </footer>
   </section>
@@ -47,13 +47,12 @@
   <section class="agent-detail agent-detail--error">
     <div class="agent-detail__error">
       <span class="agent-detail__error-emoji" aria-hidden="true">🔍</span>
-      <h1 class="agent-detail__error-title">Agent introuvable</h1>
+      <h1 class="agent-detail__error-title">{{ t('agents.detail.notFound') }}</h1>
       <p class="agent-detail__error-text">
-        L'agent <strong>{{ agentId() }}</strong> n'existe pas dans le pipeline Swarm.
-        Vérifiez l'identifiant ou retournez au listing.
+        L'agent <strong>{{ agentId() }}</strong> {{ t('agents.detail.notFoundDesc') }}
       </p>
       <a routerLink="/agents" class="agent-detail__error-link">
-        ← Retour au listing des agents
+        {{ t('agents.detail.backList') }}
       </a>
     </div>
   </section>

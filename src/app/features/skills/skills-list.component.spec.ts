@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
 import { SkillsListComponent } from './skills-list.component';
 import { ContentService } from '@shared/services/content.service';
+import { LanguageService } from '@shared/services/language.service';
 import type { Skill } from '@shared/models';
 
 const MOCK_SKILLS: Skill[] = [
@@ -62,6 +64,7 @@ describe('SkillsListComponent', () => {
       providers: [
         provideRouter([]),
         { provide: ContentService, useValue: mockContentService },
+        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
       ],
     }).compileComponents();
 
