@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { HeaderComponent } from './header.component';
+import { LanguageService } from '@shared/services/language.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -98,6 +99,31 @@ describe('HeaderComponent', () => {
     expect(navLinks.length).toBe(2);
     expect(navLinks[0].textContent?.trim()).toBe('Accueil');
     expect(navLinks[1].textContent?.trim()).toBe('À propos');
+  });
+
+  it('devrait naviguer vers /en/about quand on change de FR à EN sur /a-propos', () => {
+    const langService = TestBed.inject(LanguageService);
+    langService.setLang('fr');
+    const router = TestBed.inject(Router);
+    const navigateSpy = spyOn(router, 'navigateByUrl');
+
+    // Simuler l'URL courante
+    Object.defineProperty(router, 'url', { value: '/a-propos' });
+
+    component.toggleLang();
+    expect(navigateSpy).toHaveBeenCalledWith('/en/about');
+  });
+
+  it('devrait naviguer vers /a-propos quand on change de EN à FR sur /en/about', () => {
+    const langService = TestBed.inject(LanguageService);
+    langService.setLang('en');
+    const router = TestBed.inject(Router);
+    const navigateSpy = spyOn(router, 'navigateByUrl');
+
+    Object.defineProperty(router, 'url', { value: '/en/about' });
+
+    component.toggleLang();
+    expect(navigateSpy).toHaveBeenCalledWith('/a-propos');
   });
 
   it('devrait émettre openSearch quand le bouton de recherche est cliqué', () => {

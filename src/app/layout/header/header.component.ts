@@ -43,21 +43,31 @@ export class HeaderComponent {
 
   /**
    * Bascule la langue et navigue vers l'URL correspondante.
-   * FR → EN : ajoute le préfixe /en
-   * EN → FR : retire le préfixe /en
+   * FR → EN : traduit le chemin avec translatePathToEn
+   * EN → FR : traduit le chemin avec translatePathToFr
    */
   toggleLang(): void {
-    const newLang = this.langService.currentLang() === 'fr' ? 'en' : 'fr';
-    const currentPath = this.router.url;
-    let newPath: string;
+    const currentLang = this.langService.currentLang();
+    const newLang: 'fr' | 'en' = currentLang === 'fr' ? 'en' : 'fr';
+    const currentPath = this.router.url.split('?')[0]; // Ignore query params
 
+    let newPath: string;
     if (newLang === 'en') {
-      newPath = '/en' + (currentPath === '/' ? '' : currentPath);
+      newPath = this.langService.translatePathToEn(
+        currentLang === 'en'
+          ? this.langService.translatePathToFr(currentPath)
+          : currentPath
+      );
     } else {
-      newPath = currentPath === '/en' ? '/' : currentPath.replace(/^\/en/, '') || '/';
+      newPath = this.langService.translatePathToFr(currentPath);
     }
 
     this.langService.setLang(newLang);
     this.router.navigateByUrl(newPath);
+  }
+
+  /** Route localisée pour le lien "À propos" dans le header */
+  get aboutRoute(): string {
+    return this.langService.localizeRoute('/a-propos');
   }
 }
