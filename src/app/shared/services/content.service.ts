@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError, forkJoin, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import * as yaml from 'js-yaml';
 import type { MarkdownDocument, MarkdownFrontmatter, HeadingNode, TocEntry } from '@shared/models';
 import { CONTENT_REGISTRY } from './content-registry';
 import type { Skill, SkillCategory } from '@shared/models';
+import { LanguageService } from './language.service';
 
 /** Séparateur de frontmatter YAML dans les fichiers Markdown */
 const FRONTMATTER_REGEX = /^---\s*\n([\s\S]*?)\n---\s*\n/;
@@ -21,7 +22,19 @@ const HEADING_REGEX = /^\s*(#{1,6})\s+(.+)$/gm;
  */
 @Injectable({ providedIn: 'root' })
 export class ContentService {
+  private readonly languageService = inject(LanguageService);
+
   constructor(private http: HttpClient) {}
+
+  /**
+   * Construit le chemin de contenu en fonction de la langue courante.
+   * - Français : `content/{sourcePath}` (fichiers à la racine de content/)
+   * - Anglais : `content/en/{sourcePath}` (fichiers dans content/en/)
+   */
+  private getContentPath(sourcePath: string): string {
+    const lang = this.languageService.currentLang();
+    return lang === 'fr' ? `content/${sourcePath}` : `content/en/${sourcePath}`;
+  }
 
   /**
    * Charge et parse un document Markdown depuis `src/content/`.
@@ -48,7 +61,7 @@ export class ContentService {
     const skillEntries = CONTENT_REGISTRY.filter((entry) => entry.section === 'Skills');
 
     const requests = skillEntries.map((entry) => {
-      const url = `/content/${entry.sourcePath}`;
+      const url = `/${this.getContentPath(entry.sourcePath)}`;
       return this.http.get(url, { responseType: 'text' }).pipe(
         map((raw) => {
           const id = entry.sourcePath.replace('skills/', '').replace('.md', '');
@@ -119,14 +132,15 @@ export class ContentService {
    * @returns Observable<MarkdownDocument> — document parsé prêt à l'affichage
    */
   loadDocument(sourcePath: string): Observable<MarkdownDocument> {
-    const url = `/content/${sourcePath}`;
+    const url = `/${this.getContentPath(sourcePath)}`;
 
     return this.http.get(url, { responseType: 'text' }).pipe(
       map((raw) => this.parseDocument(raw, sourcePath)),
       catchError((err) => {
-        console.error(`[ContentService] Échec de chargement : ${sourcePath}`, err);
+        const contentPath = this.getContentPath(sourcePath);
+        console.error(`[ContentService] Échec de chargement : ${contentPath}`, err);
         return throwError(
-          () => new Error(`Le fichier "${sourcePath}" est introuvable. Vérifiez le chemin.`)
+          () => new Error(`Le fichier "${contentPath}" est introuvable. Vérifiez le chemin.`)
         );
       }),
     );
