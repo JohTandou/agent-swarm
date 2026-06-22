@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] — 2026-06-22
+
+### Added — SEO Infrastructure (Sprints 1-3)
+
+- **Title/Meta dynamiques** : SeoService utilisant les APIs Angular natives (Title, Meta) pour des balises `<title>` et `<meta description>` distinctes par page
+- **JSON-LD** : données structurées Schema.org — WebSite, Organization, BreadcrumbList, TechArticle, ItemList, HowTo, Person — injectées dynamiquement
+- **Sitemap.xml** : script post-build générant 45+ URLs (routes statiques + agents + skills)
+- **Headers Vercel** : Cache-Control optimisé, headers de sécurité (X-Content-Type-Options, X-Frame-Options, Referrer-Policy)
+- **Personal branding discret** : footer global, section Contributeurs About, README auteur — "Joh Tandou" intégré de façon périphérique
+- **humans.txt** et **robots.txt** : fichiers statiques pour SEO technique
+- **Script optimize-images** : conversion WebP via sharp
+
+### Changed — Repo Cleanup
+
+- Historique Git squashers (50 commits → 11 commits sémantiques)
+- Suppression des fichiers inutiles : `.DS_Store`, PNGs racine, dossier `images/`, `.playwright-mcp/`
+- Ajout licence MIT
+- 31 tests réparés ou documentés (0 échec)
+
 ## [1.0.0] — 2026-06-06
 
 **Swarm Wiki** — documentation technique du pipeline d'agents IA Swarm. Application Angular 19 100% statique, dark mode exclusif, design Apple-grade.

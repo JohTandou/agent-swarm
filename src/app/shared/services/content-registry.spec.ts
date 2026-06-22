@@ -12,9 +12,9 @@ describe('CONTENT_REGISTRY', () => {
     expect(agents.every((a) => a.route.startsWith('/agents/'))).toBe(true);
   });
 
-  it('devrait avoir 3 skills', () => {
+  it('devrait avoir 26 skills', () => {
     const skills = CONTENT_REGISTRY.filter((e) => e.section === 'Skills');
-    expect(skills.length).toBe(3);
+    expect(skills.length).toBe(26);
     expect(skills.every((s) => s.sourcePath.startsWith('skills/'))).toBe(true);
     expect(skills.every((s) => s.route.startsWith('/skills/'))).toBe(true);
   });

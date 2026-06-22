@@ -23,8 +23,8 @@ describe('Skill model', () => {
   });
 
   it('devrait accepter toutes les catégories valides', () => {
-    const categories: SkillCategory[] = ['creation', 'audit'];
-    expect(categories.length).toBe(2);
+    const categories: SkillCategory[] = ['creation', 'audit', 'workflow', 'documentation'];
+    expect(categories.length).toBe(4);
     expect(categories).toContain('creation');
     expect(categories).toContain('audit');
     expect(categories).toContain('workflow');
