@@ -62,7 +62,7 @@ const NAV_CARDS_DATA: Record<Lang, Pick<NavCard, 'description' | 'route'>[]> = {
     },
     {
       description: 'Supabase, Vercel, Render, Playwright, Context7, 21st.dev — 6 native integrations.',
-      route: '/en/outils-mcp',
+      route: '/en/mcp-tools',
     },
   ],
 };
