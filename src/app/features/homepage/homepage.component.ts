@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 import { HexGridComponent } from './hex-grid.component';
 import { SparkleEffectComponent } from '../../shared/components/sparkle-effect/sparkle-effect.component';
 import { AnimationService } from '../../shared/services/animation.service';
+import { TranslationService } from '../../shared/services/translation.service';
 
 /** Délai de stabilisation du DOM après le rendu initial */
 const DOM_STABILIZE_DELAY_MS = 200;
@@ -91,7 +92,10 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cursorY.set(((event.clientY - rect.top) / rect.height) * 100);
   }
 
-  constructor(private animService: AnimationService) {}
+  constructor(
+    private animService: AnimationService,
+    private translationService: TranslationService,
+  ) {}
 
   ngOnInit(): void {
     this.setupHeroAnimation();
@@ -105,6 +109,11 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.animService.killAll();
+  }
+
+  /** Retourne la traduction pour la clé donnée dans la langue courante */
+  t(key: string): string {
+    return this.translationService.translate(key);
   }
 
   /* ==========================================================================

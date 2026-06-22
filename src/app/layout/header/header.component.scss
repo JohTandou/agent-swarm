@@ -168,6 +168,30 @@
   gap: 8px;
 }
 
+/* Language switcher FR/EN */
+.header__lang-switch {
+  background: none;
+  border: 1px solid rgba(122, 136, 153, 0.2);
+  color: var(--color-text-secondary, #8E8882);
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 200ms ease, border-color 200ms ease;
+
+  &:hover {
+    color: var(--color-text-primary, #F5F0EB);
+    border-color: var(--color-accent, #F0A522);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
 .header__search-icon {
   flex-shrink: 0;
   color: currentColor;

@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
+import { LanguageService } from './language.service';
 import type { SeoConfig } from '@shared/models';
 
 /**
@@ -10,6 +11,7 @@ import type { SeoConfig } from '@shared/models';
 @Injectable({ providedIn: 'root' })
 export class SeoService {
   private readonly SUFFIX = ' — Swarm Wiki';
+  private readonly languageService = inject(LanguageService);
 
   constructor(
     private readonly title: Title,
@@ -58,6 +60,42 @@ export class SeoService {
     if (config.image) {
       this.meta.updateTag({ name: 'twitter:image', content: config.image });
     }
+
+    // Hreflang tags for multilingual SEO
+    this.updateHreflang();
+  }
+
+  /**
+   * Met à jour les balises <link rel="alternate" hreflang="..."> pour le SEO multilingue.
+   * Génère les URLs FR, EN et x-default en fonction de la langue courante.
+   */
+  private updateHreflang(): void {
+    // Supprimer les anciens hreflang
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
+
+    const baseUrl = 'https://swarm-wiki.vercel.app';
+    const currentLang = this.languageService.currentLang();
+    const path = window.location.pathname;
+
+    // Construit les chemins FR et EN
+    const frPath = currentLang === 'en' ? path.replace(/^\/en/, '') || '/' : path;
+    const enPath = currentLang === 'fr' ? '/en' + (path === '/' ? '' : path) : path;
+
+    const frUrl = frPath.startsWith('/') ? baseUrl + frPath : baseUrl + '/' + frPath;
+    const enUrl = enPath.startsWith('/') ? baseUrl + enPath : baseUrl + '/' + enPath;
+
+    this.addLink('alternate', frUrl, 'fr');
+    this.addLink('alternate', enUrl, 'en');
+    this.addLink('alternate', baseUrl + (frPath || '/'), 'x-default');
+  }
+
+  /** Crée et ajoute une balise <link> dans le <head> */
+  private addLink(rel: string, href: string, hreflang: string): void {
+    const link = document.createElement('link');
+    link.rel = rel;
+    link.href = href;
+    link.setAttribute('hreflang', hreflang);
+    document.head.appendChild(link);
   }
 
   /**

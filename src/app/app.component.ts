@@ -12,6 +12,7 @@ import { ToasterComponent } from './shared/components/toaster/toaster.component'
 import { SearchModalComponent } from './shared/components/search-modal/search-modal.component';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { SearchService } from './shared/services/search.service';
+import { TranslationService } from './shared/services/translation.service';
 import { AnimationService } from './shared/services/animation.service';
 import { ScrollProgressComponent } from './shared/components/scroll-progress/scroll-progress.component';
 import { SeoService } from './shared/services/seo.service';
@@ -118,6 +119,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private easterEggService: EasterEggService,
     private readonly seoService: SeoService,
     private readonly jsonLdService: JsonLdService,
+    private readonly translationService: TranslationService,
   ) {
     this.subscriptions.add(
       this.breakpointObserver
@@ -282,6 +284,11 @@ export class AppComponent implements OnInit, OnDestroy {
   /** Ferme la sidebar (utilisé par le bouton close et l'overlay) */
   closeSidebar(): void {
     this.sidebarOpen.set(false);
+  }
+
+  /** Retourne la traduction pour la clé donnée dans la langue courante */
+  t(key: string): string {
+    return this.translationService.translate(key);
   }
 
   @HostListener('window:keydown', ['$event'])

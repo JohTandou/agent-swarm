@@ -4,10 +4,9 @@
        Hero — Plein écran
        ========================================================================= -->
   <header class="about__hero">
-    <p class="about__eyebrow reveal-on-scroll">L'intelligence collective</p>
+    <p class="about__eyebrow reveal-on-scroll">{{ t('about.kicker') }}</p>
     <h1 class="about__title reveal-on-scroll" appTextReveal [revealDelay]="200">
-      La Swarm
-      <span class="about__title-accent">— Neuf agents, un pipeline</span>
+      {{ t('about.title') }}
     </h1>
     <p class="about__subtitle reveal-on-scroll">
       Une architecture agentique, pensée pour le développement logiciel de bout en bout. Neuf agents spécialisés collaborent pour concevoir, implémenter, tester et documenter — comme une véritable équipe de développement.
@@ -130,19 +129,19 @@
   <article class="about__section">
     <div class="about__section-text about__section-text--centered">
       <div class="section-header">
-        <span class="section-header__kicker">Origine</span>
-        <h2 class="section-header__title">Un architecte, neuf agents</h2>
-        <p class="section-header__description">La Swarm est née d'une conviction : le développement logiciel peut être orchestré, pas subi. Un humain conçoit le système, les agents l'exécutent.</p>
+        <span class="section-header__kicker">{{ t('about.team.kicker') }}</span>
+        <h2 class="section-header__title">{{ t('about.team.title') }}</h2>
+        <p class="section-header__description">{{ t('about.team.desc') }}</p>
       </div>
     </div>
 
     <div class="about__contributors">
       <div class="about__contributor">
         <span class="about__contributor-avatar" aria-hidden="true">🐝</span>
-        <h3 class="about__contributor-name">Joh Tandou</h3>
-        <p class="about__contributor-role">Architecte du système Swarm</p>
+        <h3 class="about__contributor-name">{{ t('about.contrib.name') }}</h3>
+        <p class="about__contributor-role">{{ t('about.contrib.role') }}</p>
         <p class="about__contributor-desc">
-          Conçoit, orchestre et fait évoluer le pipeline d'agents IA. Développeur full-stack spécialisé en architectures agentic.
+          {{ t('about.contrib.desc') }}
         </p>
       </div>
     </div>

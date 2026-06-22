@@ -5,6 +5,7 @@ import { UiButtonComponent } from '@shared/components/ui-button/ui-button.compon
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { AnimationService } from '@shared/services/animation.service';
 import { JsonLdService } from '@shared/services/json-ld.service';
+import { TranslationService } from '@shared/services/translation.service';
 
 /**
  * Page "À propos de la Swarm" — Contenu riche structuré en sections.
@@ -24,6 +25,7 @@ export class AboutComponent implements OnDestroy, AfterViewInit {
     private readonly hostRef: ElementRef,
     private readonly animService: AnimationService,
     private readonly jsonLdService: JsonLdService,
+    private readonly translationService: TranslationService,
   ) {
     // Ajoute le schéma Person pour l'auteur du wiki
     this.jsonLdService.addSchemas([this.jsonLdService.generatePersonSchema()]);
@@ -41,5 +43,10 @@ export class AboutComponent implements OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.animService.killAll();
+  }
+
+  /** Retourne la traduction pour la clé donnée dans la langue courante */
+  t(key: string): string {
+    return this.translationService.translate(key);
   }
 }

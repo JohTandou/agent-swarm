@@ -45,6 +45,15 @@
 
     <!-- Actions droite -->
     <div class="header__actions">
+      <!-- Language switcher FR/EN -->
+      <button
+        class="header__lang-switch"
+        (click)="toggleLang()"
+        [attr.aria-label]="langService.currentLang() === 'fr' ? 'Switch to English' : 'Passer en français'"
+        [attr.title]="langService.currentLang() === 'fr' ? 'Switch to English' : 'Passer en français'"
+      >
+        {{ langService.currentLang() === 'fr' ? 'EN' : 'FR' }}
+      </button>
       @if (!isMobile) {
         <app-ui-button variant="ghost" size="md" (click)="onSearchClick()" aria-label="Rechercher (Cmd+K)" title="Rechercher (Cmd+K)">
           <svg class="header__search-icon" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
