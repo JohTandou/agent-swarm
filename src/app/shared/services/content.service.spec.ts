@@ -1,7 +1,9 @@
 import { TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ContentService } from './content.service';
+import { LanguageService } from './language.service';
 import type { MarkdownDocument } from '@shared/models';
 
 describe('ContentService', () => {
@@ -34,7 +36,12 @@ Déploiement via Vercel.
   beforeEach(() => {
     sessionStorage.clear();
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting(), ContentService],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        ContentService,
+        LanguageService,
+      ],
     });
     service = TestBed.inject(ContentService);
     httpMock = TestBed.inject(HttpTestingController);

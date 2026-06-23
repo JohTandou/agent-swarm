@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, OnDestroy, signal, effect } from '@angular/core';
 import { TocService } from '../../services/toc.service';
+import { TranslationService } from '../../services/translation.service';
 import type { TocEntry } from '@shared/models';
 
 /**
@@ -18,6 +19,12 @@ import type { TocEntry } from '@shared/models';
 })
 export class TableOfContentsComponent implements OnInit, OnDestroy {
   private tocService = inject(TocService);
+  private readonly translationService = inject(TranslationService);
+
+  /** Retourne la traduction pour la clé donnée dans la langue courante */
+  t(key: string): string {
+    return this.translationService.translate(key);
+  }
 
   /** Signal réactif lié au service — entrées TOC */
   readonly entries = this.tocService.entries;

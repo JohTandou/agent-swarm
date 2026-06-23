@@ -8,11 +8,16 @@ describe('HeaderComponent', () => {
   let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        LanguageService,
+      ],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('fr');
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
   });
@@ -133,5 +138,88 @@ describe('HeaderComponent', () => {
     const searchBtn: HTMLElement = fixture.nativeElement.querySelector('app-ui-button[variant="ghost"]');
     searchBtn.click();
     expect(emitSpy).toHaveBeenCalled();
+  });
+
+});
+
+/* ==========================================================================
+ * Langue anglaise — toggleLang, homeLink, aboutLink
+ * ========================================================================== */
+
+describe('HeaderComponent — English', () => {
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
+  let router: Router;
+
+  beforeEach(async () => {
+    TestBed.resetTestingModule();
+    sessionStorage.clear();
+
+    await TestBed.configureTestingModule({
+      imports: [HeaderComponent],
+      providers: [
+        provideRouter([]),
+        LanguageService,
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HeaderComponent);
+    component = fixture.componentInstance;
+    router = TestBed.inject(Router);
+    TestBed.inject(LanguageService).setLang('en');
+  });
+
+  it('homeLink should return /en in English', () => {
+    expect(component.homeLink).toBe('/en');
+  });
+
+  it('aboutLink should return /en/about in English', () => {
+    expect(component.aboutLink).toBe('/en/about');
+  });
+
+  it('toggleLang should switch from EN to FR and navigate', () => {
+    spyOn(router, 'navigateByUrl');
+    component.toggleLang();
+    expect(TestBed.inject(LanguageService).currentLang()).toBe('fr');
+    expect(router.navigateByUrl).toHaveBeenCalled();
+  });
+});
+
+describe('HeaderComponent — French toggle', () => {
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
+  let router: Router;
+
+  beforeEach(async () => {
+    TestBed.resetTestingModule();
+    sessionStorage.clear();
+
+    await TestBed.configureTestingModule({
+      imports: [HeaderComponent],
+      providers: [
+        provideRouter([]),
+        LanguageService,
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HeaderComponent);
+    component = fixture.componentInstance;
+    router = TestBed.inject(Router);
+    TestBed.inject(LanguageService).setLang('fr');
+  });
+
+  it('homeLink should return / in French', () => {
+    expect(component.homeLink).toBe('/');
+  });
+
+  it('aboutLink should return /a-propos in French', () => {
+    expect(component.aboutLink).toBe('/a-propos');
+  });
+
+  it('toggleLang should switch from FR to EN and navigate', () => {
+    spyOn(router, 'navigateByUrl');
+    component.toggleLang();
+    expect(TestBed.inject(LanguageService).currentLang()).toBe('en');
+    expect(router.navigateByUrl).toHaveBeenCalled();
   });
 });

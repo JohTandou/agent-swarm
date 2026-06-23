@@ -12,13 +12,13 @@
     <div class="mcp-tools__error" role="alert">
       <div class="mcp-error__content">
         <span class="mcp-error__icon" aria-hidden="true">⚠️</span>
-        <h2 class="mcp-error__title">Catégorie introuvable</h2>
+        <h2 class="mcp-error__title">{{ t('mcp.category.notFound') }}</h2>
         <p class="mcp-error__message">{{ error() }}</p>
         <div class="mcp-error__actions">
           <a class="mcp-error__link" routerLink="/outils-mcp/supabase">
-            Voir les outils Supabase
+            {{ t('mcp.category.seeAll') }} Supabase
           </a>
-          <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
+          <app-ui-button variant="primary" size="md" (click)="retry()">{{ t('error.retry') }}</app-ui-button>
         </div>
       </div>
     </div>
@@ -93,9 +93,9 @@
         >
           <thead class="mcp-table__head">
             <tr>
-              <th scope="col">Outil</th>
-              <th scope="col">Description</th>
-              <th scope="col">Paramètres</th>
+              <th scope="col">{{ t('mcp.table.tool') }}</th>
+              <th scope="col">{{ t('mcp.table.description') }}</th>
+              <th scope="col">{{ t('mcp.table.parameters') }}</th>
             </tr>
           </thead>
           <tbody class="mcp-table__body" [appStaggerChildren]="60">
@@ -127,9 +127,9 @@
 
       <!-- Exemple d'utilisation -->
       <section class="mcp-tools__example" aria-label="Exemple d'utilisation">
-        <h2 class="mcp-example__title">Exemple d'utilisation</h2>
+        <h2 class="mcp-example__title">{{ t('mcp.example.title') }}</h2>
         <p class="mcp-example__subtitle">
-          Cas concret avec les outils {{ data.label }}
+          {{ t('mcp.example.context') }} {{ data.label }}
         </p>
         <div class="mcp-example__code-wrapper">
           <pre class="mcp-example__code"><code>{{ data.exampleCode }}</code></pre>

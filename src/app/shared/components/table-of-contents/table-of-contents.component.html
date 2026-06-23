@@ -1,13 +1,12 @@
-<aside class="toc" aria-label="Table des matières">
-  <h4 class="toc__title">Sur cette page</h4>
+<aside class="toc" [attr.aria-label]="t('toc.ariaLabel')">
+  <h4 class="toc__title">{{ t('toc.title') }}</h4>
 
   <!-- État vide -->
   @if (entries().length === 0) {
     <div class="toc__empty">
-      <p class="toc__empty-text">Aucune section détectée</p>
+      <p class="toc__empty-text">{{ t('toc.empty.title') }}</p>
       <p class="toc__empty-hint">
-        La table des matières se remplit automatiquement<br />
-        lorsque vous naviguez dans un document.
+        {{ t('toc.empty.hint') }}
       </p>
     </div>
   }

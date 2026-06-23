@@ -6,7 +6,7 @@
   class="search-modal__panel" #searchPanel
   (click)="onPanelClick($event)"
   role="dialog"
-  aria-label="Recherche rapide"
+  [attr.aria-label]="t('search.modal.ariaLabel')"
   aria-modal="true"
 >
   <!-- Barre de recherche -->
@@ -33,7 +33,7 @@
       class="search-modal__input"
       [ngModel]="query()"
       (ngModelChange)="onQueryChange($event)"
-      placeholder="Rechercher un agent, un skill, une page..."
+      [placeholder]="t('search.input.placeholder')"
       autocomplete="off"
       spellcheck="false"
       role="combobox"
@@ -41,14 +41,14 @@
       aria-haspopup="listbox"
       aria-controls="search-results-list"
       [attr.aria-activedescendant]="selectedIndex() >= 0 ? getResultId(selectedIndex()) : ''"
-      aria-label="Rechercher dans le wiki"
+      [attr.aria-label]="t('search.input.ariaLabel')"
     />
   </div>
 
   <!-- État : indexation en cours -->
   @if (loading()) {
     <div class="search-modal__indexing" role="status">
-      Indexation en cours…
+      {{ t('search.indexing') }}
     </div>
   }
 
@@ -79,8 +79,8 @@
 
   @if (!loading() && isEmpty()) {
     <app-ui-empty-state
-      [title]="'Aucun résultat pour « ' + query() + ' »'"
-      description="Essayez avec un autre terme ou vérifiez l'orthographe."
+      [title]="t('search.empty.title').replace('{query}', query())"
+      [description]="t('search.empty.description')"
     />
   }
 
@@ -89,16 +89,16 @@
     <div class="search-modal__footer">
       <div class="search-modal__kbd-group">
         <kbd class="search-modal__kbd">↵</kbd>
-        <span class="search-modal__kbd-label">Ouvrir</span>
+        <span class="search-modal__kbd-label">{{ t('search.kbd.open') }}</span>
       </div>
       <div class="search-modal__kbd-group">
         <kbd class="search-modal__kbd">↑</kbd>
         <kbd class="search-modal__kbd">↓</kbd>
-        <span class="search-modal__kbd-label">Naviguer</span>
+        <span class="search-modal__kbd-label">{{ t('search.kbd.navigate') }}</span>
       </div>
       <div class="search-modal__kbd-group">
         <kbd class="search-modal__kbd">Esc</kbd>
-        <span class="search-modal__kbd-label">Fermer</span>
+        <span class="search-modal__kbd-label">{{ t('search.kbd.close') }}</span>
       </div>
     </div>
   }

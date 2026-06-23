@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { LanguageService } from '@shared/services/language.service';
+import { TranslationService } from '@shared/services/translation.service';
 
 /**
  * En-tête fixe glassmorphique.
@@ -9,6 +10,7 @@ import { LanguageService } from '@shared/services/language.service';
  * + language switcher FR/EN.
  * Touch targets ≥ 44×44px sur mobile.
  */
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -30,7 +32,23 @@ export class HeaderComponent {
   @Output() openSearch = new EventEmitter<void>();
 
   readonly langService = inject(LanguageService);
+  private readonly translationService = inject(TranslationService);
   private readonly router = inject(Router);
+
+  /** Lien d'accueil tenant compte de la langue courante */
+  get homeLink(): string {
+    return this.langService.currentLang() === 'en' ? '/en' : '/';
+  }
+
+  /** Lien À propos tenant compte de la langue courante */
+  get aboutLink(): string {
+    return this.langService.currentLang() === 'en' ? '/en/about' : '/a-propos';
+  }
+
+  /** Retourne la traduction pour la clé donnée dans la langue courante */
+  t(key: string): string {
+    return this.translationService.translate(key);
+  }
 
   /** Gère le clic sur le bouton hamburger — émet toggleSidebar vers le parent */
   onToggleSidebar(): void {

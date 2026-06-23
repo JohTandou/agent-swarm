@@ -210,7 +210,7 @@ Classer chaque suggestion par niveau de discrétion :
 - Fichier `humans.txt` à la racine (standard Google)
 
 **Niveau 2 — Très subtil** :
-- Footer global : "Conçu et orchestré par Joh Tandou" en texte secondaire
+- Footer global : "Conçu par Joh Tandou" en texte secondaire
 - Page About : section "Contributeurs" (grille CSS existante — 1 carte Joh Tandou)
 - Breadcrumbs : `BreadcrumbList` JSON-LD avec auteur
 

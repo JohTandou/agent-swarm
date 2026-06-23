@@ -7,12 +7,14 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
+  inject,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HexGridComponent } from './hex-grid.component';
 import { SparkleEffectComponent } from '../../shared/components/sparkle-effect/sparkle-effect.component';
 import { AnimationService } from '../../shared/services/animation.service';
 import { TranslationService } from '../../shared/services/translation.service';
+import { LanguageService, type Lang } from '../../shared/services/language.service';
 
 /** Délai de stabilisation du DOM après le rendu initial */
 const DOM_STABILIZE_DELAY_MS = 200;
@@ -24,6 +26,49 @@ interface NavCard {
   route: string;
   icon: string;
 }
+
+/** Données bilingues des cartes de navigation */
+const NAV_CARDS_DATA: Record<Lang, Pick<NavCard, 'description' | 'route'>[]> = {
+  fr: [
+    {
+      description: 'Neuf agents, une équipe de développement complète orchestrée automatiquement pour vous.',
+      route: '/agents',
+    },
+    {
+      description: 'De l\'idée au déploiement : découvrez comment le pipeline automatise chaque étape sans intervention.',
+      route: '/workflow',
+    },
+    {
+      description: '3 modules que les agents activent de façon autonome lorsqu\'ils le jugent nécessaire.',
+      route: '/skills',
+    },
+    {
+      description: 'Supabase, Vercel, Render, Playwright, Context7, 21st.dev — 6 intégrations natives.',
+      route: '/outils-mcp',
+    },
+  ],
+  en: [
+    {
+      description: 'Nine agents, a complete development team automatically orchestrated for you.',
+      route: '/en/agents',
+    },
+    {
+      description: 'From idea to deployment: discover how the pipeline automates every step without intervention.',
+      route: '/en/workflow',
+    },
+    {
+      description: '3 modules that agents activate autonomously when they deem it necessary.',
+      route: '/en/skills',
+    },
+    {
+      description: 'Supabase, Vercel, Render, Playwright, Context7, 21st.dev — 6 native integrations.',
+      route: '/en/mcp-tools',
+    },
+  ],
+};
+
+const NAV_CARD_TITLES: NavCard['title'][] = ['Agents', 'Workflow', 'Skills', 'Outils MCP'];
+const NAV_CARD_ICONS: NavCard['icon'][] = ['🤖', '⚡', '🔧', '🌐'];
 
 /**
  * Page d'accueil immersive de la Swarm Wiki.
@@ -42,40 +87,20 @@ interface NavCard {
   styleUrls: ['./homepage.component.scss'],
 })
 export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
+  private readonly langService = inject(LanguageService);
+
   @ViewChild('heroSection', { static: false })
   heroSectionRef?: ElementRef<HTMLElement>;
 
-  /** Cartes de navigation vers les sections principales */
-  readonly navCards: NavCard[] = [
-    {
-      title: 'Agents',
-      description:
-        'Neuf agents, une équipe de développement complète orchestrée automatiquement pour vous.',
-      route: '/agents',
-      icon: '🤖',
-    },
-    {
-      title: 'Workflow',
-      description:
-        'De l\'idée au déploiement : découvrez comment le pipeline automatise chaque étape sans intervention.',
-      route: '/workflow',
-      icon: '⚡',
-    },
-    {
-      title: 'Skills',
-      description:
-        '3 modules que les agents activent de façon autonome lorsqu\'ils le jugent nécessaire.',
-      route: '/skills',
-      icon: '🔧',
-    },
-    {
-      title: 'Outils MCP',
-      description:
-        'Supabase, Vercel, Render, Playwright, Context7, 21st.dev — 6 intégrations natives.',
-      route: '/outils-mcp',
-      icon: '🌐',
-    },
-  ];
+  /** Cartes de navigation bilingues vers les sections principales */
+  get navCards(): NavCard[] {
+    const lang = this.langService.currentLang();
+    return NAV_CARD_TITLES.map((title, i) => ({
+      title,
+      ...NAV_CARDS_DATA[lang][i],
+      icon: NAV_CARD_ICONS[i],
+    }));
+  }
 
   /** Déclenche l'effet sparkle après le chargement initial */
   readonly showSparkle = signal(false);

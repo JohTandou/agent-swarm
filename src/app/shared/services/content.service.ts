@@ -7,6 +7,7 @@ import type { MarkdownDocument, MarkdownFrontmatter, HeadingNode, TocEntry } fro
 import { CONTENT_REGISTRY } from './content-registry';
 import type { Skill, SkillCategory } from '@shared/models';
 import { LanguageService } from './language.service';
+import { TranslationService } from './translation.service';
 
 /** Séparateur de frontmatter YAML dans les fichiers Markdown */
 const FRONTMATTER_REGEX = /^---\s*\n([\s\S]*?)\n---\s*\n/;
@@ -23,6 +24,7 @@ const HEADING_REGEX = /^\s*(#{1,6})\s+(.+)$/gm;
 @Injectable({ providedIn: 'root' })
 export class ContentService {
   private readonly languageService = inject(LanguageService);
+  private readonly translationService = inject(TranslationService);
 
   constructor(private http: HttpClient) {}
 
@@ -140,7 +142,7 @@ export class ContentService {
         const contentPath = this.getContentPath(sourcePath);
         console.error(`[ContentService] Échec de chargement : ${contentPath}`, err);
         return throwError(
-          () => new Error(`Le fichier "${contentPath}" est introuvable. Vérifiez le chemin.`)
+          () => new Error(this.translationService.translate('error.contentNotFound').replace('{path}', contentPath))
         );
       }),
     );

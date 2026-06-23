@@ -34,14 +34,14 @@
       </div>
     } @else {
       <div class="skill-detail__no-content">
-        <p>La documentation détaillée de ce skill sera disponible prochainement.</p>
+        <p>{{ t('skills.detail.comingSoon') }}</p>
       </div>
     }
 
     <!-- Navigation pied de page -->
     <footer class="skill-detail__footer">
       <a routerLink="/skills" class="skill-detail__back">
-        ← Retour au listing
+        {{ t('skills.detail.back') }}
       </a>
     </footer>
   </section>
@@ -50,13 +50,12 @@
   <section class="skill-detail skill-detail--error">
     <div class="skill-detail__error">
       <span class="skill-detail__error-emoji" aria-hidden="true">🔍</span>
-      <h1 class="skill-detail__error-title">Skill introuvable</h1>
+      <h1 class="skill-detail__error-title">{{ t('skills.detail.notFound') }}</h1>
       <p class="skill-detail__error-text">
-        Le skill <strong>{{ skillId() }}</strong> n'est pas disponible.
-        Vérifiez l'identifiant ou retournez au listing.
+        Le skill <strong>{{ skillId() }}</strong> {{ t('skills.detail.notFoundDesc') }}
       </p>
       <a routerLink="/skills" class="skill-detail__error-link">
-        ← Retour au listing des skills
+        {{ t('skills.detail.backList') }}
       </a>
     </div>
   </section>

@@ -1,12 +1,13 @@
-import { Component, signal, computed, inject, effect } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownRendererComponent } from '../../shared/components/markdown-renderer/markdown-renderer.component';
 import { TocService } from '../../shared/services/toc.service';
 import { SeoService } from '../../shared/services/seo.service';
 import { JsonLdService } from '../../shared/services/json-ld.service';
+import { TranslationService } from '../../shared/services/translation.service';
 import type { AgentCategory, TocEntry, MarkdownDocument } from '@shared/models';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
-import { AGENTS_MAP, CATEGORY_LABELS } from '@shared/data/agents.data';
+import { AGENTS_MAP } from '@shared/data/agents.data';
 
 /**
  * Page de détail d'un agent Swarm.
@@ -30,6 +31,7 @@ export class AgentDetailComponent {
   private tocService = inject(TocService);
   private seoService = inject(SeoService);
   private jsonLdService = inject(JsonLdService);
+  private readonly translate = inject(TranslationService);
 
   /** ID de l'agent extrait de l'URL */
   readonly agentId = signal<string>('');
@@ -62,6 +64,11 @@ export class AgentDetailComponent {
       // SEO + données structurées de base (seront enrichies par onDocumentLoaded)
       this.setSeoAndSchemas(id);
     });
+  }
+
+  /** Raccourci pour les traductions dans le template */
+  t(key: string): string {
+    return this.translate.translate(key);
   }
 
   /**
@@ -140,8 +147,8 @@ export class AgentDetailComponent {
     this.tocService.setEntries(entries);
   }
 
-  /** Retourne le label français pour une catégorie */
+  /** Retourne le label traduit pour une catégorie */
   getCategoryLabel(category: AgentCategory): string {
-    return CATEGORY_LABELS[category];
+    return this.translate.translate('agents.category.' + category);
   }
 }

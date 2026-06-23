@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -8,6 +9,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { importProvidersFrom } from '@angular/core';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AppComponent } from './app.component';
+import { LanguageService } from './shared/services/language.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -28,6 +30,7 @@ describe('AppComponent', () => {
         provideAnimationsAsync(),
         importProvidersFrom(OverlayModule),
         { provide: BreakpointObserver, useValue: breakpointObserverMock },
+        LanguageService,
       ],
     }).compileComponents();
 

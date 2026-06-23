@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { convertToParamMap } from '@angular/router';
 import { McpToolsComponent } from './mcp-tools.component';
+import { LanguageService } from '../../shared/services/language.service';
 
 describe('McpToolsComponent', () => {
   let component: McpToolsComponent;
@@ -11,12 +13,14 @@ describe('McpToolsComponent', () => {
   let paramMapSubject: BehaviorSubject<any>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     paramMapSubject = new BehaviorSubject(convertToParamMap({ category: 'supabase' }));
 
     await TestBed.configureTestingModule({
       imports: [McpToolsComponent],
       providers: [
         provideRouter([]),
+        LanguageService,
         {
           provide: ActivatedRoute,
           useValue: { paramMap: paramMapSubject.asObservable() },
@@ -24,6 +28,7 @@ describe('McpToolsComponent', () => {
       ],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('fr');
     fixture = TestBed.createComponent(McpToolsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -327,4 +332,62 @@ describe('McpToolsComponent', () => {
     component.ngOnDestroy();
     expect(unsubSpy).toHaveBeenCalled();
   });
+
+});
+
+/* ==========================================================================
+ * Langue anglaise — mcpCategories descriptions
+ * ========================================================================== */
+
+describe('McpToolsComponent — English', () => {
+  let component: McpToolsComponent;
+  let fixture: ComponentFixture<McpToolsComponent>;
+  let enParamMapSubject: BehaviorSubject<any>;
+
+  beforeEach(async () => {
+    sessionStorage.clear();
+    TestBed.resetTestingModule();
+    enParamMapSubject = new BehaviorSubject(convertToParamMap({ category: 'supabase' }));
+
+    await TestBed.configureTestingModule({
+      imports: [McpToolsComponent],
+      providers: [
+        provideRouter([]),
+        LanguageService,
+        {
+          provide: ActivatedRoute,
+          useValue: { paramMap: enParamMapSubject.asObservable() },
+        },
+      ],
+    }).compileComponents();
+
+    TestBed.inject(LanguageService).setLang('en');
+    fixture = TestBed.createComponent(McpToolsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('first MCP category (supabase) should have English description', () => {
+    const categories = (component as any).mcpCategories;
+    const supabase = categories['supabase'];
+    expect(supabase).toBeTruthy();
+    expect(supabase.description).toContain('MCP tools for Supabase database management');
+    expect(supabase.description).not.toContain('Outils MCP pour');
+  });
+
+  it('at least one Supabase tool should have English description', () => {
+    const categories = (component as any).mcpCategories;
+    const supabaseTools = categories['supabase'].tools;
+    expect(supabaseTools[0].description).toBe('Applies a DDL migration to the database');
+  });
+
+  it('should display English description in categoryData computed signal', fakeAsync(() => {
+    enParamMapSubject.next(convertToParamMap({ category: 'supabase' }));
+    tick(600);
+    fixture.detectChanges();
+
+    const data = (component as any).categoryData();
+    expect(data).toBeTruthy();
+    expect(data!.description).toContain('MCP tools for Supabase database management');
+  }));
 });

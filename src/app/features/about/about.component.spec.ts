@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { AboutComponent } from './about.component';
 import { LanguageService } from '../../shared/services/language.service';
@@ -11,7 +12,10 @@ describe('AboutComponent', () => {
     sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [AboutComponent],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        LanguageService,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AboutComponent);

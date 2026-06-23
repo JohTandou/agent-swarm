@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { NotFoundComponent } from './not-found.component';
+import { LanguageService } from '../../shared/services/language.service';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
@@ -10,7 +12,10 @@ describe('NotFoundComponent', () => {
     sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [NotFoundComponent],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        LanguageService,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NotFoundComponent);

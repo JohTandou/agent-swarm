@@ -9,9 +9,9 @@
 @if (error()) {
 <div class="error-state" role="alert">
   <div class="error-state__icon">⚠️</div>
-  <h2 class="error-state__title">Impossible de charger la page</h2>
+  <h2 class="error-state__title">{{ t('error.pageLoad') }}</h2>
   <p class="error-state__message">{{ error() }}</p>
-  <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
+  <app-ui-button variant="primary" size="md" (click)="retry()">{{ t('error.retry') }}</app-ui-button>
 </div>
 }
 
@@ -49,11 +49,11 @@
         <h3 class="comparison-card__label">{{ item.label }}</h3>
         <div class="comparison-card__columns">
           <div class="comparison-card__col comparison-card__col--before">
-            <span class="comparison-card__col-label">Sans la Swarm</span>
+            <span class="comparison-card__col-label">{{ comparisonColumnLabels.withoutSwarm }}</span>
             <p class="comparison-card__text">{{ item.withoutSwarm }}</p>
           </div>
           <div class="comparison-card__col comparison-card__col--after">
-            <span class="comparison-card__col-label">Avec la Swarm</span>
+            <span class="comparison-card__col-label">{{ comparisonColumnLabels.withSwarm }}</span>
             <p class="comparison-card__text">{{ item.withSwarm }}</p>
           </div>
         </div>
@@ -141,15 +141,14 @@
     <div class="models__grid models__grid--single">
       <article class="model-card model-card--heavy">
         <div class="model-card__icon" aria-hidden="true">🧠</div>
-        <h3 class="model-card__name">{{ modelInfo.name }}</h3>
-        <p class="model-card__description">{{ modelInfo.description }}</p>
+        <h3 class="model-card__name">{{ modelName }}</h3>
+        <p class="model-card__description">{{ modelDescription }}</p>
         <ul class="model-card__strengths">
-          <li>Contexte de 1M tokens</li>
-          <li>Raisonnement architectural</li>
-          <li>Génération de code</li>
-          <li>Analyse de codebase</li>
+          @for (strength of modelStrengths; track strength) {
+          <li>{{ strength }}</li>
+          }
         </ul>
-        <span class="model-card__cost">{{ modelInfo.costNote }}</span>
+        <span class="model-card__cost">{{ modelCostNote }}</span>
       </article>
     </div>
   </section>

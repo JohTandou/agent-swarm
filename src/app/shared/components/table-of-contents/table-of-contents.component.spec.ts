@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { TableOfContentsComponent } from './table-of-contents.component';
 import { TocService } from '../../services/toc.service';
+import { LanguageService } from '../../services/language.service';
 import type { TocEntry } from '@shared/models';
 
 describe('TableOfContentsComponent', () => {
@@ -11,7 +13,10 @@ describe('TableOfContentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TableOfContentsComponent],
-      providers: [TocService],
+      providers: [
+        TocService,
+        LanguageService,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TableOfContentsComponent);

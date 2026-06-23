@@ -1,5 +1,5 @@
 @if (breadcrumbs.length > 0) {
-  <nav class="breadcrumbs" aria-label="Fil d'Ariane">
+  <nav class="breadcrumbs" [attr.aria-label]="t('breadcrumb.ariaLabel')">
     <ol class="breadcrumbs__list">
       @for (crumb of breadcrumbs; track crumb.label; let last = $last) {
         <li class="breadcrumbs__item">

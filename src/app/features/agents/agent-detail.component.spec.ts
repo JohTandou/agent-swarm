@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -7,6 +8,8 @@ import { of } from 'rxjs';
 import { AgentDetailComponent } from './agent-detail.component';
 import { TocService } from '../../shared/services/toc.service';
 import { ContentService } from '../../shared/services/content.service';
+import { LanguageService } from '../../shared/services/language.service';
+import { TranslationService } from '../../shared/services/translation.service';
 import { provideMarkdown } from 'ngx-markdown';
 
 describe('AgentDetailComponent', () => {
@@ -18,6 +21,21 @@ describe('AgentDetailComponent', () => {
    * Helper pour créer le composant avec un ID d'agent spécifique dans la route.
    */
   async function setupComponent(agentId: string): Promise<void> {
+    const mockTranslationService = {
+      translate: jasmine.createSpy('translate').and.callFake((key: string) => {
+        const map: Record<string, string> = {
+          'agents.detail.back': '← Retour au listing',
+          'agents.detail.backList': '← Retour au listing des agents',
+          'agents.detail.notFound': 'Agent introuvable',
+          'agents.detail.notFoundDesc': '{id} n\'existe pas dans le pipeline Swarm. Vérifiez l\'identifiant ou retournez au listing.',
+          'agents.category.build': 'Build',
+          'agents.category.qualité': 'Qualité',
+          'agents.category.infrastructure': 'Infrastructure',
+        };
+        return map[key] ?? key;
+      }),
+    };
+
     await TestBed.configureTestingModule({
       imports: [AgentDetailComponent],
       providers: [
@@ -27,6 +45,8 @@ describe('AgentDetailComponent', () => {
         provideMarkdown(),
         ContentService,
         TocService,
+        LanguageService,
+        { provide: TranslationService, useValue: mockTranslationService },
         {
           provide: ActivatedRoute,
           useValue: {
@@ -188,6 +208,10 @@ describe('AgentDetailComponent', () => {
   // === TESTS SANS ID (route vide) ===
   describe('sans paramètre id (route vide)', () => {
     beforeEach(async () => {
+      const mockTranslationService = {
+        translate: jasmine.createSpy('translate').and.callFake((key: string) => key),
+      };
+
       await TestBed.configureTestingModule({
         imports: [AgentDetailComponent],
         providers: [
@@ -197,6 +221,8 @@ describe('AgentDetailComponent', () => {
           provideMarkdown(),
           ContentService,
           TocService,
+          LanguageService,
+          { provide: TranslationService, useValue: mockTranslationService },
           {
             provide: ActivatedRoute,
             useValue: {

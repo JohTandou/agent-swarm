@@ -32,22 +32,15 @@
 
       <!-- Résumé exécutif — 2 phrases percutantes -->
       <div class="homepage__summary homepage__hero-stagger">
-        <p class="homepage__summary-text">
-          <strong>9 agents IA spécialisés</strong> + 2 agents utilitaires collaborent en parallèle sur votre projet.
-          En <strong>2 à 4 heures</strong>, de l'analyse à la PR mergée, chaque étape est automatisée
-          sans intervention humaine.
-        </p>
-        <p class="homepage__summary-text">
-          <strong>3 skills activables</strong> étendent leurs capacités — génération de composants Apple-grade,
-          tests automatisés, analyse de codebase, documentation vivante. Déploiement natif sur Supabase, Vercel et Render.
-        </p>
+        <p class="homepage__summary-text" [innerHTML]="t('homepage.summary.line1')"></p>
+        <p class="homepage__summary-text" [innerHTML]="t('homepage.summary.line2')"></p>
       </div>
 
     </div>
 
     <!-- Indicateur de scroll -->
     <div class="homepage__scroll-hint homepage__hero-stagger" aria-hidden="true">
-      <span class="homepage__scroll-text">Explorer</span>
+      <span class="homepage__scroll-text">{{ t('homepage.scrollHint') }}</span>
       <div class="homepage__scroll-arrow">
         <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
           <rect x="6" y="2" width="4" height="8" rx="2" fill="currentColor" opacity="0.6"/>
@@ -63,7 +56,7 @@
        Section 2 : Navigation visuelle — 4 cartes animées GSAP
        ═══════════════════════════════════════════════════════════════════ -->
   <section class="homepage__navigation section--alt" aria-label="Navigation vers les sections du wiki">
-    <h2 class="homepage__section-title">Choisissez votre destination</h2>
+    <h2 class="homepage__section-title">{{ t('homepage.nav.title') }}</h2>
     <div class="homepage__nav-grid">
       @for (card of navCards; track card.route; let idx = $index) {
         <a

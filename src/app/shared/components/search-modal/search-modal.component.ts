@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import type { SearchResult } from '@shared/models';
 import { SearchService } from '../../services/search.service';
+import { TranslationService } from '../../services/translation.service';
 import { UiSkeletonComponent } from '../ui-skeleton/ui-skeleton.component';
 import { UiEmptyStateComponent } from '../ui-empty-state/ui-empty-state.component';
 
@@ -42,6 +43,12 @@ import { UiEmptyStateComponent } from '../ui-empty-state/ui-empty-state.componen
 export class SearchModalComponent implements AfterViewInit, OnDestroy {
   /** Service de recherche injecté */
   readonly searchService = inject(SearchService);
+  private readonly translationService = inject(TranslationService);
+
+  /** Retourne la traduction pour la clé donnée dans la langue courante */
+  t(key: string): string {
+    return this.translationService.translate(key);
+  }
 
   /** Émis quand l'utilisateur demande la fermeture (Escape, clic backdrop) */
   @Output() dismiss = new EventEmitter<void>();

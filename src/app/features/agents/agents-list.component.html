@@ -1,14 +1,11 @@
 <section class="agents">
   <header class="agents__header">
-    <p class="agents__eyebrow">Neuf agents, un collectif</p>
-    <h1 class="agents__title" appTextReveal [revealDelay]="200">Agents</h1>
-    <p class="agents__subtitle">
-      Chaque agent est une pièce spécialisée du pipeline. Découvrez leurs rôles,
-      responsabilités et contraintes — puis explorez leur fiche détaillée.
-    </p>
+    <p class="agents__eyebrow">{{ t('agents.list.eyebrow') }}</p>
+    <h1 class="agents__title" appTextReveal [revealDelay]="200">{{ t('agents.list.title') }}</h1>
+    <p class="agents__subtitle">{{ t('agents.list.subtitle') }}</p>
   </header>
 
-  <nav class="agents__filters" aria-label="Filtrer par catégorie">
+  <nav class="agents__filters" [attr.aria-label]="t('agents.list.filter.ariaLabel')">
     <app-ui-button
       variant="ghost"
       size="sm"
@@ -16,7 +13,7 @@
       (click)="activeCategory.set(null)"
       aria-label="Afficher tous les agents"
     >
-      Tous
+      {{ t('agents.list.filter.all') }}
       <span class="agents__filter-count">{{ agents.length }}</span>
     </app-ui-button>
     @for (category of categories; track category) {
@@ -25,7 +22,7 @@
         size="sm"
         [class.agents__filter--active]="activeCategory() === category"
         (click)="toggleCategory(category)"
-        [attr.aria-label]="'Filtrer par ' + getCategoryLabel(category)"
+        [attr.aria-label]="t('agents.list.filter.byCategory').replace('{category}', getCategoryLabel(category))"
       >
         {{ getCategoryLabel(category) }}
         <span class="agents__filter-count">{{ getCategoryCount(category) }}</span>
@@ -33,7 +30,7 @@
     }
   </nav>
 
-  <div class="agents__grid" role="list" aria-label="Liste des agents Swarm" [appStaggerChildren]="60">
+  <div class="agents__grid" role="list" [attr.aria-label]="t('agents.list.ariaLabel')" [appStaggerChildren]="60">
     @for (agent of filteredAgents(); track agent.id; let idx = $index) {
       <a
         [routerLink]="['/agents', agent.id]"
@@ -47,7 +44,7 @@
                       <span class="agents__card-avatar-wrapper">
                 <img
                   [src]="'/assets/images/avatars/' + agent.id + '.png'"
-                  [alt]="'Avatar de ' + agent.name"
+                  [alt]="t('agents.detail.avatarAlt') + ' ' + agent.name"
                   class="agents__card-avatar"
                   loading="lazy"
                   (error)="$any($event.target).style.display = 'none'"
@@ -85,9 +82,9 @@
 
     @empty {
       <app-ui-empty-state
-        title="Aucun agent trouvé"
-        description="Aucun agent ne correspond à ce filtre. Essayez une autre catégorie."
-        primaryActionLabel="Voir tous les agents"
+        [title]="t('agents.list.empty.title')"
+        [description]="t('agents.list.empty.desc')"
+        [primaryActionLabel]="t('agents.list.empty.cta')"
         (primaryAction)="resetFilters()"
       />
     }

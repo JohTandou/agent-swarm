@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
+import { LanguageService, type Lang } from '../../shared/services/language.service';
+import { TranslationService } from '../../shared/services/translation.service';
 
 /* ==========================================================================
  * Types — Outil MCP
@@ -254,6 +256,100 @@ const CATEGORY_PREFIXES: Record<string, string> = {
 };
 
 /* ==========================================================================
+ * Données bilingues — Descriptions des outils (EN)
+ * ========================================================================== */
+
+const TOOL_DESCRIPTIONS_EN: Record<string, string[]> = {
+  supabase: [
+    'Applies a DDL migration to the database',
+    'Executes raw SQL in the Postgres database',
+    'Lists all tables from one or more schemas',
+    'Lists all database migrations',
+    'Retrieves logs by service type',
+    'Deploys an Edge Function to Supabase',
+    'Creates a development branch',
+    'Merges a development branch to production',
+    'Searches Supabase documentation via GraphQL',
+    'Generates TypeScript types from the database',
+  ],
+  vercel: [
+    'Deploys the current project to Vercel',
+    'Lists all project deployments',
+    'Retrieves a deployment by ID or URL',
+    'Lists all Vercel projects',
+    'Retrieves a specific project',
+    'Checks domain name availability',
+    'Retrieves runtime logs',
+    'Searches Vercel documentation',
+  ],
+  render: [
+    'Creates a new web service',
+    'Creates a new Postgres instance',
+    'Creates a new static site',
+    'Lists all account services',
+    'Retrieves service details',
+    'Retrieves performance metrics',
+    'Lists service deployments',
+    'Retrieves a specific deployment',
+    'Lists logs with filters',
+    'Creates a scheduled cron job',
+  ],
+  playwright: [
+    'Navigates to a URL',
+    'Clicks on an element',
+    'Types text into a field',
+    'Captures accessibility snapshot of the page',
+    'Takes a screenshot of the page',
+    'Fills multiple form fields',
+    'Hovers over an element',
+    'Presses a keyboard key',
+    'Selects a dropdown option',
+    'Waits for text to appear or disappear',
+  ],
+  context7: [
+    'Resolves a library identifier from name and version',
+    'Queries up-to-date library documentation',
+  ],
+  magic: [
+    'Generates a UI component from a text description',
+    'Searches for design inspirations by keywords',
+    'Improves an existing component with quality standards',
+    'Searches for company logos by domain name',
+  ],
+};
+
+/* ==========================================================================
+ * Données bilingues — Métadonnées des catégories (EN)
+ * ========================================================================== */
+
+const CATEGORY_META_EN: Record<string, { description: string; playgroundLabel: string }> = {
+  supabase: {
+    description: 'MCP tools for Supabase database management: migrations, development branches, Edge Functions, logs, and documentation.',
+    playgroundLabel: 'Simulate a Supabase migration',
+  },
+  vercel: {
+    description: 'MCP tools for the Vercel platform: deployments, projects, domains, runtime logs, and documentation.',
+    playgroundLabel: 'Simulate a Vercel log search',
+  },
+  render: {
+    description: 'MCP tools for the Render cloud platform: web services, databases, static sites, metrics, and scheduled tasks.',
+    playgroundLabel: 'Simulate creating a Render service',
+  },
+  playwright: {
+    description: 'MCP tools for browser automation via Playwright: navigation, interactions, screenshots, and E2E tests.',
+    playgroundLabel: 'Simulate a Playwright form fill',
+  },
+  context7: {
+    description: 'MCP tools for accessing library and framework documentation: identifier resolution and up-to-date documentation querying.',
+    playgroundLabel: 'Simulate a Context7 documentation search',
+  },
+  magic: {
+    description: 'MCP tools for UI component generation and inspiration via 21st.dev: component creation, design search, refinement, and logos.',
+    playgroundLabel: 'Simulate a 21st.dev component generation',
+  },
+};
+
+/* ==========================================================================
  * Composant — McpToolsComponent
  * ========================================================================== */
 
@@ -276,6 +372,35 @@ export class McpToolsComponent implements OnInit, OnDestroy {
    * ========================================================================== */
 
   private readonly route = inject(ActivatedRoute);
+  private readonly langService = inject(LanguageService);
+  private readonly translationService = inject(TranslationService);
+
+  private get lang(): Lang { return this.langService.currentLang(); }
+
+  /** Retourne la traduction pour la clé donnée dans la langue courante */
+  t(key: string): string { return this.translationService.translate(key); }
+
+  /** Catégories MCP localisées (FR ou EN selon la langue courante) */
+  private get mcpCategories(): Record<string, McpCategory> {
+    if (this.lang === 'fr') return MCP_CATEGORIES;
+
+    // Construire la version EN en remplaçant les descriptions FR
+    const en: Record<string, McpCategory> = {};
+    for (const [key, cat] of Object.entries(MCP_CATEGORIES)) {
+      const meta = CATEGORY_META_EN[key];
+      const descs = TOOL_DESCRIPTIONS_EN[key] ?? [];
+      en[key] = {
+        ...cat,
+        description: meta?.description ?? cat.description,
+        playgroundLabel: meta?.playgroundLabel ?? cat.playgroundLabel,
+        tools: cat.tools.map((t, i) => ({
+          ...t,
+          description: descs[i] ?? t.description,
+        })),
+      };
+    }
+    return en;
+  }
 
   /* ==========================================================================
    * État du composant
@@ -289,7 +414,7 @@ export class McpToolsComponent implements OnInit, OnDestroy {
 
   /** Données de la catégorie active */
   protected readonly categoryData = computed<McpCategory | null>(() => {
-    return MCP_CATEGORIES[this.categoryId()] ?? null;
+    return this.mcpCategories[this.categoryId()] ?? null;
   });
 
   /* ==========================================================================
@@ -318,7 +443,7 @@ export class McpToolsComponent implements OnInit, OnDestroy {
   private loadCategoryData(): void {
     const id = this.categoryId();
 
-    if (!MCP_CATEGORIES[id]) {
+    if (!this.mcpCategories[id]) {
       this.error.set(`Catégorie « ${id} » introuvable.`);
       return;
     }

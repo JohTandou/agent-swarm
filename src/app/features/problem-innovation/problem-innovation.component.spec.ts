@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { ProblemInnovationComponent } from './problem-innovation.component';
+import { LanguageService } from '../../shared/services/language.service';
 
 describe('ProblemInnovationComponent', () => {
   let component: ProblemInnovationComponent;
@@ -8,6 +10,9 @@ describe('ProblemInnovationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ProblemInnovationComponent],
+      providers: [
+        LanguageService,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProblemInnovationComponent);
@@ -206,11 +211,13 @@ describe('ProblemInnovationComponent', () => {
    * ========================================================================== */
 
   it('devrait exposer les données du modèle unique', () => {
-    const modelInfo = (component as any).modelInfo;
-    expect(modelInfo).toBeTruthy();
-    expect(modelInfo.name).toBe('DeepSeek V4 Pro');
-    expect(modelInfo.description).toContain('Modèle unique utilisé par tous les agents');
-    expect(modelInfo.costNote).toContain('0,435 $/M tokens');
+    const modelName = (component as any).modelName as string;
+    expect(modelName).toBeTruthy();
+    expect(modelName).toBe('DeepSeek V4 Pro');
+    const modelDescription = (component as any).modelDescription as string;
+    expect(modelDescription).toContain('Modèle unique');
+    const modelCostNote = (component as any).modelCostNote as string;
+    expect(modelCostNote).toContain('0,435 $/M tokens');
   });
 
   /* ==========================================================================
@@ -223,5 +230,44 @@ describe('ProblemInnovationComponent', () => {
 
     component['retry']();
     expect(component['error']()).toBeNull();
+  });
+
+});
+
+/* ==========================================================================
+ * Langue anglaise — heroTitle, pillars, comparisonData
+ * ========================================================================== */
+
+describe('ProblemInnovationComponent — English', () => {
+  let component: ProblemInnovationComponent;
+  let fixture: ComponentFixture<ProblemInnovationComponent>;
+
+  beforeEach(async () => {
+    TestBed.resetTestingModule();
+    await TestBed.configureTestingModule({
+      imports: [ProblemInnovationComponent],
+      providers: [
+        LanguageService,
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ProblemInnovationComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('heroTitle should return English text', () => {
+    expect(component['heroTitle']).toBe('Why the Swarm?');
+  });
+
+  it('first pillar should have English title', () => {
+    const pillars = component['pillars'];
+    expect(pillars[0].title).toBe('Automatic complexity classification');
+  });
+
+  it('first comparisonData entry should have English withoutSwarm and withSwarm', () => {
+    const data = component['comparisonData'];
+    expect(data[0].withoutSwarm).toContain('3–5 days');
+    expect(data[0].withSwarm).toContain('15–45 minutes');
   });
 });

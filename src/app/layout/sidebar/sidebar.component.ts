@@ -15,6 +15,26 @@ const NAV_LABEL_KEYS: Record<string, string> = {
   'Agents': 'nav.agents',
   'Skills': 'nav.skills',
   'Outils MCP': 'nav.mcp',
+  'Orchestrateur': 'sidebar.children.orchestrateur',
+  'Front': 'sidebar.children.front',
+  'Back': 'sidebar.children.back',
+  'Search': 'sidebar.children.search',
+  'Planner': 'sidebar.children.planner',
+  'Contract': 'sidebar.children.contract',
+  'Tester': 'sidebar.children.tester',
+  'Reviewer': 'sidebar.children.reviewer',
+  'Writer': 'sidebar.children.writer',
+  'Explore': 'sidebar.children.explore',
+  'General': 'sidebar.children.general',
+  'UI/UX Pro Max': 'sidebar.children.uiux',
+  'Tests Create': 'sidebar.children.testsCreate',
+  'Graphify': 'sidebar.children.graphify',
+  'Supabase': 'sidebar.children.supabase',
+  'Vercel': 'sidebar.children.vercel',
+  'Render': 'sidebar.children.render',
+  'Playwright': 'sidebar.children.playwright',
+  'Context7': 'sidebar.children.context7',
+  '21st.dev': 'sidebar.children.magic',
 };
 
 /**
@@ -102,6 +122,11 @@ export class SidebarComponent {
   translateNavLabel(frLabel: string): string {
     const key = NAV_LABEL_KEYS[frLabel];
     return key ? this.translationService.translate(key) : frLabel;
+  }
+
+  /** Retourne la traduction pour la clé donnée dans la langue courante */
+  t(key: string): string {
+    return this.translationService.translate(key);
   }
 
   /** Localise une route FR vers la langue courante via LanguageService */

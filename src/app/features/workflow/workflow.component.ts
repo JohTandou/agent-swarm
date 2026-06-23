@@ -3,6 +3,8 @@ import { MarkdownRendererComponent } from '../../shared/components/markdown-rend
 import { AnimationService } from '../../shared/services/animation.service';
 import { SeoService } from '../../shared/services/seo.service';
 import { JsonLdService } from '../../shared/services/json-ld.service';
+import { LanguageService, type Lang } from '../../shared/services/language.service';
+import { TranslationService } from '../../shared/services/translation.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
@@ -51,101 +53,92 @@ interface SwarmFile {
   readonly structure: string;
 }
 
-/**
- * Page Workflow Interactive — Composant pur Apple-grade.
- *
- * Présente le pipeline complet de la Swarm en 6 sections plein écran :
- * 1. Hero
- * 2. Arbre de décision interactif (5 routes)
- * 3. Diagramme Mermaid du pipeline complet
- * 4. Pré-search expliqué
- * 5. Gates qualité (tester + reviewer)
- * 6. Intégration Git + Fichiers swarm
- */
-@Component({
-  selector: 'app-workflow',
-  standalone: true,
-  imports: [MarkdownRendererComponent, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
-  templateUrl: './workflow.component.html',
-  styleUrls: ['./workflow.component.scss'],
-})
-export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
-  private hostRef = inject(ElementRef);
-  private readonly animService = inject(AnimationService);
-  private readonly seoService = inject(SeoService);
-  private readonly jsonLdService = inject(JsonLdService);
+/* ==========================================================================
+ * Données bilingues — Section 1 : Hero
+ * ========================================================================== */
 
-  /* ==========================================================================
-   * État du composant
-   * ========================================================================== */
+const HERO: Record<Lang, { kicker: string; title: string; subtitle: string }> = {
+  fr: {
+    kicker: 'Le pipeline d\'agents IA',
+    title: 'De l\'analyse au merge, chaque étape automatisée',
+    subtitle: 'Une issue GitHub arrive, une pull request mergée en ressort. Entre les deux : classification automatique, routage intelligent, implémentation parallèle, tests rigoureux et documentation vivante. Le tout orchestré sans que vous leviez le petit doigt.',
+  },
+  en: {
+    kicker: 'The AI agent pipeline',
+    title: 'From issue to merge — entirely automated',
+    subtitle: 'A GitHub issue comes in, a merged pull request comes out. In between: automatic classification, intelligent routing, parallel implementation, rigorous testing, and living documentation. All orchestrated without you lifting a finger.',
+  },
+};
 
-  protected readonly error = signal<string | null>(null);
+/* ==========================================================================
+ * Données bilingues — Section 2 : Arbre de décision
+ * ========================================================================== */
 
-  /* ==========================================================================
-   * Données — Section 1 : Hero
-   * ========================================================================== */
-
-  protected readonly heroTitle = 'De l\'issue au merge — sans effort';
-  protected readonly heroSubtitle =
-    'Une issue GitHub arrive, une pull request mergée en ressort. Entre les deux : classification automatique, routage intelligent, implémentation parallèle, tests rigoureux et documentation vivante. Le tout orchestré sans que vous leviez le petit doigt.';
-
-  /* ==========================================================================
-   * Données — Section 2 : Arbre de décision
-   * ========================================================================== */
-
-  protected readonly decisionNodes: readonly DecisionNode[] = [
+const DECISION_NODES: Record<Lang, Pick<DecisionNode, 'label' | 'description' | 'complexity'>[]> = {
+  fr: [
     {
-      route: 'DIRECT',
       label: 'Réponse textuelle',
       description: 'Réponse à une question, commande /slash, information. Aucun agent spécialisé — pas de modification de fichier.',
       complexity: 'Minimale',
-      tokens: ROUTE_COSTS['DIRECT'].tokens,
-      cost: ROUTE_COSTS['DIRECT'].cost,
-      agents: ROUTE_COSTS['DIRECT'].agents,
     },
     {
-      route: 'SIMPLE',
       label: 'Modification ciblée',
       description: 'Correction ou ajout limité à un fichier. L\'agent adapte le code existant sans planification préalable.',
       complexity: 'Faible',
-      tokens: ROUTE_COSTS['SIMPLE'].tokens,
-      cost: ROUTE_COSTS['SIMPLE'].cost,
-      agents: ROUTE_COSTS['SIMPLE'].agents,
     },
     {
-      route: 'ADAPT',
       label: 'Adaptation transversale',
       description: 'Modification impactant 2–3 fichiers. L\'agent search cartographie les dépendances avant modification.',
       complexity: 'Modérée',
-      tokens: ROUTE_COSTS['ADAPT'].tokens,
-      cost: ROUTE_COSTS['ADAPT'].cost,
-      agents: ROUTE_COSTS['ADAPT'].agents,
     },
     {
-      route: 'MEDIUM',
       label: 'Fonctionnalité multi-fichiers',
       description: 'Feature complète avec planification, génération de tests et revue de code automatisée.',
       complexity: 'Élevée',
-      tokens: ROUTE_COSTS['MEDIUM'].tokens,
-      cost: ROUTE_COSTS['MEDIUM'].cost,
-      agents: ROUTE_COSTS['MEDIUM'].agents,
     },
     {
-      route: 'FULL',
       label: 'Feature complexe avec contrats',
       description: 'Fonctionnalité majeure nécessitant contrats TypeScript, parallélisme front+back, gates qualité et documentation.',
       complexity: 'Maximale',
-      tokens: ROUTE_COSTS['FULL'].tokens,
-      cost: ROUTE_COSTS['FULL'].cost,
-      agents: ROUTE_COSTS['FULL'].agents,
     },
-  ];
+  ],
+  en: [
+    {
+      label: 'Text response',
+      description: 'Answer to a question, /slash command, information. No specialized agent — no file modification.',
+      complexity: 'Minimal',
+    },
+    {
+      label: 'Targeted modification',
+      description: 'Fix or addition limited to a single file. The agent adapts existing code without prior planning.',
+      complexity: 'Low',
+    },
+    {
+      label: 'Cross-cutting adaptation',
+      description: 'Modification impacting 2–3 files. The search agent maps dependencies before modification.',
+      complexity: 'Moderate',
+    },
+    {
+      label: 'Multi-file feature',
+      description: 'Complete feature with planning, automated test generation, and code review.',
+      complexity: 'High',
+    },
+    {
+      label: 'Complex feature with contracts',
+      description: 'Major feature requiring TypeScript contracts, front+back parallelism, quality gates, and documentation.',
+      complexity: 'Maximum',
+    },
+  ],
+};
 
-  /* ==========================================================================
-   * Données — Section 3 : Diagramme Mermaid
-   * ========================================================================== */
+const ROUTE_LIST = ['DIRECT', 'SIMPLE', 'ADAPT', 'MEDIUM', 'FULL'] as const;
 
-  protected readonly mermaidDiagram = `\`\`\`mermaid
+/* ==========================================================================
+ * Données bilingues — Section 3 : Diagramme Mermaid
+ * ========================================================================== */
+
+const MERMAID_DIAGRAMS: Record<Lang, string> = {
+  fr: `\`\`\`mermaid
 graph TB
     ISSUE["📋 Issue GitHub"] --> PRESEARCH["🔍 Pre-search<br/>Étape 0.3"]
     PRESEARCH --> CLASSIFY["🧠 Orchestrateur<br/>Classification tâche"]
@@ -201,57 +194,105 @@ graph TB
     style FIX fill:#0E0C09,stroke:#C4780D,color:#C4780D
     linkStyle 21 color:#0E0C09
     linkStyle 22 color:#0E0C09
-  \`\`\``;
+  \`\`\``,
+  en: `\`\`\`mermaid
+graph TB
+    ISSUE["📋 GitHub Issue"] --> PRESEARCH["🔍 Pre-search<br/>Step 0.3"]
+    PRESEARCH --> CLASSIFY["🧠 Orchestrator<br/>Task classification"]
 
-  /* ==========================================================================
-   * Données — Section 4 : Pré-search
-   * ========================================================================== */
+    CLASSIFY --> ADAPT["🔄 ADAPT"]
+    CLASSIFY --> SIMPLE["🔧 SIMPLE"]
+    CLASSIFY --> MEDIUM["📦 MEDIUM"]
+    CLASSIFY --> FULL["🏗️ FULL"]
 
-  protected readonly preSearchTitle = 'Pré-search : le diagnostic qui évite les erreurs';
-  protected readonly preSearchDescription =
-    'Avant de classifier votre tâche, les agents de la Swarm analysent l\'ensemble du codebase en parallèle. Fichiers impactés, occurrences, complexité réelle — tout est mesuré objectivement. Résultat : la bonne route est choisie à chaque fois, sans tâtonnement.';
 
-  protected readonly preSearchThresholds: readonly PreSearchThreshold[] = [
-    {
-      route: 'DIRECT',
-      fichiers: '0 fichier',
-      tokens: `${ROUTE_COSTS['DIRECT'].tokens}`,
-      classification: 'Réponse textuelle — aucun agent déclenché',
-    },
-    {
-      route: 'SIMPLE',
-      fichiers: '1 fichier, > 3 occurrences',
-      tokens: `${ROUTE_COSTS['SIMPLE'].tokens}`,
-      classification: 'Modification ciblée — agent unique',
-    },
-    {
-      route: 'ADAPT',
-      fichiers: '2–5 fichiers',
-      tokens: `${ROUTE_COSTS['ADAPT'].tokens}`,
-      classification: 'Adaptation transversale — search + agent',
-    },
-    {
-      route: 'MEDIUM',
-      fichiers: '5–15 fichiers, ≥ 1 feature',
-      tokens: `${ROUTE_COSTS['MEDIUM'].tokens}`,
-      classification: 'Feature multi-fichiers — planification + tests',
-    },
-    {
-      route: 'FULL',
-      fichiers: '> 15 fichiers, contrats nécessaires',
-      tokens: `${ROUTE_COSTS['FULL'].tokens}`,
-      classification: 'Feature complexe — pipeline complet avec gates',
-    },
-  ];
 
-  /* ==========================================================================
-   * Données — Section 5 : Gates qualité
-   * ========================================================================== */
+    SIMPLE --> IMPL_SIMPLE["💻 Front or Back<br/>Implementation"]
+    IMPL_SIMPLE --> TEST["🧪 Tester<br/>Generation + test execution"]
 
-  protected readonly qualityGates: readonly QualityGate[] = [
+    ADAPT --> SEARCH_ADAPT["🔎 Search<br/>Mapping"]
+    SEARCH_ADAPT --> IMPL_ADAPT["💻 Front or Back<br/>Implementation"]
+    IMPL_ADAPT --> TEST
+
+    MEDIUM --> SEARCH_MED["🔎 Search<br/>Mapping"]
+    SEARCH_MED --> PLAN["🧩 Planner<br/>Planning"]
+    PLAN --> IMPL_MEDIUM["💻 Front + Back<br/>Parallel"]
+    IMPL_MEDIUM --> TEST
+
+    FULL --> SEARCH_FULL["🔎 Search<br/>Mapping"]
+    SEARCH_FULL --> PLAN_FULL["🧩 Planner<br/>Planning"]
+    PLAN_FULL --> CONTRACT["📝 Contract<br/>Types + API"]
+    CONTRACT --> IMPL_FULL["💻 Front + Back<br/>Parallel"]
+    IMPL_FULL --> TEST
+
+    TEST --> REVIEW["👁️ Reviewer<br/>Quality audit"]
+    REVIEW -->|"✅ Approved"| WRITER["✍️ Writer<br/>Documentation"]
+    REVIEW -->|"❌ Rejected"| FIX["🔄 Corrections"]
+    FIX --> TEST
+
+    WRITER --> COMMIT["📝 Commit + Push"]
+    COMMIT --> PR["🔀 Pull Request"]
+    PR --> MERGE["🎉 Merge"]
+
+
+    style ISSUE fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
+    style PRESEARCH fill:#0E0C09,stroke:#7A8899,color:#7A8899
+    style CLASSIFY fill:#0E0C09,stroke:#7A8899,color:#7A8899
+    style SIMPLE fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
+    style ADAPT fill:#0E0C09,stroke:#7A8899,color:#F5F0EB
+    style MEDIUM fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style FULL fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style REVIEW fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style MERGE fill:#0E0C09,stroke:#7A8899,color:#7A8899
+    style WRITER fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style PLAN fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style PLAN_FULL fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style CONTRACT fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    style FIX fill:#0E0C09,stroke:#C4780D,color:#C4780D
+    linkStyle 21 color:#0E0C09
+    linkStyle 22 color:#0E0C09
+  \`\`\``,
+};
+
+/* ==========================================================================
+ * Données bilingues — Section 4 : Pré-search
+ * ========================================================================== */
+
+const PRESEARCH: Record<Lang, { title: string; description: string }> = {
+  fr: {
+    title: 'Pré-search : le diagnostic qui évite les erreurs',
+    description: 'Avant de classifier votre tâche, les agents de la Swarm analysent l\'ensemble du codebase en parallèle. Fichiers impactés, occurrences, complexité réelle — tout est mesuré objectivement. Résultat : la bonne route est choisie à chaque fois, sans tâtonnement.',
+  },
+  en: {
+    title: 'Pre-search: the diagnosis that prevents errors',
+    description: 'Before classifying your task, Swarm agents analyze the entire codebase in parallel. Impacted files, occurrences, real complexity — everything is measured objectively. Result: the right route is chosen every time, without trial and error.',
+  },
+};
+
+const PRESEARCH_THRESHOLDS: Record<Lang, Pick<PreSearchThreshold, 'fichiers' | 'classification'>[]> = {
+  fr: [
+    { fichiers: '0 fichier', classification: 'Réponse textuelle — aucun agent déclenché' },
+    { fichiers: '1 fichier, > 3 occurrences', classification: 'Modification ciblée — agent unique' },
+    { fichiers: '2–5 fichiers', classification: 'Adaptation transversale — search + agent' },
+    { fichiers: '5–15 fichiers, ≥ 1 feature', classification: 'Feature multi-fichiers — planification + tests' },
+    { fichiers: '> 15 fichiers, contrats nécessaires', classification: 'Feature complexe — pipeline complet avec gates' },
+  ],
+  en: [
+    { fichiers: '0 file', classification: 'Text response — no agent triggered' },
+    { fichiers: '1 file, > 3 occurrences', classification: 'Targeted modification — single agent' },
+    { fichiers: '2–5 files', classification: 'Cross-cutting adaptation — search + agent' },
+    { fichiers: '5–15 files, ≥ 1 feature', classification: 'Multi-file feature — planning + tests' },
+    { fichiers: '> 15 files, contracts needed', classification: 'Complex feature — full pipeline with gates' },
+  ],
+};
+
+/* ==========================================================================
+ * Données bilingues — Section 5 : Gates qualité
+ * ========================================================================== */
+
+const QUALITY_GATES: Record<Lang, Pick<QualityGate, 'description' | 'criteria'>[]> = {
+  fr: [
     {
-      name: 'Tester',
-      icon: '🧪',
       description: 'Génération systématique de tests, exécution et mesure de couverture. Seuil bloquant : 80 %.',
       criteria: [
         'Génération automatique de tests unitaires et d\'intégration',
@@ -262,8 +303,6 @@ graph TB
       ],
     },
     {
-      name: 'Reviewer',
-      icon: '👁️',
       description: 'Audit de sécurité, qualité et cohérence du code ET des tests générés. Approbation ou rejet avec liste précise des corrections.',
       criteria: [
         'Security score ≥ 1.0 (aucune vulnérabilité critique)',
@@ -273,44 +312,59 @@ graph TB
         'Approbation/rejet avec liste exhaustive des issues',
       ],
     },
-  ];
+  ],
+  en: [
+    {
+      description: 'Systematic test generation, execution, and coverage measurement. Blocking threshold: 80%.',
+      criteria: [
+        'Automatic generation of unit and integration tests',
+        'Full test suite execution',
+        'Coverage measurement (threshold: ≥ 80%)',
+        'Error categorization for granular retry',
+        'Detailed report with corrective actions',
+      ],
+    },
+    {
+      description: 'Security, quality, and consistency audit of code AND generated tests. Approval or rejection with precise list of corrections.',
+      criteria: [
+        'Security score ≥ 1.0 (no critical vulnerabilities)',
+        'Quality score ≥ 0.85 (clean, maintainable code)',
+        'Diff limit verification (no unjustified massive modification)',
+        'Generated test audit (no false positives, real coverage)',
+        'Approval/rejection with exhaustive issue list',
+      ],
+    },
+  ],
+};
 
-  /* ==========================================================================
-   * Données — Section 6 : Intégration Git
-   * ========================================================================== */
+/* ==========================================================================
+ * Données bilingues — Section 6 : Intégration Git
+ * ========================================================================== */
 
-  protected readonly gitSteps: readonly GitStep[] = [
-    {
-      step: 'Issue GitHub',
-      icon: '📋',
-      description: 'Tout commence par une issue. la Swarm analyse le titre et la description pour classifier automatiquement la tâche.',
-    },
-    {
-      step: 'Branche',
-      icon: '🌿',
-      description: 'Création automatique d\'une branche feature/ suivant la convention swarm-issue-{n}-{description}.',
-    },
-    {
-      step: 'Commits',
-      icon: '📝',
-      description: 'Commits atomiques avec messages conventionnels (feat:, fix:, docs:). Un commit par étape majeure.',
-    },
-    {
-      step: 'Pull Request',
-      icon: '🔀',
-      description: 'Création automatique de la PR avec description générée, checklist et lien vers l\'issue.',
-    },
-    {
-      step: 'Merge',
-      icon: '🎉',
-      description: 'Après approbation des gates et revue humaine optionnelle, merge automatique dans la branche principale.',
-    },
-  ];
+const GIT_STEPS: Record<Lang, Pick<GitStep, 'step' | 'description'>[]> = {
+  fr: [
+    { step: 'Issue GitHub', description: 'Tout commence par une issue. la Swarm analyse le titre et la description pour classifier automatiquement la tâche.' },
+    { step: 'Branche', description: 'Création automatique d\'une branche feature/ suivant la convention swarm-issue-{n}-{description}.' },
+    { step: 'Commits', description: 'Commits atomiques avec messages conventionnels (feat:, fix:, docs:). Un commit par étape majeure.' },
+    { step: 'Pull Request', description: 'Création automatique de la PR avec description générée, checklist et lien vers l\'issue.' },
+    { step: 'Merge', description: 'Après approbation des gates et revue humaine optionnelle, merge automatique dans la branche principale.' },
+  ],
+  en: [
+    { step: 'GitHub Issue', description: 'Everything starts with an issue. The Swarm analyzes the title and description to automatically classify the task.' },
+    { step: 'Branch', description: 'Automatic creation of a feature/ branch following the swarm-issue-{n}-{description} convention.' },
+    { step: 'Commits', description: 'Atomic commits with conventional messages (feat:, fix:, docs:). One commit per major step.' },
+    { step: 'Pull Request', description: 'Automatic PR creation with generated description, checklist, and link to the issue.' },
+    { step: 'Merge', description: 'After gate approval and optional human review, automatic merge into the main branch.' },
+  ],
+};
 
-  protected readonly gitScriptsDescription =
-    'Deux scripts automatisent le workflow Git : setup.ts initialise la branche et l\'environnement, finish.ts nettoie, documente et prépare la PR.';
+const GIT_SCRIPTS: Record<Lang, string> = {
+  fr: 'Deux scripts automatisent le workflow Git : setup.ts initialise la branche et l\'environnement, finish.ts nettoie, documente et prépare la PR.',
+  en: 'Two scripts automate the Git workflow: setup.ts initializes the branch and environment, finish.ts cleans up, documents, and prepares the PR.',
+};
 
-  protected readonly gitGraphDiagram = `\`\`\`mermaid
+const GIT_GRAPH: Record<Lang, string> = {
+  fr: `\`\`\`mermaid
 gitGraph
    commit id: "main"
    branch feature/swarm-issue-N
@@ -319,18 +373,321 @@ gitGraph
    checkout main
    merge feature/swarm-issue-N tag: "squash merge"
    commit id: "main (post-merge)"
-\`\`\``;
+\`\`\``,
+  en: `\`\`\`mermaid
+gitGraph
+   commit id: "main"
+   branch feature/swarm-issue-N
+   commit id: "implementation"
+   commit id: "tests validated"
+   checkout main
+   merge feature/swarm-issue-N tag: "squash merge"
+   commit id: "main (post-merge)"
+\`\`\``,
+};
+
+/* ==========================================================================
+ * Données bilingues — Section 7 : Fichiers swarm
+ * ========================================================================== */
+
+const SWARM_FILES: Record<Lang, Pick<SwarmFile, 'description'>[]> = {
+  fr: [
+    {
+      description: 'File d\'attente des tâches pour les sessions multi-tâches. Permet au Swarm de traiter jusqu\'à 5 tâches indépendantes en parallèle.',
+    },
+    {
+      description: 'Mémoire persistante des métriques et de l\'historique des sessions. Alimente les tableaux de bord et l\'optimisation continue.',
+    },
+  ],
+  en: [
+    {
+      description: 'Task queue for multi-task sessions. Allows the Swarm to process up to 5 independent tasks in parallel.',
+    },
+    {
+      description: 'Persistent memory of metrics and session history. Feeds dashboards and continuous optimization.',
+    },
+  ],
+};
+
+/* ==========================================================================
+ * Données bilingues — En-têtes de section et textes statiques
+ * ========================================================================== */
+
+const SECTION_TEXTS: Record<Lang, {
+  decisionTree: { kicker: string; title: string; description: string };
+  treeNote: string;
+  mermaid: { kicker: string; title: string; description: string };
+  preSearchKicker: string;
+  qualityGates: { kicker: string; title: string; description: string };
+  gateFlow: { implementation: string; tester: string; testerThreshold: string; reviewer: string; reviewerThreshold: string; prValidated: string; rejected: string };
+  git: { kicker: string; title: string; description: string };
+  swarmFiles: { kicker: string; title: string; description: string };
+}> = {
+  fr: {
+    decisionTree: {
+      kicker: 'Classification automatique',
+      title: 'Arbre de décision des routes',
+      description: 'Chaque tâche est automatiquement classifiée sur l\'une des 5 routes du pipeline. La complexité croissante détermine le nombre d\'agents mobilisés et la rigueur des gates qualité.',
+    },
+    treeNote: 'Coûts estimés avec la tarification API DeepSeek V4 Pro (juin 2026). Tokens et coûts réels variables selon la complexité et le volume.',
+    mermaid: {
+      kicker: 'Visualisation',
+      title: 'Pipeline complet',
+      description: 'Le diagramme ci-dessous illustre le flux complet : de l\'issue GitHub au merge final. Chaque étape est automatisée. Les tâches MEDIUM et FULL activent le parallélisme front+back et les gates qualité (tester + reviewer).',
+    },
+    preSearchKicker: 'Étape 0.3',
+    qualityGates: {
+      kicker: 'Contrôle qualité',
+      title: 'Gates qualité automatisées',
+      description: 'Deux gates successives garantissent que chaque modification est testée et revue avant d\'atteindre la branche principale.',
+    },
+    gateFlow: {
+      implementation: 'Implémentation',
+      tester: 'Tester',
+      testerThreshold: 'Seuil : ≥ 80 %',
+      reviewer: 'Reviewer',
+      reviewerThreshold: 'Score : ≥ 0.85',
+      prValidated: 'PR Validée',
+      rejected: '❌ Rejeté → Corrections → Retest',
+    },
+    git: {
+      kicker: 'Workflow automatisé',
+      title: 'Intégration Git native',
+      description: 'Le pipeline Swarm est pensé pour le flux GitHub : chaque étape, de la création de branche au merge, est automatisée.',
+    },
+    swarmFiles: {
+      kicker: 'Configuration',
+      title: 'Fichiers Swarm',
+      description: 'Deux fichiers de configuration gouvernent l\'état et la mémoire du pipeline entre les sessions.',
+    },
+  },
+  en: {
+    decisionTree: {
+      kicker: 'Automatic classification',
+      title: 'Route decision tree',
+      description: 'Each task is automatically classified into one of the 5 pipeline routes. Increasing complexity determines the number of agents mobilized and the rigor of quality gates.',
+    },
+    treeNote: 'Estimated costs based on DeepSeek V4 Pro API pricing (June 2026). Tokens and actual costs vary by complexity and volume.',
+    mermaid: {
+      kicker: 'Visualization',
+      title: 'Complete pipeline',
+      description: 'The diagram below illustrates the complete flow: from GitHub issue to final merge. Each step is automated. MEDIUM and FULL tasks activate front+back parallelism and quality gates (tester + reviewer).',
+    },
+    preSearchKicker: 'Step 0.3',
+    qualityGates: {
+      kicker: 'Quality control',
+      title: 'Automated quality gates',
+      description: 'Two successive gates ensure that every modification is tested and reviewed before reaching the main branch.',
+    },
+    gateFlow: {
+      implementation: 'Implementation',
+      tester: 'Tester',
+      testerThreshold: 'Threshold: ≥ 80%',
+      reviewer: 'Reviewer',
+      reviewerThreshold: 'Score: ≥ 0.85',
+      prValidated: 'PR Validated',
+      rejected: '❌ Rejected → Corrections → Retest',
+    },
+    git: {
+      kicker: 'Automated workflow',
+      title: 'Native Git integration',
+      description: 'The Swarm pipeline is designed for the GitHub flow: every step, from branch creation to merge, is automated.',
+    },
+    swarmFiles: {
+      kicker: 'Configuration',
+      title: 'Swarm Files',
+      description: 'Two configuration files govern the pipeline state and memory between sessions.',
+    },
+  },
+};
+
+/* ==========================================================================
+ * Données bilingues — SEO & Schema
+ * ========================================================================== */
+
+const SEO_DATA: Record<Lang, { title: string; description: string; schemaName: string; schemaDesc: string; steps: { name: string; text: string }[] }> = {
+  fr: {
+    title: 'Pipeline de développement',
+    description: 'De l\'issue au merge sans effort. Découvrez comment la Swarm orchestre le développement logiciel de bout en bout : classification, routage, implémentation parallèle, tests et revue automatisés.',
+    schemaName: 'Pipeline de développement Swarm',
+    schemaDesc: 'Étapes du pipeline agentic de bout en bout, de l\'issue GitHub au merge automatisé.',
+    steps: [
+      { name: 'Pre-search', text: 'Analyse du codebase en parallèle par les agents de la Swarm pour mesurer l\'impact réel de la tâche.' },
+      { name: 'Classification', text: 'L\'orchestrateur analyse la complexité et choisit la route appropriée : DIRECT, SIMPLE, ADAPT, MEDIUM ou FULL.' },
+      { name: 'Search', text: 'L\'agent Search cartographie le codebase, identifie les fichiers impactés et détecte les patterns.' },
+      { name: 'Plan', text: 'L\'agent Planner décompose la tâche en sous-tâches atomiques et détecte les choix architecturaux.' },
+      { name: 'Implementation', text: 'Les agents Front et Back implémentent en parallèle, guidés par les contrats TypeScript.' },
+      { name: 'Tests', text: 'L\'agent Tester génère et exécute les tests, mesure la couverture (seuil 80 %) et catégorise les erreurs.' },
+      { name: 'Review & Merge', text: 'L\'agent Reviewer audite la qualité et la sécurité. Après approbation, le Writer documente et la PR est mergée.' },
+    ],
+  },
+  en: {
+    title: 'Development Pipeline',
+    description: 'From issue to merge effortlessly. Discover how the Swarm orchestrates end-to-end software development: classification, routing, parallel implementation, automated testing, and review.',
+    schemaName: 'Swarm Development Pipeline',
+    schemaDesc: 'Steps of the end-to-end agentic pipeline, from GitHub issue to automated merge.',
+    steps: [
+      { name: 'Pre-search', text: 'Parallel codebase analysis by Swarm agents to measure the real impact of the task.' },
+      { name: 'Classification', text: 'The orchestrator analyzes complexity and chooses the appropriate route: DIRECT, SIMPLE, ADAPT, MEDIUM, or FULL.' },
+      { name: 'Search', text: 'The Search agent maps the codebase, identifies impacted files, and detects patterns.' },
+      { name: 'Plan', text: 'The Planner agent breaks down the task into atomic sub-tasks and detects architectural choices.' },
+      { name: 'Implementation', text: 'Front and Back agents implement in parallel, guided by TypeScript contracts.' },
+      { name: 'Tests', text: 'The Tester agent generates and executes tests, measures coverage (80% threshold), and categorizes errors.' },
+      { name: 'Review & Merge', text: 'The Reviewer agent audits quality and security. After approval, the Writer documents and the PR is merged.' },
+    ],
+  },
+};
+
+/**
+ * Page Workflow Interactive — Composant pur Apple-grade.
+ *
+ * Présente le pipeline complet de la Swarm en 6 sections plein écran :
+ * 1. Hero
+ * 2. Arbre de décision interactif (5 routes)
+ * 3. Diagramme Mermaid du pipeline complet
+ * 4. Pré-search expliqué
+ * 5. Gates qualité (tester + reviewer)
+ * 6. Intégration Git + Fichiers swarm
+ */
+@Component({
+  selector: 'app-workflow',
+  standalone: true,
+  imports: [MarkdownRendererComponent, UiButtonComponent, UiBadgeComponent, StaggerChildrenDirective, TextRevealDirective],
+  templateUrl: './workflow.component.html',
+  styleUrls: ['./workflow.component.scss'],
+})
+export class WorkflowComponent implements OnInit, AfterViewInit, OnDestroy {
+  private hostRef = inject(ElementRef);
+  private readonly animService = inject(AnimationService);
+  private readonly seoService = inject(SeoService);
+  private readonly jsonLdService = inject(JsonLdService);
+  private readonly langService = inject(LanguageService);
+  private readonly translationService = inject(TranslationService);
+
+  private get lang(): Lang { return this.langService.currentLang(); }
+
+  /** Retourne la traduction pour la clé donnée dans la langue courante */
+  t(key: string): string { return this.translationService.translate(key); }
+
+  /* ==========================================================================
+   * État du composant
+   * ========================================================================== */
+
+  protected readonly error = signal<string | null>(null);
+
+  /* ==========================================================================
+   * Données — Section 1 : Hero
+   * ========================================================================== */
+
+  protected get heroKicker(): string { return HERO[this.lang].kicker; }
+  protected get heroTitle(): string { return HERO[this.lang].title; }
+  protected get heroSubtitle(): string { return HERO[this.lang].subtitle; }
+
+  /* ==========================================================================
+   * Données — Section 2 : Arbre de décision
+   * ========================================================================== */
+
+  protected get decisionTree(): { kicker: string; title: string; description: string } {
+    return SECTION_TEXTS[this.lang].decisionTree;
+  }
+  protected get treeNote(): string { return SECTION_TEXTS[this.lang].treeNote; }
+
+  /* ==========================================================================
+   * Données — Section 3 : Diagramme Mermaid
+   * ========================================================================== */
+
+  protected get mermaidSection(): { kicker: string; title: string; description: string } {
+    return SECTION_TEXTS[this.lang].mermaid;
+  }
+
+  protected get decisionNodes(): readonly DecisionNode[] {
+    const l = DECISION_NODES[this.lang];
+    return ROUTE_LIST.map((route, i) => ({
+      route,
+      label: l[i].label,
+      description: l[i].description,
+      complexity: l[i].complexity,
+      tokens: ROUTE_COSTS[route].tokens,
+      cost: ROUTE_COSTS[route].cost,
+      agents: ROUTE_COSTS[route].agents,
+    }));
+  }
+
+  /* ==========================================================================
+   * Données — Section 3 : Diagramme Mermaid
+   * ========================================================================== */
+
+  protected get mermaidDiagram(): string { return MERMAID_DIAGRAMS[this.lang]; }
+
+  /* ==========================================================================
+   * Données — Section 4 : Pré-search
+   * ========================================================================== */
+
+  protected get preSearchKicker(): string { return SECTION_TEXTS[this.lang].preSearchKicker; }
+  protected get preSearchTitle(): string { return PRESEARCH[this.lang].title; }
+  protected get preSearchDescription(): string { return PRESEARCH[this.lang].description; }
+
+  protected get preSearchThresholds(): readonly PreSearchThreshold[] {
+    const l = PRESEARCH_THRESHOLDS[this.lang];
+    return ROUTE_LIST.map((route, i) => ({
+      route,
+      fichiers: l[i].fichiers,
+      tokens: `${ROUTE_COSTS[route].tokens}`,
+      classification: l[i].classification,
+    }));
+  }
+
+  /* ==========================================================================
+   * Données — Section 5 : Gates qualité
+   * ========================================================================== */
+
+  protected get qualityGatesSection(): { kicker: string; title: string; description: string } {
+    return SECTION_TEXTS[this.lang].qualityGates;
+  }
+  protected get gateFlowLabels() { return SECTION_TEXTS[this.lang].gateFlow; }
+
+  protected get qualityGates(): readonly QualityGate[] {
+    const l = QUALITY_GATES[this.lang];
+    return [
+      { name: 'Tester', icon: '🧪', ...l[0] },
+      { name: 'Reviewer', icon: '👁️', ...l[1] },
+    ];
+  }
+
+  /* ==========================================================================
+   * Données — Section 6 : Intégration Git
+   * ========================================================================== */
+
+  protected get gitSection(): { kicker: string; title: string; description: string } {
+    return SECTION_TEXTS[this.lang].git;
+  }
+
+  protected get gitSteps(): readonly GitStep[] {
+    return GIT_STEPS[this.lang].map((s, i) => ({
+      ...s,
+      icon: ['📋', '🌿', '📝', '🔀', '🎉'][i],
+    }));
+  }
+
+  protected get gitScriptsDescription(): string { return GIT_SCRIPTS[this.lang]; }
+
+  protected get gitGraphDiagram(): string { return GIT_GRAPH[this.lang]; }
 
   /* ==========================================================================
    * Données — Section 7 : Fichiers swarm
    * ========================================================================== */
 
-  protected readonly swarmFiles: readonly SwarmFile[] = [
-    {
-      name: '.swarm-queue.json',
-      icon: '📋',
-      description: 'File d\'attente des tâches pour les sessions multi-tâches. Permet au Swarm de traiter jusqu\'à 5 tâches indépendantes en parallèle.',
-      structure: `{
+  protected get swarmFilesSection(): { kicker: string; title: string; description: string } {
+    return SECTION_TEXTS[this.lang].swarmFiles;
+  }
+
+  protected get swarmFiles(): readonly SwarmFile[] {
+    return SWARM_FILES[this.lang].map((s, i) => ({
+      name: ['.swarm-queue.json', '.agent-memory.json'][i],
+      icon: ['📋', '🧠'][i],
+      description: s.description,
+      structure: [
+        `{
   "sessionId": "uuid",
   "tasks": [
     {
@@ -344,12 +701,7 @@ gitGraph
   "maxParallel": 5,
   "maxCycles": 5
 }`,
-    },
-    {
-      name: '.agent-memory.json',
-      icon: '🧠',
-      description: 'Mémoire persistante des métriques et de l\'historique des sessions. Alimente les tableaux de bord et l\'optimisation continue.',
-      structure: `{
+        `{
   "sessions": [
     {
       "id": "uuid",
@@ -368,8 +720,9 @@ gitGraph
     "avgCoverage": 85
   }
 }`,
-    },
-  ];
+      ][i],
+    }));
+  }
 
   /* ==========================================================================
    * Références DOM pour les animations
@@ -395,50 +748,20 @@ gitGraph
   /** Initialise les métadonnées SEO et le schéma HowTo pour la page workflow */
   private initSeoAndSchemas(): void {
     const canonicalUrl = 'https://swarm-wiki.vercel.app/workflow';
+    const seo = SEO_DATA[this.lang];
 
     this.seoService.updatePageMeta({
-      title: 'Pipeline de développement',
-      description:
-        'De l\'issue au merge sans effort. Découvrez comment la Swarm orchestre le développement logiciel de bout en bout : classification, routage, implémentation parallèle, tests et revue automatisés.',
+      title: seo.title,
+      description: seo.description,
       canonicalUrl,
       type: 'article',
       author: 'Joh Tandou',
     });
 
     const howToSchema = this.jsonLdService.generateHowToSchema({
-      name: 'Pipeline de développement Swarm',
-      description:
-        'Étapes du pipeline agentic de bout en bout, de l\'issue GitHub au merge automatisé.',
-      steps: [
-        {
-          name: 'Pre-search',
-          text: 'Analyse du codebase en parallèle par les agents de la Swarm pour mesurer l\'impact réel de la tâche.',
-        },
-        {
-          name: 'Classification',
-          text: 'L\'orchestrateur analyse la complexité et choisit la route appropriée : DIRECT, SIMPLE, ADAPT, MEDIUM ou FULL.',
-        },
-        {
-          name: 'Search',
-          text: 'L\'agent Search cartographie le codebase, identifie les fichiers impactés et détecte les patterns.',
-        },
-        {
-          name: 'Plan',
-          text: 'L\'agent Planner décompose la tâche en sous-tâches atomiques et détecte les choix architecturaux.',
-        },
-        {
-          name: 'Implementation',
-          text: 'Les agents Front et Back implémentent en parallèle, guidés par les contrats TypeScript.',
-        },
-        {
-          name: 'Tests',
-          text: 'L\'agent Tester génère et exécute les tests, mesure la couverture (seuil 80 %) et catégorise les erreurs.',
-        },
-        {
-          name: 'Review & Merge',
-          text: 'L\'agent Reviewer audite la qualité et la sécurité. Après approbation, le Writer documente et la PR est mergée.',
-        },
-      ],
+      name: seo.schemaName,
+      description: seo.schemaDesc,
+      steps: seo.steps,
     });
 
     this.jsonLdService.addSchemas([howToSchema]);

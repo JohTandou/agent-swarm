@@ -9,9 +9,9 @@
 @if (error()) {
 <div class="error-state" role="alert">
   <div class="error-state__icon" aria-hidden="true">⚠️</div>
-  <h2 class="error-state__title">Impossible de charger la page</h2>
+  <h2 class="error-state__title">{{ t('workflow.pageLoadError') }}</h2>
   <p class="error-state__message">{{ error() }}</p>
-  <app-ui-button variant="primary" size="md" (click)="retry()">Réessayer</app-ui-button>
+  <app-ui-button variant="primary" size="md" (click)="retry()">{{ t('workflow.retry') }}</app-ui-button>
 </div>
 }
 
@@ -27,8 +27,8 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero__bg-decor" aria-hidden="true"></div>
     <div class="hero__content">
-      <span class="hero__kicker reveal-on-scroll">Le pipeline d'agents IA</span>
-      <h1 id="hero-title" class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">De l'analyse au merge, chaque étape automatisée</h1>
+      <span class="hero__kicker reveal-on-scroll">{{ heroKicker }}</span>
+      <h1 id="hero-title" class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">{{ heroTitle }}</h1>
       <p class="hero__subtitle reveal-on-scroll">{{ heroSubtitle }}</p>
     </div>
   </section>
@@ -38,12 +38,9 @@
        ======================================================================= -->
   <section class="decision-tree" aria-labelledby="tree-title">
     <div class="section-header">
-      <span class="section-header__kicker">Classification automatique</span>
-      <h2 id="tree-title" class="section-header__title">Arbre de décision des routes</h2>
-      <p class="section-header__description">
-        Chaque tâche est automatiquement classifiée sur l'une des 5 routes du pipeline.
-        La complexité croissante détermine le nombre d'agents mobilisés et la rigueur des gates qualité.
-      </p>
+      <span class="section-header__kicker">{{ decisionTree.kicker }}</span>
+      <h2 id="tree-title" class="section-header__title">{{ decisionTree.title }}</h2>
+      <p class="section-header__description">{{ decisionTree.description }}</p>
     </div>
 
     <div class="tree-container">
@@ -96,7 +93,7 @@
       </div>
     </div>
       <p class="tree-note">
-        Coûts estimés avec la tarification API DeepSeek V4 Pro (juin 2026). Tokens et coûts réels variables selon la complexité et le volume.
+        {{ treeNote }}
       </p>
   </section>
 
@@ -105,13 +102,9 @@
        ======================================================================= -->
   <section class="mermaid-section section--alt" aria-labelledby="pipeline-title">
     <div class="section-header">
-      <span class="section-header__kicker">Visualisation</span>
-      <h2 id="pipeline-title" class="section-header__title">Pipeline complet</h2>
-      <p class="section-header__description">
-        Le diagramme ci-dessous illustre le flux complet : de l'issue GitHub au merge final.
-        Chaque étape est automatisée. Les tâches MEDIUM et FULL activent le parallélisme front+back
-        et les gates qualité (tester + reviewer).
-      </p>
+      <span class="section-header__kicker">{{ mermaidSection.kicker }}</span>
+      <h2 id="pipeline-title" class="section-header__title">{{ mermaidSection.title }}</h2>
+      <p class="section-header__description">{{ mermaidSection.description }}</p>
     </div>
 
     <div class="mermaid-wrapper">
@@ -128,7 +121,7 @@
        ======================================================================= -->
   <section class="pre-search" aria-labelledby="presearch-title">
       <div class="section-header">
-      <span class="section-header__kicker">Étape 0.3</span>
+      <span class="section-header__kicker">{{ preSearchKicker }}</span>
       <h2 id="presearch-title" class="section-header__title">{{ preSearchTitle }}</h2>
       <p class="section-header__description">{{ preSearchDescription }}</p>
     </div>
@@ -168,11 +161,9 @@
        ======================================================================= -->
   <section class="quality-gates section--alt" aria-labelledby="gates-title">
     <div class="section-header">
-      <span class="section-header__kicker">Contrôle qualité</span>
-      <h2 id="gates-title" class="section-header__title">Gates qualité automatisées</h2>
-      <p class="section-header__description">
-        Deux gates successives garantissent que chaque modification est testée et revue avant d'atteindre la branche principale.
-      </p>
+      <span class="section-header__kicker">{{ qualityGatesSection.kicker }}</span>
+      <h2 id="gates-title" class="section-header__title">{{ qualityGatesSection.title }}</h2>
+      <p class="section-header__description">{{ qualityGatesSection.description }}</p>
     </div>
 
     <div class="gates-grid">
@@ -197,27 +188,27 @@
       <div class="gate-flow">
         <div class="gate-flow__step">
           <span class="gate-flow__icon">💻</span>
-          <span class="gate-flow__label">Implémentation</span>
+          <span class="gate-flow__label">{{ gateFlowLabels.implementation }}</span>
         </div>
         <div class="gate-flow__arrow">→</div>
         <div class="gate-flow__step gate-flow__step--active">
           <span class="gate-flow__icon">🧪</span>
-          <span class="gate-flow__label">Tester</span>
-          <span class="gate-flow__threshold">Seuil : ≥ 80 %</span>
+          <span class="gate-flow__label">{{ gateFlowLabels.tester }}</span>
+          <span class="gate-flow__threshold">{{ gateFlowLabels.testerThreshold }}</span>
         </div>
         <div class="gate-flow__arrow">→</div>
         <div class="gate-flow__step gate-flow__step--active">
           <span class="gate-flow__icon">👁️</span>
-          <span class="gate-flow__label">Reviewer</span>
-          <span class="gate-flow__threshold">Score : ≥ 0.85</span>
+          <span class="gate-flow__label">{{ gateFlowLabels.reviewer }}</span>
+          <span class="gate-flow__threshold">{{ gateFlowLabels.reviewerThreshold }}</span>
         </div>
         <div class="gate-flow__arrow">→</div>
         <div class="gate-flow__step gate-flow__step--success">
           <span class="gate-flow__icon">✅</span>
-          <span class="gate-flow__label">PR Validée</span>
+          <span class="gate-flow__label">{{ gateFlowLabels.prValidated }}</span>
         </div>
         <div class="gate-flow__branch gate-flow__branch--reject" aria-hidden="true">
-          <span>❌ Rejeté → Corrections → Retest</span>
+          <span>{{ gateFlowLabels.rejected }}</span>
         </div>
       </div>
     </div>
@@ -228,10 +219,10 @@
        ======================================================================= -->
   <section class="git-integration" aria-labelledby="git-title">
     <div class="section-header">
-      <span class="section-header__kicker">Workflow automatisé</span>
-      <h2 id="git-title" class="section-header__title">Intégration Git native</h2>
+      <span class="section-header__kicker">{{ gitSection.kicker }}</span>
+      <h2 id="git-title" class="section-header__title">{{ gitSection.title }}</h2>
       <p class="section-header__description">
-        Le pipeline Swarm est pensé pour le flux GitHub : chaque étape, de la création de branche au merge, est automatisée.
+        {{ gitSection.description }}
         {{ gitScriptsDescription }}
       </p>
     </div>
@@ -271,11 +262,9 @@
        ======================================================================= -->
   <section class="swarm-files section--alt" aria-labelledby="files-title">
     <div class="section-header">
-      <span class="section-header__kicker">Configuration</span>
-      <h2 id="files-title" class="section-header__title">Fichiers Swarm</h2>
-      <p class="section-header__description">
-        Deux fichiers de configuration gouvernent l'état et la mémoire du pipeline entre les sessions.
-      </p>
+      <span class="section-header__kicker">{{ swarmFilesSection.kicker }}</span>
+      <h2 id="files-title" class="section-header__title">{{ swarmFilesSection.title }}</h2>
+      <p class="section-header__description">{{ swarmFilesSection.description }}</p>
     </div>
 
     <div class="files-grid">

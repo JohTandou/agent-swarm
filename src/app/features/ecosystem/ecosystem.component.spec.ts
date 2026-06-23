@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { provideMarkdown, MERMAID_OPTIONS } from 'ngx-markdown';
 import { ContentService } from '../../shared/services/content.service';
+import { LanguageService } from '../../shared/services/language.service';
 import { EcosystemComponent } from './ecosystem.component';
 
 describe('EcosystemComponent', () => {
@@ -11,6 +13,7 @@ describe('EcosystemComponent', () => {
   let fixture: ComponentFixture<EcosystemComponent>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [EcosystemComponent],
       providers: [
@@ -33,10 +36,12 @@ describe('EcosystemComponent', () => {
           },
         }),
         ContentService,
+        LanguageService,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('fr');
     fixture = TestBed.createComponent(EcosystemComponent);
     component = fixture.componentInstance;
   });
@@ -127,4 +132,49 @@ describe('EcosystemComponent', () => {
     const main = fixture.nativeElement.querySelector('.page');
     expect(main).toBeTruthy();
   }));
+
+});
+
+/* ==========================================================================
+ * Langue anglaise — directoryTree, localizedIntegrations
+ * ========================================================================== */
+
+describe('EcosystemComponent — English', () => {
+  let component: EcosystemComponent;
+  let fixture: ComponentFixture<EcosystemComponent>;
+
+  beforeEach(async () => {
+    sessionStorage.clear();
+    TestBed.resetTestingModule();
+    await TestBed.configureTestingModule({
+      imports: [EcosystemComponent],
+      providers: [
+        LanguageService,
+      ],
+    }).compileComponents();
+
+    TestBed.inject(LanguageService).setLang('en');
+    fixture = TestBed.createComponent(EcosystemComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('should display English descriptions in directoryTree', () => {
+    const descriptions = component['directoryTree'].map((e: { description: string }) => e.description);
+    expect(descriptions.every((d: string) => d.length > 0)).toBeTrue();
+    expect(descriptions[0]).toContain('Project bible');
+  });
+
+  it('should load English descriptions for directoryTree children (agents/)', () => {
+    const agentsEntry = component['directoryTree'][3];
+    expect(agentsEntry.description).toContain('Specialized agent definitions');
+    const firstChild = agentsEntry.children![0];
+    expect(firstChild.description).toContain('Conductor');
+  });
+
+  it('should return English content in localizedIntegrations', () => {
+    const integrations = component['localizedIntegrations'];
+    expect(integrations.length).toBe(6);
+    expect(integrations[0].description).toContain('Postgres database');
+    expect(integrations[0].features[0]).toBe('Managed Postgres');
+  });
 });

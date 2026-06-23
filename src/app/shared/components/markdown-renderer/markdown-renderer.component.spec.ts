@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { MarkdownRendererComponent } from './markdown-renderer.component';
@@ -43,6 +44,7 @@ Attention : ceci est un avertissement.
         provideHttpClientTesting(),
         provideMarkdown(),
         ContentService,
+        LanguageService,
       ],
     }).compileComponents();
 

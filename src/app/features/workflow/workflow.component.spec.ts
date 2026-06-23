@@ -1,16 +1,19 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { WorkflowComponent } from './workflow.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideMarkdown, MERMAID_OPTIONS } from 'ngx-markdown';
 import { ContentService } from '../../shared/services/content.service';
+import { LanguageService } from '../../shared/services/language.service';
 
 describe('WorkflowComponent', () => {
   let component: WorkflowComponent;
   let fixture: ComponentFixture<WorkflowComponent>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [WorkflowComponent],
       providers: [
@@ -33,10 +36,12 @@ describe('WorkflowComponent', () => {
           },
         }),
         ContentService,
+        LanguageService,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('fr');
     fixture = TestBed.createComponent(WorkflowComponent);
     component = fixture.componentInstance;
     // Ne pas appeler detectChanges ici — ngOnInit sera déclenché dans chaque test
@@ -154,4 +159,49 @@ describe('WorkflowComponent', () => {
     const main: HTMLElement | null = fixture.nativeElement.querySelector('.page');
     expect(main).toBeTruthy();
   }));
+
+});
+
+/* ==========================================================================
+ * Langue anglaise — heroTitle, decisionNodes, qualityGates
+ * ========================================================================== */
+
+describe('WorkflowComponent — English', () => {
+  let component: WorkflowComponent;
+  let fixture: ComponentFixture<WorkflowComponent>;
+
+  beforeEach(async () => {
+    sessionStorage.clear();
+    TestBed.resetTestingModule();
+    await TestBed.configureTestingModule({
+      imports: [WorkflowComponent],
+      providers: [
+        LanguageService,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    TestBed.inject(LanguageService).setLang('en');
+    fixture = TestBed.createComponent(WorkflowComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('heroTitle should return English text', () => {
+    expect(component['heroTitle']).toBe('From issue to merge — entirely automated');
+  });
+
+  it('decisionNodes first node should have English description', () => {
+    const nodes = component['decisionNodes'];
+    expect(nodes[0].description).toContain('Answer to a question');
+    expect(nodes[0].description).toContain('No specialized agent');
+  });
+
+  it('at least 2 qualityGates should have English descriptions', () => {
+    const gates = component['qualityGates'];
+    expect(gates.length).toBe(2);
+    expect(gates[0].description).toContain('Systematic test generation');
+    expect(gates[0].description).toContain('Blocking threshold: 80%');
+    expect(gates[1].description).toContain('Security, quality, and consistency audit');
+    expect(gates[1].criteria[0]).toContain('Security score');
+  });
 });

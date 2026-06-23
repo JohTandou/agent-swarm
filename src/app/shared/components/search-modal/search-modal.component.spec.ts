@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
 import { SearchModalComponent } from './search-modal.component';
+import { LanguageService } from '../../services/language.service';
 import type { SearchResult } from '@shared/models';
 
 describe('SearchModalComponent', () => {
@@ -24,6 +26,7 @@ describe('SearchModalComponent', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideRouter([]),
+        LanguageService,
       ],
     }).compileComponents();
 
@@ -45,7 +48,7 @@ describe('SearchModalComponent', () => {
   it('devrait afficher un placeholder dans l\'input', () => {
     fixture.detectChanges();
     const input: HTMLInputElement = fixture.nativeElement.querySelector('.search-modal__input');
-    expect(input.placeholder).toBe('Rechercher un agent, un skill, une page...');
+    expect(input.placeholder).toBe('Rechercher un agent, un skill, une page\u2026');
   });
 
   it('devrait émettre dismiss quand Escape est pressé', () => {

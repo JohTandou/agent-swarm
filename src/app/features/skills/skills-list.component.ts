@@ -2,6 +2,7 @@ import { Component, signal, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StaggerChildrenDirective } from '@shared/directives/stagger-children.directive';
 import { ToastService } from '@shared/services/toast.service';
+import { TranslationService } from '@shared/services/translation.service';
 import { UiButtonComponent } from '@shared/components/ui-button/ui-button.component';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
@@ -15,14 +16,6 @@ const SKILLS: Skill[] = [
   { id: 'tests-create', name: 'Tests Create', emoji: '🧪', category: 'creation', sourcePath: 'skills/tests-create.md', order: 2, tags: [], description: 'Génération optimale de tests unitaires, fonctionnels, intégration et E2E' },
   { id: 'graphify', name: 'Graphify', emoji: '🕸️', category: 'audit', sourcePath: 'skills/graphify.md', order: 3, tags: [], description: 'Transforme code, docs, papiers en graphes de connaissances' },
 ];
-
-/** Labels des catégories pour les boutons de filtre */
-const CATEGORY_LABELS: Record<SkillCategory, string> = {
-  creation: 'Création',
-  audit: 'Audit',
-  workflow: 'Workflow',
-  documentation: 'Documentation',
-};
 
 /**
  * Page listing des skills Swarm — grille bento asymétrique.
@@ -40,6 +33,7 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
   styleUrls: ['./skills-list.component.scss'],
 })
 export class SkillsListComponent {
+  private readonly translate = inject(TranslationService);
   private readonly toastService = inject(ToastService);
   private readonly jsonLdService = inject(JsonLdService);
 
@@ -57,6 +51,11 @@ export class SkillsListComponent {
       description: skill.description,
     }));
     this.jsonLdService.addSchemas([this.jsonLdService.generateItemListSchema(itemListItems)]);
+  }
+
+  /** Raccourci pour les traductions dans le template */
+  t(key: string): string {
+    return this.translate.translate(key);
   }
 
   /** État de chargement (désactivé — skills hardcodés) */
@@ -83,17 +82,24 @@ export class SkillsListComponent {
   toggleCategory(category: SkillCategory): void {
     if (this.activeCategory() === category) {
       this.activeCategory.set(null);
-      this.toastService.show(`${this.skills().length} skills affichés`, 'info');
+      this.toastService.show(
+        this.translate.translate('toast.skills.all').replace('{n}', String(this.skills().length)),
+        'info',
+      );
     } else {
       this.activeCategory.set(category);
       const count = this.getCategoryCount(category);
-      this.toastService.show(`${count} skills trouvés — ${CATEGORY_LABELS[category]}`, 'success');
+      const categoryLabel = this.translate.translate('skills.category.' + category);
+      this.toastService.show(
+        this.translate.translate('toast.skills.filtered').replace('{n}', String(count)).replace('{category}', categoryLabel),
+        'success',
+      );
     }
   }
 
-  /** Retourne le label français pour une catégorie */
+  /** Retourne le label traduit pour une catégorie */
   getCategoryLabel(category: SkillCategory): string {
-    return CATEGORY_LABELS[category];
+    return this.translate.translate('skills.category.' + category);
   }
 
   /** Retourne le nombre de skills dans une catégorie donnée */
@@ -104,6 +110,9 @@ export class SkillsListComponent {
   /** Réinitialise tous les filtres — affiche tous les skills */
   resetFilters(): void {
     this.activeCategory.set(null);
-    this.toastService.show(`${this.skills().length} skills affichés`, 'info');
+    this.toastService.show(
+      this.translate.translate('toast.skills.all').replace('{n}', String(this.skills().length)),
+      'info',
+    );
   }
 }
