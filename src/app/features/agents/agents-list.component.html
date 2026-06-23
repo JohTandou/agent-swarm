@@ -11,7 +11,7 @@
       size="sm"
       [class.agents__filter--active]="activeCategory() === null"
       (click)="activeCategory.set(null)"
-      aria-label="Afficher tous les agents"
+      [attr.aria-label]="t('agents.list.filter.allAriaLabel')"
     >
       {{ t('agents.list.filter.all') }}
       <span class="agents__filter-count">{{ agents.length }}</span>
@@ -38,7 +38,7 @@
         [class.agents__card--featured]="idx === 0"
         [class.agents__card--wide]="idx === 2"
         role="listitem"
-        [attr.aria-label]="'Fiche de ' + agent.name"
+        [attr.aria-label]="t('agents.card.ariaLabel') + ' ' + agent.name"
         [attr.data-category]="agent.category"
       >
                       <span class="agents__card-avatar-wrapper">

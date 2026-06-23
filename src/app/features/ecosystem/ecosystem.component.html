@@ -27,7 +27,7 @@
     <section class="hero">
       <div class="hero__bg-decor"></div>
       <div class="hero__content">
-        <span class="hero__kicker reveal-on-scroll">Infrastructure</span>
+        <span class="hero__kicker reveal-on-scroll">{{ t('eco.hero.kicker') }}</span>
         <h1 class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">{{ heroTitle }}</h1>
         <p class="hero__subtitle reveal-on-scroll">{{ heroSubtitle }}</p>
 
@@ -40,10 +40,10 @@
          ================================================================ -->
     <section class="directory-section" id="structure">
       <div class="section-header">
-        <span class="section-header__kicker">Architecture</span>
-        <h2 class="section-header__title">Structure .opencode/</h2>
+        <span class="section-header__kicker">{{ t('eco.directory.kicker') }}</span>
+        <h2 class="section-header__title">{{ t('eco.directory.title') }}</h2>
         <p class="section-header__description">
-          Le répertoire racine contient l'intégralité de la configuration de la Swarm. Chaque fichier et dossier a un rôle précis dans l'orchestration du pipeline de développement.
+          {{ t('eco.directory.desc') }}
         </p>
       </div>
 
@@ -82,10 +82,10 @@
          ================================================================ -->
     <section class="config-section section--alt" id="workflow-config">
       <div class="section-header">
-        <span class="section-header__kicker">Configuration</span>
-        <h2 class="section-header__title">swarm-workflow.json</h2>
+        <span class="section-header__kicker">{{ t('eco.config.kicker') }}</span>
+        <h2 class="section-header__title">{{ t('eco.config.title') }}</h2>
         <p class="section-header__description">
-          Le fichier JSON central qui pilote l'ensemble du comportement de la Swarm. Chaque paramètre contrôle un aspect précis à travers 4 catégories. Extrait — 20 champs affichés sur ~40. Configuration complète dans <code>~/.opencode/swarm-workflow.json</code>.
+          {{ t('eco.config.desc') }}
         </p>
       </div>
 
@@ -122,15 +122,10 @@
          ================================================================ -->
     <section class="agentsmd-section" id="agents-md">
       <div class="section-header">
-        <span class="section-header__kicker">Documentation vivante</span>
-        <h2 class="section-header__title">AGENTS.md</h2>
+        <span class="section-header__kicker">{{ t('eco.agentsmd.kicker') }}</span>
+        <h2 class="section-header__title">{{ t('eco.agentsmd.title') }}</h2>
         <p class="section-header__description">
-          Le fichier <code>AGENTS.md</code> (~400 lignes) est la bible du projet —
-          stack technique, conventions de code, palette de couleurs, protocole
-          comportemental et checklist de livraison. Il est lu par l'orchestrateur
-          à chaque exécution et définit l'intégralité des règles que tous les
-          agents doivent respecter. Le contenu complet est disponible dans le
-          dépôt du projet.
+          {{ t('eco.agentsmd.desc') }}
         </p>
       </div>
     </section>
@@ -140,10 +135,10 @@
          ================================================================ -->
     <section class="architecture-section section--alt" id="architecture">
       <div class="section-header">
-        <span class="section-header__kicker">Vue d'ensemble</span>
-        <h2 class="section-header__title">Architecture Globale</h2>
+        <span class="section-header__kicker">{{ t('eco.architecture.kicker') }}</span>
+        <h2 class="section-header__title">{{ t('eco.architecture.title') }}</h2>
         <p class="section-header__description">
-          Le diagramme ci-dessous illustre l'ensemble du pipeline : de l'IDE aux intégrations MCP, en passant par les agents, les gates qualité et la documentation.
+          {{ t('eco.architecture.desc') }}
         </p>
       </div>
 

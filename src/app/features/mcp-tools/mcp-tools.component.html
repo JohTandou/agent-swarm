@@ -3,7 +3,7 @@
      Gère 4 états : loading, error, success, empty
      ========================================================================== -->
 
-<section class="mcp-tools" aria-label="Outils MCP">
+<section class="mcp-tools" [attr.aria-label]="t('mcp.main.ariaLabel')">
 
   <!-- ====================================================================
        ÉTAT : Erreur — Message + action de retry
@@ -30,7 +30,7 @@
   @else {
     <div class="mcp-tools__content">
     <!-- Navigation entre catégories -->
-    <nav class="mcp-tools__nav" aria-label="Catégories d'outils MCP">
+    <nav class="mcp-tools__nav" [attr.aria-label]="t('mcp.nav.ariaLabel')">
       @for (cat of categories; track cat) {
         <a
           class="mcp-nav__tab"
@@ -126,7 +126,7 @@
       </div>
 
       <!-- Exemple d'utilisation -->
-      <section class="mcp-tools__example" aria-label="Exemple d'utilisation">
+      <section class="mcp-tools__example" [attr.aria-label]="t('mcp.example.ariaLabel')">
         <h2 class="mcp-example__title">{{ t('mcp.example.title') }}</h2>
         <p class="mcp-example__subtitle">
           {{ t('mcp.example.context') }} {{ data.label }}
