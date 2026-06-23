@@ -343,7 +343,7 @@ const QUALITY_GATES: Record<Lang, Pick<QualityGate, 'description' | 'criteria'>[
 
 const GIT_STEPS: Record<Lang, Pick<GitStep, 'step' | 'description'>[]> = {
   fr: [
-    { step: 'Issue GitHub', description: 'Tout commence par une issue. la Swarm analyse le titre et la description pour classifier automatiquement la tâche.' },
+    { step: 'Issue GitHub', description: 'Tout commence par une issue. La Swarm analyse le titre et la description pour classifier automatiquement la tâche.' },
     { step: 'Branche', description: 'Création automatique d\'une branche feature/ suivant la convention swarm-issue-{n}-{description}.' },
     { step: 'Commits', description: 'Commits atomiques avec messages conventionnels (feat:, fix:, docs:). Un commit par étape majeure.' },
     { step: 'Pull Request', description: 'Création automatique de la PR avec description générée, checklist et lien vers l\'issue.' },

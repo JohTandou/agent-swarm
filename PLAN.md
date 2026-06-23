@@ -420,7 +420,7 @@ Si on utilisait Claude 4.5 Sonnet en API pour les mêmes tâches qu'une session 
 
 #### 4.4 Cas d'usage inadaptés
 
-- **Projets sans Git** : toutes les gates (tests, review, PR) sont désactivées. la Swarm fonctionne en mode dégradé.
+- **Projets sans Git** : toutes les gates (tests, review, PR) sont désactivées. La Swarm fonctionne en mode dégradé.
 - **Projets purement backend ou purement frontend** : la moitié des agents sont inactifs, le parallélisme est perdu.
 - **Refactoring massif** (> 30 fichiers) : le reviewer rejette automatiquement. Il faut découper manuellement.
 - **Tâches créatives ouvertes** (design system from scratch, branding) : sans maquette Figma ou spec précise, la Swarm peut produire un résultat incohérent entre les agents.

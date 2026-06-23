@@ -80,9 +80,9 @@ describe('AboutComponent', () => {
   });
 
   // SKIPPED: contenu chargé de manière asynchrone, non disponible dans detectChanges() synchrone
-  xit('devrait avoir la section "la Swarm en chiffres"', () => {
+  xit('devrait avoir la section "La Swarm en chiffres"', () => {
     const sectionTitles = fixture.nativeElement.querySelectorAll('.about__section-title');
     const titles = Array.from<Element>(sectionTitles).map((el) => (el as HTMLElement).textContent?.trim());
-    expect(titles).toContain('la Swarm en chiffres');
+    expect(titles).toContain('La Swarm en chiffres');
   });
 });

@@ -130,7 +130,7 @@ const WORKFLOW_FIELD_DESCS: Record<Lang, { categoryDesc: string; fieldDescs: str
     {
       categoryDesc: 'Automatisation du cycle de vie des tâches.',
       fieldDescs: [
-        'la Swarm crée une issue GitHub pour chaque nouvelle tâche identifiée.',
+        'La Swarm crée une issue GitHub pour chaque nouvelle tâche identifiée.',
         'Une branche feature/ est créée automatiquement au démarrage d\'une tâche.',
         'Une pull request est ouverte automatiquement après validation des gates.',
         'Les PR sont créées en mode brouillon, prêtes pour revue humaine optionnelle.',

@@ -45,7 +45,7 @@ interface LimitCategory {
 const HERO: Record<Lang, { title: string; subtitle: string }> = {
   fr: {
     title: 'Pourquoi la Swarm ?',
-    subtitle: 'Le développement logiciel moderne est fractal : chaque fonctionnalité cache des dizaines de micro-décisions architecturales, de dépendances croisées et de cas limites. Les agents IA isolés savent écrire du code, mais échouent face à la complexité systémique des vrais projets. la Swarm change la donne.',
+    subtitle: 'Le développement logiciel moderne est fractal : chaque fonctionnalité cache des dizaines de micro-décisions architecturales, de dépendances croisées et de cas limites. Les agents IA isolés savent écrire du code, mais échouent face à la complexité systémique des vrais projets. La Swarm change la donne.',
   },
   en: {
     title: 'Why the Swarm?',

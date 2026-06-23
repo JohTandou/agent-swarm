@@ -8,7 +8,7 @@ import { TextRevealDirective } from './text-reveal.directive';
   imports: [TextRevealDirective],
   template: `
     <h1 appTextReveal [revealDelay]="100" id="test-title">
-      la Swarm orchestre vos agents
+      La Swarm orchestre vos agents
     </h1>
   `,
 })
