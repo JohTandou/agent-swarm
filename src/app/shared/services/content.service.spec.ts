@@ -40,7 +40,7 @@ Déploiement via Vercel.
         provideHttpClient(),
         provideHttpClientTesting(),
         ContentService,
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '', setLang: () => {} } },
+        LanguageService,
       ],
     });
     service = TestBed.inject(ContentService);

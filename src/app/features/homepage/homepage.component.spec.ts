@@ -15,7 +15,7 @@ describe('HomepageComponent', () => {
       imports: [HomepageComponent],
       providers: [
         provideRouter([]),
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
       ],
       /* SwarmGraphComponent charge D3 dynamiquement — ignoré en test unitaire */
       schemas: [NO_ERRORS_SCHEMA],

@@ -14,7 +14,7 @@ describe('AboutComponent', () => {
       imports: [AboutComponent],
       providers: [
         provideRouter([]),
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
       ],
     }).compileComponents();
 

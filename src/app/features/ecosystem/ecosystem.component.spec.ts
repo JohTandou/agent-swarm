@@ -145,7 +145,7 @@ describe('EcosystemComponent — English', () => {
     await TestBed.configureTestingModule({
       imports: [EcosystemComponent],
       providers: [
-        { provide: LanguageService, useValue: { currentLang: signal('en' as const), langPrefix: '/en' } },
+        LanguageService,
       ],
     }).compileComponents();
 

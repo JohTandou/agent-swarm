@@ -15,7 +15,7 @@ describe('TableOfContentsComponent', () => {
       imports: [TableOfContentsComponent],
       providers: [
         TocService,
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
       ],
     }).compileComponents();
 

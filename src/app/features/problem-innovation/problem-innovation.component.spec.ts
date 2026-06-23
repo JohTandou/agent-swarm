@@ -11,7 +11,7 @@ describe('ProblemInnovationComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ProblemInnovationComponent],
       providers: [
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
       ],
     }).compileComponents();
 
@@ -247,7 +247,7 @@ describe('ProblemInnovationComponent — English', () => {
     await TestBed.configureTestingModule({
       imports: [ProblemInnovationComponent],
       providers: [
-        { provide: LanguageService, useValue: { currentLang: signal('en' as const), langPrefix: '/en' } },
+        LanguageService,
       ],
     }).compileComponents();
 

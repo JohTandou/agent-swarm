@@ -44,7 +44,7 @@ Attention : ceci est un avertissement.
         provideHttpClientTesting(),
         provideMarkdown(),
         ContentService,
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
       ],
     }).compileComponents();
 

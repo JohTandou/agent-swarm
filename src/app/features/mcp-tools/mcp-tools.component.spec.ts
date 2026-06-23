@@ -19,7 +19,7 @@ describe('McpToolsComponent', () => {
       imports: [McpToolsComponent],
       providers: [
         provideRouter([]),
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
         {
           provide: ActivatedRoute,
           useValue: { paramMap: paramMapSubject.asObservable() },
@@ -350,7 +350,7 @@ describe('McpToolsComponent — English', () => {
       imports: [McpToolsComponent],
       providers: [
         provideRouter([]),
-        { provide: LanguageService, useValue: { currentLang: signal('en' as const), langPrefix: '/en' } },
+        LanguageService,
         {
           provide: ActivatedRoute,
           useValue: { paramMap: enParamMapSubject.asObservable() },

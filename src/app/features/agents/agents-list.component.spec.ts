@@ -33,7 +33,7 @@ describe('AgentsListComponent', () => {
       imports: [AgentsListComponent],
       providers: [
         provideRouter([]),
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
         { provide: TranslationService, useValue: mockTranslationService },
       ],
     }).compileComponents();

@@ -35,7 +35,7 @@ describe('WorkflowComponent', () => {
           },
         }),
         ContentService,
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
@@ -173,7 +173,7 @@ describe('WorkflowComponent — English', () => {
     await TestBed.configureTestingModule({
       imports: [WorkflowComponent],
       providers: [
-        { provide: LanguageService, useValue: { currentLang: signal('en' as const), langPrefix: '/en' } },
+        LanguageService,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

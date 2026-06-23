@@ -64,7 +64,7 @@ describe('SkillsListComponent', () => {
       providers: [
         provideRouter([]),
         { provide: ContentService, useValue: mockContentService },
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
       ],
     }).compileComponents();
 

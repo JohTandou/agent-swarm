@@ -60,7 +60,7 @@ describe('SkillDetailComponent', () => {
         provideMarkdown(),
         ContentService,
         TocService,
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
         {
           provide: ActivatedRoute,
           useValue: {

@@ -124,6 +124,11 @@ export class SidebarComponent {
     return key ? this.translationService.translate(key) : frLabel;
   }
 
+  /** Retourne la traduction pour la clé donnée dans la langue courante */
+  t(key: string): string {
+    return this.translationService.translate(key);
+  }
+
   /** Localise une route FR vers la langue courante via LanguageService */
   localizeRoute(route: string): string {
     return this.langService.localizeRoute(route);

@@ -45,7 +45,7 @@ describe('AgentDetailComponent', () => {
         provideMarkdown(),
         ContentService,
         TocService,
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
         { provide: TranslationService, useValue: mockTranslationService },
         {
           provide: ActivatedRoute,
@@ -221,7 +221,7 @@ describe('AgentDetailComponent', () => {
           provideMarkdown(),
           ContentService,
           TocService,
-          { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+          LanguageService,
           { provide: TranslationService, useValue: mockTranslationService },
           {
             provide: ActivatedRoute,

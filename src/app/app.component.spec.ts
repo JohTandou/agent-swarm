@@ -30,7 +30,7 @@ describe('AppComponent', () => {
         provideAnimationsAsync(),
         importProvidersFrom(OverlayModule),
         { provide: BreakpointObserver, useValue: breakpointObserverMock },
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
       ],
     }).compileComponents();
 

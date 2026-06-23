@@ -60,7 +60,7 @@ describe('SidebarComponent', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         { provide: ContentService, useValue: mockContentService },
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
       ],
     }).compileComponents();
 

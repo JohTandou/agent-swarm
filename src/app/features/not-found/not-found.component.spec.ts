@@ -14,7 +14,7 @@ describe('NotFoundComponent', () => {
       imports: [NotFoundComponent],
       providers: [
         provideRouter([]),
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
       ],
     }).compileComponents();
 

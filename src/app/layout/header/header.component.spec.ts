@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { signal } from '@angular/core';
 import { provideRouter, Router } from '@angular/router';
 import { HeaderComponent } from './header.component';
 import { LanguageService } from '@shared/services/language.service';
@@ -13,7 +12,7 @@ describe('HeaderComponent', () => {
       imports: [HeaderComponent],
       providers: [
         provideRouter([]),
-        { provide: LanguageService, useValue: { currentLang: signal('fr' as const), langPrefix: '' } },
+        LanguageService,
       ],
     }).compileComponents();
 
@@ -149,27 +148,23 @@ describe('HeaderComponent — English', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let router: Router;
-  let mockLangService: { currentLang: ReturnType<typeof signal>; setLang: jasmine.Spy; langPrefix: string };
 
   beforeEach(async () => {
     TestBed.resetTestingModule();
-    mockLangService = {
-      currentLang: signal('en' as const),
-      setLang: jasmine.createSpy('setLang'),
-      langPrefix: '/en',
-    };
+    sessionStorage.clear();
 
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
       providers: [
         provideRouter([]),
-        { provide: LanguageService, useValue: mockLangService },
+        LanguageService,
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
+    TestBed.inject(LanguageService).setLang('en');
   });
 
   it('homeLink should return /en in English', () => {
@@ -183,7 +178,7 @@ describe('HeaderComponent — English', () => {
   it('toggleLang should switch from EN to FR and navigate', () => {
     spyOn(router, 'navigateByUrl');
     component.toggleLang();
-    expect(mockLangService.setLang).toHaveBeenCalledWith('fr');
+    expect(TestBed.inject(LanguageService).currentLang()).toBe('fr');
     expect(router.navigateByUrl).toHaveBeenCalled();
   });
 });
@@ -192,27 +187,23 @@ describe('HeaderComponent — French toggle', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let router: Router;
-  let mockLangService: { currentLang: ReturnType<typeof signal>; setLang: jasmine.Spy; langPrefix: string };
 
   beforeEach(async () => {
     TestBed.resetTestingModule();
-    mockLangService = {
-      currentLang: signal('fr' as const),
-      setLang: jasmine.createSpy('setLang'),
-      langPrefix: '',
-    };
+    sessionStorage.clear();
 
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
       providers: [
         provideRouter([]),
-        { provide: LanguageService, useValue: mockLangService },
+        LanguageService,
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
+    TestBed.inject(LanguageService).setLang('fr');
   });
 
   it('homeLink should return / in French', () => {
@@ -226,7 +217,7 @@ describe('HeaderComponent — French toggle', () => {
   it('toggleLang should switch from FR to EN and navigate', () => {
     spyOn(router, 'navigateByUrl');
     component.toggleLang();
-    expect(mockLangService.setLang).toHaveBeenCalledWith('en');
+    expect(TestBed.inject(LanguageService).currentLang()).toBe('en');
     expect(router.navigateByUrl).toHaveBeenCalled();
   });
 });
