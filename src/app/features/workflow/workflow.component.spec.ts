@@ -13,6 +13,7 @@ describe('WorkflowComponent', () => {
   let fixture: ComponentFixture<WorkflowComponent>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [WorkflowComponent],
       providers: [
@@ -40,6 +41,7 @@ describe('WorkflowComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('fr');
     fixture = TestBed.createComponent(WorkflowComponent);
     component = fixture.componentInstance;
     // Ne pas appeler detectChanges ici — ngOnInit sera déclenché dans chaque test
@@ -169,6 +171,7 @@ describe('WorkflowComponent — English', () => {
   let fixture: ComponentFixture<WorkflowComponent>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     TestBed.resetTestingModule();
     await TestBed.configureTestingModule({
       imports: [WorkflowComponent],
@@ -178,6 +181,7 @@ describe('WorkflowComponent — English', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('en');
     fixture = TestBed.createComponent(WorkflowComponent);
     component = fixture.componentInstance;
   });

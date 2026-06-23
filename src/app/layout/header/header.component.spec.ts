@@ -8,6 +8,7 @@ describe('HeaderComponent', () => {
   let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
       providers: [
@@ -16,6 +17,7 @@ describe('HeaderComponent', () => {
       ],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('fr');
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
   });

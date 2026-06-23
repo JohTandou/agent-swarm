@@ -13,6 +13,7 @@ describe('McpToolsComponent', () => {
   let paramMapSubject: BehaviorSubject<any>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     paramMapSubject = new BehaviorSubject(convertToParamMap({ category: 'supabase' }));
 
     await TestBed.configureTestingModule({
@@ -27,6 +28,7 @@ describe('McpToolsComponent', () => {
       ],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('fr');
     fixture = TestBed.createComponent(McpToolsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -343,6 +345,7 @@ describe('McpToolsComponent — English', () => {
   let enParamMapSubject: BehaviorSubject<any>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     TestBed.resetTestingModule();
     enParamMapSubject = new BehaviorSubject(convertToParamMap({ category: 'supabase' }));
 
@@ -358,6 +361,7 @@ describe('McpToolsComponent — English', () => {
       ],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('en');
     fixture = TestBed.createComponent(McpToolsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

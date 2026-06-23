@@ -13,6 +13,7 @@ describe('EcosystemComponent', () => {
   let fixture: ComponentFixture<EcosystemComponent>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     await TestBed.configureTestingModule({
       imports: [EcosystemComponent],
       providers: [
@@ -35,10 +36,12 @@ describe('EcosystemComponent', () => {
           },
         }),
         ContentService,
+        LanguageService,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('fr');
     fixture = TestBed.createComponent(EcosystemComponent);
     component = fixture.componentInstance;
   });
@@ -141,6 +144,7 @@ describe('EcosystemComponent — English', () => {
   let fixture: ComponentFixture<EcosystemComponent>;
 
   beforeEach(async () => {
+    sessionStorage.clear();
     TestBed.resetTestingModule();
     await TestBed.configureTestingModule({
       imports: [EcosystemComponent],
@@ -149,6 +153,7 @@ describe('EcosystemComponent — English', () => {
       ],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('en');
     fixture = TestBed.createComponent(EcosystemComponent);
     component = fixture.componentInstance;
   });
