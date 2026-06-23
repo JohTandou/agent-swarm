@@ -1,6 +1,0 @@
-Node.js version v25.4.0 detected.
-Odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.
- [1mPort 3000 is already in use.
-Would you like to use a different port?[22m [2m(Y/n)[22m[47G
-[?25hAn unhandled exception occurred: Port 3000 is already in use. Use '--port' to specify a different port.
-See "/private/var/folders/qf/9zylt0f51092cg7tmk3fbl140000gn/T/ng-Stpu3Z/angular-errors.log" for further details.
