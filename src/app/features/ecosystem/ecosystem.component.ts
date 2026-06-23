@@ -112,6 +112,16 @@ const DIRECTORY_TREE_DESCS: Record<Lang, { desc: string; childrenDescs?: string[
 };
 
 /* ==========================================================================
+ * Données bilingues — Directory badges
+ * ========================================================================== */
+
+/* Badges bilingues */
+const DIRECTORY_BADGES: Record<Lang, string[]> = {
+  fr: ['9 fichiers', '3 skills', '3 commandes'],
+  en: ['9 files', '3 skills', '3 commands'],
+};
+
+/* ==========================================================================
  * Données bilingues — Workflow config fields (descriptions seulement)
  * ========================================================================== */
 
@@ -199,6 +209,38 @@ const WORKFLOW_FIELD_DESCS: Record<Lang, { categoryDesc: string; fieldDescs: str
         'Only modified files are tested to optimize execution time.',
       ],
     },
+  ],
+};
+
+/* ==========================================================================
+ * Données bilingues — Noms de catégories
+ * ========================================================================== */
+
+/* Noms de catégories bilingues */
+const CATEGORY_NAMES: Record<Lang, string[]> = {
+  fr: ['Pipeline', 'Qualité', 'Git & Branches', 'Tests'],
+  en: ['Pipeline', 'Quality', 'Git & Branches', 'Tests'],
+};
+
+/* ==========================================================================
+ * Données bilingues — Labels de champs
+ * ========================================================================== */
+
+/* Labels de champs bilingues */
+const FIELD_LABELS: Record<Lang, string[]> = {
+  fr: [
+    'Création automatique d\'issue', 'Création automatique de branche', 'Création automatique de PR',
+    'PR en draft par défaut', 'Décomposition automatique', 'Tâches max par session', 'Nettoyage post-exécution',
+    'Gates qualité obligatoires', 'Validation tester obligatoire', 'Approbation reviewer obligatoire', 'E2E pour nouvelles features',
+    'Branche de base', 'Préfixe de branche',
+    'Commande serveur E2E', 'URL de test E2E', 'Tentatives E2E max', 'Timeout E2E (minutes)', 'Seuil de couverture (%)', 'Couverture obligatoire', 'Périmètre des tests',
+  ],
+  en: [
+    'Auto-create issue', 'Auto-create branch', 'Auto-create PR',
+    'PR as draft by default', 'Auto-decompose tasks', 'Max tasks per session', 'Post-execution cleanup',
+    'Enforce quality gates', 'Require tester pass', 'Require reviewer approval', 'E2E for new features',
+    'Base branch', 'Branch prefix',
+    'E2E server command', 'E2E test URL', 'Max E2E retries', 'E2E timeout (minutes)', 'Coverage threshold (%)', 'Enforce coverage', 'Test scope',
   ],
 };
 
@@ -465,9 +507,9 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
       { name: 'AGENTS.md', icon: '📜' },
       { name: 'swarm-workflow.json', icon: '⚙️' },
       { name: 'package.json', icon: '📦' },
-      { name: 'agents/', icon: '🤖', badge: '9 fichiers' },
-      { name: 'skills/', icon: '🧩', badge: '3 skills' },
-      { name: 'commands/', icon: '⌨️', badge: '3 commandes' },
+      { name: 'agents/', icon: '🤖', badge: DIRECTORY_BADGES[this.lang][0] },
+      { name: 'skills/', icon: '🧩', badge: DIRECTORY_BADGES[this.lang][1] },
+      { name: 'commands/', icon: '⌨️', badge: DIRECTORY_BADGES[this.lang][2] },
       { name: 'tools/', icon: '🔧' },
       { name: 'scripts/', icon: '📜' },
     ];
@@ -494,34 +536,37 @@ export class EcosystemComponent implements OnInit, AfterViewInit, OnDestroy {
 
   protected get workflowCategories(): readonly WorkflowCategory[] {
     const l = WORKFLOW_FIELD_DESCS[this.lang];
+    const names = CATEGORY_NAMES[this.lang];
+    const labels = FIELD_LABELS[this.lang];
+    let labelIdx = 0;
     const staticCats: Omit<WorkflowCategory, 'description'>[] = [
-      { name: 'Pipeline', icon: '⚙️', fields: [
-        { path: 'swarm.workflow.auto_create_github_issue', label: 'Création automatique d\'issue', type: 'boolean' as const, value: 'true', description: '' },
-        { path: 'swarm.workflow.auto_create_branch', label: 'Création automatique de branche', type: 'boolean' as const, value: 'true', description: '' },
-        { path: 'swarm.workflow.auto_create_pr', label: 'Création automatique de PR', type: 'boolean' as const, value: 'true', description: '' },
-        { path: 'swarm.workflow.pr_draft_by_default', label: 'PR en draft par défaut', type: 'boolean' as const, value: 'true', description: '' },
-        { path: 'swarm.workflow.auto_decompose_tasks', label: 'Décomposition automatique', type: 'boolean' as const, value: 'true', description: '' },
-        { path: 'swarm.workflow.max_tasks_per_session', label: 'Tâches max par session', type: 'number' as const, value: '5', description: '' },
-        { path: 'swarm.workflow.cleanup_processes_after_run', label: 'Nettoyage post-exécution', type: 'boolean' as const, value: 'true', description: '' },
+      { name: names[0], icon: '⚙️', fields: [
+        { path: 'swarm.workflow.auto_create_github_issue', label: labels[labelIdx++], type: 'boolean' as const, value: 'true', description: '' },
+        { path: 'swarm.workflow.auto_create_branch', label: labels[labelIdx++], type: 'boolean' as const, value: 'true', description: '' },
+        { path: 'swarm.workflow.auto_create_pr', label: labels[labelIdx++], type: 'boolean' as const, value: 'true', description: '' },
+        { path: 'swarm.workflow.pr_draft_by_default', label: labels[labelIdx++], type: 'boolean' as const, value: 'true', description: '' },
+        { path: 'swarm.workflow.auto_decompose_tasks', label: labels[labelIdx++], type: 'boolean' as const, value: 'true', description: '' },
+        { path: 'swarm.workflow.max_tasks_per_session', label: labels[labelIdx++], type: 'number' as const, value: '5', description: '' },
+        { path: 'swarm.workflow.cleanup_processes_after_run', label: labels[labelIdx++], type: 'boolean' as const, value: 'true', description: '' },
       ] },
-      { name: 'Qualité', icon: '🛡️', fields: [
-        { path: 'swarm.workflow.enforce_quality_gates', label: 'Gates qualité obligatoires', type: 'boolean' as const, value: 'true', description: '' },
-        { path: 'swarm.workflow.require_tester_pass', label: 'Validation tester obligatoire', type: 'boolean' as const, value: 'true', description: '' },
-        { path: 'swarm.workflow.require_reviewer_approve', label: 'Approbation reviewer obligatoire', type: 'boolean' as const, value: 'true', description: '' },
-        { path: 'swarm.workflow.require_e2e_for_new_features', label: 'E2E pour nouvelles features', type: 'boolean' as const, value: 'true', description: '' },
+      { name: names[1], icon: '🛡️', fields: [
+        { path: 'swarm.workflow.enforce_quality_gates', label: labels[labelIdx++], type: 'boolean' as const, value: 'true', description: '' },
+        { path: 'swarm.workflow.require_tester_pass', label: labels[labelIdx++], type: 'boolean' as const, value: 'true', description: '' },
+        { path: 'swarm.workflow.require_reviewer_approve', label: labels[labelIdx++], type: 'boolean' as const, value: 'true', description: '' },
+        { path: 'swarm.workflow.require_e2e_for_new_features', label: labels[labelIdx++], type: 'boolean' as const, value: 'true', description: '' },
       ] },
-      { name: 'Git & Branches', icon: '🌿', fields: [
-        { path: 'swarm.github.default_base_branch', label: 'Branche de base', type: 'string' as const, value: 'main', description: '' },
-        { path: 'swarm.github.branch_prefix', label: 'Préfixe de branche', type: 'string' as const, value: 'feature/swarm-', description: '' },
+      { name: names[2], icon: '🌿', fields: [
+        { path: 'swarm.github.default_base_branch', label: labels[labelIdx++], type: 'string' as const, value: 'main', description: '' },
+        { path: 'swarm.github.branch_prefix', label: labels[labelIdx++], type: 'string' as const, value: 'feature/swarm-', description: '' },
       ] },
-      { name: 'Tests', icon: '🧪', fields: [
-        { path: 'swarm.testing.e2e_frontend_command', label: 'Commande serveur E2E', type: 'string' as const, value: 'ng serve --port 3000', description: '' },
-        { path: 'swarm.testing.e2e_frontend_url', label: 'URL de test E2E', type: 'string' as const, value: 'http://localhost:3000', description: '' },
-        { path: 'swarm.testing.e2e_max_retries', label: 'Tentatives E2E max', type: 'number' as const, value: '2', description: '' },
-        { path: 'swarm.testing.e2e_timeout_minutes', label: 'Timeout E2E (minutes)', type: 'number' as const, value: '15', description: '' },
-        { path: 'swarm.testing.coverage_threshold', label: 'Seuil de couverture (%)', type: 'number' as const, value: '80', description: '' },
-        { path: 'swarm.testing.coverage_enforce', label: 'Couverture obligatoire', type: 'boolean' as const, value: 'true', description: '' },
-        { path: 'swarm.testing.test_scope', label: 'Périmètre des tests', type: 'string' as const, value: 'changed-only', description: '' },
+      { name: names[3], icon: '🧪', fields: [
+        { path: 'swarm.testing.e2e_frontend_command', label: labels[labelIdx++], type: 'string' as const, value: 'ng serve --port 3000', description: '' },
+        { path: 'swarm.testing.e2e_frontend_url', label: labels[labelIdx++], type: 'string' as const, value: 'http://localhost:3000', description: '' },
+        { path: 'swarm.testing.e2e_max_retries', label: labels[labelIdx++], type: 'number' as const, value: '2', description: '' },
+        { path: 'swarm.testing.e2e_timeout_minutes', label: labels[labelIdx++], type: 'number' as const, value: '15', description: '' },
+        { path: 'swarm.testing.coverage_threshold', label: labels[labelIdx++], type: 'number' as const, value: '80', description: '' },
+        { path: 'swarm.testing.coverage_enforce', label: labels[labelIdx++], type: 'boolean' as const, value: 'true', description: '' },
+        { path: 'swarm.testing.test_scope', label: labels[labelIdx++], type: 'string' as const, value: 'changed-only', description: '' },
       ] },
     ];
     return staticCats.map((c, i) => ({

@@ -11,7 +11,7 @@
       size="sm"
       [class.skills__filter--active]="activeCategory() === null"
       (click)="activeCategory.set(null)"
-      aria-label="Afficher tous les skills"
+      [attr.aria-label]="t('skills.list.filter.allAriaLabel')"
     >
       {{ t('skills.list.filter.all') }}
       <span class="skills__filter-count">{{ skills().length }}</span>
@@ -38,7 +38,7 @@
         [class.skills__card--featured]="idx === 0"
         [class.skills__card--wide]="idx === 2"
         role="listitem"
-        [attr.aria-label]="'Fiche de ' + skill.name"
+        [attr.aria-label]="t('skills.card.ariaLabel') + ' ' + skill.name"
         [attr.data-category]="skill.category"
       >
         <span class="skills__card-emoji" aria-hidden="true">{{ skill.emoji }}</span>

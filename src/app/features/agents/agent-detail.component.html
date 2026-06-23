@@ -49,7 +49,7 @@
       <span class="agent-detail__error-emoji" aria-hidden="true">🔍</span>
       <h1 class="agent-detail__error-title">{{ t('agents.detail.notFound') }}</h1>
       <p class="agent-detail__error-text">
-        L'agent <strong>{{ agentId() }}</strong> {{ t('agents.detail.notFoundDesc') }}
+        {{ t('agents.error.prefix') }} <strong>{{ agentId() }}</strong> {{ t('agents.detail.notFoundDesc') }}
       </p>
       <a routerLink="/agents" class="agent-detail__error-link">
         {{ t('agents.detail.backList') }}

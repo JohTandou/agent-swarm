@@ -18,6 +18,7 @@ describe('ProblemInnovationComponent', () => {
     fixture = TestBed.createComponent(ProblemInnovationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    TestBed.inject(LanguageService).setLang('fr');
   });
 
   /* ==========================================================================
@@ -254,6 +255,7 @@ describe('ProblemInnovationComponent — English', () => {
     fixture = TestBed.createComponent(ProblemInnovationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    TestBed.inject(LanguageService).setLang('en');
   });
 
   it('heroTitle should return English text', () => {

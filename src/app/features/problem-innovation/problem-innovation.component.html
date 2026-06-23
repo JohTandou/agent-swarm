@@ -27,7 +27,7 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero__bg-decor" aria-hidden="true"></div>
     <div class="hero__content">
-      <span class="hero__kicker reveal-on-scroll">Constat &amp; Vision</span>
+      <span class="hero__kicker reveal-on-scroll">{{ t('pi.hero.kicker') }}</span>
       <h1 id="hero-title" class="hero__title reveal-on-scroll" appTextReveal [revealDelay]="200">{{ heroTitle }}</h1>
       <p class="hero__subtitle reveal-on-scroll">{{ heroSubtitle }}</p>
     </div>
@@ -38,9 +38,9 @@
        ======================================================================= -->
   <section class="comparison" aria-labelledby="comparison-title">
     <div class="section-header">
-      <span class="section-header__kicker">Avant / Après</span>
-      <h2 class="section-header__title">Développer sans la Swarm,<br>puis avec</h2>
-      <p class="section-header__description">Quatre dimensions critiques où la Swarm transforme radicalement le cycle de développement.</p>
+      <span class="section-header__kicker">{{ t('pi.comparison.kicker') }}</span>
+      <h2 class="section-header__title">{{ t('pi.comparison.title') }}</h2>
+      <p class="section-header__description">{{ t('pi.comparison.desc') }}</p>
     </div>
 
     <div class="comparison__list">
@@ -49,11 +49,11 @@
         <h3 class="comparison-card__label">{{ item.label }}</h3>
         <div class="comparison-card__columns">
           <div class="comparison-card__col comparison-card__col--before">
-            <span class="comparison-card__col-label">{{ comparisonColumnLabels.withoutSwarm }}</span>
+            <span class="comparison-card__col-label">{{ t('pi.comparison.withoutSwarm') }}</span>
             <p class="comparison-card__text">{{ item.withoutSwarm }}</p>
           </div>
           <div class="comparison-card__col comparison-card__col--after">
-            <span class="comparison-card__col-label">{{ comparisonColumnLabels.withSwarm }}</span>
+            <span class="comparison-card__col-label">{{ t('pi.comparison.withSwarm') }}</span>
             <p class="comparison-card__text">{{ item.withSwarm }}</p>
           </div>
         </div>
@@ -71,9 +71,9 @@
        ======================================================================= -->
   <section class="pillars section--alt" aria-labelledby="pillars-title">
     <div class="section-header">
-      <span class="section-header__kicker">Innovation</span>
-      <h2 class="section-header__title">Les 7 piliers<br>d'innovation</h2>
-      <p class="section-header__description">Chaque pilier résout un problème structurel du développement logiciel assisté par IA.</p>
+      <span class="section-header__kicker">{{ t('pi.pillars.kicker') }}</span>
+      <h2 class="section-header__title">{{ t('pi.pillars.title') }}</h2>
+      <p class="section-header__description">{{ t('pi.pillars.desc') }}</p>
     </div>
 
     <div class="pillars__grid">
@@ -94,18 +94,18 @@
        ======================================================================= -->
   <section class="costs" aria-labelledby="costs-title">
     <div class="section-header">
-      <span class="section-header__kicker">Transparence</span>
-      <h2 class="section-header__title">Analyse des coûts</h2>
-      <p class="section-header__description">Transparence totale sur l'économie de la Swarm. Chaque session a un coût prévisible, proportionnel à sa complexité.</p>
+      <span class="section-header__kicker">{{ t('pi.costs.kicker') }}</span>
+      <h2 class="section-header__title">{{ t('pi.costs.title') }}</h2>
+      <p class="section-header__description">{{ t('pi.costs.desc') }}</p>
     </div>
 
-    <h3 class="costs__comparison-title">Swarm vs Claude Pro vs Claude Max</h3>
+    <h3 class="costs__comparison-title">{{ t('pi.costs.comparisonTitle') }}</h3>
 
     <div class="costs__comparison-table-wrapper">
       <table class="costs__comparison-table" role="table">
         <thead>
           <tr>
-            <th scope="col">Capacité</th>
+            <th scope="col">{{ t('pi.costs.colCapability') }}</th>
             <th scope="col" class="costs__comparison-col--swarm">Swarm</th>
             <th scope="col">Claude Pro</th>
             <th scope="col">Claude Max</th>
@@ -133,9 +133,9 @@
        ======================================================================= -->
   <section class="models section--alt" aria-labelledby="models-title">
     <div class="section-header">
-      <span class="section-header__kicker">Raisonnement</span>
-      <h2 class="section-header__title">Modèle d'IA</h2>
-      <p class="section-header__description">Tous les agents de la Swarm utilisent le même modèle. Pas de dégradation — chaque agent bénéficie de la pleine puissance du raisonnement.</p>
+      <span class="section-header__kicker">{{ t('pi.model.kicker') }}</span>
+      <h2 class="section-header__title">{{ t('pi.model.title') }}</h2>
+      <p class="section-header__description">{{ t('pi.model.desc') }}</p>
     </div>
 
     <div class="models__grid models__grid--single">
@@ -158,9 +158,9 @@
        ======================================================================= -->
   <section class="limits" aria-labelledby="limits-title">
     <div class="section-header">
-      <span class="section-header__kicker">Honnêteté</span>
-      <h2 class="section-header__title">Limites du système</h2>
-      <p class="section-header__description">Un système honnête expose ses limites. Voici ce que la Swarm ne fait pas — ou pas encore.</p>
+      <span class="section-header__kicker">{{ t('pi.limits.kicker') }}</span>
+      <h2 class="section-header__title">{{ t('pi.limits.title') }}</h2>
+      <p class="section-header__description">{{ t('pi.limits.desc') }}</p>
     </div>
 
     <div class="limits__grid">

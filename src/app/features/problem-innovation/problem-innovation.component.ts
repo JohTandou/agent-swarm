@@ -112,11 +112,6 @@ const COMPARISON_DATA: Record<Lang, ComparisonEntry[]> = {
   ],
 };
 
-const COMPARISON_LABELS: Record<Lang, { withoutSwarm: string; withSwarm: string }> = {
-  fr: { withoutSwarm: 'Sans la Swarm', withSwarm: 'Avec la Swarm' },
-  en: { withoutSwarm: 'Without Swarm', withSwarm: 'With Swarm' },
-};
-
 /* ==========================================================================
  * Données bilingues — Section 3 : 7 piliers d'innovation
  * ========================================================================== */
@@ -340,10 +335,6 @@ export class ProblemInnovationComponent implements OnInit, AfterViewInit, OnDest
   /* ==========================================================================
    * Données — Section 2 : Avant/Après
    * ========================================================================== */
-
-  protected get comparisonColumnLabels(): { withoutSwarm: string; withSwarm: string } {
-    return COMPARISON_LABELS[this.lang];
-  }
 
   protected get comparisonData(): readonly ComparisonEntry[] {
     return COMPARISON_DATA[this.lang];
