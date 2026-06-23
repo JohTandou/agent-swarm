@@ -7,45 +7,43 @@ Odd numbered Node.js versions will not enter LTS status and should not be used f
 ❯ Building...
 ✔ Building...
 Initial chunk files   | Names                     |  Raw size | Estimated transfer size
-main-HWQBQ5UP.js      | main                      | 208.46 kB |                51.52 kB
-chunk-VVTI5S3N.js     | -                         | 149.41 kB |                44.48 kB
-chunk-L5ZGTHOD.js     | -                         |  70.82 kB |                17.66 kB
-chunk-KCBQG3RV.js     | -                         |  54.79 kB |                15.04 kB
-chunk-44AM7WGY.js     | -                         |  40.72 kB |                11.45 kB
+main-KIOJKXSX.js      | main                      | 209.82 kB |                51.51 kB
+chunk-BNUNJ2TC.js     | -                         | 184.06 kB |                52.80 kB
+chunk-N4RQZZCD.js     | -                         |  70.82 kB |                17.64 kB
+chunk-3BQWOG4P.js     | -                         |  54.79 kB |                15.05 kB
+chunk-HH7YTHNB.js     | -                         |  40.72 kB |                11.46 kB
 polyfills-5CFQRCPP.js | polyfills                 |  34.59 kB |                11.33 kB
 styles-KLVKW5XS.css   | styles                    |  33.83 kB |                 7.46 kB
-chunk-JAEDHU2F.js     | -                         |  27.52 kB |                 6.48 kB
-chunk-JV5GO7VZ.js     | -                         |   4.99 kB |                 1.39 kB
-chunk-25HFDMPO.js     | -                         |   3.93 kB |                 1.27 kB
-chunk-TY43ZZKL.js     | -                         |   2.76 kB |               946 bytes
-chunk-KPSPRZS6.js     | -                         |   2.71 kB |               889 bytes
-chunk-YE4RKAHV.js     | -                         |   2.03 kB |               752 bytes
-chunk-UFS26WI4.js     | -                         |   1.21 kB |               564 bytes
-chunk-PV34IWFT.js     | -                         | 891 bytes |               891 bytes
+chunk-G5PMQ6HH.js     | -                         |   4.99 kB |                 1.40 kB
+chunk-BQX4TC6W.js     | -                         |   3.93 kB |                 1.27 kB
+chunk-VKPWFPWX.js     | -                         |   2.75 kB |               970 bytes
+chunk-CDRM6RF6.js     | -                         |   2.71 kB |               890 bytes
+chunk-R3M4332H.js     | -                         |   2.00 kB |               764 bytes
+chunk-TGTONPAW.js     | -                         | 923 bytes |               923 bytes
 chunk-4CLCTAJ7.js     | -                         | 830 bytes |               830 bytes
-chunk-JVPF3YJZ.js     | -                         | 554 bytes |               554 bytes
+chunk-M4XA2KGM.js     | -                         | 554 bytes |               554 bytes
 
-                      | Initial total             | 640.03 kB |               173.51 kB
+                      | Initial total             | 647.30 kB |               174.84 kB
 
 Lazy chunk files      | Names                     |  Raw size | Estimated transfer size
 chunk-AQ7UY2OY.js     | index                     |  70.51 kB |                25.03 kB
-chunk-YO7U7PNB.js     | -                         |  58.51 kB |                17.21 kB
+chunk-34KUM32V.js     | -                         |  58.65 kB |                17.15 kB
+chunk-IFJ6D7IM.js     | workflow-routes           |  48.34 kB |                11.22 kB
 chunk-PTNTPL5X.js     | ScrollTrigger             |  43.59 kB |                16.40 kB
-chunk-HFYY477T.js     | workflow-routes           |  37.07 kB |                 9.03 kB
-chunk-OICEHOKM.js     | ecosystem-routes          |  30.67 kB |                 7.66 kB
-chunk-PFQH6XLG.js     | problem-innovation-routes |  28.67 kB |                 7.08 kB
-chunk-S3TPLYN3.js     | agents-routes             |  27.27 kB |                 6.56 kB
-chunk-3UOJWAGF.js     | mcp-tools-routes          |  27.06 kB |                 6.98 kB
-chunk-5E7ST37Q.js     | homepage-routes           |  25.46 kB |                 6.73 kB
-chunk-DIKBMHXE.js     | skills-routes             |  22.59 kB |                 5.17 kB
-chunk-3CNL52GR.js     | about-routes              |  16.57 kB |                 4.31 kB
-chunk-EQLQG6VY.js     | not-found-component       |   3.02 kB |                 1.09 kB
-chunk-XGNUN5MB.js     | -                         |   1.42 kB |               548 bytes
-chunk-GIO7ZE7N.js     | -                         |   1.28 kB |               542 bytes
-chunk-VV5OATQW.js     | -                         | 446 bytes |               446 bytes
+chunk-FKQPNOT6.js     | ecosystem-routes          |  39.96 kB |                 9.15 kB
+chunk-ABMF4YYB.js     | problem-innovation-routes |  34.32 kB |                 8.44 kB
+chunk-P4C2MMPA.js     | mcp-tools-routes          |  30.52 kB |                 7.87 kB
+chunk-TP4U6ZBR.js     | agents-routes             |  27.51 kB |                 6.40 kB
+chunk-HZFEYH5U.js     | homepage-routes           |  25.60 kB |                 6.73 kB
+chunk-24QI2SGY.js     | skills-routes             |  22.46 kB |                 4.87 kB
+chunk-I6JJSA54.js     | about-routes              |  14.65 kB |                 3.08 kB
+chunk-ZO5N3YGI.js     | not-found-component       |   2.96 kB |                 1.07 kB
+chunk-6JRB7DGE.js     | -                         |   1.42 kB |               547 bytes
+chunk-KMUHDXTN.js     | -                         |   1.28 kB |               542 bytes
+chunk-DZHBH3CB.js     | -                         | 446 bytes |               446 bytes
 ...and 1 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [2.943 seconds]
+Application bundle generation complete. [3.026 seconds]
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: UiButtonComponent is not used within the template of AppComponent[0m [1m[35m[plugin angular-compiler][0m
 
@@ -70,36 +68,36 @@ Application bundle generation complete. [2.943 seconds]
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: UiBadgeComponent is not used within the template of AgentsListComponent[0m [1m[35m[plugin angular-compiler][0m
 
-    src/app/features/agents/agents-list.component.ts:24:43:
-[37m      24 │ ...ink, UiButtonComponent, [32mUiBadgeComponent[37m, StaggerChildrenDirect...
+    src/app/features/agents/agents-list.component.ts:25:43:
+[37m      25 │ ...ink, UiButtonComponent, [32mUiBadgeComponent[37m, StaggerChildrenDirect...
          ╵                            [32m~~~~~~~~~~~~~~~~[0m
 
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: StaggerChildrenDirective is not used within the template of EcosystemComponent[0m [1m[35m[plugin angular-compiler][0m
 
-    src/app/features/ecosystem/ecosystem.component.ts:57:76:
-[37m      57 │ ..., UiBadgeComponent, [32mStaggerChildrenDirective[37m, TextRevealDirecti...
-         ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    src/app/features/ecosystem/ecosystem.component.ts:472:76:
+[37m      472 │ ... UiBadgeComponent, [32mStaggerChildrenDirective[37m, TextRevealDirecti...
+          ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
 
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: StaggerChildrenDirective is not used within the template of WorkflowComponent[0m [1m[35m[plugin angular-compiler][0m
 
-    src/app/features/workflow/workflow.component.ts:68:76:
-[37m      68 │ ..., UiBadgeComponent, [32mStaggerChildrenDirective[37m, TextRevealDirecti...
-         ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    src/app/features/workflow/workflow.component.ts:555:76:
+[37m      555 │ ... UiBadgeComponent, [32mStaggerChildrenDirective[37m, TextRevealDirecti...
+          ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
 
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: UiSkeletonComponent is not used within the template of MarkdownRendererComponent[0m [1m[35m[plugin angular-compiler][0m
 
-    src/app/shared/components/markdown-renderer/markdown-renderer.component.ts:36:31:
-[37m      36 │   imports: [MarkdownComponent, [32mUiSkeletonComponent[37m],
+    src/app/shared/components/markdown-renderer/markdown-renderer.component.ts:37:31:
+[37m      37 │   imports: [MarkdownComponent, [32mUiSkeletonComponent[37m],
          ╵                                [32m~~~~~~~~~~~~~~~~~~~[0m
 
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: UiSkeletonComponent is not used within the template of SearchModalComponent[0m [1m[35m[plugin angular-compiler][0m
 
-    src/app/shared/components/search-modal/search-modal.component.ts:38:39:
-[37m      38 │ ...nModule, FormsModule, [32mUiSkeletonComponent[37m, UiEmptyStateComponent],
+    src/app/shared/components/search-modal/search-modal.component.ts:39:39:
+[37m      39 │ ...nModule, FormsModule, [32mUiSkeletonComponent[37m, UiEmptyStateComponent],
          ╵                          [32m~~~~~~~~~~~~~~~~~~~[0m
 
 

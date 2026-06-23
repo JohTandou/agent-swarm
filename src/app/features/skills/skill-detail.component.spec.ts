@@ -78,6 +78,7 @@ describe('SkillDetailComponent', () => {
     component = fixture.componentInstance;
     tocService = TestBed.inject(TocService);
     fixture.detectChanges();
+    TestBed.inject(LanguageService).setLang('fr');
   }
 
   describe('avec un skill valide (ui-ux-pro-max)', () => {

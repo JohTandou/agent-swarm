@@ -26,6 +26,7 @@ describe('BreadcrumbsComponent', () => {
 
     fixture = TestBed.createComponent(BreadcrumbsComponent);
     component = fixture.componentInstance;
+    TestBed.inject(LanguageService).setLang('fr');
   });
 
   it('devrait créer le composant', () => {
