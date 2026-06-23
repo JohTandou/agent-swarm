@@ -7,7 +7,7 @@ Odd numbered Node.js versions will not enter LTS status and should not be used f
 ❯ Building...
 ✔ Building...
 Initial chunk files   | Names                     |  Raw size | Estimated transfer size
-main-HD2WYDF7.js      | main                      | 209.82 kB |                51.55 kB
+main-TIJONRZP.js      | main                      | 209.82 kB |                51.62 kB
 chunk-DOCLQLMZ.js     | -                         | 183.97 kB |                52.79 kB
 chunk-6YXR2TFH.js     | -                         |  70.82 kB |                17.65 kB
 chunk-6YK45Z5I.js     | -                         |  54.79 kB |                15.06 kB
@@ -23,7 +23,7 @@ chunk-UFB6ZVD3.js     | -                         | 923 bytes |               92
 chunk-4CLCTAJ7.js     | -                         | 830 bytes |               830 bytes
 chunk-T3YRTWHB.js     | -                         | 554 bytes |               554 bytes
 
-                      | Initial total             | 647.22 kB |               174.87 kB
+                      | Initial total             | 647.22 kB |               174.94 kB
 
 Lazy chunk files      | Names                     |  Raw size | Estimated transfer size
 chunk-AQ7UY2OY.js     | index                     |  70.51 kB |                25.03 kB
@@ -32,7 +32,7 @@ chunk-DZ5TT3OE.js     | workflow-routes           |  48.34 kB |                1
 chunk-PTNTPL5X.js     | ScrollTrigger             |  43.59 kB |                16.40 kB
 chunk-FRGYWDUI.js     | ecosystem-routes          |  39.96 kB |                 9.15 kB
 chunk-CR5FADIP.js     | problem-innovation-routes |  34.32 kB |                 8.44 kB
-chunk-M2KFHGJ4.js     | mcp-tools-routes          |  30.52 kB |                 7.85 kB
+chunk-OH7NG647.js     | mcp-tools-routes          |  32.91 kB |                 8.06 kB
 chunk-7D7BDS2L.js     | agents-routes             |  29.82 kB |                 7.11 kB
 chunk-PBDSBPNT.js     | homepage-routes           |  25.60 kB |                 6.74 kB
 chunk-RAXBERR6.js     | skills-routes             |  23.25 kB |                 5.05 kB
@@ -43,7 +43,7 @@ chunk-CA6TF7UQ.js     | -                         |   1.28 kB |               54
 chunk-M7P6VJQP.js     | -                         | 446 bytes |               446 bytes
 ...and 1 more lazy chunks files. Use "--verbose" to show all the files.
 
-Application bundle generation complete. [2.753 seconds]
+Application bundle generation complete. [3.054 seconds]
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: UiButtonComponent is not used within the template of AppComponent[0m [1m[35m[plugin angular-compiler][0m
 
@@ -101,10 +101,10 @@ Application bundle generation complete. [2.753 seconds]
          ╵                          [32m~~~~~~~~~~~~~~~~~~~[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 10.00 kB was not met by 1.57 kB with a total of 11.57 kB.[0m
-
-
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 10.00 kB was not met by 2.19 kB with a total of 12.19 kB.[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 10.00 kB was not met by 1.57 kB with a total of 11.57 kB.[0m
 
 
 Output location: /Users/johtnd/swarm-wiki/dist/swarm-wiki

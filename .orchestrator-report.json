@@ -12,8 +12,8 @@
     },
     {
       "name": "unit-tests",
-      "status": "pass",
-      "detail": "passed"
+      "status": "fail",
+      "detail": "Node.js version v25.4.0 detected.\nOdd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.\n- Generating browser application bundles (phase: setup)...\n✔ Browser application bundle generation complete.\n✔ Browser application bundle generation complete.\n✔ Browser application bundle generation complete.\n✔ Browser application bundle generation complete.\n"
     },
     {
       "name": "backend-start",
@@ -31,5 +31,5 @@
       "detail": "Suite: smoke — 0 tests matched the grep pattern"
     }
   ],
-  "overall": "pass"
+  "overall": "fail"
 }

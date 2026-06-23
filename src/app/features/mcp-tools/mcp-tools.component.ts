@@ -350,6 +350,101 @@ const CATEGORY_META_EN: Record<string, { description: string; playgroundLabel: s
 };
 
 /* ==========================================================================
+ * Données bilingues — Exemples de code (EN)
+ * ========================================================================== */
+
+const EXAMPLE_CODE_EN: Record<string, string> = {
+  supabase: `// Deploying an Edge Function
+supabase_deploy_edge_function({
+  name: "hello-world",
+  files: [
+    { name: "index.ts", content: "Deno.serve(() => new Response('Hello'))" }
+  ],
+  entrypoint_path: "index.ts"
+});
+
+// Creating a migration
+supabase_apply_migration({
+  name: "add_users_table",
+  query: "CREATE TABLE users (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), email TEXT UNIQUE NOT NULL);"
+});`,
+  vercel: `// Automatic deployment
+vercel_deploy_to_vercel();
+
+// List recent deployments
+vercel_list_deployments({
+  projectId: "prj_abc123",
+  teamId: "team_xyz789"
+});
+
+// Retrieve error logs
+vercel_get_runtime_logs({
+  projectId: "prj_abc123",
+  teamId: "team_xyz789",
+  level: ["error", "fatal"],
+  since: "1h"
+});`,
+  render: `// Create a Node.js web service
+render_create_web_service({
+  name: "my-api",
+  runtime: "node",
+  repo: "https://github.com/user/repo",
+  buildCommand: "npm install && npm run build",
+  startCommand: "npm start",
+  plan: "starter"
+});
+
+// Monitor metrics
+render_get_metrics({
+  resourceId: "srv-cf8x9h2",
+  metricTypes: ["cpu_usage", "memory_usage"],
+  startTime: "2024-01-01T00:00:00Z",
+  endTime: "2024-01-01T12:00:00Z"
+});`,
+  playwright: `// Navigate and interact
+playwright_browser_navigate({ url: "https://example.com" });
+
+// Fill a form
+playwright_browser_fill_form({
+  fields: [
+    { target: "#email", name: "Email", type: "textbox", value: "user@example.com" },
+    { target: "#password", name: "Password", type: "textbox", value: "••••••••" }
+  ]
+});
+
+// Click the login button
+playwright_browser_click({
+  element: "Login button",
+  target: "button[type='submit']"
+});
+
+// Capture the result
+playwright_browser_take_screenshot({
+  filename: "after-login.png",
+  type: "png",
+  fullPage: true
+});`,
+  context7: `// Resolve a library and query its documentation
+const libraryId = await context7.resolveLibraryId({
+  libraryName: '@angular/core'
+});
+const docs = await context7.queryDocs({
+  libraryId,
+  query: 'standalone components'
+});`,
+  magic: `// Generate a premium button component
+const component = await magic.componentBuilder({
+  prompt: 'A premium dark mode button with amber accent, loading state, and hover glow',
+  stack: 'html'
+});
+
+// Search for design inspirations
+const inspirations = await magic.inspiration({
+  query: 'dark mode dashboard cards'
+});`,
+};
+
+/* ==========================================================================
  * Composant — McpToolsComponent
  * ========================================================================== */
 
@@ -393,6 +488,7 @@ export class McpToolsComponent implements OnInit, OnDestroy {
         ...cat,
         description: meta?.description ?? cat.description,
         playgroundLabel: meta?.playgroundLabel ?? cat.playgroundLabel,
+        exampleCode: EXAMPLE_CODE_EN[key] ?? cat.exampleCode,
         tools: cat.tools.map((t, i) => ({
           ...t,
           description: descs[i] ?? t.description,
