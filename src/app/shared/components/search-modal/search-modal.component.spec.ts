@@ -30,6 +30,9 @@ describe('SearchModalComponent', () => {
       ],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).setLang('fr');
+    sessionStorage.clear();
+
     fixture = TestBed.createComponent(SearchModalComponent);
     component = fixture.componentInstance;
   });
