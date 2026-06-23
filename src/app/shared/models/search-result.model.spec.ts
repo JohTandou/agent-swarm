@@ -3,14 +3,14 @@ import type { SearchResult } from './search-result.model';
 describe('SearchResult (modèle)', () => {
   it('devrait accepter un SearchResult complet', () => {
     const result: SearchResult = {
-      title: 'Orchestrateur',
+      title: 'Orchestrator',
       description: "Chef d'orchestre du pipeline Swarm",
       route: '/agents/orchestrateur',
       section: 'Agents',
       sourcePath: 'agents/orchestrateur.md',
     };
 
-    expect(result.title).toBe('Orchestrateur');
+    expect(result.title).toBe('Orchestrator');
     expect(result.description).toBe("Chef d'orchestre du pipeline Swarm");
     expect(result.route).toBe('/agents/orchestrateur');
     expect(result.section).toBe('Agents');

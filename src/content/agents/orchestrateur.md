@@ -1,5 +1,5 @@
 ---
-title: Orchestrateur (build)
+title: Orchestrator (build)
 description: Interface unique avec l'utilisateur et chef d'orchestre du pipeline
 order: 1
 author: Joh Tandou

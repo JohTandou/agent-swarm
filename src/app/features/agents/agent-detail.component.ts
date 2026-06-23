@@ -7,7 +7,8 @@ import { JsonLdService } from '../../shared/services/json-ld.service';
 import { TranslationService } from '../../shared/services/translation.service';
 import type { AgentCategory, TocEntry, MarkdownDocument } from '@shared/models';
 import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component';
-import { AGENTS_MAP } from '@shared/data/agents.data';
+import { AGENTS_MAP, AGENT_ROLES_EN, AGENT_DESCS_EN } from '@shared/data/agents.data';
+import { LanguageService, type Lang } from '../../shared/services/language.service';
 
 /**
  * Page de détail d'un agent Swarm.
@@ -32,14 +33,24 @@ export class AgentDetailComponent {
   private seoService = inject(SeoService);
   private jsonLdService = inject(JsonLdService);
   private readonly translate = inject(TranslationService);
+  private readonly langService = inject(LanguageService);
+
+  private get lang(): Lang { return this.langService.currentLang(); }
 
   /** ID de l'agent extrait de l'URL */
   readonly agentId = signal<string>('');
 
-  /** Données de l'agent (undefined si ID invalide) */
+  /** Données de l'agent (undefined si ID invalide), localisées selon la langue */
   readonly agent = computed(() => {
     const id = this.agentId();
-    return AGENTS_MAP[id];
+    const agent = AGENTS_MAP[id];
+    if (!agent) return undefined;
+    if (this.lang === 'fr') return agent;
+    return {
+      ...agent,
+      role: AGENT_ROLES_EN[id] ?? agent.role,
+      description: AGENT_DESCS_EN[id] ?? agent.description,
+    };
   });
 
   /** Erreur si agent non trouvé */

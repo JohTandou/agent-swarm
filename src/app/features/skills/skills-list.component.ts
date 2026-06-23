@@ -8,6 +8,7 @@ import { UiBadgeComponent } from '@shared/components/ui-badge/ui-badge.component
 import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { UiEmptyStateComponent } from '@shared/components/ui-empty-state/ui-empty-state.component';
 import { JsonLdService } from '@shared/services/json-ld.service';
+import { LanguageService, type Lang } from '../../shared/services/language.service';
 import type { Skill, SkillCategory } from '@shared/models';
 
 /** Skills hardcodés */
@@ -16,6 +17,12 @@ const SKILLS: Skill[] = [
   { id: 'tests-create', name: 'Tests Create', emoji: '🧪', category: 'creation', sourcePath: 'skills/tests-create.md', order: 2, tags: [], description: 'Génération optimale de tests unitaires, fonctionnels, intégration et E2E' },
   { id: 'graphify', name: 'Graphify', emoji: '🕸️', category: 'audit', sourcePath: 'skills/graphify.md', order: 3, tags: [], description: 'Transforme code, docs, papiers en graphes de connaissances' },
 ];
+
+const SKILL_DESCS_EN: Record<string, string> = {
+  'ui-ux-pro-max': 'UI/UX design intelligence with 67 styles, 96 palettes',
+  'tests-create': 'Optimal generation of unit, functional, integration and E2E tests',
+  'graphify': 'Transforms code, docs, papers into knowledge graphs',
+};
 
 /**
  * Page listing des skills Swarm — grille bento asymétrique.
@@ -36,9 +43,15 @@ export class SkillsListComponent {
   private readonly translate = inject(TranslationService);
   private readonly toastService = inject(ToastService);
   private readonly jsonLdService = inject(JsonLdService);
+  private readonly langService = inject(LanguageService);
 
-  /** Liste complète des skills (hardcodée) */
-  readonly skills = signal<Skill[]>(SKILLS);
+  private get lang(): Lang { return this.langService.currentLang(); }
+
+  /** Liste complète des skills (hardcodée), localisée selon la langue */
+  readonly skills = computed<Skill[]>(() => {
+    if (this.langService.currentLang() === 'fr') return SKILLS;
+    return SKILLS.map(s => ({ ...s, description: SKILL_DESCS_EN[s.id] ?? s.description }));
+  });
 
   /** Catégorie active pour le filtrage (null = toutes) */
   readonly activeCategory = signal<SkillCategory | null>(null);

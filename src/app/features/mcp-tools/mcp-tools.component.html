@@ -80,7 +80,7 @@
           <h1 class="mcp-header__title">{{ data.label }}</h1>
           <p class="mcp-header__description">{{ data.description }}</p>
           <p class="mcp-header__count">
-            {{ data.tools.length }} outil{{ data.tools.length > 1 ? 's' : '' }} MCP disponible{{ data.tools.length > 1 ? 's' : '' }}
+            {{ t('mcp.toolCount').replace('{count}', String(data.tools.length)).replace('{plural}', data.tools.length > 1 ? 's' : '') }}
           </p>
         </div>
       </header>
@@ -89,7 +89,7 @@
       <div class="mcp-tools__table-wrapper">
         <table
           class="mcp-tools__table"
-          [attr.aria-label]="'Liste des outils ' + data.label"
+          [attr.aria-label]="t('mcp.table.tool') + ' ' + data.label"
         >
           <thead class="mcp-table__head">
             <tr>

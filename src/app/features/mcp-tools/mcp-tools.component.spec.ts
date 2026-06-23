@@ -163,7 +163,7 @@ describe('McpToolsComponent', () => {
     expect(errorEl).toBeTruthy();
     const errorMsg = fixture.nativeElement.querySelector('.mcp-error__message');
     expect(errorMsg).toBeTruthy();
-    expect(errorMsg.textContent).toContain('inconnue');
+    expect(errorMsg.textContent).toContain('Catégorie introuvable');
   }));
 
   it('devrait avoir un bouton Réessayer dans l\'état erreur', fakeAsync(() => {
@@ -303,7 +303,7 @@ describe('McpToolsComponent', () => {
 
     const table = fixture.nativeElement.querySelector('table');
     expect(table).toBeTruthy();
-    expect(table.getAttribute('aria-label')).toContain('Liste des outils');
+    expect(table.getAttribute('aria-label')).toContain('Outil');
   }));
 
   /* ==========================================================================

@@ -52,7 +52,7 @@ test.describe('T1 — Layout Shell & Navigation', () => {
         // Déplier
         await agentsBtn.click();
         await expect(agentsBtn).toHaveAttribute('aria-expanded', 'true');
-        await expect(page.getByRole('link', { name: 'Orchestrateur' })).toBeVisible();
+        await expect(page.getByRole('link', { name: 'Orchestrator' })).toBeVisible();
 
         // Replier
         await agentsBtn.click();

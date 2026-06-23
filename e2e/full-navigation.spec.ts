@@ -88,13 +88,13 @@ test.describe('T17 — Navigation complète (toutes les sections)', () => {
   });
 
   test.describe('Navigation sidebar — menus pliables', () => {
-    test('Agents → Orchestrateur depuis la sidebar dépliée', async ({ page }) => {
+    test('Agents → Orchestrator depuis la sidebar dépliée', async ({ page }) => {
       await page.goto('/a-propos');
       const agentsBtn = page.getByRole('button', { name: 'Agents' });
       await expect(agentsBtn).toBeVisible({ timeout: 10000 });
       await agentsBtn.click();
       await expect(agentsBtn).toHaveAttribute('aria-expanded', 'true');
-      const orchLink = page.locator('.sidebar__subitem').getByRole('link', { name: 'Orchestrateur' });
+      const orchLink = page.locator('.sidebar__subitem').getByRole('link', { name: 'Orchestrator' });
       await orchLink.click();
       await expect(page).toHaveURL(/\/agents\/orchestrateur/, { timeout: 5000 });
     });

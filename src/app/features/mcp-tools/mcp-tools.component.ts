@@ -444,7 +444,7 @@ export class McpToolsComponent implements OnInit, OnDestroy {
     const id = this.categoryId();
 
     if (!this.mcpCategories[id]) {
-      this.error.set(`Catégorie « ${id} » introuvable.`);
+      this.error.set(this.t('mcp.category.notFound'));
       return;
     }
 

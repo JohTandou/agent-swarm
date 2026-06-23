@@ -78,7 +78,7 @@ describe('AgentDetailComponent', () => {
 
     it('devrait trouver l\'agent dans la map', () => {
       expect(component.agent()).toBeDefined();
-      expect(component.agent()?.name).toBe('Orchestrateur');
+      expect(component.agent()?.name).toBe('Orchestrator');
       expect(component.agent()?.emoji).toBe('🧠');
     });
 
@@ -97,7 +97,7 @@ describe('AgentDetailComponent', () => {
     it('devrait afficher le nom de l\'agent dans le header', () => {
       const nameEl = fixture.nativeElement.querySelector('.agent-detail__name');
       expect(nameEl).toBeTruthy();
-      expect(nameEl.textContent?.trim()).toBe('Orchestrateur');
+      expect(nameEl.textContent?.trim()).toBe('Orchestrator');
     });
 
     it('devrait afficher l\'emoji de l\'agent', () => {

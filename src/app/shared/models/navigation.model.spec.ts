@@ -17,7 +17,7 @@ describe('NavItem (modèle)', () => {
       route: '/agents',
       expanded: false,
       children: [
-        { label: 'Orchestrateur', route: '/agents/orchestrateur' },
+        { label: 'Orchestrator', route: '/agents/orchestrateur' },
         { label: 'Front', route: '/agents/front' },
       ],
     };
