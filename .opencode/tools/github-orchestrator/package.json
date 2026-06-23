@@ -1,0 +1,18 @@
+{
+  "name": "@swarm/github-orchestrator-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Swarm GitHub Orchestrator — typed tool replacements for detect-stack.sh",
+  "type": "module",
+  "scripts": {
+    "detect-stack": "tsx detect-stack.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "tsx": "^4.19.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
+}
