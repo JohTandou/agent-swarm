@@ -42,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Added — T1 : Bootstrap Angular 19 + Thème Dark
 
-- Initialisation du projet via Angular CLI 19.2.27 (`ng new swarm-wiki`)
+- Initialisation du projet via Angular CLI 19.2.27 (`ng new agent-swarm`)
 - Configuration Tailwind v4 CSS-first avec `@theme` exposant palette et polices
 - SCSS pour keyframes (fadeSlideIn, shimmer, pulseGlow, slowRotate), easings custom, stagger children avec délai incrémental, respect `prefers-reduced-motion`
 - Layout shell 3 colonnes responsive : header glassmorphism fixe (64px), sidebar 280px, zone contenu 860px, TOC placeholder 220px

@@ -73,7 +73,7 @@ Chaque section a son propre routeur lazy-loadé via `loadChildren`. La homepage 
 ## Structure du Projet
 
 ```
-swarm-wiki/
+agent-swarm/
 ├── src/
 │   ├── app/
 │   │   ├── layout/                     # Composants du shell applicatif
