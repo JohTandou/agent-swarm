@@ -67,7 +67,8 @@ export class SeoService {
 
   /**
    * Met à jour les balises <link rel="alternate" hreflang="..."> pour le SEO multilingue.
-   * Génère les URLs FR, EN et x-default en fonction de la langue courante.
+   * Génère les URLs FR, EN et x-default en utilisant le path translator
+   * du LanguageService pour traduire correctement les segments d'URL.
    */
   private updateHreflang(): void {
     // Supprimer les anciens hreflang
@@ -77,16 +78,26 @@ export class SeoService {
     const currentLang = this.languageService.currentLang();
     const path = window.location.pathname;
 
-    // Construit les chemins FR et EN
-    const frPath = currentLang === 'en' ? path.replace(/^\/en/, '') || '/' : path;
-    const enPath = currentLang === 'fr' ? '/en' + (path === '/' ? '' : path) : path;
+    // Utiliser le path translator pour traduire correctement les segments
+    let frPath: string;
+    let enPath: string;
 
-    const frUrl = frPath.startsWith('/') ? baseUrl + frPath : baseUrl + '/' + frPath;
-    const enUrl = enPath.startsWith('/') ? baseUrl + enPath : baseUrl + '/' + enPath;
+    if (currentLang === 'en') {
+      frPath = this.languageService.translatePathToFr(path);
+      enPath = path;
+    } else {
+      frPath = path;
+      enPath = this.languageService.translatePathToEn(path);
+    }
 
-    this.addLink('alternate', frUrl, 'fr');
-    this.addLink('alternate', enUrl, 'en');
-    this.addLink('alternate', baseUrl + (frPath || '/'), 'x-default');
+    this.addLink('alternate', baseUrl + frPath, 'fr');
+    this.addLink('alternate', baseUrl + enPath, 'en');
+    this.addLink('alternate', baseUrl + frPath, 'x-default');
+  }
+
+  /** Met à jour uniquement les balises hreflang (sans toucher aux autres metas) */
+  updateHreflangOnly(): void {
+    this.updateHreflang();
   }
 
   /** Crée et ajoute une balise <link> dans le <head> */
