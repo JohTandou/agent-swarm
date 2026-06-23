@@ -43,6 +43,20 @@ describe('LanguageService', () => {
     expect(svc.currentLang()).toBe('en');
   });
 
+  it('devrait détecter l\'anglais via l\'URL même si sessionStorage contient fr', () => {
+    sessionStorage.setItem('swarm-lang', 'fr'); // Contamination simulée
+    setPathname('/en/about');
+    const svc = TestBed.inject(LanguageService);
+    expect(svc.currentLang()).toBe('en'); // L'URL prime
+  });
+
+  it('devrait utiliser sessionStorage si l\'URL n\'a pas de préfixe /en', () => {
+    sessionStorage.setItem('swarm-lang', 'en'); // Laissé par une page EN précédente
+    setPathname('/a-propos');
+    const svc = TestBed.inject(LanguageService);
+    expect(svc.currentLang()).toBe('en'); // sessionStorage = 'en', pas de /en dans l'URL
+  });
+
   it('setLang devrait changer la langue courante', () => {
     setPathname('/');
     const svc = TestBed.inject(LanguageService);

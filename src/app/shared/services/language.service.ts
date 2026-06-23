@@ -17,18 +17,23 @@ export class LanguageService {
   readonly currentLang = signal<Lang>(this.detectInitialLang());
 
   /**
-   * Détecte la langue initiale depuis le sessionStorage,
-   * puis depuis le pathname de l'URL.
-   * Si le path commence par /en/ ou est exactement /en → anglais,
-   * sinon → français (langue par défaut).
+   * Détecte la langue initiale : l'URL prime sur sessionStorage.
+   * Si le path commence par /en/ ou est exactement /en → anglais.
+   * Sinon, utilise sessionStorage s'il contient une langue valide.
+   * Par défaut → français.
    */
   private detectInitialLang(): Lang {
+    const path = window.location.pathname;
+    // L'URL prime toujours : si /en/ est dans le pathname → anglais
+    if (path.startsWith('/en/') || path === '/en') {
+      sessionStorage.setItem(STORAGE_KEY, 'en');
+      return 'en';
+    }
+    // Pas de préfixe /en → vérifier sessionStorage, sinon français par défaut
     const stored = sessionStorage.getItem(STORAGE_KEY) as Lang | null;
     if (stored === 'fr' || stored === 'en') return stored;
-    const path = window.location.pathname;
-    const detected = path.startsWith('/en/') || path === '/en' ? 'en' : 'fr';
-    sessionStorage.setItem(STORAGE_KEY, detected);
-    return detected;
+    sessionStorage.setItem(STORAGE_KEY, 'fr');
+    return 'fr';
   }
 
   /** Définit la langue courante et persiste dans sessionStorage */
