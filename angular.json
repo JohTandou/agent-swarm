@@ -69,11 +69,21 @@
               "src/styles/prism-theme.css",
               "src/styles/_buttons.scss"
             ],
-            "scripts": []
+            "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/styles"
               ]
+            },
+            "server": "src/main.server.ts",
+            "security": {
+              "allowedHosts": []
+            },
+            "prerender": {
+              "routesFile": "prerender-routes.txt"
+            },
+            "ssr": {
+              "entry": "src/server.ts"
             }
           },
           "configurations": {

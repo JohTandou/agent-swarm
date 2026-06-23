@@ -7,6 +7,7 @@ import { provideMarkdown } from 'ngx-markdown';
 import { GlobalErrorHandler } from './shared/services/error-handler.service';
 
 import { routes } from './app.routes';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 /**
  * Configuration applicative racine.
@@ -21,6 +22,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     importProvidersFrom(OverlayModule),
     ...provideMarkdown(),
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }, provideClientHydration(withEventReplay()),
   ],
 };
