@@ -167,6 +167,9 @@ export class AppComponent implements OnInit, OnDestroy {
           // Mise à jour SEO
           this.updateSeo(url, isHome);
 
+          // Mise à jour hreflang sur chaque navigation (indépendamment des metas)
+          this.seoService.updateHreflangOnly();
+
           // Animation d'entrée de page
           const wrapper = this.pageWrapperRef?.nativeElement;
           if (wrapper && !this.animService.isReducedMotion()) {
