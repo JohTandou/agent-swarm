@@ -1,0 +1,45 @@
+{
+  "swarm": {
+    "workflow": {
+      "auto_create_github_issue": true,
+      "auto_create_branch": true,
+      "auto_run_local_tests": true,
+      "auto_create_pr": true,
+      "pr_draft_by_default": true,
+      "cleanup_processes_after_run": true,
+      "auto_decompose_tasks": true,
+      "max_tasks_per_session": 5,
+      "enforce_quality_gates": true,
+      "require_tester_pass": true,
+      "require_reviewer_approve": true,
+      "require_e2e_for_new_features": true
+    },
+    "github": {
+      "default_base_branch": "main",
+      "branch_prefix": "feature/swarm-"
+    },
+    "testing": {
+      "mock_setup_command": "",
+      "mock_teardown_command": "",
+      "e2e_backend_env_file": "",
+      "e2e_backend_command": "",
+      "e2e_backend_health_url": "",
+      "e2e_frontend_command": "ng serve --port 3000",
+      "e2e_frontend_url": "http://localhost:3000",
+      "e2e_stripe_mode": "sandbox",
+      "e2e_resend_mode": "mock",
+      "e2e_gemini_mode": "real",
+      "e2e_grep_pattern": "",
+      "e2e_max_retries": 2,
+      "e2e_timeout_minutes": 15,
+      "e2e_interactive_mode": true,
+      "block_on_e2e_failure": true,
+      "coverage_threshold": 80,
+      "coverage_enforce": true,
+      "a11y_enabled": false,
+      "a11y_tags": "wcag2a,wcag2aa,wcag21a,wcag21aa",
+      "test_scope": "changed-only",
+      "e2e_auto_grep_from_diff": true
+    }
+  }
+}

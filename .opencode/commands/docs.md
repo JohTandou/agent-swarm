@@ -1,0 +1,2 @@
+Recupere d'abord la liste des fichiers recemment modifies via git diff --name-only HEAD~1.
+Passe cette liste a l'agent @writer comme contexte pour mettre a jour toute la documentation maintenant, sans attendre un commit.

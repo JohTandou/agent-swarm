@@ -1,0 +1,370 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "deepseek/deepseek-v4-pro",
+  "small_model": "deepseek/gemini-3.1-flash-lite",
+  "default_agent": "build",
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+      }
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    },
+    "magic": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@21st-dev/magic@latest"
+      ],
+      "environment": {
+        "API_KEY": "{env:MAGIC_21ST_API_KEY}"
+      }
+    },
+    "supabase": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@supabase/mcp-server-supabase@0.5.0",
+        "--access-token",
+        "{env:SUPABASE_ACCESS_TOKEN}",
+        "--project-ref",
+        "{env:SUPABASE_PROJECT_REF}"
+      ]
+    },
+    "vercel": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "mcp-remote@latest",
+        "https://mcp.vercel.com"
+      ]
+    },
+    "render": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "mcp-remote@latest",
+        "https://mcp.render.com/mcp",
+        "--header",
+        "Authorization: Bearer {env:RENDER_API_KEY}"
+      ]
+    }
+  },
+  "provider": {
+    "opencode": {
+      "name": "OpenCode Go",
+      "api": "https://opencode.ai/zen/go/v1",
+      "models": {
+        "deepseek-v4-pro": {
+          "name": "DeepSeek V4 Pro",
+          "limit": {
+            "context": 1000000,
+            "output": 32768
+          }
+        }
+      },
+      "options": {
+        "apiKey": "YOUR_OPENCODE_API_KEY"
+      }
+    },
+    "deepseek": {
+      "name": "DeepSeek",
+      "api": "https://api.deepseek.com",
+      "models": {
+        "deepseek-v4-pro": {
+          "name": "DeepSeek V4 Pro",
+          "limit": {
+            "context": 1000000,
+            "output": 32768
+          }
+        }
+      },
+      "options": {
+        "apiKey": "YOUR_DEEPSEEK_API_KEY"
+      }
+    },
+    "google": {
+      "name": "Google AI Studio",
+      "api": "https://generativelanguage.googleapis.com/v1beta",
+      "models": {
+        "gemini-3.1-flash-lite": {
+          "name": "Gemini 3.1 Flash Lite Preview",
+          "limit": {
+            "context": 1000000,
+            "output": 8192
+          }
+        }
+      },
+      "options": {
+        "apiKey": "YOUR_GOOGLE_AI_API_KEY"
+      }
+    }
+  },
+  "permission": {
+    "context7_*": "allow",
+    "playwright_*": "allow",
+    "magic_*": "allow",
+    "supabase_*": "allow",
+    "vercel_*": "allow",
+    "render_*": "allow",
+    "bash": {
+      "*": "allow",
+      "git status": "allow",
+      "git diff --stat": "allow",
+      "git log --oneline*": "allow",
+      "git diff --name-only*": "allow"
+    },
+    "*": "allow"
+  },
+  "command": {
+    "status": {
+      "template": "Utilise l'outil `glob` avec le pattern `**/.agent-memory.json` pour trouver tous les fichiers de metriques dans le repertoire courant et ses sous-repertoires. Si aucun n'est trouve, indique qu'aucun run n'a encore ete effectue. Si plusieurs sont trouves, choisis celui qui correspond au projet actif (le plus proche du repertoire courant, ou demande a l'utilisateur s'il y a ambiguite). Lis le fichier choisi (cle 'metrics'). Affiche un tableau Markdown des 5 derniers runs : | Date | Route | Task type | Iterations | Status | Calcule et affiche le taux de succes global.",
+      "agent": "build",
+      "description": "Affiche les metriques des derniers runs"
+    },
+    "docs": {
+      "template": "Recupere d'abord la liste des fichiers recemment modifies via git diff --name-only HEAD~1. Passe cette liste a l'agent @writer comme contexte pour mettre a jour toute la documentation maintenant, sans attendre un commit.",
+      "agent": "writer",
+      "description": "Mise a jour documentation immediate"
+    },
+    "help": {
+      "template": "Explique le pipeline Agent Swarm a l'utilisateur : 5 routes disponibles (DIRECT, SIMPLE, ADAPT, MEDIUM, FULL), 8 agents disponibles (search, planner, contract, front, back, tester, reviewer, writer), et 3 commandes disponibles (/status, /docs, /help).",
+      "agent": "build",
+      "description": "Aide du pipeline Agent Swarm"
+    }
+  },
+  "agent": {
+    "build": {
+      "mode": "primary",
+      "model": "deepseek/deepseek-v4-pro",
+      "temperature": 0.1,
+      "steps": 80,
+      "description": "Orchestrateur principal du pipeline de developpement. Classifie chaque demande, route vers les bons sous-agents, communique l'avancement en temps reel et effectue le commit final. C'est l'agent avec lequel tu interagis directement.",
+      "color": "primary",
+      "permission": {
+        "read": "allow",
+        "edit": "deny",
+        "bash": {
+          "*": "deny",
+          "git add*": "allow",
+          "git commit*": "allow",
+          "git push*": "allow",
+          "git status": "allow",
+          "git diff --stat": "allow",
+          "gh*": "allow",
+          "npx --prefix*": "allow",
+          "git log --oneline*": "allow"
+        },
+        "task": "allow",
+        "question": "allow",
+        "todowrite": "allow",
+        "playwright_*": "allow",
+        "supabase_*": "allow",
+        "magic_*": "allow",
+        "context7_*": "allow",
+        "vercel_*": "allow",
+        "render_*": "allow"
+      },
+      "options": {}
+    },
+    "search": {
+      "mode": "subagent",
+      "hidden": true,
+      "model": "deepseek/deepseek-v4-pro",
+      "temperature": 0.1,
+      "steps": 60,
+      "description": "Analyse le codebase, identifie les fichiers impactes, detecte les patterns et conventions, recupere la doc a jour des frameworks via context7, cartographie les dependances. Avant toute exploration, lit obligatoirement graphify-out/GRAPH_REPORT.md et utilise graphify-out/graph.json pour identifier les god nodes et communities pertinentes. LECTURE SEULE absolue. Declenche sur les routes ADAPT, MEDIUM, FULL.",
+      "options": {},
+      "permission": {
+        "read": "allow",
+        "edit": "deny",
+        "bash": {
+          "*": "deny"
+        },
+        "task": "allow",
+        "context7_*": "allow"
+      }
+    },
+    "planner": {
+      "mode": "subagent",
+      "hidden": true,
+      "model": "deepseek/deepseek-v4-pro",
+      "temperature": 0.2,
+      "steps": 40,
+      "description": "Etablit une strategie de modification du code en deleguant les taches aux agents front et back",
+      "options": {},
+      "permission": {
+        "read": "allow",
+        "edit": "deny",
+        "bash": {
+          "*": "deny"
+        }
+      }
+    },
+    "contract": {
+      "mode": "subagent",
+      "hidden": true,
+      "model": "deepseek/deepseek-v4-pro",
+      "temperature": 0.1,
+      "steps": 35,
+      "description": "Etablit un contrat clair entre les agents front et back sur qui fait quoi pour eviter les conflits et les redondances",
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "*": "deny",
+          "npx supabase*": "allow",
+          "git log --oneline*": "allow"
+        },
+        "supabase_*": "allow",
+        "write": "deny",
+        "read": "deny",
+        "task": "deny"
+      },
+      "options": {}
+    },
+    "front": {
+      "mode": "subagent",
+      "hidden": true,
+      "model": "deepseek/deepseek-v4-pro",
+      "temperature": 0.1,
+      "steps": 50,
+      "description": "Implemente le frontend, les composants UI et les appels API",
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "*": "deny",
+          "npm test*": "allow",
+          "npm run test*": "allow",
+          "npm run lint*": "allow",
+          "pnpm test*": "allow",
+          "yarn test*": "allow",
+          "vitest*": "allow",
+          "jest*": "allow",
+          "npx tsc --noEmit": "allow"
+        },
+        "todowrite": "allow",
+        "context7_*": "allow",
+        "magic_*": "allow",
+        "read": "allow",
+        "write": "deny",
+        "task": "deny"
+      },
+      "options": {}
+    },
+    "back": {
+      "mode": "subagent",
+      "hidden": true,
+      "model": "deepseek/deepseek-v4-pro",
+      "temperature": 0.1,
+      "steps": 50,
+      "description": "Implemente le backend, la logique metier et les integrations",
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "*": "deny",
+          "npm test*": "allow",
+          "npm run test*": "allow",
+          "pnpm test*": "allow",
+          "pytest*": "allow",
+          "jest*": "allow",
+          "vitest*": "allow",
+          "cargo test*": "allow",
+          "go test*": "allow"
+        },
+        "todowrite": "allow",
+        "context7_*": "allow",
+        "supabase_*": "allow",
+        "read": "allow",
+        "write": "deny",
+        "task": "deny"
+      },
+      "options": {}
+    },
+    "tester": {
+      "mode": "subagent",
+      "hidden": true,
+      "model": "deepseek/deepseek-v4-pro",
+      "temperature": 0.1,
+      "steps": 60,
+      "description": "Ecrit et execute les tests pour assurer la qualite du code",
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "*": "deny",
+          "npm test*": "allow",
+          "npm run test*": "allow",
+          "pnpm test*": "allow",
+          "pytest*": "allow",
+          "jest*": "allow",
+          "npx jest*": "allow",
+          "vitest*": "allow",
+          "npx vitest*": "allow",
+          "npx playwright*": "allow",
+          "cargo test*": "allow",
+          "go test*": "allow",
+          "cat*": "allow",
+          "ls*": "allow",
+          "git log --oneline*": "allow"
+        },
+        "read": "allow",
+        "write": "deny",
+        "task": "deny"
+      },
+      "options": {}
+    },
+    "reviewer": {
+      "mode": "subagent",
+      "hidden": true,
+      "model": "deepseek/deepseek-v4-pro",
+      "temperature": 0.1,
+      "steps": 50,
+      "description": "Relit le code modifie pour assurer la qualite et la coherence",
+      "options": {},
+      "permission": {
+        "read": "allow",
+        "edit": "deny",
+        "bash": {
+          "*": "deny",
+          "npm run lint*": "allow",
+          "npx tsc --noEmit": "allow",
+          "git diff*": "allow",
+          "git log --oneline*": "allow"
+        }
+      }
+    },
+    "writer": {
+      "mode": "subagent",
+      "hidden": true,
+      "model": "deepseek/deepseek-v4-pro",
+      "temperature": 0.1,
+      "steps": 60,
+      "description": "Met a jour CHANGELOG, API.md, ARCHITECTURE.md et README apres chaque commit. La documentation produite est lue par search au prochain run via AGENTS.md. Apres toute mise a jour de documentation, declenche obligatoirement un rebuild graphify (python3 -c from graphify.watch import _rebuild_code...) pour maintenir GRAPH_REPORT.md synchronise avec le code. Declenche sur MEDIUM (si endpoint/page public), FULL (toujours), et commande /docs.",
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "*": "deny",
+          "git diff --name-only*": "allow",
+          "git log --oneline -3": "allow"
+        },
+        "read": "allow",
+        "write": "deny",
+        "task": "deny"
+      },
+      "options": {}
+    }
+
+  }
+}
