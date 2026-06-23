@@ -1,2 +1,2 @@
-Recupere d'abord la liste des fichiers recemment modifies via git diff --name-only HEAD~1.
-Passe cette liste a l'agent @writer comme contexte pour mettre a jour toute la documentation maintenant, sans attendre un commit.
+First retrieve the list of recently modified files via git diff --name-only HEAD~1.
+Pass this list to the @writer agent as context to update all documentation now, without waiting for a commit.

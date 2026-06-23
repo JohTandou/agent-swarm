@@ -1,5 +1,5 @@
-Lis le fichier .agent-memory.json a la racine du projet (cle "metrics").
-Affiche un tableau Markdown des 5 derniers runs :
+Read the .agent-memory.json file at the project root (key "metrics").
+Display a Markdown table of the last 5 runs:
 | Date | Route | Task type | Iterations | Status |
-Calcule et affiche le taux de succes global.
-Si le fichier n'existe pas, indique qu'aucun run n'a encore ete effectue.
+Calculate and display the overall success rate.
+If the file does not exist, indicate that no runs have been performed yet.

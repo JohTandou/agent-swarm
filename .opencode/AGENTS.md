@@ -1,83 +1,83 @@
-# Architecture Multi-Agents
+# Multi-Agent Architecture
 
-Ce document définit l'architecture des agents du pipeline et les outils qu'ils sont autorisés à utiliser.
+This document defines the pipeline agent architecture and the tools they are authorized to use.
 
 ---
 
-## Agents du Pipeline
+## Pipeline Agents
 
-| Agent | Responsabilité | Contraintes |
+| Agent | Responsibility | Constraints |
 |---|---|---|
-| **build** | Orchestrateur : classification, routage, gates, commit final | Édition restreinte (`.agent-memory.json` uniquement) |
-| **search** | Analyse du codebase, cartographie des dépendances, doc frameworks (Context7) | Lecture seule absolue |
-| **planner** | Planification, choix architecturaux, soumission des décisions à l'utilisateur | Lecture seule, ne code jamais |
-| **contract** | Types TypeScript, spec OpenAPI, migrations Supabase | Route FULL uniquement |
-| **front** | Implémentation UI (Magic/21st.dev), composants React, intégration MCP | Utilise les MCP magic_* et context7_* |
-| **back** | Implémentation backend, API, base de données (Supabase) | Utilise les MCP supabase_* et context7_* |
-| **tester** | Génère tests manquants, exécute tests ciblés, mesure couverture (≥80%) | Additif uniquement, ne modifie jamais le code de production |
-| **reviewer** | Gate sécurité, qualité, audit des tests avant commit | Routes MEDIUM/FULL uniquement, après tester PASS |
-| **writer** | Mise à jour CHANGELOG, API.md, ARCHITECTURE.md, README | Déclenché sur MEDIUM (endpoint public), FULL, /docs |
+| **build** | Orchestrator: classification, routing, gates, final commit | Restricted editing (`.agent-memory.json` only) |
+| **search** | Codebase analysis, dependency mapping, framework docs (Context7) | Absolute read-only |
+| **planner** | Planning, architectural choices, submitting decisions to user | Read-only, never codes |
+| **contract** | TypeScript types, OpenAPI spec, Supabase migrations | FULL route only |
+| **front** | UI implementation (Magic/21st.dev), React components, MCP integration | Uses MCP magic_* and context7_* |
+| **back** | Backend implementation, API, database (Supabase) | Uses MCP supabase_* and context7_* |
+| **tester** | Generates missing tests, runs targeted tests, measures coverage (≥80%) | Additive only, never modifies production code |
+| **reviewer** | Security gate, quality, test audit before commit | MEDIUM/FULL routes only, after tester PASS |
+| **writer** | Updates CHANGELOG, API.md, ARCHITECTURE.md, README | Triggered on MEDIUM (public endpoint), FULL, /docs |
 
 ---
 
-## Outils Disponibles
+## Available Tools
 
-> **À SAVOIR** : Les outils MCP (21st.dev, Supabase, Vercel, Render, Playwright, Context7) sont l'interface **primaire et native** pour les agents. Le seul wrapper bash restant est `mcp-playwright.sh` pour l'exécution de tests E2E (`npx playwright test`), qui n'a pas d'équivalent MCP. Les commandes CLI brutes (`supabase db push`, `vercel deploy`, `npx playwright test`) restent interdites.
+> **NOTE**: MCP tools (21st.dev, Supabase, Vercel, Render, Playwright, Context7) are the **primary and native** interface for agents. The only remaining bash wrapper is `mcp-playwright.sh` for E2E test execution (`npx playwright test`), which has no MCP equivalent. Raw CLI commands (`supabase db push`, `vercel deploy`, `npx playwright test`) remain prohibited.
 
-### Wrapper Playwright
+### Playwright Wrapper
 
 | Script | Service | Usage |
 |---|---|---|
-| `mcp-playwright.sh` | Playwright | Tests E2E (`--run`), mode UI (`--ui`), debug (`--debug`), rapport (`--report`) |
+| `mcp-playwright.sh` | Playwright | E2E tests (`--run`), UI mode (`--ui`), debug (`--debug`), report (`--report`) |
 
-Les autres services (Supabase, Vercel, Render, 21st.dev) sont exclusivement accessibles via leurs outils MCP natifs.
+Other services (Supabase, Vercel, Render, 21st.dev) are exclusively accessible via their native MCP tools.
 
 ---
 
-## Référence des Scripts
+## Script Reference
 
 ### `mcp-playwright.sh`
 
-Tests end-to-end via `npx playwright`.
+End-to-end tests via `npx playwright`.
 
 ```bash
-# Lancer tous les tests
+# Run all tests
 ~/.opencode/scripts/mcp-playwright.sh --run
 
-# Lancer un fichier de test spécifique
+# Run a specific test file
 ~/.opencode/scripts/mcp-playwright.sh --run "tests/login.spec.ts"
 
-# Ouvrir le mode UI
+# Open UI mode
 ~/.opencode/scripts/mcp-playwright.sh --ui
 
-# Mode debug
+# Debug mode
 ~/.opencode/scripts/mcp-playwright.sh --debug
 
-# Afficher le dernier rapport HTML
+# Display the latest HTML report
 ~/.opencode/scripts/mcp-playwright.sh --report
 ```
 
-**Prérequis** : `npx` disponible, `@playwright/test` installé dans le projet.
-**Retour** : JSON (mode `--run`), ou message structuré (modes interactifs).
+**Prerequisites**: `npx` available, `@playwright/test` installed in the project.
+**Returns**: JSON (`--run` mode), or structured message (interactive modes).
 
 ---
 
 ## Logging
 
-Le wrapper Playwright écrit ses logs dans `/tmp/mcp-playwright.log`.
+The Playwright wrapper writes logs to `/tmp/mcp-playwright.log`.
 
 ---
 
 ## Conventions
 
-1. **MCP natif pour tout** : Supabase, Vercel, Render, 21st.dev, Context7 sont accessibles via leurs outils MCP natifs. Ne jamais utiliser de commandes CLI directes.
-2. **Wrapper Playwright uniquement** : `mcp-playwright.sh` pour `npx playwright test` (pas d'équivalent MCP).
-3. **Vérifier le JSON de retour** : Chaque script retourne du JSON structuré. Vérifier le champ `status`.
-4. **Répertoire de travail** : Exécuter les scripts depuis la racine du projet.
+1. **Native MCP for everything**: Supabase, Vercel, Render, 21st.dev, Context7 are accessible via their native MCP tools. Never use direct CLI commands.
+2. **Playwright wrapper only**: `mcp-playwright.sh` for `npx playwright test` (no MCP equivalent).
+3. **Check return JSON**: Each script returns structured JSON. Check the `status` field.
+4. **Working directory**: Execute scripts from the project root.
 
 ---
 
-## Diagramme d'Architecture
+## Architecture Diagram
 
 ```
 ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐
@@ -87,7 +87,7 @@ Le wrapper Playwright écrit ses logs dans `/tmp/mcp-playwright.log`.
      └─────────────┴─────────────┴─────────────┘
                                │
                     ┌──────────┴──────────┐
-                    │   Outils MCP natifs  │
+                    │   Native MCP tools   │
                     │ + mcp-playwright.sh  │
                     └──────────┬──────────┘
                                │
