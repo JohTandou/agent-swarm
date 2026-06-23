@@ -7,8 +7,8 @@
     },
     {
       "name": "build",
-      "status": "pass",
-      "detail": ""
+      "status": "fail",
+      "detail": "\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mTS-998113: UiSkeletonComponent is not used within the template of MarkdownRendererComponent\u001b[0m \u001b[1m\u001b[35m[plugin angular-compiler]\u001b[0m\n\n    src/app/shared/components/markdown-renderer/markdown-renderer.component.ts:37:31:\n\u001b[37m      37 │   imports: [MarkdownComponent, \u001b[32mUiSkeletonComponent\u001b[37m],\n         ╵                                \u001b[32m~~~~~~~~~~~~~~~~~~~\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mTS-998113: UiSkeletonComponent is not used within the template of SearchModalComponent\u001b[0m \u001b[1m\u001b[35m[plugin angular-compiler]\u001b[0m\n\n    src/app/shared/components/search-modal/search-modal.component.ts:39:39:\n\u001b[37m      39 │ ...nModule, FormsModule, \u001b[32mUiSkeletonComponent\u001b[37m, UiEmptyStateComponent],\n         ╵                          \u001b[32m~~~~~~~~~~~~~~~~~~~\u001b[0m\n\n\n\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mNG9: Property 'String' does not exist on type 'McpToolsComponent'.\u001b[0m \u001b[1m\u001b[35m[plugin angular-compiler]\u001b[0m\n\n    src/app/features/mcp-tools/mcp-tools.component.html:83:53:\n\u001b[37m      83 │ ...olCount').replace('{count}', \u001b[32mString\u001b[37m(data.tools.length)).replace...\n         ╵                                 \u001b[32m~~~~~~\u001b[0m\n\n  Error occurs in the template of component McpToolsComponent.\n\n    src/app/features/mcp-tools/mcp-tools.component.ts:366:15:\n\u001b[37m      366 │   templateUrl: \u001b[32m'./mcp-tools.component.html'\u001b[37m,\n          ╵                \u001b[32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~\u001b[0m\n\n\n"
     },
     {
       "name": "unit-tests",

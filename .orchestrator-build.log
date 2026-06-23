@@ -6,44 +6,7 @@ Node.js version v25.4.0 detected.
 Odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.
 ❯ Building...
 ✔ Building...
-Initial chunk files   | Names                     |  Raw size | Estimated transfer size
-main-KIOJKXSX.js      | main                      | 209.82 kB |                51.51 kB
-chunk-BNUNJ2TC.js     | -                         | 184.06 kB |                52.80 kB
-chunk-N4RQZZCD.js     | -                         |  70.82 kB |                17.64 kB
-chunk-3BQWOG4P.js     | -                         |  54.79 kB |                15.05 kB
-chunk-HH7YTHNB.js     | -                         |  40.72 kB |                11.46 kB
-polyfills-5CFQRCPP.js | polyfills                 |  34.59 kB |                11.33 kB
-styles-KLVKW5XS.css   | styles                    |  33.83 kB |                 7.46 kB
-chunk-G5PMQ6HH.js     | -                         |   4.99 kB |                 1.40 kB
-chunk-BQX4TC6W.js     | -                         |   3.93 kB |                 1.27 kB
-chunk-VKPWFPWX.js     | -                         |   2.75 kB |               970 bytes
-chunk-CDRM6RF6.js     | -                         |   2.71 kB |               890 bytes
-chunk-R3M4332H.js     | -                         |   2.00 kB |               764 bytes
-chunk-TGTONPAW.js     | -                         | 923 bytes |               923 bytes
-chunk-4CLCTAJ7.js     | -                         | 830 bytes |               830 bytes
-chunk-M4XA2KGM.js     | -                         | 554 bytes |               554 bytes
-
-                      | Initial total             | 647.30 kB |               174.84 kB
-
-Lazy chunk files      | Names                     |  Raw size | Estimated transfer size
-chunk-AQ7UY2OY.js     | index                     |  70.51 kB |                25.03 kB
-chunk-34KUM32V.js     | -                         |  58.65 kB |                17.15 kB
-chunk-IFJ6D7IM.js     | workflow-routes           |  48.34 kB |                11.22 kB
-chunk-PTNTPL5X.js     | ScrollTrigger             |  43.59 kB |                16.40 kB
-chunk-FKQPNOT6.js     | ecosystem-routes          |  39.96 kB |                 9.15 kB
-chunk-ABMF4YYB.js     | problem-innovation-routes |  34.32 kB |                 8.44 kB
-chunk-P4C2MMPA.js     | mcp-tools-routes          |  30.52 kB |                 7.87 kB
-chunk-TP4U6ZBR.js     | agents-routes             |  27.51 kB |                 6.40 kB
-chunk-HZFEYH5U.js     | homepage-routes           |  25.60 kB |                 6.73 kB
-chunk-24QI2SGY.js     | skills-routes             |  22.46 kB |                 4.87 kB
-chunk-I6JJSA54.js     | about-routes              |  14.65 kB |                 3.08 kB
-chunk-ZO5N3YGI.js     | not-found-component       |   2.96 kB |                 1.07 kB
-chunk-6JRB7DGE.js     | -                         |   1.42 kB |               547 bytes
-chunk-KMUHDXTN.js     | -                         |   1.28 kB |               542 bytes
-chunk-DZHBH3CB.js     | -                         | 446 bytes |               446 bytes
-...and 1 more lazy chunks files. Use "--verbose" to show all the files.
-
-Application bundle generation complete. [3.026 seconds]
+Application bundle generation failed. [2.497 seconds]
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: UiButtonComponent is not used within the template of AppComponent[0m [1m[35m[plugin angular-compiler][0m
 
@@ -68,8 +31,8 @@ Application bundle generation complete. [3.026 seconds]
 
 [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: UiBadgeComponent is not used within the template of AgentsListComponent[0m [1m[35m[plugin angular-compiler][0m
 
-    src/app/features/agents/agents-list.component.ts:25:43:
-[37m      25 │ ...ink, UiButtonComponent, [32mUiBadgeComponent[37m, StaggerChildrenDirect...
+    src/app/features/agents/agents-list.component.ts:26:43:
+[37m      26 │ ...ink, UiButtonComponent, [32mUiBadgeComponent[37m, StaggerChildrenDirect...
          ╵                            [32m~~~~~~~~~~~~~~~~[0m
 
 
@@ -101,16 +64,16 @@ Application bundle generation complete. [3.026 seconds]
          ╵                          [32m~~~~~~~~~~~~~~~~~~~[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/problem-innovation/problem-innovation.component.scss exceeded maximum budget. Budget 10.00 kB was not met by 1.57 kB with a total of 11.57 kB.[0m
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'String' does not exist on type 'McpToolsComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/mcp-tools/mcp-tools.component.html:83:53:
+[37m      83 │ ...olCount').replace('{count}', [32mString[37m(data.tools.length)).replace...
+         ╵                                 [32m~~~~~~[0m
+
+  Error occurs in the template of component McpToolsComponent.
+
+    src/app/features/mcp-tools/mcp-tools.component.ts:366:15:
+[37m      366 │   templateUrl: [32m'./mcp-tools.component.html'[37m,
+          ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
 
 
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1msrc/app/features/workflow/workflow.component.scss exceeded maximum budget. Budget 10.00 kB was not met by 2.19 kB with a total of 12.19 kB.[0m
-
-
-Output location: /Users/johtnd/swarm-wiki/dist/swarm-wiki
-
-
-> swarm-wiki@0.0.0 postbuild
-> node scripts/generate-sitemap.mjs
-
-✅ Sitemap bilingue généré : 90 URLs (45 FR + 45 EN) → dist/swarm-wiki/browser/sitemap.xml
