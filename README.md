@@ -20,24 +20,24 @@
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/JohTandou/swarm-wiki.git
+git clone https://github.com/JohTandou/agent-swarm.git
 ```
 
 ### 2. Copy Swarm configuration to your OpenCode directory
 
 ```bash
 # Copy agents, skills, commands, and workflow config
-cp -r swarm-wiki/.opencode/* ~/.opencode/
+cp -r agent-swarm/.opencode/* ~/.opencode/
 
 # Copy OpenCode configuration (model, MCP servers, permissions)
-cp swarm-wiki/opencode.json ~/.config/opencode/opencode.json
+cp agent-swarm/opencode.json ~/.config/opencode/opencode.json
 ```
 
 ### 3. Configure API keys
 
 ```bash
 # Copy the environment template
-cp swarm-wiki/.env.example ~/.config/opencode/.env
+cp agent-swarm/.env.example ~/.config/opencode/.env
 
 # Edit the file and replace each placeholder with your actual API key
 # You need at minimum:
@@ -141,8 +141,8 @@ See [MCP_SETUP.md](MCP_SETUP.md) for detailed configuration instructions.
 The repository also contains the Swarm Wiki website (Angular 19, Apple-grade design):
 
 ```bash
-git clone https://github.com/JohTandou/swarm-wiki.git
-cd swarm-wiki
+git clone https://github.com/JohTandou/agent-swarm.git
+cd agent-swarm
 npm install
 npm start        # → http://localhost:3000
 npm test         # 690+ unit tests

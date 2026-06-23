@@ -1,7 +1,7 @@
 # Stratégie Backlinks — Swarm Wiki
 
 > Plan d'action pour l'acquisition de backlinks de qualité, ciblant les awesome-lists GitHub, les showcases d'outils, et les articles techniques.  
-> **Objectif** : positionner `swarm-wiki.vercel.app` et `github.com/JohTandou/swarm-wiki` comme référence sur les pipelines d'agents IA pour le développement logiciel.
+> **Objectif** : positionner `swarm-wiki.vercel.app` et `github.com/JohTandou/agent-swarm` comme référence sur les pipelines d'agents IA pour le développement logiciel.
 
 ---
 
@@ -27,7 +27,7 @@
 - **Critère d'acceptation** : PR standard — ajout à la liste dans la section "Agent Frameworks" ou "Multi-Agent Systems". Lire le `CONTRIBUTING.md` avant soumission.
 - **Texte de soumission** :
   ```
-  - [Swarm](https://github.com/JohTandou/swarm-wiki) — Pipeline of 9 specialized AI agents (orchestrator, search, planner, contract, frontend, backend, tester, reviewer, writer) that automatically classify task complexity into 5 routes (DIRECT → FULL), parallelize implementation, enforce quality gates (tests + review), and merge autonomously. Open source, Angular 19, documented at [swarm-wiki.vercel.app](https://swarm-wiki.vercel.app).
+  - [Swarm](https://github.com/JohTandou/agent-swarm) — Pipeline of 9 specialized AI agents (orchestrator, search, planner, contract, frontend, backend, tester, reviewer, writer) that automatically classify task complexity into 5 routes (DIRECT → FULL), parallelize implementation, enforce quality gates (tests + review), and merge autonomously. Open source, Angular 19, documented at [swarm-wiki.vercel.app](https://swarm-wiki.vercel.app).
   ```
 - **Pertinence** : Cible exacte — le public de cette liste cherche des systèmes multi-agents pour le code, pas des chatbots.
 
@@ -40,7 +40,7 @@
 - **Critère d'acceptation** : PR standard. Section "Coding Agents" ou "Multi-Agent Systems". Le repo accepte les frameworks et outils agentic.
 - **Texte de soumission** :
   ```
-  - [Swarm](https://github.com/JohTandou/swarm-wiki) — A multi-agent pipeline where 9 specialized AI agents (orchestrator, planner, frontend, backend, tester, reviewer, writer) collaborate on software tasks. Includes automatic complexity classification, parallel sub-agent execution, mandatory test gates, and autonomous PR merging. Built as an Angular 19 static wiki: [swarm-wiki.vercel.app](https://swarm-wiki.vercel.app).
+  - [Swarm](https://github.com/JohTandou/agent-swarm) — A multi-agent pipeline where 9 specialized AI agents (orchestrator, planner, frontend, backend, tester, reviewer, writer) collaborate on software tasks. Includes automatic complexity classification, parallel sub-agent execution, mandatory test gates, and autonomous PR merging. Built as an Angular 19 static wiki: [swarm-wiki.vercel.app](https://swarm-wiki.vercel.app).
   ```
 - **Pertinence** : E2B est une référence dans l'infrastructure agentic — leur awesome-list attire des développeurs qui construisent des systèmes similaires.
 
@@ -53,7 +53,7 @@
 - **Critère d'acceptation** : PR standard. Section "Multi-Agent" ou "Software Engineering". La liste couvre le cognitif et les systèmes AGI.
 - **Texte de soumission** :
   ```
-  - [Swarm](https://github.com/JohTandou/swarm-wiki) — Specialized multi-agent pipeline for software engineering: 9 agents handle classification, planning, implementation, testing, and review through 5 complexity routes. Demonstrates how agent specialization and quality gates reduce LLM API costs by 5–8×.
+  - [Swarm](https://github.com/JohTandou/agent-swarm) — Specialized multi-agent pipeline for software engineering: 9 agents handle classification, planning, implementation, testing, and review through 5 complexity routes. Demonstrates how agent specialization and quality gates reduce LLM API costs by 5–8×.
   ```
 - **Pertinence** : Public académique et recherche — positionne Swarm comme contribution au domaine des systèmes multi-agents cognitifs.
 
@@ -92,7 +92,7 @@
 - **Critère d'acceptation** : PR standard. Section "Tools & Utilities" ou "Documentation".
 - **Texte de soumission** :
   ```
-  - [Swarm Wiki MCP Documentation](https://swarm-wiki.vercel.app/outils-mcp) — Comprehensive documentation of MCP tools (Supabase, Vercel, Render, Playwright, Context7) used by a 9-agent software development pipeline. Built with Angular 19, open source at [github.com/JohTandou/swarm-wiki](https://github.com/JohTandou/swarm-wiki).
+  - [Swarm Wiki MCP Documentation](https://swarm-wiki.vercel.app/outils-mcp) — Comprehensive documentation of MCP tools (Supabase, Vercel, Render, Playwright, Context7) used by a 9-agent software development pipeline. Built with Angular 19, open source at [github.com/JohTandou/agent-swarm](https://github.com/JohTandou/agent-swarm).
   ```
 - **Pertinence** : Le wiki documente 4 catégories d'outils MCP — lien direct vers une ressource utile pour la communauté MCP.
 
@@ -105,7 +105,7 @@
 - **Critère d'acceptation** : PR standard. Section "Automation" ou "AI".
 - **Texte de soumission** :
   ```
-  - [Swarm](https://github.com/JohTandou/swarm-wiki) — 9-agent AI pipeline for software engineering: automatic task classification, parallel implementation, mandatory tests, and autonomous merging. Reduces development costs by 5–8× compared to single-model approaches.
+  - [Swarm](https://github.com/JohTandou/agent-swarm) — 9-agent AI pipeline for software engineering: automatic task classification, parallel implementation, mandatory tests, and autonomous merging. Reduces development costs by 5–8× compared to single-model approaches.
   ```
 - **Pertinence** : Liste généraliste ultra-populaire (>150k stars) — visibilité maximale, audience de sysadmins et devops curieux d'IA.
 
@@ -190,7 +190,7 @@ Sur un échantillon de 20 tâches exécutées par la Swarm :
 
 ## Ce que la Swarm n'est pas
 
-La Swarm n'est pas un SaaS. C'est un pipeline open source documenté en détail sur un wiki technique : [swarm-wiki.vercel.app](https://swarm-wiki.vercel.app). Le code est disponible sur [github.com/JohTandou/swarm-wiki](https://github.com/JohTandou/swarm-wiki).
+La Swarm n'est pas un SaaS. C'est un pipeline open source documenté en détail sur un wiki technique : [swarm-wiki.vercel.app](https://swarm-wiki.vercel.app). Le code est disponible sur [github.com/JohTandou/agent-swarm](https://github.com/JohTandou/agent-swarm).
 
 La Swarm n'est pas non plus une solution magique. Elle excelle sur les tâches structurées (features, bugfixes, documentation) mais ne remplace pas la créativité humaine sur les décisions architecturales fondamentales. Les agents sont des exécutants spécialisés, pas des architectes.
 
@@ -311,7 +311,7 @@ Cet article peut être décliné en :
 
 ### Phase 1 — Incontournables (semaine 1)
 
-- [ ] **1. Rendre le repo GitHub public** — `github.com/JohTandou/swarm-wiki` doit être public avant toute soumission. Le README actuel mentionne "Projet privé" → mettre à jour.
+- [ ] **1. Rendre le repo GitHub public** — `github.com/JohTandou/agent-swarm` doit être public avant toute soumission. Le README actuel mentionne "Projet privé" → mettre à jour.
 - [ ] **2. Ajouter `humans.txt`** à la racine du site (`public/humans.txt`) :
   ```
   /* TEAM */
