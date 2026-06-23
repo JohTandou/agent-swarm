@@ -12,7 +12,7 @@ describe('BreadcrumbsComponent', () => {
   const sampleBreadcrumbs: Breadcrumb[] = [
     { label: 'Accueil', route: '/' },
     { label: 'Agents', route: '/agents' },
-    { label: 'Orchestrateur' },
+    { label: 'Orchestrator' },
   ];
 
   beforeEach(async () => {
@@ -55,7 +55,7 @@ describe('BreadcrumbsComponent', () => {
     const currentEl = fixture.nativeElement.querySelector('.breadcrumbs__current');
     expect(currentEl).toBeTruthy();
     expect(currentEl.getAttribute('aria-current')).toBe('page');
-    expect(currentEl.textContent?.trim()).toBe('Orchestrateur');
+    expect(currentEl.textContent?.trim()).toBe('Orchestrator');
   });
 
   it('ne devrait rien afficher quand le tableau de breadcrumbs est vide', () => {

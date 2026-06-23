@@ -280,7 +280,7 @@ graph TB
         SKILLS["🧩 Skills (3)<br/>Modules spécialisés"]
     end
 
-    IDE --> ORCH["🧠 Orchestrateur<br/>Classification & Routage"]
+    IDE --> ORCH["🧠 Orchestrator<br/>Classification & Routage"]
 
     subgraph SOURCE["SETUP.TS"]
       ISSUE["📋 Issue GitHub"]

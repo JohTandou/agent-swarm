@@ -135,7 +135,7 @@ describe('SwarmGraphComponent', () => {
   });
 
   it('getNodeLabel devrait retourner le label correct', () => {
-    expect(component.getNodeLabel('orchestrateur')).toBe('Orchestrateur');
+    expect(component.getNodeLabel('orchestrateur')).toBe('Orchestrator');
     expect(component.getNodeLabel('search')).toBe('Search');
     expect(component.getNodeLabel('writer')).toBe('Writer');
   });

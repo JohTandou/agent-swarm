@@ -22,7 +22,7 @@ describe('Breadcrumb (modèle)', () => {
     const breadcrumbs: Breadcrumb[] = [
       { label: 'Accueil', route: '/' },
       { label: 'Agents', route: '/agents' },
-      { label: 'Orchestrateur' },
+      { label: 'Orchestrator' },
     ];
     expect(breadcrumbs.length).toBe(3);
     expect(breadcrumbs[0].route).toBe('/');

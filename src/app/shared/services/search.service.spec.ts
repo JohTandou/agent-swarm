@@ -176,7 +176,7 @@ describe('SearchService', () => {
     );
 
     const result: SearchResult = {
-      title: 'Orchestrateur',
+      title: 'Orchestrator',
       description: 'Agent orchestration',
       route: '/agents/orchestrateur',
       section: 'Agents',

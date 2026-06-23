@@ -5,6 +5,7 @@ import { TocService } from '../../shared/services/toc.service';
 import { SeoService } from '../../shared/services/seo.service';
 import { JsonLdService } from '../../shared/services/json-ld.service';
 import { TranslationService } from '../../shared/services/translation.service';
+import { LanguageService, type Lang } from '../../shared/services/language.service';
 import type { Skill, SkillCategory, TocEntry, MarkdownDocument } from '@shared/models';
 
 /** Skills hardcodés */
@@ -13,6 +14,12 @@ const SKILLS: Skill[] = [
   { id: 'tests-create', name: 'Tests Create', emoji: '🧪', category: 'creation', sourcePath: 'skills/tests-create.md', order: 2, tags: [], description: 'Génération optimale de tests unitaires, fonctionnels, intégration et E2E' },
   { id: 'graphify', name: 'Graphify', emoji: '🕸️', category: 'audit', sourcePath: 'skills/graphify.md', order: 3, tags: [], description: 'Transforme code, docs, papiers en graphes de connaissances' },
 ];
+
+const SKILL_DESCS_EN: Record<string, string> = {
+  'ui-ux-pro-max': 'UI/UX design intelligence with 67 styles, 96 palettes',
+  'tests-create': 'Optimal generation of unit, functional, integration and E2E tests',
+  'graphify': 'Transforms code, docs, papers into knowledge graphs',
+};
 
 /**
  * Page de détail d'un skill Swarm.
@@ -37,6 +44,9 @@ export class SkillDetailComponent {
   private seoService = inject(SeoService);
   private jsonLdService = inject(JsonLdService);
   private readonly translate = inject(TranslationService);
+  private readonly langService = inject(LanguageService);
+
+  private get lang(): Lang { return this.langService.currentLang(); }
 
   /** ID du skill extrait de l'URL */
   readonly skillId = signal<string>('');
@@ -44,12 +54,15 @@ export class SkillDetailComponent {
   /** Tous les skills (hardcodés) */
   readonly allSkills = signal<Skill[]>(SKILLS);
 
-  /** Données du skill (undefined si ID invalide) */
+  /** Données du skill (undefined si ID invalide), localisées selon la langue */
   readonly skill = computed<Skill | undefined>(() => {
     const id = this.skillId();
     const skills = this.allSkills();
     if (!id || skills.length === 0) return undefined;
-    return skills.find((s) => s.id === id);
+    const skill = skills.find((s) => s.id === id);
+    if (!skill) return undefined;
+    if (this.lang === 'fr') return skill;
+    return { ...skill, description: SKILL_DESCS_EN[id] ?? skill.description };
   });
 
   /** Erreur si skill non trouvé */

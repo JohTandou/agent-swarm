@@ -4,7 +4,7 @@ describe('Agent model', () => {
   it('should accept a valid Agent object with all required fields', () => {
     const agent: Agent = {
       id: 'orchestrateur',
-      name: 'Orchestrateur',
+      name: 'Orchestrator',
       emoji: '🎯',
       role: "Chef d'orchestre du pipeline",
       description: "Interface unique avec l'utilisateur et chef d'orchestre du pipeline",

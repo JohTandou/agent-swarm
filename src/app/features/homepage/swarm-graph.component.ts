@@ -354,7 +354,7 @@ export class SwarmGraphComponent implements OnInit, OnDestroy {
 
   /** Les 9 agents spécialisés de la Swarm avec leurs métadonnées */
   private readonly agents: AgentNode[] = [
-    { id: 'orchestrateur', label: 'Orchestrateur', role: 'Coordination centrale du pipeline', color: '#C4780D', radius: 80 },
+    { id: 'orchestrateur', label: 'Orchestrator', role: 'Coordination centrale du pipeline', color: '#C4780D', radius: 80 },
     { id: 'search', label: 'Search', role: 'Cartographie et analyse du codebase', color: '#B8A878', radius: 56 },
     { id: 'planner', label: 'Planner', role: 'Planification des tâches en étapes', color: '#C8A862', radius: 56 },
     { id: 'contract', label: 'Contract', role: 'Définition des contrats TypeScript', color: '#A89868', radius: 56 },

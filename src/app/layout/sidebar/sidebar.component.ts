@@ -15,7 +15,7 @@ const NAV_LABEL_KEYS: Record<string, string> = {
   'Agents': 'nav.agents',
   'Skills': 'nav.skills',
   'Outils MCP': 'nav.mcp',
-  'Orchestrateur': 'sidebar.children.orchestrateur',
+  'Orchestrator': 'sidebar.children.orchestrateur',
   'Front': 'sidebar.children.front',
   'Back': 'sidebar.children.back',
   'Search': 'sidebar.children.search',
@@ -79,7 +79,7 @@ export class SidebarComponent {
       route: '/agents',
       expanded: false,
       children: [
-        { label: 'Orchestrateur', route: '/agents/orchestrateur' },
+        { label: 'Orchestrator', route: '/agents/orchestrateur' },
         { label: 'Front', route: '/agents/front' },
         { label: 'Back', route: '/agents/back' },
         { label: 'Search', route: '/agents/search' },

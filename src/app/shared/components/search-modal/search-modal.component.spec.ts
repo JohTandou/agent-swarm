@@ -12,7 +12,7 @@ describe('SearchModalComponent', () => {
   let fixture: ComponentFixture<SearchModalComponent>;
 
   const mockResult: SearchResult = {
-    title: 'Orchestrateur',
+    title: 'Orchestrator',
     description: "Chef d'orchestre du pipeline",
     route: '/agents/orchestrateur',
     section: 'Agents',

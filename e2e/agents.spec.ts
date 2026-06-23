@@ -61,7 +61,7 @@ test.describe('T5 — Pages Agents', () => {
       // Vérifie que le filtre est actif
       await expect(page.locator('.agents__filter--active')).toContainText('Build');
       // Les agents build doivent être visibles
-      await expect(page.getByText('Orchestrateur', { exact: true })).toBeVisible();
+      await expect(page.getByText('Orchestrator', { exact: true })).toBeVisible();
       await expect(page.getByText('Front', { exact: true })).toBeVisible();
     });
 
@@ -90,7 +90,7 @@ test.describe('T5 — Pages Agents', () => {
   });
 
   test.describe('Navigation vers détail', () => {
-    test("cliquer sur Orchestrateur navigue vers /agents/orchestrateur", async ({ page }) => {
+    test("cliquer sur Orchestrator navigue vers /agents/orchestrateur", async ({ page }) => {
       await page.goto('/agents');
       await page.locator('a[href="/agents/orchestrateur"]').first().click();
       await expect(page).toHaveURL('/agents/orchestrateur');
@@ -98,7 +98,7 @@ test.describe('T5 — Pages Agents', () => {
 
     test("la page détail affiche le nom et l'emoji", async ({ page }) => {
       await page.goto('/agents/orchestrateur');
-      await expect(page.locator('.agent-detail__name')).toContainText('Orchestrateur');
+      await expect(page.locator('.agent-detail__name')).toContainText('Orchestrator');
       await expect(page.locator('.agent-detail__emoji')).toBeVisible();
     });
 

@@ -9,7 +9,8 @@ import { TextRevealDirective } from '@shared/directives/text-reveal.directive';
 import { UiEmptyStateComponent } from '@shared/components/ui-empty-state/ui-empty-state.component';
 import { JsonLdService } from '@shared/services/json-ld.service';
 import type { Agent, AgentCategory } from '@shared/models';
-import { AGENTS, ROUTE_COLORS } from '@shared/data/agents.data';
+import { AGENTS, AGENT_ROLES_EN, AGENT_DESCS_EN, ROUTE_COLORS } from '@shared/data/agents.data';
+import { LanguageService, type Lang } from '../../shared/services/language.service';
 
 /**
  * Page listing des agents Swarm — grille bento asymétrique.
@@ -30,9 +31,22 @@ export class AgentsListComponent {
   private readonly translate = inject(TranslationService);
   private readonly toastService = inject(ToastService);
   private readonly jsonLdService = inject(JsonLdService);
+  private readonly langService = inject(LanguageService);
+
+  private get lang(): Lang { return this.langService.currentLang(); }
 
   /** Liste complète des agents */
   readonly agents = AGENTS;
+
+  /** Agents localisés selon la langue courante */
+  protected readonly localizedAgents = computed(() => {
+    if (this.lang === 'fr') return this.agents;
+    return this.agents.map(a => ({
+      ...a,
+      role: AGENT_ROLES_EN[a.id] ?? a.role,
+      description: AGENT_DESCS_EN[a.id] ?? a.description,
+    }));
+  });
 
   /** Catégorie active pour le filtrage (null = toutes) */
   readonly activeCategory = signal<AgentCategory | null>(null);
@@ -55,8 +69,8 @@ export class AgentsListComponent {
   /** Agents filtrés selon la catégorie active */
   readonly filteredAgents = computed<Agent[]>(() => {
     const category = this.activeCategory();
-    if (category === null) return this.agents;
-    return this.agents.filter((a) => a.category === category);
+    if (category === null) return this.localizedAgents();
+    return this.localizedAgents().filter((a) => a.category === category);
   });
 
   /** Catégories disponibles avec leur label */

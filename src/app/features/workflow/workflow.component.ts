@@ -141,7 +141,7 @@ const MERMAID_DIAGRAMS: Record<Lang, string> = {
   fr: `\`\`\`mermaid
 graph TB
     ISSUE["📋 Issue GitHub"] --> PRESEARCH["🔍 Pre-search<br/>Étape 0.3"]
-    PRESEARCH --> CLASSIFY["🧠 Orchestrateur<br/>Classification tâche"]
+    PRESEARCH --> CLASSIFY["🧠 Orchestrator<br/>Classification tâche"]
 
     CLASSIFY --> ADAPT["🔄 ADAPT"]
     CLASSIFY --> SIMPLE["🔧 SIMPLE"]

@@ -59,7 +59,7 @@ describe('JsonLdService', () => {
     const breadcrumbs: Breadcrumb[] = [
       { label: 'Accueil', route: '/' },
       { label: 'Agents', route: '/agents' },
-      { label: 'Orchestrateur' },
+      { label: 'Orchestrator' },
     ];
 
     const schema = service.generateBreadcrumbListSchema(breadcrumbs) as Record<string, unknown>;
@@ -132,7 +132,7 @@ describe('JsonLdService', () => {
 
   it('generateTechArticleSchema devrait retourner un schéma TechArticle valide', () => {
     const schema = service.generateTechArticleSchema({
-      headline: 'Orchestrateur — Agent IA de classification',
+      headline: 'Orchestrator — Agent IA de classification',
       description: 'Point d\'entrée unique de la Swarm.',
       authorName: 'Joh Tandou',
       authorUrl: 'https://github.com/JohTandou',
@@ -142,7 +142,7 @@ describe('JsonLdService', () => {
     }) as Record<string, unknown>;
 
     expect(schema['@type']).toBe('TechArticle');
-    expect(schema['headline']).toBe('Orchestrateur — Agent IA de classification');
+    expect(schema['headline']).toBe('Orchestrator — Agent IA de classification');
     expect(schema['author']).toBeDefined();
     expect((schema['author'] as Record<string, unknown>)['@type']).toBe('Person');
     expect((schema['author'] as Record<string, unknown>)['name']).toBe('Joh Tandou');
@@ -152,7 +152,7 @@ describe('JsonLdService', () => {
 
   it('generateItemListSchema devrait retourner un schéma ItemList valide', () => {
     const schema = service.generateItemListSchema([
-      { name: 'Orchestrateur', url: '/agents/orchestrateur', description: 'Tech Lead' },
+      { name: 'Orchestrator', url: '/agents/orchestrateur', description: 'Tech Lead' },
       { name: 'Front', url: '/agents/front' },
     ]) as Record<string, unknown>;
 
@@ -160,7 +160,7 @@ describe('JsonLdService', () => {
     const items = schema['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.length).toBe(2);
     expect(items[0]['position']).toBe(1);
-    expect(items[0]['name']).toBe('Orchestrateur');
+    expect(items[0]['name']).toBe('Orchestrator');
     expect(items[0]['description']).toBe('Tech Lead');
     expect(items[1]['position']).toBe(2);
     expect(items[1]['description']).toBeUndefined();

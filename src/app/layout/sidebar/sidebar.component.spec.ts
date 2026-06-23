@@ -144,7 +144,7 @@ describe('SidebarComponent', () => {
     // Vérifie les enfants — 11 agents maintenant
     const childLinks = sublist.querySelectorAll('.sidebar__link--child');
     expect(childLinks.length).toBe(11);
-    expect(childLinks[0].textContent?.trim()).toBe('Orchestrateur');
+    expect(childLinks[0].textContent?.trim()).toBe('Orchestrator');
   });
 
   it('ne devrait pas basculer expanded pour un item sans enfants', () => {
