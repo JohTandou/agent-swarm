@@ -1,5 +1,5 @@
 {
-  "buildCommand": "ng build",
+  "buildCommand": "ng build --prerender",
   "outputDirectory": "dist/swarm-wiki/browser",
   "framework": "angular",
   "rewrites": [

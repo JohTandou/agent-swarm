@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 /** Langues supportées par l'application */
 export type Lang = 'fr' | 'en';
@@ -16,6 +17,8 @@ export class LanguageService {
   /** Signal réactif contenant la langue courante */
   readonly currentLang = signal<Lang>(this.detectInitialLang());
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
   /**
    * Détecte la langue initiale : l'URL prime sur sessionStorage.
    * Si le path commence par /en/ ou est exactement /en → anglais.
@@ -23,16 +26,23 @@ export class LanguageService {
    * Par défaut → français.
    */
   private detectInitialLang(): Lang {
-    const path = window.location.pathname;
-    // L'URL prime toujours : si /en/ est dans le pathname → anglais
-    if (path.startsWith('/en/') || path === '/en') {
-      sessionStorage.setItem(STORAGE_KEY, 'en');
-      return 'en';
+    // sessionStorage n'existe pas côté serveur — vérifier d'abord l'URL
+    try {
+      const path = window.location.pathname;
+      if (path.startsWith('/en/') || path === '/en') {
+        if (isPlatformBrowser(this.platformId)) {
+          sessionStorage.setItem(STORAGE_KEY, 'en');
+        }
+        return 'en';
+      }
+      if (isPlatformBrowser(this.platformId)) {
+        const stored = sessionStorage.getItem(STORAGE_KEY) as Lang | null;
+        if (stored === 'fr' || stored === 'en') return stored;
+        sessionStorage.setItem(STORAGE_KEY, 'fr');
+      }
+    } catch {
+      // window.location non défini — fallback fr
     }
-    // Pas de préfixe /en → vérifier sessionStorage, sinon français par défaut
-    const stored = sessionStorage.getItem(STORAGE_KEY) as Lang | null;
-    if (stored === 'fr' || stored === 'en') return stored;
-    sessionStorage.setItem(STORAGE_KEY, 'fr');
     return 'fr';
   }
 

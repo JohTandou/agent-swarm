@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 /**
  * Service d'animation global basé sur GSAP + ScrollTrigger.
@@ -29,10 +30,12 @@ export class AnimationService {
   /** Registre des animations créées pour le cleanup */
   private readonly tweens: any[] = [];
 
-  constructor() {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    this.isReducedMotion.set(mq.matches);
-    mq.addEventListener('change', (e) => this.isReducedMotion.set(e.matches));
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      this.isReducedMotion.set(mq.matches);
+      mq.addEventListener('change', (e) => this.isReducedMotion.set(e.matches));
+    }
   }
 
   /* ==========================================================================
